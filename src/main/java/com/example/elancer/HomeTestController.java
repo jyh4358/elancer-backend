@@ -45,6 +45,7 @@ public class HomeTestController {
         oAuthAttributes.getAuthorities();
 
         return ResponseEntity.ok().body(oAuthAttributes);
+
     }
 
     @GetMapping("/signup-freelancer")
