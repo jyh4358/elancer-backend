@@ -40,7 +40,7 @@ public class OAuthAttributes implements OAuth2User {
 
     @Override
     public String getName() {
-        return null;
+        return this.id;
     }
 
     public void setId(String test) {
