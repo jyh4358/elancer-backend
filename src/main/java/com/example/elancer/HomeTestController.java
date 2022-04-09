@@ -6,6 +6,7 @@ import com.example.elancer.domains.auth.dto.OAuthAttributes;
 import com.example.elancer.domains.user.MemberType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +57,18 @@ public class HomeTestController {
 
         oAuthAttributes.setRole(MemberType.FREELANCER);
         oAuthAttributes.getAuthorities();
+
+        return ResponseEntity.ok().body(oAuthAttributes);
+    }
+
+
+
+    @PreAuthorize("hasRole('ROLE_ENTERPRISE')")
+    @GetMapping("/dashboard-enterprise")
+    public ResponseEntity<OAuthAttributes> dashboardEnterprise(@AuthenticationPrincipal MemberDetails request,
+                                                                @AuthenticationPrincipal OAuthAttributes oAuthAttributes) {
+        log.info("dashboardEnterprise memberDetails = {}", request);
+        log.info("dashboardEnterprise OAuthAttributes = {}", oAuthAttributes);
 
         return ResponseEntity.ok().body(oAuthAttributes);
     }

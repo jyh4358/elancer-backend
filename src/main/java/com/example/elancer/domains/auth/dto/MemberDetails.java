@@ -5,11 +5,9 @@ import com.example.elancer.domains.user.entity.Freelancer;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -17,7 +15,7 @@ import java.util.Map;
 public class MemberDetails implements UserDetails{
 
     private String id;
-    private String freelancerName;
+    private String name;
     private String password;
     private String phone;
     private String email;
@@ -26,9 +24,9 @@ public class MemberDetails implements UserDetails{
 //    private Map<String, Object> attributes;
 
     @Builder
-    public MemberDetails(String id, String freelancerName, String password, String phone, String email, MemberType role) {
+    public MemberDetails(String id, String name, String password, String phone, String email, MemberType role) {
         this.id = id;
-        this.freelancerName = freelancerName;
+        this.name = name;
         this.password = password;
         this.phone = phone;
         this.email = email;
@@ -41,7 +39,7 @@ public class MemberDetails implements UserDetails{
     public static MemberDetails userDetailsFrom(Freelancer freelancer) {
         return MemberDetails.builder()
                 .id(freelancer.getId())
-                .freelancerName(freelancer.getName())
+                .name(freelancer.getName())
                 .password(freelancer.getPassword())
                 .phone(freelancer.getPhone())
                 .email(freelancer.getEmail())
@@ -117,7 +115,7 @@ public class MemberDetails implements UserDetails{
     public String toString() {
         return "MemberDetails{" +
                 "id='" + id + '\'' +
-                ", freelancerName='" + freelancerName + '\'' +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +

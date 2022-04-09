@@ -21,8 +21,8 @@ public class SecurityOAuth2UserService extends DefaultOAuth2UserService {
         OAuth2User oAuth2User = super.loadUser(userRequest);
 
         String id = createId(userRequest, oAuth2User);
-        String name = oAuth2User.getAttribute("name");
-        String email = oAuth2User.getAttribute("email");
+//        String name = oAuth2User.getAttribute("name");
+//        String email = oAuth2User.getAttribute("email");
         System.out.println("oAuth2User.getAttributes() = " + oAuth2User.getAttributes());
 
 //        MemberDetails memberDetails = MemberDetails.oauth2UserOf(id, name, email, oAuth2User.getAttributes());

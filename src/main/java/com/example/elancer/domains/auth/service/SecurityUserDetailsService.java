@@ -26,16 +26,20 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
         log.info("SecurityUserDetailsService username={}", username);
 
-        Optional<Freelancer> result = freelancerRepository.findById(username);
+//        Optional<Freelancer> result = freelancerRepository.findById(username);
+//
+//        if (result.isEmpty()) {
+//            throw new UsernameNotFoundException("check id");
+//        }
+//        Freelancer freelancer = result.get();
 
-        if (result.isEmpty()) {
-            throw new UsernameNotFoundException("check id");
-        }
 
-        Freelancer freelancer = result.get();
+        Freelancer freelancer = freelancerRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("check id"));
+
 
         log.info("---------------------------");
         log.info("freelancer={}", freelancer);
+
 
         MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
