@@ -1,10 +1,7 @@
 package com.example.elancer.domains.user.entity;
 
 import com.example.elancer.domains.user.MemberType;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
