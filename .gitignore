@@ -39,3 +39,4 @@ out/
 
 ### self setting ###
 src/main/resources/application-db.yml
+src/main/resources/application-oauth.yml
