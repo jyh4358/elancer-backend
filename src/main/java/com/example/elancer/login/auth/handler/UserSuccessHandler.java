@@ -1,4 +1,4 @@
-package com.example.elancer.domains.auth.handler;
+package com.example.elancer.login.auth.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

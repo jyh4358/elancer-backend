@@ -1,9 +1,9 @@
 package com.example.elancer;
 
 
-import com.example.elancer.domains.auth.dto.MemberDetails;
-import com.example.elancer.domains.auth.dto.OAuthAttributes;
-import com.example.elancer.domains.user.MemberType;
+import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.login.auth.dto.OAuthAttributes;
+import com.example.elancer.member.domain.MemberType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

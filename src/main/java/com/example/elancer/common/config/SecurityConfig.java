@@ -1,7 +1,7 @@
 package com.example.elancer.common.config;
 
-import com.example.elancer.domains.auth.handler.UserSuccessHandler;
-import com.example.elancer.domains.auth.service.SecurityOAuth2UserService;
+import com.example.elancer.login.auth.handler.UserSuccessHandler;
+import com.example.elancer.login.auth.service.SecurityOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

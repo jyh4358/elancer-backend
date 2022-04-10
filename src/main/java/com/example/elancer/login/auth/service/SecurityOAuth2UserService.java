@@ -1,9 +1,7 @@
-package com.example.elancer.domains.auth.service;
+package com.example.elancer.login.auth.service;
 
-import com.example.elancer.domains.auth.dto.MemberDetails;
-import com.example.elancer.domains.auth.dto.OAuthAttributes;
+import com.example.elancer.login.auth.dto.OAuthAttributes;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;

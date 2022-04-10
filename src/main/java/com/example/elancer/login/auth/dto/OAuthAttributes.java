@@ -1,6 +1,6 @@
-package com.example.elancer.domains.auth.dto;
+package com.example.elancer.login.auth.dto;
 
-import com.example.elancer.domains.user.MemberType;
+import com.example.elancer.member.domain.MemberType;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

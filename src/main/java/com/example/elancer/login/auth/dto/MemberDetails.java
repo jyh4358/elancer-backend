@@ -1,7 +1,7 @@
-package com.example.elancer.domains.auth.dto;
+package com.example.elancer.login.auth.dto;
 
-import com.example.elancer.domains.user.MemberType;
-import com.example.elancer.domains.user.entity.Freelancer;
+import com.example.elancer.member.domain.MemberType;
+import com.example.elancer.member.domain.Member;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -36,14 +36,14 @@ public class MemberDetails implements UserDetails{
     }
 
 
-    public static MemberDetails userDetailsFrom(Freelancer freelancer) {
+    public static MemberDetails userDetailsFrom(Member member) {
         return MemberDetails.builder()
-                .id(freelancer.getId())
-                .name(freelancer.getName())
-                .password(freelancer.getPassword())
-                .phone(freelancer.getPhone())
-                .email(freelancer.getEmail())
-                .role(freelancer.getRole())
+                .id(member.getId())
+                .name(member.getName())
+                .password(member.getPassword())
+                .phone(member.getPhone())
+                .email(member.getEmail())
+                .role(member.getRole())
                 .build();
     }
 

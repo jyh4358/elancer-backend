@@ -1,6 +1,6 @@
-package com.example.elancer.domains.user.entity;
+package com.example.elancer.member.domain;
 
-import com.example.elancer.domains.user.MemberType;
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,13 +8,17 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Freelancer {
-
+public class Member {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long num;
 
-    private String name;
+    @NotNull
+    private String id;
+    @NotNull
     private String password;
+    @NotNull
+    private String name;
     private String phone;
     private String email;
 
@@ -22,7 +26,7 @@ public class Freelancer {
     private MemberType role;
 
     @Builder
-    public Freelancer(String id, String name, String password, String phone, String email, MemberType role) {
+    public Member(String id, String name, String password, String phone, String email, MemberType role) {
         this.id = id;
         this.name = name;
         this.password = password;

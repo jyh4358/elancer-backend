@@ -1,4 +1,4 @@
-package com.example.elancer.domains.user;
+package com.example.elancer.member.domain;
 
 import lombok.Getter;
 
