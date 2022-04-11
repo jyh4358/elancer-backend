@@ -2,9 +2,8 @@ package com.example.elancer.login.auth.service;
 
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Member;
-import com.example.elancer.member.repository.FreelancerRepository;
+import com.example.elancer.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,11 +14,11 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class SecurityUserDetailsService implements UserDetailsService {
-    private final FreelancerRepository freelancerRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = freelancerRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("check id"));
+        Member member = memberRepository.findByUserId(username).orElseThrow(() -> new UsernameNotFoundException("check id"));
 
         log.info("---------------------------");
         log.info("freelancer={}", member);

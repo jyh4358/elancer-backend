@@ -20,11 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class OAuthControllerTest {
-
-
     @Autowired
     private MockMvc mvc;
-
 
     @Test
     @DisplayName("모든 유저 접근 가능")
@@ -68,7 +65,6 @@ public class OAuthControllerTest {
 //                ))
 //                .andExpect(status().isOk());
 //    }
-
 
 
 }

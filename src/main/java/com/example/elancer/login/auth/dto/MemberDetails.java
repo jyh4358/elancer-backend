@@ -38,7 +38,7 @@ public class MemberDetails implements UserDetails{
 
     public static MemberDetails userDetailsFrom(Member member) {
         return MemberDetails.builder()
-                .id(member.getId())
+                .id(member.getUserId())
                 .name(member.getName())
                 .password(member.getPassword())
                 .phone(member.getPhone())
