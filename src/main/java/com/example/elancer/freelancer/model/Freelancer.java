@@ -21,7 +21,6 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("FREELANCER")
 public class Freelancer extends Member {
-
     @NotNull
     private MailReceptionState mailReceptionState;
     @NotNull

@@ -2,7 +2,6 @@ package com.example.elancer.freelancer.join.service;
 
 import com.example.elancer.freelancer.join.dto.FreelancerJoinRequest;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancer.model.FreelancerThumbnail;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.member.domain.MemberType;
 import lombok.RequiredArgsConstructor;
