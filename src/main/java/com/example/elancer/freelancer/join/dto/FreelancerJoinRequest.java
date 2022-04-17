@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -35,6 +36,7 @@ public class FreelancerJoinRequest {
     private WorkPossibleState workPossibleState;
     @NotNull
     private LocalDate workStartPossibleDate;
+    private MultipartFile thumbnail;
 
     public void checkPasswordMatch() {
         if (!this.memberPassword.equals(this.memberPasswordCheck)) {

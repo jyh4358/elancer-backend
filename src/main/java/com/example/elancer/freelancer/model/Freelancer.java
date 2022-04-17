@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -28,13 +29,16 @@ public class Freelancer extends Member {
     @NotNull
     private LocalDate workStartPossibleDate;
 
-//    private IntroBackGround introBackGround;
-//    private String introduceVideoURL;
-//    private String introduceContent;
-//
-//
-//    @OneToOne(fetch = FetchType.LAZY,mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Position position;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private FreelancerThumbnail freelancerThumbnail;
+
+    private String introduceName;
+    private IntroBackGround introBackGround;
+    private String introduceVideoURL;
+    private String introduceContent;
+
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Position position;
 
     public Freelancer(
             String userId,
@@ -45,12 +49,14 @@ public class Freelancer extends Member {
             MemberType role,
             MailReceptionState mailReceptionState,
             WorkPossibleState workPossibleState,
-            LocalDate workStartPossibleDate
+            LocalDate workStartPossibleDate,
+            FreelancerThumbnail freelancerThumbnail
     ) {
         super(userId, password, name, phone, email, role);
         this.mailReceptionState = mailReceptionState;
         this.workPossibleState = workPossibleState;
         this.workStartPossibleDate = workStartPossibleDate;
+        this.freelancerThumbnail = freelancerThumbnail;
     }
 
     public static Freelancer createFreelancer(
@@ -62,7 +68,8 @@ public class Freelancer extends Member {
             MemberType role,
             MailReceptionState mailReceptionState,
             WorkPossibleState workPossibleState,
-            LocalDate workStartPossibleDate
+            LocalDate workStartPossibleDate,
+            FreelancerThumbnail freelancerThumbnail
     ) {
        return new Freelancer(
                userId,
@@ -73,9 +80,28 @@ public class Freelancer extends Member {
                role,
                mailReceptionState,
                workPossibleState,
-               workStartPossibleDate
+               workStartPossibleDate,
+               freelancerThumbnail
        );
     }
 
+    public void coverIntroduceInFreelancer(String introduceName, IntroBackGround introBackGround, String introduceVideoURL, String introduceContent) {
+        this.introduceName = introduceName;
+        this.introBackGround = introBackGround;
+        this.introduceVideoURL = introduceVideoURL;
+        this.introduceContent = introduceContent;
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Freelancer that = (Freelancer) o;
+        return mailReceptionState == that.mailReceptionState && workPossibleState == that.workPossibleState && Objects.equals(workStartPossibleDate, that.workStartPossibleDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mailReceptionState, workPossibleState, workStartPossibleDate);
+    }
 }

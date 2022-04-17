@@ -62,6 +62,14 @@ public class MemberDetails implements UserDetails{
 //        return attributes;
 //    }
 
+//TODO MemberDetails에 많은 필드가 있어야되는지에 대해 이야기 나눠봐요!
+    public MemberDetails(String id) {
+        this.id = id;
+    }
+
+    public boolean checkPresentId() {
+        return this.id != null;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

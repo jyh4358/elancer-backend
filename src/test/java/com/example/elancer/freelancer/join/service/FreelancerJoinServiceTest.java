@@ -37,7 +37,8 @@ class FreelancerJoinServiceTest {
                 MailReceptionState.RECEPTION,
                 "phone",
                 WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01)
+                LocalDate.of(2021, 02, 01),
+                null
         );
 
         //when
@@ -67,7 +68,8 @@ class FreelancerJoinServiceTest {
                 MailReceptionState.RECEPTION,
                 "phone",
                 WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01)
+                LocalDate.of(2021, 02, 01),
+                null
         );
 
         //when & then

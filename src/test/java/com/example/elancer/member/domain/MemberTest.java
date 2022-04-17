@@ -41,7 +41,8 @@ class MemberTest {
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01)
+                LocalDate.of(2021, 02, 01),
+                null
         );
 
         Freelancer freelancer2 = new Freelancer(
@@ -53,7 +54,8 @@ class MemberTest {
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01)
+                LocalDate.of(2021, 02, 01),
+                null
         );
 
         Freelancer freelancer3 = new Freelancer(
@@ -65,7 +67,8 @@ class MemberTest {
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01)
+                LocalDate.of(2021, 02, 01),
+                null
         );
 
         Enterprise enterprise1 = new Enterprise("T-test1");

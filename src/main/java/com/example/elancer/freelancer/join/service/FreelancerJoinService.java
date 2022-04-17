@@ -2,6 +2,7 @@ package com.example.elancer.freelancer.join.service;
 
 import com.example.elancer.freelancer.join.dto.FreelancerJoinRequest;
 import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancer.model.FreelancerThumbnail;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.member.domain.MemberType;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,9 @@ public class FreelancerJoinService {
                 MemberType.FREELANCER,
                 freelancerJoinRequest.getMailReceptionState(),
                 freelancerJoinRequest.getWorkPossibleState(),
-                freelancerJoinRequest.getWorkStartPossibleDate()
+                freelancerJoinRequest.getWorkStartPossibleDate(),
+//                FreelancerThumbnail.createFreelancerThumbnail(String.valueOf(freelancerJoinRequest.getThumbnail()))
+                null // 섬네일 저장 로직 따로 빼서 구현하기.
         );
 
         freelancerRepository.save(freelancer);

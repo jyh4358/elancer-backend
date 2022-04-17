@@ -53,7 +53,8 @@ public class FreelancerIntegrateTest {
                 MailReceptionState.RECEPTION,
                 "phone",
                 WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01)
+                LocalDate.of(2021, 02, 01),
+                null
         );
 
         //when
