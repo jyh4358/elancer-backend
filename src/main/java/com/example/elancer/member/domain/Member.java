@@ -17,7 +17,8 @@ public abstract class Member {
 
     @NotNull
     private String userId;
-//    @NotNull TODO 소셜로그인으로 로그인하면 비밀번호는 따로 저장 안하지 않나요? NotNull의 필요성에 대한 의문이에요
+
+    @NotNull
     private String password;
     @NotNull
     private String name;
@@ -26,6 +27,15 @@ public abstract class Member {
 
     @Enumerated(EnumType.STRING)
     private MemberType role;
+
+    public Member(String userId, String password, String name, String phone, String email, MemberType role) {
+        this.userId = userId;
+        this.password = password;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+    }
 
     public String getRoleKey() {
         return this.role.getKey();
