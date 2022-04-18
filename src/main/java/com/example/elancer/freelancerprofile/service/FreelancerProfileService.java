@@ -2,9 +2,6 @@ package com.example.elancer.freelancerprofile.service;
 
 import com.example.elancer.common.checker.RightRequesterChecker;
 import com.example.elancer.freelancer.dto.FreelancerProfileIntroSaveOrUpdateRequest;
-import com.example.elancer.freelancer.exception.NotExistFreelancerException;
-import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;

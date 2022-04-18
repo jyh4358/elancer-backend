@@ -6,6 +6,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.integrate.common.IntegrateBaseTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
@@ -17,28 +18,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("h2")
-public class FreelancerIntegrateTest {
-    @Autowired
-    private ObjectMapper objectMapper;
+public class FreelancerIntegrateTest extends IntegrateBaseTest {
 
     @Autowired
     private FreelancerRepository freelancerRepository;
-
-    @LocalServerPort
-    private int port;
-
-    @BeforeEach
-    public void setUp() {
-        RestAssured.port = port;
-    }
 
     @DisplayName("프리랜서 회원가입 통합테스트")
     @Test
