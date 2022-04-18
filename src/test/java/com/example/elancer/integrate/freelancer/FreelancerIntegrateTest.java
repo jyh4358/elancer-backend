@@ -8,15 +8,12 @@ import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -56,7 +53,7 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
                 .when()
                     .post(FreelancerJoinControllerPath.FREELANCER_JOIN)
                 .then()
-                    .statusCode(200);
+                    .statusCode(201);
 
         //then
         List<Freelancer> freelancers = freelancerRepository.findAll();
