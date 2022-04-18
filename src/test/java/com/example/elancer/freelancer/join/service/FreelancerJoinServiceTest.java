@@ -6,6 +6,8 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @ActiveProfiles("h2")
 @SpringBootTest
@@ -23,6 +26,8 @@ class FreelancerJoinServiceTest {
 
     @Autowired
     private FreelancerRepository freelancerRepository;
+    @Autowired
+    private FreelancerProfileRepository freelancerProfileRepository;
 
     @DisplayName("프리랜서 가입이 완료된다.")
     @Test
@@ -53,6 +58,10 @@ class FreelancerJoinServiceTest {
         Assertions.assertThat(joinedFreelancer.getPhone()).isEqualTo(freelancerJoinRequest.getMemberPhone());
         Assertions.assertThat(joinedFreelancer.getWorkStartPossibleDate()).isEqualTo(freelancerJoinRequest.getWorkStartPossibleDate());
         Assertions.assertThat(joinedFreelancer.getWorkStartPossibleDate()).isEqualTo(freelancerJoinRequest.getWorkStartPossibleDate());
+
+        List<FreelancerProfile> freelancerProfiles = freelancerProfileRepository.findAll();
+        Assertions.assertThat(freelancerProfiles).hasSize(1);
+
     }
 
     @DisplayName("[예외] 프리랜서 가입중 비밀번호와 비밀번호 확인내용이 다른경우 예외처리")

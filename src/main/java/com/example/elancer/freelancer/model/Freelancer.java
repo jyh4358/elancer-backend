@@ -1,6 +1,7 @@
 package com.example.elancer.freelancer.model;
 
 import com.example.elancer.freelancer.model.position.Position;
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.domain.MemberType;
 import com.sun.istack.NotNull;
@@ -31,13 +32,8 @@ public class Freelancer extends Member {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
     private FreelancerThumbnail freelancerThumbnail;
 
-    private String introduceName;
-    private IntroBackGround introBackGround;
-    private String introduceVideoURL;
-    private String introduceContent;
-
-    @OneToOne(fetch = FetchType.LAZY,mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Position position;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private FreelancerProfile freelancerProfile;
 
     public Freelancer(
             String userId,
@@ -82,13 +78,6 @@ public class Freelancer extends Member {
                workStartPossibleDate,
                freelancerThumbnail
        );
-    }
-
-    public void coverIntroduceInFreelancer(String introduceName, IntroBackGround introBackGround, String introduceVideoURL, String introduceContent) {
-        this.introduceName = introduceName;
-        this.introBackGround = introBackGround;
-        this.introduceVideoURL = introduceVideoURL;
-        this.introduceContent = introduceContent;
     }
 
     @Override
