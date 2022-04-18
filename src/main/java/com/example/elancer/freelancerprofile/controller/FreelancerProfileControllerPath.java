@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.controller;
 
 public class FreelancerProfileControllerPath {
-    public static final String FREELANCER_PROFILE_INTRO_SAVE = "/freelancer-profile/{profileNum}/intro";
+    public static final String FREELANCER_PROFILE_INTRO_COVER = "/freelancer-profile/{profileNum}/intro";
+    public static final String FREELANCER_PROFILE_ACADEMIC_COVER = "/freelancer-profile/{profileNum}/academic-ability";
 }
