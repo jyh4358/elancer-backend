@@ -66,20 +66,23 @@ public class FreelancerJoinDocumentTest {
         mockMvc.perform(post(FreelancerJoinControllerPath.FREELANCER_JOIN)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(freelancerJoinRequest)))
-                .andExpectAll(status().isOk())
+                .andExpectAll(status().isCreated())
                 .andDo(print())
                 .andDo(document("freelancer-join",
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
                         requestFields(
-                                fieldWithPath("memberName").type("문자열").description("회원 성명 필드.")
-                        ),
-                        responseHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
-                        ),
-                        responseFields(
-                                fieldWithPath("result.firstProductCategoryResponseList[0].secondProductCategoryResponseList[0].thirdProductCategoryResponses[0].categoryName").description("third 카테고리명 필드")
+                                fieldWithPath("memberName").type("String").description("회원 성명 필드."),
+                                fieldWithPath("memberId").type("String").description("회원 아이디 필드."),
+                                fieldWithPath("memberPassword").type("String").description("회원 비밀번호 필드."),
+                                fieldWithPath("memberPasswordCheck").type("String").description("회원 비밀번호 확인 필드."),
+                                fieldWithPath("memberEmail").type("String").description("회원 이메일 필드."),
+                                fieldWithPath("mailReceptionState").type("Enum").description("회원 메일 수신여부 필드."),
+                                fieldWithPath("memberPhone").type("String").description("회원 휴대폰 필드."),
+                                fieldWithPath("workPossibleState").type("Enum").description("회원 업무 가능여부 필드."),
+                                fieldWithPath("workStartPossibleDate").type("LocalDate").description("회원 업무가능일 필드."),
+                                fieldWithPath("thumbnail").type("MultipartFile").description("회원 섬네일 필드.")
                         )
                 ));
     }

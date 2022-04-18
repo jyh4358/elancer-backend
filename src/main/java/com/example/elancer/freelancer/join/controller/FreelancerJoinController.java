@@ -3,6 +3,7 @@ package com.example.elancer.freelancer.join.controller;
 import com.example.elancer.freelancer.join.dto.FreelancerJoinRequest;
 import com.example.elancer.freelancer.join.service.FreelancerJoinService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,6 @@ public class FreelancerJoinController {
             @Validated @RequestBody FreelancerJoinRequest freelancerJoinRequest
     ) {
         freelancerJoinService.joinFreelancer(freelancerJoinRequest);
-        return ResponseEntity.ok().body(null);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 }

@@ -1,0 +1,27 @@
+POST http://localhost:8080/freelancer
+Content-Type: application/json
+
+# info
+# mailReceptionState 구성 {
+#    RECEPTION("수신")
+#    NOT_RECEPTION("미수신")
+#}
+# workPossibleState 구성 {
+#    POSSIBLE("가능"),
+#    IMPOSSIBLE("불가능")
+# }
+#
+
+#req
+{
+  "memberName": "정민영",
+  "memberId": "minyoung@@",
+  "memberPassword": "minmin!",
+  "memberPasswordCheck": "minmin!",
+  "memberEmail": "minyoung@email.com",
+  "mailReceptionState": "RECEPTION",
+  "memberPhone": "minPhone",
+  "workPossibleState": "POSSIBLE",
+  "workStartPossibleDate": "2022-01-01",
+  "thumbnail": null
+}
