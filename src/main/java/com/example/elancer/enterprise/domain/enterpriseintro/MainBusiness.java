@@ -1,4 +1,4 @@
-package com.example.elancer.enterprise.domain;
+package com.example.elancer.enterprise.domain.enterpriseintro;
 
 import com.sun.istack.NotNull;
 
@@ -8,13 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sub_business")
-public class SubBusiness {
+@Table(name = "main_business")
+public class MainBusiness {
 
     @Id
-    @Column(name = "sub_code", unique = true)
+    @Column(name = "main_code", unique = true)
     private String code;
+
     @NotNull
     @Column(name = "biz_name")
     private String bizName;
+
 }

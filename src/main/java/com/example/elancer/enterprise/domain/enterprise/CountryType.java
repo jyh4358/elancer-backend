@@ -1,4 +1,4 @@
-package com.example.elancer.enterprise.domain;
+package com.example.elancer.enterprise.domain.enterprise;
 
 public enum CountryType {
 

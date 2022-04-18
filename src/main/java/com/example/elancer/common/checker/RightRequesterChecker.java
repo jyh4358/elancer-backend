@@ -19,7 +19,7 @@ public class RightRequesterChecker {
 
     public static void checkFreelancerProfileAndRequester(FreelancerProfile freelancerProfile, MemberDetails memberDetails) {
         if (memberDetails.checkPresentId()) {
-            freelancerProfile.checkFreelancerAndProfileMatcher(memberDetails.getId());
+            freelancerProfile.checkFreelancerAndProfileMatcher(memberDetails.getUserId());
         }
     }
 }

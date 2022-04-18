@@ -1,5 +1,6 @@
-package com.example.elancer.enterprise.domain;
+package com.example.elancer.enterprise.domain.enterprise;
 
+import com.example.elancer.enterprise.domain.enterpriseintro.EnterpriseIntro;
 import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.domain.MemberType;
 import com.sun.istack.NotNull;
@@ -76,7 +77,7 @@ public class Enterprise extends Member {
 
 
 
-    public void updateDetails(EnterpriseIntro enterpriseIntro) {
+    public void updateIntro(EnterpriseIntro enterpriseIntro) {
         this.enterpriseIntro = enterpriseIntro;
     }
 

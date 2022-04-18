@@ -1,6 +1,6 @@
 package com.example.elancer.enterprise.repository;
 
-import com.example.elancer.enterprise.domain.Enterprise;
+import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

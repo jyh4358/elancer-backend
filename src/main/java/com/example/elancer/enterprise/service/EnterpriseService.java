@@ -1,6 +1,7 @@
 package com.example.elancer.enterprise.service;
 
-import com.example.elancer.enterprise.domain.*;
+import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.domain.enterpriseintro.*;
 import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
 import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
@@ -32,22 +33,22 @@ public class EnterpriseService {
         Enterprise enterprise = enterpriseJoinRequest.toEntity();
         checkDuplicate(enterprise.getUserId());
 
-
         enterpriseRepository.save(enterprise);
     }
 
 
-    @Transactional
-    public void updateIntro(String loginUsername, EnterpriseIntroRequest enterpriseIntroRequest, String etc) {
 
-        Enterprise enterprise = enterpriseRepository.findByUserId(loginUsername).orElseThrow(NotExistEnterpriseException::new);
+    @Transactional
+    public void updateIntro(Long id, EnterpriseIntroRequest enterpriseIntroRequest, String etc) {
+
+        Enterprise enterprise = enterpriseRepository.findById(id).orElseThrow(NotExistEnterpriseException::new);
 
         List<EnterpriseMainBiz> enterpriseMainBizs = getEnterpriseMainBizs(enterpriseIntroRequest, etc);
         List<EnterpriseSubBiz> enterpriseSubBizs = getEnterpriseSubBizs(enterpriseIntroRequest, etc);
 
         EnterpriseIntro enterpriseIntro = EnterpriseIntro.of(enterpriseIntroRequest.getIntroTitle(), enterpriseMainBizs, enterpriseSubBizs, enterprise);
 
-        enterprise.updateDetails(enterpriseIntro);
+        enterprise.updateIntro(enterpriseIntro);
 
     }
 
@@ -67,4 +68,5 @@ public class EnterpriseService {
         List<MainBusiness> mainBusiness = mainBusinessRepository.findMainBusiness(enterpriseIntroRequest.getMainBizCodes());
         return EnterpriseMainBiz.createList(mainBusiness, etc);
     }
+
 }
