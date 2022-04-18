@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class FreelancerIntroSaveOrUpdateRequest {
+public class FreelancerProfileIntroSaveOrUpdateRequest {
     private String introName;
     @NotNull
     private IntroBackGround introBackGround;
