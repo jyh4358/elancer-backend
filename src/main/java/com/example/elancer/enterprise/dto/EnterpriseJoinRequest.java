@@ -21,7 +21,7 @@ public class EnterpriseJoinRequest {
 
 
     private String companyName;
-    private int companyPeople;
+    private Integer companyPeople;
     private String position;
     private String telNumber;
     private String website;

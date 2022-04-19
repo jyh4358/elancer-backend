@@ -39,9 +39,9 @@ public class EnterpriseService {
 
 
     @Transactional
-    public void updateIntro(Long id, EnterpriseIntroRequest enterpriseIntroRequest, String etc) {
+    public void updateIntro(String userId, EnterpriseIntroRequest enterpriseIntroRequest, String etc) {
 
-        Enterprise enterprise = enterpriseRepository.findById(id).orElseThrow(NotExistEnterpriseException::new);
+        Enterprise enterprise = enterpriseRepository.findByUserId(userId).orElseThrow(NotExistEnterpriseException::new);
 
         List<EnterpriseMainBiz> enterpriseMainBizs = getEnterpriseMainBizs(enterpriseIntroRequest, etc);
         List<EnterpriseSubBiz> enterpriseSubBizs = getEnterpriseSubBizs(enterpriseIntroRequest, etc);

@@ -14,7 +14,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -130,7 +129,6 @@ class EnterpriseServiceTest {
 
     @Test
     @DisplayName("회원 가입 시 비밀번호 일치하지 않으면 예외 발생")
-    @Rollback(value = false)
     public void enterpriseJoinPwdException() {
 
         //given
@@ -163,9 +161,11 @@ class EnterpriseServiceTest {
     @DisplayName("프로필 작성")
     public void enterpriseIntroUpdate() {
 
+        String userId = "testid";
+
         //given
         enterpriseService.join(new EnterpriseJoinRequest(
-                "testid",
+                userId,
                 "1234",
                 "1234",
                 "name",
@@ -182,7 +182,7 @@ class EnterpriseServiceTest {
                 "사업자 번호(123-123-123)"
         ));
 
-        Long num = enterpriseRepository.findByUserId("testid").get().getNum();
+        enterpriseRepository.findByUserId("testid").get();
 
         List<String> mainBiz = new ArrayList<>();
         mainBiz.add("main_biz1");
@@ -196,11 +196,11 @@ class EnterpriseServiceTest {
 
 
         //when
-        enterpriseService.updateIntro(num, enterpriseIntroRequest, null);
+        enterpriseService.updateIntro(userId, enterpriseIntroRequest, null);
 
 
         //then
-        Enterprise result = enterpriseRepository.findById(num).orElseThrow(NotExistEnterpriseException::new);
+        Enterprise result = enterpriseRepository.findByUserId(userId).orElseThrow(NotExistEnterpriseException::new);
         assertThat(result.getEnterpriseIntro().getIntroTitle()).isEqualTo(enterpriseIntroRequest.getIntroTitle());
         assertThat(result.getEnterpriseIntro().getEnterpriseMainBizs().size()).isEqualTo(2);
         assertThat(result.getEnterpriseIntro().getEnterpriseSubBizs().size()).isEqualTo(2);
