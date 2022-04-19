@@ -1,5 +1,6 @@
 package com.example.elancer.login.auth.handler;
 
+import com.example.elancer.login.auth.dto.OAuthAttributes;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -20,8 +21,15 @@ public class UserSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         log.info("==================================");
         log.info("onAuthenticationSuccess");
+        log.info("authentication={}", authentication);
 
-        redirectStrategy.sendRedirect(request, response, "/signup");
+        OAuthAttributes principal = (OAuthAttributes) authentication.getPrincipal();
+
+        // todo handler에서 repository에 접근하는건 괜찮나...?
+
+
+
+        redirectStrategy.sendRedirect(request, response, "/");
 
     }
 }

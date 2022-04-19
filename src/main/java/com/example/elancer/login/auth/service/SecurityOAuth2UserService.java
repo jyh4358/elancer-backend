@@ -1,7 +1,10 @@
 package com.example.elancer.login.auth.service;
 
 import com.example.elancer.login.auth.dto.OAuthAttributes;
+import com.example.elancer.login.auth.exception.MemberDuplicateException;
+import com.example.elancer.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -12,19 +15,17 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class SecurityOAuth2UserService extends DefaultOAuth2UserService {
 
+    private final MemberRepository memberRepository;
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
+
         OAuth2User oAuth2User = super.loadUser(userRequest);
+        String createUserId = createId(userRequest, oAuth2User);
+//        memberRepository.findByUserId(createUserId).orElseThrow(() -> new InternalAuthenticationServiceException("소셜 회원 가입이 안되어있습니다."));
+        OAuthAttributes oauthAttributes = OAuthAttributes.of(createUserId, oAuth2User.getAttributes());
 
-        String id = createId(userRequest, oAuth2User);
-//        String name = oAuth2User.getAttribute("name");
-//        String email = oAuth2User.getAttribute("email");
-        System.out.println("oAuth2User.getAttributes() = " + oAuth2User.getAttributes());
-
-//        MemberDetails memberDetails = MemberDetails.oauth2UserOf(id, name, email, oAuth2User.getAttributes());
-        OAuthAttributes oauthAttributes = OAuthAttributes.of(id, oAuth2User.getAttributes());
-//        return memberDetails;
         return oauthAttributes;
     }
 

@@ -1,5 +1,6 @@
 package com.example.elancer.common.config;
 
+import com.example.elancer.login.auth.handler.UserFailureHandler;
 import com.example.elancer.login.auth.handler.UserSuccessHandler;
 import com.example.elancer.login.auth.service.SecurityOAuth2UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 @Slf4j
 @Configuration
@@ -42,15 +46,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/")
                     .and()
                 .oauth2Login()
-                    .successHandler(successHandler())
-                    .userInfoEndpoint()
-                    .userService(securityOAuth2UserService);
+                .userInfoEndpoint()
+                    .userService(securityOAuth2UserService)
+                .and()
+                .successHandler(successHandler())
+                .failureHandler(failureHandler());
+
+
+
+
 
     }
 
     @Bean
-    public UserSuccessHandler successHandler() {
+    public AuthenticationSuccessHandler successHandler() {
         return new UserSuccessHandler();
+    }
+
+    @Bean
+    public AuthenticationFailureHandler failureHandler() {
+        return new UserFailureHandler();
     }
 
 
