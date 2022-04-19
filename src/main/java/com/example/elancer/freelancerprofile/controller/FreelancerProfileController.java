@@ -31,7 +31,7 @@ public class FreelancerProfileController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @PostMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER)
+    @PutMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER)
     public ResponseEntity<Void> coverFreelancerAcademicAbility(
             @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,

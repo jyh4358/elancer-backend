@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,12 +30,16 @@ public class FreelancerProfile extends BasicEntity {
     private Freelancer freelancer;
 
     private String introduceName;
+
+    @Enumerated(EnumType.STRING)
     private IntroBackGround introBackGround;
+
     private String introduceVideoURL;
     private String introduceContent;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AcademicAbility> academicAbilities = new ArrayList<>();
+
 
 //    @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Position position;
