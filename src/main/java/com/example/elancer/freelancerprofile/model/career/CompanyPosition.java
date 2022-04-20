@@ -25,7 +25,7 @@ public enum CompanyPosition {
     RESEARCHER("연구원"),
     TEMPORARY_POSITION("임시직"),
     ETC("기타"),
-    MANAGER("매니저"),
+    MANAGER("매니저")
     ;
 
     private String desc;
