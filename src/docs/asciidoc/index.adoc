@@ -1,5 +1,5 @@
-= BUNJANG API Guide
-mins1031;
+= elancer API Guide
+;
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
@@ -60,9 +60,17 @@ mins1031;
 | 요청한 리소스가 없음.
 |===
 
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
 [[resources-freelancer-join]]
 == 프리랜서 회원가입
 
 개인정보 입력을 통해 프리랜서 회원가입을 진행한다.
 
-operation::freelancer-join[snippets='http-request,request-headers,request-fields']
+include::{snippets}/freelancer-join/http-request.adoc[]
+include::{snippets}/freelancer-join/request-headers.adoc[]
+include::{snippets}/freelancer-join/request-fields.adoc[]
+
+

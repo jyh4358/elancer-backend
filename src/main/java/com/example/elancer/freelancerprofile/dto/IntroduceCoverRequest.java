@@ -1,4 +1,4 @@
-package com.example.elancer.freelancer.dto;
+package com.example.elancer.freelancerprofile.dto;
 
 import com.example.elancer.freelancer.model.IntroBackGround;
 import lombok.AccessLevel;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class FreelancerProfileIntroSaveOrUpdateRequest {
+public class IntroduceCoverRequest {
     private String introName;
     @NotNull
     private IntroBackGround introBackGround;

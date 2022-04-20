@@ -8,7 +8,8 @@ import com.example.elancer.login.auth.dto.MemberDetails;
 public class RightRequesterChecker {
 
     public static void checkFreelancerAndRequester(Freelancer freelancer, MemberDetails memberDetails) {
-        if (!memberDetails.checkPresentId() || freelancer == null) {
+        // min 로그인 기능 구현전 임시 코드
+        if (memberDetails == null || !memberDetails.checkPresentId()) {
             return;
         }
 
@@ -18,6 +19,11 @@ public class RightRequesterChecker {
     }
 
     public static void checkFreelancerProfileAndRequester(FreelancerProfile freelancerProfile, MemberDetails memberDetails) {
+        // min 로그인 기능 구현전 임시 코드
+        if (memberDetails == null || !memberDetails.checkPresentId()) {
+            return;
+        }
+
         if (memberDetails.checkPresentId()) {
             freelancerProfile.checkFreelancerAndProfileMatcher(memberDetails.getUserId());
         }
