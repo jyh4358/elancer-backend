@@ -37,6 +37,7 @@ public class FreelancerProfileService {
 
     @Transactional
     public void coverFreelancerAcademicAbility(MemberDetails memberDetails, Long profileNum, AcademicAbilityCoverRequests academicAbilityCoverRequests) {
+        // min 쿼리 10번때림;; querydsl로 쿼리 개선여부 확인후 성능개선해볼것.
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         List<AcademicAbility> academicAbilities = academicAbilityCoverRequests.getAcademicAbilityCoverRequests().stream()

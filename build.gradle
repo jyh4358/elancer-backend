@@ -7,7 +7,7 @@ buildscript {
 plugins {
 	id 'org.springframework.boot' version '2.6.6'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'org.asciidoctor.convert' version '1.5.8'
+	id "org.asciidoctor.jvm.convert" version "3.3.2"
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'java'
 }
@@ -28,6 +28,7 @@ repositories {
 
 ext {
 	set('snippetsDir', file("build/generated-snippets"))
+	snippetsDir = file('build/generated-snippets')
 }
 
 dependencies {
@@ -42,6 +43,7 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
+//	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.2.RELEASE'
 	//querydsl 추가
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
 	annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
@@ -64,6 +66,27 @@ tasks.named('test') {
 tasks.named('asciidoctor') {
 	inputs.dir snippetsDir
 	dependsOn test
+}
+
+asciidoctor.doFirst {
+	delete file('src/main/resources/static/docs')
+}
+
+bootJar {
+	dependsOn asciidoctor
+	from ("build/docs/asciidoc") {
+		into 'BOOT-INF/classes/static/docs'
+	}
+}
+
+task copyDocument(type: Copy) {
+	dependsOn asciidoctor
+	from file("build/docs/asciidoc")
+	into file("src/main/resources/static/docs")
+}
+
+build {
+	dependsOn copyDocument
 }
 
 //querydsl 추가 시작

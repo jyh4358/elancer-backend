@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface AcademicRepository extends JpaRepository<AcademicAbility, Long> {
     List<AcademicAbility> findByFreelancerProfileNum(Long profileNum);
+    void deleteByFreelancerProfileNum(Long profileNum);
 }
