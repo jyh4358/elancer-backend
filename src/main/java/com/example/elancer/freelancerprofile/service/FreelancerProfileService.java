@@ -3,6 +3,7 @@ package com.example.elancer.freelancerprofile.service;
 import com.example.elancer.common.checker.RightRequesterChecker;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
+import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
 import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
@@ -45,5 +46,10 @@ public class FreelancerProfileService {
                 .collect(Collectors.toList());
 
         freelancerProfile.coverAcademicAbilities(academicAbilities);
+    }
+
+    @Transactional
+    public void coverFreelancerCareer(MemberDetails memberDetails, Long profileNum, CareerCoverRequests careerCoverRequests) {
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
     }
 }

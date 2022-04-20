@@ -1,8 +1,10 @@
 package com.example.elancer.freelancerprofile.controller;
 
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
+import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
 import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
+import com.example.elancer.freelancerprofile.model.career.Career;
 import com.example.elancer.freelancerprofile.service.FreelancerProfileService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +42,18 @@ public class FreelancerProfileController {
         freelancerProfileService.coverFreelancerAcademicAbility(memberDetails, profileNum, academicAbilityCoverRequests);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
+
+    @PutMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_CAREER_COVER)
+    public ResponseEntity<Void> coverFreelancerCareer(
+            @PathVariable Long profileNum,
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody CareerCoverRequests careerCoverRequests
+    ) {
+        freelancerProfileService.coverFreelancerCareer(memberDetails, profileNum, careerCoverRequests);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+
 
 
 }
