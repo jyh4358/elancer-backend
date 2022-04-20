@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.dto;
 
+import com.example.elancer.freelancerprofile.model.career.Career;
 import com.example.elancer.freelancerprofile.model.career.CompanyPosition;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -17,4 +18,14 @@ public class CareerCoverRequest {
     private CompanyPosition companyPosition;
     private LocalDate careerStartDate;
     private LocalDate careerEndDate;
+
+    public static Career toCareerEntity(CareerCoverRequest careerCoverRequest) {
+        return Career.createCareer(
+                careerCoverRequest.getCompanyName(),
+                careerCoverRequest.getDepartmentName(),
+                careerCoverRequest.getCompanyPosition(),
+                careerCoverRequest.getCareerStartDate(),
+                careerCoverRequest.getCareerEndDate()
+        );
+    }
 }

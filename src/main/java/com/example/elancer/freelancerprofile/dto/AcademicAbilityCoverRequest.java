@@ -23,7 +23,7 @@ public class AcademicAbilityCoverRequest {
     private String majorName;
 
     // min 영;;; 구현 자체가 좀 이상한거 같다. 일단은 서비스로직 가독성을 위해 이렇게 구현했다.
-    public static AcademicAbility ofToAcademicAbility(AcademicAbilityCoverRequest academicAbilityCoverRequest) {
+    public static AcademicAbility toAcademicAbility(AcademicAbilityCoverRequest academicAbilityCoverRequest) {
         return AcademicAbility.createAcademicAbility(
                 academicAbilityCoverRequest.getSchoolName(),
                 academicAbilityCoverRequest.getSchoolLevel(),

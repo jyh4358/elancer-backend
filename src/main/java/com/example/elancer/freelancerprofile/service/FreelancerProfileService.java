@@ -3,11 +3,13 @@ package com.example.elancer.freelancerprofile.service;
 import com.example.elancer.common.checker.RightRequesterChecker;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
+import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
 import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
+import com.example.elancer.freelancerprofile.model.career.Career;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -25,7 +27,7 @@ public class FreelancerProfileService {
     private final AcademicRepository academicRepository;
 
     @Transactional
-    public void coverFreelancerProfileIntro(MemberDetails memberDetails, Long profileNum, IntroduceCoverRequest introduceCoverRequest) {
+    public void coverFreelancerIntroduce(MemberDetails memberDetails, Long profileNum, IntroduceCoverRequest introduceCoverRequest) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         freelancerProfile.coverIntroduceInFreelancer(
@@ -42,7 +44,7 @@ public class FreelancerProfileService {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         List<AcademicAbility> academicAbilities = academicAbilityCoverRequests.getAcademicAbilityCoverRequests().stream()
-                .map(AcademicAbilityCoverRequest::ofToAcademicAbility)
+                .map(AcademicAbilityCoverRequest::toAcademicAbility)
                 .collect(Collectors.toList());
 
         freelancerProfile.coverAcademicAbilities(academicAbilities);
@@ -51,5 +53,12 @@ public class FreelancerProfileService {
     @Transactional
     public void coverFreelancerCareer(MemberDetails memberDetails, Long profileNum, CareerCoverRequests careerCoverRequests) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        List<Career> careers = careerCoverRequests.getCareerCoverRequests().stream()
+                .map(CareerCoverRequest::toCareerEntity)
+                .collect(Collectors.toList());
+
+        freelancerProfile.coverCareers(careers);
+
     }
 }

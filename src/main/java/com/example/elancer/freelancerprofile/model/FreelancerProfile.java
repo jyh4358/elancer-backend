@@ -5,6 +5,7 @@ import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
+import com.example.elancer.freelancerprofile.model.career.Career;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +41,9 @@ public class FreelancerProfile extends BasicEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AcademicAbility> academicAbilities = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Career> careers = new ArrayList<>();
+
 
 //    @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Position position;
@@ -69,5 +73,14 @@ public class FreelancerProfile extends BasicEntity {
         }
         this.academicAbilities.addAll(academicAbilities);
     }
+
+    public void coverCareers(List<Career> careers) {
+        this.careers.clear();
+        for (Career career : careers) {
+            career.setFreelancerProfile(this);
+        }
+        this.careers.addAll(careers);
+    }
+
 
 }

@@ -77,7 +77,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerProfileIntro(memberDetails, freelancer.getNum(), introduceCoverRequest);
+        freelancerProfileService.coverFreelancerIntroduce(memberDetails, freelancer.getNum(), introduceCoverRequest);
 
         //then
         FreelancerProfile updatedFreelancerProfile = freelancerProfileRepository.findById(freelancer.getNum()).get();
