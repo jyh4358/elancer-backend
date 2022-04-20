@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("h2")
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @Import(RestDocsConfiguration.class)
@@ -41,7 +43,7 @@ public class EnterpriseJoinDocumentTest {
     @DisplayName("기업 회원가입 문서화")
     public void enterpriseJoinDocs() throws Exception {
         EnterpriseJoinRequest enterpriseJoinRequest = new EnterpriseJoinRequest(
-                "joinEnterprise",
+                "joinDocsEnterprise",
                 "1234",
                 "1234",
                 "name",

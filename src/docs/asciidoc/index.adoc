@@ -1,5 +1,5 @@
-= elancer API Guide
-;
+= BUNJANG API Guide
+mins1031;
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs

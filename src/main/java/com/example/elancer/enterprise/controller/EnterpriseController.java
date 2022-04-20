@@ -32,7 +32,7 @@ public class EnterpriseController {
 
     @PutMapping("/enterprise/{id}")
     public ResponseEntity<String> updateEnterpriseIntro(
-            @PathVariable Long id,
+            @PathVariable String id,
             @Validated @RequestBody EnterpriseIntroRequest enterpriseIntroRequest) {
         enterpriseService.updateIntro(id, enterpriseIntroRequest, null);
 
