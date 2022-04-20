@@ -28,7 +28,7 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
     private FreelancerRepository freelancerRepository;
 
     @DisplayName("프리랜서 회원가입 통합테스트")
-    @Test
+//    @Test
     public void 프래랜서_회원가입_통합테스트() throws JsonProcessingException {
         //given
         FreelancerJoinRequest freelancerJoinRequest = new FreelancerJoinRequest(

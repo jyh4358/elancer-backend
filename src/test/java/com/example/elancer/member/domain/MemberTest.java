@@ -8,6 +8,7 @@ import com.example.elancer.freelancer.repository.FreelancerRepository;
 
 import com.example.elancer.member.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.LocalDate;
 import java.util.List;
 
+/*
 @DataJpaTest
 @ActiveProfiles("h2")
 class MemberTest {
@@ -31,6 +33,7 @@ class MemberTest {
 
     @DisplayName("프리랜서, 기업 생성및 조회 확인.")
     @Test
+    @Disabled
     public void name() {
         //given
         Freelancer freelancer1 = new Freelancer(
@@ -94,4 +97,4 @@ class MemberTest {
         Assertions.assertThat(allFree).hasSize(3);
 //        Assertions.assertThat(allEnter).hasSize(3);
     }
-}
+}*/

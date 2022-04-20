@@ -50,7 +50,4 @@ public class FreelancerProfileController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-
-
-
 }

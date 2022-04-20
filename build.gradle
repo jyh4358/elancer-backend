@@ -72,7 +72,14 @@ asciidoctor.doFirst {
 	delete file('src/main/resources/static/docs')
 }
 
+//tasks {
+//	processResources {
+//		duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.EXCLUDE
+//	}
+//}
+
 bootJar {
+//	delete file('BOOT-INF/classes/static/docs')
 	dependsOn asciidoctor
 //	from ("build/docs/asciidoc") {
 //		into 'BOOT-INF/classes/static/docs'

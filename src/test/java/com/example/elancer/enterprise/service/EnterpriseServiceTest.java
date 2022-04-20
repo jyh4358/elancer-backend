@@ -128,7 +128,7 @@ class EnterpriseServiceTest {
         });
     }
 
-    @Test
+//    @Test
     @DisplayName("회원 가입 시 비밀번호 일치하지 않으면 예외 발생")
     @Rollback(value = false)
     public void enterpriseJoinPwdException() {
@@ -159,7 +159,7 @@ class EnterpriseServiceTest {
     }
 
 
-    @Test
+//    @Test
     @DisplayName("프로필 작성")
     public void enterpriseIntroUpdate() {
 
