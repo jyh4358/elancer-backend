@@ -5,7 +5,11 @@ import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
+import com.example.elancer.freelancerprofile.dto.EducationAndLicenseAndLanguageRequests;
+import com.example.elancer.freelancerprofile.dto.EducationCoverRequest;
 import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
+import com.example.elancer.freelancerprofile.dto.LanguageCoverRequest;
+import com.example.elancer.freelancerprofile.dto.LicenseCoverRequest;
 import com.example.elancer.freelancerprofile.dto.ProjectHistoryCoverRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
@@ -88,5 +92,28 @@ public class FreelancerProfileService {
                 ),
                 projectHistoryCoverRequest.getResponsibilityTask()
         ));
+    }
+
+    @Transactional
+    public void coverFreelancerEducationAndLicenseAndLanguage(MemberDetails memberDetails, Long profileNum, EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests) {
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+
+        coverFreeLancerEducation(freelancerProfile, educationAndLicenseAndLanguageRequests.getEducationCoverRequests());
+        coverFreeLancerLicense(freelancerProfile, educationAndLicenseAndLanguageRequests.getLicenseCoverRequests());
+        coverFreeLancerLanguage(freelancerProfile, educationAndLicenseAndLanguageRequests.getLanguageCoverRequests());
+    }
+
+    @Transactional
+    protected void coverFreeLancerEducation(FreelancerProfile freelancerProfile, List<EducationCoverRequest> educationCoverRequests) {
+
+    }
+
+    @Transactional
+    protected void coverFreeLancerLicense(FreelancerProfile freelancerProfile, List<LicenseCoverRequest> licenseCoverRequests) {
+    }
+
+    @Transactional
+    protected void coverFreeLancerLanguage(FreelancerProfile freelancerProfile, List<LanguageCoverRequest> languageCoverRequests) {
     }
 }
