@@ -74,9 +74,9 @@ asciidoctor.doFirst {
 
 bootJar {
 	dependsOn asciidoctor
-	from ("build/docs/asciidoc") {
-		into 'BOOT-INF/classes/static/docs'
-	}
+//	from ("build/docs/asciidoc") {
+//		into 'BOOT-INF/classes/static/docs'
+//	}
 }
 
 task copyDocument(type: Copy) {
