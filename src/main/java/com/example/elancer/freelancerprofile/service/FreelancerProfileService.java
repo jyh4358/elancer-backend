@@ -6,10 +6,13 @@ import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
 import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
+import com.example.elancer.freelancerprofile.dto.ProjectHistoryCoverRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.career.Career;
+import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
+import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -59,6 +62,31 @@ public class FreelancerProfileService {
                 .collect(Collectors.toList());
 
         freelancerProfile.coverCareers(careers);
+    }
 
+
+    @Transactional
+    public void coverFreelancerProjectHistory(MemberDetails memberDetails, Long profileNum, ProjectHistoryCoverRequest projectHistoryCoverRequest) {
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        freelancerProfile.plusProjectHistory(ProjectHistory.createProjectHistory(
+                projectHistoryCoverRequest.getProjectTitle(),
+                projectHistoryCoverRequest.getProjectStartDate(),
+                projectHistoryCoverRequest.getProjectEndDate(),
+                projectHistoryCoverRequest.getClientCompany(),
+                projectHistoryCoverRequest.getWorkCompany(),
+                projectHistoryCoverRequest.getDevelopField(),
+                projectHistoryCoverRequest.getDevelopRole(),
+                DevelopEnvironment.of(
+                        projectHistoryCoverRequest.getDevelopEnvironmentModel(),
+                        projectHistoryCoverRequest.getDevelopEnvironmentOS(),
+                        projectHistoryCoverRequest.getDevelopEnvironmentLanguage(),
+                        projectHistoryCoverRequest.getDevelopEnvironmentDBName(),
+                        projectHistoryCoverRequest.getDevelopEnvironmentTool(),
+                        projectHistoryCoverRequest.getDevelopEnvironmentCommunication(),
+                        projectHistoryCoverRequest.getDevelopEnvironmentEtc()
+                ),
+                projectHistoryCoverRequest.getResponsibilityTask()
+        ));
     }
 }

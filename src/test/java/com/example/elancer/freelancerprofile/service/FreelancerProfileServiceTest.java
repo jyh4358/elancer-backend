@@ -10,15 +10,19 @@ import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancerprofile.dto.ProjectHistoryCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.academic.state.SchoolLevel;
 import com.example.elancer.freelancerprofile.model.academic.state.AcademicState;
 import com.example.elancer.freelancerprofile.model.career.Career;
 import com.example.elancer.freelancerprofile.model.career.CompanyPosition;
+import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
+import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
 import com.example.elancer.freelancerprofile.repository.career.CareerRepository;
+import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.MemberType;
 import org.assertj.core.api.Assertions;
@@ -50,6 +54,9 @@ class FreelancerProfileServiceTest {
 
     @Autowired
     private CareerRepository careerRepository;
+
+    @Autowired
+    private ProjectHistoryRepository projectHistoryRepository;
 
 
     @DisplayName("프리랜서 소개정보가 저장된다")
@@ -173,6 +180,69 @@ class FreelancerProfileServiceTest {
         Assertions.assertThat(careers.get(0).getCompanyPosition()).isEqualTo(careerCoverRequest.getCompanyPosition());
         Assertions.assertThat(careers.get(0).getCareerStartDate()).isEqualTo(careerCoverRequest.getCareerStartDate());
         Assertions.assertThat(careers.get(0).getCareerEndDate()).isEqualTo(careerCoverRequest.getCareerEndDate());
+    }
+
+    @DisplayName("프리랜서 프로젝트 수행이력 정보가 저장된다")
+    @Test
+    public void 프리랜서_프로젝트_수행이력_저장() {
+        //given
+        String memberId = "memberId";
+        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
+                memberId,
+                "pwd",
+                "name",
+                "phone",
+                "email",
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2021, 02, 01),
+                null
+        ));
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        ProjectHistoryCoverRequest projectHistoryCoverRequest = new ProjectHistoryCoverRequest(
+                "projectTitle",
+                LocalDate.of(2020, 12, 01),
+                LocalDate.of(2021, 9, 01),
+                "clientCompany",
+                "workCompany",
+                DevelopField.APPLICATION,
+                "백엔드 개발자",
+                "model",
+                "OS",
+                "language",
+                "mysql",
+                "tool",
+                "communication",
+                null,
+                "담당업무"
+        );
+
+        MemberDetails memberDetails = new MemberDetails(memberId);
+
+        //when
+        freelancerProfileService.coverFreelancerProjectHistory(memberDetails, freelancerProfile.getNum(), projectHistoryCoverRequest);
+
+        //then
+        List<ProjectHistory> projectHistories = projectHistoryRepository.findAll();
+        Assertions.assertThat(projectHistories).hasSize(1);
+        Assertions.assertThat(projectHistories.get(0).getProjectTitle()).isEqualTo(projectHistoryCoverRequest.getProjectTitle());
+        Assertions.assertThat(projectHistories.get(0).getProjectStartDate()).isEqualTo(projectHistoryCoverRequest.getProjectStartDate());
+        Assertions.assertThat(projectHistories.get(0).getProjectEndDate()).isEqualTo(projectHistoryCoverRequest.getProjectEndDate());
+        Assertions.assertThat(projectHistories.get(0).getClientCompany()).isEqualTo(projectHistoryCoverRequest.getClientCompany());
+        Assertions.assertThat(projectHistories.get(0).getWorkCompany()).isEqualTo(projectHistoryCoverRequest.getWorkCompany());
+        Assertions.assertThat(projectHistories.get(0).getDevelopField()).isEqualTo(projectHistoryCoverRequest.getDevelopField());
+        Assertions.assertThat(projectHistories.get(0).getDevelopRole()).isEqualTo(projectHistoryCoverRequest.getDevelopRole());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentModel()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentModel());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentOS()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentOS());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentLanguage()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentLanguage());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentDBName()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentDBName());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentTool()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentTool());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentCommunication()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentCommunication());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentEtc()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentEtc());
+        Assertions.assertThat(projectHistories.get(0).getResponsibilityTask()).isEqualTo(projectHistoryCoverRequest.getResponsibilityTask());
     }
 
 

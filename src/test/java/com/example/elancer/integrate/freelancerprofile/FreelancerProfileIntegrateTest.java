@@ -70,7 +70,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
                     .body(introduceCoverRequest)
                     .log().all()
                 .when()
-                    .put(path)
+                    .post(path)
                 .then()
                     .statusCode(HttpStatus.OK.value())
         ;
@@ -108,7 +108,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
                 .body(new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest)))
                 .log().all()
                 .when()
-                .put(path)
+                .post(path)
                 .then()
                 .statusCode(HttpStatus.OK.value())
         ;
@@ -147,7 +147,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
                     .body(new CareerCoverRequests(Arrays.asList(careerCoverRequest)))
                     .log().all()
                 .when()
-                    .put(path)
+                    .post(path)
                 .then()
                     .statusCode(HttpStatus.OK.value())
         ;

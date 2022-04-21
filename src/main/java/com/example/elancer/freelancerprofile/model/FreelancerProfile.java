@@ -6,6 +6,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.career.Career;
+import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,6 +44,9 @@ public class FreelancerProfile extends BasicEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Career> careers = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProjectHistory> projectHistories = new ArrayList<>();
 
 
 //    @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -82,5 +86,7 @@ public class FreelancerProfile extends BasicEntity {
         this.careers.addAll(careers);
     }
 
-
+    public void plusProjectHistory(ProjectHistory projectHistory) {
+        this.projectHistories.add(projectHistory);
+    }
 }

@@ -1,4 +1,4 @@
-PUT http://localhost:8080/freelancer-profile/1/academic-ability
+POST http://localhost:8080/freelancer-profile/1/academic-ability
 Content-Type: application/json
 
 #info
