@@ -1,4 +1,4 @@
-POST http://localhost:8080/freelancer-profile/1/project-history
+PUT http://localhost:8080/freelancer-profile/1/project-history
 Content-Type: application/json
 
 #info

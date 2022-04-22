@@ -14,6 +14,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class FreelancerProfileController {
     private final FreelancerProfileService freelancerProfileService;
 
-    @PostMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_INTRO_COVER)
+    @PutMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_INTRO_COVER)
     public ResponseEntity<Void> coverFreelancerIntroduce(
             @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
@@ -32,7 +33,7 @@ public class FreelancerProfileController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @PostMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER)
+    @PutMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER)
     public ResponseEntity<Void> coverFreelancerAcademicAbility(
             @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
@@ -42,7 +43,7 @@ public class FreelancerProfileController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @PostMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_CAREER_COVER)
+    @PutMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_CAREER_COVER)
     public ResponseEntity<Void> coverFreelancerCareer(
             @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
@@ -52,7 +53,7 @@ public class FreelancerProfileController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @PostMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER)
+    @PutMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER)
     public ResponseEntity<Void> coverFreelancerProjectHistory(
             @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
@@ -62,7 +63,7 @@ public class FreelancerProfileController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @PostMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER)
+    @PutMapping(FreelancerProfileControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER)
     public ResponseEntity<Void> coverFreelancerEducationAndLicenseAndLanguage(
             @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
