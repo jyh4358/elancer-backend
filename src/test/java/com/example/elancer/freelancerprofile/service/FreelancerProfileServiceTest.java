@@ -316,6 +316,4 @@ class FreelancerProfileServiceTest {
         Assertions.assertThat(languages.get(0).getLanguageName()).isEqualTo(languageCoverRequest.getLanguageName());
         Assertions.assertThat(languages.get(0).getLanguageAbility()).isEqualTo(languageCoverRequest.getLanguageAbility());
     }
-
-
 }
