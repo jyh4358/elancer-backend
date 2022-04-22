@@ -4,12 +4,16 @@ import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
+import com.example.elancer.freelancerprofile.dto.EducationAndLicenseAndLanguageRequests;
+import com.example.elancer.freelancerprofile.dto.EducationCoverRequest;
 import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancerprofile.dto.LanguageCoverRequest;
+import com.example.elancer.freelancerprofile.dto.LicenseCoverRequest;
 import com.example.elancer.freelancerprofile.dto.ProjectHistoryCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
@@ -17,11 +21,18 @@ import com.example.elancer.freelancerprofile.model.academic.state.SchoolLevel;
 import com.example.elancer.freelancerprofile.model.academic.state.AcademicState;
 import com.example.elancer.freelancerprofile.model.career.Career;
 import com.example.elancer.freelancerprofile.model.career.CompanyPosition;
+import com.example.elancer.freelancerprofile.model.education.Education;
+import com.example.elancer.freelancerprofile.model.language.Language;
+import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
+import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
 import com.example.elancer.freelancerprofile.repository.career.CareerRepository;
+import com.example.elancer.freelancerprofile.repository.education.EducationRepository;
+import com.example.elancer.freelancerprofile.repository.language.LanguageRepository;
+import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.MemberType;
@@ -57,6 +68,15 @@ class FreelancerProfileServiceTest {
 
     @Autowired
     private ProjectHistoryRepository projectHistoryRepository;
+
+    @Autowired
+    private EducationRepository educationRepository;
+
+    @Autowired
+    private LicenseRepository licenseRepository;
+
+    @Autowired
+    private LanguageRepository languageRepository;
 
 
     @DisplayName("프리랜서 소개정보가 저장된다")
@@ -243,6 +263,58 @@ class FreelancerProfileServiceTest {
         Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentCommunication()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentCommunication());
         Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentEtc()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentEtc());
         Assertions.assertThat(projectHistories.get(0).getResponsibilityTask()).isEqualTo(projectHistoryCoverRequest.getResponsibilityTask());
+    }
+
+    @DisplayName("프리랜서 프로필 교육 및 자격사항 저장 테스트")
+    @Test
+    public void 프리랜서_프로필_교육_및_자격사항_저장() {
+        //given
+        String memberId = "memberId";
+        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
+                memberId,
+                "pwd",
+                "name",
+                "phone",
+                "email",
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2021, 02, 01),
+                null
+        ));
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        EducationCoverRequest educationCoverRequest = new EducationCoverRequest("eduTitle", "eduOrganization", LocalDate.of(2020, 10, 01), LocalDate.of(2021, 01, 01));
+        LicenseCoverRequest licenseCoverRequest = new LicenseCoverRequest("licenseTitle", "issuer", LocalDate.of(2020, 05, 20));
+        LanguageCoverRequest languageCoverRequest = new LanguageCoverRequest("lanuageName", LanguageAbility.MIDDLE);
+
+        EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests = new EducationAndLicenseAndLanguageRequests(
+                Arrays.asList(educationCoverRequest), Arrays.asList(licenseCoverRequest), Arrays.asList(languageCoverRequest));
+
+        MemberDetails memberDetails = new MemberDetails(memberId);
+
+        //when
+        freelancerProfileService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, freelancerProfile.getNum(), educationAndLicenseAndLanguageRequests);
+
+        //then
+        List<Education> educations = educationRepository.findAll();
+        Assertions.assertThat(educations).hasSize(1);
+        Assertions.assertThat(educations.get(0).getEducationTitle()).isEqualTo(educationCoverRequest.getEducationTitle());
+        Assertions.assertThat(educations.get(0).getEducationOrganization()).isEqualTo(educationCoverRequest.getEducationOrganization());
+        Assertions.assertThat(educations.get(0).getEducationStartDate()).isEqualTo(educationCoverRequest.getEducationStartDate());
+        Assertions.assertThat(educations.get(0).getEducationEndDate()).isEqualTo(educationCoverRequest.getEducationEndDate());
+
+        List<License> licenses = licenseRepository.findAll();
+        Assertions.assertThat(licenses).hasSize(1);
+        Assertions.assertThat(licenses.get(0).getLicenseTitle()).isEqualTo(licenseCoverRequest.getLicenseTitle());
+        Assertions.assertThat(licenses.get(0).getLicenseIssuer()).isEqualTo(licenseCoverRequest.getLicenseIssuer());
+        Assertions.assertThat(licenses.get(0).getAcquisitionDate()).isEqualTo(licenseCoverRequest.getAcquisitionDate());
+
+        List<Language> languages = languageRepository.findAll();
+        Assertions.assertThat(languages).hasSize(1);
+        Assertions.assertThat(languages.get(0).getLanguageName()).isEqualTo(languageCoverRequest.getLanguageName());
+        Assertions.assertThat(languages.get(0).getLanguageAbility()).isEqualTo(languageCoverRequest.getLanguageAbility());
     }
 
 

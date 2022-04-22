@@ -28,4 +28,8 @@ public class Language extends BasicEntity {
     public static Language createLanguage(String languageName, LanguageAbility languageAbility) {
         return new Language(languageName, languageAbility);
     }
+
+    public void setFreelancerProfile(FreelancerProfile freelancerProfile) {
+        this.freelancerProfile = freelancerProfile;
+    }
 }

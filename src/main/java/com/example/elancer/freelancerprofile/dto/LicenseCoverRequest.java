@@ -1,5 +1,7 @@
 package com.example.elancer.freelancerprofile.dto;
 
+import com.example.elancer.freelancerprofile.model.education.Education;
+import com.example.elancer.freelancerprofile.model.license.License;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,4 +16,12 @@ public class LicenseCoverRequest {
     private String licenseTitle;
     private String licenseIssuer;
     private LocalDate acquisitionDate;
+
+    public static License toLicense(LicenseCoverRequest licenseCoverRequest) {
+        return License.createLicense(
+                licenseCoverRequest.getLicenseTitle(),
+                licenseCoverRequest.getLicenseIssuer(),
+                licenseCoverRequest.getAcquisitionDate()
+        );
+    }
 }

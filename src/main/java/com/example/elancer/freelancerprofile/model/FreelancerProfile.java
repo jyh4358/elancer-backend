@@ -6,6 +6,9 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.career.Career;
+import com.example.elancer.freelancerprofile.model.education.Education;
+import com.example.elancer.freelancerprofile.model.language.Language;
+import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -48,6 +51,15 @@ public class FreelancerProfile extends BasicEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProjectHistory> projectHistories = new ArrayList<>();
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Education> educations = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<License> licenses = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Language> languages = new ArrayList<>();
+
 
 //    @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private Position position;
@@ -88,5 +100,29 @@ public class FreelancerProfile extends BasicEntity {
 
     public void plusProjectHistory(ProjectHistory projectHistory) {
         this.projectHistories.add(projectHistory);
+    }
+
+    public void coverEducation(List<Education> educations) {
+        this.educations.clear();
+        for (Education education : educations) {
+            education.setFreelancerProfile(this);
+        }
+        this.educations.addAll(educations);
+    }
+
+    public void coverLicense(List<License> licenses) {
+        this.licenses.clear();
+        for (License license : licenses) {
+            license.setFreelancerProfile(this);
+        }
+        this.licenses.addAll(licenses);
+    }
+
+    public void coverLanguage(List<Language> languages) {
+        this.languages.clear();
+        for (Language language : languages) {
+            language.setFreelancerProfile(this);
+        }
+        this.languages.addAll(languages);
     }
 }

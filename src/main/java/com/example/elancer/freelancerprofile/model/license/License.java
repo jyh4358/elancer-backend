@@ -31,4 +31,8 @@ public class License extends BasicEntity {
     public static License createLicense(String licenseTitle, String licenseIssuer, LocalDate acquisitionDate) {
         return new License(licenseTitle, licenseIssuer, acquisitionDate);
     }
+
+    public void setFreelancerProfile(FreelancerProfile freelancerProfile) {
+        this.freelancerProfile = freelancerProfile;
+    }
 }
