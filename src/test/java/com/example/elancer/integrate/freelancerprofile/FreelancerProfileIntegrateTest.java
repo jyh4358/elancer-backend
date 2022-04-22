@@ -6,7 +6,9 @@ import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.controller.FreelancerProfileControllerPath;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
+import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
 import com.example.elancer.freelancerprofile.dto.EducationAndLicenseAndLanguageRequests;
 import com.example.elancer.freelancerprofile.dto.EducationCoverRequest;
 import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
@@ -45,6 +47,7 @@ import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
@@ -89,22 +92,6 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         프리랜서_프로필_소개정보_저장_요청결과_검증(freelancerProfile, introduceCoverRequest);
     }
 
-    private void 프리랜서_프로필_소개정보_저장_요청(FreelancerProfile freelancerProfile, IntroduceCoverRequest introduceCoverRequest) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_INTRO_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(introduceCoverRequest)))
-                .andExpect(status().isOk());
-    }
-
-    private void 프리랜서_프로필_소개정보_저장_요청결과_검증(FreelancerProfile freelancerProfile, IntroduceCoverRequest introduceCoverRequest) {
-        FreelancerProfile updatedFreelancerProfile = freelancerProfileRepository.findById(freelancerProfile.getNum()).get();
-        Assertions.assertThat(updatedFreelancerProfile.getIntroduceName()).isEqualTo(introduceCoverRequest.getIntroName());
-        Assertions.assertThat(updatedFreelancerProfile.getIntroBackGround()).isEqualTo(introduceCoverRequest.getIntroBackGround());
-        Assertions.assertThat(updatedFreelancerProfile.getIntroduceContent()).isEqualTo(introduceCoverRequest.getIntroContent());
-        Assertions.assertThat(updatedFreelancerProfile.getIntroduceVideoURL()).isEqualTo(introduceCoverRequest.getIntroVideoUrl());
-    }
-
     @DisplayName("프리랜서 프로필 학력 저장 통합테스트")
     @Test
     public void 프리랜서_프로필_학력정보_저장() throws Exception {
@@ -121,29 +108,13 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
                 "문과"
         );
 
+        AcademicAbilityCoverRequests academicAbilityCoverRequests = new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest));
+
         //when
-        프리랜서_프로필_학력사항_저장_요청(freelancerProfile, academicAbilityCoverRequest);
+        프리랜서_프로필_학력사항_저장_요청(freelancerProfile, academicAbilityCoverRequests);
 
         //then
         프리랜서_프로필_학력사항_저장_요청결과_검증(academicAbilityCoverRequest);
-    }
-
-    private void 프리랜서_프로필_학력사항_저장_요청(FreelancerProfile freelancerProfile, AcademicAbilityCoverRequest academicAbilityCoverRequest) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(academicAbilityCoverRequest)))
-                .andExpect(status().isOk());
-    }
-
-    private void 프리랜서_프로필_학력사항_저장_요청결과_검증(AcademicAbilityCoverRequest academicAbilityCoverRequest) {
-        AcademicAbility academicAbility = academicRepository.findAll().get(0);
-        Assertions.assertThat(academicAbility.getSchoolName()).isEqualTo(academicAbilityCoverRequest.getSchoolName());
-        Assertions.assertThat(academicAbility.getSchoolLevel()).isEqualTo(academicAbilityCoverRequest.getSchoolLevel());
-        Assertions.assertThat(academicAbility.getEnterSchoolDate()).isEqualTo(academicAbilityCoverRequest.getEnterSchoolDate());
-        Assertions.assertThat(academicAbility.getGraduationDate()).isEqualTo(academicAbilityCoverRequest.getGraduationDate());
-        Assertions.assertThat(academicAbility.getAcademicState()).isEqualTo(academicAbilityCoverRequest.getAcademicState());
-        Assertions.assertThat(academicAbility.getMajorName()).isEqualTo(academicAbilityCoverRequest.getMajorName());
     }
 
     @DisplayName("프리랜서 프로필 경력 저장 통합테스트")
@@ -157,37 +128,22 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
                 "companyName",
                 "departmentName",
                 CompanyPosition.HEAD_OF_DEPARTMENT,
-                LocalDate.of(2020, 02, 01),
-                LocalDate.of(2021, 02, 01)
+                LocalDate.of(2020, 9, 01),
+                LocalDate.of(2021, 10, 01)
         );
 
+        CareerCoverRequests careerCoverRequests = new CareerCoverRequests(Arrays.asList(careerCoverRequest));
+
         //when
-        프리랜서_프로필_경력사항_저장_요청(freelancerProfile, careerCoverRequest);
+        프리랜서_프로필_경력사항_저장_요청(freelancerProfile, careerCoverRequests);
 
         //then
-        프리랜서_프로필_경력사항_저장_요청결과_검증(careerCoverRequest);
+        프리랜서_프로필_경력사항_저장_요청결과_검증(careerCoverRequests.getCareerCoverRequests().get(0));
     }
 
-    private void 프리랜서_프로필_경력사항_저장_요청(FreelancerProfile freelancerProfile, CareerCoverRequest careerCoverRequest) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_CAREER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(String.valueOf(careerCoverRequest))))
-                .andExpect(status().isOk());
-    }
-
-    private void 프리랜서_프로필_경력사항_저장_요청결과_검증(CareerCoverRequest careerCoverRequest) {
-        Career career = careerRepository.findAll().get(0);
-        Assertions.assertThat(career.getCompanyName()).isEqualTo(careerCoverRequest.getCompanyName());
-        Assertions.assertThat(career.getDepartmentName()).isEqualTo(careerCoverRequest.getDepartmentName());
-        Assertions.assertThat(career.getCompanyPosition()).isEqualTo(careerCoverRequest.getCompanyPosition());
-        Assertions.assertThat(career.getCareerStartDate()).isEqualTo(careerCoverRequest.getCareerStartDate());
-        Assertions.assertThat(career.getCareerEndDate()).isEqualTo(careerCoverRequest.getCareerEndDate());
-    }
-
-    @DisplayName("프리랜서 프로필 교육 및 자격사항 저장 통합테스트")
+    @DisplayName("프리랜서 프로필 프로젝트이력 저장 통합테스트")
     @Test
-    public void 프리랜서_프로필_교육및자격사항_저장() throws Exception {
+    public void 프리랜서_프로필_프로젝트이력_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
@@ -217,12 +173,91 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         프리랜서_프로필_프로젝트이력_저장_요청결과_검증(projectHistoryCoverRequest);
     }
 
+    @DisplayName("프리랜서 프로필 교육 및 자격사항 저장 통합테스트")
+    @Test
+    public void 프리랜서_프로필_교육및자격사항_저장() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        EducationCoverRequest educationCoverRequest = new EducationCoverRequest("우아한테크코스", "우아한형제들", LocalDate.of(2020, 01, 01), LocalDate.of(2021, 01, 01));
+        LicenseCoverRequest licenseCoverRequest = new LicenseCoverRequest("정보처리기사", "한국자격증협회", LocalDate.of(2020, 05, 20));
+        LanguageCoverRequest languageCoverRequest = new LanguageCoverRequest("영어", LanguageAbility.MIDDLE);
+
+        EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests = new EducationAndLicenseAndLanguageRequests(
+                Arrays.asList(educationCoverRequest),
+                Arrays.asList(licenseCoverRequest),
+                Arrays.asList(languageCoverRequest)
+        );
+
+        //when
+        프리랜서_프로필_교육및자격사항_저장_요청(freelancerProfile, educationAndLicenseAndLanguageRequests);
+
+        //then
+        프리랜서_프로필_교육및자격사항_저장_요청결과_검증(educationCoverRequest, licenseCoverRequest, languageCoverRequest);
+    }
+
+    private void 프리랜서_프로필_소개정보_저장_요청(FreelancerProfile freelancerProfile, IntroduceCoverRequest introduceCoverRequest) throws Exception {
+        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_INTRO_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        mockMvc.perform(put(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(introduceCoverRequest)))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    private void 프리랜서_프로필_소개정보_저장_요청결과_검증(FreelancerProfile freelancerProfile, IntroduceCoverRequest introduceCoverRequest) {
+        FreelancerProfile updatedFreelancerProfile = freelancerProfileRepository.findById(freelancerProfile.getNum()).get();
+        Assertions.assertThat(updatedFreelancerProfile.getIntroduceName()).isEqualTo(introduceCoverRequest.getIntroName());
+        Assertions.assertThat(updatedFreelancerProfile.getIntroBackGround()).isEqualTo(introduceCoverRequest.getIntroBackGround());
+        Assertions.assertThat(updatedFreelancerProfile.getIntroduceContent()).isEqualTo(introduceCoverRequest.getIntroContent());
+        Assertions.assertThat(updatedFreelancerProfile.getIntroduceVideoURL()).isEqualTo(introduceCoverRequest.getIntroVideoUrl());
+    }
+
+    private void 프리랜서_프로필_학력사항_저장_요청(FreelancerProfile freelancerProfile, AcademicAbilityCoverRequests academicAbilityCoverRequests) throws Exception {
+        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        mockMvc.perform(put(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(academicAbilityCoverRequests)))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    private void 프리랜서_프로필_학력사항_저장_요청결과_검증(AcademicAbilityCoverRequest academicAbilityCoverRequest) {
+        AcademicAbility academicAbility = academicRepository.findAll().get(0);
+        Assertions.assertThat(academicAbility.getSchoolName()).isEqualTo(academicAbilityCoverRequest.getSchoolName());
+        Assertions.assertThat(academicAbility.getSchoolLevel()).isEqualTo(academicAbilityCoverRequest.getSchoolLevel());
+        Assertions.assertThat(academicAbility.getEnterSchoolDate()).isEqualTo(academicAbilityCoverRequest.getEnterSchoolDate());
+        Assertions.assertThat(academicAbility.getGraduationDate()).isEqualTo(academicAbilityCoverRequest.getGraduationDate());
+        Assertions.assertThat(academicAbility.getAcademicState()).isEqualTo(academicAbilityCoverRequest.getAcademicState());
+        Assertions.assertThat(academicAbility.getMajorName()).isEqualTo(academicAbilityCoverRequest.getMajorName());
+    }
+
+    private void 프리랜서_프로필_경력사항_저장_요청(FreelancerProfile freelancerProfile, CareerCoverRequests careerCoverRequests) throws Exception {
+        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_CAREER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        mockMvc.perform(put(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(careerCoverRequests)))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    private void 프리랜서_프로필_경력사항_저장_요청결과_검증(CareerCoverRequest careerCoverRequest) {
+        Career career = careerRepository.findAll().get(0);
+        Assertions.assertThat(career.getCompanyName()).isEqualTo(careerCoverRequest.getCompanyName());
+        Assertions.assertThat(career.getDepartmentName()).isEqualTo(careerCoverRequest.getDepartmentName());
+        Assertions.assertThat(career.getCompanyPosition()).isEqualTo(careerCoverRequest.getCompanyPosition());
+        Assertions.assertThat(career.getCareerStartDate()).isEqualTo(careerCoverRequest.getCareerStartDate());
+        Assertions.assertThat(career.getCareerEndDate()).isEqualTo(careerCoverRequest.getCareerEndDate());
+    }
+
     private void 프리랜서_프로필_프로젝트이력_저장_요청(FreelancerProfile freelancerProfile, ProjectHistoryCoverRequest projectHistoryCoverRequest) throws Exception {
         String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(projectHistoryCoverRequest)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 
     private void 프리랜서_프로필_프로젝트이력_저장_요청결과_검증(ProjectHistoryCoverRequest projectHistoryCoverRequest) {
@@ -245,36 +280,13 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         Assertions.assertThat(projectHistories.get(0).getResponsibilityTask()).isEqualTo(projectHistoryCoverRequest.getResponsibilityTask());
     }
 
-    @DisplayName("프리랜서 프로필 프로젝트 이력 저장 통합테스트")
-    @Test
-    public void 프리랜서_프로필_프로젝트이력_저장() throws Exception {
-        //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
-
-        EducationCoverRequest educationCoverRequest = new EducationCoverRequest("우아한테크코스", "우아한형제들", LocalDate.of(2020, 01, 01), LocalDate.of(2021, 01, 01));
-        LicenseCoverRequest licenseCoverRequest = new LicenseCoverRequest("정보처리기사", "한국자격증협회", LocalDate.of(2020, 05, 20));
-        LanguageCoverRequest languageCoverRequest = new LanguageCoverRequest("영어", LanguageAbility.MIDDLE);
-
-        EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests = new EducationAndLicenseAndLanguageRequests(
-                Arrays.asList(educationCoverRequest),
-                Arrays.asList(licenseCoverRequest),
-                Arrays.asList(languageCoverRequest)
-        );
-
-        //when
-        프리랜서_프로필_교육및자격사항_저장_요청(freelancerProfile, educationAndLicenseAndLanguageRequests);
-
-        //then
-        프리랜서_프로필_교육및자격사항_저장_요청결과_검증(educationCoverRequest, licenseCoverRequest, languageCoverRequest);
-    }
-
     private void 프리랜서_프로필_교육및자격사항_저장_요청(FreelancerProfile freelancerProfile, EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(educationAndLicenseAndLanguageRequests)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andDo(print());
     }
 
     private void 프리랜서_프로필_교육및자격사항_저장_요청결과_검증(EducationCoverRequest educationCoverRequest, LicenseCoverRequest licenseCoverRequest, LanguageCoverRequest languageCoverRequest) {
