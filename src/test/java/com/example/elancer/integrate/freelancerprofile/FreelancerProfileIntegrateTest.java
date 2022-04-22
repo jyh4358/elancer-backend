@@ -11,6 +11,8 @@ import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
 import com.example.elancer.freelancerprofile.dto.EducationAndLicenseAndLanguageRequests;
 import com.example.elancer.freelancerprofile.dto.EducationCoverRequest;
+import com.example.elancer.freelancerprofile.dto.EducationAndLicenseAndLanguageRequests;
+import com.example.elancer.freelancerprofile.dto.EducationCoverRequest;
 import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
 import com.example.elancer.freelancerprofile.dto.LanguageCoverRequest;
 import com.example.elancer.freelancerprofile.dto.LicenseCoverRequest;
