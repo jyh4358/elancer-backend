@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.dto;
 
+import com.example.elancer.freelancerprofile.model.education.Education;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,4 +16,13 @@ public class EducationCoverRequest {
     private String educationOrganization;
     private LocalDate educationStartDate;
     private LocalDate educationEndDate;
+
+    public static Education toEducation(EducationCoverRequest educationCoverRequest) {
+        return Education.createEducation(
+                educationCoverRequest.getEducationTitle(),
+                educationCoverRequest.getEducationOrganization(),
+                educationCoverRequest.getEducationStartDate(),
+                educationCoverRequest.getEducationEndDate()
+        );
+    }
 }

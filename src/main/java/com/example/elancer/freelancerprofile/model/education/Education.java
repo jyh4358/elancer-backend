@@ -34,4 +34,8 @@ public class Education extends BasicEntity {
     public static Education createEducation(String educationTitle, String educationOrganization, LocalDate educationStartDate, LocalDate educationEndDate) {
         return new Education(educationTitle, educationOrganization, educationStartDate, educationEndDate);
     }
+
+    public void setFreelancerProfile(FreelancerProfile freelancerProfile) {
+        this.freelancerProfile = freelancerProfile;
+    }
 }

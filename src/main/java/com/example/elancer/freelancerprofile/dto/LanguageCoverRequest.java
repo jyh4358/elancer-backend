@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.dto;
 
+import com.example.elancer.freelancerprofile.model.language.Language;
 import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,4 +13,8 @@ import lombok.NoArgsConstructor;
 public class LanguageCoverRequest {
     private String languageName;
     private LanguageAbility languageAbility;
+
+    public static Language toLanguage(LanguageCoverRequest languageCoverRequest) {
+        return Language.createLanguage(languageCoverRequest.getLanguageName(), languageCoverRequest.getLanguageAbility());
+    }
 }

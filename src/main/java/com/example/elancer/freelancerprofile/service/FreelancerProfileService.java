@@ -15,6 +15,9 @@ import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfile
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.career.Career;
+import com.example.elancer.freelancerprofile.model.education.Education;
+import com.example.elancer.freelancerprofile.model.language.Language;
+import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
@@ -106,14 +109,25 @@ public class FreelancerProfileService {
 
     @Transactional
     protected void coverFreeLancerEducation(FreelancerProfile freelancerProfile, List<EducationCoverRequest> educationCoverRequests) {
-
+        List<Education> educations = educationCoverRequests.stream()
+                .map(EducationCoverRequest::toEducation)
+                .collect(Collectors.toList());
+        freelancerProfile.coverEducation(educations);
     }
 
     @Transactional
     protected void coverFreeLancerLicense(FreelancerProfile freelancerProfile, List<LicenseCoverRequest> licenseCoverRequests) {
+        List<License> licenses = licenseCoverRequests.stream()
+                .map(LicenseCoverRequest::toLicense)
+                .collect(Collectors.toList());
+        freelancerProfile.coverLicense(licenses);
     }
 
     @Transactional
     protected void coverFreeLancerLanguage(FreelancerProfile freelancerProfile, List<LanguageCoverRequest> languageCoverRequests) {
+        List<Language> languages = languageCoverRequests.stream()
+                .map(LanguageCoverRequest::toLanguage)
+                .collect(Collectors.toList());
+        freelancerProfile.coverLanguage(languages);
     }
 }
