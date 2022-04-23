@@ -1,6 +1,8 @@
 package com.example.elancer.freelancerprofile.model.position.publisher;
 
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,8 +26,8 @@ public class Publisher extends Position {
 
     private String etcSkill;
 
-    public Publisher(String position, List<PublishingSkill> publishingSkillList, String etcSkill) {
-        super(position);
+    public Publisher(PositionType positionType, FreelancerProfile freelancerProfile, List<PublishingSkill> publishingSkillList, String etcSkill) {
+        super(positionType, freelancerProfile);
         this.publishingSkillList = publishingSkillList;
         this.etcSkill = etcSkill;
     }
