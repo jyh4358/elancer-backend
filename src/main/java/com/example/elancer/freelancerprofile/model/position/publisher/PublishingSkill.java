@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.model.position.developer.javaskill;
+package com.example.elancer.freelancerprofile.model.position.publisher;
 
 import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
@@ -15,11 +15,11 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class JavaSkill extends BasicEntity {
+public class PublishingSkill extends BasicEntity {
 
     @Enumerated(EnumType.STRING)
-    private JavaDetailSkill javaDetailSkill;
+    private PublishingDetailSkill publishingDetailSkill;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Developer developer;
+    private Publisher publisher;
 }

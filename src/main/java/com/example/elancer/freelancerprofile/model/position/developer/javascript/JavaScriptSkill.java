@@ -1,8 +1,7 @@
 package com.example.elancer.freelancerprofile.model.position.developer.javascript;
 
 import com.example.elancer.common.model.BasicEntity;
-import com.example.elancer.freelancerprofile.model.position.Developer;
-import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
