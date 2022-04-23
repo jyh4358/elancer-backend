@@ -22,4 +22,6 @@ public class PhpOrAspSkill extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Developer developer;
+
+
 }

@@ -21,14 +21,10 @@ import javax.persistence.OneToOne;
 @DiscriminatorColumn(name = "position_type")
 public abstract class Position extends BasicEntity {
 
-    @NotNull
-    private PositionType positionType;
-
     @OneToOne(fetch = FetchType.LAZY)
     private FreelancerProfile freelancerProfile;
 
-    public Position(PositionType positionType, FreelancerProfile freelancerProfile) {
-        this.positionType = positionType;
+    public Position(FreelancerProfile freelancerProfile) {
         this.freelancerProfile = freelancerProfile;
     }
 }

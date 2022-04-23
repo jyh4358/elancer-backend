@@ -26,8 +26,8 @@ public class Publisher extends Position {
 
     private String etcSkill;
 
-    public Publisher(PositionType positionType, FreelancerProfile freelancerProfile, List<PublishingSkill> publishingSkillList, String etcSkill) {
-        super(positionType, freelancerProfile);
+    public Publisher(FreelancerProfile freelancerProfile, List<PublishingSkill> publishingSkillList, String etcSkill) {
+        super(freelancerProfile);
         this.publishingSkillList = publishingSkillList;
         this.etcSkill = etcSkill;
     }

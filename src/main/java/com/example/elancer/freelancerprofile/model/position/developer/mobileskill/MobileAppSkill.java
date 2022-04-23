@@ -22,4 +22,17 @@ public class MobileAppSkill extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Developer developer;
+
+    public MobileAppSkill(MobileAppDetailSkill mobileAppDetailSkill, Developer developer) {
+        this.mobileAppDetailSkill = mobileAppDetailSkill;
+        this.developer = developer;
+    }
+
+    public static MobileAppSkill createMobileAppSkill(MobileAppDetailSkill mobileAppDetailSkill, Developer developer) {
+        return new MobileAppSkill(mobileAppDetailSkill, developer);
+    }
+
+    public void setDeveloper(Developer developer) {
+        this.developer = developer;
+    }
 }

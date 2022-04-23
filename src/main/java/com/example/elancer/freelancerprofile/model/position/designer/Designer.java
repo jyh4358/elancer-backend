@@ -2,7 +2,6 @@ package com.example.elancer.freelancerprofile.model.position.designer;
 
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
-import com.example.elancer.freelancerprofile.model.position.PositionType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,8 +30,8 @@ public class Designer extends Position {
 
     private String etcSkill;
 
-    public Designer(PositionType positionType, FreelancerProfile freelancerProfile, List<DesignRole> designRole, String etcRole, List<DesignSkill> designSkills, String etcSkill) {
-        super(positionType, freelancerProfile);
+    public Designer(FreelancerProfile freelancerProfile, List<DesignRole> designRole, String etcRole, List<DesignSkill> designSkills, String etcSkill) {
+        super(freelancerProfile);
         this.designRole = designRole;
         this.etcRole = etcRole;
         this.designSkills = designSkills;
