@@ -1,5 +1,6 @@
-package com.example.elancer.freelancer.model.position;
+package com.example.elancer.freelancerprofile.model.position;
 
+import com.example.elancer.common.model.BasicEntity;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -19,17 +20,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "position_type")
-public abstract class Position {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long positionNum;
+public abstract class Position extends BasicEntity {
 
     @NotNull
     private String position;
-
-    private LocalDateTime createDate;
-    private LocalDateTime updateDate;
 
     public Position(String position) {
         this.position = position;

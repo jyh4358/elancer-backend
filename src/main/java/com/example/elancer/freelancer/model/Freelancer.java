@@ -1,6 +1,5 @@
 package com.example.elancer.freelancer.model;
 
-import com.example.elancer.freelancer.model.position.Position;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.domain.MemberType;

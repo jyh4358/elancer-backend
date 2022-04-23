@@ -1,4 +1,4 @@
-package com.example.elancer.freelancer.model.position;
+package com.example.elancer.freelancerprofile.model.position;
 
 public class PositionEtc extends Position{
 }
