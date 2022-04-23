@@ -1,6 +1,8 @@
 package com.example.elancer.freelancerprofile.model.position.designer;
 
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,16 +21,21 @@ import java.util.List;
 @DiscriminatorValue("DESIGNER")
 public class Designer extends Position {
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "developer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "designer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DesignRole> designRole = new ArrayList<>();
 
     private String etcRole;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "developer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "designer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DesignSkill> designSkills = new ArrayList<>();
 
     private String etcSkill;
 
-
-
+    public Designer(PositionType positionType, FreelancerProfile freelancerProfile, List<DesignRole> designRole, String etcRole, List<DesignSkill> designSkills, String etcSkill) {
+        super(positionType, freelancerProfile);
+        this.designRole = designRole;
+        this.etcRole = etcRole;
+        this.designSkills = designSkills;
+        this.etcSkill = etcSkill;
+    }
 }

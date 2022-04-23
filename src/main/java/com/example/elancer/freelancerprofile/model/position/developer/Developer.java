@@ -1,6 +1,8 @@
 package com.example.elancer.freelancerprofile.model.position.developer;
 
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetSkill;
@@ -55,4 +57,31 @@ public class Developer extends Position {
     private List<DBSkill> dbSkills = new ArrayList<>();
 
     private String etcSkill;
+
+    public Developer(
+            PositionType positionType,
+            FreelancerProfile freelancerProfile,
+            String focusSkill,
+            String role,
+            List<JavaSkill> javaSkills,
+            List<MobileAppSkill> mobileAppSkills,
+            List<PhpOrAspSkill> phpOrAspSkills,
+            List<DotNetSkill> dotNetSkills,
+            List<JavaScriptSkill> javaScriptSkills,
+            List<CSkill> cOrCPlusplusSkills,
+            List<DBSkill> dbSkills,
+            String etcSkill
+    ) {
+        super(positionType, freelancerProfile);
+        this.focusSkill = focusSkill;
+        this.role = role;
+        this.javaSkills = javaSkills;
+        this.mobileAppSkills = mobileAppSkills;
+        this.phpOrAspSkills = phpOrAspSkills;
+        this.dotNetSkills = dotNetSkills;
+        this.javaScriptSkills = javaScriptSkills;
+        this.cOrCPlusplusSkills = cOrCPlusplusSkills;
+        this.dbSkills = dbSkills;
+        this.etcSkill = etcSkill;
+    }
 }

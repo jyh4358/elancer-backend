@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.model.position;
 
 import com.example.elancer.common.model.BasicEntity;
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,12 +9,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import java.time.LocalDateTime;
+import javax.persistence.OneToOne;
 
 @Entity
 @Getter
@@ -23,9 +22,13 @@ import java.time.LocalDateTime;
 public abstract class Position extends BasicEntity {
 
     @NotNull
-    private String position;
+    private PositionType positionType;
 
-    public Position(String position) {
-        this.position = position;
+    @OneToOne(fetch = FetchType.LAZY)
+    private FreelancerProfile freelancerProfile;
+
+    public Position(PositionType positionType, FreelancerProfile freelancerProfile) {
+        this.positionType = positionType;
+        this.freelancerProfile = freelancerProfile;
     }
 }
