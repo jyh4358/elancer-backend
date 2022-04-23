@@ -22,4 +22,17 @@ public class JavaSkill extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Developer developer;
+
+    public JavaSkill(JavaDetailSkill javaDetailSkill, Developer developer) {
+        this.javaDetailSkill = javaDetailSkill;
+        this.developer = developer;
+    }
+
+    public static JavaSkill createJavaSkill(JavaDetailSkill javaDetailSkill, Developer developer) {
+        return new JavaSkill(javaDetailSkill, developer);
+    }
+
+    public void setDeveloper(Developer developer) {
+        this.developer = developer;
+    }
 }
