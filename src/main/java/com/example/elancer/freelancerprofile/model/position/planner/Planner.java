@@ -23,5 +23,4 @@ public class Planner extends Position {
     private List<PlanField> planFields = new ArrayList<>();
 
     private String etcField;
-
 }

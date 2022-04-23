@@ -1,8 +1,6 @@
 package com.example.elancer.freelancerprofile.model.position.designer;
 
 import com.example.elancer.common.model.BasicEntity;
-import com.example.elancer.freelancerprofile.model.position.developer.Developer;
-import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +17,7 @@ import javax.persistence.ManyToOne;
 public class DesignSkill extends BasicEntity {
 
     @Enumerated(EnumType.STRING)
-    private PublishingDetailSkill publishingDetailSkill;
+    private DesignDetailSkill designDetailSkill;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Designer designer;
