@@ -49,7 +49,7 @@ class FreelancerPositionServiceTest {
     private JavaSkillRepository javaSkillRepository;
 
     @DisplayName("프리랜서 프로필 스킬이 개발자로 등록된다.")
-    @Test
+//    @Test
     public void 프리랜서_프로필_스킬이_개발자로_등록된다() {
         //given
         String memberId = "memberId";

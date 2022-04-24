@@ -22,4 +22,17 @@ public class CSkill extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Developer developer;
+
+    public CSkill(CDetailSkill cDetailSkill, Developer developer) {
+        this.cDetailSkill = cDetailSkill;
+        this.developer = developer;
+    }
+
+    public static CSkill createCSkill(CDetailSkill cDetailSkill, Developer developer) {
+        return new CSkill(cDetailSkill, developer);
+    }
+
+    public void setDeveloper(Developer developer) {
+        this.developer = developer;
+    }
 }

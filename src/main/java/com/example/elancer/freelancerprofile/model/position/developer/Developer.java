@@ -63,9 +63,11 @@ public class Developer extends Position {
         this.role = role;
     }
 
-    public void coverDeveloper(
-            String focusSkill,
-            String role,
+    public static Developer createBasicDeveloper(FreelancerProfile freelancerProfile, String focusSkill, String role) {
+        return new Developer(freelancerProfile, focusSkill, role);
+    }
+
+    public void coverDeveloperSkills(
             List<JavaSkill> javaSkills,
             List<MobileAppSkill> mobileAppSkills,
             List<PhpOrAspSkill> phpOrAspSkills,
@@ -75,8 +77,6 @@ public class Developer extends Position {
             List<DBSkill> dbSkills,
             String etcSkill
     ) {
-        this.focusSkill = focusSkill;
-        this.role = role;
         coverJavaSkills(javaSkills);
         coverMobileSkills(mobileAppSkills);
         coverPhpOrAspSkills(phpOrAspSkills);
@@ -106,82 +106,40 @@ public class Developer extends Position {
     private void coverPhpOrAspSkills(List<PhpOrAspSkill> phpOrAspSkills) {
         this.phpOrAspSkills.clear();
         for (PhpOrAspSkill phpOrAspSkill : phpOrAspSkills) {
-
+            phpOrAspSkill.setDeveloper(this);
         }
         this.phpOrAspSkills = phpOrAspSkills;
     }
 
     private void coverDotNetSkills(List<DBSkill> dbSkills) {
         this.dotNetSkills.clear();
+        for (DBSkill dbSkill : dbSkills) {
+            dbSkill.setDeveloper(this);
+        }
         this.dbSkills = dbSkills;
     }
 
-    private void coverCSkills(List<CSkill> cOrCPlusplusSkills) {
+    private void coverCSkills(List<CSkill> cSkills) {
         this.cSkills.clear();
-        this.cSkills = cOrCPlusplusSkills;
+        for (CSkill cSkill : cSkills) {
+            cSkill.setDeveloper(this);
+        }
+        this.cSkills = cSkills;
     }
 
     private void coverJavaScriptSkills(List<JavaScriptSkill> javaScriptSkills) {
         this.javaScriptSkills.clear();
+        for (JavaScriptSkill javaScriptSkill : javaScriptSkills) {
+            javaScriptSkill.setDeveloper(this);
+        }
         this.javaScriptSkills = javaScriptSkills;
     }
 
     private void coverDBSkills(List<DotNetSkill> dotNetSkills) {
         this.dbSkills.clear();
+        for (DotNetSkill dotNetSkill : dotNetSkills) {
+            dotNetSkill.setDeveloper(this);
+        }
         this.dotNetSkills = dotNetSkills;
-    }
-
-    public Developer(
-            FreelancerProfile freelancerProfile,
-            String focusSkill,
-            String role,
-            List<JavaSkill> javaSkills,
-            List<MobileAppSkill> mobileAppSkills,
-            List<PhpOrAspSkill> phpOrAspSkills,
-            List<DotNetSkill> dotNetSkills,
-            List<JavaScriptSkill> javaScriptSkills,
-            List<CSkill> cOrCPlusplusSkills,
-            List<DBSkill> dbSkills,
-            String etcSkill
-    ) {
-        super(freelancerProfile);
-        this.focusSkill = focusSkill;
-        this.role = role;
-        this.javaSkills = javaSkills;
-        this.mobileAppSkills = mobileAppSkills;
-        this.phpOrAspSkills = phpOrAspSkills;
-        this.dotNetSkills = dotNetSkills;
-        this.javaScriptSkills = javaScriptSkills;
-        this.cSkills = cOrCPlusplusSkills;
-        this.dbSkills = dbSkills;
-        this.etcSkill = etcSkill;
-    }
-
-    public static Developer createDeveloper(
-            FreelancerProfile freelancerProfile,
-            String focusSkill,
-            String role,
-            List<JavaSkill> javaSkills,
-            List<MobileAppSkill> mobileAppSkills,
-            List<PhpOrAspSkill> phpOrAspSkills,
-            List<DotNetSkill> dotNetSkills,
-            List<JavaScriptSkill> javaScriptSkills,
-            List<CSkill> cOrCPlusplusSkills,
-            List<DBSkill> dbSkills,
-            String etcSkill
-    ) {
-        return new Developer(
-                freelancerProfile,
-                focusSkill,
-                role,
-                javaSkills,
-                mobileAppSkills,
-                phpOrAspSkills,
-                dotNetSkills,
-                javaScriptSkills,
-                cOrCPlusplusSkills,
-                dbSkills,
-                etcSkill
-        );
     }
 }

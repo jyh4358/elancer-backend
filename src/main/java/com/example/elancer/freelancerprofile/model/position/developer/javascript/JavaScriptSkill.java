@@ -22,4 +22,17 @@ public class JavaScriptSkill extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Developer developer;
+
+    public JavaScriptSkill(JavaScriptDetailSkill javaScriptDetailSkill, Developer developer) {
+        this.javaScriptDetailSkill = javaScriptDetailSkill;
+        this.developer = developer;
+    }
+
+    public static JavaScriptSkill createJavaScriptSkill(JavaScriptDetailSkill javaScriptDetailSkill, Developer developer) {
+        return new JavaScriptSkill(javaScriptDetailSkill, developer);
+    }
+
+    public void setDeveloper(Developer developer) {
+        this.developer = developer;
+    }
 }
