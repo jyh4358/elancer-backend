@@ -11,7 +11,7 @@ public enum DesignDetailRole {
     PACKAGE_DESIGN("패키지 디자인"),
     ART_DIRECTION("아트 디렉션"),
     ANIMATION("애니메이션"),
-    LOGO_BRANDING("로고 브랜딩"),
+    LOGO_BRANDING("로고 브랜딩")
     ;
 
     private String desc;

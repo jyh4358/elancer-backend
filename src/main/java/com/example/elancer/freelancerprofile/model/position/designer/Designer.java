@@ -21,7 +21,7 @@ import java.util.List;
 public class Designer extends Position {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "designer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DesignRole> designRole = new ArrayList<>();
+    private List<DesignRole> designRoles = new ArrayList<>();
 
     private String etcRole;
 
@@ -30,11 +30,34 @@ public class Designer extends Position {
 
     private String etcSkill;
 
-    public Designer(FreelancerProfile freelancerProfile, List<DesignRole> designRole, String etcRole, List<DesignSkill> designSkills, String etcSkill) {
+    public Designer(FreelancerProfile freelancerProfile) {
         super(freelancerProfile);
-        this.designRole = designRole;
+    }
+
+    public static Designer createBasicDesigner(FreelancerProfile freelancerProfile) {
+        return new Designer(freelancerProfile);
+    }
+
+    public void coverDesignRoleAndSkill(List<DesignRole> designRoles, List<DesignSkill> designSkills, String etcRole,  String etcSkill) {
+        coverDesignRoles(designRoles);
+        coverDesignSkills(designSkills);
         this.etcRole = etcRole;
-        this.designSkills = designSkills;
         this.etcSkill = etcSkill;
+    }
+
+    private void coverDesignRoles(List<DesignRole> designRoles) {
+        this.designRoles.clear();
+        for (DesignRole designRole : designRoles) {
+            designRole.setDesigner(this);
+        }
+        this.designRoles.addAll(designRoles);
+    }
+
+    private void coverDesignSkills(List<DesignSkill> designSkills) {
+        this.designSkills.clear();
+        for (DesignSkill designSkill : designSkills) {
+            designSkill.setDesigner(this);
+        }
+        this.designSkills.addAll(designSkills);
     }
 }

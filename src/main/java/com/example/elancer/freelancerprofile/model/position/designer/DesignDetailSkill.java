@@ -14,7 +14,7 @@ public enum DesignDetailSkill {
     THREE_D_MAX_AND_MAYA("3D Max/Maya"),
     CLIP_STUDIO("CLIP STUDIO"),
     MEDIBANG("MediBang"),
-    FLASH("Flash"),
+    FLASH("Flash")
     ;
     private String desc;
 

@@ -3,9 +3,13 @@ package com.example.elancer.integrate.freelancerprofile;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.controller.FreelancerPositionControllerPath;
+import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.designer.Designer;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBDetailSkill;
@@ -16,6 +20,7 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
+import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
@@ -39,6 +44,9 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
 
     @Autowired
     private PublisherRepository publisherRepository;
+
+    @Autowired
+    private DesignerRepository designerRepository;
 
 
     @DisplayName("프리랜서 프로필 개발자 저장 통합테스트")
@@ -95,5 +103,32 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
         //then
         List<Publisher> publishers = publisherRepository.findAll();
         Assertions.assertThat(publishers).hasSize(1);
+    }
+
+    @DisplayName("프리랜서 프로필 디자이너 저장 통합테스트")
+    @Test
+    public void 프리랜서_프로필_디자이너_저장() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
+                Arrays.asList(DesignDetailRole.APP_DESIGN, DesignDetailRole.GAME_DESIGN),
+                "etcRole",
+                Arrays.asList(DesignDetailSkill.AFERE_EFFECT, DesignDetailSkill.THREE_D_MAX_AND_MAYA),
+                "etcSkill"
+        );
+
+        //when
+        String path = FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        mockMvc.perform(put(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(designerCoverRequest)))
+                .andExpect(status().isCreated())
+                .andDo(print());
+
+        //then
+        List<Designer> designers = designerRepository.findAll();
+        Assertions.assertThat(designers).hasSize(1);
     }
 }

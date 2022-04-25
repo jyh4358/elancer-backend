@@ -22,4 +22,16 @@ public class DesignRole extends BasicEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Designer designer;
 
+    public DesignRole(DesignDetailRole designDetailRole, Designer designer) {
+        this.designDetailRole = designDetailRole;
+        this.designer = designer;
+    }
+
+    public static DesignRole createDesignRole(DesignDetailRole designDetailRole, Designer designer) {
+        return new DesignRole(designDetailRole, designer);
+    }
+
+    public void setDesigner(Designer designer) {
+        this.designer = designer;
+    }
 }
