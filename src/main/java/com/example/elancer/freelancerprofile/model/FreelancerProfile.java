@@ -125,4 +125,8 @@ public class FreelancerProfile extends BasicEntity {
         }
         this.languages.addAll(languages);
     }
+
+    public void coverPosition(Position position) {
+        this.position = position;
+    }
 }

@@ -23,6 +23,15 @@ public class DBSkill extends BasicEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Developer developer;
 
+    public DBSkill(DBDetailSkill dbDetailSkill, Developer developer) {
+        this.dbDetailSkill = dbDetailSkill;
+        this.developer = developer;
+    }
+
+    public static DBSkill createDBSkill(DBDetailSkill dbDetailSkill, Developer developer) {
+        return new DBSkill(dbDetailSkill, developer);
+    }
+
     public void setDeveloper(Developer developer) {
         this.developer = developer;
     }
