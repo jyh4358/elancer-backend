@@ -8,7 +8,7 @@ public enum DotNetDetailSkill {
     MFC("MFC"),
     OPENGL("OpenGL"),
     DEVEXPRESS("DevExpress"),
-    VBA("VBA"),
+    VBA("VBA")
     ;
 
     private String desc;

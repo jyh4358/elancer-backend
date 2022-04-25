@@ -12,7 +12,7 @@ public enum CDetailSkill {
     ADUINO("Aduino"),
     QT("Qt"),
     METALAB("MetaLab"),
-    LABVIEW("LabVIEW"),
+    LABVIEW("LabVIEW")
     ;
 
     private String desc;

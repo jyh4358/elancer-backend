@@ -38,6 +38,6 @@ public class FreelancerPositionService {
                 developerCoverRequest.toDBSkill(developer),
                 developerCoverRequest.getEtcSkill()
         );
-        freelancerProfile.coverPosition(developer);
+        developerRepository.save(developer);
     }
 }

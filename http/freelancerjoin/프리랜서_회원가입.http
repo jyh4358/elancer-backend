@@ -1,4 +1,4 @@
-PUT http://localhost:8080/freelancer
+POST http://localhost:8080/freelancer
 Content-Type: application/json
 
 # info

@@ -6,7 +6,7 @@ public enum MobileAppDetailSkill {
     IOS_OBJECT_C("IOS(Object-C)"),
     IOS_SWIFT("IOS(Swift)"),
     WEBVIEW("WebView"),
-    IOT("IoT"),
+    IOT("IoT")
     ;
 
     private String desc;
