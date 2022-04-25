@@ -80,10 +80,10 @@ public class Developer extends Position {
         coverJavaSkills(javaSkills);
         coverMobileSkills(mobileAppSkills);
         coverPhpOrAspSkills(phpOrAspSkills);
-        coverDBSkills(dotNetSkills);
+        coverDotNetSkills(dotNetSkills);
         coverJavaScriptSkills(javaScriptSkills);
         coverCSkills(cOrCPlusplusSkills);
-        coverDotNetSkills(dbSkills);
+        coverDBSkills(dbSkills);
         this.etcSkill = etcSkill;
     }
 
@@ -111,12 +111,12 @@ public class Developer extends Position {
         this.phpOrAspSkills = phpOrAspSkills;
     }
 
-    private void coverDotNetSkills(List<DBSkill> dbSkills) {
+    private void coverDotNetSkills(List<DotNetSkill> dbSkills) {
         this.dotNetSkills.clear();
-        for (DBSkill dbSkill : dbSkills) {
-            dbSkill.setDeveloper(this);
+        for (DotNetSkill dotNetSkill : dotNetSkills) {
+            dotNetSkill.setDeveloper(this);
         }
-        this.dbSkills = dbSkills;
+        this.dotNetSkills = dbSkills;
     }
 
     private void coverCSkills(List<CSkill> cSkills) {
@@ -135,11 +135,11 @@ public class Developer extends Position {
         this.javaScriptSkills = javaScriptSkills;
     }
 
-    private void coverDBSkills(List<DotNetSkill> dotNetSkills) {
+    private void coverDBSkills(List<DBSkill> dbSkills) {
         this.dbSkills.clear();
-        for (DotNetSkill dotNetSkill : dotNetSkills) {
-            dotNetSkill.setDeveloper(this);
+        for (DBSkill dbSkill : dbSkills) {
+            dbSkill.setDeveloper(this);
         }
-        this.dotNetSkills = dotNetSkills;
+        this.dbSkills = dbSkills;
     }
 }

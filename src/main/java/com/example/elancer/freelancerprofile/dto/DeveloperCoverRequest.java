@@ -4,6 +4,7 @@ import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.javascript.JavaScriptDetailSkill;
@@ -75,6 +76,7 @@ public class DeveloperCoverRequest {
         if (this.dotNetDetailSkills == null) {
             return new ArrayList<>();
         }
+
         return this.dotNetDetailSkills.stream()
                 .map(dotNetDetailSkill -> DotNetSkill.createDotNetSkill(dotNetDetailSkill, developer))
                 .collect(Collectors.toList());
@@ -98,13 +100,13 @@ public class DeveloperCoverRequest {
                 .collect(Collectors.toList());
     }
 
-//    public List<JavaSkill> toJavaSkill(Developer developer) {
-//        if (this.javaDetailSkills == null) {
-//            return new ArrayList<>();
-//        }
-//        return this.javaDetailSkills.stream()
-//                .map(javaDetailSkill -> JavaSkill.createJavaSkill(javaDetailSkill, developer))
-//                .collect(Collectors.toList());
-//    }
+    public List<DBSkill> toDBSkill(Developer developer) {
+        if (this.dbDetailSkills == null) {
+            return new ArrayList<>();
+        }
+        return this.dbDetailSkills.stream()
+                .map(dbDetailSkill -> DBSkill.createDBSkill(dbDetailSkill, developer))
+                .collect(Collectors.toList());
+    }
 
 }
