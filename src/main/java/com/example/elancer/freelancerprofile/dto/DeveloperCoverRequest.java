@@ -42,7 +42,6 @@ public class DeveloperCoverRequest {
     private List<DBDetailSkill> dbDetailSkills;
     private String etcSkill;
 
-
     public List<JavaSkill> toJavaSkill(Developer developer) {
         if (this.javaDetailSkills == null) {
             return new ArrayList<>();
@@ -109,4 +108,8 @@ public class DeveloperCoverRequest {
                 .collect(Collectors.toList());
     }
 
+    // min @Getter가 cDetailSkills는 만들어내지 못하는것 같다. 에러는 요청조차 안들어가고 테스트가 싪패하는 걸로 봐서는 object -> json 과정에서 문제가 생기는거 같은데 밑의 get 추가해주니 에러 사라짐.
+    public List<CDetailSkill> getcDetailSkills() {
+        return cDetailSkills;
+    }
 }
