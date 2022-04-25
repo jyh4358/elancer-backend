@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.controller;
 
+import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.service.FreelancerPositionService;
@@ -36,6 +37,16 @@ public class FreelancerPositionController {
             @Validated @RequestBody PublisherCoverRequest publisherCoverRequest
     ) {
         freelancerPositionService.coverFreelancerPositionToPublisher(profileNum, memberDetails, publisherCoverRequest);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
+    @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_COVER)
+    public ResponseEntity<Void> coverFreelancerPositionToDesigner(
+            @PathVariable Long profileNum,
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody DesignerCoverRequest designerCoverRequest
+    ) {
+        freelancerPositionService.coverFreelancerPositionToDesigner(profileNum, memberDetails, designerCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 }

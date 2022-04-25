@@ -4,9 +4,15 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignRole;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignSkill;
+import com.example.elancer.freelancerprofile.model.position.designer.Designer;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
@@ -26,6 +32,9 @@ import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
+import com.example.elancer.freelancerprofile.repository.position.designer.DesignRoleRepository;
+import com.example.elancer.freelancerprofile.repository.position.designer.DesignSkillRepository;
+import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.CSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DbSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
@@ -83,6 +92,12 @@ class FreelancerPositionServiceTest {
     @Autowired
     private PublishingSkillRepository publishingSkillRepository;
 
+    @Autowired
+    private DesignerRepository designerRepository;
+    @Autowired
+    private DesignSkillRepository designSkillRepository;
+    @Autowired
+    private DesignRoleRepository designRoleRepository;
 
 
     @DisplayName("프리랜서 프로필 스킬이 개발자로 등록된다.")
@@ -151,7 +166,7 @@ class FreelancerPositionServiceTest {
         Assertions.assertThat(dbSkills).hasSize(2);
     }
 
-    @DisplayName("프리랜서 프로필 스킬이 퍼블리셔로 등록로다.")
+    @DisplayName("프리랜서 프로필 스킬이 퍼블리셔로 등록된다.")
     @Test
     public void 프리랜서_프로필_스킬이_퍼블리셔로_등록된다() {
         //given
@@ -190,5 +205,54 @@ class FreelancerPositionServiceTest {
         Assertions.assertThat(publishingSkills.get(0).getPublishingDetailSkill()).isEqualTo(PublishingDetailSkill.HTML5);
         Assertions.assertThat(publishingSkills.get(1).getPublishingDetailSkill()).isEqualTo(PublishingDetailSkill.CSS);
         Assertions.assertThat(publishingSkills.get(2).getPublishingDetailSkill()).isEqualTo(PublishingDetailSkill.JQUERY);
+    }
+
+    @DisplayName("프리랜서 프로필 스킬이 디자이너로 등록된다.")
+    @Test
+    public void 프리랜서_프로필_스킬이_디자이너로_등록된다() {
+        //given
+        String memberId = "memberId";
+        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
+                memberId,
+                "pwd",
+                "name",
+                "phone",
+                "email",
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2021, 02, 01),
+                null
+        ));
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
+                Arrays.asList(DesignDetailRole.APP_DESIGN, DesignDetailRole.GAME_DESIGN),
+                "etcRole",
+                Arrays.asList(DesignDetailSkill.AFERE_EFFECT, DesignDetailSkill.THREE_D_MAX_AND_MAYA),
+                "etcSkill"
+        );
+
+        MemberDetails memberDetails = new MemberDetails(memberId);
+
+        //when
+        freelancerPositionService.coverFreelancerPositionToDesigner(freelancerProfile.getNum(), memberDetails, designerCoverRequest);
+
+        //then
+        List<Designer> designers = designerRepository.findAll();
+        Assertions.assertThat(designers).hasSize(1);
+        Assertions.assertThat(designers.get(0).getEtcRole()).isEqualTo(designerCoverRequest.getEtcRole());
+        Assertions.assertThat(designers.get(0).getEtcSkill()).isEqualTo(designerCoverRequest.getEtcSkill());
+
+        List<DesignRole> designRoles = designRoleRepository.findAll();
+        Assertions.assertThat(designRoles).hasSize(2);
+        Assertions.assertThat(designRoles.get(0).getDesignDetailRole()).isEqualTo(DesignDetailRole.APP_DESIGN);
+        Assertions.assertThat(designRoles.get(1).getDesignDetailRole()).isEqualTo(DesignDetailRole.GAME_DESIGN);
+
+        List<DesignSkill> designSkills = designSkillRepository.findAll();
+        Assertions.assertThat(designSkills).hasSize(2);
+        Assertions.assertThat(designSkills.get(0).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.AFERE_EFFECT);
+        Assertions.assertThat(designSkills.get(1).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.THREE_D_MAX_AND_MAYA);
     }
 }

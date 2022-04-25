@@ -21,4 +21,17 @@ public class DesignSkill extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Designer designer;
+
+    public DesignSkill(DesignDetailSkill designDetailSkill, Designer designer) {
+        this.designDetailSkill = designDetailSkill;
+        this.designer = designer;
+    }
+
+    public static DesignSkill createDesignSkill(DesignDetailSkill designDetailSkill, Designer designer) {
+        return new DesignSkill(designDetailSkill, designer);
+    }
+
+    public void setDesigner(Designer designer) {
+        this.designer = designer;
+    }
 }
