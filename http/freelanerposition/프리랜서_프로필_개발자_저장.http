@@ -1,0 +1,115 @@
+PUT http://localhost:8080/freelancer-profile/1/developer
+Content-Type: application/json
+
+#info
+# JavaDetailSkill 구성 {
+#    FRONT_END("Front-End"),
+#    BACK_END("Back-End"),
+#    SPRING("Spring"),
+#    XPLATFORM("Xplatform"),
+#    MIPLATFORM("Miplatform"),
+#    NEXACRO("Nexacro"),
+#    PROFRAME("Proframe"),
+#    MAVEN("Maven"),
+#    JENKINS("Jenkins"),
+#    SENCHA("Sencha"),
+#    TRUSTFORM("Trustform"),
+#    TUXEDO("Tuxedo"),
+#    GAUCE("Gauce"),
+#    PRO_C("Pro*C"),
+#    DEVON("DevOn"),
+#    THYMELEAF("Thymeleaf")
+#}
+#
+# MobileAppDetailSkill 구성 {
+#    HYBRID("Hybrid"),
+#    ANDROID("Android"),
+#    IOS_OBJECT_C("IOS(Object-C)"),
+#    IOS_SWIFT("IOS(Swift)"),
+#    WEBVIEW("WebView"),
+#    IOT("IoT")
+#}
+#
+# PhpOrAspDetailSkill 구성 {
+#    PHP("PHP"),
+#    LARAVEL("laravel"),
+#    CODEIGNITER("Codeigniter"),
+#    SYMFONY("Symfony"),
+#    ZEND_FRAMEWORK("Zend Framework"),
+#    WORDPRESS("WordPress"),
+#    ASP("Asp")
+#}
+#
+# DotNetDetailSkill 구성 {
+#    ASP_DOT_NET("ASP.net"),
+#    C("C"),
+#    C_PLUS_PLUS("C++"),
+#    C_SHOP("C#"),
+#    MFC("MFC"),
+#    OPENGL("OpenGL"),
+#    DEVEXPRESS("DevExpress"),
+#    VBA("VBA")
+# }
+#
+# JavaScriptDetailSkill 구성 {
+#    NODE_JS("node.js"),
+#    ANGULAR_JS("AngularJS"),
+#    REACT_JS("React.js"),
+#    VUE_JS("Vue.js"),
+#    JQUERY("jQuery"),
+#    JAVASCRIPT("JavaScript")
+# }
+#
+# CDetailSkill 구성 {
+#    SERVER("Server"),
+#    UNIX("Unix"),
+#    EMBEDDED("Embedded"),
+#    FIRMWARE("Firmware"),
+#    MACHINE_VISION("Machine Vision"),
+#    ADUINO("Aduino"),
+#    QT("Qt"),
+#    METALAB("MetaLab"),
+#    LABVIEW("LabVIEW")
+# }
+#
+# DBDetailSkill 구성 {
+#    ORACLE("Oracle"),
+#    MSSQL("MSSQL"),
+#    MYSQL("MySQL"),
+#    MARIADB("MariaDB"),
+#    MONGODB("MongoDB"),
+#    POSTGRESQL("Prostgresql"),
+#    CUBRID("CUBRID"),
+#    TIBERO("Tibero")
+# }
+#
+
+
+#req
+{
+  "focusSkill": "java, spring",
+  "role": "백엔드 개발자",
+  "javaDetailSkills": [
+    "BACK_END", "SPRING"
+  ],
+  "mobileAppDetailSkills": [
+    "HYBRID"
+  ],
+  "phpOrAspDetailSkills": [
+    "PHP"
+  ],
+  "dotNetDetailSkills": [
+    "ASP_DOT_NET"
+  ],
+  "javaScriptDetailSkills": [
+    "NODE_JS"
+  ],
+  "cDetailSkills": [
+    "SERVER"
+  ],
+  "dbDetailSkills": [
+    "ORACLE", "MYSQL"
+  ],
+  "etcSkill": "etc"
+}
+

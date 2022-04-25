@@ -9,7 +9,7 @@ public enum JavaScriptDetailSkill {
     REACT_JS("React.js"),
     VUE_JS("Vue.js"),
     JQUERY("jQuery"),
-    JAVASCRIPT("JavaScript"),
+    JAVASCRIPT("JavaScript")
     ;
 
     private String desc;

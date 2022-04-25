@@ -25,7 +25,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DiscriminatorValue("DEVEL")
+@DiscriminatorValue("DEVELOPER")
 public class Developer extends Position {
 
     @NotNull
