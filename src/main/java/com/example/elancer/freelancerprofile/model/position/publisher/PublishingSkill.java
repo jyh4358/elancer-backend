@@ -22,4 +22,17 @@ public class PublishingSkill extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Publisher publisher;
+
+    public PublishingSkill(PublishingDetailSkill publishingDetailSkill, Publisher publisher) {
+        this.publishingDetailSkill = publishingDetailSkill;
+        this.publisher = publisher;
+    }
+
+    public static PublishingSkill createPublishingSkill(PublishingDetailSkill publishingDetailSkill, Publisher publisher) {
+        return new PublishingSkill(publishingDetailSkill, publisher);
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
 }

@@ -5,6 +5,7 @@ import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
+import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
@@ -21,6 +22,9 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
+import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
+import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.CSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DbSkillRepository;
@@ -30,6 +34,8 @@ import com.example.elancer.freelancerprofile.repository.position.developer.JavaS
 import com.example.elancer.freelancerprofile.repository.position.developer.JavaSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.MobileAppSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.PhpOrAspSkillRepository;
+import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
+import com.example.elancer.freelancerprofile.repository.position.publisher.PublishingSkillRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.MemberType;
 import org.assertj.core.api.Assertions;
@@ -57,7 +63,6 @@ class FreelancerPositionServiceTest {
 
     @Autowired
     private DeveloperRepository developerRepository;
-
     @Autowired
     private JavaSkillRepository javaSkillRepository;
     @Autowired
@@ -72,6 +77,12 @@ class FreelancerPositionServiceTest {
     private CSkillRepository cSkillRepository;
     @Autowired
     private DbSkillRepository dbSkillRepository;
+
+    @Autowired
+    private PublisherRepository publisherRepository;
+    @Autowired
+    private PublishingSkillRepository publishingSkillRepository;
+
 
 
     @DisplayName("프리랜서 프로필 스킬이 개발자로 등록된다.")
@@ -138,5 +149,46 @@ class FreelancerPositionServiceTest {
 
         List<DBSkill> dbSkills = dbSkillRepository.findAll();
         Assertions.assertThat(dbSkills).hasSize(2);
+    }
+
+    @DisplayName("프리랜서 프로필 스킬이 퍼블리셔로 등록로다.")
+    @Test
+    public void 프리랜서_프로필_스킬이_퍼블리셔로_등록된다() {
+        //given
+        String memberId = "memberId";
+        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
+                memberId,
+                "pwd",
+                "name",
+                "phone",
+                "email",
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2021, 02, 01),
+                null
+        ));
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        PublisherCoverRequest publisherCoverRequest
+                = new PublisherCoverRequest(Arrays.asList(PublishingDetailSkill.HTML5, PublishingDetailSkill.CSS, PublishingDetailSkill.JQUERY), "etcSkill");
+
+
+        MemberDetails memberDetails = new MemberDetails(memberId);
+
+        //when
+        freelancerPositionService.coverFreelancerPositionToPublisher(freelancerProfile.getNum(), memberDetails, publisherCoverRequest);
+
+        //then
+        List<Publisher> publishers = publisherRepository.findAll();
+        Assertions.assertThat(publishers).hasSize(1);
+        Assertions.assertThat(publishers.get(0).getEtcSkill()).isEqualTo(publisherCoverRequest.getEtcSkill());
+
+        List<PublishingSkill> publishingSkills = publishingSkillRepository.findAll();
+        Assertions.assertThat(publishingSkills).hasSize(3);
+        Assertions.assertThat(publishingSkills.get(0).getPublishingDetailSkill()).isEqualTo(PublishingDetailSkill.HTML5);
+        Assertions.assertThat(publishingSkills.get(1).getPublishingDetailSkill()).isEqualTo(PublishingDetailSkill.CSS);
+        Assertions.assertThat(publishingSkills.get(2).getPublishingDetailSkill()).isEqualTo(PublishingDetailSkill.JQUERY);
     }
 }

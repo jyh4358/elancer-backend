@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.controller;
 
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
+import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.service.FreelancerPositionService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,16 @@ public class FreelancerPositionController {
             @Validated @RequestBody DeveloperCoverRequest developerCoverRequest
     ) {
         freelancerPositionService.coverFreelancerPositionToDeveloper(profileNum, memberDetails, developerCoverRequest);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
+    @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_COVER)
+    public ResponseEntity<Void> coverFreelancerPositionToPublisher(
+            @PathVariable Long profileNum,
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody PublisherCoverRequest publisherCoverRequest
+    ) {
+        freelancerPositionService.coverFreelancerPositionToPublisher(profileNum, memberDetails, publisherCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 }

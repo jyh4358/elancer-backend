@@ -17,7 +17,7 @@ public enum PublishingDetailSkill {
     FLASH("Flash"),
     WEB_ACCESSIBILITY("웹접근성"),
     WEB_STANDARD("웹표준"),
-    GIT("Git"),
+    GIT("Git")
     ;
 
     private String desc;
