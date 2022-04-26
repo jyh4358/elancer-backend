@@ -21,4 +21,17 @@ public class EtcRole extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private PositionEtc positionEtc;
+
+    public EtcRole(EtcDetailRole etcDetailRole, PositionEtc positionEtc) {
+        this.etcDetailRole = etcDetailRole;
+        this.positionEtc = positionEtc;
+    }
+
+    public static EtcRole createEtcRole(EtcDetailRole etcDetailRole, PositionEtc positionEtc) {
+        return new EtcRole(etcDetailRole, positionEtc);
+    }
+
+    public void setPositionEtc(PositionEtc positionEtc) {
+        this.positionEtc = positionEtc;
+    }
 }

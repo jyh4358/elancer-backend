@@ -3,6 +3,7 @@ package com.example.elancer.freelancerprofile.controller;
 import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.PositionEtcCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.service.FreelancerPositionService;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -67,6 +68,16 @@ public class FreelancerPositionController {
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
         freelancerPositionService.coverFreelancerPositionToCrowdWorker(profileNum, memberDetails);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
+
+    @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_ETC_COVER)
+    public ResponseEntity<Void> coverFreelancerPositionToEtc(
+            @PathVariable Long profileNum,
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody PositionEtcCoverRequest positionEtcCoverRequest
+    ) {
+        freelancerPositionService.coverFreelancerPositionToEtc(profileNum, memberDetails, positionEtcCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 }

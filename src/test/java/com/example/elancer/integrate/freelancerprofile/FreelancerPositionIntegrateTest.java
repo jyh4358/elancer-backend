@@ -6,6 +6,7 @@ import com.example.elancer.freelancerprofile.controller.FreelancerPositionContro
 import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.PositionEtcCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
@@ -20,6 +21,8 @@ import com.example.elancer.freelancerprofile.model.position.developer.javascript
 import com.example.elancer.freelancerprofile.model.position.developer.javaskill.JavaDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.etc.EtcDetailRole;
+import com.example.elancer.freelancerprofile.model.position.etc.PositionEtc;
 import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
@@ -27,6 +30,7 @@ import com.example.elancer.freelancerprofile.model.position.publisher.Publishing
 import com.example.elancer.freelancerprofile.repository.position.CrowdWorkerRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
+import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtcRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
@@ -59,6 +63,9 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
 
     @Autowired
     private CrowdWorkerRepository crowdWorkerRepository;
+
+    @Autowired
+    private PositionEtcRepository positionEtcRepository;
 
 
     @DisplayName("프리랜서 프로필 개발자 저장 통합테스트")
@@ -184,5 +191,27 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
         //then
         List<CrowdWorker> crowdWorkers = crowdWorkerRepository.findAll();
         Assertions.assertThat(crowdWorkers).hasSize(1);
+    }
+
+    @DisplayName("프리랜서 프로필 스킬-기타 저장 통합테스트")
+    @Test
+    public void 프리랜서_프로필_기타_저장() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        PositionEtcCoverRequest positionEtcCoverRequest = new PositionEtcCoverRequest(Arrays.asList(EtcDetailRole.AA, EtcDetailRole.DBA), "positionEtcRole");
+
+        //when
+        String path = FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_ETC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        mockMvc.perform(put(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(positionEtcCoverRequest)))
+                .andExpect(status().isCreated())
+                .andDo(print());
+
+        //then
+        List<PositionEtc> positionEtcs = positionEtcRepository.findAll();
+        Assertions.assertThat(positionEtcs).hasSize(1);
     }
 }

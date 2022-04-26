@@ -2,7 +2,7 @@ PUT http://localhost:8080/freelancer-profile/1/publisher
 Content-Type: application/json
 
 #info
-# JavaDetailSkill 구성 {
+# PublishingDetailSkill 구성 {
 #    HTML5("HTML5"),
 #    CSS("CSS"),
 #    ACTIONSCRIPT("ActionScript"),

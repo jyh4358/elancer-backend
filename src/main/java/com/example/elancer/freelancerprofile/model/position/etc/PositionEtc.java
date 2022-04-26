@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.model.position.etc;
 
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -20,8 +21,29 @@ import java.util.List;
 public class PositionEtc extends Position {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "positionEtc", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EtcRole> planFields = new ArrayList<>();
+    private List<EtcRole> etcRoles = new ArrayList<>();
 
-    private String etcField;
+    private String positionEtcField;
+
+    public PositionEtc(FreelancerProfile freelancerProfile) {
+        super(freelancerProfile);
+    }
+
+    public static PositionEtc createBasicPositionEtc(FreelancerProfile freelancerProfile) {
+        return new PositionEtc(freelancerProfile);
+    }
+
+    public void coverAllField(List<EtcRole> etcRoles, String positionEtcField) {
+        coverEtcRoles(etcRoles);
+        this.positionEtcField = positionEtcField;
+    }
+
+    private void coverEtcRoles(List<EtcRole> etcRoles) {
+        this.etcRoles.clear();
+        for (EtcRole etcRole : etcRoles) {
+            etcRole.setPositionEtc(this);
+        }
+        this.etcRoles.addAll(etcRoles);
+    }
 
 }

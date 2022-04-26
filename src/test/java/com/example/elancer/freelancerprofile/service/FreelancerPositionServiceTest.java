@@ -7,6 +7,7 @@ import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.PositionEtcCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
@@ -30,6 +31,9 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
+import com.example.elancer.freelancerprofile.model.position.etc.EtcDetailRole;
+import com.example.elancer.freelancerprofile.model.position.etc.EtcRole;
+import com.example.elancer.freelancerprofile.model.position.etc.PositionEtc;
 import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerField;
@@ -49,6 +53,8 @@ import com.example.elancer.freelancerprofile.repository.position.developer.JavaS
 import com.example.elancer.freelancerprofile.repository.position.developer.JavaSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.MobileAppSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.PhpOrAspSkillRepository;
+import com.example.elancer.freelancerprofile.repository.position.etc.EtcRoleRepository;
+import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtcRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlanFieldRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
@@ -114,6 +120,11 @@ class FreelancerPositionServiceTest {
 
     @Autowired
     private CrowdWorkerRepository crowdWorkerRepository;
+
+    @Autowired
+    private PositionEtcRepository positionEtcRepository;
+    @Autowired
+    private EtcRoleRepository etcRoleRepository;
 
 
     @DisplayName("프리랜서 프로필 스킬이 개발자로 등록된다.")
@@ -338,5 +349,43 @@ class FreelancerPositionServiceTest {
         //then
         List<CrowdWorker> crowdWorkers = crowdWorkerRepository.findAll();
         Assertions.assertThat(crowdWorkers).hasSize(1);
+    }
+
+    @DisplayName("프리랜서 프로필 스킬이 기타로 등록된다.")
+    @Test
+    public void 프리랜서_프로필_스킬이_기타로_등록된다() {
+        //given
+        String memberId = "memberId";
+        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
+                memberId,
+                "pwd",
+                "name",
+                "phone",
+                "email",
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2021, 02, 01),
+                null
+        ));
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        PositionEtcCoverRequest positionEtcCoverRequest = new PositionEtcCoverRequest(Arrays.asList(EtcDetailRole.AA, EtcDetailRole.DBA), "positionEtcRole");
+
+        MemberDetails memberDetails = new MemberDetails(memberId);
+
+        //when
+        freelancerPositionService.coverFreelancerPositionToEtc(freelancerProfile.getNum(), memberDetails, positionEtcCoverRequest);
+
+        //then
+        List<PositionEtc> positionEtcs = positionEtcRepository.findAll();
+        Assertions.assertThat(positionEtcs).hasSize(1);
+        Assertions.assertThat(positionEtcs.get(0).getPositionEtcField()).isEqualTo(positionEtcCoverRequest.getPositionEtcRole());
+
+        List<EtcRole> etcRoles = etcRoleRepository.findAll();
+        Assertions.assertThat(etcRoles).hasSize(2);
+        Assertions.assertThat(etcRoles.get(0).getEtcDetailRole()).isEqualTo(positionEtcCoverRequest.getEtcDetailRoles().get(0));
+        Assertions.assertThat(etcRoles.get(1).getEtcDetailRole()).isEqualTo(positionEtcCoverRequest.getEtcDetailRoles().get(1));
     }
 }
