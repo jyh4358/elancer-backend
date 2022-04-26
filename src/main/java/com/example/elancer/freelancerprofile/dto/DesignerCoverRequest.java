@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,12 +24,20 @@ public class DesignerCoverRequest {
     private String etcSkill;
 
     public List<DesignRole> toDesignRoles(Designer designer) {
+        if (this.designDetailRoles == null) {
+            return new ArrayList<>();
+        }
+
         return this.designDetailRoles.stream()
                 .map(designDetailRole -> DesignRole.createDesignRole(designDetailRole, designer))
                 .collect(Collectors.toList());
     }
 
     public List<DesignSkill> toDesignSkills(Designer designer) {
+        if (this.designDetailSkills == null) {
+            return new ArrayList<>();
+        }
+
         return this.designDetailSkills.stream()
                 .map(designDetailSkill -> DesignSkill.createDesignSkill(designDetailSkill, designer))
                 .collect(Collectors.toList());

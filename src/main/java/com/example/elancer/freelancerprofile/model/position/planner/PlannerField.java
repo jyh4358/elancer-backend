@@ -14,11 +14,24 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PlanField extends BasicEntity {
+public class PlannerField extends BasicEntity {
 
     @Enumerated(EnumType.STRING)
-    private PlanDetailField planDetailField;
+    private PlannerDetailField plannerDetailField;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Planner planner;
+
+    public PlannerField(PlannerDetailField plannerDetailField, Planner planner) {
+        this.plannerDetailField = plannerDetailField;
+        this.planner = planner;
+    }
+
+    public static PlannerField createPlannerField(PlannerDetailField plannerDetailField, Planner planner) {
+        return new PlannerField(plannerDetailField, planner);
+    }
+
+    public void setPlanner(Planner planner) {
+        this.planner = planner;
+    }
 }
