@@ -3,7 +3,7 @@ package com.example.elancer.freelancerprofile.model.position.planner;
 import lombok.Getter;
 
 @Getter
-public enum PlanDetailField {
+public enum PlannerDetailField {
     PM("PM"),
     PL("PL"),
     PMO("PMO(사업관리)"),
@@ -25,12 +25,12 @@ public enum PlanDetailField {
     ACCOUNTING("회계"),
     PRODUCTION("제조"),
     CONSTRUCTION("건설"),
-    CRYPTOCURRENCY("암호화폐"),
+    CRYPTOCURRENCY("암호화폐")
     ;
 
     private String desc;
 
-    PlanDetailField(String desc) {
+    PlannerDetailField(String desc) {
         this.desc = desc;
     }
 }

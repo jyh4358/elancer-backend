@@ -42,6 +42,7 @@ public class DeveloperCoverRequest {
     private List<DBDetailSkill> dbDetailSkills;
     private String etcSkill;
 
+    //dto에서 변환해주는 작업은 필드가 null로 요청될수 있기에 당장은 옳은 방식이라고 생각함.
     public List<JavaSkill> toJavaSkill(Developer developer) {
         if (this.javaDetailSkills == null) {
             return new ArrayList<>();

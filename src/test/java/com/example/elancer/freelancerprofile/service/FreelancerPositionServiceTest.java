@@ -6,6 +6,7 @@ import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
+import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
@@ -28,6 +29,9 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
+import com.example.elancer.freelancerprofile.model.position.planner.Planner;
+import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
+import com.example.elancer.freelancerprofile.model.position.planner.PlannerField;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
@@ -43,6 +47,8 @@ import com.example.elancer.freelancerprofile.repository.position.developer.JavaS
 import com.example.elancer.freelancerprofile.repository.position.developer.JavaSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.MobileAppSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.PhpOrAspSkillRepository;
+import com.example.elancer.freelancerprofile.repository.position.planner.PlanFieldRepository;
+import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublishingSkillRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -98,6 +104,11 @@ class FreelancerPositionServiceTest {
     private DesignSkillRepository designSkillRepository;
     @Autowired
     private DesignRoleRepository designRoleRepository;
+
+    @Autowired
+    private PlannerRepository plannerRepository;
+    @Autowired
+    private PlanFieldRepository planFieldRepository;
 
 
     @DisplayName("프리랜서 프로필 스킬이 개발자로 등록된다.")
@@ -254,5 +265,43 @@ class FreelancerPositionServiceTest {
         Assertions.assertThat(designSkills).hasSize(2);
         Assertions.assertThat(designSkills.get(0).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.AFERE_EFFECT);
         Assertions.assertThat(designSkills.get(1).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.THREE_D_MAX_AND_MAYA);
+    }
+
+    @DisplayName("프리랜서 프로필 스킬이 기획자로 등록된다.")
+    @Test
+    public void 프리랜서_프로필_스킬이_기획자로_등록된다() {
+        //given
+        String memberId = "memberId";
+        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
+                memberId,
+                "pwd",
+                "name",
+                "phone",
+                "email",
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2021, 02, 01),
+                null
+        ));
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APP_PLAN), "etcField");
+
+        MemberDetails memberDetails = new MemberDetails(memberId);
+
+        //when
+        freelancerPositionService.coverFreelancerPositionToPlanner(freelancerProfile.getNum(), memberDetails, plannerCoverRequest);
+
+        //then
+        List<Planner> planners = plannerRepository.findAll();
+        Assertions.assertThat(planners).hasSize(1);
+        Assertions.assertThat(planners.get(0).getEtcField()).isEqualTo(plannerCoverRequest.getEtcField());
+
+        List<PlannerField> plannerFields = planFieldRepository.findAll();
+        Assertions.assertThat(plannerFields).hasSize(2);
+        Assertions.assertThat(plannerFields.get(0).getPlannerDetailField()).isEqualTo(plannerCoverRequest.getPlannerDetailFields().get(0));
+        Assertions.assertThat(plannerFields.get(1).getPlannerDetailField()).isEqualTo(plannerCoverRequest.getPlannerDetailFields().get(1));
     }
 }
