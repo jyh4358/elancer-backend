@@ -9,6 +9,7 @@ import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignRole;
@@ -36,6 +37,7 @@ import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
+import com.example.elancer.freelancerprofile.repository.position.CrowdWorkerRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignRoleRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignSkillRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
@@ -109,6 +111,9 @@ class FreelancerPositionServiceTest {
     private PlannerRepository plannerRepository;
     @Autowired
     private PlanFieldRepository planFieldRepository;
+
+    @Autowired
+    private CrowdWorkerRepository crowdWorkerRepository;
 
 
     @DisplayName("프리랜서 프로필 스킬이 개발자로 등록된다.")
@@ -303,5 +308,35 @@ class FreelancerPositionServiceTest {
         Assertions.assertThat(plannerFields).hasSize(2);
         Assertions.assertThat(plannerFields.get(0).getPlannerDetailField()).isEqualTo(plannerCoverRequest.getPlannerDetailFields().get(0));
         Assertions.assertThat(plannerFields.get(1).getPlannerDetailField()).isEqualTo(plannerCoverRequest.getPlannerDetailFields().get(1));
+    }
+
+    @DisplayName("프리랜서 프로필 스킬이 크라우드워커로 등록된다.")
+    @Test
+    public void 프리랜서_프로필_스킬이_크라우드워커로_등록된다() {
+        //given
+        String memberId = "memberId";
+        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
+                memberId,
+                "pwd",
+                "name",
+                "phone",
+                "email",
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2021, 02, 01),
+                null
+        ));
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        MemberDetails memberDetails = new MemberDetails(memberId);
+
+        //when
+        freelancerPositionService.coverFreelancerPositionToCrowdWorker(freelancerProfile.getNum(), memberDetails);
+
+        //then
+        List<CrowdWorker> crowdWorkers = crowdWorkerRepository.findAll();
+        Assertions.assertThat(crowdWorkers).hasSize(1);
     }
 }

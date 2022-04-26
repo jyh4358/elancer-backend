@@ -7,11 +7,13 @@ import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
+import com.example.elancer.freelancerprofile.repository.position.CrowdWorkerRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
@@ -29,6 +31,7 @@ public class FreelancerPositionService {
     private final PublisherRepository publisherRepository;
     private final DesignerRepository designerRepository;
     private final PlannerRepository plannerRepository;
+    private final CrowdWorkerRepository crowdWorkerRepository;
 
     /**
      * 1. 프리랜서에 등록되어있던 develop이 사라진다. -> developer db에서 num정보가 변경, 삭제된 developer와 연관된 값들도 변경되는지 확인해야한다.
@@ -88,5 +91,12 @@ public class FreelancerPositionService {
         planner.coverAllField(plannerCoverRequest.toPlannerField(planner), plannerCoverRequest.getEtcField());
 
         freelancerProfile.coverPosition(plannerRepository.save(planner));
+    }
+
+    @Transactional
+    public void coverFreelancerPositionToCrowdWorker(Long profileNum, MemberDetails memberDetails) {
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        crowdWorkerRepository.save(new CrowdWorker(freelancerProfile));
     }
 }

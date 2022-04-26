@@ -8,6 +8,7 @@ import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
@@ -23,6 +24,7 @@ import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
+import com.example.elancer.freelancerprofile.repository.position.CrowdWorkerRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
@@ -54,6 +56,9 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
 
     @Autowired
     private PlannerRepository plannerRepository;
+
+    @Autowired
+    private CrowdWorkerRepository crowdWorkerRepository;
 
 
     @DisplayName("프리랜서 프로필 개발자 저장 통합테스트")
@@ -159,5 +164,25 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
         //then
         List<Planner> planners = plannerRepository.findAll();
         Assertions.assertThat(planners).hasSize(1);
+    }
+
+    @DisplayName("프리랜서 프로필 크라우드워커 저장 통합테스트")
+    @Test
+    public void 프리랜서_프로필_크라우드워커_저장() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        //when
+        String path = FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_CROWD_WORKER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        mockMvc.perform(put(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(null)))
+                .andExpect(status().isCreated())
+                .andDo(print());
+
+        //then
+        List<CrowdWorker> crowdWorkers = crowdWorkerRepository.findAll();
+        Assertions.assertThat(crowdWorkers).hasSize(1);
     }
 }
