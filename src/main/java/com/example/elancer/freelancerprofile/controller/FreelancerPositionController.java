@@ -60,4 +60,13 @@ public class FreelancerPositionController {
         freelancerPositionService.coverFreelancerPositionToPlanner(profileNum, memberDetails, plannerCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
+
+    @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_CROWD_WORKER_COVER)
+    public ResponseEntity<Void> coverFreelancerPositionToCrowdWorker(
+            @PathVariable Long profileNum,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        freelancerPositionService.coverFreelancerPositionToCrowdWorker(profileNum, memberDetails);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
+    }
 }
