@@ -4,18 +4,21 @@ import com.example.elancer.common.checker.RightRequesterChecker;
 import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.PositionEtcCoverRequest;
 import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.position.etc.PositionEtc;
 import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.position.CrowdWorkerRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
+import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtcRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -32,6 +35,7 @@ public class FreelancerPositionService {
     private final DesignerRepository designerRepository;
     private final PlannerRepository plannerRepository;
     private final CrowdWorkerRepository crowdWorkerRepository;
+    private final PositionEtcRepository positionEtcRepository;
 
     /**
      * 1. 프리랜서에 등록되어있던 develop이 사라진다. -> developer db에서 num정보가 변경, 삭제된 developer와 연관된 값들도 변경되는지 확인해야한다.
@@ -97,6 +101,18 @@ public class FreelancerPositionService {
     public void coverFreelancerPositionToCrowdWorker(Long profileNum, MemberDetails memberDetails) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
-        crowdWorkerRepository.save(new CrowdWorker(freelancerProfile));
+        CrowdWorker crowdWorker = new CrowdWorker(freelancerProfile);
+
+        freelancerProfile.coverPosition(crowdWorkerRepository.save(crowdWorker));
+    }
+
+    @Transactional
+    public void coverFreelancerPositionToEtc(Long profileNum, MemberDetails memberDetails, PositionEtcCoverRequest positionEtcCoverRequest) {
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(freelancerProfile);
+        positionEtc.coverAllField(positionEtcCoverRequest.toEtcRole(positionEtc), positionEtcCoverRequest.getPositionEtcRole());
+
+        freelancerProfile.coverPosition(positionEtcRepository.save(positionEtc));
     }
 }
