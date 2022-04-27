@@ -1,5 +1,6 @@
 package com.example.elancer.enterprise.domain.enterpriseintro;
 
+import com.example.elancer.common.model.BasicEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 @Table(name = "enterprise_subbiz")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class EnterpriseSubBiz {
+public class EnterpriseSubBiz extends BasicEntity {
 
     @Id @GeneratedValue
     @Column(name = "enterprise_subbiz_id")

@@ -62,7 +62,7 @@ public class Enterprise extends Member {
     @JoinColumn(name = "enDetails_id", unique = true)
     private EnterpriseIntro enterpriseIntro;
 
-    @OneToMany(mappedBy = "heartscrap", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL)
     private List<HeartScrap> heartScraps = new ArrayList<>();
 
 
@@ -86,5 +86,9 @@ public class Enterprise extends Member {
     }
 
 
+    public void addHeartScrap(HeartScrap heartScrap) {
+        heartScraps.add(heartScrap);
+        heartScrap.insertEnterprise(this);
+    }
 
 }

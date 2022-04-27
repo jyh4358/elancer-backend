@@ -1,5 +1,6 @@
 package com.example.elancer.enterprise.domain.enterpriseintro;
 
+import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import java.util.List;
 @Table(name = "enterprise_intro")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class EnterpriseIntro {
+public class EnterpriseIntro extends BasicEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "enDetails_id")
