@@ -18,8 +18,7 @@ public class IdPhoto {
     private String storeFileName;
 
     @Builder
-    public IdPhoto(Long id, String uploadFileName, String storeFileName) {
-        this.id = id;
+    public IdPhoto(String uploadFileName, String storeFileName) {
         this.uploadFileName = uploadFileName;
         this.storeFileName = storeFileName;
     }

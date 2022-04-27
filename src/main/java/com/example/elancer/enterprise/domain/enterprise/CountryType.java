@@ -1,5 +1,8 @@
 package com.example.elancer.enterprise.domain.enterprise;
 
+import lombok.Getter;
+
+@Getter
 public enum CountryType {
 
     KR("대한민국"),
@@ -11,9 +14,6 @@ public enum CountryType {
     final private String name;
     CountryType(String name){
         this.name = name;
-    }
-    public String getName() {
-        return name;
     }
 
 }

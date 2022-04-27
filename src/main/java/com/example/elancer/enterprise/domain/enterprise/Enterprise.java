@@ -1,5 +1,6 @@
 package com.example.elancer.enterprise.domain.enterprise;
 
+import com.example.elancer.enterprise.domain.HeartScrap;
 import com.example.elancer.enterprise.domain.enterpriseintro.EnterpriseIntro;
 import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.domain.MemberType;
@@ -10,6 +11,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -59,6 +62,9 @@ public class Enterprise extends Member {
     @JoinColumn(name = "enDetails_id", unique = true)
     private EnterpriseIntro enterpriseIntro;
 
+    @OneToMany(mappedBy = "heartscrap", cascade = CascadeType.ALL)
+    private List<HeartScrap> heartScraps = new ArrayList<>();
+
 
     @Builder
     public Enterprise(String userId, String password, String name, String phone, String email, MemberType role, String companyName, int companyPeople, String position, String telNumber, String website, Address address, String bizContents, int sales, String idNumber, IdPhoto idPhoto) {
@@ -75,10 +81,10 @@ public class Enterprise extends Member {
         this.idPhoto = idPhoto;
     }
 
-
-
     public void updateIntro(EnterpriseIntro enterpriseIntro) {
         this.enterpriseIntro = enterpriseIntro;
     }
+
+
 
 }
