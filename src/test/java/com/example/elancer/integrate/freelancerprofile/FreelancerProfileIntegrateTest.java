@@ -4,7 +4,7 @@ import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
-import com.example.elancer.freelancerprofile.controller.FreelancerProfileControllerPath;
+import com.example.elancer.freelancerprofile.controller.FreelancerProfileAlterControllerPath;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
 import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
 import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
@@ -200,7 +200,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     }
 
     private void 프리랜서_프로필_소개정보_저장_요청(FreelancerProfile freelancerProfile, IntroduceCoverRequest introduceCoverRequest) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_INTRO_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_INTRO_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(introduceCoverRequest)))
@@ -217,7 +217,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     }
 
     private void 프리랜서_프로필_학력사항_저장_요청(FreelancerProfile freelancerProfile, AcademicAbilityCoverRequests academicAbilityCoverRequests) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(academicAbilityCoverRequests)))
@@ -236,7 +236,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     }
 
     private void 프리랜서_프로필_경력사항_저장_요청(FreelancerProfile freelancerProfile, CareerCoverRequests careerCoverRequests) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_CAREER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_CAREER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(careerCoverRequests)))
@@ -254,7 +254,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     }
 
     private void 프리랜서_프로필_프로젝트이력_저장_요청(FreelancerProfile freelancerProfile, ProjectHistoryCoverRequest projectHistoryCoverRequest) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(projectHistoryCoverRequest)))
@@ -283,7 +283,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     }
 
     private void 프리랜서_프로필_교육및자격사항_저장_요청(FreelancerProfile freelancerProfile, EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(educationAndLicenseAndLanguageRequests)))

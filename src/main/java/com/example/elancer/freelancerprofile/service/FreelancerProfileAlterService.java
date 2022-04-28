@@ -32,9 +32,8 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class FreelancerProfileService {
+public class FreelancerProfileAlterService {
     private final FreelancerProfileRepository freelancerProfileRepository;
-    private final AcademicRepository academicRepository;
 
     @Transactional
     public void coverFreelancerIntroduce(MemberDetails memberDetails, Long profileNum, IntroduceCoverRequest introduceCoverRequest) {

@@ -49,10 +49,10 @@ import java.util.List;
 
 @ActiveProfiles("h2")
 @SpringBootTest
-class FreelancerProfileServiceTest {
+class FreelancerProfileAlterServiceTest {
 
     @Autowired
-    private FreelancerProfileService freelancerProfileService;
+    private FreelancerProfileAlterService freelancerProfileAlterService;
 
     @Autowired
     private FreelancerRepository freelancerRepository;
@@ -104,7 +104,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerIntroduce(memberDetails, freelancer.getNum(), introduceCoverRequest);
+        freelancerProfileAlterService.coverFreelancerIntroduce(memberDetails, freelancer.getNum(), introduceCoverRequest);
 
         //then
         FreelancerProfile updatedFreelancerProfile = freelancerProfileRepository.findById(freelancer.getNum()).get();
@@ -145,7 +145,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerAcademicAbility(memberDetails, freelancerProfile.getNum(), new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest)));
+        freelancerProfileAlterService.coverFreelancerAcademicAbility(memberDetails, freelancerProfile.getNum(), new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest)));
 
         //then
         List<AcademicAbility> academicAbilityList = academicRepository.findAll();
@@ -190,7 +190,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerCareer(memberDetails, freelancerProfile.getNum(), new CareerCoverRequests(Arrays.asList(careerCoverRequest)));
+        freelancerProfileAlterService.coverFreelancerCareer(memberDetails, freelancerProfile.getNum(), new CareerCoverRequests(Arrays.asList(careerCoverRequest)));
 
         //then
         List<Career> careers = careerRepository.findAll();
@@ -243,7 +243,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerProjectHistory(memberDetails, freelancerProfile.getNum(), projectHistoryCoverRequest);
+        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, freelancerProfile.getNum(), projectHistoryCoverRequest);
 
         //then
         List<ProjectHistory> projectHistories = projectHistoryRepository.findAll();
@@ -295,7 +295,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, freelancerProfile.getNum(), educationAndLicenseAndLanguageRequests);
+        freelancerProfileAlterService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, freelancerProfile.getNum(), educationAndLicenseAndLanguageRequests);
 
         //then
         List<Education> educations = educationRepository.findAll();
