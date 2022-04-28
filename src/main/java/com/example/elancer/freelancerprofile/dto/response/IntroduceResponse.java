@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.dto.response;
 
 import com.example.elancer.freelancer.model.IntroBackGround;
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,7 +16,12 @@ public class IntroduceResponse {
     private String introduceVideoURL;
     private String introduceContent;
 
-    public static IntroduceResponse of(String introduceName, IntroBackGround introBackGround, String introduceVideoURL, String introduceContent) {
-        return new IntroduceResponse(introduceName, introBackGround, introduceVideoURL, introduceContent);
+    public static IntroduceResponse of(FreelancerProfile freelancerProfile) {
+        return new IntroduceResponse(
+                freelancerProfile.getIntroduceName(),
+                freelancerProfile.getIntroBackGround(),
+                freelancerProfile.getIntroduceVideoURL(),
+                freelancerProfile.getIntroduceContent()
+        );
     }
 }

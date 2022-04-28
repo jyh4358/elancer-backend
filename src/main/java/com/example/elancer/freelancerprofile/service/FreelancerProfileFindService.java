@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.service;
 
+import com.example.elancer.freelancerprofile.dto.response.FreelancerDetailResponse;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileFindRepository;
@@ -13,7 +14,8 @@ public class FreelancerProfileFindService {
     private final FreelancerProfileFindRepository freelancerProfileFindRepository;
 
     @Transactional
-    public /*FreelancerDetailResponse*/void findDetailFreelancerProfile(Long freelancerNum) {
+    public FreelancerDetailResponse findDetailFreelancerProfile(Long freelancerNum) {
         FreelancerProfile freelancerProfile = freelancerProfileFindRepository.findFreelancerProfileByFetch(freelancerNum).orElseThrow(NotExistFreelancerProfileException::new);
+
     }
 }
