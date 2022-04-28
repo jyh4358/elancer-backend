@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DiscriminatorValue("PUBLISHER")
+//@DiscriminatorValue("PUBLISHER")
 public class Publisher extends Position {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "publisher", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -27,13 +27,13 @@ public class Publisher extends Position {
 
     private String etcSkill;
 
-    public Publisher(FreelancerProfile freelancerProfile, String etcSkill) {
-        super(freelancerProfile);
+    public Publisher(PositionType positionType, FreelancerProfile freelancerProfile, String etcSkill) {
+        super(positionType, freelancerProfile);
         this.etcSkill = etcSkill;
     }
 
-    public static Publisher createBasicPublisher(FreelancerProfile freelancerProfile, String etcSkill) {
-        return new Publisher(freelancerProfile, etcSkill);
+    public static Publisher createBasicPublisher(PositionType positionType, FreelancerProfile freelancerProfile, String etcSkill) {
+        return new Publisher(positionType, freelancerProfile, etcSkill);
     }
 
     public void coverPublishingSkill(List<PublishingSkill> publishingSkillList) {

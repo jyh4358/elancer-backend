@@ -12,10 +12,13 @@ import com.example.elancer.freelancerprofile.model.education.Education;
 import com.example.elancer.freelancerprofile.model.language.Language;
 import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import com.example.elancer.freelancerprofile.model.license.License;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
+import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileFindRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -109,6 +112,8 @@ class FreelancerProfileFindServiceTest {
                 "담당업무는 백엔드 개발"
         );
 
+        Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java", "role");
+
         String introduceName = "소개글";
         IntroBackGround introBackGround = IntroBackGround.COBALT_BLUE;
         String introduceVideoURL = "소개 영상 주소";
@@ -121,14 +126,18 @@ class FreelancerProfileFindServiceTest {
         freelancerProfile.coverLicense(Arrays.asList(license));
         freelancerProfile.coverLanguage(Arrays.asList(language));
         freelancerProfile.plusProjectHistory(projectHistory);
-
+        freelancerProfile.coverPosition(developer);
 
         when(freelancerProfileFindRepository.findFreelancerProfileByFetch(freelancerNum)).thenReturn(Optional.of(freelancerProfile));
 
         //when
-        freelancerProfileFindService.findDetailFreelancerProfile(freelancerNum);
+        FreelancerDetailResponse detailFreelancerProfile = freelancerProfileFindService.findDetailFreelancerProfile(freelancerNum);
 
         //then
+        Assertions.assertThat(detailFreelancerProfile.getProfileNum()).isEqualTo(freelancerProfile.getNum());
+        Assertions.assertThat(detailFreelancerProfile.getGreeting()).isEqualTo(freelancerProfile.getGreeting());
+        Assertions.assertThat(detailFreelancerProfile.getPositionType()).isEqualTo(freelancerProfile.getPosition().getPositionType());
+        Assertions.assertThat(detailFreelancerProfile.getAcademicAbilityResponses()).isEqualTo(freelancerProfile.getPosition().getPositionType());
 
 
     }

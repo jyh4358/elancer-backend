@@ -11,10 +11,10 @@ import javax.persistence.Entity;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DiscriminatorValue("CROWD_WORKER")
+//@DiscriminatorValue("CROWD_WORKER")
 public class CrowdWorker extends Position{
 
-    public CrowdWorker(FreelancerProfile freelancerProfile) {
-        super(freelancerProfile);
+    public CrowdWorker(PositionType positionType, FreelancerProfile freelancerProfile) {
+        super(positionType, freelancerProfile);
     }
 }

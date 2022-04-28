@@ -1,6 +1,5 @@
 package com.example.elancer.freelancerprofile.dto.response;
 
-import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.language.Language;
 import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import lombok.AccessLevel;
@@ -8,10 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -2,6 +2,7 @@ package com.example.elancer.freelancerprofile.model.position.etc;
 
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DiscriminatorValue("ETC")
+//@DiscriminatorValue("ETC")
 public class PositionEtc extends Position {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "positionEtc", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -25,12 +26,12 @@ public class PositionEtc extends Position {
 
     private String positionEtcField;
 
-    public PositionEtc(FreelancerProfile freelancerProfile) {
-        super(freelancerProfile);
+    public PositionEtc(PositionType positionType, FreelancerProfile freelancerProfile) {
+        super(positionType, freelancerProfile);
     }
 
-    public static PositionEtc createBasicPositionEtc(FreelancerProfile freelancerProfile) {
-        return new PositionEtc(freelancerProfile);
+    public static PositionEtc createBasicPositionEtc(PositionType positionType, FreelancerProfile freelancerProfile) {
+        return new PositionEtc(positionType, freelancerProfile);
     }
 
     public void coverAllField(List<EtcRole> etcRoles, String positionEtcField) {

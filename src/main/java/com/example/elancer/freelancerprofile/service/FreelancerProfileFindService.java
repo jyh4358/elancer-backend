@@ -16,6 +16,6 @@ public class FreelancerProfileFindService {
     @Transactional
     public FreelancerDetailResponse findDetailFreelancerProfile(Long freelancerNum) {
         FreelancerProfile freelancerProfile = freelancerProfileFindRepository.findFreelancerProfileByFetch(freelancerNum).orElseThrow(NotExistFreelancerProfileException::new);
-
+        return FreelancerDetailResponse.of(freelancerProfile);
     }
 }

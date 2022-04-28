@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.controller;
 
+import com.example.elancer.freelancerprofile.dto.response.FreelancerDetailResponse;
 import com.example.elancer.freelancerprofile.service.FreelancerProfileFindService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,10 +17,10 @@ public class FreelancerProfileFindController {
     private final FreelancerProfileFindService freelancerProfileFindService;
 
     @GetMapping(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND)
-    public ResponseEntity<Void> findDetailFreelancerProfile(
+    public ResponseEntity<FreelancerDetailResponse> findDetailFreelancerProfile(
             @NotNull @PathVariable Long freelancerNum
     ) {
-        freelancerProfileFindService.findDetailFreelancerProfile(freelancerNum);
+        FreelancerDetailResponse detailFreelancerProfile = freelancerProfileFindService.findDetailFreelancerProfile(freelancerNum);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

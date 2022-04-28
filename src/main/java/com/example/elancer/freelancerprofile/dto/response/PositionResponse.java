@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 //@AllArgsConstructor
-public class PositionResponse {
-
+public class PositionResponse<T> {
+    private T positionTypeResponse;
 }
