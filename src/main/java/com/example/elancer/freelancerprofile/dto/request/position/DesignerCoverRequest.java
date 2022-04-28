@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.dto;
+package com.example.elancer.freelancerprofile.dto.request.position;
 
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;

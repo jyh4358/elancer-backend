@@ -82,4 +82,8 @@ public class ProjectHistory extends BasicEntity {
                 responsibilityTask
         );
     }
+
+    public void setFreelancerProfile(FreelancerProfile freelancerProfile) {
+        this.freelancerProfile = freelancerProfile;
+    }
 }

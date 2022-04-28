@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.dto;
+package com.example.elancer.freelancerprofile.dto.request.position;
 
 import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;

@@ -1,11 +1,11 @@
 package com.example.elancer.freelancerprofile.service;
 
 import com.example.elancer.common.checker.RightRequesterChecker;
-import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
-import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.PositionEtcCoverRequest;
-import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.PositionEtcCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.CrowdWorker;

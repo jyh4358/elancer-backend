@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.dto;
+package com.example.elancer.freelancerprofile.dto.request;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

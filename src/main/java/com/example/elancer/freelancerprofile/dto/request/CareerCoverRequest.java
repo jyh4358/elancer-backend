@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.dto;
+package com.example.elancer.freelancerprofile.dto.request;
 
 import com.example.elancer.freelancerprofile.model.career.Career;
 import com.example.elancer.freelancerprofile.model.career.CompanyPosition;
