@@ -21,6 +21,6 @@ public class FreelancerProfileFindController {
             @NotNull @PathVariable Long freelancerNum
     ) {
         FreelancerDetailResponse detailFreelancerProfile = freelancerProfileFindService.findDetailFreelancerProfile(freelancerNum);
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<FreelancerDetailResponse>(detailFreelancerProfile, HttpStatus.OK);
     }
 }
