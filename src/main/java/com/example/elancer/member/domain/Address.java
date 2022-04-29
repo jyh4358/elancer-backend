@@ -21,15 +21,15 @@ public class Address {
     @NotBlank
     private String zipcode;
     @NotBlank
-    private String address1; // 주소
+    private String mainAddress;
     @NotBlank
-    private String address2; // 상세주소
+    private String detailAddress;
 
-    public Address(CountryType country, String zipcode, String address1, String address2) {
+    public Address(CountryType country, String zipcode, String mainAddress, String detailAddress) {
         this.country = country;
         this.zipcode = zipcode;
-        this.address1 = address1;
-        this.address2 = address2;
+        this.mainAddress = mainAddress;
+        this.detailAddress = detailAddress;
     }
 }
 

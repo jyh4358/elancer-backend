@@ -12,12 +12,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,39 +32,14 @@ public class Freelancer extends Member {
 
     private LocalDate birthDate;
 
-    private String workEtcField;
-
-//    private CareerForm careerForm;
-
-    private int careerYear;
-    private int careerMonth;
-    private int hopeMonthMinPay;
-    private int hopeMonthMaxPay;
-
-    @Enumerated(EnumType.STRING)
-    private KOSAState kosaState;
-
-    @Enumerated(EnumType.STRING)
-    private MailReceptionState mailReceptionState;
-
-    @Enumerated(EnumType.STRING)
-    private PresentWorkState presentWorkState;
-
-    @Enumerated(EnumType.STRING)
-    private HopeWorkState hopeWorkState;
-
-    @Enumerated(EnumType.STRING)
-    private WorkPossibleState workPossibleState;
-
-    private LocalDate workStartPossibleDate;
-
-    @Enumerated(EnumType.STRING)
-    private CountryType hopeWorkCountry;
-    private String hopeWorkCity;
-
+    @Embedded
+    private FreelancerAccountInfo freelancerAccountInfo;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
     private FreelancerThumbnail freelancerThumbnail;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private CareerForm careerForm;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
     private FreelancerProfile freelancerProfile;
@@ -116,22 +95,24 @@ public class Freelancer extends Member {
        );
     }
 
-//    public void updateFreelancer(
-//            String name,
-//            String password,
-//            String email,
-//            String phone,
-//            String website,
-//            Address address,
-//            LocalDate birthDate,
-//            int careerYear,
-//            int careerMonth,
-//    ) {
-//        updateMember(name, password, email, phone, website, address);
-//        this.birthDate = birthDate;
-//
-//
-//    }
+    public void updateFreelancer(
+            String name,
+            String password,
+            String email,
+            String phone,
+            String website,
+            Address address,
+            LocalDate birthDate,
+            int careerYear,
+            int careerMonth,
+            int hopeMonthMinPay,
+            int hopeMonthMaxPay
+    ) {
+        updateMember(name, password, email, phone, website, address);
+        this.birthDate = birthDate;
+
+
+    }
 
 
     @Override

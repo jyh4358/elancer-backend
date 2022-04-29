@@ -1,7 +1,6 @@
 package com.example.elancer.member.domain;
 
 import com.example.elancer.common.model.BasicEntity;
-import com.example.elancer.enterprise.domain.enterprise.Address;
 import com.sun.istack.NotNull;
 import lombok.*;
 
