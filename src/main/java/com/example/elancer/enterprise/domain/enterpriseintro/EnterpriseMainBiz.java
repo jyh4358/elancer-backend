@@ -1,5 +1,6 @@
 package com.example.elancer.enterprise.domain.enterpriseintro;
 
+import com.example.elancer.common.model.BasicEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,14 +11,14 @@ import java.util.stream.Collectors;
 @Table(name = "enterprise_mainbiz")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class EnterpriseMainBiz {
+public class EnterpriseMainBiz extends BasicEntity{
 
-    @Id @GeneratedValue
-    @Column(name = "enterprise_mainbiz_id")
-    private Long id;
+//    @Id @GeneratedValue
+//    @Column(name = "enterprise_mainbiz_id")
+//    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "enDetails_id")
+    @JoinColumn(name = "enIntro_num")
     private EnterpriseIntro enterpriseIntro;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,8 +28,7 @@ public class EnterpriseMainBiz {
     private String etc;
 
     @Builder
-    public EnterpriseMainBiz(Long id, EnterpriseIntro enterpriseIntro, MainBusiness mainBusiness, String etc) {
-        this.id = id;
+    public EnterpriseMainBiz(EnterpriseIntro enterpriseIntro, MainBusiness mainBusiness, String etc) {
         this.enterpriseIntro = enterpriseIntro;
         this.mainBusiness = mainBusiness;
         this.etc = etc;

@@ -1,5 +1,5 @@
-= elancer API Guide
-;
+= BUNJANG API Guide
+mins1031;
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
@@ -72,6 +72,16 @@ endif::[]
 include::{snippets}/freelancer-join/http-request.adoc[]
 include::{snippets}/freelancer-join/request-headers.adoc[]
 include::{snippets}/freelancer-join/request-fields.adoc[]
+
+
+
+[[resources-enterprise-join]]
+== 기업 회원가입
+
+개인정보 입력을 통해 프리랜서 회원가입을 진행한다.
+include::{snippets}/enterprise-join/http-request.adoc[]
+include::{snippets}/enterprise-join/request-headers.adoc[]
+include::{snippets}/enterprise-join/request-fields.adoc[]
 
 
 

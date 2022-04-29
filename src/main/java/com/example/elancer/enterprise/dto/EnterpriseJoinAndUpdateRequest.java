@@ -8,27 +8,47 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 @Getter @Setter
 @AllArgsConstructor
-public class EnterpriseJoinRequest {
+public class EnterpriseJoinAndUpdateRequest {
 
+    @NotBlank
     private String userId;
+    @NotBlank
     private String password1;
+    @NotBlank
     private String password2;
+    @NotBlank
     private String name;
+    @NotBlank
     private String phone;
+    @Email
+    @NotBlank
     private String email;
 
 
+    @NotBlank
     private String companyName;
-    private int companyPeople;
+
+    private Integer companyPeople;
+    @NotBlank
     private String position;
+    @NotBlank
     private String telNumber;
     private String website;
+
     private Address address;
+
     private String bizContents;
-    private int sales;
+
+    private Integer sales;
+    @NotBlank
     private String idNumber;
+
+    // todo - 이후에 사업자 등록증 파일 구현
 
 
     public Enterprise toEntity() {

@@ -1,5 +1,6 @@
 package com.example.elancer.enterprise.domain.enterprise;
 
+import com.example.elancer.enterprise.domain.HeartScrap;
 import com.example.elancer.enterprise.domain.enterpriseintro.EnterpriseIntro;
 import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.domain.MemberType;
@@ -10,6 +11,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -40,12 +44,13 @@ public class Enterprise extends Member {
     private String position;
     @NotNull
     private String telNumber; // 담당자 전좌번호
-    private String website;
+
     @NotNull
     @Embedded
     private Address address;
     @NotNull
     private String bizContents;
+
     private int sales;
     @NotNull
     @Column(name = "idNumber")
@@ -59,26 +64,35 @@ public class Enterprise extends Member {
     @JoinColumn(name = "enDetails_id", unique = true)
     private EnterpriseIntro enterpriseIntro;
 
+    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL)
+    private List<HeartScrap> heartScraps = new ArrayList<>();
+
 
     @Builder
     public Enterprise(String userId, String password, String name, String phone, String email, MemberType role, String companyName, int companyPeople, String position, String telNumber, String website, Address address, String bizContents, int sales, String idNumber, IdPhoto idPhoto) {
-        super(userId, password, name, phone, email, role);
+        super(userId, password, name, phone, email, website, address, role);
         this.companyName = companyName;
         this.companyPeople = companyPeople;
         this.position = position;
         this.telNumber = telNumber;
-        this.website = website;
-        this.address = address;
         this.bizContents = bizContents;
         this.sales = sales;
         this.idNumber = idNumber;
         this.idPhoto = idPhoto;
     }
 
-
-
-    public void updateIntro(EnterpriseIntro enterpriseIntro) {
+    public void updateIntro(EnterpriseIntro enterpriseIntro, String bizContents, int sales, String idNumber) {
         this.enterpriseIntro = enterpriseIntro;
+        this.bizContents = bizContents;
+        this.sales = sales;
+        this.idNumber = idNumber;
+
+    }
+
+
+    public void addHeartScrap(HeartScrap heartScrap) {
+        heartScraps.add(heartScrap);
+        heartScrap.insertEnterprise(this);
     }
 
 }

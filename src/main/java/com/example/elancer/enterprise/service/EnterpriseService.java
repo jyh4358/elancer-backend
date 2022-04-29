@@ -3,18 +3,20 @@ package com.example.elancer.enterprise.service;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.domain.enterpriseintro.*;
 import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
-import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
+import com.example.elancer.enterprise.dto.EnterpriseJoinAndUpdateRequest;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.enterprise.repository.MainBusinessRepository;
 import com.example.elancer.enterprise.repository.SubBusinessRepository;
+import com.example.elancer.freelancer.model.Freelancer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,13 +29,22 @@ public class EnterpriseService {
     private final SubBusinessRepository subBusinessRepository;
 
     @Transactional
-    public void join(EnterpriseJoinRequest enterpriseJoinRequest) {
-        enterpriseJoinRequest.checkPwd();
-        enterpriseJoinRequest.setPassword1(passwordEncoder.encode(enterpriseJoinRequest.getPassword1()));
-        Enterprise enterprise = enterpriseJoinRequest.toEntity();
-        checkDuplicate(enterprise.getUserId());
+    public Long join(EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest) {
+
+        enterpriseJoinAndUpdateRequest.checkPwd();
+        checkDuplicate(enterpriseJoinAndUpdateRequest.getUserId());
+        enterpriseJoinAndUpdateRequest.setPassword1(passwordEncoder.encode(enterpriseJoinAndUpdateRequest.getPassword1()));
+        Enterprise enterprise = enterpriseJoinAndUpdateRequest.toEntity();
 
         enterpriseRepository.save(enterprise);
+        return enterprise.getNum();
+    }
+
+
+    @Transactional
+    public void enterpriseUpdate(String userId, EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest) {
+//        enterpriseRepository.findByUserId(userId);
+
     }
 
 
@@ -46,11 +57,25 @@ public class EnterpriseService {
         List<EnterpriseMainBiz> enterpriseMainBizs = getEnterpriseMainBizs(enterpriseIntroRequest, etc);
         List<EnterpriseSubBiz> enterpriseSubBizs = getEnterpriseSubBizs(enterpriseIntroRequest, etc);
 
+
         EnterpriseIntro enterpriseIntro = EnterpriseIntro.of(enterpriseIntroRequest.getIntroTitle(), enterpriseMainBizs, enterpriseSubBizs, enterprise);
 
-        enterprise.updateIntro(enterpriseIntro);
+
+        enterprise.updateIntro(enterpriseIntro,
+                enterpriseIntroRequest.getBizContents(),
+                enterpriseIntroRequest.getSales(),
+                enterpriseIntroRequest.getIdNumber());
 
     }
+
+    public void findScrap(Long id) {
+        Enterprise enterprise = enterpriseRepository.findScrapAndFreelancerFetchJoin(id).orElseThrow(NotExistEnterpriseException::new);
+        List<Freelancer> collect = enterprise.getHeartScraps().stream().map(scrap -> scrap.getFreelancer()).collect(Collectors.toList());
+        // todo - entityy -> dto 변환 로직 후 반환
+
+    }
+
+
 
 
     private void checkDuplicate(String userId) {

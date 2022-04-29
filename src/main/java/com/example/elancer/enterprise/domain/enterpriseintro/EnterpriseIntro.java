@@ -1,5 +1,6 @@
 package com.example.elancer.enterprise.domain.enterpriseintro;
 
+import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -14,11 +15,11 @@ import java.util.List;
 @Table(name = "enterprise_intro")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class EnterpriseIntro {
+public class EnterpriseIntro extends BasicEntity{
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "enDetails_id")
-    private Long id;
+//    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "enDetails_id")
+//    private Long id;
 
     private String introTitle;
 
@@ -36,8 +37,7 @@ public class EnterpriseIntro {
     // TODO 파일 저장 테이블이 정해지면 포트폴리오 및 기타문서 파일 구현
 
     @Builder
-    public EnterpriseIntro(Long id, String introTitle, Enterprise enterprise) {
-        this.id = id;
+    public EnterpriseIntro(String introTitle, Enterprise enterprise) {
         this.introTitle = introTitle;
         this.enterprise = enterprise;
     }
