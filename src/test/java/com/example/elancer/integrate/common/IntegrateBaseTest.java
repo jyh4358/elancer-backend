@@ -23,8 +23,8 @@ public class IntegrateBaseTest {
     protected MockMvc mockMvc;
 
     @Autowired
-    private FreelancerRepository freelancerRepository;
+    protected FreelancerRepository freelancerRepository;
 
     @Autowired
-    private FreelancerProfileRepository freelancerProfileRepository;
+    protected FreelancerProfileRepository freelancerProfileRepository;
 }

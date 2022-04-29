@@ -9,6 +9,7 @@ import com.example.elancer.freelancerprofile.model.career.Career;
 import com.example.elancer.freelancerprofile.model.education.Education;
 import com.example.elancer.freelancerprofile.model.language.Language;
 import com.example.elancer.freelancerprofile.model.license.License;
+import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -60,9 +61,8 @@ public class FreelancerProfile extends BasicEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Language> languages = new ArrayList<>();
 
-
-//    @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Position position;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Position position;
 
     public FreelancerProfile(String greeting, Freelancer freelancer) {
         this.greeting = greeting;
@@ -124,5 +124,9 @@ public class FreelancerProfile extends BasicEntity {
             language.setFreelancerProfile(this);
         }
         this.languages.addAll(languages);
+    }
+
+    public void coverPosition(Position position) {
+        this.position = position;
     }
 }

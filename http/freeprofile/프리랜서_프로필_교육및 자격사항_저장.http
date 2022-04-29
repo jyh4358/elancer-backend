@@ -1,0 +1,35 @@
+PUT http://localhost:8080/freelancer-profile/1/education-license-language
+Content-Type: application/json
+
+#info
+# LanguageAbility 구성 {
+#    SEMI("일상회화 가능"),
+#    MIDDLE("비즈니스 회화가능"),
+#    NATIVE("원어민 수준")
+#}
+
+#req
+{
+  "educationCoverRequests": [
+    {
+      "educationTitle": "국비교육",
+      "educationOrganization": "이젠",
+      "educationStartDate": "2019-01-05",
+      "educationEndDate": "2019-07-01"
+    }
+  ],
+  "licenseCoverRequests": [
+    {
+      "licenseTitle": "정보처리기사",
+      "licenseIssuer": "한국자격증협회",
+      "acquisitionDate": "2019-02-20"
+    }
+  ],
+  "languageCoverRequests": [
+    {
+      "languageName": "영어",
+      "languageAbility": "MIDDLE"
+    }
+  ]
+}
+
