@@ -61,6 +61,8 @@ import com.example.elancer.freelancerprofile.repository.position.planner.Planner
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublishingSkillRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.member.domain.Address;
+import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.domain.MemberType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -139,6 +141,8 @@ class FreelancerPositionServiceTest {
                 "name",
                 "phone",
                 "email",
+                "website",
+                new Address(CountryType.KR, "zipcode","address1", "address2"),
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
@@ -207,6 +211,8 @@ class FreelancerPositionServiceTest {
                 "name",
                 "phone",
                 "email",
+                "website",
+                new Address(CountryType.KR, "zipcode","address1", "address2"),
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
@@ -250,6 +256,8 @@ class FreelancerPositionServiceTest {
                 "name",
                 "phone",
                 "email",
+                "website",
+                new Address(CountryType.KR, "zipcode","address1", "address2"),
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
@@ -301,6 +309,8 @@ class FreelancerPositionServiceTest {
                 "name",
                 "phone",
                 "email",
+                "website",
+                new Address(CountryType.KR, "zipcode","address1", "address2"),
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
@@ -340,6 +350,8 @@ class FreelancerPositionServiceTest {
                 "name",
                 "phone",
                 "email",
+                "website",
+                new Address(CountryType.KR, "zipcode","address1", "address2"),
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
@@ -371,6 +383,8 @@ class FreelancerPositionServiceTest {
                 "name",
                 "phone",
                 "email",
+                "website",
+                new Address(CountryType.KR, "zipcode","address1", "address2"),
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,

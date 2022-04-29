@@ -13,10 +13,6 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "member_type")
 public abstract class Member extends BasicEntity {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long num;
-
     @NotNull
     private String userId;
 
@@ -35,13 +31,11 @@ public abstract class Member extends BasicEntity {
 
     private String website;
 
-    @NotNull
     @Embedded
     private Address address;
 
     @Enumerated(EnumType.STRING)
     private MemberType role;
-
 
     public Member(String userId, String password, String name, String phone, String email, String website, Address address, MemberType role) {
         this.userId = userId;
@@ -52,6 +46,22 @@ public abstract class Member extends BasicEntity {
         this.website = website;
         this.address = address;
         this.role = role;
+    }
+
+    public void updateMember(
+            String name,
+            String password,
+            String email,
+            String phone,
+            String website,
+            Address address
+    ) {
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.website = website;
+        this.address = address;
     }
 
     public String getRoleKey() {

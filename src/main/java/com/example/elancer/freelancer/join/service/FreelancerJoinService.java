@@ -30,6 +30,8 @@ public class FreelancerJoinService {
                 freelancerJoinRequest.getMemberName(),
                 freelancerJoinRequest.getMemberPhone(),
                 freelancerJoinRequest.getMemberEmail(),
+                null,
+                null,
                 MemberType.FREELANCER,
                 freelancerJoinRequest.getMailReceptionState(),
                 freelancerJoinRequest.getWorkPossibleState(),

@@ -1,6 +1,8 @@
 package com.example.elancer.freelancer.model;
 
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.member.domain.Address;
+import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.domain.MemberType;
 import com.sun.istack.NotNull;
@@ -11,6 +13,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
@@ -21,12 +25,39 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue("FREELANCER")
 public class Freelancer extends Member {
-    @NotNull
+
+    private LocalDate birthDate;
+
+    private String workEtcField;
+
+//    private CareerForm careerForm;
+
+    private int careerYear;
+    private int careerMonth;
+    private int hopeMonthMinPay;
+    private int hopeMonthMaxPay;
+
+    @Enumerated(EnumType.STRING)
+    private KOSAState kosaState;
+
+    @Enumerated(EnumType.STRING)
     private MailReceptionState mailReceptionState;
-    @NotNull
+
+    @Enumerated(EnumType.STRING)
+    private PresentWorkState presentWorkState;
+
+    @Enumerated(EnumType.STRING)
+    private HopeWorkState hopeWorkState;
+
+    @Enumerated(EnumType.STRING)
     private WorkPossibleState workPossibleState;
-    @NotNull
+
     private LocalDate workStartPossibleDate;
+
+    @Enumerated(EnumType.STRING)
+    private CountryType hopeWorkCountry;
+    private String hopeWorkCity;
+
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
     private FreelancerThumbnail freelancerThumbnail;
@@ -40,13 +71,15 @@ public class Freelancer extends Member {
             String name,
             String phone,
             String email,
+            String website,
+            Address address,
             MemberType role,
             MailReceptionState mailReceptionState,
             WorkPossibleState workPossibleState,
             LocalDate workStartPossibleDate,
             FreelancerThumbnail freelancerThumbnail
     ) {
-        super(userId, password, name, phone, email, role);
+        super(userId, password, name, phone, email, website, address, role);
         this.mailReceptionState = mailReceptionState;
         this.workPossibleState = workPossibleState;
         this.workStartPossibleDate = workStartPossibleDate;
@@ -59,6 +92,8 @@ public class Freelancer extends Member {
             String name,
             String phone,
             String email,
+            String website,
+            Address address,
             MemberType role,
             MailReceptionState mailReceptionState,
             WorkPossibleState workPossibleState,
@@ -71,6 +106,8 @@ public class Freelancer extends Member {
                name,
                phone,
                email,
+               website,
+               address,
                role,
                mailReceptionState,
                workPossibleState,
@@ -78,6 +115,24 @@ public class Freelancer extends Member {
                freelancerThumbnail
        );
     }
+
+//    public void updateFreelancer(
+//            String name,
+//            String password,
+//            String email,
+//            String phone,
+//            String website,
+//            Address address,
+//            LocalDate birthDate,
+//            int careerYear,
+//            int careerMonth,
+//    ) {
+//        updateMember(name, password, email, phone, website, address);
+//        this.birthDate = birthDate;
+//
+//
+//    }
+
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,6 @@
 package com.example.elancer.freelancer.model;
 
+import com.example.elancer.common.model.BasicEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,12 +16,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class FreelancerThumbnail {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long thumbnailNum;
-
+public class FreelancerThumbnail extends BasicEntity {
     @NotNull
     private String thumbnailPath;
 

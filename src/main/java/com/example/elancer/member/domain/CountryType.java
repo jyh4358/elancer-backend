@@ -1,4 +1,4 @@
-package com.example.elancer.enterprise.domain.enterprise;
+package com.example.elancer.member.domain;
 
 import lombok.Getter;
 

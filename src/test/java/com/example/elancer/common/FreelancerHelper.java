@@ -4,6 +4,8 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.member.domain.Address;
+import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.domain.MemberType;
 
 import java.time.LocalDate;
@@ -17,6 +19,8 @@ public class FreelancerHelper {
                 "name",
                 "phone",
                 "email",
+                "website",
+                new Address(CountryType.KR, "zipcode","address1", "address2"),
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
