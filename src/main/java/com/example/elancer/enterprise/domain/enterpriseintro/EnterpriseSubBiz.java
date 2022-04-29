@@ -11,14 +11,14 @@ import java.util.stream.Collectors;
 @Table(name = "enterprise_subbiz")
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class EnterpriseSubBiz extends BasicEntity {
+public class EnterpriseSubBiz extends BasicEntity{
 
-    @Id @GeneratedValue
-    @Column(name = "enterprise_subbiz_id")
-    private Long id;
+//    @Id @GeneratedValue
+//    @Column(name = "enterprise_subbiz_id")
+//    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "enDetails_id")
+    @JoinColumn(name = "enIntro_num")
     private EnterpriseIntro enterpriseIntro;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,7 +29,6 @@ public class EnterpriseSubBiz extends BasicEntity {
 
     @Builder
     public EnterpriseSubBiz(Long id, EnterpriseIntro enterpriseIntro, SubBusiness subBusiness, String etc) {
-        this.id = id;
         this.enterpriseIntro = enterpriseIntro;
         this.subBusiness = subBusiness;
         this.etc = etc;
