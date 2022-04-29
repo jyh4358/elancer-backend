@@ -45,7 +45,6 @@ public class Enterprise extends Member {
     @NotNull
     private String telNumber; // 담당자 전좌번호
 
-    private String website;
     @NotNull
     @Embedded
     private Address address;
@@ -71,13 +70,11 @@ public class Enterprise extends Member {
 
     @Builder
     public Enterprise(String userId, String password, String name, String phone, String email, MemberType role, String companyName, int companyPeople, String position, String telNumber, String website, Address address, String bizContents, int sales, String idNumber, IdPhoto idPhoto) {
-        super(userId, password, name, phone, email, role);
+        super(userId, password, name, phone, email, website, address, role);
         this.companyName = companyName;
         this.companyPeople = companyPeople;
         this.position = position;
         this.telNumber = telNumber;
-        this.website = website;
-        this.address = address;
         this.bizContents = bizContents;
         this.sales = sales;
         this.idNumber = idNumber;
