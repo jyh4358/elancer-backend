@@ -10,6 +10,7 @@ import com.example.elancer.freelancerprofile.model.education.Education;
 import com.example.elancer.freelancerprofile.model.language.Language;
 import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.position.Position;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -100,6 +101,7 @@ public class FreelancerProfile extends BasicEntity {
 
     public void plusProjectHistory(ProjectHistory projectHistory) {
         this.projectHistories.add(projectHistory);
+        projectHistory.setFreelancerProfile(this);
     }
 
     public void coverEducation(List<Education> educations) {
@@ -129,4 +131,13 @@ public class FreelancerProfile extends BasicEntity {
     public void coverPosition(Position position) {
         this.position = position;
     }
+
+    public PositionType confirmPositionType() {
+        if (this.position == null) {
+            return null;
+        }
+
+        return this.position.getPositionType();
+    }
+
 }

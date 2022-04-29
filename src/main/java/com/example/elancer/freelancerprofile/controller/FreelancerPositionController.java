@@ -1,10 +1,10 @@
 package com.example.elancer.freelancerprofile.controller;
 
-import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
-import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.PositionEtcCoverRequest;
-import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.PositionEtcCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.service.FreelancerPositionService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;

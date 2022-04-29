@@ -4,17 +4,18 @@ import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
-import com.example.elancer.freelancerprofile.controller.FreelancerProfileControllerPath;
-import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
-import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
-import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
-import com.example.elancer.freelancerprofile.dto.EducationAndLicenseAndLanguageRequests;
-import com.example.elancer.freelancerprofile.dto.EducationCoverRequest;
-import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
-import com.example.elancer.freelancerprofile.dto.LanguageCoverRequest;
-import com.example.elancer.freelancerprofile.dto.LicenseCoverRequest;
-import com.example.elancer.freelancerprofile.dto.ProjectHistoryCoverRequest;
+import com.example.elancer.freelancerprofile.controller.FreelancerProfileAlterControllerPath;
+import com.example.elancer.freelancerprofile.controller.FreelancerProfileFindControllerPath;
+import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.EducationAndLicenseAndLanguageRequests;
+import com.example.elancer.freelancerprofile.dto.request.EducationCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.academic.state.AcademicState;
@@ -25,6 +26,9 @@ import com.example.elancer.freelancerprofile.model.education.Education;
 import com.example.elancer.freelancerprofile.model.language.Language;
 import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import com.example.elancer.freelancerprofile.model.license.License;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
+import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
@@ -40,6 +44,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -47,7 +53,9 @@ import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
@@ -197,8 +205,100 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         프리랜서_프로필_교육및자격사항_저장_요청결과_검증(educationCoverRequest, licenseCoverRequest, languageCoverRequest);
     }
 
+    @DisplayName("프리랜서 프로필 세부사항 조회 통합테스트")
+    @Test
+    public void 프리랜서_프로필_세부사항_조회() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer);
+
+        AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
+                "고등학교",
+                SchoolLevel.HIGH_SCHOOL,
+                LocalDate.of(2012, 02, 01),
+                LocalDate.of(2015, 02, 01),
+                AcademicState.GRADUATION,
+                "문과"
+        );
+
+        AcademicAbility academicAbility2 = AcademicAbility.createAcademicAbility(
+                "대학교",
+                SchoolLevel.UNIVERSITY,
+                LocalDate.of(2015, 02, 01),
+                LocalDate.of(2020, 02, 01),
+                AcademicState.GRADUATION,
+                "컴퓨터공학과"
+        );
+
+        Career career = Career.createCareer(
+                "삼성",
+                "개발팀",
+                CompanyPosition.ASSISTANT_MANAGER,
+                LocalDate.of(2020, 02, 01),
+                LocalDate.of(2021, 02, 01)
+        );
+
+        Education education = Education.createEducation(
+                "특수교육",
+                "특수기관",
+                LocalDate.of(2020, 02, 01),
+                LocalDate.of(2021, 02, 01)
+        );
+
+        License license = License.createLicense("특수 자격증", "특수 기관", LocalDate.of(2019, 02, 22));
+
+        Language language = Language.createLanguage("영어", LanguageAbility.MIDDLE);
+
+        ProjectHistory projectHistory = ProjectHistory.createProjectHistory(
+                "프로젝트명",
+                LocalDate.of(2020, 02, 01),
+                LocalDate.of(2021, 02, 01),
+                "고객사명",
+                "상주사명",
+                DevelopField.APPLICATION,
+                "backend",
+                DevelopEnvironment.of(
+                        "model",
+                        "Ms",
+                        "language",
+                        "DB",
+                        "Tool",
+                        "통신",
+                        "기타"
+                ),
+                "담당업무는 백엔드 개발"
+        );
+
+        Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java", "role");
+
+        String introduceName = "소개글";
+        IntroBackGround introBackGround = IntroBackGround.COBALT_BLUE;
+        String introduceVideoURL = "소개 영상 주소";
+        String introduceContent = "소개 내용";
+        freelancerProfile.coverIntroduceInFreelancer(introduceName, introBackGround, introduceVideoURL, introduceContent);
+
+        freelancerProfile.coverAcademicAbilities(Arrays.asList(academicAbility, academicAbility2));
+        freelancerProfile.coverCareers(Arrays.asList(career));
+        freelancerProfile.coverEducation(Arrays.asList(education));
+        freelancerProfile.coverLicense(Arrays.asList(license));
+        freelancerProfile.coverLanguage(Arrays.asList(language));
+        freelancerProfile.plusProjectHistory(projectHistory);
+        freelancerProfile.coverPosition(developer);
+
+        freelancerProfileRepository.save(freelancerProfile);
+
+        //when & then
+        String path = FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND.replace("{freelancerNum}", String.valueOf(freelancer.getNum()));
+        mockMvc.perform(get(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("profileNum").value("1"))
+                .andDo(print());
+
+    }
+
     private void 프리랜서_프로필_소개정보_저장_요청(FreelancerProfile freelancerProfile, IntroduceCoverRequest introduceCoverRequest) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_INTRO_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_INTRO_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(introduceCoverRequest)))
@@ -215,7 +315,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     }
 
     private void 프리랜서_프로필_학력사항_저장_요청(FreelancerProfile freelancerProfile, AcademicAbilityCoverRequests academicAbilityCoverRequests) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(academicAbilityCoverRequests)))
@@ -234,7 +334,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     }
 
     private void 프리랜서_프로필_경력사항_저장_요청(FreelancerProfile freelancerProfile, CareerCoverRequests careerCoverRequests) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_CAREER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_CAREER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(careerCoverRequests)))
@@ -252,7 +352,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     }
 
     private void 프리랜서_프로필_프로젝트이력_저장_요청(FreelancerProfile freelancerProfile, ProjectHistoryCoverRequest projectHistoryCoverRequest) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(projectHistoryCoverRequest)))
@@ -281,7 +381,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     }
 
     private void 프리랜서_프로필_교육및자격사항_저장_요청(FreelancerProfile freelancerProfile, EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests) throws Exception {
-        String path = FreelancerProfileControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(educationAndLicenseAndLanguageRequests)))

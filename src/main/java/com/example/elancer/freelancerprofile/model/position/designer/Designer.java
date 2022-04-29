@@ -2,6 +2,7 @@ package com.example.elancer.freelancerprofile.model.position.designer;
 
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,6 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DiscriminatorValue("DESIGNER")
 public class Designer extends Position {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "designer", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -30,12 +30,12 @@ public class Designer extends Position {
 
     private String etcSkill;
 
-    public Designer(FreelancerProfile freelancerProfile) {
-        super(freelancerProfile);
+    public Designer(PositionType positionType, FreelancerProfile freelancerProfile) {
+        super(positionType, freelancerProfile);
     }
 
-    public static Designer createBasicDesigner(FreelancerProfile freelancerProfile) {
-        return new Designer(freelancerProfile);
+    public static Designer createBasicDesigner(PositionType positionType, FreelancerProfile freelancerProfile) {
+        return new Designer(positionType, freelancerProfile);
     }
 
     public void coverDesignRoleAndSkill(List<DesignRole> designRoles, List<DesignSkill> designSkills, String etcRole,  String etcSkill) {

@@ -1,6 +1,5 @@
-package com.example.elancer.freelancerprofile.dto;
+package com.example.elancer.freelancerprofile.dto.request;
 
-import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.academic.state.SchoolLevel;
 import com.example.elancer.freelancerprofile.model.academic.state.AcademicState;

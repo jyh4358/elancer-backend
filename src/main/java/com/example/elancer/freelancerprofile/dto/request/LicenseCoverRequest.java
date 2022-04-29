@@ -1,6 +1,5 @@
-package com.example.elancer.freelancerprofile.dto;
+package com.example.elancer.freelancerprofile.dto.request;
 
-import com.example.elancer.freelancerprofile.model.education.Education;
 import com.example.elancer.freelancerprofile.model.license.License;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

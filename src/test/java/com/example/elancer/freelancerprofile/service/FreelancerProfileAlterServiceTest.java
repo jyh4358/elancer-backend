@@ -1,20 +1,20 @@
 package com.example.elancer.freelancerprofile.service;
 
-import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
-import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
-import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
-import com.example.elancer.freelancerprofile.dto.EducationAndLicenseAndLanguageRequests;
-import com.example.elancer.freelancerprofile.dto.EducationCoverRequest;
-import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.EducationAndLicenseAndLanguageRequests;
+import com.example.elancer.freelancerprofile.dto.request.EducationCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
-import com.example.elancer.freelancerprofile.dto.LanguageCoverRequest;
-import com.example.elancer.freelancerprofile.dto.LicenseCoverRequest;
-import com.example.elancer.freelancerprofile.dto.ProjectHistoryCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.academic.state.SchoolLevel;
@@ -49,10 +49,10 @@ import java.util.List;
 
 @ActiveProfiles("h2")
 @SpringBootTest
-class FreelancerProfileServiceTest {
+class FreelancerProfileAlterServiceTest {
 
     @Autowired
-    private FreelancerProfileService freelancerProfileService;
+    private FreelancerProfileAlterService freelancerProfileAlterService;
 
     @Autowired
     private FreelancerRepository freelancerRepository;
@@ -104,7 +104,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerIntroduce(memberDetails, freelancer.getNum(), introduceCoverRequest);
+        freelancerProfileAlterService.coverFreelancerIntroduce(memberDetails, freelancer.getNum(), introduceCoverRequest);
 
         //then
         FreelancerProfile updatedFreelancerProfile = freelancerProfileRepository.findById(freelancer.getNum()).get();
@@ -145,7 +145,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerAcademicAbility(memberDetails, freelancerProfile.getNum(), new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest)));
+        freelancerProfileAlterService.coverFreelancerAcademicAbility(memberDetails, freelancerProfile.getNum(), new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest)));
 
         //then
         List<AcademicAbility> academicAbilityList = academicRepository.findAll();
@@ -190,7 +190,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerCareer(memberDetails, freelancerProfile.getNum(), new CareerCoverRequests(Arrays.asList(careerCoverRequest)));
+        freelancerProfileAlterService.coverFreelancerCareer(memberDetails, freelancerProfile.getNum(), new CareerCoverRequests(Arrays.asList(careerCoverRequest)));
 
         //then
         List<Career> careers = careerRepository.findAll();
@@ -243,7 +243,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerProjectHistory(memberDetails, freelancerProfile.getNum(), projectHistoryCoverRequest);
+        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, freelancerProfile.getNum(), projectHistoryCoverRequest);
 
         //then
         List<ProjectHistory> projectHistories = projectHistoryRepository.findAll();
@@ -295,7 +295,7 @@ class FreelancerProfileServiceTest {
         MemberDetails memberDetails = new MemberDetails(memberId);
 
         //when
-        freelancerProfileService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, freelancerProfile.getNum(), educationAndLicenseAndLanguageRequests);
+        freelancerProfileAlterService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, freelancerProfile.getNum(), educationAndLicenseAndLanguageRequests);
 
         //then
         List<Education> educations = educationRepository.findAll();

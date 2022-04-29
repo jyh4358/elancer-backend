@@ -1,16 +1,16 @@
 package com.example.elancer.freelancerprofile.service;
 
 import com.example.elancer.common.checker.RightRequesterChecker;
-import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequest;
-import com.example.elancer.freelancerprofile.dto.AcademicAbilityCoverRequests;
-import com.example.elancer.freelancerprofile.dto.CareerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.CareerCoverRequests;
-import com.example.elancer.freelancerprofile.dto.EducationAndLicenseAndLanguageRequests;
-import com.example.elancer.freelancerprofile.dto.EducationCoverRequest;
-import com.example.elancer.freelancerprofile.dto.IntroduceCoverRequest;
-import com.example.elancer.freelancerprofile.dto.LanguageCoverRequest;
-import com.example.elancer.freelancerprofile.dto.LicenseCoverRequest;
-import com.example.elancer.freelancerprofile.dto.ProjectHistoryCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.EducationAndLicenseAndLanguageRequests;
+import com.example.elancer.freelancerprofile.dto.request.EducationCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
@@ -21,7 +21,6 @@ import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
-import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,9 +31,10 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class FreelancerProfileService {
+public class FreelancerProfileAlterService {
     private final FreelancerProfileRepository freelancerProfileRepository;
-    private final AcademicRepository academicRepository;
+
+    // TODO 저장 로직 쿼리 괴랄함. 기능구현 얼추 끝나면 좀 파야할 필요성 있음.
 
     @Transactional
     public void coverFreelancerIntroduce(MemberDetails memberDetails, Long profileNum, IntroduceCoverRequest introduceCoverRequest) {

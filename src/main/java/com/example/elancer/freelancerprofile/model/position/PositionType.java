@@ -1,6 +1,10 @@
 package com.example.elancer.freelancerprofile.model.position;
 
+import com.example.elancer.freelancerprofile.dto.response.PositionResponse;
 import lombok.Getter;
+
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Getter
 public enum PositionType {
@@ -13,6 +17,8 @@ public enum PositionType {
     ;
 
     private String desc;
+//    private Function<Positionx>
+
 
     PositionType(String desc) {
         this.desc = desc;

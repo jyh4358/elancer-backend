@@ -4,13 +4,14 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
-import com.example.elancer.freelancerprofile.dto.DesignerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.DeveloperCoverRequest;
-import com.example.elancer.freelancerprofile.dto.PlannerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.PositionEtcCoverRequest;
-import com.example.elancer.freelancerprofile.dto.PublisherCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.PositionEtcCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.position.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignRole;
@@ -170,6 +171,8 @@ class FreelancerPositionServiceTest {
         Assertions.assertThat(developers).hasSize(1);
         Assertions.assertThat(developers.get(0).getFocusSkill()).isEqualTo(developerCoverRequest.getFocusSkill());
         Assertions.assertThat(developers.get(0).getRole()).isEqualTo(developerCoverRequest.getRole());
+        Assertions.assertThat(developers.get(0).getPositionType()).isEqualTo(PositionType.DEVELOPER);
+
 
         List<JavaSkill> javaSkills = javaSkillRepository.findAll();
         Assertions.assertThat(javaSkills).hasSize(2);
@@ -226,6 +229,8 @@ class FreelancerPositionServiceTest {
         List<Publisher> publishers = publisherRepository.findAll();
         Assertions.assertThat(publishers).hasSize(1);
         Assertions.assertThat(publishers.get(0).getEtcSkill()).isEqualTo(publisherCoverRequest.getEtcSkill());
+        Assertions.assertThat(publishers.get(0).getPositionType()).isEqualTo(PositionType.PUBLISHER);
+
 
         List<PublishingSkill> publishingSkills = publishingSkillRepository.findAll();
         Assertions.assertThat(publishingSkills).hasSize(3);
@@ -271,6 +276,8 @@ class FreelancerPositionServiceTest {
         Assertions.assertThat(designers).hasSize(1);
         Assertions.assertThat(designers.get(0).getEtcRole()).isEqualTo(designerCoverRequest.getEtcRole());
         Assertions.assertThat(designers.get(0).getEtcSkill()).isEqualTo(designerCoverRequest.getEtcSkill());
+        Assertions.assertThat(designers.get(0).getPositionType()).isEqualTo(PositionType.DESIGNER);
+
 
         List<DesignRole> designRoles = designRoleRepository.findAll();
         Assertions.assertThat(designRoles).hasSize(2);
@@ -314,6 +321,7 @@ class FreelancerPositionServiceTest {
         List<Planner> planners = plannerRepository.findAll();
         Assertions.assertThat(planners).hasSize(1);
         Assertions.assertThat(planners.get(0).getEtcField()).isEqualTo(plannerCoverRequest.getEtcField());
+        Assertions.assertThat(planners.get(0).getPositionType()).isEqualTo(PositionType.PLANNER);
 
         List<PlannerField> plannerFields = planFieldRepository.findAll();
         Assertions.assertThat(plannerFields).hasSize(2);
@@ -349,6 +357,7 @@ class FreelancerPositionServiceTest {
         //then
         List<CrowdWorker> crowdWorkers = crowdWorkerRepository.findAll();
         Assertions.assertThat(crowdWorkers).hasSize(1);
+        Assertions.assertThat(crowdWorkers.get(0).getPositionType()).isEqualTo(PositionType.CROWD_WORKER);
     }
 
     @DisplayName("프리랜서 프로필 스킬이 기타로 등록된다.")
@@ -382,6 +391,7 @@ class FreelancerPositionServiceTest {
         List<PositionEtc> positionEtcs = positionEtcRepository.findAll();
         Assertions.assertThat(positionEtcs).hasSize(1);
         Assertions.assertThat(positionEtcs.get(0).getPositionEtcField()).isEqualTo(positionEtcCoverRequest.getPositionEtcRole());
+        Assertions.assertThat(positionEtcs.get(0).getPositionType()).isEqualTo(PositionType.ETC);
 
         List<EtcRole> etcRoles = etcRoleRepository.findAll();
         Assertions.assertThat(etcRoles).hasSize(2);

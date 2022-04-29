@@ -2,6 +2,7 @@ package com.example.elancer.freelancerprofile.model.position.developer;
 
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetSkill;
@@ -25,7 +26,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@DiscriminatorValue("DEVELOPER")
+//@DiscriminatorValue("DEVELOPER")
 public class Developer extends Position {
 
     @NotNull
@@ -57,14 +58,14 @@ public class Developer extends Position {
 
     private String etcSkill;
 
-    public Developer(FreelancerProfile freelancerProfile, String focusSkill, String role) {
-        super(freelancerProfile);
+    public Developer(PositionType positionType, FreelancerProfile freelancerProfile, String focusSkill, String role) {
+        super(positionType, freelancerProfile);
         this.focusSkill = focusSkill;
         this.role = role;
     }
 
-    public static Developer createBasicDeveloper(FreelancerProfile freelancerProfile, String focusSkill, String role) {
-        return new Developer(freelancerProfile, focusSkill, role);
+    public static Developer createBasicDeveloper(PositionType positionType, FreelancerProfile freelancerProfile, String focusSkill, String role) {
+        return new Developer(positionType, freelancerProfile, focusSkill, role);
     }
 
     public void coverDeveloperSkills(
