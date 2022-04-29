@@ -1,8 +1,7 @@
 package com.example.elancer.enterprise.controller;
 
-import com.example.elancer.common.utils.SecurityUtil;
 import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
-import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
+import com.example.elancer.enterprise.dto.EnterpriseJoinAndUpdateRequest;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,9 +17,9 @@ public class EnterpriseController {
 
     @PostMapping("/enterprise")
     public ResponseEntity<String> joinEnterprise(
-            @Validated @RequestBody EnterpriseJoinRequest enterpriseJoinRequest) {
+            @Validated @RequestBody EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest) {
 
-        enterpriseService.join(enterpriseJoinRequest);
+        enterpriseService.join(enterpriseJoinAndUpdateRequest);
         return new ResponseEntity("join", HttpStatus.CREATED);
     }
 
@@ -32,7 +31,7 @@ public class EnterpriseController {
 
     @PutMapping("/enterprise/{id}")
     public ResponseEntity<String> updateEnterpriseIntro(
-            @PathVariable String id,
+            @PathVariable Long id,
             @Validated @RequestBody EnterpriseIntroRequest enterpriseIntroRequest) {
         enterpriseService.updateIntro(id, enterpriseIntroRequest, null);
 

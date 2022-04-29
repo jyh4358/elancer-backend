@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -43,12 +44,14 @@ public class Enterprise extends Member {
     private String position;
     @NotNull
     private String telNumber; // 담당자 전좌번호
+
     private String website;
     @NotNull
     @Embedded
     private Address address;
     @NotNull
     private String bizContents;
+
     private int sales;
     @NotNull
     @Column(name = "idNumber")
@@ -81,8 +84,12 @@ public class Enterprise extends Member {
         this.idPhoto = idPhoto;
     }
 
-    public void updateIntro(EnterpriseIntro enterpriseIntro) {
+    public void updateIntro(EnterpriseIntro enterpriseIntro, String bizContents, int sales, String idNumber) {
         this.enterpriseIntro = enterpriseIntro;
+        this.bizContents = bizContents;
+        this.sales = sales;
+        this.idNumber = idNumber;
+
     }
 
 
