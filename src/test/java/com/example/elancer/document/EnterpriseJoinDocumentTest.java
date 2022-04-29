@@ -2,7 +2,7 @@ package com.example.elancer.document;
 
 import com.example.elancer.enterprise.domain.enterprise.Address;
 import com.example.elancer.enterprise.domain.enterprise.CountryType;
-import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
+import com.example.elancer.enterprise.dto.EnterpriseJoinAndUpdateRequest;
 import com.example.elancer.testconfig.RestDocsConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
@@ -42,7 +42,7 @@ public class EnterpriseJoinDocumentTest {
     @Test
     @DisplayName("기업 회원가입 문서화")
     public void enterpriseJoinDocs() throws Exception {
-        EnterpriseJoinRequest enterpriseJoinRequest = new EnterpriseJoinRequest(
+        EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest = new EnterpriseJoinAndUpdateRequest(
                 "joinDocsEnterprise",
                 "1234",
                 "1234",
@@ -62,7 +62,7 @@ public class EnterpriseJoinDocumentTest {
 
         mockMvc.perform(post("/enterprise")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(enterpriseJoinRequest)))
+                        .content(objectMapper.writeValueAsString(enterpriseJoinAndUpdateRequest)))
                 .andExpectAll(status().isCreated())
                 .andDo(print())
                 .andDo(document("enterprise-join",
