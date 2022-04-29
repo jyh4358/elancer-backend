@@ -4,7 +4,7 @@ import com.example.elancer.enterprise.domain.enterprise.Address;
 import com.example.elancer.enterprise.domain.enterprise.CountryType;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
-import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
+import com.example.elancer.enterprise.dto.EnterpriseJoinAndUpdateRequest;
 import com.example.elancer.enterprise.exception.CheckPasswordException;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
@@ -14,8 +14,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ class EnterpriseServiceTest {
     public void enterpriseJoin() {
 
         //given
-        EnterpriseJoinRequest enterpriseJoinRequest = new EnterpriseJoinRequest(
+        EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest = new EnterpriseJoinAndUpdateRequest(
                 "testid",
                 "1234",
                 "1234",
@@ -58,24 +56,24 @@ class EnterpriseServiceTest {
         );
 
         //when
-        enterpriseService.join(enterpriseJoinRequest);
+        Long memberNum = enterpriseService.join(enterpriseJoinAndUpdateRequest);
 
 
         //then
-        Enterprise joinEnterprise = enterpriseRepository.findByUserId(enterpriseJoinRequest.getUserId()).orElseThrow(NotExistEnterpriseException::new);
-        assertThat(joinEnterprise.getUserId()).isEqualTo(enterpriseJoinRequest.getUserId());
-        assertThat(joinEnterprise.getName()).isEqualTo(enterpriseJoinRequest.getName());
-        assertThat(joinEnterprise.getPhone()).isEqualTo(enterpriseJoinRequest.getPhone());
-        assertThat(joinEnterprise.getEmail()).isEqualTo(enterpriseJoinRequest.getEmail());
-        assertThat(joinEnterprise.getCompanyName()).isEqualTo(enterpriseJoinRequest.getCompanyName());
-        assertThat(joinEnterprise.getCompanyPeople()).isEqualTo(enterpriseJoinRequest.getCompanyPeople());
-        assertThat(joinEnterprise.getPosition()).isEqualTo(enterpriseJoinRequest.getPosition());
-        assertThat(joinEnterprise.getTelNumber()).isEqualTo(enterpriseJoinRequest.getTelNumber());
-        assertThat(joinEnterprise.getWebsite()).isEqualTo(enterpriseJoinRequest.getWebsite());
-        assertThat(joinEnterprise.getAddress().getCountry()).isEqualTo(enterpriseJoinRequest.getAddress().getCountry());
-        assertThat(joinEnterprise.getBizContents()).isEqualTo(enterpriseJoinRequest.getBizContents());
-        assertThat(joinEnterprise.getSales()).isEqualTo(enterpriseJoinRequest.getSales());
-        assertThat(joinEnterprise.getIdNumber()).isEqualTo(enterpriseJoinRequest.getIdNumber());
+        Enterprise joinEnterprise = enterpriseRepository.findById(memberNum).orElseThrow(NotExistEnterpriseException::new);
+        assertThat(joinEnterprise.getUserId()).isEqualTo(enterpriseJoinAndUpdateRequest.getUserId());
+        assertThat(joinEnterprise.getName()).isEqualTo(enterpriseJoinAndUpdateRequest.getName());
+        assertThat(joinEnterprise.getPhone()).isEqualTo(enterpriseJoinAndUpdateRequest.getPhone());
+        assertThat(joinEnterprise.getEmail()).isEqualTo(enterpriseJoinAndUpdateRequest.getEmail());
+        assertThat(joinEnterprise.getCompanyName()).isEqualTo(enterpriseJoinAndUpdateRequest.getCompanyName());
+        assertThat(joinEnterprise.getCompanyPeople()).isEqualTo(enterpriseJoinAndUpdateRequest.getCompanyPeople());
+        assertThat(joinEnterprise.getPosition()).isEqualTo(enterpriseJoinAndUpdateRequest.getPosition());
+        assertThat(joinEnterprise.getTelNumber()).isEqualTo(enterpriseJoinAndUpdateRequest.getTelNumber());
+        assertThat(joinEnterprise.getWebsite()).isEqualTo(enterpriseJoinAndUpdateRequest.getWebsite());
+        assertThat(joinEnterprise.getAddress().getCountry()).isEqualTo(enterpriseJoinAndUpdateRequest.getAddress().getCountry());
+        assertThat(joinEnterprise.getBizContents()).isEqualTo(enterpriseJoinAndUpdateRequest.getBizContents());
+        assertThat(joinEnterprise.getSales()).isEqualTo(enterpriseJoinAndUpdateRequest.getSales());
+        assertThat(joinEnterprise.getIdNumber()).isEqualTo(enterpriseJoinAndUpdateRequest.getIdNumber());
 
     }
 
@@ -85,7 +83,7 @@ class EnterpriseServiceTest {
     public void enterpriseJoinDuplicateException() {
 
         //given
-        EnterpriseJoinRequest enterpriseJoinRequest1 = new EnterpriseJoinRequest(
+        EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest1 = new EnterpriseJoinAndUpdateRequest(
                 "testid",
                 "1234",
                 "1234",
@@ -102,7 +100,7 @@ class EnterpriseServiceTest {
                 10000000,
                 "사업자 번호(123-123-123)"
         );
-        EnterpriseJoinRequest enterpriseJoinRequest2 = new EnterpriseJoinRequest(
+        EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest2 = new EnterpriseJoinAndUpdateRequest(
                 "testid",
                 "1234",
                 "1234",
@@ -121,12 +119,12 @@ class EnterpriseServiceTest {
         );
 
         //when
-        enterpriseService.join(enterpriseJoinRequest1);
+        enterpriseService.join(enterpriseJoinAndUpdateRequest1);
 
 
         //then
         Assertions.assertThrows(EnterpriseCheckUserIdException.class, () ->{
-            enterpriseService.join(enterpriseJoinRequest2);
+            enterpriseService.join(enterpriseJoinAndUpdateRequest2);
         });
     }
 
@@ -135,7 +133,7 @@ class EnterpriseServiceTest {
     public void enterpriseJoinPwdException() {
 
         //given
-        EnterpriseJoinRequest enterpriseJoinRequest = new EnterpriseJoinRequest(
+        EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest = new EnterpriseJoinAndUpdateRequest(
                 "testid",
                 "1234",
                 "12344",
@@ -155,7 +153,7 @@ class EnterpriseServiceTest {
 
         //when, then
         Assertions.assertThrows(CheckPasswordException.class, () ->{
-            enterpriseService.join(enterpriseJoinRequest);
+            enterpriseService.join(enterpriseJoinAndUpdateRequest);
         });
     }
 
@@ -167,7 +165,7 @@ class EnterpriseServiceTest {
         String userId = "testid";
 
         //given
-        enterpriseService.join(new EnterpriseJoinRequest(
+        Long memberNum = enterpriseService.join(new EnterpriseJoinAndUpdateRequest(
                 userId,
                 "1234",
                 "1234",
@@ -185,7 +183,7 @@ class EnterpriseServiceTest {
                 "사업자 번호(123-123-123)"
         ));
 
-        enterpriseRepository.findByUserId("testid").get();
+        Enterprise enterprise = enterpriseRepository.findById(memberNum).get();
 
         List<String> mainBiz = new ArrayList<>();
         mainBiz.add("main_biz1");
@@ -195,15 +193,15 @@ class EnterpriseServiceTest {
         subBiz.add("sub_biz1");
         subBiz.add("sub_biz2");
 
-        EnterpriseIntroRequest enterpriseIntroRequest = new EnterpriseIntroRequest("타이틀", mainBiz, subBiz);
+        EnterpriseIntroRequest enterpriseIntroRequest = new EnterpriseIntroRequest("타이틀", "SI", 1000, "123-123-123",  mainBiz, subBiz);
 
 
         //when
-        enterpriseService.updateIntro(userId, enterpriseIntroRequest, null);
+        enterpriseService.updateIntro(memberNum, enterpriseIntroRequest, null);
 
 
         //then
-        Enterprise result = enterpriseRepository.findByUserId(userId).orElseThrow(NotExistEnterpriseException::new);
+        Enterprise result = enterpriseRepository.findById(memberNum).get();
         assertThat(result.getEnterpriseIntro().getIntroTitle()).isEqualTo(enterpriseIntroRequest.getIntroTitle());
         assertThat(result.getEnterpriseIntro().getEnterpriseMainBizs().size()).isEqualTo(2);
         assertThat(result.getEnterpriseIntro().getEnterpriseSubBizs().size()).isEqualTo(2);
