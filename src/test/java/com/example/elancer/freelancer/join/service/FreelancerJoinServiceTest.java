@@ -54,10 +54,10 @@ class FreelancerJoinServiceTest {
         Assertions.assertThat(joinedFreelancer.getName()).isEqualTo(freelancerJoinRequest.getMemberName());
         Assertions.assertThat(joinedFreelancer.getUserId()).isEqualTo(freelancerJoinRequest.getMemberId());
         Assertions.assertThat(joinedFreelancer.getEmail()).isEqualTo(freelancerJoinRequest.getMemberEmail());
-        Assertions.assertThat(joinedFreelancer.getMailReceptionState()).isEqualTo(freelancerJoinRequest.getMailReceptionState());
+        Assertions.assertThat(joinedFreelancer.getFreelancerAccountInfo().getMailReceptionState()).isEqualTo(freelancerJoinRequest.getMailReceptionState());
         Assertions.assertThat(joinedFreelancer.getPhone()).isEqualTo(freelancerJoinRequest.getMemberPhone());
-        Assertions.assertThat(joinedFreelancer.getWorkStartPossibleDate()).isEqualTo(freelancerJoinRequest.getWorkStartPossibleDate());
-        Assertions.assertThat(joinedFreelancer.getWorkStartPossibleDate()).isEqualTo(freelancerJoinRequest.getWorkStartPossibleDate());
+        Assertions.assertThat(joinedFreelancer.getFreelancerAccountInfo().getWorkStartPossibleDate()).isEqualTo(freelancerJoinRequest.getWorkStartPossibleDate());
+        Assertions.assertThat(joinedFreelancer.getFreelancerAccountInfo().getWorkStartPossibleDate()).isEqualTo(freelancerJoinRequest.getWorkStartPossibleDate());
 
         List<FreelancerProfile> freelancerProfiles = freelancerProfileRepository.findAll();
         Assertions.assertThat(freelancerProfiles).hasSize(1);

@@ -27,7 +27,11 @@ public class WorkType extends BasicEntity {
         this.freelancer = freelancer;
     }
 
-    public static WorkType createCareerForm(FreelancerWorkType freelancerWorkType, Freelancer freelancer) {
+    public static WorkType createWorkType(FreelancerWorkType freelancerWorkType, Freelancer freelancer) {
         return new WorkType(freelancerWorkType, freelancer);
+    }
+
+    public void setFreelancer(Freelancer freelancer) {
+        this.freelancer = freelancer;
     }
 }

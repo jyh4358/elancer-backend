@@ -1,5 +1,6 @@
 package com.example.elancer.freelancer.join.service;
 
+import com.example.elancer.common.checker.RightRequesterChecker;
 import com.example.elancer.freelancer.join.dto.FreelancerJoinRequest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
@@ -23,7 +24,7 @@ public class FreelancerJoinService {
 
     @Transactional
     public void joinFreelancer(FreelancerJoinRequest freelancerJoinRequest) {
-        freelancerJoinRequest.checkPasswordMatch();
+        RightRequesterChecker.checkPasswordMatch(freelancerJoinRequest.getMemberPassword(), freelancerJoinRequest.getMemberPasswordCheck());
         Freelancer freelancer = Freelancer.createFreelancer(
                 freelancerJoinRequest.getMemberId(),
                 bCryptPasswordEncoder.encode(freelancerJoinRequest.getMemberPassword()),

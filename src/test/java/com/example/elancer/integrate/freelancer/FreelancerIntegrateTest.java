@@ -20,6 +20,10 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("h2")
 public class FreelancerIntegrateTest extends IntegrateBaseTest {
@@ -28,8 +32,8 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
     private FreelancerRepository freelancerRepository;
 
     @DisplayName("프리랜서 회원가입 통합테스트")
-//    @Test
-    public void 프래랜서_회원가입_통합테스트() throws JsonProcessingException {
+    @Test
+    public void 프래랜서_회원가입_통합테스트() throws Exception {
         //given
         FreelancerJoinRequest freelancerJoinRequest = new FreelancerJoinRequest(
                 "name",
@@ -45,15 +49,11 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
         );
 
         //when
-        RestAssured
-                .given()
-                    .body(objectMapper.writeValueAsString(freelancerJoinRequest))
-                    .contentType(MediaType.APPLICATION_JSON_VALUE)
-                    .log().all()
-                .when()
-                    .post(FreelancerJoinControllerPath.FREELANCER_JOIN)
-                .then()
-                    .statusCode(201);
+        mockMvc.perform(post(FreelancerJoinControllerPath.FREELANCER_JOIN)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(freelancerJoinRequest)))
+                .andExpect(status().isCreated())
+                .andDo(print());
 
         //then
         List<Freelancer> freelancers = freelancerRepository.findAll();
@@ -62,8 +62,8 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
         Assertions.assertThat(freelancers.get(0).getName()).isEqualTo(freelancerJoinRequest.getMemberName());
         Assertions.assertThat(freelancers.get(0).getEmail()).isEqualTo(freelancerJoinRequest.getMemberEmail());
         Assertions.assertThat(freelancers.get(0).getPhone()).isEqualTo(freelancerJoinRequest.getMemberPhone());
-        Assertions.assertThat(freelancers.get(0).getMailReceptionState()).isEqualTo(freelancerJoinRequest.getMailReceptionState());
-        Assertions.assertThat(freelancers.get(0).getWorkPossibleState()).isEqualTo(freelancerJoinRequest.getWorkPossibleState());
-        Assertions.assertThat(freelancers.get(0).getWorkStartPossibleDate()).isEqualTo(freelancerJoinRequest.getWorkStartPossibleDate());
+        Assertions.assertThat(freelancers.get(0).getFreelancerAccountInfo().getMailReceptionState()).isEqualTo(freelancerJoinRequest.getMailReceptionState());
+        Assertions.assertThat(freelancers.get(0).getFreelancerAccountInfo().getWorkPossibleState()).isEqualTo(freelancerJoinRequest.getWorkPossibleState());
+        Assertions.assertThat(freelancers.get(0).getFreelancerAccountInfo().getWorkStartPossibleDate()).isEqualTo(freelancerJoinRequest.getWorkStartPossibleDate());
     }
 }

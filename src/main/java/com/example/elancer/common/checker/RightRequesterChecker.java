@@ -1,6 +1,7 @@
 package com.example.elancer.common.checker;
 
 import com.example.elancer.common.exception.WrongRequestException;
+import com.example.elancer.freelancer.join.exception.FreelancerCheckPasswordException;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -26,6 +27,12 @@ public class RightRequesterChecker {
 
         if (memberDetails.checkPresentId()) {
             freelancerProfile.checkFreelancerAndProfileMatcher(memberDetails.getUserId());
+        }
+    }
+
+    public static void checkPasswordMatch(String password, String passwordCheck) {
+        if (!password.equals(passwordCheck)) {
+            throw new FreelancerCheckPasswordException();
         }
     }
 }

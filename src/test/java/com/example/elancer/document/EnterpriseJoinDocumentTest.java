@@ -1,8 +1,8 @@
 package com.example.elancer.document;
 
-import com.example.elancer.enterprise.domain.enterprise.Address;
-import com.example.elancer.enterprise.domain.enterprise.CountryType;
 import com.example.elancer.enterprise.dto.EnterpriseJoinAndUpdateRequest;
+import com.example.elancer.member.domain.Address;
+import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.testconfig.RestDocsConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
