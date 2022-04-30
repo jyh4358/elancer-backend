@@ -12,8 +12,12 @@ import com.example.elancer.freelancer.model.KOSAState;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.PresentWorkState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
+import com.example.elancer.freelancer.model.WorkType;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
+import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
@@ -31,7 +35,9 @@ import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -40,6 +46,9 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
 
     @Autowired
     private FreelancerRepository freelancerRepository;
+
+    @Autowired
+    private FreelancerWorkTypeRepository freelancerWorkTypeRepository;
 
     @DisplayName("프리랜서 회원가입 통합테스트")
     @Test
@@ -124,5 +133,49 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
         List<Freelancer> freelancers = freelancerRepository.findAll();
         Assertions.assertThat(freelancers).hasSize(1);
         Assertions.assertThat(freelancers.get(0).getName()).isEqualTo(freelancerAccountCoverRequest.getName());
+    }
+
+    @DisplayName("프리랜서 계정 정보 조회 통합테스트")
+    @Test
+    public void 프래랜서_계정정보_조회_통합테스트() throws Exception {
+        //given
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+
+        List<WorkType> workTypes = freelancerWorkTypeRepository.saveAll(Arrays.asList(WorkType.createWorkType(FreelancerWorkType.ACCOUNTING, freelancer), WorkType.createWorkType(FreelancerWorkType.BIGDATA, freelancer)));
+
+        MemberDetails memberDetails = new MemberDetails(freelancer.getUserId());
+        freelancer.updateFreelancer(
+                "멤버이름",
+                "패스워드",
+                "email@email.email.com",
+                "010-0101-0101",
+                "http://web.com",
+                new Address(CountryType.KR, "경기도", "성남시", "중원구"),
+                LocalDate.of(2000, 01, 01),
+                9,
+                5,
+                400,
+                600,
+                workTypes,
+                null,
+                KOSAState.NOT_POSSESS,
+                MailReceptionState.RECEPTION,
+                PresentWorkState.FREE_AT_COMPANY,
+                HopeWorkState.AT_COMPANY,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2022, 02, 01),
+                CountryType.KR,
+                "seoul"
+        );
+
+        Freelancer updatedFreelancer = freelancerRepository.save(freelancer);
+
+        //when & then
+        String path = FreelancerControllerPath.FREELANCER_ACCOUNT_INFO_FIND.replace("{freelancerNum}", String.valueOf(updatedFreelancer.getNum()));
+        mockMvc.perform(get(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").value(updatedFreelancer.getName()))
+                .andDo(print());
     }
 }
