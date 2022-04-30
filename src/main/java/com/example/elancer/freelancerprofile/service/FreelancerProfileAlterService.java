@@ -1,6 +1,6 @@
 package com.example.elancer.freelancerprofile.service;
 
-import com.example.elancer.common.checker.RightRequesterChecker;
+import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequests;
 import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequest;
@@ -35,11 +35,10 @@ public class FreelancerProfileAlterService {
     private final FreelancerProfileRepository freelancerProfileRepository;
 
     // TODO 저장 로직 쿼리 괴랄함. 기능구현 얼추 끝나면 좀 파야할 필요성 있음.
-
     @Transactional
     public void coverFreelancerIntroduce(MemberDetails memberDetails, Long profileNum, IntroduceCoverRequest introduceCoverRequest) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
-        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         freelancerProfile.coverIntroduceInFreelancer(
                 introduceCoverRequest.getIntroName(),
                 introduceCoverRequest.getIntroBackGround(),
@@ -52,7 +51,7 @@ public class FreelancerProfileAlterService {
     public void coverFreelancerAcademicAbility(MemberDetails memberDetails, Long profileNum, AcademicAbilityCoverRequests academicAbilityCoverRequests) {
         // min 쿼리 10번때림;; 쿼리 개선여부 확인후 성능개선해볼것.
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
-        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         List<AcademicAbility> academicAbilities = academicAbilityCoverRequests.getAcademicAbilityCoverRequests().stream()
                 .map(AcademicAbilityCoverRequest::toAcademicAbility)
                 .collect(Collectors.toList());
@@ -63,7 +62,7 @@ public class FreelancerProfileAlterService {
     @Transactional
     public void coverFreelancerCareer(MemberDetails memberDetails, Long profileNum, CareerCoverRequests careerCoverRequests) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
-        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         List<Career> careers = careerCoverRequests.getCareerCoverRequests().stream()
                 .map(CareerCoverRequest::toCareerEntity)
                 .collect(Collectors.toList());
@@ -75,7 +74,7 @@ public class FreelancerProfileAlterService {
     @Transactional
     public void coverFreelancerProjectHistory(MemberDetails memberDetails, Long profileNum, ProjectHistoryCoverRequest projectHistoryCoverRequest) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
-        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         freelancerProfile.plusProjectHistory(ProjectHistory.createProjectHistory(
                 projectHistoryCoverRequest.getProjectTitle(),
                 projectHistoryCoverRequest.getProjectStartDate(),
@@ -100,7 +99,7 @@ public class FreelancerProfileAlterService {
     @Transactional
     public void coverFreelancerEducationAndLicenseAndLanguage(MemberDetails memberDetails, Long profileNum, EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
-        RightRequesterChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
 
         coverFreeLancerEducation(freelancerProfile, educationAndLicenseAndLanguageRequests.getEducationCoverRequests());
         coverFreeLancerLicense(freelancerProfile, educationAndLicenseAndLanguageRequests.getLicenseCoverRequests());

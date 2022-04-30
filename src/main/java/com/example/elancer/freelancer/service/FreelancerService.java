@@ -1,10 +1,9 @@
 package com.example.elancer.freelancer.service;
 
-import com.example.elancer.common.checker.RightRequesterChecker;
+import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
 import com.example.elancer.freelancer.dto.FreelancerAccountResponse;
 import com.example.elancer.freelancer.exception.NotExistFreelancerException;
-import com.example.elancer.freelancer.model.CareerForm;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -23,8 +22,8 @@ public class FreelancerService {
     @Transactional
     public void coverFreelancerAccountInfo(Long freelancerNum, MemberDetails memberDetails, FreelancerAccountCoverRequest freelancerAccountCoverRequest) {
         Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
-        RightRequesterChecker.checkFreelancerAndRequester(freelancer, memberDetails);
-        RightRequesterChecker.checkPasswordMatch(freelancerAccountCoverRequest.getPassword(), freelancerAccountCoverRequest.getPasswordCheck());
+        RightRequestChecker.checkFreelancerAndRequester(freelancer, memberDetails);
+        RightRequestChecker.checkPasswordMatch(freelancerAccountCoverRequest.getPassword(), freelancerAccountCoverRequest.getPasswordCheck());
         freelancer.updateFreelancer(
                 freelancerAccountCoverRequest.getName(),
                 passwordEncoder.encode(freelancerAccountCoverRequest.getPassword()),
@@ -61,6 +60,7 @@ public class FreelancerService {
     @Transactional(readOnly = true)
     public FreelancerAccountResponse findFreelancerAccountInfo(Long freelancerNum, MemberDetails memberDetails) {
         Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
+        RightRequestChecker.checkFreelancerAndRequester(freelancer, memberDetails);
         return FreelancerAccountResponse.of(freelancer);
     }
 }

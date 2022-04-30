@@ -6,7 +6,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.login.auth.dto.MemberDetails;
 
-public class RightRequesterChecker {
+public class RightRequestChecker {
 
     public static void checkFreelancerAndRequester(Freelancer freelancer, MemberDetails memberDetails) {
         // min 로그인 기능 구현전 임시 코드
@@ -25,8 +25,8 @@ public class RightRequesterChecker {
             return;
         }
 
-        if (memberDetails.checkPresentId()) {
-            freelancerProfile.checkFreelancerAndProfileMatcher(memberDetails.getUserId());
+        if (memberDetails.checkPresentId() && !freelancerProfile.checkFreelancerUserId(memberDetails.getUserId())) {
+            throw new WrongRequestException("프로필에 대한 요청자와 프리랜서가 동일하지 않습니다. 잘못된 요청입니다.");
         }
     }
 
@@ -35,4 +35,6 @@ public class RightRequesterChecker {
             throw new FreelancerCheckPasswordException();
         }
     }
+
+
 }
