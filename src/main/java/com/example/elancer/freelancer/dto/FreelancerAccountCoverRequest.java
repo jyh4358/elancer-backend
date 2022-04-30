@@ -1,6 +1,5 @@
 package com.example.elancer.freelancer.dto;
 
-import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.FreelancerWorkType;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancer.model.KOSAState;
@@ -32,7 +31,7 @@ public class FreelancerAccountCoverRequest {
     private String password;
     @NotBlank
     private String passwordCheck;
-    @NotBlank
+    @NotNull
     private LocalDate birthDate;
     @NotBlank
     private String email;

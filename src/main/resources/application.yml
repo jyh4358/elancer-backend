@@ -1,10 +1,6 @@
-
-
 spring:
   profiles:
     include:
       - db
       - oauth
     active: local
-server:
-  port: 8001

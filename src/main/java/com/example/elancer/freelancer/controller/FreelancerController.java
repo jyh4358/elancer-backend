@@ -28,6 +28,6 @@ public class FreelancerController {
             @Validated @RequestBody FreelancerAccountCoverRequest freelancerAccountCoverRequest
     ) {
         freelancerService.coverFreelancerAccountInfo(freelancerNum, memberDetails, freelancerAccountCoverRequest);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }
