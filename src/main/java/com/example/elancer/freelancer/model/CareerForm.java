@@ -14,6 +14,9 @@ import javax.persistence.OneToOne;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CareerForm extends BasicEntity {
 
+    private String fileName;
+    private String filePath;
+
     @OneToOne(fetch = FetchType.LAZY)
     private Freelancer freelancer;
 }

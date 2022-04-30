@@ -2,6 +2,7 @@ package com.example.elancer.freelancer.service;
 
 import com.example.elancer.common.checker.RightRequesterChecker;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
+import com.example.elancer.freelancer.dto.FreelancerAccountResponse;
 import com.example.elancer.freelancer.exception.NotExistFreelancerException;
 import com.example.elancer.freelancer.model.CareerForm;
 import com.example.elancer.freelancer.model.Freelancer;
@@ -55,5 +56,11 @@ public class FreelancerService {
 
 //        freelancer.coverCareerForm(freelancerAccountCoverRequest.getCareerForm());
 
+    }
+
+    @Transactional(readOnly = true)
+    public FreelancerAccountResponse findFreelancerAccountInfo(Long freelancerNum, MemberDetails memberDetails) {
+        Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
+        return FreelancerAccountResponse.of(freelancer);
     }
 }

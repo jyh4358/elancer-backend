@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -129,6 +130,20 @@ public class Freelancer extends Member {
 
     public void coverCareerForm(CareerForm careerForm) {
         this.careerForm = careerForm;
+    }
+
+    public String getCareerFormFileName() {
+        if (this.careerForm == null) {
+            return null;
+        }
+
+        return this.careerForm.getFileName();
+    }
+
+    public List<FreelancerWorkType> getFreelancerWorkTypesInFreelancer() {
+        return this.freelancerAccountInfo.getWorkTypes().stream()
+                .map(WorkType::getFreelancerWorkType)
+                .collect(Collectors.toList());
     }
 
     @Override

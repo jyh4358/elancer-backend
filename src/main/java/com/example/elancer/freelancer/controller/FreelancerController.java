@@ -1,6 +1,7 @@
 package com.example.elancer.freelancer.controller;
 
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
+import com.example.elancer.freelancer.dto.FreelancerAccountResponse;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.service.FreelancerService;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,5 +31,14 @@ public class FreelancerController {
     ) {
         freelancerService.coverFreelancerAccountInfo(freelancerNum, memberDetails, freelancerAccountCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @GetMapping(FreelancerControllerPath.FREELANCER_ACCOUNT_INFO_FIND)
+    public ResponseEntity<FreelancerAccountResponse> findFreelancerAccountInfo(
+            @NotNull @PathVariable Long freelancerNum,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        FreelancerAccountResponse freelancerAccountInfo = freelancerService.findFreelancerAccountInfo(freelancerNum, memberDetails);
+        return new ResponseEntity<FreelancerAccountResponse>(freelancerAccountInfo, HttpStatus.OK);
     }
 }
