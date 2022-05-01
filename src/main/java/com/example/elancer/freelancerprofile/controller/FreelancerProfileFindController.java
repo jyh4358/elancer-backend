@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.controller;
 
 import com.example.elancer.freelancerprofile.dto.response.FreelancerDetailResponse;
+import com.example.elancer.freelancerprofile.dto.response.FreelancerProfileSimpleResponse;
 import com.example.elancer.freelancerprofile.service.FreelancerProfileFindService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +29,11 @@ public class FreelancerProfileFindController {
     }
 
     @GetMapping(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_SIMPLE)
-    public ResponseEntity<Void> findSimpleFreelancerAccount(
+    public ResponseEntity<FreelancerProfileSimpleResponse> findSimpleFreelancerAccount(
             @NotNull @PathVariable Long freelancerNum,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        freelancerProfileFindService.findSimpleFreelancerAccount(freelancerNum, memberDetails);
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        FreelancerProfileSimpleResponse simpleFreelancerAccount = freelancerProfileFindService.findSimpleFreelancerAccount(freelancerNum, memberDetails);
+        return new ResponseEntity<FreelancerProfileSimpleResponse>(simpleFreelancerAccount, HttpStatus.OK);
     }
 }
