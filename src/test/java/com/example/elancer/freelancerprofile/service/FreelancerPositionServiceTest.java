@@ -153,8 +153,8 @@ class FreelancerPositionServiceTest {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
 
         DeveloperCoverRequest developerCoverRequest = new DeveloperCoverRequest(
-                "Java",
-                "백엔드 개발자",
+                Arrays.asList("Java"),
+                Arrays.asList("백엔드 개발자"),
                 Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACK_END),
                 Arrays.asList(MobileAppDetailSkill.ANDROID),
                 Arrays.asList(PhpOrAspDetailSkill.PHP),
@@ -173,8 +173,8 @@ class FreelancerPositionServiceTest {
         //then
         List<Developer> developers = developerRepository.findAll();
         Assertions.assertThat(developers).hasSize(1);
-        Assertions.assertThat(developers.get(0).getFocusSkill()).isEqualTo(developerCoverRequest.getFocusSkill());
-        Assertions.assertThat(developers.get(0).getRole()).isEqualTo(developerCoverRequest.getRole());
+        Assertions.assertThat(developers.get(0).getFocusSkill()).isEqualTo(developerCoverRequest.getFocusSkills().get(0));
+        Assertions.assertThat(developers.get(0).getRole()).isEqualTo(developerCoverRequest.getRoles().get(0));
         Assertions.assertThat(developers.get(0).getPositionType()).isEqualTo(PositionType.DEVELOPER);
 
 

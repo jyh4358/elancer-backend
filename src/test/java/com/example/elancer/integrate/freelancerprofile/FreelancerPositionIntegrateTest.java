@@ -76,8 +76,8 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
 
         DeveloperCoverRequest developerCoverRequest = new DeveloperCoverRequest(
-                "Java, Spring",
-                "백엔드 개발자",
+                Arrays.asList("Java", "Spring"),
+                Arrays.asList("백엔드 개발자"),
                 Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACK_END),
                 Arrays.asList(MobileAppDetailSkill.ANDROID),
                 Arrays.asList(PhpOrAspDetailSkill.PHP),
