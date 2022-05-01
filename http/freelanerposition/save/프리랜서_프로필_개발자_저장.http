@@ -87,8 +87,12 @@ Content-Type: application/json
 
 #req
 {
-  "focusSkill": "java, spring",
-  "role": "백엔드 개발자",
+  "focusSkills": [
+    "java", "spring"
+  ],
+  "roles": [
+    "백엔드 개발자"
+  ],
   "javaDetailSkills": [
     "BACK_END", "SPRING"
   ],

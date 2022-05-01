@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.service;
 
 import com.example.elancer.common.checker.RightRequestChecker;
+import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
@@ -9,6 +10,7 @@ import com.example.elancer.freelancerprofile.dto.request.position.PositionEtcCov
 import com.example.elancer.freelancerprofile.dto.request.position.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistDevelopException;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
+import com.example.elancer.freelancerprofile.exception.NotExistPublisherException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -34,13 +36,22 @@ import org.springframework.transaction.annotation.Transactional;
 public class FreelancerPositionFindService {
     private final FreelancerProfileRepository freelancerProfileRepository;
     private final DeveloperRepository developerRepository;
+    private final PublisherRepository publisherRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public DeveloperResponse coverFreelancerPositionToDeveloper(Long profileNum, MemberDetails memberDetails) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Developer developer = developerRepository.findByFreelancerProfileNum(profileNum).orElseThrow(NotExistDevelopException::new);
         return DeveloperResponse.of(developer);
+    }
+
+    @Transactional(readOnly = true)
+    public PublisherResponse coverFreelancerPositionToPublisher(Long profileNum, MemberDetails memberDetails) {
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+        RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        Publisher publisher = publisherRepository.findByFreelancerProfileNum(profileNum).orElseThrow(NotExistPublisherException::new);
+        return PublisherResponse.of(publisher);
     }
 
 }

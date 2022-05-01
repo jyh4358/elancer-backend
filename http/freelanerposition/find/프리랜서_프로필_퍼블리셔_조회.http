@@ -1,0 +1,14 @@
+GET http://localhost:8080/freelancer-profile/1/publisher
+Content-Type: application/json
+
+#res
+#{
+#  "publishingDetailSkills": [
+#    "HTML5",
+#    "CSS",
+#    "JQUERY"
+#  ],
+#  "etcSkill": "etcSkill"
+#}
+#
+#Response code: 201; Time: 95ms; Content length: 73 bytes

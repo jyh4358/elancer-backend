@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.service;
 
 import com.example.elancer.common.utils.StringEditor;
+import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
@@ -20,8 +21,12 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
+import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
+import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
+import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,11 +55,14 @@ class FreelancerPositionFindServiceTest {
 
     @Mock
     private DeveloperRepository developerRepository;
+    @Mock
+    private PublisherRepository publisherRepository;
+
 
     @BeforeEach
     void setUp() {
         this.freelancerPositionFindService = new FreelancerPositionFindService(
-                freelancerProfileRepository, developerRepository
+                freelancerProfileRepository, developerRepository, publisherRepository
         );
     }
 
@@ -108,6 +116,32 @@ class FreelancerPositionFindServiceTest {
         Assertions.assertThat(developerResponse.getCDetailSkills().get(0)).isEqualTo(cSkills.get(0).getCDetailSkill());
         Assertions.assertThat(developerResponse.getDbDetailSkills().get(0)).isEqualTo(dbSkills.get(0).getDbDetailSkill());
         Assertions.assertThat(developerResponse.getEtcSkill()).isEqualTo(etc);
+    }
+
+    @DisplayName("프리랜서 프로필 퍼블리셔 포지션 상세조회한다.")
+    @Test
+    public void 프리랜서_프로필_퍼블리셔_상세조회() {
+        //given
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+
+        Long profileNum = 1L;
+
+        MemberDetails memberDetails = new MemberDetails(null);
+
+        Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, "etcPubSkill");
+        List<PublishingSkill> publishingSkillList = Arrays.asList(PublishingSkill.createPublishingSkill(PublishingDetailSkill.HTML5, publisher), PublishingSkill.createPublishingSkill(PublishingDetailSkill.CSS, publisher));
+        publisher.coverPublishingSkill(publishingSkillList);
+
+        when(freelancerProfileRepository.findById(any())).thenReturn(Optional.of(freelancerProfile));
+        when(publisherRepository.findByFreelancerProfileNum(any())).thenReturn(Optional.of(publisher));
+
+        //when
+        PublisherResponse publisherResponse = freelancerPositionFindService.coverFreelancerPositionToPublisher(profileNum, memberDetails);
+
+        //then
+        Assertions.assertThat(publisherResponse.getPublishingDetailSkills().get(0)).isEqualTo(publishingSkillList.get(0).getPublishingDetailSkill());
+        Assertions.assertThat(publisherResponse.getPublishingDetailSkills().get(1)).isEqualTo(publishingSkillList.get(1).getPublishingDetailSkill());
+        Assertions.assertThat(publisherResponse.getEtcSkill()).isEqualTo("etcPubSkill");
     }
 
 }

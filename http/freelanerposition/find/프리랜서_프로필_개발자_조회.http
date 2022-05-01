@@ -1,0 +1,39 @@
+GET http://localhost:8080/freelancer-profile/1/developer
+Content-Type: application/json
+
+#res
+#{
+#  "focusSkills": [
+#    "java",
+#    "spring"
+#  ],
+#  "roles": [
+#    "백엔드 개발자"
+#  ],
+#  "javaDetailSkills": [
+#    "BACK_END",
+#    "SPRING"
+#  ],
+#  "mobileAppDetailSkills": [
+#    "HYBRID"
+#  ],
+#  "phpOrAspDetailSkills": [
+#    "PHP"
+#  ],
+#  "dotNetDetailSkills": [
+#    "ASP_DOT_NET"
+#  ],
+#  "javaScriptDetailSkills": [
+#    "NODE_JS"
+#  ],
+#  "dbDetailSkills": [
+#    "ORACLE",
+#    "MYSQL"
+#  ],
+#  "etcSkill": "etc",
+#  "cdetailSkills": [
+#    "SERVER"
+#  ]
+#}
+#
+#Response code: 201; Time: 129ms; Content length: 314 bytes

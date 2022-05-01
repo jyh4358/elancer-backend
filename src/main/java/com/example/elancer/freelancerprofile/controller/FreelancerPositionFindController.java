@@ -1,5 +1,7 @@
 package com.example.elancer.freelancerprofile.controller;
 
+import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
+import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
@@ -25,11 +27,20 @@ public class FreelancerPositionFindController {
     private final FreelancerPositionFindService freelancerPositionFindService;
 
     @GetMapping(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_FIND)
-    public ResponseEntity<Void> coverFreelancerPositionToDeveloper(
+    public ResponseEntity<DeveloperResponse> coverFreelancerPositionToDeveloper(
             @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        freelancerPositionFindService.coverFreelancerPositionToDeveloper(profileNum, memberDetails);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        DeveloperResponse developerResponse = freelancerPositionFindService.coverFreelancerPositionToDeveloper(profileNum, memberDetails);
+        return new ResponseEntity<DeveloperResponse>(developerResponse, HttpStatus.CREATED);
+    }
+
+    @GetMapping(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_FIND)
+    public ResponseEntity<PublisherResponse> coverFreelancerPositionToPublisher(
+            @PathVariable Long profileNum,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        PublisherResponse publisherResponse = freelancerPositionFindService.coverFreelancerPositionToPublisher(profileNum, memberDetails);
+        return new ResponseEntity<PublisherResponse>(publisherResponse, HttpStatus.CREATED);
     }
 }
