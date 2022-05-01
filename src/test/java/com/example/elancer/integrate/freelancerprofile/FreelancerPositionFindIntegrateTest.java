@@ -10,6 +10,8 @@ import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignRole;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
@@ -42,6 +44,7 @@ import org.springframework.http.MediaType;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -118,6 +121,38 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("publishingDetailSkills.[0]").value("HTML5"))
                 .andExpect(jsonPath("etcSkill").value("etcPubSkill"))
+                .andDo(print());
+    }
+
+    @DisplayName("프리랜서 프로필 디자이너 상세 조회 통합테스트")
+    @Test
+    public void 프리랜서_프로필_디자이너_상세조회() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
+        List<DesignRole> designRoles = Arrays.asList(DesignRole.createDesignRole(DesignDetailRole.APP_DESIGN, designer), DesignRole.createDesignRole(DesignDetailRole.GAME_DESIGN, designer));
+        List<DesignSkill> designSkills = Arrays.asList(DesignSkill.createDesignSkill(DesignDetailSkill.FLASH, designer));
+        String etcRole = "etcRole";
+        String etcSkill = "etcSkill";
+        designer.coverDesignRoleAndSkill(
+                designRoles,
+                designSkills,
+                etcRole,
+                etcSkill
+        );
+        designerRepository.save(designer);
+
+        //when & then
+        String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        mockMvc.perform(get(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("designDetailRoles", hasSize(2)))
+                .andExpect(jsonPath("etcRole").value(etcRole))
+                .andExpect(jsonPath("designDetailSkills", hasSize(1)))
+                .andExpect(jsonPath("etcSkill").value(etcSkill))
                 .andDo(print());
     }
 }

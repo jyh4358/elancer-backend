@@ -2,12 +2,14 @@ package com.example.elancer.freelancerprofile.service;
 
 import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
+import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PositionEtcCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PublisherCoverRequest;
+import com.example.elancer.freelancerprofile.exception.NotExistDesignerException;
 import com.example.elancer.freelancerprofile.exception.NotExistDevelopException;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.exception.NotExistPublisherException;
@@ -37,6 +39,7 @@ public class FreelancerPositionFindService {
     private final FreelancerProfileRepository freelancerProfileRepository;
     private final DeveloperRepository developerRepository;
     private final PublisherRepository publisherRepository;
+    private final DesignerRepository designerRepository;
 
     @Transactional(readOnly = true)
     public DeveloperResponse coverFreelancerPositionToDeveloper(Long profileNum, MemberDetails memberDetails) {
@@ -54,4 +57,11 @@ public class FreelancerPositionFindService {
         return PublisherResponse.of(publisher);
     }
 
+    @Transactional(readOnly = true)
+    public DesignerResponse coverFreelancerPositionToDesigner(Long profileNum, MemberDetails memberDetails) {
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+        RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        Designer designer = designerRepository.findByFreelancerProfileNum(profileNum).orElseThrow(NotExistDesignerException::new);
+        return DesignerResponse.of(designer);
+    }
 }

@@ -2,10 +2,16 @@ package com.example.elancer.freelancerprofile.service;
 
 import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
+import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignRole;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignSkill;
+import com.example.elancer.freelancerprofile.model.position.designer.Designer;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
@@ -25,6 +31,7 @@ import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
+import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -57,16 +64,18 @@ class FreelancerPositionFindServiceTest {
     private DeveloperRepository developerRepository;
     @Mock
     private PublisherRepository publisherRepository;
+    @Mock
+    private DesignerRepository designerRepository;
 
 
     @BeforeEach
     void setUp() {
         this.freelancerPositionFindService = new FreelancerPositionFindService(
-                freelancerProfileRepository, developerRepository, publisherRepository
+                freelancerProfileRepository, developerRepository, publisherRepository, designerRepository
         );
     }
 
-    @DisplayName("프리랜서 프로필 개발자 포지션 상세조회한다.")
+    @DisplayName("프리랜서 프로필 개발자 포지션을 상세조회한다.")
     @Test
     public void 프리랜서_프로필_개발자_상세조회() {
         //given
@@ -118,7 +127,7 @@ class FreelancerPositionFindServiceTest {
         Assertions.assertThat(developerResponse.getEtcSkill()).isEqualTo(etc);
     }
 
-    @DisplayName("프리랜서 프로필 퍼블리셔 포지션 상세조회한다.")
+    @DisplayName("프리랜서 프로필 퍼블리셔 포지션을 상세조회한다.")
     @Test
     public void 프리랜서_프로필_퍼블리셔_상세조회() {
         //given
@@ -142,6 +151,42 @@ class FreelancerPositionFindServiceTest {
         Assertions.assertThat(publisherResponse.getPublishingDetailSkills().get(0)).isEqualTo(publishingSkillList.get(0).getPublishingDetailSkill());
         Assertions.assertThat(publisherResponse.getPublishingDetailSkills().get(1)).isEqualTo(publishingSkillList.get(1).getPublishingDetailSkill());
         Assertions.assertThat(publisherResponse.getEtcSkill()).isEqualTo("etcPubSkill");
+    }
+
+    @DisplayName("프리랜서 프로필 디자이너 포지션을 상세조회한다.")
+    @Test
+    public void 프리랜서_프로필_디자이너_상세조회() {
+        //given
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+
+        Long profileNum = 1L;
+
+        MemberDetails memberDetails = new MemberDetails(null);
+
+        Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
+        List<DesignRole> designRoles = Arrays.asList(DesignRole.createDesignRole(DesignDetailRole.APP_DESIGN, designer), DesignRole.createDesignRole(DesignDetailRole.GAME_DESIGN, designer));
+        List<DesignSkill> designSkills = Arrays.asList(DesignSkill.createDesignSkill(DesignDetailSkill.FLASH, designer));
+        String etcRole = "etcRole";
+        String etcSkill = "etcSkill";
+        designer.coverDesignRoleAndSkill(
+                designRoles,
+                designSkills,
+                etcRole,
+                etcSkill
+        );
+
+        when(freelancerProfileRepository.findById(any())).thenReturn(Optional.of(freelancerProfile));
+        when(designerRepository.findByFreelancerProfileNum(any())).thenReturn(Optional.of(designer));
+
+        //when
+        DesignerResponse designerResponse = freelancerPositionFindService.coverFreelancerPositionToDesigner(profileNum, memberDetails);
+
+        //then
+        Assertions.assertThat(designerResponse.getDesignDetailRoles().get(0)).isEqualTo(designRoles.get(0).getDesignDetailRole());
+        Assertions.assertThat(designerResponse.getDesignDetailRoles().get(1)).isEqualTo(designRoles.get(1).getDesignDetailRole());
+        Assertions.assertThat(designerResponse.getEtcRole()).isEqualTo(etcRole);
+        Assertions.assertThat(designerResponse.getDesignDetailSkills().get(0)).isEqualTo(designSkills.get(0).getDesignDetailSkill());
+        Assertions.assertThat(designerResponse.getEtcSkill()).isEqualTo(etcSkill);
     }
 
 }
