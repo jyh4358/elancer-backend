@@ -4,6 +4,7 @@ import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
+import com.example.elancer.freelancerprofile.dto.PlannerResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -27,12 +28,16 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
+import com.example.elancer.freelancerprofile.model.position.planner.Planner;
+import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
+import com.example.elancer.freelancerprofile.model.position.planner.PlannerField;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
+import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import org.assertj.core.api.Assertions;
@@ -66,12 +71,13 @@ class FreelancerPositionFindServiceTest {
     private PublisherRepository publisherRepository;
     @Mock
     private DesignerRepository designerRepository;
-
+    @Mock
+    private PlannerRepository plannerRepository;
 
     @BeforeEach
     void setUp() {
         this.freelancerPositionFindService = new FreelancerPositionFindService(
-                freelancerProfileRepository, developerRepository, publisherRepository, designerRepository
+                freelancerProfileRepository, developerRepository, publisherRepository, designerRepository, plannerRepository
         );
     }
 
@@ -187,6 +193,33 @@ class FreelancerPositionFindServiceTest {
         Assertions.assertThat(designerResponse.getEtcRole()).isEqualTo(etcRole);
         Assertions.assertThat(designerResponse.getDesignDetailSkills().get(0)).isEqualTo(designSkills.get(0).getDesignDetailSkill());
         Assertions.assertThat(designerResponse.getEtcSkill()).isEqualTo(etcSkill);
+    }
+
+    @DisplayName("프리랜서 프로필 기획자 포지션을 상세조회한다.")
+    @Test
+    public void 프리랜서_프로필_기획자_상세조회() {
+        //given
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+
+        Long profileNum = 1L;
+
+        MemberDetails memberDetails = new MemberDetails(null);
+
+        Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
+        List<PlannerField> plannerFields = Arrays.asList(PlannerField.createPlannerField(PlannerDetailField.APP_PLAN, planner), PlannerField.createPlannerField(PlannerDetailField.WEB_PLAN, planner));
+        String etcField = "etcField";
+        planner.coverAllField(plannerFields, etcField);
+
+        when(freelancerProfileRepository.findById(any())).thenReturn(Optional.of(freelancerProfile));
+        when(plannerRepository.findByFreelancerProfileNum(any())).thenReturn(Optional.of(planner));
+
+        //when
+        PlannerResponse plannerResponse = freelancerPositionFindService.coverFreelancerPositionToPlanner(profileNum, memberDetails);
+
+        //then
+        Assertions.assertThat(plannerResponse.getPlannerDetailFields().get(0)).isEqualTo(plannerFields.get(0).getPlannerDetailField());
+        Assertions.assertThat(plannerResponse.getPlannerDetailFields().get(1)).isEqualTo(plannerFields.get(1).getPlannerDetailField());
+        Assertions.assertThat(plannerResponse.getEtcField()).isEqualTo(etcField);
     }
 
 }

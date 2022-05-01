@@ -3,6 +3,7 @@ package com.example.elancer.freelancerprofile.controller;
 import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
+import com.example.elancer.freelancerprofile.dto.PlannerResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
@@ -52,5 +53,14 @@ public class FreelancerPositionFindController {
     ) {
         DesignerResponse designerResponse = freelancerPositionFindService.coverFreelancerPositionToDesigner(profileNum, memberDetails);
         return new ResponseEntity<DesignerResponse>(designerResponse, HttpStatus.CREATED);
+    }
+
+    @GetMapping(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_FIND)
+    public ResponseEntity<PlannerResponse> coverFreelancerPositionToPlanner(
+            @PathVariable Long profileNum,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        PlannerResponse plannerResponse = freelancerPositionFindService.coverFreelancerPositionToPlanner(profileNum, memberDetails);
+        return new ResponseEntity<PlannerResponse>(plannerResponse, HttpStatus.CREATED);
     }
 }

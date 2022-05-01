@@ -1,0 +1,13 @@
+GET http://localhost:8080/freelancer-profile/1/planner
+Content-Type: application/json
+
+#res
+#{
+#  "plannerDetailFields": [
+#    "SHOPPING_MALL",
+#    "PM"
+#  ],
+#  "etcField": "etcField"
+#}
+#
+#Response code: 201; Time: 297ms; Content length: 68 bytes

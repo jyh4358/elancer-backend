@@ -28,11 +28,15 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
+import com.example.elancer.freelancerprofile.model.position.planner.Planner;
+import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
+import com.example.elancer.freelancerprofile.model.position.planner.PlannerField;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
+import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import org.assertj.core.api.Assertions;
@@ -58,6 +62,9 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     private PublisherRepository publisherRepository;
     @Autowired
     private DesignerRepository designerRepository;
+    @Autowired
+    private PlannerRepository plannerRepository;
+
 
     @DisplayName("프리랜서 프로필 개발자 상세 조회 통합테스트")
     @Test
@@ -87,16 +94,22 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
                 etc
         );
 
-        Developer savedDeveloper = developerRepository.save(developer);
+        developerRepository.save(developer);
 
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("focusSkills.[0]").value("java"))
-                .andExpect(jsonPath("focusSkills.[1]").value("spring"))
-                .andExpect(jsonPath("roles.[0]").value("backend"))
+                .andExpect(jsonPath("focusSkills", hasSize(2)))
+                .andExpect(jsonPath("roles", hasSize(1)))
+                .andExpect(jsonPath("javaDetailSkills", hasSize(2)))
+                .andExpect(jsonPath("mobileAppDetailSkills", hasSize(1)))
+                .andExpect(jsonPath("phpOrAspDetailSkills", hasSize(1)))
+                .andExpect(jsonPath("dotNetDetailSkills", hasSize(1)))
+                .andExpect(jsonPath("javaScriptDetailSkills", hasSize(1)))
+                .andExpect(jsonPath("cdetailSkills", hasSize(1)))
+                .andExpect(jsonPath("dbDetailSkills", hasSize(2)))
                 .andExpect(jsonPath("etcSkill").value("etc"))
                 .andDo(print());
     }
@@ -112,14 +125,14 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         List<PublishingSkill> publishingSkillList = Arrays.asList(PublishingSkill.createPublishingSkill(PublishingDetailSkill.HTML5, publisher), PublishingSkill.createPublishingSkill(PublishingDetailSkill.CSS, publisher));
         publisher.coverPublishingSkill(publishingSkillList);
 
-        Publisher savedPublisher = publisherRepository.save(publisher);
+        publisherRepository.save(publisher);
 
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("publishingDetailSkills.[0]").value("HTML5"))
+                .andExpect(jsonPath("publishingDetailSkills", hasSize(2)))
                 .andExpect(jsonPath("etcSkill").value("etcPubSkill"))
                 .andDo(print());
     }
@@ -153,6 +166,29 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
                 .andExpect(jsonPath("etcRole").value(etcRole))
                 .andExpect(jsonPath("designDetailSkills", hasSize(1)))
                 .andExpect(jsonPath("etcSkill").value(etcSkill))
+                .andDo(print());
+    }
+
+    @DisplayName("프리랜서 프로필 기획자 상세 조회 통합테스트")
+    @Test
+    public void 프리랜서_프로필_기획자_상세조회() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
+        List<PlannerField> plannerFields = Arrays.asList(PlannerField.createPlannerField(PlannerDetailField.APP_PLAN, planner), PlannerField.createPlannerField(PlannerDetailField.WEB_PLAN, planner));
+        String etcField = "etcField";
+        planner.coverAllField(plannerFields, etcField);
+        plannerRepository.save(planner);
+
+        //when & then
+        String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        mockMvc.perform(get(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("plannerDetailFields", hasSize(2)))
+                .andExpect(jsonPath("etcField").value(etcField))
                 .andDo(print());
     }
 }
