@@ -18,6 +18,7 @@ public class CareerResponse {
     private String companyName;
     private String departmentName;
     private CompanyPosition companyPosition;
+    private String companyPositionDescription;
     private LocalDate careerStartDate;
     private LocalDate careerEndDate;
 
@@ -26,6 +27,7 @@ public class CareerResponse {
                 career.getCompanyName(),
                 career.getDepartmentName(),
                 career.getCompanyPosition(),
+                career.getCompanyPosition().getDesc(),
                 career.getCareerStartDate(),
                 career.getCareerEndDate()
         );

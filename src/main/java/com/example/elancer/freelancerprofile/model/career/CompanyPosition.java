@@ -1,5 +1,8 @@
 package com.example.elancer.freelancerprofile.model.career;
 
+import lombok.Getter;
+
+@Getter
 public enum CompanyPosition {
     CHAIRMAN("회장"),
     A_VICE_CHAIRMAN("부회장"),

@@ -1,7 +1,7 @@
 package com.example.elancer.freelancerprofile.model;
 
-import com.example.elancer.common.exception.WrongRequestException;
 import com.example.elancer.common.model.BasicEntity;
+import com.example.elancer.freelancer.model.WorkAssessment;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -44,6 +45,9 @@ public class FreelancerProfile extends BasicEntity {
     private String introduceVideoURL;
     private String introduceContent;
 
+    @Embedded
+    private WorkAssessment workAssessment;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AcademicAbility> academicAbilities = new ArrayList<>();
 
@@ -68,6 +72,7 @@ public class FreelancerProfile extends BasicEntity {
     public FreelancerProfile(String greeting, Freelancer freelancer) {
         this.greeting = greeting;
         this.freelancer = freelancer;
+        this.workAssessment = new WorkAssessment(0, 0, 0, 0, 0);
     }
 
     public void coverIntroduceInFreelancer(String introduceName, IntroBackGround introBackGround, String introduceVideoURL, String introduceContent) {
@@ -136,6 +141,10 @@ public class FreelancerProfile extends BasicEntity {
         }
 
         return this.position.getPositionType();
+    }
+
+    public void plusWorkAssessment(int expertise, int scheduleAdherence, int initiative, int communication, int reEmploymentIntention) {
+        this.workAssessment.estimatedFreelancerWorkAbility(expertise, scheduleAdherence, initiative, communication, reEmploymentIntention);
     }
 
 }

@@ -44,8 +44,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -288,7 +286,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
-        String path = FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND.replace("{freelancerNum}", String.valueOf(freelancer.getNum()));
+        String path = FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_DETAIL.replace("{freelancerNum}", String.valueOf(freelancer.getNum()));
         mockMvc.perform(get(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())

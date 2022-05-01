@@ -2,7 +2,7 @@ package com.example.elancer.freelancer.service;
 
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
-import com.example.elancer.freelancer.dto.FreelancerAccountResponse;
+import com.example.elancer.freelancer.dto.FreelancerAccountDetailResponse;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.FreelancerWorkType;
 import com.example.elancer.freelancer.model.HopeWorkState;
@@ -21,10 +21,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
-import org.thymeleaf.spring5.processor.SpringOptionInSelectFieldTagProcessor;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -149,7 +146,7 @@ class FreelancerServiceTest {
         Freelancer updatedFreelancer = freelancerRepository.save(freelancer);
 
         //when
-        FreelancerAccountResponse freelancerAccountInfo = freelancerService.findFreelancerAccountInfo(updatedFreelancer.getNum(), memberDetails);
+        FreelancerAccountDetailResponse freelancerAccountInfo = freelancerService.findDetailFreelancerAccount(updatedFreelancer.getNum(), memberDetails);
 
         //then
         Assertions.assertThat(updatedFreelancer.getName()).isEqualTo(freelancerAccountInfo.getName());
@@ -179,5 +176,4 @@ class FreelancerServiceTest {
         Assertions.assertThat(workTypes.get(0).getFreelancerWorkType()).isEqualTo(freelancerAccountInfo.getFreelancerWorkTypes().get(0));
         Assertions.assertThat(workTypes.get(1).getFreelancerWorkType()).isEqualTo(freelancerAccountInfo.getFreelancerWorkTypes().get(1));
     }
-
 }

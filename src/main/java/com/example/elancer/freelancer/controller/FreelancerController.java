@@ -1,8 +1,7 @@
 package com.example.elancer.freelancer.controller;
 
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
-import com.example.elancer.freelancer.dto.FreelancerAccountResponse;
-import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancer.dto.FreelancerAccountDetailResponse;
 import com.example.elancer.freelancer.service.FreelancerService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
@@ -34,11 +33,11 @@ public class FreelancerController {
     }
 
     @GetMapping(FreelancerControllerPath.FREELANCER_ACCOUNT_INFO_FIND)
-    public ResponseEntity<FreelancerAccountResponse> findFreelancerAccountInfo(
+    public ResponseEntity<FreelancerAccountDetailResponse> findDetailFreelancerAccount(
             @NotNull @PathVariable Long freelancerNum,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        FreelancerAccountResponse freelancerAccountInfo = freelancerService.findFreelancerAccountInfo(freelancerNum, memberDetails);
-        return new ResponseEntity<FreelancerAccountResponse>(freelancerAccountInfo, HttpStatus.OK);
+        FreelancerAccountDetailResponse freelancerAccountInfo = freelancerService.findDetailFreelancerAccount(freelancerNum, memberDetails);
+        return new ResponseEntity<FreelancerAccountDetailResponse>(freelancerAccountInfo, HttpStatus.OK);
     }
 }

@@ -31,9 +31,6 @@ public class Freelancer extends Member {
     @Embedded
     private FreelancerAccountInfo freelancerAccountInfo;
 
-    @Embedded
-    private ActivityEvaluation activityEvaluation;
-
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancer", cascade = CascadeType.ALL, orphanRemoval = true)
     private FreelancerThumbnail freelancerThumbnail;
 

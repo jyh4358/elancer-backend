@@ -2,10 +2,11 @@ package com.example.elancer.freelancer.service;
 
 import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
-import com.example.elancer.freelancer.dto.FreelancerAccountResponse;
+import com.example.elancer.freelancer.dto.FreelancerAccountDetailResponse;
 import com.example.elancer.freelancer.exception.NotExistFreelancerException;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class FreelancerService {
     private final FreelancerRepository freelancerRepository;
+    private final FreelancerProfileRepository freelancerProfileRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -58,9 +60,9 @@ public class FreelancerService {
     }
 
     @Transactional(readOnly = true)
-    public FreelancerAccountResponse findFreelancerAccountInfo(Long freelancerNum, MemberDetails memberDetails) {
+    public FreelancerAccountDetailResponse findDetailFreelancerAccount(Long freelancerNum, MemberDetails memberDetails) {
         Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
         RightRequestChecker.checkFreelancerAndRequester(freelancer, memberDetails);
-        return FreelancerAccountResponse.of(freelancer);
+        return FreelancerAccountDetailResponse.of(freelancer);
     }
 }

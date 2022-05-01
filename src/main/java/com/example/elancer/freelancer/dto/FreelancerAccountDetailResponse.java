@@ -19,7 +19,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class FreelancerAccountResponse {
+public class FreelancerAccountDetailResponse {
     private String name;
     private LocalDate birthDate;
     private String email;
@@ -45,8 +45,8 @@ public class FreelancerAccountResponse {
     private CountryType hopeWorkCountry;
     private String hopeWorkCity;
 
-    public static FreelancerAccountResponse of(Freelancer freelancer) {
-        return new FreelancerAccountResponse(
+    public static FreelancerAccountDetailResponse of(Freelancer freelancer) {
+        return new FreelancerAccountDetailResponse(
                 freelancer.getName(),
                 freelancer.getBirthDate(),
                 freelancer.getEmail(),

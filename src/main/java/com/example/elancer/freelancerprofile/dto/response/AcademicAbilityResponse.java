@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class AcademicAbilityResponse {
     private String schoolName;
     private SchoolLevel schoolLevel;
+    private String schoolLevelDescription;
     private LocalDate enterSchoolDate;
     private LocalDate graduationDate;
     private AcademicState academicState;
@@ -27,6 +28,7 @@ public class AcademicAbilityResponse {
         return new AcademicAbilityResponse(
                 academicAbility.getSchoolName(),
                 academicAbility.getSchoolLevel(),
+                academicAbility.getSchoolLevel().getDesc(),
                 academicAbility.getEnterSchoolDate(),
                 academicAbility.getGraduationDate(),
                 academicAbility.getAcademicState(),

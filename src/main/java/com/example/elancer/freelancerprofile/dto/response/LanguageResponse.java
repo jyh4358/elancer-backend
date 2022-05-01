@@ -16,9 +16,10 @@ import java.util.stream.Collectors;
 public class LanguageResponse {
     private String languageName;
     private LanguageAbility languageAbility;
+    private String languageAbilityDescription;
 
     public static LanguageResponse of(Language language) {
-        return new LanguageResponse(language.getLanguageName(), language.getLanguageAbility());
+        return new LanguageResponse(language.getLanguageName(), language.getLanguageAbility(), language.getLanguageAbility().getDesc());
     }
 
     public static List<LanguageResponse> listOf(List<Language> languages) {

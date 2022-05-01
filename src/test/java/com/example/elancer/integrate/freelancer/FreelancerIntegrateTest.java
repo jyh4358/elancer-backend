@@ -19,8 +19,6 @@ import com.example.elancer.integrate.common.IntegrateBaseTest;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import io.restassured.RestAssured;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -64,6 +64,7 @@ public class Developer extends Position {
         this.role = role;
     }
 
+    //develop 생성시 밑의 스킬들을 등록하려면 develop 데이터가 필요해 먼저 develop 생성후 스킬들을 할당해준다.
     public static Developer createBasicDeveloper(PositionType positionType, FreelancerProfile freelancerProfile, String focusSkill, String role) {
         return new Developer(positionType, freelancerProfile, focusSkill, role);
     }
