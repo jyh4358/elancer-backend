@@ -63,6 +63,7 @@ mins1031;
 ifndef::snippets[]
 :snippets: ./build/generated-snippets
 endif::[]
+== 프리랜서
 
 [[resources-freelancer-join]]
 == 프리랜서 회원가입
@@ -73,7 +74,27 @@ include::{snippets}/freelancer-join/http-request.adoc[]
 include::{snippets}/freelancer-join/request-headers.adoc[]
 include::{snippets}/freelancer-join/request-fields.adoc[]
 
+[[resources-freelancer-account-cover]]
+== 프리랜서 회원 정보 수정
 
+개인정보 입력을 통해 프리랜서 회원 정보를 수정한다.
+
+include::{snippets}/freelancer-account-cover/http-request.adoc[]
+include::{snippets}/freelancer-account-cover/request-headers.adoc[]
+include::{snippets}/freelancer-account-cover/request-fields.adoc[]
+
+[[resources-freelancer-account-find]]
+== 프리랜서 회원 정보 조회
+
+개인정보 입력을 통해 프리랜서 회원 정보를 조회한다.
+
+include::{snippets}/freelancer-account-find/http-request.adoc[]
+include::{snippets}/freelancer-account-find/response-headers.adoc[]
+include::{snippets}/freelancer-account-find/response-fields.adoc[]
+include::{snippets}/freelancer-account-find/response-body.adoc[]
+
+
+== 기업
 
 [[resources-enterprise-join]]
 == 기업 회원가입

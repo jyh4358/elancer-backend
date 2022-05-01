@@ -3,9 +3,7 @@ package com.example.elancer.integrate.freelancerprofile;
 
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancerprofile.controller.FreelancerPositionControllerPath;
 import com.example.elancer.freelancerprofile.controller.FreelancerPositionFindControllerPath;
-import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
@@ -39,7 +37,6 @@ import com.example.elancer.freelancerprofile.repository.position.developer.Devel
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

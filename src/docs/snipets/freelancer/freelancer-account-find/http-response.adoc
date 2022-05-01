@@ -1,0 +1,39 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 747
+
+{
+  "name" : "멤버이름",
+  "birthDate" : "2000-01-01",
+  "email" : "email@email.email.com",
+  "phone" : "010-0101-0101",
+  "website" : "http://web.com",
+  "countryType" : "KR",
+  "zipcode" : "경기도",
+  "mainAddress" : "성남시",
+  "detailAddress" : "중원구",
+  "freelancerWorkTypes" : [ "ACCOUNTING", "BIGDATA" ],
+  "workEtcField" : null,
+  "fileName" : null,
+  "careerYear" : 9,
+  "careerMonth" : 5,
+  "hopeMonthMinPay" : 400,
+  "hopeMonthMaxPay" : 600,
+  "kosaState" : "NOT_POSSESS",
+  "mailReceptionState" : "RECEPTION",
+  "presentWorkState" : "FREE_AT_COMPANY",
+  "hopeWorkState" : "AT_COMPANY",
+  "workPossibleState" : "POSSIBLE",
+  "workStartPossibleDate" : "2022-02-01",
+  "hopeWorkCountry" : "KR",
+  "hopeWorkCity" : "seoul"
+}
+----

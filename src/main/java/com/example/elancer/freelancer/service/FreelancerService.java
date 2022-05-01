@@ -54,7 +54,7 @@ public class FreelancerService {
                 freelancerAccountCoverRequest.getHopeWorkCountry(),
                 freelancerAccountCoverRequest.getHopeWorkCity()
         );
-
+// TODO min 경력기술서 s3하고 진행해야한다.
 //        freelancer.coverCareerForm(freelancerAccountCoverRequest.getCareerForm());
 
     }
