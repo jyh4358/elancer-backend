@@ -16,6 +16,7 @@ import java.util.Optional;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class FreelancerProfileSimpleResponse {
+    private Long profileNum;
     private String name;
     private int expertise;
     private int scheduleAdherence;
@@ -44,6 +45,7 @@ public class FreelancerProfileSimpleResponse {
 
     public static FreelancerProfileSimpleResponse of(Freelancer freelancer, FreelancerProfile freelancerProfile) {
         return new FreelancerProfileSimpleResponse(
+                freelancerProfile.getNum(),
                 freelancer.getName(),
                 freelancerProfile.getWorkAssessment().getExpertise(),
                 freelancerProfile.getWorkAssessment().getScheduleAdherence(),

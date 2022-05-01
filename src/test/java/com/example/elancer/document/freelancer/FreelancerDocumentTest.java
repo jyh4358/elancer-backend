@@ -1,4 +1,4 @@
-package com.example.elancer.document;
+package com.example.elancer.document.freelancer;
 
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.document.common.DocumentBaseTest;

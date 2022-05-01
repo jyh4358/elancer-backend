@@ -98,7 +98,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         프리랜서_프로필_소개정보_저장_요청결과_검증(freelancerProfile, introduceCoverRequest);
     }
 
-    @DisplayName("프리랜서 프로필 학력 저장 통합테스트")
+    @DisplayName("프리랜서 프로필 학력정보 저장 통합테스트")
     @Test
     public void 프리랜서_프로필_학력정보_저장() throws Exception {
         //given

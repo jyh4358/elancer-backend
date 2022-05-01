@@ -40,4 +40,5 @@ public class FreelancerController {
         FreelancerAccountDetailResponse freelancerAccountInfo = freelancerService.findDetailFreelancerAccount(freelancerNum, memberDetails);
         return new ResponseEntity<FreelancerAccountDetailResponse>(freelancerAccountInfo, HttpStatus.OK);
     }
+    //Todo min 예외 핸들러 필요 - 서비스 로직 참고해서 추가할것.
 }

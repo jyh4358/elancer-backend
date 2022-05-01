@@ -77,7 +77,7 @@ include::{snippets}/freelancer-join/request-fields.adoc[]
 [[resources-freelancer-account-cover]]
 == 프리랜서 회원 정보 수정
 
-개인정보 입력을 통해 프리랜서 회원 정보를 수정한다.
+회원정보를 통해 프리랜서 회원 정보를 수정한다.
 
 include::{snippets}/freelancer-account-cover/http-request.adoc[]
 include::{snippets}/freelancer-account-cover/request-headers.adoc[]
@@ -86,12 +86,82 @@ include::{snippets}/freelancer-account-cover/request-fields.adoc[]
 [[resources-freelancer-account-find]]
 == 프리랜서 회원 정보 조회
 
-개인정보 입력을 통해 프리랜서 회원 정보를 조회한다.
+프리랜서 식별자 정보를 통해 프리랜서 회원 정보를 조회한다.
 
 include::{snippets}/freelancer-account-find/http-request.adoc[]
 include::{snippets}/freelancer-account-find/response-headers.adoc[]
 include::{snippets}/freelancer-account-find/response-fields.adoc[]
 include::{snippets}/freelancer-account-find/response-body.adoc[]
+
+[[resources-freelancer-profile-intro-cover]]
+== 프리랜서 프로필 소개정보 저장
+
+프로필 소개정보 입력을 통해 소개정보를 저장한다.
+
+include::{snippets}/freelancer-profile-intro-cover/http-request.adoc[]
+include::{snippets}/freelancer-profile-intro-cover/request-headers.adoc[]
+include::{snippets}/freelancer-profile-intro-cover/request-fields.adoc[]
+include::{snippets}/freelancer-profile-intro-cover/request-body.adoc[]
+
+[[resources-freelancer-profile-academic-cover]]
+== 프리랜서 프로필 학력정보 저장
+
+프로필 학력정보 입력을 통해 학력정보를 저장한다.
+
+include::{snippets}/freelancer-profile-academic-cover/http-request.adoc[]
+include::{snippets}/freelancer-profile-academic-cover/request-headers.adoc[]
+include::{snippets}/freelancer-profile-academic-cover/request-fields.adoc[]
+include::{snippets}/freelancer-profile-academic-cover/request-body.adoc[]
+
+[[resources-freelancer-profile-career-cover]]
+== 프리랜서 프로필 근무경력 저장
+
+프로필 근무경력 입력을 통해 근무경력 정보를 저장한다.
+
+include::{snippets}/freelancer-profile-career-cover/http-request.adoc[]
+include::{snippets}/freelancer-profile-career-cover/request-headers.adoc[]
+include::{snippets}/freelancer-profile-career-cover/request-fields.adoc[]
+include::{snippets}/freelancer-profile-career-cover/request-body.adoc[]
+
+[[resources-freelancer-profile-education-license-language-cover]]
+== 프리랜서 프로필 교육 및 자격사항 저장
+
+프로필 교육 및 자격사항 입력을 통해 교육 및 자격사항 정보를 저장한다.
+
+include::{snippets}/freelancer-profile-education-license-language-cover/http-request.adoc[]
+include::{snippets}/freelancer-profile-education-license-language-cover/request-headers.adoc[]
+include::{snippets}/freelancer-profile-education-license-language-cover/request-fields.adoc[]
+include::{snippets}/freelancer-profile-education-license-language-cover/request-body.adoc[]
+
+[[resources-freelancer-profile-projecthistory-cover]]
+== 프리랜서 프로필 프로젝트 수행이력 저장
+
+프로필 교육 및 자격사항 입력을 통해 교육 및 자격사항 정보를 저장한다.
+
+include::{snippets}/freelancer-profile-projecthistory-cover/http-request.adoc[]
+include::{snippets}/freelancer-profile-projecthistory-cover/request-headers.adoc[]
+include::{snippets}/freelancer-profile-projecthistory-cover/request-fields.adoc[]
+include::{snippets}/freelancer-profile-projecthistory-cover/request-body.adoc[]
+
+[[resources-freelancer-profile-detail-find]]
+== 프리랜서 프로필 세부정보 조회
+
+프로필 식별자를 통해 세부정보를 조회한다.
+
+include::{snippets}/freelancer-profile-detail-find/http-request.adoc[]
+include::{snippets}/freelancer-profile-detail-find/response-headers.adoc[]
+include::{snippets}/freelancer-profile-detail-find/response-fields.adoc[]
+include::{snippets}/freelancer-profile-detail-find/response-body.adoc[]
+
+[[resources-freelancer-profile-simple-find]]
+== 프리랜서 프로필 요약정보 조회
+
+프로필 식별자를 통해 요약정보를 조회한다.
+
+include::{snippets}/freelancer-profile-simple-find/http-request.adoc[]
+include::{snippets}/freelancer-profile-simple-find/response-headers.adoc[]
+include::{snippets}/freelancer-profile-simple-find/response-fields.adoc[]
+include::{snippets}/freelancer-profile-simple-find/response-body.adoc[]
 
 
 == 기업

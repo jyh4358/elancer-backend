@@ -1,5 +1,7 @@
 package com.example.elancer.document.common;
 
+import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.testconfig.RestDocsConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +24,10 @@ public class DocumentBaseTest {
 
     @Autowired
     protected MockMvc mockMvc;
+
+    @Autowired
+    protected FreelancerRepository freelancerRepository;
+
+    @Autowired
+    protected FreelancerProfileRepository freelancerProfileRepository;
 }
