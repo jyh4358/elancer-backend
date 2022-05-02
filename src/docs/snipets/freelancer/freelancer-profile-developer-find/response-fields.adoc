@@ -1,0 +1,44 @@
+|===
+|Path|Type|Description
+
+|`+focusSkills+`
+|`+List<String>+`
+|프리랜서 개발자 주언어 정보 필드.
+
+|`+roles+`
+|`+List<String>+`
+|프리랜서 개발자 역할 정보 필드.
+
+|`+javaDetailSkills+`
+|`+List<JavaDetailSkill>+`
+|프리랜서 개발자 JAVA 스킬 정보 필드.
+
+|`+mobileAppDetailSkills+`
+|`+List<MobileAppDetailSkill>+`
+|프리랜서 개발자 Mobile App 스킬 정보 필드.
+
+|`+phpOrAspDetailSkills+`
+|`+List<PhpOrAspDetailSkill>+`
+|프리랜서 개발자 PHP/ASP 스킬 정보 필드.
+
+|`+dotNetDetailSkills+`
+|`+List<DotNetDetailSkill>+`
+|프리랜서 개발자 .NET 스킬 정보 필드.
+
+|`+javaScriptDetailSkills+`
+|`+List<JavaScriptDetailSkill>+`
+|프리랜서 개발자 JavaScript 스킬 정보 필드.
+
+|`+cdetailSkills+`
+|`+List<CDetailSkill>+`
+|프리랜서 개발자 C/C++ 스킬 정보 필드.
+
+|`+dbDetailSkills+`
+|`+List<DBDetailSkill>+`
+|프리랜서 개발자 DB 스킬 정보 필드.
+
+|`+etcSkill+`
+|`+String+`
+|프리랜서 개발자 기티스킬 정보 필드.
+
+|===

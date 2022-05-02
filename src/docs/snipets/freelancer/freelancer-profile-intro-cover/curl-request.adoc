@@ -1,0 +1,11 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/freelancer-profile/1/intro' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "introName" : "introName",
+  "introBackGround" : "COBALT_BLUE",
+  "introVideoUrl" : "introVideoUrl",
+  "introContent" : "introContent"
+}'
+----

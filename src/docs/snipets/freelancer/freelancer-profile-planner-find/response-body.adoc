@@ -1,0 +1,7 @@
+[source,options="nowrap"]
+----
+{
+  "plannerDetailFields" : [ "APP_PLAN", "WEB_PLAN" ],
+  "etcField" : "etcField"
+}
+----

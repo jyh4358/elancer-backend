@@ -1,0 +1,20 @@
+[source,http,options="nowrap"]
+----
+POST /freelancer HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 345
+Host: localhost:8080
+
+{
+  "memberName" : "memberName",
+  "memberId" : "memberID",
+  "memberPassword" : "password",
+  "memberPasswordCheck" : "password",
+  "memberEmail" : "membmer@email.com",
+  "mailReceptionState" : "NOT_RECEPTION",
+  "memberPhone" : "memberPhone",
+  "workPossibleState" : "POSSIBLE",
+  "workStartPossibleDate" : "2022-10-10",
+  "thumbnail" : null
+}
+----

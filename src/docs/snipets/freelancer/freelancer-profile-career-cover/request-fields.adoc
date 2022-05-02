@@ -1,0 +1,24 @@
+|===
+|Path|Type|Description
+
+|`+careerCoverRequests.[0].companyName+`
+|`+String+`
+|프리랜서 근무경력 회사명 정보 필드.
+
+|`+careerCoverRequests.[0].departmentName+`
+|`+String+`
+|프리랜서 근무경력 부서명 정보 필드.
+
+|`+careerCoverRequests.[0].companyPosition+`
+|`+CompanyPosition+`
+|프리랜서 근무경력 직책 정보 필드.
+
+|`+careerCoverRequests.[0].careerStartDate+`
+|`+LocalDate+`
+|프리랜서 근무경력 근무시작월 정보 필드.
+
+|`+careerCoverRequests.[0].careerEndDate+`
+|`+LocalDate+`
+|프리랜서 근무경력 퇴사월 정보 필드.
+
+|===

@@ -1,0 +1,100 @@
+|===
+|Path|Type|Description
+
+|`+name+`
+|`+String+`
+|회원 이름 정보 필드
+
+|`+birthDate+`
+|`+LocalDate+`
+|회원 생년월일 정보 필드
+
+|`+email+`
+|`+String+`
+|회원 이메일 정보 필드
+
+|`+phone+`
+|`+String+`
+|회원 폰번호 정보 필드
+
+|`+website+`
+|`+String+`
+|회원 웹사이트 정보 필드
+
+|`+countryType+`
+|`+CountryType+`
+|회원 거주국가 정보 필드
+
+|`+zipcode+`
+|`+String+`
+|회원 거주지 정보 필드
+
+|`+mainAddress+`
+|`+String+`
+|회원 거주지 시동구 정보 필드
+
+|`+detailAddress+`
+|`+String+`
+|회원 거주지 읍면리 정보 필드
+
+|`+freelancerWorkTypes+`
+|`+List<FreelancerWorkType>+`
+|회원 업무분야 정보 필드
+
+|`+workEtcField+`
+|`+String+`
+|회원 업무분야 직접입력 정보 필드
+
+|`+fileName+`
+|`+String+`
+|회원 파일이름 정보 필드
+
+|`+careerYear+`
+|`+int+`
+|회원 경력 년수 정보 필드
+
+|`+careerMonth+`
+|`+int+`
+|회원 경력 개월수 정보 필드
+
+|`+hopeMonthMinPay+`
+|`+int+`
+|회원 희망 월단가 최소값 정보 필드
+
+|`+hopeMonthMaxPay+`
+|`+int+`
+|회원 희망 월단가 최대값 정보 필드
+
+|`+kosaState+`
+|`+KOSAState+`
+|회원 kosa보유 여부 정보 필드
+
+|`+mailReceptionState+`
+|`+MailReceptionState+`
+|회원 메일수신 여부 정보 필드
+
+|`+presentWorkState+`
+|`+PresentWorkState+`
+|회원 현재 업무상태 정보 필드
+
+|`+hopeWorkState+`
+|`+HopeWorkState+`
+|회원 희망 업무형태 정보 필드
+
+|`+workPossibleState+`
+|`+WorkPossibleState+`
+|회원 업무가능 여부 정보 필드
+
+|`+workStartPossibleDate+`
+|`+LocalDate+`
+|회원 업무가능일 정보 필드
+
+|`+hopeWorkCountry+`
+|`+CountryType+`
+|회원 희망지역 국가 정보 필드
+
+|`+hopeWorkCity+`
+|`+String+`
+|회원 희망지역 도시 정보 필드
+
+|===

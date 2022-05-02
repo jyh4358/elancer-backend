@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description
+
+|`+etcDetailRoles+`
+|`+List<EtcDetailRole>+`
+|프리랜서 기티파트 역할 정보 필드.
+
+|`+positionEtcRole+`
+|`+String+`
+|프리랜서 기타파트 기티분야 역할외 정보 필드.
+
+|===

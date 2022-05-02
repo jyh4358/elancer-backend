@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.service;
 
 import com.example.elancer.common.checker.RightRequestChecker;
+import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
@@ -49,7 +50,12 @@ public class FreelancerPositionService {
     public void coverFreelancerPositionToDeveloper(Long profileNum, MemberDetails memberDetails, DeveloperCoverRequest developerCoverRequest) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
-        Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, developerCoverRequest.getFocusSkill(), developerCoverRequest.getRole());
+        Developer developer = Developer.createBasicDeveloper(
+                PositionType.DEVELOPER, freelancerProfile,
+                StringEditor.editStringListToString(developerCoverRequest.getFocusSkills()),
+                StringEditor.editStringListToString(developerCoverRequest.getRoles())
+        );
+
         developer.coverDeveloperSkills(
                 developerCoverRequest.toJavaSkill(developer),
                 developerCoverRequest.toMobileAppSkill(developer),

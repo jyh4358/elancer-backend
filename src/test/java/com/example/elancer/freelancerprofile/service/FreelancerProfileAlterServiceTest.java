@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.service;
 
+import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequests;
 import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequest;
@@ -11,7 +12,6 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
-import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
@@ -27,7 +27,6 @@ import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
-import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
 import com.example.elancer.freelancerprofile.repository.career.CareerRepository;
 import com.example.elancer.freelancerprofile.repository.education.EducationRepository;
@@ -39,28 +38,19 @@ import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.domain.MemberType;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-@ActiveProfiles("h2")
-@SpringBootTest
-class FreelancerProfileAlterServiceTest {
+class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
 
     @Autowired
     private FreelancerProfileAlterService freelancerProfileAlterService;
-
-    @Autowired
-    private FreelancerRepository freelancerRepository;
-
-    @Autowired
-    private FreelancerProfileRepository freelancerProfileRepository;
 
     @Autowired
     private AcademicRepository academicRepository;
@@ -327,5 +317,10 @@ class FreelancerProfileAlterServiceTest {
         Assertions.assertThat(languages).hasSize(1);
         Assertions.assertThat(languages.get(0).getLanguageName()).isEqualTo(languageCoverRequest.getLanguageName());
         Assertions.assertThat(languages.get(0).getLanguageAbility()).isEqualTo(languageCoverRequest.getLanguageAbility());
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

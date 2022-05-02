@@ -1,0 +1,9 @@
+[source,options="nowrap"]
+----
+{
+  "introName" : "introName",
+  "introBackGround" : "COBALT_BLUE",
+  "introVideoUrl" : "introVideoUrl",
+  "introContent" : "introContent"
+}
+----

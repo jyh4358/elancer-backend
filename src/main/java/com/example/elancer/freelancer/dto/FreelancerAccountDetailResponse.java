@@ -29,9 +29,9 @@ public class FreelancerAccountDetailResponse {
     private String zipcode;
     private String mainAddress;
     private String detailAddress;
-    private String fileName;
     private List<FreelancerWorkType> freelancerWorkTypes;
     private String workEtcField;
+    private String fileName;
     private int careerYear;
     private int careerMonth;
     private int hopeMonthMinPay;
@@ -56,9 +56,9 @@ public class FreelancerAccountDetailResponse {
                 freelancer.getAddress().getZipcode(),
                 freelancer.getAddress().getMainAddress(),
                 freelancer.getAddress().getDetailAddress(),
-                freelancer.getCareerFormFileName(),
                 freelancer.getFreelancerWorkTypesInFreelancer(),
                 freelancer.getFreelancerAccountInfo().getWorkEtcField(),
+                freelancer.getCareerFormFileName(),
                 freelancer.getFreelancerAccountInfo().getCareerYear(),
                 freelancer.getFreelancerAccountInfo().getCareerMonth(),
                 freelancer.getFreelancerAccountInfo().getHopeMonthMinPay(),

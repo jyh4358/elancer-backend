@@ -1,0 +1,184 @@
+|===
+|Path|Type|Description
+
+|`+profileNum+`
+|`+Long+`
+|프리랜서 프로필 식별자 정보 필드.
+
+|`+greeting+`
+|`+String+`
+|프리랜서 프로필 인사말 정보 필드.
+
+|`+positionType+`
+|`+PositionType+`
+|프리랜서 프로필 포지션(스킬) 정보 필드.
+
+|`+introduceResponse.introduceName+`
+|`+String+`
+|프리랜서 프로필 소개이름 정보 필드.
+
+|`+introduceResponse.introBackGround+`
+|`+IntroBackGround+`
+|프리랜서 프로필 소개배경 정보 필드.
+
+|`+introduceResponse.introduceVideoURL+`
+|`+String+`
+|프리랜서 프로필 소개영상 URL 정보 필드.
+
+|`+introduceResponse.introduceContent+`
+|`+String+`
+|프리랜서 프로필 소개 글 정보 필드.
+
+|`+academicAbilityResponses.[0].schoolName+`
+|`+String+`
+|프리랜서 학력정보 학교명 정보 필드.
+
+|`+academicAbilityResponses.[0].schoolLevel+`
+|`+SchoolLevel+`
+|프리랜서 학력정보 학력단계 정보 필드.
+
+|`+academicAbilityResponses.[0].schoolLevelDescription+`
+|`+String+`
+|프리랜서 학력정보 학력단계 설명 정보 필드.
+
+|`+academicAbilityResponses.[0].enterSchoolDate+`
+|`+LocalDate+`
+|프리랜서 학력정보 입학일 정보 필드.
+
+|`+academicAbilityResponses.[0].graduationDate+`
+|`+LocalDate+`
+|프리랜서 학력정보 졸업일 정보 필드.
+
+|`+academicAbilityResponses.[0].academicState+`
+|`+AcademicState+`
+|프리랜서 학력정보 현재상태 정보 필드.
+
+|`+academicAbilityResponses.[0].majorName+`
+|`+String+`
+|프리랜서 학력정보 전공 정보 필드.
+
+|`+careerResponses.[0].companyName+`
+|`+String+`
+|프리랜서 근무경력 회사명 정보 필드.
+
+|`+careerResponses.[0].departmentName+`
+|`+String+`
+|프리랜서 근무경력 부서명 정보 필드.
+
+|`+careerResponses.[0].companyPosition+`
+|`+CompanyPosition+`
+|프리랜서 근무경력 직책 정보 필드.
+
+|`+careerResponses.[0].companyPositionDescription+`
+|`+String+`
+|프리랜서 근무경력 직책 설명 정보 필드.
+
+|`+careerResponses.[0].careerStartDate+`
+|`+LocalDate+`
+|프리랜서 근무경력 근무시작월 정보 필드.
+
+|`+careerResponses.[0].careerEndDate+`
+|`+LocalDate+`
+|프리랜서 근무경력 퇴사월 정보 필드.
+
+|`+educationResponses.[0].educationTitle+`
+|`+String+`
+|프리랜서 교육 교육명 정보 필드.
+
+|`+educationResponses.[0].educationOrganization+`
+|`+String+`
+|프리랜서 교육 교육기관명 정보 필드.
+
+|`+educationResponses.[0].educationStartDate+`
+|`+LocalDate+`
+|프리랜서 교육 교육시작년월 정보 필드.
+
+|`+educationResponses.[0].educationEndDate+`
+|`+LocalDate+`
+|프리랜서 교육 교육수료년월 정보 필드.
+
+|`+licenseResponses.[0].licenseTitle+`
+|`+String+`
+|프리랜서 자격증 자격증명 정보 필드.
+
+|`+licenseResponses.[0].licenseIssuer+`
+|`+String+`
+|프리랜서 자격증 발급기관 정보 필드.
+
+|`+licenseResponses.[0].acquisitionDate+`
+|`+LocalDate+`
+|프리랜서 자격증 취득년월 정보 필드.
+
+|`+languageResponses.[0].languageName+`
+|`+String+`
+|프리랜서 외국어 외국어명 정보 필드.
+
+|`+languageResponses.[0].languageAbility+`
+|`+LanguageAbility+`
+|프리랜서 외국어 실력 정보 필드.
+
+|`+languageResponses.[0].languageAbilityDescription+`
+|`+LanguageAbility+`
+|프리랜서 외국어 실력 설명 정보 필드.
+
+|`+projectHistoryResponses.[0].projectTitle+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 프로젝트명 정보 필드.
+
+|`+projectHistoryResponses.[0].projectStartDate+`
+|`+LocalDate+`
+|프리랜서 프로젝트 수행이력 프로젝트 시작년월 정보 필드.
+
+|`+projectHistoryResponses.[0].projectEndDate+`
+|`+LocalDate+`
+|프리랜서 프로젝트 수행이력 프로젝트 종료년월 정보 필드.
+
+|`+projectHistoryResponses.[0].clientCompany+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 고객사 정보 필드.
+
+|`+projectHistoryResponses.[0].workCompany+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 근무사 정보 필드.
+
+|`+projectHistoryResponses.[0].developField+`
+|`+DevelopField+`
+|프리랜서 프로젝트 수행이력 개발분야 정보 필드.
+
+|`+projectHistoryResponses.[0].developRole+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 역할 정보 필드.
+
+|`+projectHistoryResponses.[0].developEnvironment.developEnvironmentModel+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 기종 정보 필드.
+
+|`+projectHistoryResponses.[0].developEnvironment.developEnvironmentOS+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 os 정보 필드.
+
+|`+projectHistoryResponses.[0].developEnvironment.developEnvironmentLanguage+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 언어 정보 필드.
+
+|`+projectHistoryResponses.[0].developEnvironment.developEnvironmentDBName+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 DB 정보 필드.
+
+|`+projectHistoryResponses.[0].developEnvironment.developEnvironmentTool+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드.
+
+|`+projectHistoryResponses.[0].developEnvironment.developEnvironmentCommunication+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드.
+
+|`+projectHistoryResponses.[0].developEnvironment.developEnvironmentEtc+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드.
+
+|`+projectHistoryResponses.[0].responsibilityTask+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 담당업무 정보 필드.
+
+|===

@@ -1,0 +1,12 @@
+[source,options="nowrap"]
+----
+{
+  "careerCoverRequests" : [ {
+    "companyName" : "companyName",
+    "departmentName" : "departmentName",
+    "companyPosition" : "HEAD_OF_DEPARTMENT",
+    "careerStartDate" : "2020-09-01",
+    "careerEndDate" : "2021-10-01"
+  } ]
+}
+----

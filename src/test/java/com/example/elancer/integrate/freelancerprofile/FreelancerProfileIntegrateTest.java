@@ -40,6 +40,7 @@ import com.example.elancer.freelancerprofile.repository.license.LicenseRepositor
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +99,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         프리랜서_프로필_소개정보_저장_요청결과_검증(freelancerProfile, introduceCoverRequest);
     }
 
-    @DisplayName("프리랜서 프로필 학력 저장 통합테스트")
+    @DisplayName("프리랜서 프로필 학력정보 저장 통합테스트")
     @Test
     public void 프리랜서_프로필_학력정보_저장() throws Exception {
         //given
@@ -497,5 +498,10 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         Assertions.assertThat(languages).hasSize(1);
         Assertions.assertThat(languages.get(0).getLanguageName()).isEqualTo(languageCoverRequest.getLanguageName());
         Assertions.assertThat(languages.get(0).getLanguageAbility()).isEqualTo(languageCoverRequest.getLanguageAbility());
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

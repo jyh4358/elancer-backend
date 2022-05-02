@@ -1,0 +1,17 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/freelancer' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "memberName" : "memberName",
+  "memberId" : "memberID",
+  "memberPassword" : "password",
+  "memberPasswordCheck" : "password",
+  "memberEmail" : "membmer@email.com",
+  "mailReceptionState" : "NOT_RECEPTION",
+  "memberPhone" : "memberPhone",
+  "workPossibleState" : "POSSIBLE",
+  "workStartPossibleDate" : "2022-10-10",
+  "thumbnail" : null
+}'
+----

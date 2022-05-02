@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http GET 'http://localhost:8080/freelancer-profile/1/planner' \
+    'Content-Type:application/json;charset=UTF-8'
+----

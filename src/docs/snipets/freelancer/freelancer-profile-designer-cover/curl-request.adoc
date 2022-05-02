@@ -1,0 +1,11 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/freelancer-profile/1/designer' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "designDetailRoles" : [ "APP_DESIGN", "GAME_DESIGN" ],
+  "etcRole" : "etcRole",
+  "designDetailSkills" : [ "AFERE_EFFECT", "THREE_D_MAX_AND_MAYA" ],
+  "etcSkill" : "etcSkill"
+}'
+----

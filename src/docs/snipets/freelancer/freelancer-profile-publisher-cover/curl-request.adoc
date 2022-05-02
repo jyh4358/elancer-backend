@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/freelancer-profile/1/publisher' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "publishingDetailSkills" : [ "HTML5", "CSS", "JQUERY" ],
+  "etcSkill" : "etcSkill"
+}'
+----

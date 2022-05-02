@@ -21,6 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,10 +30,10 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class DeveloperCoverRequest {
-    @NotBlank
-    private String focusSkill;
-    @NotBlank
-    private String role;
+    @NotNull
+    private List<String> focusSkills;
+    @NotNull
+    private List<String> roles;
     private List<JavaDetailSkill> javaDetailSkills;
     private List<MobileAppDetailSkill> mobileAppDetailSkills;
     private List<PhpOrAspDetailSkill> phpOrAspDetailSkills;

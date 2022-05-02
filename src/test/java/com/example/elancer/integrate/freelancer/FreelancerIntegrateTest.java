@@ -13,19 +13,17 @@ import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.PresentWorkState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.model.WorkType;
-import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -38,12 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("h2")
 public class FreelancerIntegrateTest extends IntegrateBaseTest {
-
-    @Autowired
-    private FreelancerRepository freelancerRepository;
 
     @Autowired
     private FreelancerWorkTypeRepository freelancerWorkTypeRepository;
@@ -175,5 +168,10 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value(updatedFreelancer.getName()))
                 .andDo(print());
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

@@ -1,0 +1,8 @@
+[source,bash]
+----
+$ echo '{
+  "etcDetailRoles" : [ "AA", "DBA" ],
+  "positionEtcRole" : "positionEtcRole"
+}' | http PUT 'http://localhost:8080/freelancer-profile/1/etc' \
+    'Content-Type:application/json;charset=UTF-8'
+----

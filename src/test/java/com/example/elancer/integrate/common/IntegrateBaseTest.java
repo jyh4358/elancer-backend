@@ -1,5 +1,6 @@
 package com.example.elancer.integrate.common;
 
+import com.example.elancer.common.database.DatabaseClean;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,4 +28,7 @@ public class IntegrateBaseTest {
 
     @Autowired
     protected FreelancerProfileRepository freelancerProfileRepository;
+
+    @Autowired
+    protected DatabaseClean databaseClean;
 }
