@@ -1,0 +1,40 @@
+|===
+|Path|Type|Description
+
+|`+educationCoverRequests.[0].educationTitle+`
+|`+String+`
+|프리랜서 교육 교육명 정보 필드.
+
+|`+educationCoverRequests.[0].educationOrganization+`
+|`+String+`
+|프리랜서 교육 교육기관명 정보 필드.
+
+|`+educationCoverRequests.[0].educationStartDate+`
+|`+LocalDate+`
+|프리랜서 교육 교육시작년월 정보 필드.
+
+|`+educationCoverRequests.[0].educationEndDate+`
+|`+LocalDate+`
+|프리랜서 교육 교육수료년월 정보 필드.
+
+|`+licenseCoverRequests.[0].licenseTitle+`
+|`+String+`
+|프리랜서 자격증 자격증명 정보 필드.
+
+|`+licenseCoverRequests.[0].licenseIssuer+`
+|`+String+`
+|프리랜서 자격증 발급기관 정보 필드.
+
+|`+licenseCoverRequests.[0].acquisitionDate+`
+|`+LocalDate+`
+|프리랜서 자격증 취득년월 정보 필드.
+
+|`+languageCoverRequests.[0].languageName+`
+|`+String+`
+|프리랜서 외국어 외국어명 정보 필드.
+
+|`+languageCoverRequests.[0].languageAbility+`
+|`+LanguageAbility+`
+|프리랜서 외국어 실력 정보 필드.
+
+|===

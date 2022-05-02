@@ -62,24 +62,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class FreelancerProfileDocumentTest extends DocumentBaseTest {
 
-    @Autowired
-    private AcademicRepository academicRepository;
-
-    @Autowired
-    private CareerRepository careerRepository;
-
-    @Autowired
-    private ProjectHistoryRepository projectHistoryRepository;
-
-    @Autowired
-    private EducationRepository educationRepository;
-
-    @Autowired
-    private LicenseRepository licenseRepository;
-
-    @Autowired
-    private LanguageRepository languageRepository;
-
     @DisplayName("프리랜서 프로필 소개정보 저장 문서화")
     @Test
     public void 프리랜서_프로필_소개정보_저장_문서화() throws Exception {

@@ -1,0 +1,13 @@
+[source,options="nowrap"]
+----
+{
+  "academicAbilityCoverRequests" : [ {
+    "schoolName" : "schoolName",
+    "schoolLevel" : "HIGH_SCHOOL",
+    "enterSchoolDate" : "2015-02-01",
+    "graduationDate" : "2018-02-01",
+    "academicState" : "GRADUATION",
+    "majorName" : "문과"
+  } ]
+}
+----
