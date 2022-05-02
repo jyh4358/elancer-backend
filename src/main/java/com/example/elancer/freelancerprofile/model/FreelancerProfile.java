@@ -1,7 +1,7 @@
 package com.example.elancer.freelancerprofile.model;
 
 import com.example.elancer.common.model.BasicEntity;
-import com.example.elancer.freelancer.model.WorkAssessment;
+import com.example.elancer.common.model.WorkAssessment;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
