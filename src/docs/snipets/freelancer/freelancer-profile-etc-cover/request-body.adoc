@@ -1,0 +1,7 @@
+[source,options="nowrap"]
+----
+{
+  "etcDetailRoles" : [ "AA", "DBA" ],
+  "positionEtcRole" : "positionEtcRole"
+}
+----

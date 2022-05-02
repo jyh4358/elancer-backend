@@ -5,6 +5,7 @@ import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.controller.FreelancerPositionFindControllerPath;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
@@ -26,14 +27,19 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
+import com.example.elancer.freelancerprofile.model.position.etc.EtcDetailRole;
+import com.example.elancer.freelancerprofile.model.position.etc.EtcRole;
+import com.example.elancer.freelancerprofile.model.position.etc.PositionEtc;
 import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerField;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
+import com.example.elancer.freelancerprofile.repository.position.CrowdWorkerRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
+import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtcRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
@@ -61,6 +67,9 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     private DesignerRepository designerRepository;
     @Autowired
     private PlannerRepository plannerRepository;
+    @Autowired
+    private PositionEtcRepository positionEtcRepository;
+
 
 
     @DisplayName("프리랜서 프로필 개발자 상세 조회 통합테스트")
@@ -97,7 +106,7 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("focusSkills", hasSize(2)))
                 .andExpect(jsonPath("roles", hasSize(1)))
                 .andExpect(jsonPath("javaDetailSkills", hasSize(2)))
@@ -128,7 +137,7 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("publishingDetailSkills", hasSize(2)))
                 .andExpect(jsonPath("etcSkill").value("etcPubSkill"))
                 .andDo(print());
@@ -158,7 +167,7 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("designDetailRoles", hasSize(2)))
                 .andExpect(jsonPath("etcRole").value(etcRole))
                 .andExpect(jsonPath("designDetailSkills", hasSize(1)))
@@ -183,9 +192,33 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("plannerDetailFields", hasSize(2)))
                 .andExpect(jsonPath("etcField").value(etcField))
+                .andDo(print());
+    }
+
+    @DisplayName("프리랜서 프로필 기타포지션 상세 조회 통합테스트")
+    @Test
+    public void 프리랜서_프로필_기타포지션_상세조회() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
+        List<EtcRole> etcRoles = Arrays.asList(EtcRole.createEtcRole(EtcDetailRole.DBA, positionEtc));
+        String positionEtcField = "positionEtcField";
+        positionEtc.coverAllField(etcRoles, positionEtcField);
+
+        positionEtcRepository.save(positionEtc);
+
+        //when & then
+        String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_ETC_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
+        mockMvc.perform(get(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("etcDetailRoles", hasSize(1)))
+                .andExpect(jsonPath("positionEtcRole").value(positionEtcField))
                 .andDo(print());
     }
 }

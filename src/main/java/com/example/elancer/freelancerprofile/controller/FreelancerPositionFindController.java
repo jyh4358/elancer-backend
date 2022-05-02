@@ -4,6 +4,7 @@ import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.PlannerResponse;
+import com.example.elancer.freelancerprofile.dto.PositionEtcResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
@@ -34,7 +35,7 @@ public class FreelancerPositionFindController {
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
         DeveloperResponse developerResponse = freelancerPositionFindService.coverFreelancerPositionToDeveloper(profileNum, memberDetails);
-        return new ResponseEntity<DeveloperResponse>(developerResponse, HttpStatus.CREATED);
+        return new ResponseEntity<DeveloperResponse>(developerResponse, HttpStatus.OK);
     }
 
     @GetMapping(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_FIND)
@@ -43,7 +44,7 @@ public class FreelancerPositionFindController {
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
         PublisherResponse publisherResponse = freelancerPositionFindService.coverFreelancerPositionToPublisher(profileNum, memberDetails);
-        return new ResponseEntity<PublisherResponse>(publisherResponse, HttpStatus.CREATED);
+        return new ResponseEntity<PublisherResponse>(publisherResponse, HttpStatus.OK);
     }
 
     @GetMapping(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_FIND)
@@ -52,7 +53,7 @@ public class FreelancerPositionFindController {
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
         DesignerResponse designerResponse = freelancerPositionFindService.coverFreelancerPositionToDesigner(profileNum, memberDetails);
-        return new ResponseEntity<DesignerResponse>(designerResponse, HttpStatus.CREATED);
+        return new ResponseEntity<DesignerResponse>(designerResponse, HttpStatus.OK);
     }
 
     @GetMapping(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_FIND)
@@ -61,6 +62,15 @@ public class FreelancerPositionFindController {
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
         PlannerResponse plannerResponse = freelancerPositionFindService.coverFreelancerPositionToPlanner(profileNum, memberDetails);
-        return new ResponseEntity<PlannerResponse>(plannerResponse, HttpStatus.CREATED);
+        return new ResponseEntity<PlannerResponse>(plannerResponse, HttpStatus.OK);
+    }
+
+    @GetMapping(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_ETC_FIND)
+    public ResponseEntity<PositionEtcResponse> coverFreelancerPositionToEtc(
+            @PathVariable Long profileNum,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        PositionEtcResponse positionEtcResponse = freelancerPositionFindService.coverFreelancerPositionToEtc(profileNum, memberDetails);
+        return new ResponseEntity<PositionEtcResponse>(positionEtcResponse, HttpStatus.OK);
     }
 }

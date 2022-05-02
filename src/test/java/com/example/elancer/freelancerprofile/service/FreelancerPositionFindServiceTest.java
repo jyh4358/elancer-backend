@@ -5,6 +5,7 @@ import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.PlannerResponse;
+import com.example.elancer.freelancerprofile.dto.PositionEtcResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -28,6 +29,9 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
+import com.example.elancer.freelancerprofile.model.position.etc.EtcDetailRole;
+import com.example.elancer.freelancerprofile.model.position.etc.EtcRole;
+import com.example.elancer.freelancerprofile.model.position.etc.PositionEtc;
 import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerField;
@@ -37,6 +41,7 @@ import com.example.elancer.freelancerprofile.model.position.publisher.Publishing
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
+import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtcRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -73,11 +78,13 @@ class FreelancerPositionFindServiceTest {
     private DesignerRepository designerRepository;
     @Mock
     private PlannerRepository plannerRepository;
+    @Mock
+    private PositionEtcRepository positionEtcRepository;
 
     @BeforeEach
     void setUp() {
         this.freelancerPositionFindService = new FreelancerPositionFindService(
-                freelancerProfileRepository, developerRepository, publisherRepository, designerRepository, plannerRepository
+                freelancerProfileRepository, developerRepository, publisherRepository, designerRepository, plannerRepository, positionEtcRepository
         );
     }
 
@@ -220,6 +227,32 @@ class FreelancerPositionFindServiceTest {
         Assertions.assertThat(plannerResponse.getPlannerDetailFields().get(0)).isEqualTo(plannerFields.get(0).getPlannerDetailField());
         Assertions.assertThat(plannerResponse.getPlannerDetailFields().get(1)).isEqualTo(plannerFields.get(1).getPlannerDetailField());
         Assertions.assertThat(plannerResponse.getEtcField()).isEqualTo(etcField);
+    }
+
+    @DisplayName("프리랜서 프로필 기타 포지션을 상세조회한다.")
+    @Test
+    public void 프리랜서_프로필_기타포지션_상세조회() {
+        //given
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+
+        Long profileNum = 1L;
+
+        MemberDetails memberDetails = new MemberDetails(null);
+
+        PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
+        List<EtcRole> etcRoles = Arrays.asList(EtcRole.createEtcRole(EtcDetailRole.DBA, positionEtc));
+        String positionEtcField = "positionEtcField";
+        positionEtc.coverAllField(etcRoles, positionEtcField);
+
+        when(freelancerProfileRepository.findById(any())).thenReturn(Optional.of(freelancerProfile));
+        when(positionEtcRepository.findByFreelancerProfileNum(any())).thenReturn(Optional.of(positionEtc));
+
+        //when
+        PositionEtcResponse positionEtcResponse = freelancerPositionFindService.coverFreelancerPositionToEtc(profileNum, memberDetails);
+
+        //then
+        Assertions.assertThat(positionEtcResponse.getEtcDetailRoles().get(0)).isEqualTo(etcRoles.get(0).getEtcDetailRole());
+        Assertions.assertThat(positionEtcResponse.getPositionEtcRole()).isEqualTo(positionEtcField);
     }
 
 }

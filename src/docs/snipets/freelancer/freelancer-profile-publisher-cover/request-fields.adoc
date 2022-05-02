@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description
+
+|`+publishingDetailSkills+`
+|`+List<PublishingDetailSkill>+`
+|프리랜서 퍼블리셔 스킬,경험 정보 필드.
+
+|`+etcSkill+`
+|`+String+`
+|프리랜서 퍼블리셔 기티스킬 정보 필드.
+
+|===

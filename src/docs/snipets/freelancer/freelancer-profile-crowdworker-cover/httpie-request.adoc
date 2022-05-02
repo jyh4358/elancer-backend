@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ echo 'null' | http PUT 'http://localhost:8080/freelancer-profile/1/crowd-worker' \
+    'Content-Type:application/json;charset=UTF-8'
+----

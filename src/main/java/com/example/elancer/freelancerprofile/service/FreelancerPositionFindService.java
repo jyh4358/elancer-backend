@@ -5,6 +5,7 @@ import com.example.elancer.freelancerprofile.dtd.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.PlannerResponse;
+import com.example.elancer.freelancerprofile.dto.PositionEtcResponse;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
@@ -14,6 +15,7 @@ import com.example.elancer.freelancerprofile.exception.NotExistDesignerException
 import com.example.elancer.freelancerprofile.exception.NotExistDevelopException;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.exception.NotExistPlannerException;
+import com.example.elancer.freelancerprofile.exception.NotExistPositionEtcException;
 import com.example.elancer.freelancerprofile.exception.NotExistPublisherException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
@@ -43,12 +45,13 @@ public class FreelancerPositionFindService {
     private final PublisherRepository publisherRepository;
     private final DesignerRepository designerRepository;
     private final PlannerRepository plannerRepository;
+    private final PositionEtcRepository positionEtcRepository;
 
     @Transactional(readOnly = true)
     public DeveloperResponse coverFreelancerPositionToDeveloper(Long profileNum, MemberDetails memberDetails) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
-        Developer developer = developerRepository.findByFreelancerProfileNum(profileNum).orElseThrow(NotExistDevelopException::new);
+        Developer developer = developerRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistDevelopException::new);
         return DeveloperResponse.of(developer);
     }
 
@@ -56,7 +59,7 @@ public class FreelancerPositionFindService {
     public PublisherResponse coverFreelancerPositionToPublisher(Long profileNum, MemberDetails memberDetails) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
-        Publisher publisher = publisherRepository.findByFreelancerProfileNum(profileNum).orElseThrow(NotExistPublisherException::new);
+        Publisher publisher = publisherRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistPublisherException::new);
         return PublisherResponse.of(publisher);
     }
 
@@ -64,7 +67,7 @@ public class FreelancerPositionFindService {
     public DesignerResponse coverFreelancerPositionToDesigner(Long profileNum, MemberDetails memberDetails) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
-        Designer designer = designerRepository.findByFreelancerProfileNum(profileNum).orElseThrow(NotExistDesignerException::new);
+        Designer designer = designerRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistDesignerException::new);
         return DesignerResponse.of(designer);
     }
 
@@ -72,7 +75,15 @@ public class FreelancerPositionFindService {
     public PlannerResponse coverFreelancerPositionToPlanner(Long profileNum, MemberDetails memberDetails) {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
-        Planner planner = plannerRepository.findByFreelancerProfileNum(profileNum).orElseThrow(NotExistPlannerException::new);
+        Planner planner = plannerRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistPlannerException::new);
         return PlannerResponse.of(planner);
+    }
+
+    @Transactional(readOnly = true)
+    public PositionEtcResponse coverFreelancerPositionToEtc(Long profileNum, MemberDetails memberDetails) {
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+        RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        PositionEtc positionEtc = positionEtcRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistPositionEtcException::new);
+        return PositionEtcResponse.of(positionEtc);
     }
 }
