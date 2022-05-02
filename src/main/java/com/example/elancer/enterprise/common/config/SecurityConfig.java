@@ -1,4 +1,4 @@
-package com.example.elancer.common.config;
+package com.example.elancer.enterprise.common.config;
 
 import com.example.elancer.login.auth.handler.UserFailureHandler;
 import com.example.elancer.login.auth.handler.UserSuccessHandler;
@@ -41,16 +41,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/member").authenticated()
                     .and()
                 .formLogin()
+//                    .loginPage("/elogin") // 사용자 정의 로그인 페이지
+                    .loginProcessingUrl("/elogin") // 사용자 이름과 암호를 제출할 URL
+                    .defaultSuccessUrl("/") // 성공적인 로그인 후 랜딩 페이지, 이게 있으면 successHandler를 불러오지 못함
+                    .failureUrl("/elogin") // 로그인 실패 후 방문 페이지
                     .and()
                 .logout()
                     .logoutSuccessUrl("/")
                     .and()
                 .oauth2Login()
-                .userInfoEndpoint()
+                    .userInfoEndpoint()
                     .userService(securityOAuth2UserService)
                 .and()
-                .successHandler(successHandler())
-                .failureHandler(failureHandler());
+                    .failureUrl("/elogin")
+                    .successHandler(successHandler());
 
 
 

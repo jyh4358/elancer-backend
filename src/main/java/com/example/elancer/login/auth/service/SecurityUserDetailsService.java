@@ -1,6 +1,7 @@
 package com.example.elancer.login.auth.service;
 
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.login.auth.exception.UserIdNotFoundException;
 import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +19,9 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByUserId(username).orElseThrow(() -> new UsernameNotFoundException("check id"));
+        Member member = memberRepository.findByUserId(username).orElseThrow(UserIdNotFoundException::new);
 
-        log.info("---------------------------");
-        log.info("freelancer={}", member);
-
+        // 비밀번호가 맞는지는 시큐리티 내부에서 확인해준다.
         MemberDetails memberDetails = MemberDetails.userDetailsFrom(member);
 
         return memberDetails;

@@ -1,4 +1,4 @@
-package com.example.elancer.common.utils;
+package com.example.elancer.enterprise.common.utils;
 
 import com.example.elancer.login.auth.dto.MemberDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
