@@ -40,6 +40,7 @@ import com.example.elancer.freelancerprofile.repository.license.LicenseRepositor
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -497,5 +498,10 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         Assertions.assertThat(languages).hasSize(1);
         Assertions.assertThat(languages.get(0).getLanguageName()).isEqualTo(languageCoverRequest.getLanguageName());
         Assertions.assertThat(languages.get(0).getLanguageAbility()).isEqualTo(languageCoverRequest.getLanguageAbility());
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

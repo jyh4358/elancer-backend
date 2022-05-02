@@ -1,6 +1,7 @@
 package com.example.elancer.freelancer.service;
 
 import com.example.elancer.common.FreelancerHelper;
+import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
 import com.example.elancer.freelancer.dto.FreelancerAccountDetailResponse;
 import com.example.elancer.freelancer.model.Freelancer;
@@ -11,30 +12,23 @@ import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.PresentWorkState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.model.WorkType;
-import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-@ActiveProfiles("h2")
-@SpringBootTest
-class FreelancerServiceTest {
+class FreelancerServiceTest extends ServiceBaseTest {
     @Autowired
     private FreelancerService freelancerService;
-
-    @Autowired
-    private FreelancerRepository freelancerRepository;
 
     @Autowired
     private FreelancerWorkTypeRepository freelancerWorkTypeRepository;
@@ -175,5 +169,10 @@ class FreelancerServiceTest {
 
         Assertions.assertThat(workTypes.get(0).getFreelancerWorkType()).isEqualTo(freelancerAccountInfo.getFreelancerWorkTypes().get(0));
         Assertions.assertThat(workTypes.get(1).getFreelancerWorkType()).isEqualTo(freelancerAccountInfo.getFreelancerWorkTypes().get(1));
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

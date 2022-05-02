@@ -22,6 +22,7 @@ import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.testconfig.RestDocsConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,11 +63,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class FreelancerDocumentTest extends DocumentBaseTest {
     @Autowired
-    private FreelancerRepository freelancerRepository;
-
-    @Autowired
     private FreelancerWorkTypeRepository freelancerWorkTypeRepository;
-
 
     @DisplayName("프리랜서 회원가입 문서화 테스트")
     @Test
@@ -259,4 +256,8 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
                 ));
     }
 
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
+    }
 }

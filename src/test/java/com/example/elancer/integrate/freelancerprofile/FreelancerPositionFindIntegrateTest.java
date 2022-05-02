@@ -5,7 +5,6 @@ import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.controller.FreelancerPositionFindControllerPath;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
-import com.example.elancer.freelancerprofile.model.position.CrowdWorker;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
@@ -36,13 +35,13 @@ import com.example.elancer.freelancerprofile.model.position.planner.PlannerField
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
-import com.example.elancer.freelancerprofile.repository.position.CrowdWorkerRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
 import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtcRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -220,5 +219,10 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
                 .andExpect(jsonPath("etcDetailRoles", hasSize(1)))
                 .andExpect(jsonPath("positionEtcRole").value(positionEtcField))
                 .andDo(print());
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

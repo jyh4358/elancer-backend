@@ -1,9 +1,9 @@
 package com.example.elancer.freelancerprofile.service;
 
+import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
-import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
@@ -41,7 +41,6 @@ import com.example.elancer.freelancerprofile.model.position.planner.PlannerField
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
-import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.position.CrowdWorkerRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignRoleRepository;
 import com.example.elancer.freelancerprofile.repository.position.designer.DesignSkillRepository;
@@ -65,27 +64,18 @@ import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.domain.MemberType;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-@ActiveProfiles("h2")
-@SpringBootTest
-class FreelancerPositionServiceTest {
+class FreelancerPositionServiceTest extends ServiceBaseTest {
     @Autowired
     private FreelancerPositionService freelancerPositionService;
-
-    @Autowired
-    private FreelancerRepository freelancerRepository;
-
-    @Autowired
-    private FreelancerProfileRepository freelancerProfileRepository;
 
     @Autowired
     private DeveloperRepository developerRepository;
@@ -411,5 +401,10 @@ class FreelancerPositionServiceTest {
         Assertions.assertThat(etcRoles).hasSize(2);
         Assertions.assertThat(etcRoles.get(0).getEtcDetailRole()).isEqualTo(positionEtcCoverRequest.getEtcDetailRoles().get(0));
         Assertions.assertThat(etcRoles.get(1).getEtcDetailRole()).isEqualTo(positionEtcCoverRequest.getEtcDetailRoles().get(1));
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

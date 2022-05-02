@@ -35,6 +35,7 @@ import com.example.elancer.freelancerprofile.repository.position.planner.Planner
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -213,5 +214,10 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
         //then
         List<PositionEtc> positionEtcs = positionEtcRepository.findAll();
         Assertions.assertThat(positionEtcs).hasSize(1);
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

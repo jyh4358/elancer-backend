@@ -55,6 +55,7 @@ import com.example.elancer.freelancerprofile.repository.education.EducationRepos
 import com.example.elancer.freelancerprofile.repository.language.LanguageRepository;
 import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -274,5 +275,8 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
                 ));
     }
 
-
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
+    }
 }
