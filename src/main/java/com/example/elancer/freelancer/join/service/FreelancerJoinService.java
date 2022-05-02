@@ -25,8 +25,8 @@ public class FreelancerJoinService {
 
     @Transactional
     public void joinFreelancer(FreelancerJoinRequest freelancerJoinRequest) {
-        checkExistUserId(freelancerJoinRequest);
         RightRequestChecker.checkPasswordMatch(freelancerJoinRequest.getMemberPassword(), freelancerJoinRequest.getMemberPasswordCheck());
+        checkExistUserId(freelancerJoinRequest);
         Freelancer freelancer = Freelancer.createFreelancer(
                 freelancerJoinRequest.getMemberId(),
                 bCryptPasswordEncoder.encode(freelancerJoinRequest.getMemberPassword()),
