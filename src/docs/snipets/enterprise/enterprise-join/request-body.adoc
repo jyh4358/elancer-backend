@@ -1,0 +1,25 @@
+[source,options="nowrap"]
+----
+{
+  "userId" : "joinDocsEnterprise",
+  "password1" : "1234",
+  "password2" : "1234",
+  "name" : "name",
+  "phone" : "01000000000",
+  "email" : "test@gmail.com",
+  "companyName" : "test company",
+  "companyPeople" : 10,
+  "position" : "사장",
+  "telNumber" : "01011111111",
+  "website" : "www.test.com",
+  "address" : {
+    "country" : "KR",
+    "zipcode" : "123",
+    "address1" : "주소1",
+    "address2" : "주소2"
+  },
+  "bizContents" : "주요 사업",
+  "sales" : 10000000,
+  "idNumber" : "사업자 번호(123-123-123)"
+}
+----

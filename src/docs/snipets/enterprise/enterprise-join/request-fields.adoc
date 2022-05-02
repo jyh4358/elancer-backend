@@ -1,0 +1,76 @@
+|===
+|Path|Type|Description
+
+|`+userId+`
+|`+String+`
+|회원 아이디 필드
+
+|`+password1+`
+|`+String+`
+|회원 비밀번호 필드
+
+|`+password2+`
+|`+String+`
+|회원 비밀번호 확인 필드
+
+|`+name+`
+|`+String+`
+|회원 담당자 성명 필드
+
+|`+phone+`
+|`+String+`
+|회원 회사 전화번호 필드
+
+|`+email+`
+|`+String+`
+|회원 이메일 필드
+
+|`+companyName+`
+|`+String+`
+|회원 회사명 필드
+
+|`+companyPeople+`
+|`+Integer+`
+|회원 회사 인원수 필드
+
+|`+position+`
+|`+String+`
+|회원 담당자 직책 필드
+
+|`+telNumber+`
+|`+String+`
+|회원 담당자 휴대폰 필드
+
+|`+website+`
+|`+String+`
+|회원 웹사이트 필드
+
+|`+address.country+`
+|`+CountryType.STRING+`
+|회원 주소 국적 필드
+
+|`+address.zipcode+`
+|`+String+`
+|회원 우편번호 필드
+
+|`+address.address1+`
+|`+String+`
+|회원 주소 필드
+
+|`+address.address2+`
+|`+String+`
+|회원 상세 주소 필드
+
+|`+bizContents+`
+|`+String+`
+|회원 주요 사업내용 필드
+
+|`+sales+`
+|`+Integer+`
+|회원 연간 매출액 필드
+
+|`+idNumber+`
+|`+String+`
+|회원 사업자 번호 필드
+
+|===
