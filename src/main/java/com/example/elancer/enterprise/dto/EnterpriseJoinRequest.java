@@ -4,14 +4,17 @@ import com.example.elancer.member.domain.Address;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.exception.CheckPasswordException;
 import com.example.elancer.member.domain.MemberType;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class EnterpriseJoinRequest {
 
