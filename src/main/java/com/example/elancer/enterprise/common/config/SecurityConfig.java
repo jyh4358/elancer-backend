@@ -3,6 +3,7 @@ package com.example.elancer.enterprise.common.config;
 import com.example.elancer.login.auth.handler.UserFailureHandler;
 import com.example.elancer.login.auth.handler.UserSuccessHandler;
 import com.example.elancer.login.auth.service.SecurityOAuth2UserService;
+import com.example.elancer.member.domain.MemberType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -11,11 +12,13 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.web.filter.CorsFilter;
 
 @Slf4j
 @Configuration
@@ -25,6 +28,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final SecurityOAuth2UserService securityOAuth2UserService;
+
+    private final CorsFilter corsFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -36,25 +41,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests()
-                    .antMatchers("/index").permitAll()
-                    .antMatchers("/member").authenticated()
-                    .and()
-                .formLogin()
-//                    .loginPage("/elogin") // 사용자 정의 로그인 페이지
-                    .loginProcessingUrl("/elogin") // 사용자 이름과 암호를 제출할 URL
-                    .defaultSuccessUrl("/") // 성공적인 로그인 후 랜딩 페이지, 이게 있으면 successHandler를 불러오지 못함
-                    .failureUrl("/elogin") // 로그인 실패 후 방문 페이지
-                    .and()
-                .logout()
-                    .logoutSuccessUrl("/")
-                    .and()
-                .oauth2Login()
-                    .userInfoEndpoint()
-                    .userService(securityOAuth2UserService)
+                .addFilter(corsFilter)  // 인증이 필요한 요청을 위해 필터 등록
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                    .failureUrl("/elogin")
-                    .successHandler(successHandler());
+                .formLogin().disable()
+                .httpBasic().disable()  // 기본 인증방식 비활성화(아이디, 비밀번호를 전달하는..)
+                .authorizeRequests()
+                .antMatchers("/")
+                .anonymous();
+
+
 
 
 
