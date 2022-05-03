@@ -5,6 +5,7 @@ spring:
     include:
       - db
       - oauth
+      - security
     active: local
 server:
   port: 8001

@@ -1,4 +1,4 @@
-package com.example.elancer.enterprise.common.config;
+package com.example.elancer.common.config;
 
 import com.example.elancer.login.auth.handler.UserFailureHandler;
 import com.example.elancer.login.auth.handler.UserSuccessHandler;

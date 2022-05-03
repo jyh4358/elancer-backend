@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -207,6 +208,15 @@ class EnterpriseServiceTest {
         assertThat(result.getEnterpriseIntro().getEnterpriseSubBizs().size()).isEqualTo(2);
 
 
+    }
+
+    @Value("${jwt.accessExpired}")
+    private Long ex;
+
+    @Test
+    public void test() {
+
+        System.out.println("ex = " + ex);
     }
 
 
