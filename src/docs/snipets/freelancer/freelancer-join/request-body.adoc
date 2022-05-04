@@ -1,0 +1,15 @@
+[source,options="nowrap"]
+----
+{
+  "memberName" : "memberName",
+  "memberId" : "memberID",
+  "memberPassword" : "password",
+  "memberPasswordCheck" : "password",
+  "memberEmail" : "membmer@email.com",
+  "mailReceptionState" : "NOT_RECEPTION",
+  "memberPhone" : "memberPhone",
+  "workPossibleState" : "POSSIBLE",
+  "workStartPossibleDate" : "2022-10-10",
+  "thumbnail" : null
+}
+----

@@ -1,0 +1,28 @@
+PUT http://localhost:8080/freelancer-profile/1/project-history
+Content-Type: application/json
+
+#info
+# DevelopField 구성{
+#    ("산업"),
+#    APPLICATION("응용")
+#}
+
+#req
+{
+  "projectTitle": "프로젝트명",
+  "projectStartDate": "2020-01-01",
+  "projectEndDate": "2020-03-01",
+  "clientCompany": "고객사",
+  "workCompany": "상주사",
+  "developField": "INDUSTRY",
+  "developRole": "백엔드 개발자",
+  "developEnvironmentModel": "개발환경 기종",
+  "developEnvironmentOS": "개발환경 os",
+  "developEnvironmentLanguage": "개발언어",
+  "developEnvironmentDBName": "개발 디비",
+  "developEnvironmentTool": "개발 툴",
+  "developEnvironmentCommunication": "개발 통신",
+  "developEnvironmentEtc": "기타",
+  "responsibilityTask": "담당업무 입니다."
+}
+

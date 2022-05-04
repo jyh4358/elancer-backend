@@ -1,0 +1,21 @@
+[source,bash]
+----
+$ echo '{
+  "projectTitle" : "projectTitle",
+  "projectStartDate" : "2020-12-01",
+  "projectEndDate" : "2021-09-01",
+  "clientCompany" : "clientCompany",
+  "workCompany" : "workCompany",
+  "developField" : "APPLICATION",
+  "developRole" : "백엔드 개발자",
+  "developEnvironmentModel" : "model",
+  "developEnvironmentOS" : "OS",
+  "developEnvironmentLanguage" : "language",
+  "developEnvironmentDBName" : "mysql",
+  "developEnvironmentTool" : "tool",
+  "developEnvironmentCommunication" : "communication",
+  "developEnvironmentEtc" : null,
+  "responsibilityTask" : "담당업무"
+}' | http PUT 'http://localhost:8080/freelancer-profile/1/project-history' \
+    'Content-Type:application/json;charset=UTF-8'
+----

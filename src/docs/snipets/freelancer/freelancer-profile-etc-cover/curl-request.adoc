@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/freelancer-profile/1/etc' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "etcDetailRoles" : [ "AA", "DBA" ],
+  "positionEtcRole" : "positionEtcRole"
+}'
+----

@@ -1,0 +1,14 @@
+[source,bash]
+----
+$ echo '{
+  "academicAbilityCoverRequests" : [ {
+    "schoolName" : "schoolName",
+    "schoolLevel" : "HIGH_SCHOOL",
+    "enterSchoolDate" : "2015-02-01",
+    "graduationDate" : "2018-02-01",
+    "academicState" : "GRADUATION",
+    "majorName" : "문과"
+  } ]
+}' | http PUT 'http://localhost:8080/freelancer-profile/1/academic-ability' \
+    'Content-Type:application/json;charset=UTF-8'
+----

@@ -1,0 +1,73 @@
+[source,options="nowrap"]
+----
+{
+  "profileNum" : 1,
+  "name" : "name",
+  "expertise" : 0,
+  "scheduleAdherence" : 0,
+  "initiative" : 0,
+  "communication" : 0,
+  "reemploymentIntention" : 0,
+  "totalActiveScore" : 0.0,
+  "introduceName" : "소개글",
+  "introBackGround" : "COBALT_BLUE",
+  "greeting" : "greeting",
+  "careerYear" : 0,
+  "positionType" : "DEVELOPER",
+  "positionTypeDescription" : "개발자",
+  "introduceVideoUrl" : "소개 영상 주소",
+  "introduceContent" : "소개 내용",
+  "projectHistoryResponses" : [ {
+    "projectTitle" : "프로젝트명",
+    "projectStartDate" : "2020-02-01",
+    "projectEndDate" : "2021-02-01",
+    "clientCompany" : "고객사명",
+    "workCompany" : "상주사명",
+    "developField" : "APPLICATION",
+    "developRole" : "backend",
+    "developEnvironment" : {
+      "developEnvironmentModel" : "model",
+      "developEnvironmentOS" : "Ms",
+      "developEnvironmentLanguage" : "language",
+      "developEnvironmentDBName" : "DB",
+      "developEnvironmentTool" : "Tool",
+      "developEnvironmentCommunication" : "통신",
+      "developEnvironmentEtc" : "기타"
+    },
+    "responsibilityTask" : "담당업무는 백엔드 개발"
+  } ],
+  "academicAbilityResponses" : [ {
+    "schoolName" : "고등학교",
+    "schoolLevel" : "HIGH_SCHOOL",
+    "schoolLevelDescription" : "고등학교",
+    "enterSchoolDate" : "2012-02-01",
+    "graduationDate" : "2015-02-01",
+    "academicState" : "GRADUATION",
+    "majorName" : "문과"
+  } ],
+  "careerResponses" : [ {
+    "companyName" : "삼성",
+    "departmentName" : "개발팀",
+    "companyPosition" : "ASSISTANT_MANAGER",
+    "companyPositionDescription" : "대리",
+    "careerStartDate" : "2020-02-01",
+    "careerEndDate" : "2021-02-01"
+  } ],
+  "educationResponses" : [ {
+    "educationTitle" : "특수교육",
+    "educationOrganization" : "특수기관",
+    "educationStartDate" : "2020-02-01",
+    "educationEndDate" : "2021-02-01"
+  } ],
+  "licenseResponses" : [ {
+    "licenseTitle" : "특수 자격증",
+    "licenseIssuer" : "특수 기관",
+    "acquisitionDate" : "2019-02-22"
+  } ],
+  "languageResponses" : [ {
+    "languageName" : "영어",
+    "languageAbility" : "MIDDLE",
+    "languageAbilityDescription" : "비즈니스 회화가능"
+  } ]
+}
+----

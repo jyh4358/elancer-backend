@@ -1,0 +1,8 @@
+[source,bash]
+----
+$ echo '{
+  "publishingDetailSkills" : [ "HTML5", "CSS", "JQUERY" ],
+  "etcSkill" : "etcSkill"
+}' | http PUT 'http://localhost:8080/freelancer-profile/1/publisher' \
+    'Content-Type:application/json;charset=UTF-8'
+----

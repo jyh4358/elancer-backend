@@ -1,0 +1,36 @@
+GET http://localhost:8080/freelancer/1
+Content-Type: application/json
+
+#res
+#
+# {
+#  "name": "계정 이름",
+#  "birthDate": "2000-01-01",
+#  "email": "email@min.com",
+#  "phone": "010-0101-0101",
+#  "website": null,
+#  "countryType": "KR",
+#  "zipcode": "경기도",
+#  "mainAddress": "성남시",
+#  "detailAddress": "판교",
+#  "fileName": null,
+#  "freelancerWorkTypes": [
+#    "DISTRIBUTION",
+#    "SEMICONDUCTOR"
+#  ],
+#  "workEtcField": "workEtc필드",
+#  "careerYear": 10,
+#  "careerMonth": 2,
+#  "hopeMonthMinPay": 300,
+#  "hopeMonthMaxPay": 600,
+#  "kosaState": "NOT_POSSESS",
+#  "mailReceptionState": "RECEPTION",
+#  "presentWorkState": "JOB_HUNTING",
+#  "hopeWorkState": "AT_COMPANY",
+#  "workPossibleState": "POSSIBLE",
+#  "workStartPossibleDate": "2022-04-30",
+#  "hopeWorkCountry": "KR",
+#  "hopeWorkCity": "서울"
+#}
+#
+#Response code: 200; Time: 199ms; Content length: 586 bytes

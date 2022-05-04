@@ -18,10 +18,10 @@ public class SecurityUserDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByUserId(username).orElseThrow(UserIdNotFoundException::new);
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        Member member = memberRepository.findByUserId(userId).orElseThrow(UserIdNotFoundException::new);
 
-        // 비밀번호가 맞는지는 시큐리티 내부에서 확인해준다.
+        // 비밀번호가 맞는지는 시큐리티 내부에서 확인해준다. 확인해보니 memberDetails(UserDetails)에 password가 있어야하네..? 근데 session에 password를..?
         MemberDetails memberDetails = MemberDetails.userDetailsFrom(member);
 
         return memberDetails;

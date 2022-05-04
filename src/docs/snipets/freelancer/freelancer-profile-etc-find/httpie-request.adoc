@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http GET 'http://localhost:8080/freelancer-profile/1/etc' \
+    'Content-Type:application/json;charset=UTF-8'
+----

@@ -1,5 +1,7 @@
 package com.example.elancer.common.config;
 
+import com.example.elancer.jwt.JwtAuthenticationFilter;
+import com.example.elancer.jwt.JwtTokenProvider;
 import com.example.elancer.login.auth.handler.UserFailureHandler;
 import com.example.elancer.login.auth.handler.UserSuccessHandler;
 import com.example.elancer.login.auth.service.SecurityOAuth2UserService;
@@ -18,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.CorsFilter;
 
 @Slf4j
@@ -28,6 +31,8 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final SecurityOAuth2UserService securityOAuth2UserService;
+
+    private final JwtTokenProvider jwtTokenProvider;
 
     private final CorsFilter corsFilter;
 
@@ -47,8 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .httpBasic().disable()  // 기본 인증방식 비활성화(아이디, 비밀번호를 전달하는..)
                 .authorizeRequests()
-                .antMatchers("/")
-                .anonymous();
+                .antMatchers("/").anonymous()
+                .antMatchers("/member").authenticated()
+                .and()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
 
 

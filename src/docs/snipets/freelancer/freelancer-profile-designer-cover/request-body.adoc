@@ -1,0 +1,9 @@
+[source,options="nowrap"]
+----
+{
+  "designDetailRoles" : [ "APP_DESIGN", "GAME_DESIGN" ],
+  "etcRole" : "etcRole",
+  "designDetailSkills" : [ "AFERE_EFFECT", "THREE_D_MAX_AND_MAYA" ],
+  "etcSkill" : "etcSkill"
+}
+----

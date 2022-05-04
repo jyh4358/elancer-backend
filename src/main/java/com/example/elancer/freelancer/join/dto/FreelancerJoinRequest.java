@@ -37,10 +37,4 @@ public class FreelancerJoinRequest {
     @NotNull
     private LocalDate workStartPossibleDate;
     private MultipartFile thumbnail;
-
-    public void checkPasswordMatch() {
-        if (!this.memberPassword.equals(this.memberPasswordCheck)) {
-            throw new FreelancerCheckPasswordException();
-        }
-    }
 }

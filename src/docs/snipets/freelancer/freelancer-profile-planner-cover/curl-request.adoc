@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/freelancer-profile/1/planner' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "plannerDetailFields" : [ "ACCOUNTING", "APP_PLAN" ],
+  "etcField" : "etcField"
+}'
+----

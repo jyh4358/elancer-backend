@@ -1,0 +1,108 @@
+GET http://localhost:8080/freelancer/1/freelancer-profile
+Content-Type: application/json
+
+#res
+#{
+#  "profileNum": 1,
+#  "greeting": "안녕하세요 정민영 입니다.",
+#  "positionType": "DEVELOPER",
+#  "introduceResponse": {
+#    "introduceName": "소개정보 이름",
+#    "introBackGround": "WHITE",
+#    "introduceVideoURL": "소개정보 url",
+#    "introduceContent": "소개정보 내용"
+#  },
+#  "academicAbilityResponses": [
+#    {
+#      "schoolName": "high school",
+#      "schoolLevel": "HIGH_SCHOOL",
+#      "enterSchoolDate": "2010-02-01",
+#      "graduationDate": "2013-02-01",
+#      "academicState": "GRADUATION",
+#      "majorName": "문과"
+#    },
+#    {
+#      "schoolName": "college",
+#      "schoolLevel": "COLLEGE",
+#      "enterSchoolDate": "2013-02-01",
+#      "graduationDate": "2018-02-01",
+#      "academicState": "GRADUATION",
+#      "majorName": "컴퓨터공학과"
+#    },
+#    {
+#      "schoolName": "university",
+#      "schoolLevel": "UNIVERSITY",
+#      "enterSchoolDate": "2018-02-01",
+#      "graduationDate": "2022-02-01",
+#      "academicState": "GRADUATION",
+#      "majorName": "컴퓨터공학과"
+#    }
+#  ],
+#  "careerResponses": [
+#    {
+#      "companyName": "회사명",
+#      "departmentName": "부서명",
+#      "companyPosition": "TOP_RESEARCHER",
+#      "careerStartDate": "2018-01-01",
+#      "careerEndDate": "2019-01-01"
+#    },
+#    {
+#      "companyName": "회사명2",
+#      "departmentName": "부서명2",
+#      "companyPosition": "TEAM_MANAGER",
+#      "careerStartDate": "2019-01-01",
+#      "careerEndDate": "2020-01-01"
+#    },
+#    {
+#      "companyName": "회사명",
+#      "departmentName": "부서명",
+#      "companyPosition": "STAFF",
+#      "careerStartDate": "2020-01-01",
+#      "careerEndDate": "2021-01-01"
+#    }
+#  ],
+#  "educationResponses": [
+#    {
+#      "educationTitle": "국비교육",
+#      "educationOrganization": "이젠",
+#      "educationStartDate": "2019-01-05",
+#      "educationEndDate": "2019-07-01"
+#    }
+#  ],
+#  "licenseResponses": [
+#    {
+#      "licenseTitle": "정보처리기사",
+#      "licenseIssuer": "한국자격증협회",
+#      "acquisitionDate": "2019-02-20"
+#    }
+#  ],
+#  "languageResponses": [
+#    {
+#      "languageName": "영어",
+#      "languageAbility": "MIDDLE"
+#    }
+#  ],
+#  "projectHistoryResponses": [
+#    {
+#      "projectTitle": "프로젝트명",
+#      "projectStartDate": "2020-01-01",
+#      "projectEndDate": "2020-03-01",
+#      "clientCompany": "고객사",
+#      "workCompany": "상주사",
+#      "developField": "INDUSTRY",
+#      "developRole": "백엔드 개발자",
+#      "developEnvironment": {
+#        "developEnvironmentModel": "개발환경 기종",
+#        "developEnvironmentOS": "개발환경 os",
+#        "developEnvironmentLanguage": "개발언어",
+#        "developEnvironmentDBName": "개발 디비",
+#        "developEnvironmentTool": "개발 툴",
+#        "developEnvironmentCommunication": "개발 통신",
+#        "developEnvironmentEtc": "기타"
+#      },
+#      "responsibilityTask": "담당업무 입니다."
+#    }
+#  ]
+#}
+#
+#Response code: 200; Time: 164ms; Content length: 1980 bytes

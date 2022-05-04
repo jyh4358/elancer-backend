@@ -1,0 +1,14 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/freelancer-profile/1/career' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "careerCoverRequests" : [ {
+    "companyName" : "companyName",
+    "departmentName" : "departmentName",
+    "companyPosition" : "HEAD_OF_DEPARTMENT",
+    "careerStartDate" : "2020-09-01",
+    "careerEndDate" : "2021-10-01"
+  } ]
+}'
+----

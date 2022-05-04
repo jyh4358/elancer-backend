@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description
+
+|`+plannerDetailFields+`
+|`+List<PlannerDetailField>+`
+|프리랜서 기획자 업무분야 정보 필드.
+
+|`+etcField+`
+|`+String+`
+|프리랜서 기획자 기티분야 정보 필드.
+
+|===

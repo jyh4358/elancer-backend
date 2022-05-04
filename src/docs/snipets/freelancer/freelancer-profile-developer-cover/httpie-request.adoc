@@ -1,0 +1,16 @@
+[source,bash]
+----
+$ echo '{
+  "focusSkills" : [ "Java", "Spring" ],
+  "roles" : [ "백엔드 개발자" ],
+  "javaDetailSkills" : [ "SPRING", "BACK_END" ],
+  "mobileAppDetailSkills" : [ "ANDROID" ],
+  "phpOrAspDetailSkills" : [ "PHP" ],
+  "dotNetDetailSkills" : [ "C" ],
+  "javaScriptDetailSkills" : [ "ANGULAR_JS" ],
+  "cDetailSkills" : [ "EMBEDDED" ],
+  "dbDetailSkills" : [ "MARIADB", "MYSQL" ],
+  "etcSkill" : "etc"
+}' | http PUT 'http://localhost:8080/freelancer-profile/1/developer' \
+    'Content-Type:application/json;charset=UTF-8'
+----

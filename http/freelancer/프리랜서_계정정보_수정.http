@@ -1,0 +1,102 @@
+PUT http://localhost:8080/freelancer/1
+Content-Type: application/json
+
+# info
+# CountryType 구성 {
+#    KR("대한민국"),
+#    UK("영국"),
+#    US("미국"),
+#    JP("일본"),
+#    CN("중국")
+# }
+#
+# FreelancerWorkType 구성 {
+#    SHOPPING_MALL("쇼핑몰"),
+#    TRAVEL_AGENCY("여행사"),
+#    FINANCE("금융"),
+#    STOCK("증권"),
+#    CARD("카드"),
+#    INSURANCE("보험"),
+#    UNIVERSITY("대학"),
+#    HOSPITAL("병원"),
+#    PUBLIC_OFFICE("공공기관"),
+#    DISTRIBUTION("물류"),
+#    ACCOUNTING("회계"),
+#    PRODUCTION("제조"),
+#    CONSTRUCTION("건설"),
+#    COMMUNICATION("통신"),
+#    CIRCULATION("유통"),
+#    PRODUCE("생산"),
+#    MEDIA("미디어"),
+#    EDUCATION("교육"),
+#    SEMICONDUCTOR("반도체"),
+#    VEHICLE("자동차"),
+#    CRYPTOCURRENCY("암호화폐"),
+#    BLOCKCHAIN("블록체인"),
+#    BIGDATA("빅데이터"),
+#    ETC("기타")
+#}
+#
+# KOSAState 구성 {
+#    POSSESS("있다"),
+#    NOT_POSSESS("없다")
+# }
+#
+# MailReceptionState 구성 {
+#    RECEPTION("수신"),
+#    NOT_RECEPTION("미수신")
+# }
+#
+# PresentWorkState 구성 {
+#    JOB_HUNTING("구직중"),
+#    REGULAR("정규직[재직중]"),
+#    FREE_AT_COMPANY("프리랜서[상주]"),
+#    FREE_AT_HOME("프리랜서[재택]")
+# }
+#
+# HopeWorkState 구성 [
+#    AT_COMPANY("상주"),
+#    AT_HOME("재택"),
+#    REGULAR("정규직"),
+#    NO_MATTER("관계없음")
+# }
+#
+# WorkPossibleState 구성 {
+#    POSSIBLE("가능"),
+#    IMPOSSIBLE("불가능")
+# }
+#
+
+
+
+#req
+{
+  "name": "계정 이름",
+  "password": "계정password",
+  "passwordCheck": "계정password",
+  "birthDate": "2000-01-01",
+  "email": "email@min.com",
+  "phone": "010-0101-0101",
+  "website": null,
+  "countryType": "KR",
+  "zipcode": "경기도",
+  "mainAddress": "성남시",
+  "detailAddress": "판교",
+  "freelancerWorkTypes": [
+    "DISTRIBUTION", "SEMICONDUCTOR"
+  ],
+  "workEtcField": "workEtc필드",
+  "careerForm": null,
+  "careerYear": 10,
+  "careerMonth": 2,
+  "hopeMonthMinPay": 300,
+  "hopeMonthMaxPay": 600,
+  "kosaState": "NOT_POSSESS",
+  "mailReceptionState": "RECEPTION",
+  "presentWorkState": "JOB_HUNTING",
+  "hopeWorkState": "AT_COMPANY",
+  "workPossibleState": "POSSIBLE",
+  "workStartPossibleDate": "2022-04-30",
+  "hopeWorkCountry": "KR",
+  "hopeWorkCity": "서울"
+}

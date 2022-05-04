@@ -1,0 +1,28 @@
+|===
+|Path|Type|Description
+
+|`+academicAbilityCoverRequests.[0].schoolName+`
+|`+String+`
+|프리랜서 학력정보 학교명 정보 필드.
+
+|`+academicAbilityCoverRequests.[0].schoolLevel+`
+|`+SchoolLevel+`
+|프리랜서 학력정보 학력단계 정보 필드.
+
+|`+academicAbilityCoverRequests.[0].enterSchoolDate+`
+|`+LocalDate+`
+|프리랜서 학력정보 입학일 정보 필드.
+
+|`+academicAbilityCoverRequests.[0].graduationDate+`
+|`+LocalDate+`
+|프리랜서 학력정보 졸업일 정보 필드.
+
+|`+academicAbilityCoverRequests.[0].academicState+`
+|`+AcademicState+`
+|프리랜서 학력정보 현재상태 정보 필드.
+
+|`+academicAbilityCoverRequests.[0].majorName+`
+|`+String+`
+|프리랜서 학력정보 전공 정보 필드.
+
+|===

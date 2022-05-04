@@ -1,0 +1,20 @@
+[source,options="nowrap"]
+----
+{
+  "projectTitle" : "projectTitle",
+  "projectStartDate" : "2020-12-01",
+  "projectEndDate" : "2021-09-01",
+  "clientCompany" : "clientCompany",
+  "workCompany" : "workCompany",
+  "developField" : "APPLICATION",
+  "developRole" : "백엔드 개발자",
+  "developEnvironmentModel" : "model",
+  "developEnvironmentOS" : "OS",
+  "developEnvironmentLanguage" : "language",
+  "developEnvironmentDBName" : "mysql",
+  "developEnvironmentTool" : "tool",
+  "developEnvironmentCommunication" : "communication",
+  "developEnvironmentEtc" : null,
+  "responsibilityTask" : "담당업무"
+}
+----

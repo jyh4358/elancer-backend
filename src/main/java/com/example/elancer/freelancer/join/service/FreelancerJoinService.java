@@ -1,6 +1,8 @@
 package com.example.elancer.freelancer.join.service;
 
+import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancer.join.dto.FreelancerJoinRequest;
+import com.example.elancer.freelancer.join.exception.ExistUserIdException;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
@@ -23,13 +25,16 @@ public class FreelancerJoinService {
 
     @Transactional
     public void joinFreelancer(FreelancerJoinRequest freelancerJoinRequest) {
-        freelancerJoinRequest.checkPasswordMatch();
+        RightRequestChecker.checkPasswordMatch(freelancerJoinRequest.getMemberPassword(), freelancerJoinRequest.getMemberPasswordCheck());
+        checkExistUserId(freelancerJoinRequest);
         Freelancer freelancer = Freelancer.createFreelancer(
                 freelancerJoinRequest.getMemberId(),
                 bCryptPasswordEncoder.encode(freelancerJoinRequest.getMemberPassword()),
                 freelancerJoinRequest.getMemberName(),
                 freelancerJoinRequest.getMemberPhone(),
                 freelancerJoinRequest.getMemberEmail(),
+                null,
+                null,
                 MemberType.FREELANCER,
                 freelancerJoinRequest.getMailReceptionState(),
                 freelancerJoinRequest.getWorkPossibleState(),
@@ -41,6 +46,12 @@ public class FreelancerJoinService {
         Freelancer savedFreelancer = freelancerRepository.save(freelancer);
         
         initializeFreelancerProfile(savedFreelancer);
+    }
+
+    private void checkExistUserId(FreelancerJoinRequest freelancerJoinRequest) {
+        if (freelancerRepository.existsByUserId(freelancerJoinRequest.getMemberId())) {
+            throw new ExistUserIdException();
+        }
     }
 
     private void initializeFreelancerProfile(Freelancer savedFreelancer) {

@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<meta name="author" content="mins1031">
-<title>BUNJANG API Guide</title>
+<meta name="author" content="BackEnd">
+<title>Elancer API Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,9 +440,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>BUNJANG API Guide</h1>
+<h1>Elancer API Guide</h1>
 <div class="details">
-<span id="author" class="author">mins1031</span><br>
+<span id="author" class="author">BackEnd</span><br>
 <span id="revnumber">version 0.0.1-SNAPSHOT</span>
 </div>
 <div id="toc" class="toc2">
@@ -452,7 +452,30 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#overview-http-verbs">HTTP 동사</a></li>
 <li><a href="#overview-http-status-codes">HTTP 상태 코드</a></li>
+<li><a href="#_프리랜서">프리랜서</a></li>
 <li><a href="#resources-freelancer-join">프리랜서 회원가입</a></li>
+<li><a href="#resources-freelancer-account-cover">프리랜서 회원 정보 수정</a></li>
+<li><a href="#resources-freelancer-account-find">프리랜서 회원 정보 조회</a></li>
+<li><a href="#resources-freelancer-profile-intro-cover">프리랜서 프로필 소개정보 저장</a></li>
+<li><a href="#resources-freelancer-profile-academic-cover">프리랜서 프로필 학력정보 저장</a></li>
+<li><a href="#resources-freelancer-profile-career-cover">프리랜서 프로필 근무경력 저장</a></li>
+<li><a href="#resources-freelancer-profile-education-license-language-cover">프리랜서 프로필 교육 및 자격사항 저장</a></li>
+<li><a href="#resources-freelancer-profile-projecthistory-cover">프리랜서 프로필 프로젝트 수행이력 저장</a></li>
+<li><a href="#resources-freelancer-profile-detail-find">프리랜서 프로필 세부정보 조회</a></li>
+<li><a href="#resources-freelancer-profile-simple-find">프리랜서 프로필 요약정보 조회</a></li>
+<li><a href="#resources-freelancer-profile-developer-cover">프리랜서 프로필 개발자 포지션 정보 저장</a></li>
+<li><a href="#resources-freelancer-profile-developer-find">프리랜서 프로필 개발자 포지션 정보 조회</a></li>
+<li><a href="#resources-freelancer-profile-publisher-cover">프리랜서 프로필 퍼블리셔 포지션 정보 저장</a></li>
+<li><a href="#resources-freelancer-profile-publisher-find">프리랜서 프로필 퍼블리셔 포지션 정보 조회</a></li>
+<li><a href="#resources-freelancer-profile-designer-cover">프리랜서 프로필 디자이너 포지션 정보 저장</a></li>
+<li><a href="#resources-freelancer-profile-designer-find">프리랜서 프로필 디자이너 포지션 정보 조회</a></li>
+<li><a href="#resources-freelancer-profile-planner-cover">프리랜서 프로필 기획자 포지션 정보 저장</a></li>
+<li><a href="#resources-freelancer-profile-planner-find">프리랜서 프로필 기획자 포지션 정보 조회</a></li>
+<li><a href="#resources-freelancer-profile-crowdworker-cover">프리랜서 프로필 크라우드워커 포지션 정보 저장</a></li>
+<li><a href="#resources-freelancer-profile-etc-cover">프리랜서 프로필 기타 포지션 정보 저장</a></li>
+<li><a href="#resources-freelancer-profile-etc-find">프리랜서 프로필 기타 포지션 정보 조회</a></li>
+<li><a href="#_기업">기업</a></li>
+<li><a href="#resources-enterprise-join">기업 회원가입</a></li>
 </ul>
 </li>
 </ul>
@@ -545,6 +568,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
+<h2 id="_프리랜서"><a class="link" href="#_프리랜서">프리랜서</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
 <h2 id="resources-freelancer-join"><a class="link" href="#resources-freelancer-join">프리랜서 회원가입</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -554,7 +583,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 356
+Content-Length: 345
 Host: localhost:8080
 
 {
@@ -657,11 +686,2601 @@ Host: localhost:8080
 </table>
 </div>
 </div>
+<div class="sect1">
+<h2 id="resources-freelancer-account-cover"><a class="link" href="#resources-freelancer-account-cover">프리랜서 회원 정보 수정</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>회원정보를 통해 프리랜서 회원 정보를 수정한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer/1 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 816
+Host: localhost:8080
+
+{
+  "name" : "멤버이름",
+  "password" : "패스워드",
+  "passwordCheck" : "패스워드",
+  "birthDate" : "2000-01-01",
+  "email" : "email@email.email.com",
+  "phone" : "010-0101-0101",
+  "website" : "http://web.com",
+  "countryType" : "KR",
+  "zipcode" : "경기도",
+  "mainAddress" : "성남시",
+  "detailAddress" : "중원구",
+  "freelancerWorkTypes" : [ "ACCOUNTING", "BIGDATA" ],
+  "workEtcField" : null,
+  "careerForm" : null,
+  "careerYear" : 9,
+  "careerMonth" : 5,
+  "hopeMonthMinPay" : 400,
+  "hopeMonthMaxPay" : 600,
+  "kosaState" : "NOT_POSSESS",
+  "mailReceptionState" : "RECEPTION",
+  "presentWorkState" : "FREE_AT_COMPANY",
+  "hopeWorkState" : "AT_COMPANY",
+  "workPossibleState" : "POSSIBLE",
+  "workStartPossibleDate" : "2022-02-01",
+  "hopeWorkCountry" : "KR",
+  "hopeWorkCity" : "seoul"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 이름 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>password</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 비밀번호 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>passwordCheck</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 비밀번호 확인 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>birthDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 생년월일 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 이메일 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>phone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 폰번호 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>website</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 웹사이트 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>countryType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CountryType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 거주국가 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zipcode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 거주지 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mainAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 거주지 시동구 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detailAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 거주지 읍면리 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>freelancerWorkTypes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;FreelancerWorkType&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무분야 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>workEtcField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무분야 직접입력 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerForm</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MultipartFile</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 경력기술서 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerYear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 경력 년수 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerMonth</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 경력 개월수 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeMonthMinPay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망 월단가 최소값 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeMonthMaxPay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망 월단가 최대값 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kosaState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KOSAState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 kosa보유 여부 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mailReceptionState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MailReceptionState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 메일수신 여부 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>presentWorkState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PresentWorkState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 현재 업무상태 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeWorkState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopeWorkState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망 업무형태 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>workPossibleState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkPossibleState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무가능 여부 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>workStartPossibleDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무가능일 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeWorkCountry</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CountryType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망지역 국가 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeWorkCity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망지역 도시 정보 필드</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-account-find"><a class="link" href="#resources-freelancer-account-find">프리랜서 회원 정보 조회</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 식별자 정보를 통해 프리랜서 회원 정보를 조회한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/1 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 이름 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>birthDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 생년월일 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 이메일 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>phone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 폰번호 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>website</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 웹사이트 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>countryType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CountryType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 거주국가 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>zipcode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 거주지 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mainAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 거주지 시동구 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>detailAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 거주지 읍면리 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>freelancerWorkTypes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;FreelancerWorkType&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무분야 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>workEtcField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무분야 직접입력 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>fileName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 파일이름 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerYear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 경력 년수 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerMonth</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 경력 개월수 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeMonthMinPay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망 월단가 최소값 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeMonthMaxPay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망 월단가 최대값 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>kosaState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>KOSAState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 kosa보유 여부 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mailReceptionState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>MailReceptionState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 메일수신 여부 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>presentWorkState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PresentWorkState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 현재 업무상태 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeWorkState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>HopeWorkState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망 업무형태 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>workPossibleState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>WorkPossibleState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무가능 여부 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>workStartPossibleDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무가능일 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeWorkCountry</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CountryType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망지역 국가 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hopeWorkCity</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 희망지역 도시 정보 필드</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "name" : "멤버이름",
+  "birthDate" : "2000-01-01",
+  "email" : "email@email.email.com",
+  "phone" : "010-0101-0101",
+  "website" : "http://web.com",
+  "countryType" : "KR",
+  "zipcode" : "경기도",
+  "mainAddress" : "성남시",
+  "detailAddress" : "중원구",
+  "freelancerWorkTypes" : [ "ACCOUNTING", "BIGDATA" ],
+  "workEtcField" : null,
+  "fileName" : null,
+  "careerYear" : 9,
+  "careerMonth" : 5,
+  "hopeMonthMinPay" : 400,
+  "hopeMonthMaxPay" : 600,
+  "kosaState" : "NOT_POSSESS",
+  "mailReceptionState" : "RECEPTION",
+  "presentWorkState" : "FREE_AT_COMPANY",
+  "hopeWorkState" : "AT_COMPANY",
+  "workPossibleState" : "POSSIBLE",
+  "workStartPossibleDate" : "2022-02-01",
+  "hopeWorkCountry" : "KR",
+  "hopeWorkCity" : "seoul"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-intro-cover"><a class="link" href="#resources-freelancer-profile-intro-cover">프리랜서 프로필 소개정보 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프로필 소개정보 입력을 통해 소개정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/intro HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 140
+Host: localhost:8080
+
+{
+  "introName" : "introName",
+  "introBackGround" : "COBALT_BLUE",
+  "introVideoUrl" : "introVideoUrl",
+  "introContent" : "introContent"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 소개이름 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IntroBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 소개배경 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introVideoUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 소개영상 URL 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introContent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 소개글 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "introName" : "introName",
+  "introBackGround" : "COBALT_BLUE",
+  "introVideoUrl" : "introVideoUrl",
+  "introContent" : "introContent"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-academic-cover"><a class="link" href="#resources-freelancer-profile-academic-cover">프리랜서 프로필 학력정보 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프로필 학력정보 입력을 통해 학력정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/academic-ability HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 254
+Host: localhost:8080
+
+{
+  "academicAbilityCoverRequests" : [ {
+    "schoolName" : "schoolName",
+    "schoolLevel" : "HIGH_SCHOOL",
+    "enterSchoolDate" : "2015-02-01",
+    "graduationDate" : "2018-02-01",
+    "academicState" : "GRADUATION",
+    "majorName" : "문과"
+  } ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityCoverRequests.[0].schoolName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학교명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityCoverRequests.[0].schoolLevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SchoolLevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학력단계 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityCoverRequests.[0].enterSchoolDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 입학일 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityCoverRequests.[0].graduationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 졸업일 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityCoverRequests.[0].academicState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AcademicState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 현재상태 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityCoverRequests.[0].majorName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 전공 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "academicAbilityCoverRequests" : [ {
+    "schoolName" : "schoolName",
+    "schoolLevel" : "HIGH_SCHOOL",
+    "enterSchoolDate" : "2015-02-01",
+    "graduationDate" : "2018-02-01",
+    "academicState" : "GRADUATION",
+    "majorName" : "문과"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-career-cover"><a class="link" href="#resources-freelancer-profile-career-cover">프리랜서 프로필 근무경력 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프로필 근무경력 입력을 통해 근무경력 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/career HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 234
+Host: localhost:8080
+
+{
+  "careerCoverRequests" : [ {
+    "companyName" : "companyName",
+    "departmentName" : "departmentName",
+    "companyPosition" : "HEAD_OF_DEPARTMENT",
+    "careerStartDate" : "2020-09-01",
+    "careerEndDate" : "2021-10-01"
+  } ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerCoverRequests.[0].companyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 회사명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerCoverRequests.[0].departmentName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 부서명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerCoverRequests.[0].companyPosition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CompanyPosition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 직책 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerCoverRequests.[0].careerStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 근무시작월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerCoverRequests.[0].careerEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 퇴사월 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "careerCoverRequests" : [ {
+    "companyName" : "companyName",
+    "departmentName" : "departmentName",
+    "companyPosition" : "HEAD_OF_DEPARTMENT",
+    "careerStartDate" : "2020-09-01",
+    "careerEndDate" : "2021-10-01"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-education-license-language-cover"><a class="link" href="#resources-freelancer-profile-education-license-language-cover">프리랜서 프로필 교육 및 자격사항 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프로필 교육 및 자격사항 입력을 통해 교육 및 자격사항 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/education-license-language HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 489
+Host: localhost:8080
+
+{
+  "educationCoverRequests" : [ {
+    "educationTitle" : "우아한테크코스",
+    "educationOrganization" : "우아한형제들",
+    "educationStartDate" : "2020-01-01",
+    "educationEndDate" : "2021-01-01"
+  } ],
+  "licenseCoverRequests" : [ {
+    "licenseTitle" : "정보처리기사",
+    "licenseIssuer" : "한국자격증협회",
+    "acquisitionDate" : "2020-05-20"
+  } ],
+  "languageCoverRequests" : [ {
+    "languageName" : "영어",
+    "languageAbility" : "MIDDLE"
+  } ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationCoverRequests.[0].educationTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationCoverRequests.[0].educationOrganization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육기관명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationCoverRequests.[0].educationStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육시작년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationCoverRequests.[0].educationEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육수료년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseCoverRequests.[0].licenseTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 자격증명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseCoverRequests.[0].licenseIssuer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 발급기관 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseCoverRequests.[0].acquisitionDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 취득년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageCoverRequests.[0].languageName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 외국어명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageCoverRequests.[0].languageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LanguageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 실력 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "educationCoverRequests" : [ {
+    "educationTitle" : "우아한테크코스",
+    "educationOrganization" : "우아한형제들",
+    "educationStartDate" : "2020-01-01",
+    "educationEndDate" : "2021-01-01"
+  } ],
+  "licenseCoverRequests" : [ {
+    "licenseTitle" : "정보처리기사",
+    "licenseIssuer" : "한국자격증협회",
+    "acquisitionDate" : "2020-05-20"
+  } ],
+  "languageCoverRequests" : [ {
+    "languageName" : "영어",
+    "languageAbility" : "MIDDLE"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-projecthistory-cover"><a class="link" href="#resources-freelancer-profile-projecthistory-cover">프리랜서 프로필 프로젝트 수행이력 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프로필 교육 및 자격사항 입력을 통해 교육 및 자격사항 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/project-history HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 578
+Host: localhost:8080
+
+{
+  "projectTitle" : "projectTitle",
+  "projectStartDate" : "2020-12-01",
+  "projectEndDate" : "2021-09-01",
+  "clientCompany" : "clientCompany",
+  "workCompany" : "workCompany",
+  "developField" : "APPLICATION",
+  "developRole" : "백엔드 개발자",
+  "developEnvironmentModel" : "model",
+  "developEnvironmentOS" : "OS",
+  "developEnvironmentLanguage" : "language",
+  "developEnvironmentDBName" : "mysql",
+  "developEnvironmentTool" : "tool",
+  "developEnvironmentCommunication" : "communication",
+  "developEnvironmentEtc" : null,
+  "responsibilityTask" : "담당업무"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트 시작년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트 종료년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clientCompany</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 고객사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>workCompany</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 근무사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>developField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DevelopField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발분야 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>developRole</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>developEnvironmentModel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 기종 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>developEnvironmentOS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 os 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>developEnvironmentLanguage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 언어 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>developEnvironmentDBName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 DB 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>developEnvironmentTool</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>developEnvironmentCommunication</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>developEnvironmentEtc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>responsibilityTask</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 담당업무 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "projectTitle" : "projectTitle",
+  "projectStartDate" : "2020-12-01",
+  "projectEndDate" : "2021-09-01",
+  "clientCompany" : "clientCompany",
+  "workCompany" : "workCompany",
+  "developField" : "APPLICATION",
+  "developRole" : "백엔드 개발자",
+  "developEnvironmentModel" : "model",
+  "developEnvironmentOS" : "OS",
+  "developEnvironmentLanguage" : "language",
+  "developEnvironmentDBName" : "mysql",
+  "developEnvironmentTool" : "tool",
+  "developEnvironmentCommunication" : "communication",
+  "developEnvironmentEtc" : null,
+  "responsibilityTask" : "담당업무"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-detail-find"><a class="link" href="#resources-freelancer-profile-detail-find">프리랜서 프로필 세부정보 조회</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프로필 식별자를 통해 세부정보를 조회한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/1/freelancer-profile HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profileNum</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 식별자 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>greeting</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 인사말 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PositionType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 포지션(스킬) 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceResponse.introduceName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개이름 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceResponse.introBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IntroBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개배경 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceResponse.introduceVideoURL</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개영상 URL 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceResponse.introduceContent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개 글 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].schoolName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학교명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].schoolLevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SchoolLevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학력단계 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].schoolLevelDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학력단계 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].enterSchoolDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 입학일 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].graduationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 졸업일 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].academicState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AcademicState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 현재상태 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].majorName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 전공 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].companyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 회사명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].departmentName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 부서명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].companyPosition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CompanyPosition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 직책 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].companyPositionDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 직책 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].careerStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 근무시작월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].careerEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 퇴사월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationOrganization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육기관명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육시작년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육수료년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseResponses.[0].licenseTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 자격증명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseResponses.[0].licenseIssuer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 발급기관 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseResponses.[0].acquisitionDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 취득년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageResponses.[0].languageName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 외국어명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageResponses.[0].languageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LanguageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 실력 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageResponses.[0].languageAbilityDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LanguageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 실력 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].projectTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].projectStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트 시작년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].projectEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트 종료년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].clientCompany</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 고객사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].workCompany</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 근무사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DevelopField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발분야 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developRole</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentModel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 기종 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentOS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 os 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentLanguage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 언어 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentDBName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 DB 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentTool</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentCommunication</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentEtc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].responsibilityTask</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 담당업무 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "profileNum" : 1,
+  "greeting" : "greeting",
+  "positionType" : "DEVELOPER",
+  "introduceResponse" : {
+    "introduceName" : "소개글",
+    "introBackGround" : "COBALT_BLUE",
+    "introduceVideoURL" : "소개 영상 주소",
+    "introduceContent" : "소개 내용"
+  },
+  "academicAbilityResponses" : [ {
+    "schoolName" : "고등학교",
+    "schoolLevel" : "HIGH_SCHOOL",
+    "schoolLevelDescription" : "고등학교",
+    "enterSchoolDate" : "2012-02-01",
+    "graduationDate" : "2015-02-01",
+    "academicState" : "GRADUATION",
+    "majorName" : "문과"
+  } ],
+  "careerResponses" : [ {
+    "companyName" : "삼성",
+    "departmentName" : "개발팀",
+    "companyPosition" : "ASSISTANT_MANAGER",
+    "companyPositionDescription" : "대리",
+    "careerStartDate" : "2020-02-01",
+    "careerEndDate" : "2021-02-01"
+  } ],
+  "educationResponses" : [ {
+    "educationTitle" : "특수교육",
+    "educationOrganization" : "특수기관",
+    "educationStartDate" : "2020-02-01",
+    "educationEndDate" : "2021-02-01"
+  } ],
+  "licenseResponses" : [ {
+    "licenseTitle" : "특수 자격증",
+    "licenseIssuer" : "특수 기관",
+    "acquisitionDate" : "2019-02-22"
+  } ],
+  "languageResponses" : [ {
+    "languageName" : "영어",
+    "languageAbility" : "MIDDLE",
+    "languageAbilityDescription" : "비즈니스 회화가능"
+  } ],
+  "projectHistoryResponses" : [ {
+    "projectTitle" : "프로젝트명",
+    "projectStartDate" : "2020-02-01",
+    "projectEndDate" : "2021-02-01",
+    "clientCompany" : "고객사명",
+    "workCompany" : "상주사명",
+    "developField" : "APPLICATION",
+    "developRole" : "backend",
+    "developEnvironment" : {
+      "developEnvironmentModel" : "model",
+      "developEnvironmentOS" : "Ms",
+      "developEnvironmentLanguage" : "language",
+      "developEnvironmentDBName" : "DB",
+      "developEnvironmentTool" : "Tool",
+      "developEnvironmentCommunication" : "통신",
+      "developEnvironmentEtc" : "기타"
+    },
+    "responsibilityTask" : "담당업무는 백엔드 개발"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-simple-find"><a class="link" href="#resources-freelancer-profile-simple-find">프리랜서 프로필 요약정보 조회</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프로필 식별자를 통해 요약정보를 조회한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/1/freelancer-profile/simple HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profileNum</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 식별자 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 이름 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>expertise</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 전문성 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scheduleAdherence</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 일정준수 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>initiative</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 적극성 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>communication</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 의사소통 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reemploymentIntention</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 재고용의사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>totalActiveScore</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Double</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 총 평점 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개이름 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IntroBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개배경 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>greeting</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 인사말 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerYear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 경력년수 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PositionType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 포지션(스킬) 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionTypeDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 포지션(스킬) 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceVideoUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개영상 URL 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceContent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개 글 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].schoolName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학교명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].schoolLevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SchoolLevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학력단계 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].schoolLevelDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학력단계 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].enterSchoolDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 입학일 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].graduationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 졸업일 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].academicState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AcademicState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 현재상태 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].majorName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 전공 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].companyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 회사명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].departmentName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 부서명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].companyPosition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CompanyPosition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 직책 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].companyPositionDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 직책 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].careerStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 근무시작월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].careerEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 퇴사월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationOrganization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육기관명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육시작년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육수료년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseResponses.[0].licenseTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 자격증명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseResponses.[0].licenseIssuer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 발급기관 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseResponses.[0].acquisitionDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 취득년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageResponses.[0].languageName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 외국어명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageResponses.[0].languageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LanguageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 실력 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageResponses.[0].languageAbilityDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LanguageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 실력 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].projectTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].projectStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트 시작년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].projectEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트 종료년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].clientCompany</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 고객사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].workCompany</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 근무사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DevelopField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발분야 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developRole</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentModel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 기종 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentOS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 os 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentLanguage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 언어 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentDBName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 DB 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentTool</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentCommunication</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentEtc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].responsibilityTask</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 담당업무 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "profileNum" : 1,
+  "name" : "name",
+  "expertise" : 0,
+  "scheduleAdherence" : 0,
+  "initiative" : 0,
+  "communication" : 0,
+  "reemploymentIntention" : 0,
+  "totalActiveScore" : 0.0,
+  "introduceName" : "소개글",
+  "introBackGround" : "COBALT_BLUE",
+  "greeting" : "greeting",
+  "careerYear" : 0,
+  "positionType" : "DEVELOPER",
+  "positionTypeDescription" : "개발자",
+  "introduceVideoUrl" : "소개 영상 주소",
+  "introduceContent" : "소개 내용",
+  "projectHistoryResponses" : [ {
+    "projectTitle" : "프로젝트명",
+    "projectStartDate" : "2020-02-01",
+    "projectEndDate" : "2021-02-01",
+    "clientCompany" : "고객사명",
+    "workCompany" : "상주사명",
+    "developField" : "APPLICATION",
+    "developRole" : "backend",
+    "developEnvironment" : {
+      "developEnvironmentModel" : "model",
+      "developEnvironmentOS" : "Ms",
+      "developEnvironmentLanguage" : "language",
+      "developEnvironmentDBName" : "DB",
+      "developEnvironmentTool" : "Tool",
+      "developEnvironmentCommunication" : "통신",
+      "developEnvironmentEtc" : "기타"
+    },
+    "responsibilityTask" : "담당업무는 백엔드 개발"
+  } ],
+  "academicAbilityResponses" : [ {
+    "schoolName" : "고등학교",
+    "schoolLevel" : "HIGH_SCHOOL",
+    "schoolLevelDescription" : "고등학교",
+    "enterSchoolDate" : "2012-02-01",
+    "graduationDate" : "2015-02-01",
+    "academicState" : "GRADUATION",
+    "majorName" : "문과"
+  } ],
+  "careerResponses" : [ {
+    "companyName" : "삼성",
+    "departmentName" : "개발팀",
+    "companyPosition" : "ASSISTANT_MANAGER",
+    "companyPositionDescription" : "대리",
+    "careerStartDate" : "2020-02-01",
+    "careerEndDate" : "2021-02-01"
+  } ],
+  "educationResponses" : [ {
+    "educationTitle" : "특수교육",
+    "educationOrganization" : "특수기관",
+    "educationStartDate" : "2020-02-01",
+    "educationEndDate" : "2021-02-01"
+  } ],
+  "licenseResponses" : [ {
+    "licenseTitle" : "특수 자격증",
+    "licenseIssuer" : "특수 기관",
+    "acquisitionDate" : "2019-02-22"
+  } ],
+  "languageResponses" : [ {
+    "languageName" : "영어",
+    "languageAbility" : "MIDDLE",
+    "languageAbilityDescription" : "비즈니스 회화가능"
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-developer-cover"><a class="link" href="#resources-freelancer-profile-developer-cover">프리랜서 프로필 개발자 포지션 정보 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 개발자 스킬정보 입력을 통해 개발자 포지션 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/developer HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 395
+Host: localhost:8080
+
+{
+  "focusSkills" : [ "Java", "Spring" ],
+  "roles" : [ "백엔드 개발자" ],
+  "javaDetailSkills" : [ "SPRING", "BACK_END" ],
+  "mobileAppDetailSkills" : [ "ANDROID" ],
+  "phpOrAspDetailSkills" : [ "PHP" ],
+  "dotNetDetailSkills" : [ "C" ],
+  "javaScriptDetailSkills" : [ "ANGULAR_JS" ],
+  "cDetailSkills" : [ "EMBEDDED" ],
+  "dbDetailSkills" : [ "MARIADB", "MYSQL" ],
+  "etcSkill" : "etc"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>focusSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 주언어 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>roles</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javaDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;JavaDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 JAVA 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mobileAppDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;MobileAppDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 Mobile App 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>phpOrAspDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;PhpOrAspDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 PHP/ASP 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dotNetDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;DotNetDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 .NET 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javaScriptDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;JavaScriptDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 JavaScript 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;CDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 C/C++ 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dbDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;DBDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 DB 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcSkill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 기티스킬 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "focusSkills" : [ "Java", "Spring" ],
+  "roles" : [ "백엔드 개발자" ],
+  "javaDetailSkills" : [ "SPRING", "BACK_END" ],
+  "mobileAppDetailSkills" : [ "ANDROID" ],
+  "phpOrAspDetailSkills" : [ "PHP" ],
+  "dotNetDetailSkills" : [ "C" ],
+  "javaScriptDetailSkills" : [ "ANGULAR_JS" ],
+  "cDetailSkills" : [ "EMBEDDED" ],
+  "dbDetailSkills" : [ "MARIADB", "MYSQL" ],
+  "etcSkill" : "etc"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-developer-find"><a class="link" href="#resources-freelancer-profile-developer-find">프리랜서 프로필 개발자 포지션 정보 조회</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 기타 스킬정보 입력을 통해 기타 포지션 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/developer HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>focusSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 주언어 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>roles</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javaDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;JavaDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 JAVA 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mobileAppDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;MobileAppDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 Mobile App 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>phpOrAspDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;PhpOrAspDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 PHP/ASP 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dotNetDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;DotNetDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 .NET 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javaScriptDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;JavaScriptDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 JavaScript 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cdetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;CDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 C/C++ 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dbDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;DBDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 DB 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcSkill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 개발자 기티스킬 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "focusSkills" : [ "java", "spring" ],
+  "roles" : [ "backend" ],
+  "javaDetailSkills" : [ "SPRING", "BACK_END" ],
+  "mobileAppDetailSkills" : [ "ANDROID" ],
+  "phpOrAspDetailSkills" : [ "PHP" ],
+  "dotNetDetailSkills" : [ "C" ],
+  "javaScriptDetailSkills" : [ "ANGULAR_JS" ],
+  "dbDetailSkills" : [ "MARIADB", "MYSQL" ],
+  "etcSkill" : "etc",
+  "cdetailSkills" : [ "EMBEDDED" ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-publisher-cover"><a class="link" href="#resources-freelancer-profile-publisher-cover">프리랜서 프로필 퍼블리셔 포지션 정보 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 퍼블리셔 스킬정보 입력을 통해 퍼블리셔 포지션 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/publisher HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 88
+Host: localhost:8080
+
+{
+  "publishingDetailSkills" : [ "HTML5", "CSS", "JQUERY" ],
+  "etcSkill" : "etcSkill"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>publishingDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;PublishingDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 퍼블리셔 스킬,경험 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcSkill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 퍼블리셔 기티스킬 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "publishingDetailSkills" : [ "HTML5", "CSS", "JQUERY" ],
+  "etcSkill" : "etcSkill"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-publisher-find"><a class="link" href="#resources-freelancer-profile-publisher-find">프리랜서 프로필 퍼블리셔 포지션 정보 조회</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 퍼블리셔 스킬정보 입력을 통해 퍼블리셔 포지션 정보를 조한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/publisher HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>publishingDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;PublishingDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 퍼블리셔 스킬,경험 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcSkill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 퍼블리셔 기티스킬 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "publishingDetailSkills" : [ "HTML5", "CSS" ],
+  "etcSkill" : "etcPubSkill"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-designer-cover"><a class="link" href="#resources-freelancer-profile-designer-cover">프리랜서 프로필 디자이너 포지션 정보 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 디자이너 스킬정보 입력을 통해 디자이너 포지션 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/designer HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 180
+Host: localhost:8080
+
+{
+  "designDetailRoles" : [ "APP_DESIGN", "GAME_DESIGN" ],
+  "etcRole" : "etcRole",
+  "designDetailSkills" : [ "AFERE_EFFECT", "THREE_D_MAX_AND_MAYA" ],
+  "etcSkill" : "etcSkill"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>designDetailRoles</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;DesignDetailRole&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 디자이너 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcRole</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 디자이너 기티역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>designDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;DesignDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 디자이너 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcSkill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 디자이너 기티스킬 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "designDetailRoles" : [ "APP_DESIGN", "GAME_DESIGN" ],
+  "etcRole" : "etcRole",
+  "designDetailSkills" : [ "AFERE_EFFECT", "THREE_D_MAX_AND_MAYA" ],
+  "etcSkill" : "etcSkill"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-designer-find"><a class="link" href="#resources-freelancer-profile-designer-find">프리랜서 프로필 디자이너 포지션 정보 조회</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 디자이너 스킬정보 입력을 통해 디자이너 포지션 정보를 조한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/designer HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>designDetailRoles</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;DesignDetailRole&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 디자이너 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcRole</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 디자이너 기티역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>designDetailSkills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;DesignDetailSkill&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 디자이너 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcSkill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 디자이너 기티스킬 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "designDetailRoles" : [ "APP_DESIGN", "GAME_DESIGN" ],
+  "etcRole" : "etcRole",
+  "designDetailSkills" : [ "FLASH" ],
+  "etcSkill" : "etcSkill"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-planner-cover"><a class="link" href="#resources-freelancer-profile-planner-cover">프리랜서 프로필 기획자 포지션 정보 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 기획자 스킬정보 입력을 통해 기획자 포지션 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/planner HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 85
+Host: localhost:8080
+
+{
+  "plannerDetailFields" : [ "ACCOUNTING", "APP_PLAN" ],
+  "etcField" : "etcField"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plannerDetailFields</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;PlannerDetailField&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 기획자 업무분야 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 기획자 기티분야 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "plannerDetailFields" : [ "ACCOUNTING", "APP_PLAN" ],
+  "etcField" : "etcField"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-planner-find"><a class="link" href="#resources-freelancer-profile-planner-find">프리랜서 프로필 기획자 포지션 정보 조회</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 기획자 스킬정보 입력을 통해 기획자 포지션 정보를 조회한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/planner HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>plannerDetailFields</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;PlannerDetailField&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 기획자 업무분야 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 기획자 기티분야 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "plannerDetailFields" : [ "APP_PLAN", "WEB_PLAN" ],
+  "etcField" : "etcField"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-crowdworker-cover"><a class="link" href="#resources-freelancer-profile-crowdworker-cover">프리랜서 프로필 크라우드워커 포지션 정보 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 크라우드워커 스킬정보 입력을 통해 크라우드워커 포지션 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/crowd-worker HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 4
+Host: localhost:8080
+
+null</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-etc-cover"><a class="link" href="#resources-freelancer-profile-etc-cover">프리랜서 프로필 기타 포지션 정보 저장</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 기타 스킬정보 입력을 통해 기타 포지션 정보를 저장한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/etc HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 81
+Host: localhost:8080
+
+{
+  "etcDetailRoles" : [ "AA", "DBA" ],
+  "positionEtcRole" : "positionEtcRole"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcDetailRoles</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;EtcDetailRole&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 기티파트 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionEtcRole</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 기타파트 기티분야 역할외 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "etcDetailRoles" : [ "AA", "DBA" ],
+  "positionEtcRole" : "positionEtcRole"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-etc-find"><a class="link" href="#resources-freelancer-profile-etc-find">프리랜서 프로필 기타 포지션 정보 조회</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 기타 스킬정보 입력을 통해 기타 포지션 정보를 조회한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/etc HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>etcDetailRoles</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;EtcDetailRole&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 기티파트 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionEtcRole</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 기타파트 기티분야 역할외 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "etcDetailRoles" : [ "DBA" ],
+  "positionEtcRole" : "positionEtcField"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_기업"><a class="link" href="#_기업">기업</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-enterprise-join"><a class="link" href="#resources-enterprise-join">기업 회원가입</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-04-21 13:50:30 +0900
+Last updated 2022-05-02 14:33:35 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

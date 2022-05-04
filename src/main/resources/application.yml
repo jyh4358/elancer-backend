@@ -7,5 +7,3 @@ spring:
       - oauth
       - security
     active: local
-server:
-  port: 8001

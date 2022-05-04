@@ -1,25 +1,11 @@
 package com.example.elancer.member.domain;
 
-import com.example.elancer.enterprise.repository.EnterpriseRepository;
-import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancer.model.MailReceptionState;
-import com.example.elancer.freelancer.model.WorkPossibleState;
-import com.example.elancer.freelancer.repository.FreelancerRepository;
-
-import com.example.elancer.member.repository.MemberRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.time.LocalDate;
-import java.util.List;
-
-//@DataJpaTest
-//@ActiveProfiles("h2")
-//class MemberTest {
+@DataJpaTest
+@ActiveProfiles("h2")
+class MemberTest {
 //    @Autowired
 //    private MemberRepository memberRepository;
 //
@@ -94,4 +80,4 @@ import java.util.List;
 //        Assertions.assertThat(allFree).hasSize(3);
 ////        Assertions.assertThat(allEnter).hasSize(3);
 //    }
-//}
+}

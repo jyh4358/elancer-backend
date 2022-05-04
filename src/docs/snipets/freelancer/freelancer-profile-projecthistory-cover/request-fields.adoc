@@ -1,0 +1,64 @@
+|===
+|Path|Type|Description
+
+|`+projectTitle+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 프로젝트명 정보 필드.
+
+|`+projectStartDate+`
+|`+LocalDate+`
+|프리랜서 프로젝트 수행이력 프로젝트 시작년월 정보 필드.
+
+|`+projectEndDate+`
+|`+LocalDate+`
+|프리랜서 프로젝트 수행이력 프로젝트 종료년월 정보 필드.
+
+|`+clientCompany+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 고객사 정보 필드.
+
+|`+workCompany+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 근무사 정보 필드.
+
+|`+developField+`
+|`+DevelopField+`
+|프리랜서 프로젝트 수행이력 개발분야 정보 필드.
+
+|`+developRole+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 역할 정보 필드.
+
+|`+developEnvironmentModel+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 기종 정보 필드.
+
+|`+developEnvironmentOS+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 os 정보 필드.
+
+|`+developEnvironmentLanguage+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 언어 정보 필드.
+
+|`+developEnvironmentDBName+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 DB 정보 필드.
+
+|`+developEnvironmentTool+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드.
+
+|`+developEnvironmentCommunication+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드.
+
+|`+developEnvironmentEtc+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드.
+
+|`+responsibilityTask+`
+|`+String+`
+|프리랜서 프로젝트 수행이력 담당업무 정보 필드.
+
+|===

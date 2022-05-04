@@ -1,0 +1,22 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/freelancer-profile/1/education-license-language' -i -X PUT \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -d '{
+  "educationCoverRequests" : [ {
+    "educationTitle" : "우아한테크코스",
+    "educationOrganization" : "우아한형제들",
+    "educationStartDate" : "2020-01-01",
+    "educationEndDate" : "2021-01-01"
+  } ],
+  "licenseCoverRequests" : [ {
+    "licenseTitle" : "정보처리기사",
+    "licenseIssuer" : "한국자격증협회",
+    "acquisitionDate" : "2020-05-20"
+  } ],
+  "languageCoverRequests" : [ {
+    "languageName" : "영어",
+    "languageAbility" : "MIDDLE"
+  } ]
+}'
+----

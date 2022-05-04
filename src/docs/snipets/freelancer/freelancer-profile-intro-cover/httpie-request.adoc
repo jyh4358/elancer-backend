@@ -1,0 +1,10 @@
+[source,bash]
+----
+$ echo '{
+  "introName" : "introName",
+  "introBackGround" : "COBALT_BLUE",
+  "introVideoUrl" : "introVideoUrl",
+  "introContent" : "introContent"
+}' | http PUT 'http://localhost:8080/freelancer-profile/1/intro' \
+    'Content-Type:application/json;charset=UTF-8'
+----
