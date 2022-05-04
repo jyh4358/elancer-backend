@@ -1,4 +1,4 @@
-package com.example.elancer.wishproject.model;
+package com.example.elancer.wishprojects.model;
 
 import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.freelancer.model.Freelancer;

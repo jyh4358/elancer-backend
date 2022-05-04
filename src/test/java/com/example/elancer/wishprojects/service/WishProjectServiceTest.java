@@ -1,13 +1,10 @@
-package com.example.elancer.wishproject.service;
+package com.example.elancer.wishprojects.service;
 
 import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
-import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
-import com.example.elancer.freelancerprofile.model.academic.state.AcademicState;
-import com.example.elancer.freelancerprofile.model.academic.state.SchoolLevel;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
@@ -15,9 +12,9 @@ import com.example.elancer.member.domain.MemberType;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectBackGround;
 import com.example.elancer.project.repository.ProjectRepository;
-import com.example.elancer.wishproject.dto.WishProjectSaveRequest;
-import com.example.elancer.wishproject.model.WishProject;
-import com.example.elancer.wishproject.repository.WishProjectRepository;
+import com.example.elancer.wishprojects.dto.WishProjectSaveRequest;
+import com.example.elancer.wishprojects.model.WishProject;
+import com.example.elancer.wishprojects.repository.WishProjectRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -26,8 +23,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 class WishProjectServiceTest extends ServiceBaseTest {

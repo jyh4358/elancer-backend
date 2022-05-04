@@ -62,6 +62,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
 
+    @Autowired
+    private DeveloperRepository developerRepository;
+    @Autowired
+    private PublisherRepository publisherRepository;
+    @Autowired
+    private DesignerRepository designerRepository;
+    @Autowired
+    private PlannerRepository plannerRepository;
+    @Autowired
+    private PositionEtcRepository positionEtcRepository;
+
+
+
     @DisplayName("프리랜서 프로필 개발자 상세 조회 통합테스트")
     @Test
     public void 프리랜서_프로필_개발자_상세조회() throws Exception {

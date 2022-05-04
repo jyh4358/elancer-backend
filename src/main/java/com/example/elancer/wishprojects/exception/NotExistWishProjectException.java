@@ -1,4 +1,4 @@
-package com.example.elancer.wishproject.exception;
+package com.example.elancer.wishprojects.exception;
 
 public class NotExistWishProjectException extends RuntimeException {
     private static final String MESSAGE = "프로젝트찜 정보가 없습니다. 잘못된 요청입니다.";

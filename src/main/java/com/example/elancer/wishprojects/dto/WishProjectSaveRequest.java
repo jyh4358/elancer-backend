@@ -1,4 +1,4 @@
-package com.example.elancer.wishproject.dto;
+package com.example.elancer.wishprojects.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
