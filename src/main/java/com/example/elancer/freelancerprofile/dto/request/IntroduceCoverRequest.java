@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class IntroduceCoverRequest {
     private String introName;
-    @NotNull
     private IntroBackGround introBackGround;
     private String introVideoUrl;
     private String introContent;
