@@ -14,14 +14,14 @@ Content-Type: application/json
 
 #req
 {
-  "memberName": "정민영",
-  "memberId": "minyoung@@",
-  "memberPassword": "minmin!",
-  "memberPasswordCheck": "minmin!",
-  "memberEmail": "minyoung@email.com",
-  "mailReceptionState": "RECEPTION",
-  "memberPhone": "minPhone",
-  "workPossibleState": "POSSIBLE",
-  "workStartPossibleDate": "2022-01-01",
-  "thumbnail": null
+  "memberName" : "memberName",
+  "memberId" : "memberID",
+  "memberPassword" : "password",
+  "memberPasswordCheck" : "password",
+  "memberEmail" : "membmer@email.com",
+  "mailReceptionState" : "NOT_RECEPTION",
+  "memberPhone" : "memberPhone",
+  "workPossibleState" : "POSSIBLE",
+  "workStartPossibleDate" : "2022-10-10",
+  "thumbnail" : null
 }

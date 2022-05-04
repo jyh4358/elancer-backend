@@ -1,12 +1,14 @@
 package com.example.elancer.freelancer.dto;
 
 import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancer.model.FreelancerAccountInfo;
 import com.example.elancer.freelancer.model.FreelancerWorkType;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancer.model.KOSAState;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.PresentWorkState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
+import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -52,25 +55,25 @@ public class FreelancerAccountDetailResponse {
                 freelancer.getEmail(),
                 freelancer.getPhone(),
                 freelancer.getWebsite(),
-                freelancer.getAddress().getCountry(),
-                freelancer.getAddress().getZipcode(),
-                freelancer.getAddress().getMainAddress(),
-                freelancer.getAddress().getDetailAddress(),
+                Optional.ofNullable(freelancer.getAddress()).map(Address::getCountry).orElse(null),
+                Optional.ofNullable(freelancer.getAddress()).map(Address::getZipcode).orElse(null),
+                Optional.ofNullable(freelancer.getAddress()).map(Address::getMainAddress).orElse(null),
+                Optional.ofNullable(freelancer.getAddress()).map(Address::getDetailAddress).orElse(null),
                 freelancer.getFreelancerWorkTypesInFreelancer(),
-                freelancer.getFreelancerAccountInfo().getWorkEtcField(),
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getWorkEtcField).orElse(null),
                 freelancer.getCareerFormFileName(),
-                freelancer.getFreelancerAccountInfo().getCareerYear(),
-                freelancer.getFreelancerAccountInfo().getCareerMonth(),
-                freelancer.getFreelancerAccountInfo().getHopeMonthMinPay(),
-                freelancer.getFreelancerAccountInfo().getHopeMonthMaxPay(),
-                freelancer.getFreelancerAccountInfo().getKosaState(),
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getCareerYear).orElse(null),
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getCareerMonth).orElse(null),
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getHopeMonthMinPay).orElse(null),
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getHopeMonthMaxPay).orElse(null),
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getKosaState).orElse(null),
                 freelancer.getFreelancerAccountInfo().getMailReceptionState(),
-                freelancer.getFreelancerAccountInfo().getPresentWorkState(),
-                freelancer.getFreelancerAccountInfo().getHopeWorkState(),
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getPresentWorkState).orElse(null),
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getHopeWorkState).orElse(null),
                 freelancer.getFreelancerAccountInfo().getWorkPossibleState(),
                 freelancer.getFreelancerAccountInfo().getWorkStartPossibleDate(),
-                freelancer.getFreelancerAccountInfo().getHopeWorkCountry(),
-                freelancer.getFreelancerAccountInfo().getHopeWorkCity()
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getHopeWorkCountry).orElse(null),
+                Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getHopeWorkCity).orElse(null)
         );
     }
 }
