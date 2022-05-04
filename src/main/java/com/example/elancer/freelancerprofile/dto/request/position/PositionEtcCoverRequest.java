@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.dto.request.position;
 
+import com.example.elancer.common.validatemessages.PositionRequestMessages;
 import com.example.elancer.freelancerprofile.model.position.etc.EtcDetailRole;
 import com.example.elancer.freelancerprofile.model.position.etc.EtcRole;
 import com.example.elancer.freelancerprofile.model.position.etc.PositionEtc;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 public class PositionEtcCoverRequest {
 
     @Size(max = 3)
-    @NotNull
+    @NotNull(message = PositionRequestMessages.POSITION_ETC_ROLES_NULL_MESSAGE)
     private List<EtcDetailRole> etcDetailRoles;
     private String positionEtcRole;
 

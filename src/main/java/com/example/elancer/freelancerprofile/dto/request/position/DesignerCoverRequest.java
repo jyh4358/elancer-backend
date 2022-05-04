@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.dto.request.position;
 
+import com.example.elancer.common.validatemessages.PositionRequestMessages;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignRole;
@@ -10,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +20,10 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class DesignerCoverRequest {
+    @NotNull(message = PositionRequestMessages.DESIGNER_ROLES_NULL_MESSAGE)
     private List<DesignDetailRole> designDetailRoles;
     private String etcRole;
+    @NotNull(message = PositionRequestMessages.DESIGNER_SKILLS_NULL_MESSAGE)
     private List<DesignDetailSkill> designDetailSkills;
     private String etcSkill;
 
