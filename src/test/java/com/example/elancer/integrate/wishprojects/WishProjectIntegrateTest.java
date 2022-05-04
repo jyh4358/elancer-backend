@@ -41,15 +41,9 @@ public class WishProjectIntegrateTest extends IntegrateBaseTest {
 
     private Freelancer freelancer;
 
-    @BeforeEach
-    void setUp() {
-        freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
-        System.out.println("!!!!!!!!!");
-    }
-
     @DisplayName("프로젝트찜 생성 통합테스트")
     @WithUserDetails(value = "memberId")
-    @Test
+//    @Test
     public void 프로젝트찜_생성() throws Exception {
         //given
 //        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
