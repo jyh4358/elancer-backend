@@ -1,5 +1,6 @@
 package com.example.elancer.freelancer.dto;
 
+import com.example.elancer.common.validatemessages.FreelancerRequestMessages;
 import com.example.elancer.freelancer.model.FreelancerWorkType;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancer.model.KOSAState;
@@ -25,55 +26,55 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class FreelancerAccountCoverRequest {
-    @NotBlank
+    @NotBlank(message = FreelancerRequestMessages.FREELANCER_NAME_BLANK_MESSAGE)
     private String name;
-    @NotBlank
+    @NotBlank(message = FreelancerRequestMessages.FREELANCER_PASSWORD_BLANK_MESSAGE)
     private String password;
-    @NotBlank
+    @NotBlank(message = FreelancerRequestMessages.FREELANCER_PASSWORD_CHECK_BLANK_MESSAGE)
     private String passwordCheck;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_BIRTHDATE_NULL_MESSAGE)
     private LocalDate birthDate;
-    @NotBlank
+    @NotBlank(message = FreelancerRequestMessages.FREELANCER_EMAIL_BLANK_MESSAGE)
     private String email;
-    @NotBlank
+    @NotBlank(message = FreelancerRequestMessages.FREELANCER_PHONE_BLANK_MESSAGE)
     private String phone;
     private String website;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_COUNTRY_TYPE_NULL_MESSAGE)
     private CountryType countryType;
-    @NotBlank
+    @NotBlank(message = FreelancerRequestMessages.FREELANCER_ZIPCODE_BLANK_MESSAGE)
     private String zipcode;
-    @NotBlank
+    @NotBlank(message = FreelancerRequestMessages.FREELANCER_MAIN_ADDRESS_BLANK_MESSAGE)
     private String mainAddress;
-    @NotBlank
+    @NotBlank(message = FreelancerRequestMessages.FREELANCER_DETAIL_ADDRESS_BLANK_MESSAGE)
     private String detailAddress;
 
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_WORK_TYPE_NULL_MESSAGE)
     @Size(max = 3)
     private List<FreelancerWorkType> freelancerWorkTypes;
     private String workEtcField;
 
     private MultipartFile careerForm;
 
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_CAREER_YEAR_NULL_MESSAGE)
     private int careerYear;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_CAREER_MONTH_NULL_MESSAGE)
     private int careerMonth;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_HOPE_MONTH_MIN_PAY_NULL_MESSAGE)
     private int hopeMonthMinPay;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_HOPE_MONTH_MAX_PAY_NULL_MESSAGE)
     private int hopeMonthMaxPay;
 
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_KOSASTAE_NULL_MESSAGE)
     private KOSAState kosaState;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_MAIL_RECEPTION_STATE_NULL_MESSAGE)
     private MailReceptionState mailReceptionState;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_PRESENT_WORK_STATE_NULL_MESSAGE)
     private PresentWorkState presentWorkState;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_HOPE_WORK_STATE_NULL_MESSAGE)
     private HopeWorkState hopeWorkState;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_WORK_POSSIBLE_STATE_NULL_MESSAGE)
     private WorkPossibleState workPossibleState;
-    @NotNull
+    @NotNull(message = FreelancerRequestMessages.FREELANCER_WORK_START_POSSIBLE_DATE_NULL_MESSAGE)
     private LocalDate workStartPossibleDate;
 
     private CountryType hopeWorkCountry;
