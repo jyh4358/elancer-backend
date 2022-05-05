@@ -1,5 +1,8 @@
 package com.example.elancer.freelancerprofile.model.position.developer.phpaspskill;
 
+import lombok.Getter;
+
+@Getter
 public enum PhpOrAspDetailSkill {
     PHP("PHP"),
     LARAVEL("laravel"),

@@ -1,5 +1,8 @@
 package com.example.elancer.freelancerprofile.model.position.developer.dotnet;
 
+import lombok.Getter;
+
+@Getter
 public enum DotNetDetailSkill {
     ASP_DOT_NET("ASP.net"),
     C("C"),

@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.dtd;
+package com.example.elancer.freelancerprofile.dto;
 
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
