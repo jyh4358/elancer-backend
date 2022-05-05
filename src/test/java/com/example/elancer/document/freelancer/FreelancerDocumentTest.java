@@ -3,6 +3,7 @@ package com.example.elancer.document.freelancer;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.freelancer.controller.FreelancerControllerPath;
+import com.example.elancer.freelancer.controller.FreelancerEnumControllerPath;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
 import com.example.elancer.freelancer.join.controller.FreelancerJoinControllerPath;
 import com.example.elancer.freelancer.join.dto.FreelancerJoinRequest;
@@ -252,6 +253,42 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("workStartPossibleDate").type("LocalDate").description("회원 업무가능일 정보 필드"),
                                 fieldWithPath("hopeWorkCountry").type("CountryType").description("회원 희망지역 국가 정보 필드"),
                                 fieldWithPath("hopeWorkCity").type("String").description("회원 희망지역 도시 정보 필드")
+                        )
+                ));
+    }
+
+    @DisplayName("프리랜서 국가정보 조회 문서화 테스트")
+    @Test
+    public void 프래랜서_국가정보_조회_문서화() throws Exception {
+        //when & then
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerEnumControllerPath.FREELANCER_COUNTRIES_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("freelancer-countryType-names-find",
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                        ),
+                        responseFields(
+                                fieldWithPath("countryNames").type("List<String>").description("거주국가 이름 리스트 정보 필드")
+                        )
+                ));
+    }
+
+    @DisplayName("프리랜서 업무분야 조회 문서화 테스트")
+    @Test
+    public void 프래랜서_업무분야_조회_문서화() throws Exception {
+        //when & then
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerEnumControllerPath.FREELANCER_WORK_TYPE_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("freelancer-worktype-names-find",
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                        ),
+                        responseFields(
+                                fieldWithPath("workTypeNames").type("List<String>").description("업무분야 이름 리스트 정보 필드")
                         )
                 ));
     }

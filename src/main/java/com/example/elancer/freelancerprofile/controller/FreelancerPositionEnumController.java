@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.controller;
 
 import com.example.elancer.freelancerprofile.dto.DeveloperSkillsResponse;
+import com.example.elancer.freelancerprofile.dto.ProfileEnumResponse;
 import com.example.elancer.freelancerprofile.service.FreelancerPositionEnumService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,9 @@ public class FreelancerPositionEnumController {
         return new ResponseEntity<DeveloperSkillsResponse>(developerSkillNames, HttpStatus.OK);
     }
 
-
-
-
+    @GetMapping(FreelancerPositionEnumControllerPath.FREELANCER_PROFILE_ENUMS_FIND)
+    public ResponseEntity<ProfileEnumResponse> findProfileEnumNames() {
+        ProfileEnumResponse profileEnumNames = freelancerPositionEnumService.findProfileEnumNames();
+        return new ResponseEntity<ProfileEnumResponse>(profileEnumNames, HttpStatus.OK);
+    }
 }
