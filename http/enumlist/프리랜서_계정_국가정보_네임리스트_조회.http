@@ -1,0 +1,15 @@
+GET http://localhost:8080/countries
+Content-Type: application/json
+
+#res
+#{
+#  "countryNames": [
+#    "대한민국",
+#    "영국",
+#    "미국",
+#    "일본",
+#    "중국"
+#  ]
+#}
+#
+#Response code: 200; Time: 99ms; Content length: 45 bytes
