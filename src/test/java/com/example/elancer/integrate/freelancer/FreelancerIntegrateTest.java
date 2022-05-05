@@ -2,6 +2,7 @@ package com.example.elancer.integrate.freelancer;
 
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.controller.FreelancerControllerPath;
+import com.example.elancer.freelancer.controller.FreelancerEnumControllerPath;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
 import com.example.elancer.freelancer.join.controller.FreelancerJoinControllerPath;
 import com.example.elancer.freelancer.join.dto.FreelancerJoinRequest;
@@ -167,6 +168,28 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value(updatedFreelancer.getName()))
+                .andDo(print());
+    }
+
+    @DisplayName("프리랜서 국가정보 조회 통합테스트")
+    @Test
+    public void 프래랜서_국가정보_조회_통합테스트() throws Exception {
+        //when & then
+        mockMvc.perform(get(FreelancerEnumControllerPath.FREELANCER_COUNTRIES_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("countryNames.[0]").value("대한민국"))
+                .andDo(print());
+    }
+
+    @DisplayName("프리랜서 업무분야 조회 통합테스트")
+    @Test
+    public void 프래랜서_업무분야_조회_통합테스트() throws Exception {
+        //when & then
+        mockMvc.perform(get(FreelancerEnumControllerPath.FREELANCER_WORK_TYPE_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("workTypeNames.[0]").value("쇼핑몰"))
                 .andDo(print());
     }
 

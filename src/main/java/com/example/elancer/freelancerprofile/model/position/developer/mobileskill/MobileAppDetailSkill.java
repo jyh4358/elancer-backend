@@ -1,5 +1,8 @@
 package com.example.elancer.freelancerprofile.model.position.developer.mobileskill;
 
+import lombok.Getter;
+
+@Getter
 public enum MobileAppDetailSkill {
     HYBRID("Hybrid"),
     ANDROID("Android"),

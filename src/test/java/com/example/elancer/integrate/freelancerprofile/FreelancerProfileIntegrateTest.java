@@ -1,9 +1,11 @@
 package com.example.elancer.integrate.freelancerprofile;
 
 import com.example.elancer.common.FreelancerHelper;
+import com.example.elancer.freelancer.controller.FreelancerEnumControllerPath;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancerprofile.controller.FreelancerPositionEnumControllerPath;
 import com.example.elancer.freelancerprofile.controller.FreelancerProfileAlterControllerPath;
 import com.example.elancer.freelancerprofile.controller.FreelancerProfileFindControllerPath;
 import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequest;
@@ -384,6 +386,39 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value(freelancer.getName()))
+                .andDo(print());
+
+    }
+
+    @DisplayName("프리랜서 프로필 개발자 스킬리스트 조회 통합테스트")
+    @Test
+    public void 프리랜서_프로필_개발자_스킬리스트_조회() throws Exception {
+        //when & then
+        mockMvc.perform(get(FreelancerPositionEnumControllerPath.FREELANCER_POSITION_DEVELOPER_SKILLS_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("javaDetailSkillNames.[0]").value("Front-End"))
+                .andExpect(jsonPath("mobileDetailSkillNames.[0]").value("Hybrid"))
+                .andExpect(jsonPath("phpOrAspDetailSkillNames.[0]").value("PHP"))
+                .andExpect(jsonPath("dotNetDetailSkillNames.[0]").value("ASP.net"))
+                .andExpect(jsonPath("javaScriptDetailSkillNames.[0]").value("node.js"))
+                .andExpect(jsonPath("cdetailSkillNames.[0]").value("Server"))
+                .andExpect(jsonPath("dbDetailSkillNames.[0]").value("Oracle"))
+                .andDo(print());
+
+    }
+
+    @DisplayName("프리랜서 프로필 이넘리스트 조회 통합테스트")
+    @Test
+    public void 프리랜서_프로필_이넘리스트_조회() throws Exception {
+        //when & then
+        mockMvc.perform(get(FreelancerPositionEnumControllerPath.FREELANCER_PROFILE_ENUMS_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("schoolLevelNames.[0]").value("고등학교"))
+                .andExpect(jsonPath("academicStateNames.[0]").value("재학"))
+                .andExpect(jsonPath("companyPositionNames.[0]").value("회장"))
+                .andExpect(jsonPath("languageAbilityNames.[0]").value("일상회화 가능"))
                 .andDo(print());
 
     }

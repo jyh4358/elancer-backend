@@ -1,0 +1,8 @@
+|===
+|Path|Type|Description
+
+|`+countryNames+`
+|`+List<String>+`
+|거주국가 이름 리스트 정보 필드
+
+|===

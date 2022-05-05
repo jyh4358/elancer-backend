@@ -1,5 +1,8 @@
 package com.example.elancer.freelancerprofile.model.position.developer.javaskill;
 
+import lombok.Getter;
+
+@Getter
 public enum JavaDetailSkill {
     FRONT_END("Front-End"),
     BACK_END("Back-End"),

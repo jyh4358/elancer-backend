@@ -1,0 +1,6 @@
+[source,options="nowrap"]
+----
+{
+  "countryNames" : [ "대한민국", "영국", "미국", "일본", "중국" ]
+}
+----
