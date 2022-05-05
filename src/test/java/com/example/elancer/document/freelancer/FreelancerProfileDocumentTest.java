@@ -4,6 +4,7 @@ import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
+import com.example.elancer.freelancerprofile.controller.FreelancerPositionEnumControllerPath;
 import com.example.elancer.freelancerprofile.controller.FreelancerProfileAlterControllerPath;
 import com.example.elancer.freelancerprofile.controller.FreelancerProfileFindControllerPath;
 import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequest;
@@ -537,6 +538,51 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentCommunication").type("String").description("프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드."),
                                 fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentEtc").type("String").description("프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드."),
                                 fieldWithPath("projectHistoryResponses.[0].responsibilityTask").type("String").description("프리랜서 프로젝트 수행이력 담당업무 정보 필드.")
+                        )
+                ));
+    }
+
+    @DisplayName("프리랜서 프로필 개발자 스킬 & 경험 조회 문서화")
+    @Test
+    public void 프리랜서_프로필_개발자_스킬_경험_조회_문서화() throws Exception {
+        //when & then
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionEnumControllerPath.FREELANCER_POSITION_DEVELOPER_SKILLS_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("freelancer-profile-developer-skills-find",
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                        ),
+                        responseFields(
+                                fieldWithPath("javaDetailSkillNames").type("List<String>").description("프리랜서 프로필 개발자 java 스킬 정보 필드."),
+                                fieldWithPath("mobileDetailSkillNames").type("List<String>").description("프리랜서 프로필 개발자 mobile 스킬 정보 필드."),
+                                fieldWithPath("phpOrAspDetailSkillNames").type("List<String>").description("프리랜서 프로필 개발자 php/asp 스킬 정보 필드."),
+                                fieldWithPath("dotNetDetailSkillNames").type("List<String>").description("프리랜서 프로필 개발자 .net 스킬 정보 필드."),
+                                fieldWithPath("javaScriptDetailSkillNames").type("List<String>").description("프리랜서 프로필 개발자 javaScript 스킬 정보 필드."),
+                                fieldWithPath("cdetailSkillNames").type("List<String>").description("프리랜서 프로필 개발자 c언어 스킬 정보 필드."),
+                                fieldWithPath("dbDetailSkillNames").type("List<String>").description("프리랜서 프로필 개발자 db 스킬 정보 필드.")
+                        )
+                ));
+    }
+
+    @DisplayName("프리랜서 프로필 이넘 네임리스트 조회 문서화")
+    @Test
+    public void 프리랜서_프로필_이넘_네임리스트_조회_문서화() throws Exception {
+        //when & then
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionEnumControllerPath.FREELANCER_PROFILE_ENUMS_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("freelancer-profile-enum-names-find",
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                        ),
+                        responseFields(
+                                fieldWithPath("schoolLevelNames").type("List<String>").description("프리랜서 프로필 학력단계 정보 필드."),
+                                fieldWithPath("academicStateNames").type("List<String>").description("프리랜서 프로필 학력상태 정보 필드."),
+                                fieldWithPath("companyPositionNames").type("List<String>").description("프리랜서 프로필 회사직책 정보 필드."),
+                                fieldWithPath("languageAbilityNames").type("List<String>").description("프리랜서 프로필 언어구사능력 정보 필드.")
                         )
                 ));
     }

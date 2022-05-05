@@ -302,6 +302,25 @@ include::{snippets}/freelancer-worktype-names-find/response-headers.adoc[]
 include::{snippets}/freelancer-worktype-names-find/response-fields.adoc[]
 include::{snippets}/freelancer-worktype-names-find/response-body.adoc[]
 
+[[resources-freelancer-profile-developer-skills-find]]
+== 프리랜서 프로필 개발자 스킬 & 경험 네임리스트 정보
+
+프리랜서 프로필 개발자 스킬 & 경험 네임리스트 정보를 조회한다.
+
+include::{snippets}/freelancer-profile-developer-skills-find/http-request.adoc[]
+include::{snippets}/freelancer-profile-developer-skills-find/response-headers.adoc[]
+include::{snippets}/freelancer-profile-developer-skills-find/response-fields.adoc[]
+include::{snippets}/freelancer-profile-developer-skills-find/response-body.adoc[]
+
+[[resources-freelancer-profile-enum-names-find]]
+== 프리랜서 프로필 이넘 네임리스트 정보
+
+프리랜서 프로필 이넘 네임리스트 정보를 조회한다.
+
+include::{snippets}/freelancer-profile-enum-names-find/http-request.adoc[]
+include::{snippets}/freelancer-profile-enum-names-find/response-headers.adoc[]
+include::{snippets}/freelancer-profile-enum-names-find/response-fields.adoc[]
+include::{snippets}/freelancer-profile-enum-names-find/response-body.adoc[]
 
 
 == 기업
