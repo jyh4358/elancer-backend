@@ -22,7 +22,6 @@ public abstract class Member extends BasicEntity {
     private String phone;
     private String email;
 
-
     /**
      * enterprise, freelancer 공통 부분 추가
      * website, address
@@ -32,6 +31,12 @@ public abstract class Member extends BasicEntity {
 
     @Embedded
     private Address address;
+
+    /**
+     * refreshToken 필드 추가
+     */
+    private String refreshToken;
+
 
     @Enumerated(EnumType.STRING)
     private MemberType role;
@@ -71,4 +76,8 @@ public abstract class Member extends BasicEntity {
         return this.role.getType();
     }
 
+    public void updateRefreshToken(String refreshToken) {
+
+        this.refreshToken = refreshToken;
+    }
 }

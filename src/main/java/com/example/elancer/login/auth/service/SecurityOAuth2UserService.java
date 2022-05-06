@@ -23,6 +23,7 @@ public class SecurityOAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
+        System.out.println("SecurityOauth2UserService 호출 ========" );
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
         String createUserId = createId(userRequest, oAuth2User);

@@ -1,6 +1,6 @@
-package com.example.elancer.jwt;
+package com.example.elancer.token.jwt;
 
-import com.example.elancer.jwt.property.JwtProperty;
+import com.example.elancer.token.jwt.property.JwtProperty;
 import com.example.elancer.login.auth.service.SecurityUserDetailsService;
 import com.example.elancer.member.domain.MemberType;
 import io.jsonwebtoken.Claims;
@@ -35,9 +35,10 @@ public class JwtTokenProvider {
         this.securityUserDetailsService = securityUserDetailsService;
     }
 
-    public String createToken(String userId, MemberType role) {
+    public String createToken(String userId, String name, MemberType role) {
         Claims claims = Jwts.claims().setSubject(userId); // JWT payload 에 저장되는 정보단위, 보통 여기서 user를 식별하는 값을 넣는다.
-        claims.put("roles", role); // 정보는 key / value 쌍으로 저장된다.
+        claims.put("name", name);
+        claims.put("role", role); // 정보는 key / value 쌍으로 저장된다.
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장

@@ -1,4 +1,4 @@
-package com.example.elancer.jwt.property;
+package com.example.elancer.token.jwt.property;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
