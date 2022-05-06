@@ -11,6 +11,7 @@ $ curl 'http://localhost:8080/freelancer' -i -X POST \
   "mailReceptionState" : "NOT_RECEPTION",
   "memberPhone" : "memberPhone",
   "workPossibleState" : "POSSIBLE",
+  "positionType" : "DEVELOPER",
   "workStartPossibleDate" : "2022-10-10",
   "thumbnail" : null
 }'

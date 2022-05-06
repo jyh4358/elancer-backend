@@ -33,6 +33,10 @@
 |`+Enum+`
 |회원 업무 가능여부 필드.
 
+|`+positionType+`
+|`+Enum+`
+|회원 포지션 정보 필드.
+
 |`+workStartPossibleDate+`
 |`+LocalDate+`
 |회원 업무가능일 필드.
