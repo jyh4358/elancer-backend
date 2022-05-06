@@ -96,7 +96,7 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_개발자_포지션_조회_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java,spring", "backend");
         List<JavaSkill> javaSkills = Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, developer), JavaSkill.createJavaSkill(JavaDetailSkill.BACK_END, developer));
@@ -119,7 +119,9 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
                 etc
         );
 
-        developerRepository.save(developer);
+        freelancerProfile.coverPosition(developer);
+
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_FIND, freelancerProfile.getNum())
@@ -150,13 +152,14 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_퍼블리셔_포지션_조회_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, "etcPubSkill");
         List<PublishingSkill> publishingSkillList = Arrays.asList(PublishingSkill.createPublishingSkill(PublishingDetailSkill.HTML5, publisher), PublishingSkill.createPublishingSkill(PublishingDetailSkill.CSS, publisher));
         publisher.coverPublishingSkill(publishingSkillList);
+        freelancerProfile.coverPosition(publisher);
 
-        publisherRepository.save(publisher);
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_FIND, freelancerProfile.getNum())
@@ -179,7 +182,7 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_디자이너_포지션_조회_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
         List<DesignRole> designRoles = Arrays.asList(DesignRole.createDesignRole(DesignDetailRole.APP_DESIGN, designer), DesignRole.createDesignRole(DesignDetailRole.GAME_DESIGN, designer));
@@ -192,7 +195,9 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
                 etcRole,
                 etcSkill
         );
-        designerRepository.save(designer);
+        freelancerProfile.coverPosition(designer);
+
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_FIND, freelancerProfile.getNum())
@@ -217,13 +222,15 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_기획자_포지션_조회_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
         List<PlannerField> plannerFields = Arrays.asList(PlannerField.createPlannerField(PlannerDetailField.APP_PLAN, planner), PlannerField.createPlannerField(PlannerDetailField.WEB_PLAN, planner));
         String etcField = "etcField";
         planner.coverAllField(plannerFields, etcField);
-        plannerRepository.save(planner);
+        freelancerProfile.coverPosition(planner);
+
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_FIND, freelancerProfile.getNum())
@@ -246,14 +253,14 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_기타_포지션_조회_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
         List<EtcRole> etcRoles = Arrays.asList(EtcRole.createEtcRole(EtcDetailRole.DBA, positionEtc));
         String positionEtcField = "positionEtcField";
-        positionEtc.coverAllField(etcRoles, positionEtcField);
+        freelancerProfile.coverPosition(positionEtc);
 
-        positionEtcRepository.save(positionEtc);
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_ETC_FIND, freelancerProfile.getNum())

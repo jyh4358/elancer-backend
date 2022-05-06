@@ -14,6 +14,7 @@ import com.example.elancer.freelancerprofile.model.education.Education;
 import com.example.elancer.freelancerprofile.model.language.Language;
 import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import com.example.elancer.freelancerprofile.model.license.License;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
@@ -57,7 +58,7 @@ class FreelancerProfileFindRepositoryTest {
     public void name() {
         //given
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
                 "고등학교",

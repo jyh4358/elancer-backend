@@ -90,7 +90,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_소개정보_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         IntroduceCoverRequest introduceCoverRequest = new IntroduceCoverRequest("introName", IntroBackGround.COBALT_BLUE, "introVideoUrl", "introContent");
 
@@ -106,7 +106,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_학력정보_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         AcademicAbilityCoverRequest academicAbilityCoverRequest = new AcademicAbilityCoverRequest(
                 "schoolName",
@@ -131,7 +131,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_경력정보_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         CareerCoverRequest careerCoverRequest = new CareerCoverRequest(
                 "companyName",
@@ -155,7 +155,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_프로젝트이력_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         ProjectHistoryCoverRequest projectHistoryCoverRequest = new ProjectHistoryCoverRequest(
                 "projectTitle",
@@ -187,7 +187,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_교육및자격사항_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         EducationCoverRequest educationCoverRequest = new EducationCoverRequest("우아한테크코스", "우아한형제들", LocalDate.of(2020, 01, 01), LocalDate.of(2021, 01, 01));
         LicenseCoverRequest licenseCoverRequest = new LicenseCoverRequest("정보처리기사", "한국자격증협회", LocalDate.of(2020, 05, 20));
@@ -211,7 +211,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_세부사항_조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
                 "고등학교",
@@ -303,7 +303,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_기본_조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
                 "고등학교",

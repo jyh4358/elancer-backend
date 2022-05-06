@@ -47,6 +47,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
+import javax.persistence.EntityManager;
 import java.util.Arrays;
 import java.util.List;
 
@@ -70,13 +71,12 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     private PositionEtcRepository positionEtcRepository;
 
 
-
     @DisplayName("프리랜서 프로필 개발자 상세 조회 통합테스트")
     @Test
     public void 프리랜서_프로필_개발자_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java,spring", "backend");
         List<JavaSkill> javaSkills = Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, developer), JavaSkill.createJavaSkill(JavaDetailSkill.BACK_END, developer));
@@ -99,7 +99,9 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
                 etc
         );
 
-        developerRepository.save(developer);
+        freelancerProfile.coverPosition(developer);
+
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
@@ -124,13 +126,14 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_퍼블리셔_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, "etcPubSkill");
         List<PublishingSkill> publishingSkillList = Arrays.asList(PublishingSkill.createPublishingSkill(PublishingDetailSkill.HTML5, publisher), PublishingSkill.createPublishingSkill(PublishingDetailSkill.CSS, publisher));
         publisher.coverPublishingSkill(publishingSkillList);
+        freelancerProfile.coverPosition(publisher);
 
-        publisherRepository.save(publisher);
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
@@ -147,7 +150,7 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_디자이너_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
         List<DesignRole> designRoles = Arrays.asList(DesignRole.createDesignRole(DesignDetailRole.APP_DESIGN, designer), DesignRole.createDesignRole(DesignDetailRole.GAME_DESIGN, designer));
@@ -160,7 +163,9 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
                 etcRole,
                 etcSkill
         );
-        designerRepository.save(designer);
+        freelancerProfile.coverPosition(designer);
+
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
@@ -179,13 +184,15 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_기획자_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
         List<PlannerField> plannerFields = Arrays.asList(PlannerField.createPlannerField(PlannerDetailField.APP_PLAN, planner), PlannerField.createPlannerField(PlannerDetailField.WEB_PLAN, planner));
         String etcField = "etcField";
         planner.coverAllField(plannerFields, etcField);
-        plannerRepository.save(planner);
+        freelancerProfile.coverPosition(planner);
+
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
@@ -202,14 +209,15 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_기타포지션_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
         List<EtcRole> etcRoles = Arrays.asList(EtcRole.createEtcRole(EtcDetailRole.DBA, positionEtc));
         String positionEtcField = "positionEtcField";
         positionEtc.coverAllField(etcRoles, positionEtcField);
+        freelancerProfile.coverPosition(positionEtc);
 
-        positionEtcRepository.save(positionEtc);
+        freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_ETC_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));

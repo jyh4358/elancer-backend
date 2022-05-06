@@ -15,13 +15,14 @@ Content-Type: application/json
 #req
 {
   "memberName" : "memberName",
-  "memberId" : "memberID",
+  "memberId" : "memberID5",
   "memberPassword" : "password",
   "memberPasswordCheck" : "password",
   "memberEmail" : "membmer@email.com",
   "mailReceptionState" : "NOT_RECEPTION",
   "memberPhone" : "memberPhone",
   "workPossibleState" : "POSSIBLE",
+  "positionType": "DEVELOPER",
   "workStartPossibleDate" : "2022-10-10",
   "thumbnail" : null
 }

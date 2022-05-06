@@ -69,9 +69,10 @@ public class FreelancerProfile extends BasicEntity {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private Position position;
 
-    public FreelancerProfile(String greeting, Freelancer freelancer) {
+    public FreelancerProfile(String greeting, Freelancer freelancer, PositionType positionType) {
         this.greeting = greeting;
         this.freelancer = freelancer;
+        this.position = positionType.getFunction().apply(this);
         this.workAssessment = new WorkAssessment(0, 0, 0, 0, 0);
     }
 
