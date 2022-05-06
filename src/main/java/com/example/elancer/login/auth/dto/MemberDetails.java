@@ -33,7 +33,6 @@ public class MemberDetails implements UserDetails{
 
     }
 
-
     public static MemberDetails userDetailsFrom(Member member) {
         return MemberDetails.builder()
                 .id(member.getNum())

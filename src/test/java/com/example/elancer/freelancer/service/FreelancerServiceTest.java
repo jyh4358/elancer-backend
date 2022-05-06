@@ -39,7 +39,11 @@ class FreelancerServiceTest extends ServiceBaseTest {
         //given
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
-        MemberDetails memberDetails = new MemberDetails(freelancer.getUserId());
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         FreelancerAccountCoverRequest freelancerAccountCoverRequest = new FreelancerAccountCoverRequest(
                 "멤버이름",
@@ -71,7 +75,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
         );
 
         //when
-        freelancerService.coverFreelancerAccountInfo(freelancer.getNum(), memberDetails, freelancerAccountCoverRequest);
+        freelancerService.coverFreelancerAccountInfo(memberDetails, freelancerAccountCoverRequest);
 
         //then
         Freelancer updatedFreelancer = freelancerRepository.findById(freelancer.getNum()).get();
@@ -85,6 +89,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
         Assertions.assertThat(updatedFreelancer.getAddress().getMainAddress()).isEqualTo(freelancerAccountCoverRequest.getMainAddress());
         Assertions.assertThat(updatedFreelancer.getAddress().getDetailAddress()).isEqualTo(freelancerAccountCoverRequest.getDetailAddress());
         Assertions.assertThat(updatedFreelancer.getFreelancerAccountInfo().getWorkEtcField()).isEqualTo(freelancerAccountCoverRequest.getWorkEtcField());
+        //TODO 경력기술서 구현후 테스틒 필요.
 //        Assertions.assertThat(updatedFreelancer.getCareerForm()).isEqualTo(freelancerAccountCoverRequest.getCareerForm());
         Assertions.assertThat(updatedFreelancer.getFreelancerAccountInfo().getCareerYear()).isEqualTo(freelancerAccountCoverRequest.getCareerYear());
         Assertions.assertThat(updatedFreelancer.getFreelancerAccountInfo().getCareerMonth()).isEqualTo(freelancerAccountCoverRequest.getCareerMonth());

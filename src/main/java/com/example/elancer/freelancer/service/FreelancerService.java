@@ -22,8 +22,9 @@ public class FreelancerService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void coverFreelancerAccountInfo(Long freelancerNum, MemberDetails memberDetails, FreelancerAccountCoverRequest freelancerAccountCoverRequest) {
-        Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
+    public void coverFreelancerAccountInfo(MemberDetails memberDetails, FreelancerAccountCoverRequest freelancerAccountCoverRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        Freelancer freelancer = freelancerRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerException::new);
         RightRequestChecker.checkFreelancerAndRequester(freelancer, memberDetails);
         RightRequestChecker.checkPasswordMatch(freelancerAccountCoverRequest.getPassword(), freelancerAccountCoverRequest.getPasswordCheck());
         freelancer.updateFreelancer(
