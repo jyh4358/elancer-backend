@@ -7,6 +7,9 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.Position;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
+import com.example.elancer.freelancerprofile.repository.position.PositionRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +22,9 @@ import java.util.List;
 class FreelancerJoinServiceTest extends ServiceBaseTest {
     @Autowired
     private FreelancerJoinService freelancerJoinService;
+
+    @Autowired
+    private PositionRepository positionRepository;
 
 
     @DisplayName("프리랜서 가입이 완료된다.")
@@ -34,6 +40,7 @@ class FreelancerJoinServiceTest extends ServiceBaseTest {
                 MailReceptionState.RECEPTION,
                 "phone",
                 WorkPossibleState.POSSIBLE,
+                PositionType.DEVELOPER,
                 LocalDate.of(2021, 02, 01),
                 null
         );
@@ -54,6 +61,9 @@ class FreelancerJoinServiceTest extends ServiceBaseTest {
         List<FreelancerProfile> freelancerProfiles = freelancerProfileRepository.findAll();
         Assertions.assertThat(freelancerProfiles).hasSize(1);
 
+        List<Position> positions = positionRepository.findAll();
+        Assertions.assertThat(positions).hasSize(1);
+
     }
 
     @DisplayName("[예외] 프리랜서 가입중 비밀번호와 비밀번호 확인내용이 다른경우 예외처리")
@@ -69,6 +79,7 @@ class FreelancerJoinServiceTest extends ServiceBaseTest {
                 MailReceptionState.RECEPTION,
                 "phone",
                 WorkPossibleState.POSSIBLE,
+                PositionType.DEVELOPER,
                 LocalDate.of(2021, 02, 01),
                 null
         );

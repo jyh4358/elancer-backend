@@ -71,7 +71,7 @@ class FreelancerProfileFindServiceTest {
     @Test
     public void 프리랜서_프로필_조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
 
         Long freelancerNum = 1L;
 
@@ -251,7 +251,7 @@ class FreelancerProfileFindServiceTest {
                 null
         );
 
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         Long freelancerNum = 1L;
 

@@ -90,7 +90,7 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_개발자_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 
@@ -142,7 +142,7 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_퍼블리셔_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null , PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 
@@ -168,7 +168,7 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_디자이너_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 
@@ -204,7 +204,7 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_기획자_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 
@@ -231,7 +231,7 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_기타포지션_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 

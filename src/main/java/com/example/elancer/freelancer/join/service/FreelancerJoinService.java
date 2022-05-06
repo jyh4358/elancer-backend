@@ -6,6 +6,7 @@ import com.example.elancer.freelancer.join.exception.ExistUserIdException;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.member.domain.MemberType;
 import lombok.RequiredArgsConstructor;
@@ -44,17 +45,17 @@ public class FreelancerJoinService {
         );
 
         Freelancer savedFreelancer = freelancerRepository.save(freelancer);
-        
-        initializeFreelancerProfile(savedFreelancer);
+
+        initializeFreelancerProfile(savedFreelancer, freelancerJoinRequest.getPositionType());
+    }
+
+    private void initializeFreelancerProfile(Freelancer savedFreelancer, PositionType positionType) {
+        freelancerProfileRepository.save(new FreelancerProfile(GREETING_DEFAULT_MESSAGE.replace("xx", savedFreelancer.getName()), savedFreelancer, positionType));
     }
 
     private void checkExistUserId(FreelancerJoinRequest freelancerJoinRequest) {
         if (freelancerRepository.existsByUserId(freelancerJoinRequest.getMemberId())) {
             throw new ExistUserIdException();
         }
-    }
-
-    private void initializeFreelancerProfile(Freelancer savedFreelancer) {
-        freelancerProfileRepository.save(new FreelancerProfile(GREETING_DEFAULT_MESSAGE.replace("xx", savedFreelancer.getName()), savedFreelancer));
     }
 }

@@ -17,6 +17,7 @@ import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.model.WorkType;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
@@ -79,6 +80,7 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
                 MailReceptionState.NOT_RECEPTION,
                 "memberPhone",
                 WorkPossibleState.POSSIBLE,
+                PositionType.DEVELOPER,
                 LocalDate.of(2022, 10, 10),
                 null
         );
@@ -102,6 +104,7 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("mailReceptionState").type("Enum").description("회원 메일 수신여부 필드."),
                                 fieldWithPath("memberPhone").type("String").description("회원 휴대폰 필드."),
                                 fieldWithPath("workPossibleState").type("Enum").description("회원 업무 가능여부 필드."),
+                                fieldWithPath("positionType").type("Enum").description("회원 포지션 정보 필드."),
                                 fieldWithPath("workStartPossibleDate").type("LocalDate").description("회원 업무가능일 필드."),
                                 fieldWithPath("thumbnail").type("MultipartFile").description("회원 섬네일 필드.")
                         )

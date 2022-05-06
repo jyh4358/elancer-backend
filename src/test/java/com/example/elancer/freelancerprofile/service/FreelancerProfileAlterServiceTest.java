@@ -25,6 +25,7 @@ import com.example.elancer.freelancerprofile.model.education.Education;
 import com.example.elancer.freelancerprofile.model.language.Language;
 import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import com.example.elancer.freelancerprofile.model.license.License;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
@@ -91,7 +92,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 null
         ));
 
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         IntroduceCoverRequest introduceCoverRequest =
                 new IntroduceCoverRequest("testname", IntroBackGround.COBALT_BLUE, "url", "introContent");
@@ -128,7 +129,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 null
         ));
 
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         AcademicAbilityCoverRequest academicAbilityCoverRequest = new AcademicAbilityCoverRequest(
                 "schoolName",
@@ -174,7 +175,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 null
         ));
 
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         CareerCoverRequest careerCoverRequest = new CareerCoverRequest(
                 "companyName",
@@ -220,7 +221,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 null
         ));
 
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         ProjectHistoryCoverRequest projectHistoryCoverRequest = new ProjectHistoryCoverRequest(
                 "projectTitle",
@@ -285,7 +286,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 null
         ));
 
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         EducationCoverRequest educationCoverRequest = new EducationCoverRequest("eduTitle", "eduOrganization", LocalDate.of(2020, 10, 01), LocalDate.of(2021, 01, 01));
         LicenseCoverRequest licenseCoverRequest = new LicenseCoverRequest("licenseTitle", "issuer", LocalDate.of(2020, 05, 20));

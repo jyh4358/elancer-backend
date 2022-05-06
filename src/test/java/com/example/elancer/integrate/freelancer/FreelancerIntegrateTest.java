@@ -15,6 +15,7 @@ import com.example.elancer.freelancer.model.PresentWorkState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.model.WorkType;
 import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
@@ -56,6 +57,7 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
                 MailReceptionState.RECEPTION,
                 "phone",
                 WorkPossibleState.POSSIBLE,
+                PositionType.DEVELOPER,
                 LocalDate.of(2021, 02, 01),
                 null
         );

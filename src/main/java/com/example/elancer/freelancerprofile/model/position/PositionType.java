@@ -1,26 +1,26 @@
 package com.example.elancer.freelancerprofile.model.position;
 
 import com.example.elancer.freelancerprofile.dto.response.PositionResponse;
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 @Getter
+@AllArgsConstructor
 public enum PositionType {
-    DEVELOPER("개발자"),
-    PUBLISHER("퍼블리셔"),
-    DESIGNER("디자이너"),
-    PLANNER("기획자"),
-    CROWD_WORKER("크라우드워커"),
-    ETC("기타")
+    DEVELOPER("개발자", PositionFactory::generateDeveloper),
+    PUBLISHER("퍼블리셔", PositionFactory::generatePublisher),
+    DESIGNER("디자이너", PositionFactory::generateDesigner),
+    PLANNER("기획자", PositionFactory::generatePlanner),
+    CROWD_WORKER("크라우드워커", PositionFactory::generateCrowdWorker),
+    ETC("기타", PositionFactory::generatePositionEtc)
     ;
 
     private String desc;
-//    private Function<Positionx>
+    private Function<FreelancerProfile, Position> function;
 
-
-    PositionType(String desc) {
-        this.desc = desc;
-    }
 }

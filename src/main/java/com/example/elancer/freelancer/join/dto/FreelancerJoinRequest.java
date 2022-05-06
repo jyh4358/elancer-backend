@@ -3,6 +3,7 @@ package com.example.elancer.freelancer.join.dto;
 import com.example.elancer.freelancer.join.exception.FreelancerCheckPasswordException;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,8 @@ public class FreelancerJoinRequest {
     private String memberPhone;
     @NotNull
     private WorkPossibleState workPossibleState;
+    @NotNull
+    private PositionType positionType;
     @NotNull
     private LocalDate workStartPossibleDate;
     private MultipartFile thumbnail;

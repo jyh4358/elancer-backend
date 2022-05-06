@@ -1,4 +1,4 @@
-GET http://localhost:8080/freelancer-profile/1/developer
+GET http://localhost:8080/freelancer-profile/4/developer
 Content-Type: application/json
 
 #res
