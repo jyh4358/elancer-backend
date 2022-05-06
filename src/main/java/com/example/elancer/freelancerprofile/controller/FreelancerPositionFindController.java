@@ -1,10 +1,12 @@
 package com.example.elancer.freelancerprofile.controller;
 
+import com.example.elancer.freelancer.controller.FreelancerControllerPath;
 import com.example.elancer.freelancerprofile.dto.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.PlannerResponse;
 import com.example.elancer.freelancerprofile.dto.PositionEtcResponse;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.service.FreelancerPositionFindService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -64,4 +67,5 @@ public class FreelancerPositionFindController {
         PositionEtcResponse positionEtcResponse = freelancerPositionFindService.coverFreelancerPositionToEtc(profileNum, memberDetails);
         return new ResponseEntity<PositionEtcResponse>(positionEtcResponse, HttpStatus.OK);
     }
+
 }

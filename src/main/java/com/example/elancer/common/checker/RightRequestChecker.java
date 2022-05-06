@@ -1,5 +1,6 @@
 package com.example.elancer.common.checker;
 
+import com.example.elancer.common.exception.ImpossibleException;
 import com.example.elancer.common.exception.WrongRequestException;
 import com.example.elancer.freelancer.join.exception.FreelancerCheckPasswordException;
 import com.example.elancer.freelancer.model.Freelancer;
@@ -14,7 +15,7 @@ public class RightRequestChecker {
             return;
         }
 
-        if (!memberDetails.getId().equals(freelancer.getUserId())) {
+        if (!memberDetails.getId().equals(freelancer.getNum())) {
             throw new WrongRequestException("요청자와 조회된 프리랜서 정보가 틀립니다. 잘못된 요청입니다.");
         }
     }
@@ -33,6 +34,12 @@ public class RightRequestChecker {
     public static void checkPasswordMatch(String password, String passwordCheck) {
         if (!password.equals(passwordCheck)) {
             throw new FreelancerCheckPasswordException();
+        }
+    }
+
+    public static void checkMemberDetail(MemberDetails memberDetails) {
+        if (memberDetails == null) {
+            throw new ImpossibleException("요청자가 없습니다. 잘못된 요청입니다.");
         }
     }
 
