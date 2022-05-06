@@ -1,6 +1,7 @@
 package com.example.elancer.member.controller;
 
 import com.example.elancer.token.dto.*;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.example.elancer.token.service.JwtTokenService;
 import com.example.elancer.login.auth.dto.AuthCode;
 import com.example.elancer.member.dto.MemberLoginRequest;
@@ -9,9 +10,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
@@ -20,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public class MemberController {
 
     private final JwtTokenService jwtTokenService;
+    private final JwtTokenProvider jwtTokenProvider;
 
 
     @PostMapping("/login")
@@ -37,11 +41,17 @@ public class MemberController {
     }
 
     @PostMapping("/login/google")
-    public MemberLoginResponse loginByKakao(@RequestBody AuthCode authCode, HttpServletResponse response) {
-        System.out.println("login/google 호출 ===========");
+    public MemberLoginResponse loginBy(@RequestBody AuthCode authCode, HttpServletRequest request, HttpServletResponse response) {
+
+        String s = jwtTokenProvider.resolveToken(request);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(s);
+
+        System.out.println("authentication = " + authentication);
+
         System.out.println("code = " + authCode.getCode());
         MemberLoginResponse responseDto = jwtTokenService.loginMemberByProvider(authCode.getCode());
-        System.out.println("login/google 로직 이후 ===========");
+
         response.addCookie(getCookie(responseDto.getRefreshToken()));
 
         return responseDto;
