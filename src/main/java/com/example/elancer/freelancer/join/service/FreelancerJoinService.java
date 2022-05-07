@@ -4,15 +4,20 @@ import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancer.join.dto.FreelancerJoinRequest;
 import com.example.elancer.freelancer.join.exception.ExistUserIdException;
 import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancer.model.FreelancerThumbnail;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancer.repository.FreelancerThumbnailRepository;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.member.domain.MemberType;
+import com.example.elancer.s3.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +28,8 @@ public class FreelancerJoinService {
     private final FreelancerRepository freelancerRepository;
     private final PasswordEncoder bCryptPasswordEncoder;
     private final FreelancerProfileRepository freelancerProfileRepository;
+    private final FreelancerThumbnailRepository freelancerThumbnailRepository;
+    private final S3UploadService s3UploadService;
 
     @Transactional
     public void joinFreelancer(FreelancerJoinRequest freelancerJoinRequest) {
@@ -39,14 +46,22 @@ public class FreelancerJoinService {
                 MemberType.FREELANCER,
                 freelancerJoinRequest.getMailReceptionState(),
                 freelancerJoinRequest.getWorkPossibleState(),
-                freelancerJoinRequest.getWorkStartPossibleDate(),
-//                FreelancerThumbnail.createFreelancerThumbnail(String.valueOf(freelancerJoinRequest.getThumbnail()))
-                null // 섬네일 저장 로직 따로 빼서 구현하기.
+                freelancerJoinRequest.getWorkStartPossibleDate()
         );
 
         Freelancer savedFreelancer = freelancerRepository.save(freelancer);
 
         initializeFreelancerProfile(savedFreelancer, freelancerJoinRequest.getPositionType());
+        saveFreelancerThumbnail(freelancerJoinRequest, savedFreelancer);
+    }
+
+    private void saveFreelancerThumbnail(FreelancerJoinRequest freelancerJoinRequest, Freelancer savedFreelancer) {
+        if (freelancerJoinRequest.getThumbnail() == null) {
+            return;
+        }
+
+        String thumbnailPath = s3UploadService.uploadForMultiFile(freelancerJoinRequest.getThumbnail());
+        freelancerThumbnailRepository.save(FreelancerThumbnail.createFreelancerThumbnail(thumbnailPath, savedFreelancer));
     }
 
     private void initializeFreelancerProfile(Freelancer savedFreelancer, PositionType positionType) {

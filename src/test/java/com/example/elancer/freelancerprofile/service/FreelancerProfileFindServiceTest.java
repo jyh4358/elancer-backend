@@ -247,8 +247,7 @@ class FreelancerProfileFindServiceTest {
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
-                LocalDate.of(2020, 02, 01),
-                null
+                LocalDate.of(2020, 02, 01)
         );
 
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);

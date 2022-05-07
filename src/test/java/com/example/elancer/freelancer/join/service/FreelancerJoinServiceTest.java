@@ -4,19 +4,25 @@ import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancer.join.dto.FreelancerJoinRequest;
 import com.example.elancer.freelancer.join.exception.FreelancerCheckPasswordException;
 import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancer.model.FreelancerThumbnail;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
+import com.example.elancer.freelancer.repository.FreelancerThumbnailRepository;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.repository.position.PositionRepository;
+import com.example.elancer.s3.service.S3UploadService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 class FreelancerJoinServiceTest extends ServiceBaseTest {
@@ -26,11 +32,17 @@ class FreelancerJoinServiceTest extends ServiceBaseTest {
     @Autowired
     private PositionRepository positionRepository;
 
+    @Autowired
+    private FreelancerThumbnailRepository freelancerThumbnailRepository;
+
 
     @DisplayName("프리랜서 가입이 완료된다.")
-//    @Test
+    @Test
     public void 프리랜서_가입() {
         //given
+        String fileName = "testFileName";
+        MockMultipartFile thumbnail = new MockMultipartFile(fileName, fileName, null, (byte[]) null);
+
         FreelancerJoinRequest freelancerJoinRequest = new FreelancerJoinRequest(
                 "name",
                 "memberId",
@@ -42,7 +54,7 @@ class FreelancerJoinServiceTest extends ServiceBaseTest {
                 WorkPossibleState.POSSIBLE,
                 PositionType.DEVELOPER,
                 LocalDate.of(2021, 02, 01),
-                null
+                thumbnail
         );
 
         //when
@@ -64,6 +76,8 @@ class FreelancerJoinServiceTest extends ServiceBaseTest {
         List<Position> positions = positionRepository.findAll();
         Assertions.assertThat(positions).hasSize(1);
 
+        List<FreelancerThumbnail> freelancerThumbnails = freelancerThumbnailRepository.findAll();
+        Assertions.assertThat(freelancerThumbnails).hasSize(1);
     }
 
     @DisplayName("[예외] 프리랜서 가입중 비밀번호와 비밀번호 확인내용이 다른경우 예외처리")

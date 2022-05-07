@@ -19,4 +19,14 @@ public class CareerForm extends BasicEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     private Freelancer freelancer;
+
+    public CareerForm(String fileName, String filePath, Freelancer freelancer) {
+        this.fileName = fileName;
+        this.filePath = filePath;
+        this.freelancer = freelancer;
+    }
+
+    public static CareerForm createCareerForm(String fileName, String filePath, Freelancer freelancer) {
+        return new CareerForm(fileName, filePath, freelancer);
+    }
 }

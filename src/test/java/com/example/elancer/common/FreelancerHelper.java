@@ -24,8 +24,7 @@ public class FreelancerHelper {
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
+                LocalDate.of(2021, 02, 01)
         );
 
         return freelancerRepository.save(freelancer);
