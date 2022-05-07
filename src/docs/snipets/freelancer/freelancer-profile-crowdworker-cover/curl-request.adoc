@@ -1,6 +1,7 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/freelancer-profile/1/crowd-worker' -i -X PUT \
+$ curl 'http://localhost:8080/freelancer-profile/crowd-worker' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNDcyOSwiZXhwIjoxNjUxOTM0ODE1fQ.BkeXaP7q30g2JWwvxa_tzqhI6liPhSH5Y4-nqjaP1sA' \
     -d 'null'
 ----

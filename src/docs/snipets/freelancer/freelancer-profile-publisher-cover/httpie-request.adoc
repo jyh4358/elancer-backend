@@ -3,6 +3,7 @@
 $ echo '{
   "publishingDetailSkills" : [ "HTML5", "CSS", "JQUERY" ],
   "etcSkill" : "etcSkill"
-}' | http PUT 'http://localhost:8080/freelancer-profile/1/publisher' \
-    'Content-Type:application/json;charset=UTF-8'
+}' | http PUT 'http://localhost:8080/freelancer-profile/publisher' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNDczMiwiZXhwIjoxNjUxOTM0ODE4fQ.5n30XSf9gvI6B-d3JA3H-66wCzsiRO7mmHQrn3HELaQ'
 ----

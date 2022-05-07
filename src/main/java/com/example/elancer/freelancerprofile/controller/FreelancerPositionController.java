@@ -24,60 +24,54 @@ public class FreelancerPositionController {
 
     @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_COVER)
     public ResponseEntity<Void> coverFreelancerPositionToDeveloper(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody DeveloperCoverRequest developerCoverRequest
     ) {
-        freelancerPositionService.coverFreelancerPositionToDeveloper(profileNum, memberDetails, developerCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToDeveloper(memberDetails, developerCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_COVER)
     public ResponseEntity<Void> coverFreelancerPositionToPublisher(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody PublisherCoverRequest publisherCoverRequest
     ) {
-        freelancerPositionService.coverFreelancerPositionToPublisher(profileNum, memberDetails, publisherCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToPublisher(memberDetails, publisherCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_COVER)
     public ResponseEntity<Void> coverFreelancerPositionToDesigner(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody DesignerCoverRequest designerCoverRequest
     ) {
-        freelancerPositionService.coverFreelancerPositionToDesigner(profileNum, memberDetails, designerCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToDesigner(memberDetails, designerCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_COVER)
     public ResponseEntity<Void> coverFreelancerPositionToPlanner(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody PlannerCoverRequest plannerCoverRequest
     ) {
-        freelancerPositionService.coverFreelancerPositionToPlanner(profileNum, memberDetails, plannerCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToPlanner(memberDetails, plannerCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_CROWD_WORKER_COVER)
     public ResponseEntity<Void> coverFreelancerPositionToCrowdWorker(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        freelancerPositionService.coverFreelancerPositionToCrowdWorker(profileNum, memberDetails);
+        freelancerPositionService.coverFreelancerPositionToCrowdWorker(memberDetails);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @PutMapping(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_ETC_COVER)
     public ResponseEntity<Void> coverFreelancerPositionToEtc(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody PositionEtcCoverRequest positionEtcCoverRequest
     ) {
-        freelancerPositionService.coverFreelancerPositionToEtc(profileNum, memberDetails, positionEtcCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToEtc(memberDetails, positionEtcCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 }

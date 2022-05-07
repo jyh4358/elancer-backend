@@ -35,6 +35,9 @@ import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtc
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
+import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -75,6 +78,8 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_개발자_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DeveloperCoverRequest developerCoverRequest = new DeveloperCoverRequest(
@@ -94,6 +99,7 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
         String path = FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(developerCoverRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print());
@@ -108,15 +114,17 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_퍼블리셔_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PublisherCoverRequest publisherCoverRequest
                 = new PublisherCoverRequest(Arrays.asList(PublishingDetailSkill.HTML5, PublishingDetailSkill.CSS, PublishingDetailSkill.JQUERY), "etcSkill");
 
         //when
-        String path = FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(publisherCoverRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print());
@@ -131,6 +139,8 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_디자이너_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
@@ -141,9 +151,9 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
         );
 
         //when
-        String path = FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(designerCoverRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print());
@@ -158,14 +168,16 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_기획자_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APP_PLAN), "etcField");
 
         //when
-        String path = FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(plannerCoverRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print());
@@ -180,12 +192,14 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_크라우드워커_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         //when
-        String path = FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_CROWD_WORKER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_CROWD_WORKER_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(null)))
                 .andExpect(status().isCreated())
                 .andDo(print());
@@ -200,14 +214,16 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_기타_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PositionEtcCoverRequest positionEtcCoverRequest = new PositionEtcCoverRequest(Arrays.asList(EtcDetailRole.AA, EtcDetailRole.DBA), "positionEtcRole");
 
         //when
-        String path = FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_ETC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_ETC_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(positionEtcCoverRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print());

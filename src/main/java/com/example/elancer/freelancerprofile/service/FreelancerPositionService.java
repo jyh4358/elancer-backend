@@ -47,8 +47,9 @@ public class FreelancerPositionService {
      * 했는데.. 만약 coverDeveloperSkills방식이 변경되면 Developer객체 생성 로직 자체가 변할수도 있고 이 변경은 Developer객체가 생성되는 모든곳에 영향을 주기에 당장은 현상유지로 결정.
      **/
     @Transactional
-    public void coverFreelancerPositionToDeveloper(Long profileNum, MemberDetails memberDetails, DeveloperCoverRequest developerCoverRequest) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public void coverFreelancerPositionToDeveloper(MemberDetails memberDetails, DeveloperCoverRequest developerCoverRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Developer developer = Developer.createBasicDeveloper(
                 PositionType.DEVELOPER, freelancerProfile,
@@ -70,8 +71,9 @@ public class FreelancerPositionService {
     }
 
     @Transactional
-    public void coverFreelancerPositionToPublisher(Long profileNum, MemberDetails memberDetails, PublisherCoverRequest publisherCoverRequest) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public void coverFreelancerPositionToPublisher(MemberDetails memberDetails, PublisherCoverRequest publisherCoverRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, publisherCoverRequest.getEtcSkill());
         publisher.coverPublishingSkill(publisherCoverRequest.toPublishingSkill(publisher));
@@ -80,8 +82,9 @@ public class FreelancerPositionService {
     }
 
     @Transactional
-    public void coverFreelancerPositionToDesigner(Long profileNum, MemberDetails memberDetails, DesignerCoverRequest designerCoverRequest) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public void coverFreelancerPositionToDesigner(MemberDetails memberDetails, DesignerCoverRequest designerCoverRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
         designer.coverDesignRoleAndSkill(
@@ -95,8 +98,9 @@ public class FreelancerPositionService {
     }
 
     @Transactional
-    public void coverFreelancerPositionToPlanner(Long profileNum, MemberDetails memberDetails, PlannerCoverRequest plannerCoverRequest) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public void coverFreelancerPositionToPlanner(MemberDetails memberDetails, PlannerCoverRequest plannerCoverRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
         planner.coverAllField(plannerCoverRequest.toPlannerField(planner), plannerCoverRequest.getEtcField());
@@ -105,8 +109,9 @@ public class FreelancerPositionService {
     }
 
     @Transactional
-    public void coverFreelancerPositionToCrowdWorker(Long profileNum, MemberDetails memberDetails) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public void coverFreelancerPositionToCrowdWorker(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         CrowdWorker crowdWorker = new CrowdWorker(PositionType.CROWD_WORKER, freelancerProfile);
 
@@ -114,8 +119,9 @@ public class FreelancerPositionService {
     }
 
     @Transactional
-    public void coverFreelancerPositionToEtc(Long profileNum, MemberDetails memberDetails, PositionEtcCoverRequest positionEtcCoverRequest) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public void coverFreelancerPositionToEtc(MemberDetails memberDetails, PositionEtcCoverRequest positionEtcCoverRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
         positionEtc.coverAllField(positionEtcCoverRequest.toEtcRole(positionEtc), positionEtcCoverRequest.getPositionEtcRole());

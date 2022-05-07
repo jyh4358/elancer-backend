@@ -150,7 +150,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerPositionService.coverFreelancerPositionToDeveloper(freelancerProfile.getNum(), memberDetails, developerCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToDeveloper(memberDetails, developerCoverRequest);
 
         //then
         List<Developer> developers = developerRepository.findAll();
@@ -203,7 +203,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
 
 
         //when
-        freelancerPositionService.coverFreelancerPositionToPublisher(freelancerProfile.getNum(), memberDetails, publisherCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToPublisher(memberDetails, publisherCoverRequest);
 
         //then
         List<Publisher> publishers = publisherRepository.findAll();
@@ -242,7 +242,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerPositionService.coverFreelancerPositionToDesigner(freelancerProfile.getNum(), memberDetails, designerCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToDesigner(memberDetails, designerCoverRequest);
 
         //then
         List<Designer> designers = designerRepository.findAll();
@@ -281,7 +281,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerPositionService.coverFreelancerPositionToPlanner(freelancerProfile.getNum(), memberDetails, plannerCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToPlanner(memberDetails, plannerCoverRequest);
 
         //then
         List<Planner> planners = plannerRepository.findAll();
@@ -311,7 +311,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerPositionService.coverFreelancerPositionToCrowdWorker(freelancerProfile.getNum(), memberDetails);
+        freelancerPositionService.coverFreelancerPositionToCrowdWorker(memberDetails);
 
         //then
         List<CrowdWorker> crowdWorkers = crowdWorkerRepository.findAll();
@@ -337,7 +337,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerPositionService.coverFreelancerPositionToEtc(freelancerProfile.getNum(), memberDetails, positionEtcCoverRequest);
+        freelancerPositionService.coverFreelancerPositionToEtc(memberDetails, positionEtcCoverRequest);
 
         //then
         List<PositionEtc> positionEtcs = positionEtcRepository.findAll();

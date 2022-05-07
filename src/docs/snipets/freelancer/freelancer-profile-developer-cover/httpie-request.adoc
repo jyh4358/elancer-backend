@@ -11,6 +11,7 @@ $ echo '{
   "cDetailSkills" : [ "EMBEDDED" ],
   "dbDetailSkills" : [ "MARIADB", "MYSQL" ],
   "etcSkill" : "etc"
-}' | http PUT 'http://localhost:8080/freelancer-profile/1/developer' \
-    'Content-Type:application/json;charset=UTF-8'
+}' | http PUT 'http://localhost:8080/freelancer-profile/developer' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNDczMSwiZXhwIjoxNjUxOTM0ODE3fQ.fi9lRBwgwe3a7iXoVAeWy-S6e-lk0jz_gttLt2zwB1Q'
 ----
