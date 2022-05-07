@@ -12,15 +12,6 @@ public class OAuthRequestFactory {
 
     public OAuthRequest getRequest(String code) {
 
-//        LinkedMultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-//
-//        map.add("grant_type", "authorization_code");
-//        map.add("client_id", socialProperty.getClientId());
-//        map.add("client_secret", socialProperty.getClientSecret());
-//        map.add("redirect_uri", socialProperty.getRedirect());
-//        map.add("code", code);
-//
-//        return new OAuthRequest(socialProperty.getUrlToken(), map);
         OAuthRequest oAuthRequest = OAuthRequest.builder()
                 .clientId(socialProperty.getClientId())
                 .clientSecret(socialProperty.getClientSecret())

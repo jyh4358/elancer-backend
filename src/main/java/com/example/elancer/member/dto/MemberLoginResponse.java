@@ -10,6 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class MemberLoginResponse {
 
+    private String username;
+
     private String accessToken;
     private String refreshToken;
 }

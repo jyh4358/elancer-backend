@@ -40,14 +40,9 @@ public class MemberController {
         return "<h1>test 통과</h1>";
     }
 
-    @PostMapping("/login/google")
-    public MemberLoginResponse loginBy(@RequestBody AuthCode authCode, HttpServletRequest request, HttpServletResponse response) {
+    @GetMapping("/login/google")
+    public MemberLoginResponse loginBy(@RequestBody AuthCode authCode, HttpServletResponse response) {
 
-        String s = jwtTokenProvider.resolveToken(request);
-
-        Authentication authentication = jwtTokenProvider.getAuthentication(s);
-
-        System.out.println("authentication = " + authentication);
 
         System.out.println("code = " + authCode.getCode());
         MemberLoginResponse responseDto = jwtTokenService.loginMemberByProvider(authCode.getCode());

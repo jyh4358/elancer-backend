@@ -6,11 +6,8 @@ import org.springframework.util.LinkedMultiValueMap;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Builder
 public class OAuthRequest {
-//    private String url;
-//    private LinkedMultiValueMap<String, String> map;
 
     private String clientId;
     private String redirectUri;

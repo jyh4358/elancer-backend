@@ -43,7 +43,7 @@ public class JwtTokenService {
         if (!passwordEncoder.matches(requestDto.getPassword(), member.getPassword()))
             throw new UserPasswordException();
         member.updateRefreshToken(jwtTokenProvider.createRefreshToken());
-        return new MemberLoginResponse(jwtTokenProvider.createToken(member.getUserId(), member.getName(), member.getRole()), member.getRefreshToken());
+        return new MemberLoginResponse(member.getName(), jwtTokenProvider.createToken(member.getUserId()), member.getRefreshToken());
     }
 
 
@@ -53,15 +53,17 @@ public class JwtTokenService {
         System.out.println("accessToken = " + accessToken);
         GoogleProfile googleProfile = providerService.getProfile(accessToken.getAccess_token());
 
+        // userId는 구글에서 가져온 email key(sub)을 이용하여 만듬. ex) google_12321321321
+
         String userId = createUserId(googleProfile.getSub());
 
         Optional<Member> findMember = memberRepository.findByUserId(userId);
         if (findMember.isPresent()) {
             Member member = findMember.get();
             member.updateRefreshToken(jwtTokenProvider.createRefreshToken());
-            return new MemberLoginResponse(jwtTokenProvider.createToken(member.getUserId(), member.getName(), member.getRole()), member.getRefreshToken());
+            return new MemberLoginResponse(member.getName(), jwtTokenProvider.createToken(member.getUserId()), member.getRefreshToken());
         } else {
-            return new MemberLoginResponse(jwtTokenProvider.createToken(userId, googleProfile.getName(), null), jwtTokenProvider.createRefreshToken());
+            return new MemberLoginResponse(userId, "", "");
         }
     }
 
@@ -87,7 +89,7 @@ public class JwtTokenService {
         if (!member.getRefreshToken().equals(tokenRequestDto.getRefreshToken()))
             throw new InvalidRefreshTokenException();
 
-        String accessToken = jwtTokenProvider.createToken(member.getUserId(), member.getName(), member.getRole());
+        String accessToken = jwtTokenProvider.createToken(member.getUserId());
         String refreshToken = jwtTokenProvider.createRefreshToken();
         member.updateRefreshToken(refreshToken);
         return new TokenResponse(accessToken, refreshToken);
