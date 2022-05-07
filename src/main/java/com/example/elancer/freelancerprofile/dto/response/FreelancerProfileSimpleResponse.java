@@ -45,11 +45,11 @@ public class FreelancerProfileSimpleResponse {
     private List<LicenseResponse> licenseResponses;
     private List<LanguageResponse> languageResponses;
 
-    public static FreelancerProfileSimpleResponse of(Freelancer freelancer, FreelancerProfile freelancerProfile) {
+    public static FreelancerProfileSimpleResponse of(FreelancerProfile freelancerProfile) {
         return new FreelancerProfileSimpleResponse(
                 freelancerProfile.getNum(),
-                freelancer.getName(),
-                Optional.ofNullable(freelancer.getFreelancerThumbnail()).map(FreelancerThumbnail::getThumbnailPath).orElse(null),
+                freelancerProfile.getFreelancer().getName(),
+                Optional.ofNullable(freelancerProfile.getFreelancer().getFreelancerThumbnail()).map(FreelancerThumbnail::getThumbnailPath).orElse(null),
                 freelancerProfile.getWorkAssessment().getExpertise(),
                 freelancerProfile.getWorkAssessment().getScheduleAdherence(),
                 freelancerProfile.getWorkAssessment().getInitiative(),
@@ -59,7 +59,7 @@ public class FreelancerProfileSimpleResponse {
                 freelancerProfile.getIntroduceName(),
                 freelancerProfile.getIntroBackGround(),
                 freelancerProfile.getGreeting(),
-                freelancer.getFreelancerAccountInfo().getCareerYear(),
+                freelancerProfile.getFreelancer().getFreelancerAccountInfo().getCareerYear(),
                 freelancerProfile.confirmPositionType(),
                 Optional.ofNullable(freelancerProfile.confirmPositionType()).map(PositionType::getDesc).orElse(null),
                 freelancerProfile.getIntroduceVideoURL(),

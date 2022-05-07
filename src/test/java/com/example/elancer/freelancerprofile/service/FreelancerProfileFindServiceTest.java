@@ -71,9 +71,15 @@ class FreelancerProfileFindServiceTest {
     @Test
     public void 프리랜서_프로필_조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
+        Freelancer freelancer = Freelancer.createFreelancer("userId", "password", "name", null, null, null, null, MemberType.FREELANCER,
+                MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
-        Long freelancerNum = 1L;
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId("userId")
+                .role(null)
+                .build();
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
                 "고등학교",
@@ -148,12 +154,10 @@ class FreelancerProfileFindServiceTest {
         freelancerProfile.plusProjectHistory(projectHistory);
         freelancerProfile.coverPosition(developer);
 
-        MemberDetails memberDetails = new MemberDetails(null);
-
         when(freelancerProfileFindRepository.findFreelancerProfileByFetch(any())).thenReturn(Optional.of(freelancerProfile));
 
         //when
-        FreelancerDetailResponse detailFreelancerProfile = freelancerProfileFindService.findDetailFreelancerProfile(freelancerNum, memberDetails);
+        FreelancerDetailResponse detailFreelancerProfile = freelancerProfileFindService.findDetailFreelancerProfile(memberDetails);
 
         //then
         Assertions.assertThat(detailFreelancerProfile.getProfileNum()).isEqualTo(freelancerProfile.getNum());
@@ -252,7 +256,11 @@ class FreelancerProfileFindServiceTest {
 
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
-        Long freelancerNum = 1L;
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId("userId")
+                .role(null)
+                .build();
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
                 "고등학교",
@@ -327,13 +335,11 @@ class FreelancerProfileFindServiceTest {
         freelancerProfile.plusProjectHistory(projectHistory);
         freelancerProfile.coverPosition(developer);
 
-        MemberDetails memberDetails = new MemberDetails(null);
 
         when(freelancerProfileRepository.findByFreelancerNum(any())).thenReturn(Optional.of(freelancerProfile));
-        when(freelancerRepository.findById(any())).thenReturn(Optional.of(freelancer));
 
         //when
-        FreelancerProfileSimpleResponse freelancerProfileSimpleResponse = freelancerProfileFindService.findSimpleFreelancerAccount(freelancerNum, memberDetails);
+        FreelancerProfileSimpleResponse freelancerProfileSimpleResponse = freelancerProfileFindService.findSimpleFreelancerAccount(memberDetails);
 
         //then
         Assertions.assertThat(freelancerProfileSimpleResponse.getName()).isEqualTo(freelancer.getName());

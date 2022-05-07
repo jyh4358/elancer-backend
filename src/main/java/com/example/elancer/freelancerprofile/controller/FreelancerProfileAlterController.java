@@ -24,51 +24,46 @@ public class FreelancerProfileAlterController {
 
     @PutMapping(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_INTRO_COVER)
     public ResponseEntity<Void> coverFreelancerIntroduce(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody IntroduceCoverRequest IntroduceCoverRequest
     ) {
-        freelancerProfileAlterService.coverFreelancerIntroduce(memberDetails, profileNum, IntroduceCoverRequest);
+        freelancerProfileAlterService.coverFreelancerIntroduce(memberDetails, IntroduceCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @PutMapping(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER)
     public ResponseEntity<Void> coverFreelancerAcademicAbility(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody AcademicAbilityCoverRequests academicAbilityCoverRequests
     ) {
-        freelancerProfileAlterService.coverFreelancerAcademicAbility(memberDetails, profileNum, academicAbilityCoverRequests);
+        freelancerProfileAlterService.coverFreelancerAcademicAbility(memberDetails, academicAbilityCoverRequests);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @PutMapping(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_CAREER_COVER)
     public ResponseEntity<Void> coverFreelancerCareer(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody CareerCoverRequests careerCoverRequests
     ) {
-        freelancerProfileAlterService.coverFreelancerCareer(memberDetails, profileNum, careerCoverRequests);
+        freelancerProfileAlterService.coverFreelancerCareer(memberDetails, careerCoverRequests);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @PutMapping(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER)
     public ResponseEntity<Void> coverFreelancerProjectHistory(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody ProjectHistoryCoverRequest projectHistoryCoverRequest
     ) {
-        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, profileNum, projectHistoryCoverRequest);
+        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, projectHistoryCoverRequest);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @PutMapping(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER)
     public ResponseEntity<Void> coverFreelancerEducationAndLicenseAndLanguage(
-            @PathVariable Long profileNum,
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests
     ) {
-        freelancerProfileAlterService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, profileNum, educationAndLicenseAndLanguageRequests);
+        freelancerProfileAlterService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, educationAndLicenseAndLanguageRequests);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 

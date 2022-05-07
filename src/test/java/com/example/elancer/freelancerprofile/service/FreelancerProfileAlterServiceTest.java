@@ -84,15 +84,15 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
 
         IntroduceCoverRequest introduceCoverRequest =
                 new IntroduceCoverRequest("testname", IntroBackGround.COBALT_BLUE, "url", "introContent");
+
         MemberDetails memberDetails = MemberDetails.builder()
                 .id(freelancer.getNum())
                 .userId(freelancer.getUserId())
                 .role(freelancer.getRole())
                 .build();
 
-
         //when
-        freelancerProfileAlterService.coverFreelancerIntroduce(memberDetails, freelancer.getNum(), introduceCoverRequest);
+        freelancerProfileAlterService.coverFreelancerIntroduce(memberDetails, introduceCoverRequest);
 
         //then
         FreelancerProfile updatedFreelancerProfile = freelancerProfileRepository.findById(freelancer.getNum()).get();
@@ -120,10 +120,14 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 AcademicState.GRADUATION,
                 "전자공학"
         );
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
-        freelancerProfileAlterService.coverFreelancerAcademicAbility(memberDetails, freelancerProfile.getNum(), new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest)));
+        freelancerProfileAlterService.coverFreelancerAcademicAbility(memberDetails, new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest)));
 
         //then
         List<AcademicAbility> academicAbilityList = academicRepository.findAll();
@@ -161,7 +165,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerProfileAlterService.coverFreelancerCareer(memberDetails, freelancerProfile.getNum(), new CareerCoverRequests(Arrays.asList(careerCoverRequest)));
+        freelancerProfileAlterService.coverFreelancerCareer(memberDetails, new CareerCoverRequests(Arrays.asList(careerCoverRequest)));
 
         //then
         List<Career> careers = careerRepository.findAll();
@@ -207,7 +211,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, freelancerProfile.getNum(), projectHistoryCoverRequest);
+        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, projectHistoryCoverRequest);
 
         //then
         List<ProjectHistory> projectHistories = projectHistoryRepository.findAll();
@@ -252,7 +256,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerProfileAlterService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, freelancerProfile.getNum(), educationAndLicenseAndLanguageRequests);
+        freelancerProfileAlterService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, educationAndLicenseAndLanguageRequests);
 
         //then
         List<Education> educations = educationRepository.findAll();

@@ -24,18 +24,19 @@ public class FreelancerProfileFindService {
     private final FreelancerRepository freelancerRepository;
 
     @Transactional(readOnly = true)
-    public FreelancerDetailResponse findDetailFreelancerProfile(Long freelancerNum, MemberDetails memberDetails) {
-        FreelancerProfile freelancerProfile = freelancerProfileFindRepository.findFreelancerProfileByFetch(freelancerNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public FreelancerDetailResponse findDetailFreelancerProfile(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileFindRepository.findFreelancerProfileByFetch(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         return FreelancerDetailResponse.of(freelancerProfile);
     }
 
     @Transactional(readOnly = true)
-    public FreelancerProfileSimpleResponse findSimpleFreelancerAccount(Long freelancerNum, MemberDetails memberDetails) {
-        Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
-        RightRequestChecker.checkFreelancerAndRequester(freelancer, memberDetails);
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(freelancer.getNum()).orElseThrow(() -> new ImpossibleException("발생 불가능한 예외 입니다. 프리랜서와 프리랜서 프로필 디비 데이터를 확인해 주세요."));
-        return FreelancerProfileSimpleResponse.of(freelancer, freelancerProfile);
+    public FreelancerProfileSimpleResponse findSimpleFreelancerAccount(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(() -> new ImpossibleException("발생 불가능한 예외 입니다. 프리랜서와 프리랜서 프로필 디비 데이터를 확인해 주세요."));
+        RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
+        return FreelancerProfileSimpleResponse.of(freelancerProfile);
 
     }
 }

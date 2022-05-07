@@ -41,6 +41,9 @@ import com.example.elancer.freelancerprofile.repository.language.LanguageReposit
 import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
+import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -90,12 +93,14 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_소개정보_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         IntroduceCoverRequest introduceCoverRequest = new IntroduceCoverRequest("introName", IntroBackGround.COBALT_BLUE, "introVideoUrl", "introContent");
 
         //when
-        프리랜서_프로필_소개정보_저장_요청(freelancerProfile, introduceCoverRequest);
+        프리랜서_프로필_소개정보_저장_요청(freelancerProfile, introduceCoverRequest, memberLoginResponse);
 
         //then
         프리랜서_프로필_소개정보_저장_요청결과_검증(freelancerProfile, introduceCoverRequest);
@@ -106,6 +111,8 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_학력정보_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         AcademicAbilityCoverRequest academicAbilityCoverRequest = new AcademicAbilityCoverRequest(
@@ -120,7 +127,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         AcademicAbilityCoverRequests academicAbilityCoverRequests = new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest));
 
         //when
-        프리랜서_프로필_학력사항_저장_요청(freelancerProfile, academicAbilityCoverRequests);
+        프리랜서_프로필_학력사항_저장_요청(freelancerProfile, academicAbilityCoverRequests, memberLoginResponse);
 
         //then
         프리랜서_프로필_학력사항_저장_요청결과_검증(academicAbilityCoverRequest);
@@ -131,6 +138,8 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_경력정보_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         CareerCoverRequest careerCoverRequest = new CareerCoverRequest(
@@ -144,7 +153,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         CareerCoverRequests careerCoverRequests = new CareerCoverRequests(Arrays.asList(careerCoverRequest));
 
         //when
-        프리랜서_프로필_경력사항_저장_요청(freelancerProfile, careerCoverRequests);
+        프리랜서_프로필_경력사항_저장_요청(freelancerProfile, careerCoverRequests, memberLoginResponse);
 
         //then
         프리랜서_프로필_경력사항_저장_요청결과_검증(careerCoverRequests.getCareerCoverRequests().get(0));
@@ -155,6 +164,8 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_프로젝트이력_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         ProjectHistoryCoverRequest projectHistoryCoverRequest = new ProjectHistoryCoverRequest(
@@ -176,7 +187,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         );
 
         //when
-        프리랜서_프로필_프로젝트이력_저장_요청(freelancerProfile, projectHistoryCoverRequest);
+        프리랜서_프로필_프로젝트이력_저장_요청(freelancerProfile, projectHistoryCoverRequest, memberLoginResponse);
 
         //then
         프리랜서_프로필_프로젝트이력_저장_요청결과_검증(projectHistoryCoverRequest);
@@ -187,6 +198,8 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_교육및자격사항_저장() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         EducationCoverRequest educationCoverRequest = new EducationCoverRequest("우아한테크코스", "우아한형제들", LocalDate.of(2020, 01, 01), LocalDate.of(2021, 01, 01));
@@ -200,7 +213,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         );
 
         //when
-        프리랜서_프로필_교육및자격사항_저장_요청(freelancerProfile, educationAndLicenseAndLanguageRequests);
+        프리랜서_프로필_교육및자격사항_저장_요청(freelancerProfile, educationAndLicenseAndLanguageRequests, memberLoginResponse);
 
         //then
         프리랜서_프로필_교육및자격사항_저장_요청결과_검증(educationCoverRequest, licenseCoverRequest, languageCoverRequest);
@@ -211,6 +224,8 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_세부사항_조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
@@ -289,9 +304,9 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
-        String path = FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_DETAIL.replace("{freelancerNum}", String.valueOf(freelancer.getNum()));
-        mockMvc.perform(get(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(get(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_DETAIL)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("profileNum").value("1"))
                 .andDo(print());
@@ -303,6 +318,8 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_기본_조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
@@ -383,7 +400,8 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         //when & then
         String path = FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_SIMPLE.replace("{freelancerNum}", String.valueOf(freelancer.getNum()));
         mockMvc.perform(get(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value(freelancer.getName()))
                 .andDo(print());
@@ -423,10 +441,10 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
 
     }
 
-    private void 프리랜서_프로필_소개정보_저장_요청(FreelancerProfile freelancerProfile, IntroduceCoverRequest introduceCoverRequest) throws Exception {
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_INTRO_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+    private void 프리랜서_프로필_소개정보_저장_요청(FreelancerProfile freelancerProfile, IntroduceCoverRequest introduceCoverRequest, MemberLoginResponse memberLoginResponse) throws Exception {
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_INTRO_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(introduceCoverRequest)))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -440,10 +458,10 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         Assertions.assertThat(updatedFreelancerProfile.getIntroduceVideoURL()).isEqualTo(introduceCoverRequest.getIntroVideoUrl());
     }
 
-    private void 프리랜서_프로필_학력사항_저장_요청(FreelancerProfile freelancerProfile, AcademicAbilityCoverRequests academicAbilityCoverRequests) throws Exception {
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+    private void 프리랜서_프로필_학력사항_저장_요청(FreelancerProfile freelancerProfile, AcademicAbilityCoverRequests academicAbilityCoverRequests, MemberLoginResponse memberLoginResponse) throws Exception {
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(academicAbilityCoverRequests)))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -459,10 +477,10 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         Assertions.assertThat(academicAbility.getMajorName()).isEqualTo(academicAbilityCoverRequest.getMajorName());
     }
 
-    private void 프리랜서_프로필_경력사항_저장_요청(FreelancerProfile freelancerProfile, CareerCoverRequests careerCoverRequests) throws Exception {
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_CAREER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+    private void 프리랜서_프로필_경력사항_저장_요청(FreelancerProfile freelancerProfile, CareerCoverRequests careerCoverRequests, MemberLoginResponse memberLoginResponse) throws Exception {
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_CAREER_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(careerCoverRequests)))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -477,10 +495,10 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         Assertions.assertThat(career.getCareerEndDate()).isEqualTo(careerCoverRequest.getCareerEndDate());
     }
 
-    private void 프리랜서_프로필_프로젝트이력_저장_요청(FreelancerProfile freelancerProfile, ProjectHistoryCoverRequest projectHistoryCoverRequest) throws Exception {
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+    private void 프리랜서_프로필_프로젝트이력_저장_요청(FreelancerProfile freelancerProfile, ProjectHistoryCoverRequest projectHistoryCoverRequest, MemberLoginResponse memberLoginResponse) throws Exception {
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(projectHistoryCoverRequest)))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -506,10 +524,10 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         Assertions.assertThat(projectHistories.get(0).getResponsibilityTask()).isEqualTo(projectHistoryCoverRequest.getResponsibilityTask());
     }
 
-    private void 프리랜서_프로필_교육및자격사항_저장_요청(FreelancerProfile freelancerProfile, EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests) throws Exception {
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+    private void 프리랜서_프로필_교육및자격사항_저장_요청(FreelancerProfile freelancerProfile, EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests, MemberLoginResponse memberLoginResponse) throws Exception {
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(educationAndLicenseAndLanguageRequests)))
                 .andExpect(status().isOk())
                 .andDo(print());

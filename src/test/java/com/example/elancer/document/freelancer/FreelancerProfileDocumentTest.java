@@ -38,6 +38,9 @@ import com.example.elancer.freelancerprofile.repository.education.EducationRepos
 import com.example.elancer.freelancerprofile.repository.language.LanguageRepository;
 import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
+import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -69,19 +72,23 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_소개정보_저장_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         IntroduceCoverRequest introduceCoverRequest = new IntroduceCoverRequest("introName", IntroBackGround.COBALT_BLUE, "introVideoUrl", "introContent");
+
         //when & then
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_INTRO_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_INTRO_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(introduceCoverRequest)))
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
+                .content(objectMapper.writeValueAsString(introduceCoverRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-intro-cover",
                         requestHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         requestFields(
                                 fieldWithPath("introName").type("String").description("프리랜서 소개이름 정보 필드."),
@@ -97,6 +104,8 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_학력정보_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         AcademicAbilityCoverRequest academicAbilityCoverRequest = new AcademicAbilityCoverRequest(
@@ -111,15 +120,16 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
         AcademicAbilityCoverRequests academicAbilityCoverRequests = new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest));
 
         //when & then
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_ACADEMIC_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(academicAbilityCoverRequests)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-academic-cover",
                         requestHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         requestFields(
                                 fieldWithPath("academicAbilityCoverRequests.[0].schoolName").type("String").description("프리랜서 학력정보 학교명 정보 필드."),
@@ -137,6 +147,8 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_근무경력_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         CareerCoverRequest careerCoverRequest = new CareerCoverRequest(
@@ -150,15 +162,16 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
         CareerCoverRequests careerCoverRequests = new CareerCoverRequests(Arrays.asList(careerCoverRequest));
 
         //when & then
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_CAREER_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_CAREER_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(careerCoverRequests)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-career-cover",
                         requestHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         requestFields(
                                 fieldWithPath("careerCoverRequests.[0].companyName").type("String").description("프리랜서 근무경력 회사명 정보 필드."),
@@ -175,6 +188,8 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_교육_및_자격사항_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         EducationCoverRequest educationCoverRequest = new EducationCoverRequest("우아한테크코스", "우아한형제들", LocalDate.of(2020, 01, 01), LocalDate.of(2021, 01, 01));
@@ -188,15 +203,16 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
         );
 
         //when & then
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_EDU_AND_LICENSE_AND_LANG_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(educationAndLicenseAndLanguageRequests)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-education-license-language-cover",
                         requestHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         requestFields(
                                 fieldWithPath("educationCoverRequests.[0].educationTitle").type("String").description("프리랜서 교육 교육명 정보 필드."),
@@ -217,6 +233,8 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_프로젝트_수행이력_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         ProjectHistoryCoverRequest projectHistoryCoverRequest = new ProjectHistoryCoverRequest(
@@ -238,15 +256,16 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
         );
 
         //when & then
-        String path = FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
-        mockMvc.perform(put(path)
+        mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(projectHistoryCoverRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-projecthistory-cover",
                         requestHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         requestFields(
                                 fieldWithPath("projectTitle").type("String").description("프리랜서 프로젝트 수행이력 프로젝트명 정보 필드."),
@@ -273,6 +292,8 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_세부정보_조회_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
@@ -342,11 +363,15 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
         freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
-        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_DETAIL, freelancer.getNum())
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_DETAIL)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-detail-find",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
@@ -405,6 +430,8 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_요약정보_조회_문서화() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer , PositionType.DEVELOPER));
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
@@ -475,11 +502,15 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
 
         //when & then
         String path = FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_SIMPLE.replace("{freelancerNum}", String.valueOf(freelancer.getNum()));
-        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_SIMPLE, freelancer.getNum())
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_SIMPLE)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-simple-find",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
@@ -548,7 +579,8 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     public void 프리랜서_프로필_개발자_스킬_경험_조회_문서화() throws Exception {
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionEnumControllerPath.FREELANCER_POSITION_DEVELOPER_SKILLS_FIND)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                )
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-developer-skills-find",

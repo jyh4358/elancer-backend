@@ -21,19 +21,17 @@ public class FreelancerProfileFindController {
 
     @GetMapping(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_DETAIL)
     public ResponseEntity<FreelancerDetailResponse> findDetailFreelancerProfile(
-            @NotNull @PathVariable Long freelancerNum,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        FreelancerDetailResponse detailFreelancerProfile = freelancerProfileFindService.findDetailFreelancerProfile(freelancerNum, memberDetails);
+        FreelancerDetailResponse detailFreelancerProfile = freelancerProfileFindService.findDetailFreelancerProfile(memberDetails);
         return new ResponseEntity<FreelancerDetailResponse>(detailFreelancerProfile, HttpStatus.OK);
     }
 
     @GetMapping(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_SIMPLE)
     public ResponseEntity<FreelancerProfileSimpleResponse> findSimpleFreelancerAccount(
-            @NotNull @PathVariable Long freelancerNum,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        FreelancerProfileSimpleResponse simpleFreelancerAccount = freelancerProfileFindService.findSimpleFreelancerAccount(freelancerNum, memberDetails);
+        FreelancerProfileSimpleResponse simpleFreelancerAccount = freelancerProfileFindService.findSimpleFreelancerAccount(memberDetails);
         return new ResponseEntity<FreelancerProfileSimpleResponse>(simpleFreelancerAccount, HttpStatus.OK);
     }
 }
