@@ -78,26 +78,18 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_소개정보_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         IntroduceCoverRequest introduceCoverRequest =
                 new IntroduceCoverRequest("testname", IntroBackGround.COBALT_BLUE, "url", "introContent");
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
+
 
         //when
         freelancerProfileAlterService.coverFreelancerIntroduce(memberDetails, freelancer.getNum(), introduceCoverRequest);
@@ -149,20 +141,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_근무경력_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -175,7 +154,11 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
         );
 
 
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
         freelancerProfileAlterService.coverFreelancerCareer(memberDetails, freelancerProfile.getNum(), new CareerCoverRequests(Arrays.asList(careerCoverRequest)));
@@ -195,20 +178,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로젝트_수행이력_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -230,7 +200,11 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 "담당업무"
         );
 
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
         freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, freelancerProfile.getNum(), projectHistoryCoverRequest);
@@ -260,20 +234,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_교육_및_자격사항_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -284,7 +245,11 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
         EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests = new EducationAndLicenseAndLanguageRequests(
                 Arrays.asList(educationCoverRequest), Arrays.asList(licenseCoverRequest), Arrays.asList(languageCoverRequest));
 
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
         freelancerProfileAlterService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, freelancerProfile.getNum(), educationAndLicenseAndLanguageRequests);

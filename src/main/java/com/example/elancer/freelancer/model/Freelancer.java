@@ -49,12 +49,10 @@ public class Freelancer extends Member {
             String website,
             Address address,
             MemberType role,
-            FreelancerAccountInfo freelancerAccountInfo,
-            FreelancerThumbnail freelancerThumbnail
+            FreelancerAccountInfo freelancerAccountInfo
     ) {
         super(userId, password, name, phone, email, website, address, role);
         this.freelancerAccountInfo = freelancerAccountInfo;
-        this.freelancerThumbnail = freelancerThumbnail;
     }
 
     public static Freelancer createFreelancer(
@@ -68,8 +66,7 @@ public class Freelancer extends Member {
             MemberType role,
             MailReceptionState mailReceptionState,
             WorkPossibleState workPossibleState,
-            LocalDate workStartPossibleDate,
-            FreelancerThumbnail freelancerThumbnail
+            LocalDate workStartPossibleDate
     ) {
         return new Freelancer(
                 userId,
@@ -80,8 +77,7 @@ public class Freelancer extends Member {
                 website,
                 address,
                 role,
-                FreelancerAccountInfo.basicOf(mailReceptionState, workPossibleState, workStartPossibleDate),
-                freelancerThumbnail
+                FreelancerAccountInfo.basicOf(mailReceptionState, workPossibleState, workStartPossibleDate)
         );
     }
 

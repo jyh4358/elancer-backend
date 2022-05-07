@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.service;
 
+import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
@@ -125,20 +126,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_개발자로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -155,7 +143,11 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
                 "etc"
         );
 
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
         freelancerPositionService.coverFreelancerPositionToDeveloper(freelancerProfile.getNum(), memberDetails, developerCoverRequest);
@@ -195,20 +187,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_퍼블리셔로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -216,7 +195,12 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
                 = new PublisherCoverRequest(Arrays.asList(PublishingDetailSkill.HTML5, PublishingDetailSkill.CSS, PublishingDetailSkill.JQUERY), "etcSkill");
 
 
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
+
 
         //when
         freelancerPositionService.coverFreelancerPositionToPublisher(freelancerProfile.getNum(), memberDetails, publisherCoverRequest);
@@ -240,20 +224,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_디자이너로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -264,7 +235,11 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
                 "etcSkill"
         );
 
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
         freelancerPositionService.coverFreelancerPositionToDesigner(freelancerProfile.getNum(), memberDetails, designerCoverRequest);
@@ -293,26 +268,17 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_기획자로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APP_PLAN), "etcField");
 
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
         freelancerPositionService.coverFreelancerPositionToPlanner(freelancerProfile.getNum(), memberDetails, plannerCoverRequest);
@@ -334,24 +300,15 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_크라우드워커로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
         freelancerPositionService.coverFreelancerPositionToCrowdWorker(freelancerProfile.getNum(), memberDetails);
@@ -367,26 +324,17 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_기타로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PositionEtcCoverRequest positionEtcCoverRequest = new PositionEtcCoverRequest(Arrays.asList(EtcDetailRole.AA, EtcDetailRole.DBA), "positionEtcRole");
 
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
         freelancerPositionService.coverFreelancerPositionToEtc(freelancerProfile.getNum(), memberDetails, positionEtcCoverRequest);
