@@ -1,5 +1,6 @@
 [source,bash]
 ----
-$ http GET 'http://localhost:8080/freelancer-profile/1/designer' \
-    'Content-Type:application/json;charset=UTF-8'
+$ http GET 'http://localhost:8080/freelancer-profile/designer' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNzE3NiwiZXhwIjoxNjUxOTM3MjYzfQ.k1pcBEdmP_YIVtVHQCen_gp9nnpuFMblM_BzEeGXVO8'
 ----

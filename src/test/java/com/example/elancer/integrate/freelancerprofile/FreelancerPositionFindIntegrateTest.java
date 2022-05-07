@@ -41,6 +41,9 @@ import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtc
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
+import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -59,23 +62,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
 
-    @Autowired
-    private DeveloperRepository developerRepository;
-    @Autowired
-    private PublisherRepository publisherRepository;
-    @Autowired
-    private DesignerRepository designerRepository;
-    @Autowired
-    private PlannerRepository plannerRepository;
-    @Autowired
-    private PositionEtcRepository positionEtcRepository;
-
-
     @DisplayName("프리랜서 프로필 개발자 상세 조회 통합테스트")
     @Test
     public void 프리랜서_프로필_개발자_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java,spring", "backend");
@@ -106,7 +99,8 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("focusSkills", hasSize(2)))
                 .andExpect(jsonPath("roles", hasSize(1)))
@@ -126,6 +120,8 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_퍼블리셔_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, "etcPubSkill");
@@ -138,7 +134,8 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("publishingDetailSkills", hasSize(2)))
                 .andExpect(jsonPath("etcSkill").value("etcPubSkill"))
@@ -150,6 +147,8 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_디자이너_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
@@ -170,7 +169,8 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("designDetailRoles", hasSize(2)))
                 .andExpect(jsonPath("etcRole").value(etcRole))
@@ -184,6 +184,8 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_기획자_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
@@ -197,7 +199,8 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("plannerDetailFields", hasSize(2)))
                 .andExpect(jsonPath("etcField").value(etcField))
@@ -209,6 +212,8 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     public void 프리랜서_프로필_기타포지션_상세조회() throws Exception {
         //given
         Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
@@ -222,7 +227,8 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
         //when & then
         String path = FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_ETC_FIND.replace("{profileNum}", String.valueOf(freelancerProfile.getNum()));
         mockMvc.perform(get(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("etcDetailRoles", hasSize(1)))
                 .andExpect(jsonPath("positionEtcRole").value(positionEtcField))

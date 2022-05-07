@@ -1,7 +1,8 @@
 [source,http,options="nowrap"]
 ----
-GET /freelancer-profile/1/etc HTTP/1.1
+GET /freelancer-profile/etc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNzQzOSwiZXhwIjoxNjUxOTM3NTI2fQ.3NjO6iUGyLIPyeqru1KusWygUualrRCRG8Kl_pBbRmI
 Host: localhost:8080
 
 ----

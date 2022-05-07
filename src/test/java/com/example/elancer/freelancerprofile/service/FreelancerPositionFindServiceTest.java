@@ -1,6 +1,10 @@
 package com.example.elancer.freelancerprofile.service;
 
+import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.utils.StringEditor;
+import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancer.model.MailReceptionState;
+import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancerprofile.dto.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
@@ -44,6 +48,7 @@ import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtc
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.member.domain.MemberType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -90,11 +95,17 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_개발자_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
+        Freelancer freelancer = Freelancer.createFreelancer("userId", "password", "name", null, null, null, null, MemberType.FREELANCER,
+                MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 
-        MemberDetails memberDetails = new MemberDetails(null);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(profileNum)
+                .userId("userId")
+                .role(null)
+                .build();
 
         Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java, spring", "backend");
         List<JavaSkill> javaSkills = Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, developer), JavaSkill.createJavaSkill(JavaDetailSkill.BACK_END, developer));
@@ -117,11 +128,11 @@ class FreelancerPositionFindServiceTest {
                 etc
         );
 
-        when(freelancerProfileRepository.findById(any())).thenReturn(Optional.of(freelancerProfile));
+        when(freelancerProfileRepository.findByFreelancerNum(any())).thenReturn(Optional.of(freelancerProfile));
         when(developerRepository.findByFreelancerProfileNum(any())).thenReturn(Optional.of(developer));
 
         //when
-        DeveloperResponse developerResponse = freelancerPositionFindService.coverFreelancerPositionToDeveloper(profileNum, memberDetails);
+        DeveloperResponse developerResponse = freelancerPositionFindService.findFreelancerPositionToDeveloper(memberDetails);
 
         //then
         Assertions.assertThat(developerResponse.getFocusSkills().get(0)).isEqualTo(StringEditor.editStringToStringList(developer.getFocusSkill()).get(0));
@@ -142,21 +153,27 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_퍼블리셔_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null , PositionType.DEVELOPER);
+        Freelancer freelancer = Freelancer.createFreelancer("userId", "password", "name", null, null, null, null, MemberType.FREELANCER,
+                MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer , PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 
-        MemberDetails memberDetails = new MemberDetails(null);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(profileNum)
+                .userId("userId")
+                .role(null)
+                .build();
 
         Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, "etcPubSkill");
         List<PublishingSkill> publishingSkillList = Arrays.asList(PublishingSkill.createPublishingSkill(PublishingDetailSkill.HTML5, publisher), PublishingSkill.createPublishingSkill(PublishingDetailSkill.CSS, publisher));
         publisher.coverPublishingSkill(publishingSkillList);
 
-        when(freelancerProfileRepository.findById(any())).thenReturn(Optional.of(freelancerProfile));
+        when(freelancerProfileRepository.findByFreelancerNum(any())).thenReturn(Optional.of(freelancerProfile));
         when(publisherRepository.findByFreelancerProfileNum(any())).thenReturn(Optional.of(publisher));
 
         //when
-        PublisherResponse publisherResponse = freelancerPositionFindService.coverFreelancerPositionToPublisher(profileNum, memberDetails);
+        PublisherResponse publisherResponse = freelancerPositionFindService.findFreelancerPositionToPublisher(memberDetails);
 
         //then
         Assertions.assertThat(publisherResponse.getPublishingDetailSkills().get(0)).isEqualTo(publishingSkillList.get(0).getPublishingDetailSkill());
@@ -168,11 +185,17 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_디자이너_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
+        Freelancer freelancer = Freelancer.createFreelancer("userId", "password", "name", null, null, null, null, MemberType.FREELANCER,
+                MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 
-        MemberDetails memberDetails = new MemberDetails(null);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(profileNum)
+                .userId("userId")
+                .role(null)
+                .build();
 
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
         List<DesignRole> designRoles = Arrays.asList(DesignRole.createDesignRole(DesignDetailRole.APP_DESIGN, designer), DesignRole.createDesignRole(DesignDetailRole.GAME_DESIGN, designer));
@@ -186,11 +209,11 @@ class FreelancerPositionFindServiceTest {
                 etcSkill
         );
 
-        when(freelancerProfileRepository.findById(any())).thenReturn(Optional.of(freelancerProfile));
+        when(freelancerProfileRepository.findByFreelancerNum(any())).thenReturn(Optional.of(freelancerProfile));
         when(designerRepository.findByFreelancerProfileNum(any())).thenReturn(Optional.of(designer));
 
         //when
-        DesignerResponse designerResponse = freelancerPositionFindService.coverFreelancerPositionToDesigner(profileNum, memberDetails);
+        DesignerResponse designerResponse = freelancerPositionFindService.findFreelancerPositionToDesigner(memberDetails);
 
         //then
         Assertions.assertThat(designerResponse.getDesignDetailRoles().get(0)).isEqualTo(designRoles.get(0).getDesignDetailRole());
@@ -204,22 +227,28 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_기획자_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
+        Freelancer freelancer = Freelancer.createFreelancer("userId", "password", "name", null, null, null, null, MemberType.FREELANCER,
+                MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 
-        MemberDetails memberDetails = new MemberDetails(null);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(profileNum)
+                .userId("userId")
+                .role(null)
+                .build();
 
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
         List<PlannerField> plannerFields = Arrays.asList(PlannerField.createPlannerField(PlannerDetailField.APP_PLAN, planner), PlannerField.createPlannerField(PlannerDetailField.WEB_PLAN, planner));
         String etcField = "etcField";
         planner.coverAllField(plannerFields, etcField);
 
-        when(freelancerProfileRepository.findById(any())).thenReturn(Optional.of(freelancerProfile));
+        when(freelancerProfileRepository.findByFreelancerNum(any())).thenReturn(Optional.of(freelancerProfile));
         when(plannerRepository.findByFreelancerProfileNum(any())).thenReturn(Optional.of(planner));
 
         //when
-        PlannerResponse plannerResponse = freelancerPositionFindService.coverFreelancerPositionToPlanner(profileNum, memberDetails);
+        PlannerResponse plannerResponse = freelancerPositionFindService.findFreelancerPositionToPlanner(memberDetails);
 
         //then
         Assertions.assertThat(plannerResponse.getPlannerDetailFields().get(0)).isEqualTo(plannerFields.get(0).getPlannerDetailField());
@@ -231,22 +260,28 @@ class FreelancerPositionFindServiceTest {
     @Test
     public void 프리랜서_프로필_기타포지션_상세조회() {
         //given
-        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", null, PositionType.DEVELOPER);
+        Freelancer freelancer = Freelancer.createFreelancer("userId", "password", "name", null, null, null, null, MemberType.FREELANCER,
+                MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         Long profileNum = 1L;
 
-        MemberDetails memberDetails = new MemberDetails(null);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(profileNum)
+                .userId("userId")
+                .role(null)
+                .build();
 
         PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
         List<EtcRole> etcRoles = Arrays.asList(EtcRole.createEtcRole(EtcDetailRole.DBA, positionEtc));
         String positionEtcField = "positionEtcField";
         positionEtc.coverAllField(etcRoles, positionEtcField);
 
-        when(freelancerProfileRepository.findById(any())).thenReturn(Optional.of(freelancerProfile));
+        when(freelancerProfileRepository.findByFreelancerNum(any())).thenReturn(Optional.of(freelancerProfile));
         when(positionEtcRepository.findByFreelancerProfileNum(any())).thenReturn(Optional.of(positionEtc));
 
         //when
-        PositionEtcResponse positionEtcResponse = freelancerPositionFindService.coverFreelancerPositionToEtc(profileNum, memberDetails);
+        PositionEtcResponse positionEtcResponse = freelancerPositionFindService.findFreelancerPositionToEtc(memberDetails);
 
         //then
         Assertions.assertThat(positionEtcResponse.getEtcDetailRoles().get(0)).isEqualTo(etcRoles.get(0).getEtcDetailRole());

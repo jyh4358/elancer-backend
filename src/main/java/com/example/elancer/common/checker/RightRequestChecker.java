@@ -21,11 +21,6 @@ public class RightRequestChecker {
     }
 
     public static void checkFreelancerProfileAndRequester(FreelancerProfile freelancerProfile, MemberDetails memberDetails) {
-        // min 로그인 기능 구현전 임시 코드
-        if (memberDetails == null || !memberDetails.checkPresentId()) {
-            return;
-        }
-
         if (memberDetails.checkPresentId() && !freelancerProfile.checkFreelancerUserId(memberDetails.getUserId())) {
             throw new WrongRequestException("프로필에 대한 요청자와 프리랜서가 동일하지 않습니다. 잘못된 요청입니다.");
         }

@@ -1,5 +1,6 @@
 [source,bash]
 ----
-$ http GET 'http://localhost:8080/freelancer-profile/1/planner' \
-    'Content-Type:application/json;charset=UTF-8'
+$ http GET 'http://localhost:8080/freelancer-profile/planner' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNzMyOCwiZXhwIjoxNjUxOTM3NDE0fQ.1b01umDp3638CyOFeiy21ODp4mS8CrY4BPNKg8Xc7Mc'
 ----
