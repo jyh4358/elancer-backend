@@ -127,7 +127,12 @@ class FreelancerServiceTest extends ServiceBaseTest {
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
         List<WorkType> workTypes = freelancerWorkTypeRepository.saveAll(Arrays.asList(WorkType.createWorkType(FreelancerWorkType.ACCOUNTING, freelancer), WorkType.createWorkType(FreelancerWorkType.BIGDATA, freelancer)));
 
-        MemberDetails memberDetails = new MemberDetails(freelancer.getUserId());
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
+
         freelancer.updateFreelancer(
                 "멤버이름",
                 "패스워드",
@@ -155,7 +160,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
         Freelancer updatedFreelancer = freelancerRepository.save(freelancer);
 
         //when
-        FreelancerAccountDetailResponse freelancerAccountInfo = freelancerService.findDetailFreelancerAccount(updatedFreelancer.getNum(), memberDetails);
+        FreelancerAccountDetailResponse freelancerAccountInfo = freelancerService.findDetailFreelancerAccount(memberDetails);
 
         //then
         Assertions.assertThat(updatedFreelancer.getName()).isEqualTo(freelancerAccountInfo.getName());

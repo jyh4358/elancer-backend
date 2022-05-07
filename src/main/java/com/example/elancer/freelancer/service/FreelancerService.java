@@ -77,8 +77,9 @@ public class FreelancerService {
     }
 
     @Transactional(readOnly = true)
-    public FreelancerAccountDetailResponse findDetailFreelancerAccount(Long freelancerNum, MemberDetails memberDetails) {
-        Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
+    public FreelancerAccountDetailResponse findDetailFreelancerAccount(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        Freelancer freelancer = freelancerRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerException::new);
         RightRequestChecker.checkFreelancerAndRequester(freelancer, memberDetails);
         return FreelancerAccountDetailResponse.of(freelancer);
     }
