@@ -14,6 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ class EnterpriseServiceTest {
     private EnterpriseRepository enterpriseRepository;
 
     @Test
+    @Rollback(value = false)
     @DisplayName("기업 회원 가입")
     public void enterpriseJoin() {
 

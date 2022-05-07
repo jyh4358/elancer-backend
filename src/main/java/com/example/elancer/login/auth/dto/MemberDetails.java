@@ -16,7 +16,6 @@ import java.util.Collection;
  */
 
 @Getter
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberDetails implements UserDetails{
 

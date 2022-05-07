@@ -24,6 +24,7 @@ public class OAuthAttributes implements OAuth2User {
     private String id;
     private MemberType role;
     private Map<String, Object> attributes;
+    private boolean checkMember;
 
     @Override
     public Map<String, Object> getAttributes() {
@@ -58,14 +59,20 @@ public class OAuthAttributes implements OAuth2User {
         this.attributes = attributes;
     }
 
+
+
     public static OAuthAttributes of(String id, Map<String, Object> attributes) {
         return OAuthAttributes.builder()
                 .id(id)
                 .attributes(attributes)
-                .role(MemberType.FREELANCER)
+                .role(null)
                 .build();
     }
     public void setRole(MemberType role) {
         this.role = role;
+    }
+
+    public void checkMember(boolean checked) {
+        this.checkMember = checked;
     }
 }

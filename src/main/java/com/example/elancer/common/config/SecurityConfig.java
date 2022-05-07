@@ -1,7 +1,7 @@
 package com.example.elancer.common.config;
 
-import com.example.elancer.login.auth.handler.UserFailureHandler;
-import com.example.elancer.login.auth.handler.UserSuccessHandler;
+import com.example.elancer.token.jwt.JwtAuthenticationFilter;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.example.elancer.login.auth.service.SecurityOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,17 +11,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Configuration
@@ -32,55 +26,41 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final SecurityOAuth2UserService securityOAuth2UserService;
 
+    private final JwtTokenProvider jwtTokenProvider;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .cors().and()
                 .csrf().disable()
-                .authorizeRequests()
-                    .antMatchers("/index").permitAll()
-                    .antMatchers("/member").authenticated()
-                    .and()
-                .formLogin()
-                    .and()
-                .logout()
-                    .logoutSuccessUrl("/")
-                    .and()
-                .oauth2Login()
-                .userInfoEndpoint()
-                    .userService(securityOAuth2UserService)
+//                .addFilter(corsFilter)  // 인증이 필요한 요청을 위해 필터 등록
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .successHandler(successHandler())
-                .failureHandler(failureHandler());
+                .formLogin().disable()
+                .httpBasic().disable()  // 기본 인증방식 비활성화(아이디, 비밀번호를 전달하는..)
+                .authorizeRequests()
+                .antMatchers("/").anonymous()
+                .antMatchers("/member").authenticated()
+                .and()
+
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+
+
+
+
     }
 
-    @Bean
-    public AuthenticationSuccessHandler successHandler() {
-        return new UserSuccessHandler();
-    }
 
-    @Bean
-    public AuthenticationFailureHandler failureHandler() {
-        return new UserFailureHandler();
-    }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000","http://localhost:8080"));
-        configuration.addAllowedHeader("*");
-        configuration.addAllowedMethod("*");
-        configuration.setAllowCredentials(true);
-
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 
 }

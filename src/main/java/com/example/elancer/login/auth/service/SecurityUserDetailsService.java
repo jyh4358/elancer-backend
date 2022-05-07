@@ -1,6 +1,7 @@
 package com.example.elancer.login.auth.service;
 
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.login.auth.exception.UserIdNotFoundException;
 import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +18,12 @@ public class SecurityUserDetailsService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member member = memberRepository.findByUserId(username).orElseThrow(() -> new UsernameNotFoundException("check id"));
-
-        log.info("---------------------------");
-        log.info("freelancer={}", member);
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        Member member = memberRepository.findByUserId(userId).orElseThrow(UserIdNotFoundException::new);
 
         MemberDetails memberDetails = MemberDetails.userDetailsFrom(member);
+
+        log.info("UserDeailService 호출========================");
 
         return memberDetails;
     }
