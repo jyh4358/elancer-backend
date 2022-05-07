@@ -1,7 +1,9 @@
 package com.example.elancer.freelancer.dto;
 
+import com.example.elancer.freelancer.model.CareerForm;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.FreelancerAccountInfo;
+import com.example.elancer.freelancer.model.FreelancerThumbnail;
 import com.example.elancer.freelancer.model.FreelancerWorkType;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancer.model.KOSAState;
@@ -24,6 +26,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class FreelancerAccountDetailResponse {
     private String name;
+    private String thumbnailPath;
     private LocalDate birthDate;
     private String email;
     private String phone;
@@ -51,6 +54,7 @@ public class FreelancerAccountDetailResponse {
     public static FreelancerAccountDetailResponse of(Freelancer freelancer) {
         return new FreelancerAccountDetailResponse(
                 freelancer.getName(),
+                Optional.ofNullable(freelancer.getFreelancerThumbnail()).map(FreelancerThumbnail::getThumbnailPath).orElse(null),
                 freelancer.getBirthDate(),
                 freelancer.getEmail(),
                 freelancer.getPhone(),

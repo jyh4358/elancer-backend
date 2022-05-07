@@ -9,6 +9,10 @@
 |`+String+`
 |프리랜서 이름 정보 필드.
 
+|`+thumbnailPath+`
+|`+String+`
+|프리랜서 섬네일 url주소 정보 필드.
+
 |`+expertise+`
 |`+int+`
 |프리랜서 활동평가 전문성 정보 필드.

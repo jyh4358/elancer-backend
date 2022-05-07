@@ -3,6 +3,7 @@
 {
   "profileNum" : 1,
   "name" : "name",
+  "thumbnailPath" : null,
   "expertise" : 0,
   "scheduleAdherence" : 0,
   "initiative" : 0,

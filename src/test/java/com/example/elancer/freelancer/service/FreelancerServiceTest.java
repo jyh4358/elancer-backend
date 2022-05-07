@@ -159,6 +159,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
 
         //then
         Assertions.assertThat(updatedFreelancer.getName()).isEqualTo(freelancerAccountInfo.getName());
+        Assertions.assertThat(freelancerAccountInfo.getThumbnailPath()).isNull();
         Assertions.assertThat(updatedFreelancer.getBirthDate()).isEqualTo(freelancerAccountInfo.getBirthDate());
         Assertions.assertThat(updatedFreelancer.getEmail()).isEqualTo(freelancerAccountInfo.getEmail());
         Assertions.assertThat(updatedFreelancer.getPhone()).isEqualTo(freelancerAccountInfo.getPhone());

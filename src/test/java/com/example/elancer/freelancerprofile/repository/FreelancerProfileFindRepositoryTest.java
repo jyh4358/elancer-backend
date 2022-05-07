@@ -54,7 +54,7 @@ class FreelancerProfileFindRepositoryTest {
     private FreelancerProfileFindRepository freelancerProfileFindRepository;
 
     @DisplayName("ddd")
-    @Test
+//    @Test
     public void name() {
         //given
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);

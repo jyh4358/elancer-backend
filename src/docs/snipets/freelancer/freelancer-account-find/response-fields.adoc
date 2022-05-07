@@ -5,6 +5,10 @@
 |`+String+`
 |회원 이름 정보 필드
 
+|`+thumbnailPath+`
+|`+String+`
+|회원 섬네일 url주소 정보 필드
+
 |`+birthDate+`
 |`+LocalDate+`
 |회원 생년월일 정보 필드
@@ -47,7 +51,7 @@
 
 |`+fileName+`
 |`+String+`
-|회원 파일이름 정보 필드
+|회원 경력기술서 이름 정보 필드
 
 |`+careerYear+`
 |`+int+`

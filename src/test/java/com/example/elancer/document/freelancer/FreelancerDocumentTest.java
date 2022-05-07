@@ -233,6 +233,7 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
                         ),
                         responseFields(
                                 fieldWithPath("name").type("String").description("회원 이름 정보 필드"),
+                                fieldWithPath("thumbnailPath").type("String").description("회원 섬네일 url주소 정보 필드"),
                                 fieldWithPath("birthDate").type("LocalDate").description("회원 생년월일 정보 필드"),
                                 fieldWithPath("email").type("String").description("회원 이메일 정보 필드"),
                                 fieldWithPath("phone").type("String").description("회원 폰번호 정보 필드"),
@@ -243,7 +244,7 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("detailAddress").type("String").description("회원 거주지 읍면리 정보 필드"),
                                 fieldWithPath("freelancerWorkTypes").type("List<FreelancerWorkType>").description("회원 업무분야 정보 필드"),
                                 fieldWithPath("workEtcField").type("String").description("회원 업무분야 직접입력 정보 필드"),
-                                fieldWithPath("fileName").type("String").description("회원 파일이름 정보 필드"),
+                                fieldWithPath("fileName").type("String").description("회원 경력기술서 이름 정보 필드"),
                                 fieldWithPath("careerYear").type("int").description("회원 경력 년수 정보 필드"),
                                 fieldWithPath("careerMonth").type("int").description("회원 경력 개월수 정보 필드"),
                                 fieldWithPath("hopeMonthMinPay").type("int").description("회원 희망 월단가 최소값 정보 필드"),

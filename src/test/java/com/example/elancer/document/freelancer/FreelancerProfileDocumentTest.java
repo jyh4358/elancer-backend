@@ -486,6 +486,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
                         responseFields(
                                 fieldWithPath("profileNum").type("Long").description("프리랜서 프로필 식별자 정보 필드."),
                                 fieldWithPath("name").type("String").description("프리랜서 이름 정보 필드."),
+                                fieldWithPath("thumbnailPath").type("String").description("프리랜서 섬네일 url주소 정보 필드."),
                                 fieldWithPath("expertise").type("int").description("프리랜서 활동평가 전문성 정보 필드."),
                                 fieldWithPath("scheduleAdherence").type("int").description("프리랜서 활동평가 일정준수 정보 필드."),
                                 fieldWithPath("initiative").type("int").description("프리랜서 활동평가 적극성 정보 필드."),

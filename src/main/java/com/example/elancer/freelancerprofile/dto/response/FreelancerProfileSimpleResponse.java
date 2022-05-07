@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.dto.response;
 
 import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancer.model.FreelancerThumbnail;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class FreelancerProfileSimpleResponse {
     private Long profileNum;
     private String name;
+    private String thumbnailPath;
     private int expertise;
     private int scheduleAdherence;
     private int initiative;
@@ -47,6 +49,7 @@ public class FreelancerProfileSimpleResponse {
         return new FreelancerProfileSimpleResponse(
                 freelancerProfile.getNum(),
                 freelancer.getName(),
+                Optional.ofNullable(freelancer.getFreelancerThumbnail()).map(FreelancerThumbnail::getThumbnailPath).orElse(null),
                 freelancerProfile.getWorkAssessment().getExpertise(),
                 freelancerProfile.getWorkAssessment().getScheduleAdherence(),
                 freelancerProfile.getWorkAssessment().getInitiative(),
