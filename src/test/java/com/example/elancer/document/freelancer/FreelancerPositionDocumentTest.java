@@ -101,7 +101,7 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_개발자_포지션_저장_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DeveloperCoverRequest developerCoverRequest = new DeveloperCoverRequest(
@@ -147,7 +147,7 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_퍼블리셔_포지션_저장_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PublisherCoverRequest publisherCoverRequest
@@ -175,7 +175,7 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_디자이너_포지션_저장_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
@@ -208,7 +208,7 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_기획자_포지션_저장_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APP_PLAN), "etcField");
@@ -235,7 +235,7 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_크라우드워커_포지션_저장_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         //when & then
@@ -252,7 +252,7 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_기타_포지션_저장_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PositionEtcCoverRequest positionEtcCoverRequest = new PositionEtcCoverRequest(Arrays.asList(EtcDetailRole.AA, EtcDetailRole.DBA), "positionEtcRole");

@@ -75,7 +75,7 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_개발자_상세조회() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java,spring", "backend");
@@ -125,7 +125,7 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_퍼블리셔_상세조회() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, "etcPubSkill");
@@ -149,7 +149,7 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_디자이너_상세조회() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
@@ -183,7 +183,7 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_기획자_상세조회() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
@@ -208,7 +208,7 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_기타포지션_상세조회() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);

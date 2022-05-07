@@ -126,7 +126,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_개발자로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -187,7 +187,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_퍼블리셔로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -224,7 +224,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_디자이너로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -268,7 +268,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_기획자로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -300,7 +300,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_크라우드워커로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -324,7 +324,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_스킬이_기타로_등록된다() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 

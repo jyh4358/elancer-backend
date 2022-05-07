@@ -5,6 +5,7 @@ import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("h2")
@@ -16,4 +17,6 @@ public class ServiceBaseTest {
     protected FreelancerProfileRepository freelancerProfileRepository;
     @Autowired
     protected DatabaseClean databaseClean;
+    @Autowired
+    protected PasswordEncoder passwordEncoder;
 }

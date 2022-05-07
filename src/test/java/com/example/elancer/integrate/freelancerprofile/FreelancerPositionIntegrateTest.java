@@ -74,7 +74,7 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_개발자_저장() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DeveloperCoverRequest developerCoverRequest = new DeveloperCoverRequest(
@@ -107,7 +107,7 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_퍼블리셔_저장() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PublisherCoverRequest publisherCoverRequest
@@ -130,7 +130,7 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_디자이너_저장() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
@@ -157,7 +157,7 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_기획자_저장() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APP_PLAN), "etcField");
@@ -179,7 +179,7 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_크라우드워커_저장() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         //when
@@ -199,7 +199,7 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프리랜서_프로필_기타_저장() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PositionEtcCoverRequest positionEtcCoverRequest = new PositionEtcCoverRequest(Arrays.asList(EtcDetailRole.AA, EtcDetailRole.DBA), "positionEtcRole");

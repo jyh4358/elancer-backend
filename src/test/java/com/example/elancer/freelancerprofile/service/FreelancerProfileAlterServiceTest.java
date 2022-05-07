@@ -78,7 +78,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_소개정보_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -108,7 +108,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
         //given
         String memberId = "memberId";
 
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -141,7 +141,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_근무경력_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -178,7 +178,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로젝트_수행이력_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -234,7 +234,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_교육_및_자격사항_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 

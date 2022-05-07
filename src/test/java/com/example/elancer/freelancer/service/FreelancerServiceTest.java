@@ -43,7 +43,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
     @Test
     public void 프리랜서_계정_정보가_업데이트() {
         //given
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         MemberDetails memberDetails = MemberDetails.builder()
                 .id(freelancer.getNum())
@@ -124,7 +124,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
     @Test
     public void 프리랜서_계정_정보_조회() {
         //given
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
         List<WorkType> workTypes = freelancerWorkTypeRepository.saveAll(Arrays.asList(WorkType.createWorkType(FreelancerWorkType.ACCOUNTING, freelancer), WorkType.createWorkType(FreelancerWorkType.BIGDATA, freelancer)));
 
         MemberDetails memberDetails = MemberDetails.builder()

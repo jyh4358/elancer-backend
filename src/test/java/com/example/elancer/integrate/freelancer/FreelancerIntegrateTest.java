@@ -20,6 +20,8 @@ import com.example.elancer.integrate.common.IntegrateBaseTest;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
+import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -82,11 +84,11 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
     }
 
     @DisplayName("프리랜서 계정 정보 수정 통합테스트")
-    //TODO 임시 주석 jwt 구현후 진행해야 한다.
-//    @Test
+    @Test
     public void 프래랜서_계정정보_수정_통합테스트() throws Exception {
         //given
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
 
         FreelancerAccountCoverRequest freelancerAccountCoverRequest = new FreelancerAccountCoverRequest(
                 "멤버이름",
@@ -120,6 +122,7 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
         //when
         mockMvc.perform(put(FreelancerControllerPath.FREELANCER_ACCOUNT_INFO_UPDATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
                         .content(objectMapper.writeValueAsString(freelancerAccountCoverRequest)))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -134,11 +137,11 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
     @Test
     public void 프래랜서_계정정보_조회_통합테스트() throws Exception {
         //given
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
 
         List<WorkType> workTypes = freelancerWorkTypeRepository.saveAll(Arrays.asList(WorkType.createWorkType(FreelancerWorkType.ACCOUNTING, freelancer), WorkType.createWorkType(FreelancerWorkType.BIGDATA, freelancer)));
 
-        MemberDetails memberDetails = new MemberDetails(freelancer.getUserId());
         freelancer.updateFreelancer(
                 "멤버이름",
                 "패스워드",
@@ -166,9 +169,9 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
         Freelancer updatedFreelancer = freelancerRepository.save(freelancer);
 
         //when & then
-        String path = FreelancerControllerPath.FREELANCER_ACCOUNT_INFO_FIND.replace("{freelancerNum}", String.valueOf(updatedFreelancer.getNum()));
-        mockMvc.perform(get(path)
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(get(FreelancerControllerPath.FREELANCER_ACCOUNT_INFO_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value(updatedFreelancer.getName()))
                 .andDo(print());

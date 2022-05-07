@@ -68,7 +68,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_소개정보_저장_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         IntroduceCoverRequest introduceCoverRequest = new IntroduceCoverRequest("introName", IntroBackGround.COBALT_BLUE, "introVideoUrl", "introContent");
@@ -96,7 +96,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_학력정보_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         AcademicAbilityCoverRequest academicAbilityCoverRequest = new AcademicAbilityCoverRequest(
@@ -136,7 +136,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_근무경력_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         CareerCoverRequest careerCoverRequest = new CareerCoverRequest(
@@ -174,7 +174,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_교육_및_자격사항_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         EducationCoverRequest educationCoverRequest = new EducationCoverRequest("우아한테크코스", "우아한형제들", LocalDate.of(2020, 01, 01), LocalDate.of(2021, 01, 01));
@@ -216,7 +216,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_프로젝트_수행이력_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         ProjectHistoryCoverRequest projectHistoryCoverRequest = new ProjectHistoryCoverRequest(
@@ -272,7 +272,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_세부정보_조회_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
@@ -404,7 +404,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_요약정보_조회_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer , PositionType.DEVELOPER));
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
