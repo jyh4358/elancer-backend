@@ -65,8 +65,8 @@ public class S3UploadService {
 
     }
 
-    public String getThumbnailPath(String path) {
-        return String.valueOf(amazonS3.getUrl(amazonS3BucketProperties.getBucket(), path));
+    public String getThumbnailPath(String fineName) {
+        return String.valueOf(amazonS3.getUrl(amazonS3BucketProperties.getBucket(), fineName));
     }
 
     private void putS3(MultipartFile multipartFile, String originalFilename) throws IOException {

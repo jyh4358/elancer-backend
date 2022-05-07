@@ -4,6 +4,7 @@ import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
 import com.example.elancer.freelancer.dto.FreelancerAccountDetailResponse;
+import com.example.elancer.freelancer.model.CareerForm;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.FreelancerWorkType;
 import com.example.elancer.freelancer.model.HopeWorkState;
@@ -12,6 +13,7 @@ import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.PresentWorkState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.model.WorkType;
+import com.example.elancer.freelancer.repository.CareerFormRepository;
 import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
@@ -21,6 +23,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -32,6 +35,9 @@ class FreelancerServiceTest extends ServiceBaseTest {
 
     @Autowired
     private FreelancerWorkTypeRepository freelancerWorkTypeRepository;
+
+    @Autowired
+    private CareerFormRepository careerFormRepository;
 
     @DisplayName("프리랜서 계정 정보가 업데이트 된다")
     @Test
@@ -45,6 +51,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
                 .role(freelancer.getRole())
                 .build();
 
+        MockMultipartFile mockMultipartFile = new MockMultipartFile("fileName", "fileOriginName", null, (byte[]) null);
         FreelancerAccountCoverRequest freelancerAccountCoverRequest = new FreelancerAccountCoverRequest(
                 "멤버이름",
                 "패스워드",
@@ -59,7 +66,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
                 "중원구",
                 Arrays.asList(FreelancerWorkType.ACCOUNTING, FreelancerWorkType.BIGDATA),
                 null,
-                null,
+                mockMultipartFile,
                 9,
                 5,
                 400,
@@ -108,6 +115,9 @@ class FreelancerServiceTest extends ServiceBaseTest {
         Assertions.assertThat(workTypes).hasSize(2);
         Assertions.assertThat(workTypes.get(0).getFreelancerWorkType()).isEqualTo(freelancerAccountCoverRequest.getFreelancerWorkTypes().get(0));
         Assertions.assertThat(workTypes.get(1).getFreelancerWorkType()).isEqualTo(freelancerAccountCoverRequest.getFreelancerWorkTypes().get(1));
+
+        List<CareerForm> careerForms = careerFormRepository.findAll();
+        Assertions.assertThat(careerForms).hasSize(1);
     }
 
     @DisplayName("프리랜서 계정 정보를 조회한다.")

@@ -4,11 +4,14 @@ import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
 import com.example.elancer.freelancer.dto.FreelancerAccountDetailResponse;
 import com.example.elancer.freelancer.exception.NotExistFreelancerException;
+import com.example.elancer.freelancer.model.CareerForm;
 import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancer.repository.CareerFormRepository;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
+import com.example.elancer.s3.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,8 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class FreelancerService {
     private final FreelancerRepository freelancerRepository;
-    private final FreelancerProfileRepository freelancerProfileRepository;
+    private final CareerFormRepository careerFormRepository;
     private final PasswordEncoder passwordEncoder;
+    private final S3UploadService s3UploadService;
 
     @Transactional
     public void coverFreelancerAccountInfo(MemberDetails memberDetails, FreelancerAccountCoverRequest freelancerAccountCoverRequest) {
@@ -55,9 +59,21 @@ public class FreelancerService {
                 freelancerAccountCoverRequest.getHopeWorkCountry(),
                 freelancerAccountCoverRequest.getHopeWorkCity()
         );
-// TODO min 경력기술서 s3하고 진행해야한다.
-//        freelancer.coverCareerForm(freelancerAccountCoverRequest.getCareerForm());
 
+        saveCareerForm(freelancerAccountCoverRequest, freelancer);
+    }
+
+    private void saveCareerForm(FreelancerAccountCoverRequest freelancerAccountCoverRequest, Freelancer freelancer) {
+        if (freelancerAccountCoverRequest.getCareerForm() == null) {
+            return;
+        }
+
+        CareerForm careerForm = CareerForm.createCareerForm(
+                freelancerAccountCoverRequest.getCareerForm().getName(),
+                s3UploadService.uploadForMultiFile(freelancerAccountCoverRequest.getCareerForm()),
+                freelancer
+        );
+        careerFormRepository.save(careerForm);
     }
 
     @Transactional(readOnly = true)
