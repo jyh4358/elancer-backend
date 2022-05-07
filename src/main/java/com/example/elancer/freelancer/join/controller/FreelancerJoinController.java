@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @Slf4j
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class FreelancerJoinController {
             @Validated @RequestBody FreelancerJoinRequest freelancerJoinRequest
     ) {
         freelancerJoinService.joinFreelancer(freelancerJoinRequest);
-        return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity<Void>(HttpStatus.CREATED);
     }
 
     @ExceptionHandler({ExistUserIdException.class})

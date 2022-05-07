@@ -52,11 +52,17 @@ public class S3UploadService {
         return fileUrls;
     }
 
-    public String uploadForMultiFile(MultipartFile multipartFile) throws IOException {
-        String originalFilename = multipartFile.getOriginalFilename();
+    public String uploadForMultiFile(MultipartFile multipartFile) {
+        try {
+            String originalFilename = multipartFile.getOriginalFilename();
 
-        putS3(multipartFile, originalFilename);
-        return getThumbnailPath(originalFilename);
+            putS3(multipartFile, originalFilename);
+            return getThumbnailPath(originalFilename);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
     public String getThumbnailPath(String path) {
