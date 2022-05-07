@@ -2,6 +2,7 @@
 ----
 {
   "name" : "멤버이름",
+  "thumbnailPath" : null,
   "birthDate" : "2000-01-01",
   "email" : "email@email.email.com",
   "phone" : "010-0101-0101",
