@@ -1,8 +1,8 @@
 [source,http,options="nowrap"]
 ----
-PUT /freelancer-profile/1/crowd-worker
-HTTP/1.1
+PUT /freelancer-profile/crowd-worker HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNDcyOSwiZXhwIjoxNjUxOTM0ODE1fQ.BkeXaP7q30g2JWwvxa_tzqhI6liPhSH5Y4-nqjaP1sA
 Content-Length: 4
 Host: localhost:8080
 

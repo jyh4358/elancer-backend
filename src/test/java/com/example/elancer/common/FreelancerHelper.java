@@ -7,15 +7,16 @@ import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.domain.MemberType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
 public class FreelancerHelper {
 
-    public static Freelancer 프리랜서_생성(FreelancerRepository freelancerRepository) {
+    public static Freelancer 프리랜서_생성(FreelancerRepository freelancerRepository, PasswordEncoder passwordEncoder) {
         Freelancer freelancer = Freelancer.createFreelancer(
                 "memberId",
-                "pwd",
+                passwordEncoder.encode("pwd"),
                 "name",
                 "phone",
                 "email",

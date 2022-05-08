@@ -1,7 +1,8 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/freelancer-profile/1/career' -i -X PUT \
+$ curl 'http://localhost:8080/freelancer-profile/career' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTk0MTQ3MSwiZXhwIjoxNjUxOTQxNTU4fQ.OHNrn1XQmXYUzMLARVoVZUIpUd3l-sq6u9eZokMgC_s' \
     -d '{
   "careerCoverRequests" : [ {
     "companyName" : "companyName",

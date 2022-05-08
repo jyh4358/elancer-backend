@@ -1,0 +1,8 @@
+|===
+|Path|Type|Description
+
+|`+workTypeNames+`
+|`+List<String>+`
+|업무분야 이름 리스트 정보 필드
+
+|===

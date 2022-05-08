@@ -16,6 +16,7 @@ $ echo '{
   "developEnvironmentCommunication" : "communication",
   "developEnvironmentEtc" : null,
   "responsibilityTask" : "담당업무"
-}' | http PUT 'http://localhost:8080/freelancer-profile/1/project-history' \
-    'Content-Type:application/json;charset=UTF-8'
+}' | http PUT 'http://localhost:8080/freelancer-profile/project-history' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTk0MTQ3NCwiZXhwIjoxNjUxOTQxNTYwfQ.w746AFs55VvVRMll_nMEKWyUS37viClvd02oSX2H-PA'
 ----

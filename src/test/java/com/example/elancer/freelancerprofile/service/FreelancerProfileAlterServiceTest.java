@@ -78,21 +78,21 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_소개정보_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         IntroduceCoverRequest introduceCoverRequest =
                 new IntroduceCoverRequest("testname", IntroBackGround.COBALT_BLUE, "url", "introContent");
+
         MemberDetails memberDetails = MemberDetails.builder()
                 .id(freelancer.getNum())
                 .userId(freelancer.getUserId())
                 .role(freelancer.getRole())
                 .build();
 
-
         //when
-        freelancerProfileAlterService.coverFreelancerIntroduce(memberDetails, freelancer.getNum(), introduceCoverRequest);
+        freelancerProfileAlterService.coverFreelancerIntroduce(memberDetails, introduceCoverRequest);
 
         //then
         FreelancerProfile updatedFreelancerProfile = freelancerProfileRepository.findById(freelancer.getNum()).get();
@@ -108,7 +108,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
         //given
         String memberId = "memberId";
 
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -120,10 +120,14 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 AcademicState.GRADUATION,
                 "전자공학"
         );
-        MemberDetails memberDetails = new MemberDetails(memberId);
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
 
         //when
-        freelancerProfileAlterService.coverFreelancerAcademicAbility(memberDetails, freelancerProfile.getNum(), new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest)));
+        freelancerProfileAlterService.coverFreelancerAcademicAbility(memberDetails, new AcademicAbilityCoverRequests(Arrays.asList(academicAbilityCoverRequest)));
 
         //then
         List<AcademicAbility> academicAbilityList = academicRepository.findAll();
@@ -141,7 +145,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_근무경력_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -161,7 +165,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerProfileAlterService.coverFreelancerCareer(memberDetails, freelancerProfile.getNum(), new CareerCoverRequests(Arrays.asList(careerCoverRequest)));
+        freelancerProfileAlterService.coverFreelancerCareer(memberDetails, new CareerCoverRequests(Arrays.asList(careerCoverRequest)));
 
         //then
         List<Career> careers = careerRepository.findAll();
@@ -178,7 +182,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로젝트_수행이력_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -207,7 +211,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, freelancerProfile.getNum(), projectHistoryCoverRequest);
+        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, projectHistoryCoverRequest);
 
         //then
         List<ProjectHistory> projectHistories = projectHistoryRepository.findAll();
@@ -234,7 +238,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
     public void 프리랜서_프로필_교육_및_자격사항_저장() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
@@ -252,7 +256,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 .build();
 
         //when
-        freelancerProfileAlterService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, freelancerProfile.getNum(), educationAndLicenseAndLanguageRequests);
+        freelancerProfileAlterService.coverFreelancerEducationAndLicenseAndLanguage(memberDetails, educationAndLicenseAndLanguageRequests);
 
         //then
         List<Education> educations = educationRepository.findAll();

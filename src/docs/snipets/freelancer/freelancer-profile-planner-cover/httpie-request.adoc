@@ -3,6 +3,7 @@
 $ echo '{
   "plannerDetailFields" : [ "ACCOUNTING", "APP_PLAN" ],
   "etcField" : "etcField"
-}' | http PUT 'http://localhost:8080/freelancer-profile/1/planner' \
-    'Content-Type:application/json;charset=UTF-8'
+}' | http PUT 'http://localhost:8080/freelancer-profile/planner' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNDczMCwiZXhwIjoxNjUxOTM0ODE3fQ.8wM18-IcCBdhyQM-4VEbR6j9_PnghuCj_n7hpR_cUyU'
 ----

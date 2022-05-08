@@ -52,6 +52,9 @@ import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtc
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
+import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -79,23 +82,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
 
-    @Autowired
-    private DeveloperRepository developerRepository;
-    @Autowired
-    private PublisherRepository publisherRepository;
-    @Autowired
-    private DesignerRepository designerRepository;
-    @Autowired
-    private PlannerRepository plannerRepository;
-    @Autowired
-    private PositionEtcRepository positionEtcRepository;
-
-
     @DisplayName("프리랜서 프로필 개발자 포지션 조회 문서화")
     @Test
     public void 프리랜서_프로필_개발자_포지션_조회_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java,spring", "backend");
@@ -124,11 +117,15 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
         freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
-        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_FIND, freelancerProfile.getNum())
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DEVELOPER_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-developer-find",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
@@ -151,7 +148,9 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_퍼블리셔_포지션_조회_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, "etcPubSkill");
@@ -162,11 +161,15 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
         freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
-        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_FIND, freelancerProfile.getNum())
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PUBLISHER_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-publisher-find",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
@@ -181,7 +184,9 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_디자이너_포지션_조회_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
@@ -200,11 +205,15 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
         freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
-        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_FIND, freelancerProfile.getNum())
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_DESIGNER_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-designer-find",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
@@ -221,7 +230,9 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_기획자_포지션_조회_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
@@ -233,11 +244,16 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
         freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
-        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_FIND, freelancerProfile.getNum())
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
+
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-planner-find",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
@@ -252,7 +268,9 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
     @Test
     public void 프리랜서_프로필_기타_포지션_조회_문서화() throws Exception {
         //given
-        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository));
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
@@ -263,11 +281,15 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
         freelancerProfileRepository.save(freelancerProfile);
 
         //when & then
-        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_ETC_FIND, freelancerProfile.getNum())
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+        mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerPositionFindControllerPath.FREELANCER_PROFILE_POSITION_ETC_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-profile-etc-find",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),

@@ -5,6 +5,7 @@ $ echo '{
   "etcRole" : "etcRole",
   "designDetailSkills" : [ "AFERE_EFFECT", "THREE_D_MAX_AND_MAYA" ],
   "etcSkill" : "etcSkill"
-}' | http PUT 'http://localhost:8080/freelancer-profile/1/designer' \
-    'Content-Type:application/json;charset=UTF-8'
+}' | http PUT 'http://localhost:8080/freelancer-profile/designer' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNDczMCwiZXhwIjoxNjUxOTM0ODE2fQ._2QhVnp1U89BSEI81RoBmA4GNNu5Q7g3FQRL68EWweM'
 ----

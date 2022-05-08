@@ -1,8 +1,8 @@
 [source,http,options="nowrap"]
 ----
-PUT /freelancer-profile/1/planner
-HTTP/1.1
+PUT /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNDczMCwiZXhwIjoxNjUxOTM0ODE3fQ.8wM18-IcCBdhyQM-4VEbR6j9_PnghuCj_n7hpR_cUyU
 Content-Length: 85
 Host: localhost:8080
 

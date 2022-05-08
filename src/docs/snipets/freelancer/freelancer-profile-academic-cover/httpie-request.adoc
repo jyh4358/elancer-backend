@@ -9,6 +9,7 @@ $ echo '{
     "academicState" : "GRADUATION",
     "majorName" : "문과"
   } ]
-}' | http PUT 'http://localhost:8080/freelancer-profile/1/academic-ability' \
-    'Content-Type:application/json;charset=UTF-8'
+}' | http PUT 'http://localhost:8080/freelancer-profile/academic-ability' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTk0MTQ3MywiZXhwIjoxNjUxOTQxNTU5fQ.tZxy9UyQj9oafUlI2EqAsgqVI7k3FAR_7C5VkY4d6o4'
 ----

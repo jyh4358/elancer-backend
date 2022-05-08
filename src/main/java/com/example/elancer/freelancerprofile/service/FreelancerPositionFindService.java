@@ -40,40 +40,45 @@ public class FreelancerPositionFindService {
     private final PositionEtcRepository positionEtcRepository;
 
     @Transactional(readOnly = true)
-    public DeveloperResponse coverFreelancerPositionToDeveloper(Long profileNum, MemberDetails memberDetails) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public DeveloperResponse findFreelancerPositionToDeveloper(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Developer developer = developerRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistDevelopException::new);
         return DeveloperResponse.of(developer);
     }
 
     @Transactional(readOnly = true)
-    public PublisherResponse coverFreelancerPositionToPublisher(Long profileNum, MemberDetails memberDetails) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public PublisherResponse findFreelancerPositionToPublisher(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Publisher publisher = publisherRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistPublisherException::new);
         return PublisherResponse.of(publisher);
     }
 
     @Transactional(readOnly = true)
-    public DesignerResponse coverFreelancerPositionToDesigner(Long profileNum, MemberDetails memberDetails) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public DesignerResponse findFreelancerPositionToDesigner(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Designer designer = designerRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistDesignerException::new);
         return DesignerResponse.of(designer);
     }
 
     @Transactional(readOnly = true)
-    public PlannerResponse coverFreelancerPositionToPlanner(Long profileNum, MemberDetails memberDetails) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public PlannerResponse findFreelancerPositionToPlanner(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Planner planner = plannerRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistPlannerException::new);
         return PlannerResponse.of(planner);
     }
 
     @Transactional(readOnly = true)
-    public PositionEtcResponse coverFreelancerPositionToEtc(Long profileNum, MemberDetails memberDetails) {
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(profileNum).orElseThrow(NotExistFreelancerProfileException::new);
+    public PositionEtcResponse findFreelancerPositionToEtc(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         PositionEtc positionEtc = positionEtcRepository.findByFreelancerProfileNum(freelancerProfile.getNum()).orElseThrow(NotExistPositionEtcException::new);
         return PositionEtcResponse.of(positionEtc);

@@ -1,7 +1,8 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/freelancer-profile/1/planner' -i -X PUT \
+$ curl 'http://localhost:8080/freelancer-profile/planner' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNDczMCwiZXhwIjoxNjUxOTM0ODE3fQ.8wM18-IcCBdhyQM-4VEbR6j9_PnghuCj_n7hpR_cUyU' \
     -d '{
   "plannerDetailFields" : [ "ACCOUNTING", "APP_PLAN" ],
   "etcField" : "etcField"

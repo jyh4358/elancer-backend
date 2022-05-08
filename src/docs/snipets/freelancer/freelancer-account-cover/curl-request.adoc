@@ -1,7 +1,8 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/freelancer/1' -i -X PUT \
+$ curl 'http://localhost:8080/freelancer' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzMjQ4OSwiZXhwIjoxNjUxOTMyNTc1fQ.bTKsRGS6YRWnbzO7E0WvxvDaF51cnm4jS6UbUFhzr2c' \
     -d '{
   "name" : "멤버이름",
   "password" : "패스워드",

@@ -4,4 +4,5 @@ spring:
       - db
       - oauth
       - aws
+      - security
     active: local

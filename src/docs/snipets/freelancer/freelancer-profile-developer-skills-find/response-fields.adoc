@@ -1,0 +1,32 @@
+|===
+|Path|Type|Description
+
+|`+javaDetailSkillNames+`
+|`+List<String>+`
+|프리랜서 프로필 개발자 java 스킬 정보 필드.
+
+|`+mobileDetailSkillNames+`
+|`+List<String>+`
+|프리랜서 프로필 개발자 mobile 스킬 정보 필드.
+
+|`+phpOrAspDetailSkillNames+`
+|`+List<String>+`
+|프리랜서 프로필 개발자 php/asp 스킬 정보 필드.
+
+|`+dotNetDetailSkillNames+`
+|`+List<String>+`
+|프리랜서 프로필 개발자 .net 스킬 정보 필드.
+
+|`+javaScriptDetailSkillNames+`
+|`+List<String>+`
+|프리랜서 프로필 개발자 javaScript 스킬 정보 필드.
+
+|`+cdetailSkillNames+`
+|`+List<String>+`
+|프리랜서 프로필 개발자 c언어 스킬 정보 필드.
+
+|`+dbDetailSkillNames+`
+|`+List<String>+`
+|프리랜서 프로필 개발자 db 스킬 정보 필드.
+
+|===

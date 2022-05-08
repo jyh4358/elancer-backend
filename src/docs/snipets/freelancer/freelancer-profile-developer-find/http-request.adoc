@@ -1,8 +1,8 @@
 [source,http,options="nowrap"]
 ----
-GET /freelancer-profile/1/developer
-HTTP/1.1
+GET /freelancer-profile/developer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNjY4NSwiZXhwIjoxNjUxOTM2NzcyfQ._20opOA0v5uAurmHW3CGCTH_Q66d_5D4Gttx0XLKny8
 Host: localhost:8080
 
 ----

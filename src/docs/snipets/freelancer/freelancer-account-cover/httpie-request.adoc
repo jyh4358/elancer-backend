@@ -27,6 +27,7 @@ $ echo '{
   "workStartPossibleDate" : "2022-02-01",
   "hopeWorkCountry" : "KR",
   "hopeWorkCity" : "seoul"
-}' | http PUT 'http://localhost:8080/freelancer/1' \
-    'Content-Type:application/json;charset=UTF-8'
+}' | http PUT 'http://localhost:8080/freelancer' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzMjQ4OSwiZXhwIjoxNjUxOTMyNTc1fQ.bTKsRGS6YRWnbzO7E0WvxvDaF51cnm4jS6UbUFhzr2c'
 ----

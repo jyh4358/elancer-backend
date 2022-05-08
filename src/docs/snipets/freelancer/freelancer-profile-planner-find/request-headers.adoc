@@ -1,7 +1,7 @@
 |===
 |Name|Description
 
-|`+Content-Type+`
-|요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청
+|`+Authorization+`
+|jwt 토큰 인증 헤더 필드.
 
 |===

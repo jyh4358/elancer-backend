@@ -1,0 +1,22 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 878
+
+{
+  "javaDetailSkillNames" : [ "Front-End", "Back-End", "Spring", "Xplatform", "Miplatform", "Nexacro", "Proframe", "Maven", "Jenkins", "Sencha", "Trustform", "Tuxedo", "Gauce", "Pro*C", "DevOn", "Thymeleaf" ],
+  "mobileDetailSkillNames" : [ "Hybrid", "Android", "IOS(Object-C)", "IOS(Swift)", "WebView", "IoT" ],
+  "phpOrAspDetailSkillNames" : [ "PHP", "laravel", "Codeigniter", "Symfony", "Zend Framework", "WordPress", "Asp" ],
+  "dotNetDetailSkillNames" : [ "ASP.net", "C", "C++", "C#", "MFC", "OpenGL", "DevExpress", "VBA" ],
+  "javaScriptDetailSkillNames" : [ "node.js", "AngularJS", "React.js", "Vue.js", "jQuery", "JavaScript" ],
+  "dbDetailSkillNames" : [ "Oracle", "MSSQL", "MySQL", "MariaDB", "MongoDB", "Prostgresql", "CUBRID", "Tibero" ],
+  "cdetailSkillNames" : [ "Server", "Unix", "Embedded", "Firmware", "Machine Vision", "Aduino", "Qt", "MetaLab", "LabVIEW" ]
+}
+----

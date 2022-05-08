@@ -1,5 +1,6 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/freelancer-profile/1/developer' -i -X GET \
-    -H 'Content-Type: application/json;charset=UTF-8'
+$ curl 'http://localhost:8080/freelancer-profile/developer' -i -X GET \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNjY4NSwiZXhwIjoxNjUxOTM2NzcyfQ._20opOA0v5uAurmHW3CGCTH_Q66d_5D4Gttx0XLKny8'
 ----

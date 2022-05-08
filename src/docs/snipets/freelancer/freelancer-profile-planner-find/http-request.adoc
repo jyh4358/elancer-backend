@@ -1,8 +1,8 @@
 [source,http,options="nowrap"]
 ----
-GET /freelancer-profile/1/planner
-HTTP/1.1
+GET /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNzMyOCwiZXhwIjoxNjUxOTM3NDE0fQ.1b01umDp3638CyOFeiy21ODp4mS8CrY4BPNKg8Xc7Mc
 Host: localhost:8080
 
 ----

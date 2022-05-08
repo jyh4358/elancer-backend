@@ -18,10 +18,13 @@ import com.example.elancer.freelancer.model.WorkType;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
+import com.example.elancer.integrate.freelancer.LoginHelper;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
+import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.testconfig.RestDocsConfiguration;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -112,11 +115,11 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
     }
 
     @DisplayName("프리랜서 계정 정보 수정 문서화 테스트")
-    //TODO 임시 주석 jwt 구현후 진행해야 한다.
-//    @Test
+    @Test
     public void 프래랜서_계정정보_수정_문서화() throws Exception {
         //given
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
 
         FreelancerAccountCoverRequest freelancerAccountCoverRequest = new FreelancerAccountCoverRequest(
                 "멤버이름",
@@ -150,12 +153,14 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
         //when & then
         mockMvc.perform(put(FreelancerControllerPath.FREELANCER_ACCOUNT_INFO_UPDATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(freelancerAccountCoverRequest)))
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
+                .content(objectMapper.writeValueAsString(freelancerAccountCoverRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-account-cover",
                         requestHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         requestFields(
                                 fieldWithPath("name").type("String").description("회원 이름 정보 필드"),
@@ -192,7 +197,8 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
     @Test
     public void 프래랜서_계정정보_조회_문서화() throws Exception {
         //given
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
 
         List<WorkType> workTypes = freelancerWorkTypeRepository.saveAll(Arrays.asList(WorkType.createWorkType(FreelancerWorkType.ACCOUNTING, freelancer), WorkType.createWorkType(FreelancerWorkType.BIGDATA, freelancer)));
 
@@ -224,10 +230,14 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
 
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.get(FreelancerControllerPath.FREELANCER_ACCOUNT_INFO_FIND, updatedFreelancer.getNum())
-                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("freelancer-account-find",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),

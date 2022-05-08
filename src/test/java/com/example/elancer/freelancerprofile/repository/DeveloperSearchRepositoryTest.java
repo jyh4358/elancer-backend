@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Slice;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Arrays;
@@ -39,12 +40,15 @@ class DeveloperSearchRepositoryTest {
     @Autowired
     private DeveloperSearchRepository developerSearchRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @DisplayName("개발자가 조건에 맞게 검색됨.")
     //TODO tdd후 구현이 안됨.
 //    @Test
     public void 개발자_검색() {
         //given
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("hi!", freelancer, PositionType.DEVELOPER));
         Developer developer = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java,spring", "백엔드"));
 

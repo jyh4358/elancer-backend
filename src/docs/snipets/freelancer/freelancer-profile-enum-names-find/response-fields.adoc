@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`+schoolLevelNames+`
+|`+List<String>+`
+|프리랜서 프로필 학력단계 정보 필드.
+
+|`+academicStateNames+`
+|`+List<String>+`
+|프리랜서 프로필 학력상태 정보 필드.
+
+|`+companyPositionNames+`
+|`+List<String>+`
+|프리랜서 프로필 회사직책 정보 필드.
+
+|`+languageAbilityNames+`
+|`+List<String>+`
+|프리랜서 프로필 언어구사능력 정보 필드.
+
+|===

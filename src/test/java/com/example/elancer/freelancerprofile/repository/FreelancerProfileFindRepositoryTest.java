@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,11 +54,14 @@ class FreelancerProfileFindRepositoryTest {
     @Autowired
     private FreelancerProfileFindRepository freelancerProfileFindRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @DisplayName("ddd")
 //    @Test
     public void name() {
         //given
-        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(

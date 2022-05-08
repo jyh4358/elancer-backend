@@ -1,7 +1,8 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/freelancer-profile/1/developer' -i -X PUT \
+$ curl 'http://localhost:8080/freelancer-profile/developer' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTkzNDczMSwiZXhwIjoxNjUxOTM0ODE3fQ.fi9lRBwgwe3a7iXoVAeWy-S6e-lk0jz_gttLt2zwB1Q' \
     -d '{
   "focusSkills" : [ "Java", "Spring" ],
   "roles" : [ "백엔드 개발자" ],

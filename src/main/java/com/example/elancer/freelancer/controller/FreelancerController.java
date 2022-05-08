@@ -35,10 +35,9 @@ public class FreelancerController {
 
     @GetMapping(FreelancerControllerPath.FREELANCER_ACCOUNT_INFO_FIND)
     public ResponseEntity<FreelancerAccountDetailResponse> findDetailFreelancerAccount(
-            @NotNull @PathVariable Long freelancerNum,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        FreelancerAccountDetailResponse freelancerAccountInfo = freelancerService.findDetailFreelancerAccount(freelancerNum, memberDetails);
+        FreelancerAccountDetailResponse freelancerAccountInfo = freelancerService.findDetailFreelancerAccount(memberDetails);
         return new ResponseEntity<FreelancerAccountDetailResponse>(freelancerAccountInfo, HttpStatus.OK);
     }
     //Todo min 예외 핸들러 필요 - 서비스 로직 참고해서 추가할것.
