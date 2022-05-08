@@ -102,7 +102,7 @@ class FreelancerPositionFindServiceTest {
         Long profileNum = 1L;
 
         MemberDetails memberDetails = MemberDetails.builder()
-                .id(profileNum)
+                .id(freelancer.getNum())
                 .userId("userId")
                 .role(null)
                 .build();
@@ -160,7 +160,7 @@ class FreelancerPositionFindServiceTest {
         Long profileNum = 1L;
 
         MemberDetails memberDetails = MemberDetails.builder()
-                .id(profileNum)
+                .id(freelancer.getNum())
                 .userId("userId")
                 .role(null)
                 .build();
@@ -192,7 +192,7 @@ class FreelancerPositionFindServiceTest {
         Long profileNum = 1L;
 
         MemberDetails memberDetails = MemberDetails.builder()
-                .id(profileNum)
+                .id(freelancer.getNum())
                 .userId("userId")
                 .role(null)
                 .build();
@@ -234,7 +234,7 @@ class FreelancerPositionFindServiceTest {
         Long profileNum = 1L;
 
         MemberDetails memberDetails = MemberDetails.builder()
-                .id(profileNum)
+                .id(freelancer.getNum())
                 .userId("userId")
                 .role(null)
                 .build();
@@ -267,7 +267,7 @@ class FreelancerPositionFindServiceTest {
         Long profileNum = 1L;
 
         MemberDetails memberDetails = MemberDetails.builder()
-                .id(profileNum)
+                .id(freelancer.getNum())
                 .userId("userId")
                 .role(null)
                 .build();
