@@ -1,0 +1,12 @@
+[source,options="nowrap"]
+----
+{
+  "javaDetailSkillNames" : [ "Front-End", "Back-End", "Spring", "Xplatform", "Miplatform", "Nexacro", "Proframe", "Maven", "Jenkins", "Sencha", "Trustform", "Tuxedo", "Gauce", "Pro*C", "DevOn", "Thymeleaf" ],
+  "mobileDetailSkillNames" : [ "Hybrid", "Android", "IOS(Object-C)", "IOS(Swift)", "WebView", "IoT" ],
+  "phpOrAspDetailSkillNames" : [ "PHP", "laravel", "Codeigniter", "Symfony", "Zend Framework", "WordPress", "Asp" ],
+  "dotNetDetailSkillNames" : [ "ASP.net", "C", "C++", "C#", "MFC", "OpenGL", "DevExpress", "VBA" ],
+  "javaScriptDetailSkillNames" : [ "node.js", "AngularJS", "React.js", "Vue.js", "jQuery", "JavaScript" ],
+  "dbDetailSkillNames" : [ "Oracle", "MSSQL", "MySQL", "MariaDB", "MongoDB", "Prostgresql", "CUBRID", "Tibero" ],
+  "cdetailSkillNames" : [ "Server", "Unix", "Embedded", "Firmware", "Machine Vision", "Aduino", "Qt", "MetaLab", "LabVIEW" ]
+}
+----

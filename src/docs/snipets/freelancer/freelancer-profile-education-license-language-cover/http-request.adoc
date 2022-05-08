@@ -1,8 +1,8 @@
 [source,http,options="nowrap"]
 ----
-PUT /freelancer-profile/1/education-license-language
-HTTP/1.1
+PUT /freelancer-profile/education-license-language HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTk0MTQ3NCwiZXhwIjoxNjUxOTQxNTYwfQ.w746AFs55VvVRMll_nMEKWyUS37viClvd02oSX2H-PA
 Content-Length: 489
 Host: localhost:8080
 

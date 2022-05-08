@@ -1,7 +1,8 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/freelancer-profile/1/academic-ability' -i -X PUT \
+$ curl 'http://localhost:8080/freelancer-profile/academic-ability' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTk0MTQ3MywiZXhwIjoxNjUxOTQxNTU5fQ.tZxy9UyQj9oafUlI2EqAsgqVI7k3FAR_7C5VkY4d6o4' \
     -d '{
   "academicAbilityCoverRequests" : [ {
     "schoolName" : "schoolName",

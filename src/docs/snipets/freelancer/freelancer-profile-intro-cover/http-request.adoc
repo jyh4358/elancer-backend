@@ -1,7 +1,8 @@
 [source,http,options="nowrap"]
 ----
-PUT /freelancer-profile/1/intro HTTP/1.1
+PUT /freelancer-profile/intro HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTk0MTQ3MiwiZXhwIjoxNjUxOTQxNTU5fQ.93jx2_rlhvFCjNQyV9JPVCyCVcio0-TkN7RP6ifPy8s
 Content-Length: 140
 Host: localhost:8080
 

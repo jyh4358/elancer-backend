@@ -1,8 +1,8 @@
 [source,http,options="nowrap"]
 ----
-PUT /freelancer-profile/1/academic-ability
-HTTP/1.1
+PUT /freelancer-profile/academic-ability HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTk0MTQ3MywiZXhwIjoxNjUxOTQxNTU5fQ.tZxy9UyQj9oafUlI2EqAsgqVI7k3FAR_7C5VkY4d6o4
 Content-Length: 254
 Host: localhost:8080
 

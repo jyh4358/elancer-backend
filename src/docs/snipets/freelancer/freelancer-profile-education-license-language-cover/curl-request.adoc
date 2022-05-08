@@ -1,7 +1,8 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/freelancer-profile/1/education-license-language' -i -X PUT \
+$ curl 'http://localhost:8080/freelancer-profile/education-license-language' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTk0MTQ3NCwiZXhwIjoxNjUxOTQxNTYwfQ.w746AFs55VvVRMll_nMEKWyUS37viClvd02oSX2H-PA' \
     -d '{
   "educationCoverRequests" : [ {
     "educationTitle" : "우아한테크코스",
