@@ -73,15 +73,27 @@ public class DeveloperSearchRepository {
             return;
         }
 
-        for (HopeWorkState hopeWorkState : hopeWorkStates) {
-            if (hopeWorkState.equals(HopeWorkState.AT_HALF_COMPANY)) {
+        for (int i =0; i < hopeWorkStates.size(); i++) {
+            if (hopeWorkStates.get(i).equals(HopeWorkState.AT_HALF_COMPANY)) {
                 builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
                         .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
                 continue;
             }
 
-            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+            if (i == 0) {
+                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
+            }
+            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
         }
+//        for (HopeWorkState hopeWorkState : hopeWorkStates) {
+//            if (hopeWorkState.equals(HopeWorkState.AT_HALF_COMPANY)) {
+//                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
+//                        .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
+//                continue;
+//            }
+//
+//            builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+//        }
     }
 
     private void eqPositionWorkShipConds(List<PositionWorkManShip> positionWorkManShips, BooleanBuilder builder) {

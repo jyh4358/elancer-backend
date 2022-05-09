@@ -97,7 +97,7 @@ class DeveloperSearchRepositoryTest {
         cSkills.addAll(Arrays.asList(CSkill.createCSkill(CDetailSkill.EMBEDDED, developer)));
         List<DBSkill> dbSkills = new ArrayList<>();
         dbSkills.addAll(Arrays.asList(DBSkill.createDBSkill(DBDetailSkill.MARIADB, developer), DBSkill.createDBSkill(DBDetailSkill.MYSQL, developer)));
-        String etc = "etc";
+        String etc = "etc1";
 
         developer.coverDeveloperSkills(
                 javaSkills,
@@ -191,6 +191,40 @@ class DeveloperSearchRepositoryTest {
         freelancerProfileRepository.save(freelancerProfile2);
         freelancerRepository.save(freelancer2);
 
+        Freelancer freelancer3 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id3");
+        FreelancerProfile freelancerProfile3 = freelancerProfileRepository.save(new FreelancerProfile("hi!", freelancer3, PositionType.DEVELOPER));
+        Developer developer3 = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile3, "react,java", "backend,백엔드");
+
+        freelancerProfile3.coverPosition(developer3);
+
+        freelancer3.updateFreelancer(
+                "멤버이름3",
+                "패스워드3",
+                "email2@email.email.com",
+                "010-0202-020",
+                null,
+                new Address(CountryType.KR, "경기도", "성남시", "중원구"),
+                LocalDate.of(2000, 01, 01),
+                5,
+                5,
+                200,
+                300,
+                new ArrayList<>(),
+                null,
+                KOSAState.NOT_POSSESS,
+                MailReceptionState.RECEPTION,
+                PresentWorkState.FREE_AT_COMPANY,
+                HopeWorkState.AT_COMPANY,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2022, 02, 01),
+                CountryType.KR,
+                "seoul"
+        );
+
+        Developer savedDeveloper3 = developerRepository.save(developer3);
+        freelancerProfileRepository.save(freelancerProfile3);
+        freelancerRepository.save(freelancer3);
+
         em.flush();
         em.clear();
 
@@ -198,10 +232,10 @@ class DeveloperSearchRepositoryTest {
         List<Developer> all = developerRepository.findAll();
         Slice<Developer> freelancers = developerSearchRepository.findFreelancerProfileByFetch(
                 PositionType.DEVELOPER,
-                null/*StringEditor.editStringToStringList("java,spring")*/,
-                null/*"backend"*/,
-                null/*Arrays.asList(HopeWorkState.AT_COMPANY, HopeWorkState.AT_HOME)*/,
-                Arrays.asList(PositionWorkManShip.MIDDLE)
+                StringEditor.editStringToStringList("java,spring"),
+                null/*"etc1"*/,
+                Arrays.asList(HopeWorkState.AT_COMPANY, HopeWorkState.AT_HOME),
+                null/*Arrays.asList(PositionWorkManShip.MIDDLE)*/
         );
 
         //then
