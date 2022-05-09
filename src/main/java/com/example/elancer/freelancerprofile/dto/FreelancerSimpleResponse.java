@@ -1,6 +1,8 @@
 package com.example.elancer.freelancerprofile.dto;
 
 import com.example.elancer.freelancer.model.IntroBackGround;
+import com.example.elancer.freelancerprofile.model.position.Position;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,7 +14,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FreelancerSimpleResponse {
-    private String positionName;
+    private PositionType positionName;
     private String freelancerName;
     private IntroBackGround introBackGround;
     private int careerYear;
@@ -21,12 +23,22 @@ public class FreelancerSimpleResponse {
     private List<String> projectNames;
 
     @QueryProjection
-    public FreelancerSimpleResponse(String positionName, String freelancerName, IntroBackGround introBackGround, int careerYear, String greeting, List<String> skills, List<String> projectNames) {
+    public FreelancerSimpleResponse(
+            PositionType positionName,
+            String freelancerName,
+            IntroBackGround introBackGround,
+            int careerYear,
+            String greeting,
+            List<String> skills,
+            String etcSkill,
+            List<String> projectNames
+    ) {
         this.positionName = positionName;
         this.freelancerName = freelancerName;
         this.introBackGround = introBackGround;
         this.careerYear = careerYear;
         this.greeting = greeting;
+        skills.add(etcSkill);
         this.skills = skills;
         this.projectNames = projectNames;
     }
