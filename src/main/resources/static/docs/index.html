@@ -474,6 +474,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#resources-freelancer-profile-crowdworker-cover">프리랜서 프로필 크라우드워커 포지션 정보 저장</a></li>
 <li><a href="#resources-freelancer-profile-etc-cover">프리랜서 프로필 기타 포지션 정보 저장</a></li>
 <li><a href="#resources-freelancer-profile-etc-find">프리랜서 프로필 기타 포지션 정보 조회</a></li>
+<li><a href="#resources-freelancer-countryType-names-find">프리랜서 거주국가 네임리스트 정보</a></li>
+<li><a href="#resources-freelancer-worktype-names-find">프리랜서 거주국가 업무분야 네임리스트 정보</a></li>
+<li><a href="#resources-freelancer-profile-developer-skills-find">프리랜서 프로필 개발자 스킬 &amp; 경험 네임리스트 정보</a></li>
+<li><a href="#resources-freelancer-profile-enum-names-find">프리랜서 프로필 이넘 네임리스트 정보</a></li>
 <li><a href="#_기업">기업</a></li>
 <li><a href="#resources-enterprise-join">기업 회원가입</a></li>
 </ul>
@@ -583,7 +587,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 345
+Content-Length: 389
 Host: localhost:8080
 
 {
@@ -595,6 +599,7 @@ Host: localhost:8080
   "mailReceptionState" : "NOT_RECEPTION",
   "memberPhone" : "memberPhone",
   "workPossibleState" : "POSSIBLE",
+  "positionType" : "DEVELOPER",
   "workStartPossibleDate" : "2022-10-10",
   "thumbnail" : null
 }</code></pre>
@@ -673,6 +678,11 @@ Host: localhost:8080
 <td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무 가능여부 필드.</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Enum</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 포지션 정보 필드.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>workStartPossibleDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">회원 업무가능일 필드.</p></td>
@@ -694,9 +704,10 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer/1 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 816
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyNywiZXhwIjoxNjUyMDk5MjEzfQ.wNK6Wz462KEn1ge_kCp3E22DcVAj6nbNAtn9s6-ncHw
+Content-Length: 843
 Host: localhost:8080
 
 {
@@ -744,6 +755,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -903,8 +918,9 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/1 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyNiwiZXhwIjoxNjUyMDk5MjEzfQ.eVyPslMOoGjODLF54eC4yodEAFJQ5B6dArmT5_mJzBw
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -944,6 +960,11 @@ Host: localhost:8080</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">회원 이름 정보 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>thumbnailPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 섬네일 url주소 정보 필드</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>birthDate</code></p></td>
@@ -998,7 +1019,7 @@ Host: localhost:8080</code></pre>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>fileName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">회원 파일이름 정보 필드</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 경력기술서 이름 정보 필드</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerYear</code></p></td>
@@ -1065,15 +1086,16 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "name" : "멤버이름",
+  "name" : "硫ㅻ쾭�씠由�",
+  "thumbnailPath" : null,
   "birthDate" : "2000-01-01",
   "email" : "email@email.email.com",
   "phone" : "010-0101-0101",
   "website" : "http://web.com",
   "countryType" : "KR",
-  "zipcode" : "경기도",
-  "mainAddress" : "성남시",
-  "detailAddress" : "중원구",
+  "zipcode" : "寃쎄린�룄",
+  "mainAddress" : "�꽦�궓�떆",
+  "detailAddress" : "以묒썝援�",
   "freelancerWorkTypes" : [ "ACCOUNTING", "BIGDATA" ],
   "workEtcField" : null,
   "fileName" : null,
@@ -1102,9 +1124,10 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/intro HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/intro HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 140
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMCwiZXhwIjoxNjUyMDk5MjE2fQ.PTXV7UNzkV-UQ9vGXSrXXmKVMzf-rpFX8ViDxUWYLcU
+Content-Length: 145
 Host: localhost:8080
 
 {
@@ -1130,6 +1153,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1189,9 +1216,10 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/academic-ability HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/academic-ability HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 254
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMCwiZXhwIjoxNjUyMDk5MjE2fQ.PTXV7UNzkV-UQ9vGXSrXXmKVMzf-rpFX8ViDxUWYLcU
+Content-Length: 263
 Host: localhost:8080
 
 {
@@ -1221,6 +1249,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1294,9 +1326,10 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/career HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/career HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 234
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMCwiZXhwIjoxNjUyMDk5MjE2fQ.PTXV7UNzkV-UQ9vGXSrXXmKVMzf-rpFX8ViDxUWYLcU
+Content-Length: 242
 Host: localhost:8080
 
 {
@@ -1325,6 +1358,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1392,9 +1429,10 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/education-license-language HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/education-license-language HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 489
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMSwiZXhwIjoxNjUyMDk5MjE3fQ.85wgB_zrEoTli0rjBkL1mO5iOgWhAL6PRUGHzV-nHwA
+Content-Length: 505
 Host: localhost:8080
 
 {
@@ -1431,6 +1469,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1526,9 +1568,10 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/project-history HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/project-history HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 578
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMSwiZXhwIjoxNjUyMDk5MjE3fQ.85wgB_zrEoTli0rjBkL1mO5iOgWhAL6PRUGHzV-nHwA
+Content-Length: 594
 Host: localhost:8080
 
 {
@@ -1565,6 +1608,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1690,8 +1737,9 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/1/freelancer-profile HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/freelancer-profile HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMCwiZXhwIjoxNjUyMDk5MjE3fQ.XAgB6pz7gmQyXJkk5JAX7xDg6o37G4_eC1zMj83V1xo
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1961,50 +2009,50 @@ Host: localhost:8080</code></pre>
   "greeting" : "greeting",
   "positionType" : "DEVELOPER",
   "introduceResponse" : {
-    "introduceName" : "소개글",
+    "introduceName" : "�냼媛쒓�",
     "introBackGround" : "COBALT_BLUE",
-    "introduceVideoURL" : "소개 영상 주소",
-    "introduceContent" : "소개 내용"
+    "introduceVideoURL" : "�냼媛� �쁺�긽 二쇱냼",
+    "introduceContent" : "�냼媛� �궡�슜"
   },
   "academicAbilityResponses" : [ {
-    "schoolName" : "고등학교",
+    "schoolName" : "怨좊벑�븰援�",
     "schoolLevel" : "HIGH_SCHOOL",
-    "schoolLevelDescription" : "고등학교",
+    "schoolLevelDescription" : "怨좊벑�븰援�",
     "enterSchoolDate" : "2012-02-01",
     "graduationDate" : "2015-02-01",
     "academicState" : "GRADUATION",
-    "majorName" : "문과"
+    "majorName" : "臾멸낵"
   } ],
   "careerResponses" : [ {
-    "companyName" : "삼성",
-    "departmentName" : "개발팀",
+    "companyName" : "�궪�꽦",
+    "departmentName" : "媛쒕컻��",
     "companyPosition" : "ASSISTANT_MANAGER",
-    "companyPositionDescription" : "대리",
+    "companyPositionDescription" : "��由�",
     "careerStartDate" : "2020-02-01",
     "careerEndDate" : "2021-02-01"
   } ],
   "educationResponses" : [ {
-    "educationTitle" : "특수교육",
-    "educationOrganization" : "특수기관",
+    "educationTitle" : "�듅�닔援먯쑁",
+    "educationOrganization" : "�듅�닔湲곌�",
     "educationStartDate" : "2020-02-01",
     "educationEndDate" : "2021-02-01"
   } ],
   "licenseResponses" : [ {
-    "licenseTitle" : "특수 자격증",
-    "licenseIssuer" : "특수 기관",
+    "licenseTitle" : "�듅�닔 �옄寃⑹쬆",
+    "licenseIssuer" : "�듅�닔 湲곌�",
     "acquisitionDate" : "2019-02-22"
   } ],
   "languageResponses" : [ {
-    "languageName" : "영어",
+    "languageName" : "�쁺�뼱",
     "languageAbility" : "MIDDLE",
-    "languageAbilityDescription" : "비즈니스 회화가능"
+    "languageAbilityDescription" : "鍮꾩쫰�땲�뒪 �쉶�솕媛��뒫"
   } ],
   "projectHistoryResponses" : [ {
-    "projectTitle" : "프로젝트명",
+    "projectTitle" : "�봽濡쒖젥�듃紐�",
     "projectStartDate" : "2020-02-01",
     "projectEndDate" : "2021-02-01",
-    "clientCompany" : "고객사명",
-    "workCompany" : "상주사명",
+    "clientCompany" : "怨좉컼�궗紐�",
+    "workCompany" : "�긽二쇱궗紐�",
     "developField" : "APPLICATION",
     "developRole" : "backend",
     "developEnvironment" : {
@@ -2013,10 +2061,10 @@ Host: localhost:8080</code></pre>
       "developEnvironmentLanguage" : "language",
       "developEnvironmentDBName" : "DB",
       "developEnvironmentTool" : "Tool",
-      "developEnvironmentCommunication" : "통신",
-      "developEnvironmentEtc" : "기타"
+      "developEnvironmentCommunication" : "�넻�떊",
+      "developEnvironmentEtc" : "湲고�"
     },
-    "responsibilityTask" : "담당업무는 백엔드 개발"
+    "responsibilityTask" : "�떞�떦�뾽臾대뒗 諛깆뿏�뱶 媛쒕컻"
   } ]
 }</code></pre>
 </div>
@@ -2031,8 +2079,9 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/1/freelancer-profile/simple HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/freelancer-profile/simple HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMSwiZXhwIjoxNjUyMDk5MjE4fQ.2bQBtdngdA-MA3oXAF3UcaS4Be01RLEwtagTjPdJPKE
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2077,6 +2126,11 @@ Host: localhost:8080</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 이름 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>thumbnailPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 섬네일 url주소 정보 필드.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>expertise</code></p></td>
@@ -2345,26 +2399,27 @@ Host: localhost:8080</code></pre>
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
   "profileNum" : 1,
   "name" : "name",
+  "thumbnailPath" : null,
   "expertise" : 0,
   "scheduleAdherence" : 0,
   "initiative" : 0,
   "communication" : 0,
   "reemploymentIntention" : 0,
   "totalActiveScore" : 0.0,
-  "introduceName" : "소개글",
+  "introduceName" : "�냼媛쒓�",
   "introBackGround" : "COBALT_BLUE",
   "greeting" : "greeting",
   "careerYear" : 0,
   "positionType" : "DEVELOPER",
-  "positionTypeDescription" : "개발자",
-  "introduceVideoUrl" : "소개 영상 주소",
-  "introduceContent" : "소개 내용",
+  "positionTypeDescription" : "媛쒕컻�옄",
+  "introduceVideoUrl" : "�냼媛� �쁺�긽 二쇱냼",
+  "introduceContent" : "�냼媛� �궡�슜",
   "projectHistoryResponses" : [ {
-    "projectTitle" : "프로젝트명",
+    "projectTitle" : "�봽濡쒖젥�듃紐�",
     "projectStartDate" : "2020-02-01",
     "projectEndDate" : "2021-02-01",
-    "clientCompany" : "고객사명",
-    "workCompany" : "상주사명",
+    "clientCompany" : "怨좉컼�궗紐�",
+    "workCompany" : "�긽二쇱궗紐�",
     "developField" : "APPLICATION",
     "developRole" : "backend",
     "developEnvironment" : {
@@ -2373,43 +2428,43 @@ Host: localhost:8080</code></pre>
       "developEnvironmentLanguage" : "language",
       "developEnvironmentDBName" : "DB",
       "developEnvironmentTool" : "Tool",
-      "developEnvironmentCommunication" : "통신",
-      "developEnvironmentEtc" : "기타"
+      "developEnvironmentCommunication" : "�넻�떊",
+      "developEnvironmentEtc" : "湲고�"
     },
-    "responsibilityTask" : "담당업무는 백엔드 개발"
+    "responsibilityTask" : "�떞�떦�뾽臾대뒗 諛깆뿏�뱶 媛쒕컻"
   } ],
   "academicAbilityResponses" : [ {
-    "schoolName" : "고등학교",
+    "schoolName" : "怨좊벑�븰援�",
     "schoolLevel" : "HIGH_SCHOOL",
-    "schoolLevelDescription" : "고등학교",
+    "schoolLevelDescription" : "怨좊벑�븰援�",
     "enterSchoolDate" : "2012-02-01",
     "graduationDate" : "2015-02-01",
     "academicState" : "GRADUATION",
-    "majorName" : "문과"
+    "majorName" : "臾멸낵"
   } ],
   "careerResponses" : [ {
-    "companyName" : "삼성",
-    "departmentName" : "개발팀",
+    "companyName" : "�궪�꽦",
+    "departmentName" : "媛쒕컻��",
     "companyPosition" : "ASSISTANT_MANAGER",
-    "companyPositionDescription" : "대리",
+    "companyPositionDescription" : "��由�",
     "careerStartDate" : "2020-02-01",
     "careerEndDate" : "2021-02-01"
   } ],
   "educationResponses" : [ {
-    "educationTitle" : "특수교육",
-    "educationOrganization" : "특수기관",
+    "educationTitle" : "�듅�닔援먯쑁",
+    "educationOrganization" : "�듅�닔湲곌�",
     "educationStartDate" : "2020-02-01",
     "educationEndDate" : "2021-02-01"
   } ],
   "licenseResponses" : [ {
-    "licenseTitle" : "특수 자격증",
-    "licenseIssuer" : "특수 기관",
+    "licenseTitle" : "�듅�닔 �옄寃⑹쬆",
+    "licenseIssuer" : "�듅�닔 湲곌�",
     "acquisitionDate" : "2019-02-22"
   } ],
   "languageResponses" : [ {
-    "languageName" : "영어",
+    "languageName" : "�쁺�뼱",
     "languageAbility" : "MIDDLE",
-    "languageAbilityDescription" : "비즈니스 회화가능"
+    "languageAbilityDescription" : "鍮꾩쫰�땲�뒪 �쉶�솕媛��뒫"
   } ]
 }</code></pre>
 </div>
@@ -2424,9 +2479,10 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/developer HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/developer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 395
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE1fQ._t7tmroQPsC9BCMWh-KIRK7YdiWCFLIrf0P6ERpVD2M
+Content-Length: 406
 Host: localhost:8080
 
 {
@@ -2458,6 +2514,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2553,8 +2613,9 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/developer HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/developer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE2fQ.etDGwkQimPVj74285_QBX46fpAzVaeACkHoN2Ynz_ow
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2668,9 +2729,10 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/publisher HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/publisher HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 88
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE1fQ._t7tmroQPsC9BCMWh-KIRK7YdiWCFLIrf0P6ERpVD2M
+Content-Length: 91
 Host: localhost:8080
 
 {
@@ -2694,6 +2756,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2741,8 +2807,9 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/publisher HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/publisher HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE2fQ.etDGwkQimPVj74285_QBX46fpAzVaeACkHoN2Ynz_ow
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2808,9 +2875,10 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/designer HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/designer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 180
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE0fQ.a2VN2RKVtMT1f-p1Jjp4tWDDetptWWAUlu02Whnq6aE
+Content-Length: 185
 Host: localhost:8080
 
 {
@@ -2836,6 +2904,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2895,8 +2967,9 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/designer HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/designer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE1fQ.jNXGBPKnXiEPElSAb6G9hsSUP3pRMA49-x6b9bH60h0
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2974,9 +3047,10 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/planner HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 85
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE0fQ.a2VN2RKVtMT1f-p1Jjp4tWDDetptWWAUlu02Whnq6aE
+Content-Length: 88
 Host: localhost:8080
 
 {
@@ -3000,6 +3074,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3047,8 +3125,9 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/planner HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE1fQ.jNXGBPKnXiEPElSAb6G9hsSUP3pRMA49-x6b9bH60h0
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3114,8 +3193,9 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/crowd-worker HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/crowd-worker HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyNywiZXhwIjoxNjUyMDk5MjE0fQ.gtJOvrJ4bfszsiEvUg7rdLbANAaA_LOheZg53BNDjhI
 Content-Length: 4
 Host: localhost:8080
 
@@ -3132,9 +3212,10 @@ null</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/1/etc HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/etc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 81
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE0fQ.a2VN2RKVtMT1f-p1Jjp4tWDDetptWWAUlu02Whnq6aE
+Content-Length: 84
 Host: localhost:8080
 
 {
@@ -3158,6 +3239,10 @@ Host: localhost:8080
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
 </tr>
 </tbody>
 </table>
@@ -3205,8 +3290,9 @@ Host: localhost:8080
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/1/etc HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/etc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE1fQ.jNXGBPKnXiEPElSAb6G9hsSUP3pRMA49-x6b9bH60h0
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3257,8 +3343,306 @@ Host: localhost:8080</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
-  "etcDetailRoles" : [ "DBA" ],
-  "positionEtcRole" : "positionEtcField"
+  "etcDetailRoles" : [ ],
+  "positionEtcRole" : null
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-countryType-names-find"><a class="link" href="#resources-freelancer-countryType-names-find">프리랜서 거주국가 네임리스트 정보</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 회원정보의 거주국가 이름 리스트 정보를 조회한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /countries HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>countryNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">거주국가 이름 리스트 정보 필드</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "countryNames" : [ "���븳誘쇨뎅", "�쁺援�", "誘멸뎅", "�씪蹂�", "以묎뎅" ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-worktype-names-find"><a class="link" href="#resources-freelancer-worktype-names-find">프리랜서 거주국가 업무분야 네임리스트 정보</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 회원정보의 업무분야 리스트 정보를 조회한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /work-types HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>workTypeNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업무분야 이름 리스트 정보 필드</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "workTypeNames" : [ "�눥�븨紐�", "�뿬�뻾�궗", "湲덉쑖", "利앷텒", "移대뱶", "蹂댄뿕", "���븰", "蹂묒썝", "怨듦났湲곌�", "臾쇰쪟", "�쉶怨�", "�젣議�", "嫄댁꽕", "�넻�떊", "�쑀�넻", "�깮�궛", "誘몃뵒�뼱", "援먯쑁", "諛섎룄泥�", "�옄�룞李�", "�븫�샇�솕�룓", "釉붾줉泥댁씤", "鍮낅뜲�씠�꽣", "湲고�" ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-developer-skills-find"><a class="link" href="#resources-freelancer-profile-developer-skills-find">프리랜서 프로필 개발자 스킬 &amp; 경험 네임리스트 정보</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 프로필 개발자 스킬 &amp; 경험 네임리스트 정보를 조회한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /developer/skills HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javaDetailSkillNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 개발자 java 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mobileDetailSkillNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 개발자 mobile 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>phpOrAspDetailSkillNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 개발자 php/asp 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dotNetDetailSkillNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 개발자 .net 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>javaScriptDetailSkillNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 개발자 javaScript 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>cdetailSkillNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 개발자 c언어 스킬 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>dbDetailSkillNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 개발자 db 스킬 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "javaDetailSkillNames" : [ "Front-End", "Back-End", "Spring", "Xplatform", "Miplatform", "Nexacro", "Proframe", "Maven", "Jenkins", "Sencha", "Trustform", "Tuxedo", "Gauce", "Pro*C", "DevOn", "Thymeleaf" ],
+  "mobileDetailSkillNames" : [ "Hybrid", "Android", "IOS(Object-C)", "IOS(Swift)", "WebView", "IoT" ],
+  "phpOrAspDetailSkillNames" : [ "PHP", "laravel", "Codeigniter", "Symfony", "Zend Framework", "WordPress", "Asp" ],
+  "dotNetDetailSkillNames" : [ "ASP.net", "C", "C++", "C#", "MFC", "OpenGL", "DevExpress", "VBA" ],
+  "javaScriptDetailSkillNames" : [ "node.js", "AngularJS", "React.js", "Vue.js", "jQuery", "JavaScript" ],
+  "dbDetailSkillNames" : [ "Oracle", "MSSQL", "MySQL", "MariaDB", "MongoDB", "Prostgresql", "CUBRID", "Tibero" ],
+  "cdetailSkillNames" : [ "Server", "Unix", "Embedded", "Firmware", "Machine Vision", "Aduino", "Qt", "MetaLab", "LabVIEW" ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-freelancer-profile-enum-names-find"><a class="link" href="#resources-freelancer-profile-enum-names-find">프리랜서 프로필 이넘 네임리스트 정보</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>프리랜서 프로필 이넘 네임리스트 정보를 조회한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /profile-enums HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>schoolLevelNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 학력단계 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicStateNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 학력상태 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>companyPositionNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 회사직책 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageAbilityNames</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 언어구사능력 정보 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "schoolLevelNames" : [ "怨좊벑�븰援�", "���븰援�(2,3�뀈)", "���븰援�(4�뀈)", "���븰�썝(�꽍�궗)", "���븰�썝(諛뺤궗)" ],
+  "academicStateNames" : [ "�옱�븰", "�쑕�븰", "以묓눜", "議몄뾽", "�닔猷�/�씠�닔" ],
+  "companyPositionNames" : [ "�쉶�옣", "遺��쉶�옣", "�궗�옣", "遺��궗�옣", "�쟾臾�", "�긽臾�", "�씠�궗", "遺��옣", "李⑥옣", "怨쇱옣", "�떎�옣", "���옣", "��由�", "怨꾩옣", "二쇱엫", "�궗�썝", "�뿰援ъ냼�옣", "�닔�꽍 �뿰援ъ썝", "梨낆엫 �뿰援ъ썝", "�꽑�엫 �뿰援ъ썝", "二쇱엫 �뿰援ъ썝", "�뿰援ъ썝", "�엫�떆吏�", "湲고�", "留ㅻ땲��" ],
+  "languageAbilityNames" : [ "�씪�긽�쉶�솕 媛��뒫", "鍮꾩쫰�땲�뒪 �쉶�솕媛��뒫", "�썝�뼱誘� �닔以�" ]
 }</code></pre>
 </div>
 </div>
@@ -3280,7 +3664,7 @@ Host: localhost:8080</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-05-04 13:21:15 +0900
+Last updated 2022-05-07 17:40:38 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

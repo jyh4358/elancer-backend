@@ -33,7 +33,7 @@ class EnterpriseServiceTest {
     @Autowired
     private EnterpriseRepository enterpriseRepository;
 
-    @Test
+//    @Test
     @Rollback(value = false)
     @DisplayName("기업 회원 가입")
     public void enterpriseJoin() {
@@ -80,7 +80,7 @@ class EnterpriseServiceTest {
     }
 
 
-    @Test
+//    @Test
     @DisplayName("기업 회원 가입 시, 중복된 아이디일 경우 예외 발생")
     public void enterpriseJoinDuplicateException() {
 

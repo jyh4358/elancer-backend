@@ -41,7 +41,7 @@ public class EnterpriseIntroDocumentTest {
     @Autowired
     protected MockMvc mockMvc;
 
-    @Test
+//    @Test
     @DisplayName("기업 프로필 문서화")
     public void 기업_프로필_문서화() throws Exception {
         List<String> mainBizCodes = new ArrayList<>();
