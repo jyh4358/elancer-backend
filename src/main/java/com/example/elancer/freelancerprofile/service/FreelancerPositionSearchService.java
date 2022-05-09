@@ -4,6 +4,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
+import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.repository.DeveloperSearchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
@@ -25,7 +26,7 @@ public class FreelancerPositionSearchService {
             List<HopeWorkState> hopeWorkStates,
             List<PositionWorkManShip> positionWorkManShips
     ) {
-        Slice<Freelancer> freelancerProfileByFetch = developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips);
+        Slice<Developer> freelancerProfileByFetch = developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips);
 
     }
 }
