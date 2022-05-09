@@ -1,7 +1,10 @@
+
+
 spring:
   profiles:
     include:
       - db
       - oauth
+      - security
       - aws
     active: local

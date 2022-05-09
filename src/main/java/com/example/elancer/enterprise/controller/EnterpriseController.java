@@ -1,11 +1,13 @@
 package com.example.elancer.enterprise.controller;
 
 import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
-import com.example.elancer.enterprise.dto.EnterpriseJoinAndUpdateRequest;
+import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.service.EnterpriseService;
+import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +17,12 @@ public class EnterpriseController {
 
     private final EnterpriseService enterpriseService;
 
-    @PostMapping("/enterprise")
+//    @PostMapping("/enterprise")
     public ResponseEntity<String> joinEnterprise(
-            @Validated @RequestBody EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest) {
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody EnterpriseJoinRequest enterpriseJoinRequest) {
 
-        enterpriseService.join(enterpriseJoinAndUpdateRequest);
+        enterpriseService.join(enterpriseJoinRequest);
         return new ResponseEntity("join", HttpStatus.CREATED);
     }
 
@@ -28,6 +31,15 @@ public class EnterpriseController {
 //        enterpriseService.(id);
         return null;
     }
+
+//    @PostMapping("/enterprise/{num}/profile")
+//    public ResponseEntity<String> enterpriseProfile(
+//            @PathVariable Long num,
+//            @AuthenticationPrincipal MemberDetails memberDetails,
+//            @Validated @RequestBody EnterpriseIntroRequest enterpriseIntroRequest) {
+//
+//        enterpriseService.updateIntro(num, enterpriseIntroReques;
+//    }
 
     @PutMapping("/enterprise/{id}")
     public ResponseEntity<String> updateEnterpriseIntro(
@@ -38,4 +50,7 @@ public class EnterpriseController {
 
         return new ResponseEntity("update", HttpStatus.OK);
     }
+
+
+
 }

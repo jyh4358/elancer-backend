@@ -17,9 +17,6 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class EnterpriseIntro extends BasicEntity{
 
-//    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "enDetails_id")
-//    private Long id;
 
     private String introTitle;
 
@@ -56,6 +53,12 @@ public class EnterpriseIntro extends BasicEntity{
         return enterpriseIntro;
     }
 
+    public static EnterpriseIntro initializeFrom(String name) {
+        return EnterpriseIntro.builder()
+                .introTitle("안녕하세요. " + name + "입니다")
+                .build();
+    }
+
     public void addEnterpriseMainBiz(EnterpriseMainBiz enterpriseMainBiz) {
         enterpriseMainBizs.add(enterpriseMainBiz);
         enterpriseMainBiz.setEnterpriseIntro(this);
@@ -64,5 +67,9 @@ public class EnterpriseIntro extends BasicEntity{
     public void addEnterpriseSubBiz(EnterpriseSubBiz enterpriseSubBiz) {
         enterpriseSubBizs.add(enterpriseSubBiz);
         enterpriseSubBiz.setEnterpriseIntro(this);
+    }
+
+    public void initializeEnterpriseProfile(String name) {
+        this.introTitle = "안녕하세요. " + name + "입니다";
     }
 }

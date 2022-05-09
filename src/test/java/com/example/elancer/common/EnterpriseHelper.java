@@ -1,4 +1,4 @@
-package com.example.elancer.common.utils;
+package com.example.elancer.common;
 
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;

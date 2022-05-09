@@ -3,13 +3,14 @@ package com.example.elancer.enterprise.service;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.domain.enterpriseintro.*;
 import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
-import com.example.elancer.enterprise.dto.EnterpriseJoinAndUpdateRequest;
+import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.enterprise.repository.MainBusinessRepository;
 import com.example.elancer.enterprise.repository.SubBusinessRepository;
 import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,21 +29,27 @@ public class EnterpriseService {
     private final MainBusinessRepository mainBusinessRepository;
     private final SubBusinessRepository subBusinessRepository;
 
-    @Transactional
-    public Long join(EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest) {
 
-        enterpriseJoinAndUpdateRequest.checkPwd();
-        checkDuplicate(enterpriseJoinAndUpdateRequest.getUserId());
-        enterpriseJoinAndUpdateRequest.setPassword1(passwordEncoder.encode(enterpriseJoinAndUpdateRequest.getPassword1()));
-        Enterprise enterprise = enterpriseJoinAndUpdateRequest.toEntity();
+    @Transactional
+    public Long join(EnterpriseJoinRequest enterpriseJoinRequest) {
+
+        enterpriseJoinRequest.checkPwd();
+        checkDuplicate(enterpriseJoinRequest.getUserId());
+        enterpriseJoinRequest.setPassword1(passwordEncoder.encode(enterpriseJoinRequest.getPassword1()));
+        Enterprise enterprise = enterpriseJoinRequest.toEntity();
 
         enterpriseRepository.save(enterprise);
         return enterprise.getNum();
     }
 
+    public void coverEnterpriseAccountInfo(MemberDetails memberDetails, EnterpriseJoinRequest enterpriseJoinRequest) {
+
+
+    }
+
 
     @Transactional
-    public void enterpriseUpdate(String userId, EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest) {
+    public void enterpriseUpdate(String userId, EnterpriseJoinRequest enterpriseJoinRequest) {
 //        enterpriseRepository.findByUserId(userId);
 
     }
