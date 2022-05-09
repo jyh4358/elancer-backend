@@ -82,9 +82,11 @@ public class DeveloperSearchRepository {
 
             if (i == 0) {
                 builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
+                continue;
             }
             builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
         }
+//        int count = 0;
 //        for (HopeWorkState hopeWorkState : hopeWorkStates) {
 //            if (hopeWorkState.equals(HopeWorkState.AT_HALF_COMPANY)) {
 //                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
@@ -92,7 +94,13 @@ public class DeveloperSearchRepository {
 //                continue;
 //            }
 //
-//            builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+//            if (count == 0) {
+//                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+//                count++;
+//                continue;
+//            }
+//
+//            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
 //        }
     }
 
