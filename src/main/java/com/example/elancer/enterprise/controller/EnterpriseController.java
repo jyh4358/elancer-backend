@@ -1,7 +1,8 @@
 package com.example.elancer.enterprise.controller;
 
+import com.example.elancer.enterprise.dto.EnterpriseAccountDetailResponse;
 import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
-import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
+import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
@@ -17,39 +18,35 @@ public class EnterpriseController {
 
     private final EnterpriseService enterpriseService;
 
-//    @PostMapping("/enterprise")
-    public ResponseEntity<String> joinEnterprise(
+    @PutMapping("/enterprise")
+    public ResponseEntity<Void> coverEnterpriseAccountInfo(
             @AuthenticationPrincipal MemberDetails memberDetails,
-            @Validated @RequestBody EnterpriseJoinRequest enterpriseJoinRequest) {
-
-        enterpriseService.join(enterpriseJoinRequest);
-        return new ResponseEntity("join", HttpStatus.CREATED);
-    }
-
-    @GetMapping("/member/{id}")
-    public ResponseEntity enterpriseIntro(@PathVariable String id) {
-//        enterpriseService.(id);
+            @Validated @RequestBody EnterpriseUpdateRequest enterpriseUpdateRequest
+    ) {
+        enterpriseService.coverEnterpriseAccountInfo(memberDetails, enterpriseUpdateRequest);
         return null;
     }
 
-//    @PostMapping("/enterprise/{num}/profile")
-//    public ResponseEntity<String> enterpriseProfile(
-//            @PathVariable Long num,
-//            @AuthenticationPrincipal MemberDetails memberDetails,
-//            @Validated @RequestBody EnterpriseIntroRequest enterpriseIntroRequest) {
-//
-//        enterpriseService.updateIntro(num, enterpriseIntroReques;
-//    }
+    @GetMapping("/enterprise")
+    public ResponseEntity<EnterpriseAccountDetailResponse> findDetailEnterpriseAccount(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        EnterpriseAccountDetailResponse enterpriseAccountInfo = enterpriseService.findDetailEnterpriseAccount(memberDetails.getId());
+        return new ResponseEntity<EnterpriseAccountDetailResponse>(enterpriseAccountInfo, HttpStatus.OK);
 
-    @PutMapping("/enterprise/{id}")
-    public ResponseEntity<String> updateEnterpriseIntro(
-            @PathVariable Long id,
-            @Validated @RequestBody EnterpriseIntroRequest enterpriseIntroRequest) {
-        enterpriseService.updateIntro(id, enterpriseIntroRequest, null);
-
-
-        return new ResponseEntity("update", HttpStatus.OK);
     }
+
+
+
+    @PostMapping("/enterprise/profile")
+    public ResponseEntity<String> coverEnterpriseIntroduce(
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody EnterpriseIntroRequest enterpriseIntroRequest) {
+
+        enterpriseService.updateIntro(memberDetails, enterpriseIntroRequest);
+        return null;
+    }
+
 
 
 

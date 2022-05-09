@@ -28,13 +28,13 @@ public class EnterpriseSubBiz extends BasicEntity{
     private String etc;
 
     @Builder
-    public EnterpriseSubBiz(Long id, EnterpriseIntro enterpriseIntro, SubBusiness subBusiness, String etc) {
+    public EnterpriseSubBiz(Long id, EnterpriseIntro enterpriseIntro, SubBusiness subBusiness) {
         this.enterpriseIntro = enterpriseIntro;
         this.subBusiness = subBusiness;
         this.etc = etc;
     }
 
-    public static List<EnterpriseSubBiz> createList(List<SubBusiness> subBusinesses, String etc) {
+    public static List<EnterpriseSubBiz> createList(List<SubBusiness> subBusinesses) {
         return subBusinesses.stream().map((s) ->
                         EnterpriseSubBiz.builder()
                                 .subBusiness(s)

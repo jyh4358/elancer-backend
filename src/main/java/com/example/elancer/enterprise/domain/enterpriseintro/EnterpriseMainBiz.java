@@ -34,7 +34,7 @@ public class EnterpriseMainBiz extends BasicEntity{
         this.etc = etc;
     }
 
-    public static List<EnterpriseMainBiz> createList(List<MainBusiness> mainBusinesses, String etc) {
+    public static List<EnterpriseMainBiz> createList(List<MainBusiness> mainBusinesses) {
         return mainBusinesses.stream().map((s) ->
                         EnterpriseMainBiz.builder()
                                 .mainBusiness(s)
