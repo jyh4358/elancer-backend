@@ -40,7 +40,7 @@ public class MemberController {
         return "<h1>test 통과</h1>";
     }
 
-    @GetMapping("/login/google")
+    @PostMapping("/login/google")
     public MemberLoginResponse loginBy(@RequestBody AuthCode authCode, HttpServletResponse response) {
 
 
