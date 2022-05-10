@@ -1,10 +1,12 @@
 package com.example.elancer.wishprojects.service;
 
+import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
@@ -41,22 +43,9 @@ class WishProjectServiceTest extends ServiceBaseTest {
     public void 프로젝트찜_생성() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.PLANNER));
 
         MemberDetails memberDetails = new MemberDetails(freelancer.getNum(), freelancer.getUserId(), freelancer.getRole());
 
@@ -77,22 +66,10 @@ class WishProjectServiceTest extends ServiceBaseTest {
     public void 프로젝트찜_삭제() {
         //given
         String memberId = "memberId";
-        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
-                memberId,
-                "pwd",
-                "name",
-                "phone",
-                "email",
-                "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
-                MemberType.FREELANCER,
-                MailReceptionState.RECEPTION,
-                WorkPossibleState.POSSIBLE,
-                LocalDate.of(2021, 02, 01),
-                null
-        ));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
 
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.CROWD_WORKER));
 
         MemberDetails memberDetails = new MemberDetails(freelancer.getNum(), freelancer.getUserId(), freelancer.getRole());
 

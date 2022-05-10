@@ -4,12 +4,17 @@ import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.annotation.WithMockCustomUser;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
+import com.example.elancer.integrate.freelancer.LoginHelper;
 import com.example.elancer.member.domain.Member;
+import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.member.repository.MemberRepository;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectBackGround;
 import com.example.elancer.project.repository.ProjectRepository;
+import com.example.elancer.token.jwt.JwtTokenProvider;
+import com.example.elancer.token.service.JwtTokenService;
 import com.example.elancer.wishprojects.controller.WishProjectControllerPath;
 import com.example.elancer.wishprojects.dto.WishProjectSaveRequest;
 import com.example.elancer.wishprojects.model.WishProject;
@@ -21,6 +26,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithUserDetails;
 
 import java.util.List;
@@ -39,16 +45,21 @@ public class WishProjectIntegrateTest extends IntegrateBaseTest {
     @Autowired
     private MemberRepository memberRepository;
 
-    private Freelancer freelancer;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtTokenService jwtTokenService;
+
 
     @DisplayName("프로젝트찜 생성 통합테스트")
-    @WithUserDetails(value = "memberId")
-//    @Test
+    @Test
     public void 프로젝트찜_생성() throws Exception {
         //given
-//        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository);
-        Member member = memberRepository.findByUserId(freelancer.getUserId()).orElseThrow(() -> new UsernameNotFoundException("check id"));
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer));
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.ETC));
 
         Project project = projectRepository.save(new Project(ProjectBackGround.BLACK));
 
@@ -56,11 +67,12 @@ public class WishProjectIntegrateTest extends IntegrateBaseTest {
 
         //when
         mockMvc.perform(post(WishProjectControllerPath.WISH_PROJECT_SAVE)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(objectMapper.writeValueAsString(wishProjectSaveRequest)))
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
+                        .content(objectMapper.writeValueAsString(wishProjectSaveRequest)))
                 .andExpect(status().isCreated())
                 .andDo(print()
-        );
+                );
 
         //then
         List<WishProject> wishProjects = wishProjectRepository.findAll();
