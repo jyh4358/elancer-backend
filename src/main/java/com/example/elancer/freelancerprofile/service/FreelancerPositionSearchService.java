@@ -17,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FreelancerPositionSearchService {
     private final DeveloperSearchRepository developerSearchRepository;
+//    private final Proje developerSearchRepository;
 
     @Transactional(readOnly = true)
     public void searchDevelopers(
@@ -24,9 +25,11 @@ public class FreelancerPositionSearchService {
             List<String> majorSkillKeywords,
             String minorSkill,
             List<HopeWorkState> hopeWorkStates,
-            List<PositionWorkManShip> positionWorkManShips
+            List<PositionWorkManShip> positionWorkManShips,
+            WorkArea workArea
     ) {
-        Slice<Developer> freelancerProfileByFetch = developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips);
+        Slice<Developer> freelancerProfileByFetch = developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips, workArea.getDesc());
+
 
     }
 }

@@ -70,6 +70,7 @@ public class FreelancerProfile extends BasicEntity {
     public FreelancerProfile(String greeting, Freelancer freelancer, PositionType positionType) {
         this.greeting = greeting;
         this.freelancer = freelancer;
+        //TODO min 쿼리날아가는지 확인
         this.position = positionType.getFunction().apply(this);
     }
 

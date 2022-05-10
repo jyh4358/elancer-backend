@@ -8,6 +8,7 @@ import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.QPosition;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.member.domain.QAddress;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.Expression;
@@ -38,7 +39,8 @@ public class DeveloperSearchRepository {
             List<String> majorSkillConditions,
             String minorSkill,
             List<HopeWorkState> hopeWorkStates,
-            List<PositionWorkManShip> positionWorkManShips
+            List<PositionWorkManShip> positionWorkManShips,
+            String workArea
     ) {
         BooleanBuilder builder = new BooleanBuilder();
 
@@ -47,6 +49,7 @@ public class DeveloperSearchRepository {
         eqMajorSkillConds(majorSkillConditions, builder);
         eqHopeWorkStateConds(hopeWorkStates, builder);
         eqPositionWorkShipConds(positionWorkManShips, builder);
+        eqWorkAreaConds(workArea, builder);
 
 
         QueryResults<Developer> developerQueryResults = jpaQueryFactory.selectFrom(developer)
@@ -56,6 +59,14 @@ public class DeveloperSearchRepository {
                 .fetchResults();
 
         return new SliceImpl<Developer>(developerQueryResults.getResults());
+    }
+
+    private void eqWorkAreaConds(String area, BooleanBuilder builder) {
+        if (area == null) {
+            return ;
+        }
+
+        builder.and(freelancer.address.mainAddress.containsIgnoreCase(area));
     }
 
     private void eqMajorSkillConds(List<String> majorSkillKeywords, BooleanBuilder builder) {
@@ -73,35 +84,35 @@ public class DeveloperSearchRepository {
             return;
         }
 
-        for (int i =0; i < hopeWorkStates.size(); i++) {
-            if (hopeWorkStates.get(i).equals(HopeWorkState.AT_HALF_COMPANY)) {
-                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
-                        .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
-                continue;
-            }
-
-            if (i == 0) {
-                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
-                continue;
-            }
-            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
-        }
-//        int count = 0;
-//        for (HopeWorkState hopeWorkState : hopeWorkStates) {
-//            if (hopeWorkState.equals(HopeWorkState.AT_HALF_COMPANY)) {
+//        for (int i =0; i < hopeWorkStates.size(); i++) {
+//            if (hopeWorkStates.get(i).equals(HopeWorkState.AT_HALF_COMPANY)) {
 //                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
 //                        .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
 //                continue;
 //            }
 //
-//            if (count == 0) {
-//                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
-//                count++;
+//            if (i == 0) {
+//                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
 //                continue;
 //            }
-//
-//            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+//            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
 //        }
+        int count = 0;
+        for (HopeWorkState hopeWorkState : hopeWorkStates) {
+            if (hopeWorkState.equals(HopeWorkState.AT_HALF_COMPANY)) {
+                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
+                        .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
+                continue;
+            }
+
+            if (count == 0) {
+                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+                count++;
+                continue;
+            }
+
+            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+        }
     }
 
     private void eqPositionWorkShipConds(List<PositionWorkManShip> positionWorkManShips, BooleanBuilder builder) {
