@@ -5,6 +5,7 @@ import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.service.FreelancerPositionSearchService;
+import com.example.elancer.freelancerprofile.service.WorkArea;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,10 @@ public class FreelancerPositionSearchController {
             @RequestParam(required = false) List<String> majorSkillKeywords,
             @RequestParam(required = false) String minorSkill,
             @RequestParam(required = false) List<HopeWorkState> hopeWorkStates,
-            @RequestParam(required = false) List<PositionWorkManShip> positionWorkManShips
+            @RequestParam(required = false) List<PositionWorkManShip> positionWorkManShips,
+            @RequestParam(required = false) WorkArea workArea
     ) {
-        freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips);
+        freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips, workArea);
         return new ResponseEntity<FreelancerSimpleResponse>(HttpStatus.OK);
     }
 }
