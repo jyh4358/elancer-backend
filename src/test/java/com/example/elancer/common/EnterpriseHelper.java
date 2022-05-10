@@ -5,13 +5,14 @@ import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.domain.MemberType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class EnterpriseHelper {
 
-    public static Enterprise 기업_생성(EnterpriseRepository enterpriseRepository) {
+    public static Enterprise 기업_생성(EnterpriseRepository enterpriseRepository, PasswordEncoder passwordEncoder) {
         Enterprise enterprise = Enterprise.builder()
                 .userId("enterpriseId")
-                .password("pwd")
+                .password(passwordEncoder.encode("pwd"))
                 .name("기업")
                 .phone("000-0000-0000")
                 .email("enterprise@gmail.com")

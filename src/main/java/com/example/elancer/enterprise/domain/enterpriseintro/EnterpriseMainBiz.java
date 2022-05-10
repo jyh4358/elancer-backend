@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "enterprise_mainbiz")
-@Getter @Setter
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class EnterpriseMainBiz extends BasicEntity{
 
@@ -43,4 +43,7 @@ public class EnterpriseMainBiz extends BasicEntity{
 
     }
 
+    public void setEnterpriseIntro(EnterpriseIntro enterpriseIntro) {
+        this.enterpriseIntro = enterpriseIntro;
+    }
 }

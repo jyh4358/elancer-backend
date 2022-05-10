@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter @Setter
 @AllArgsConstructor
-public class EnterpriseIntroRequest {
+public class EnterpriseProfileRequest {
 
     private String introTitle;
 

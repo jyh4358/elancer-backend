@@ -3,29 +3,17 @@ package com.example.elancer.enterprise.service;
 import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.enterprise.dto.EnterpriseAccountDetailResponse;
-import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
 import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
-import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
-import com.example.elancer.enterprise.exception.CheckPasswordException;
-import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
-import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,7 +38,7 @@ class EnterpriseServiceTest extends ServiceBaseTest {
     public void 기업_계정_정보_업데이트() {
 
         // given
-        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository);
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
 
         MemberDetails memberDetails = MemberDetails.builder()
                 .id(enterprise.getNum())
@@ -104,7 +92,7 @@ class EnterpriseServiceTest extends ServiceBaseTest {
     public void 기업_계정_정보_조회() {
 
         // given
-        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository);
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
 
         MemberDetails memberDetails = new MemberDetails(
                 enterprise.getNum(),
@@ -153,7 +141,7 @@ class EnterpriseServiceTest extends ServiceBaseTest {
 //        subBiz.add("sub_biz1");
 //        subBiz.add("sub_biz2");
 //
-//        EnterpriseIntroRequest enterpriseIntroRequest = new EnterpriseIntroRequest("타이틀", "SI", 1000, "123-123-123",  mainBiz, subBiz);
+//        EnterpriseProfileRequest enterpriseIntroRequest = new EnterpriseProfileRequest("타이틀", "SI", 1000, "123-123-123",  mainBiz, subBiz);
 //
 //
 //        //when

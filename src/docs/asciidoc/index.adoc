@@ -328,10 +328,32 @@ include::{snippets}/freelancer-profile-enum-names-find/response-body.adoc[]
 [[resources-enterprise-join]]
 == 기업 회원가입
 
-//개인정보 입력을 통해 프리랜서 회원가입을 진행한다.
-//include::{snippets}/enterprise-join/http-request.adoc[]
-//include::{snippets}/enterprise-join/request-headers.adoc[]
-//include::{snippets}/enterprise-join/request-fields.adoc[]
+개인정보 입력을 통해 프리랜서 회원가입을 진행한다.
+include::{snippets}/enterprise-join/http-request.adoc[]
+include::{snippets}/enterprise-join/request-headers.adoc[]
+include::{snippets}/enterprise-join/request-fields.adoc[]
+
+[[resources-enterprise-account-cover]]
+== 기업 회원 정보 수정
+include::{snippets}/enterprise-account-cover/http-request.adoc[]
+include::{snippets}/enterprise-account-cover/request-headers.adoc[]
+include::{snippets}/enterprise-account-cover/request-fields.adoc[]
+
+[[resources-enterprise-account-find]]
+== 기업 회원 정보 조회
+요청
+include::{snippets}/enterprise-account-find/http-request.adoc[]
+include::{snippets}/enterprise-account-find/request-headers.adoc[]
+응답
+include::{snippets}/enterprise-account-find/response-headers.adoc[]
+include::{snippets}/enterprise-account-find/response-fields.adoc[]
+
+
+[[resources-enterprise-profile]]
+== 기업 프로필 정보 수정
+include::{snippets}/enterprise-profile/http-request.adoc[]
+include::{snippets}/enterprise-profile/request-headers.adoc[]
+include::{snippets}/enterprise-profile/request-fields.adoc[]
 
 
 
