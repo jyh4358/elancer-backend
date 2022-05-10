@@ -57,14 +57,12 @@ public class EnterpriseController {
      * @param memberDetails
      * @return
      */
-
-
     @GetMapping("/enterprise/profile")
     public ResponseEntity<EnterpriseProfileResponse> findEnterpriseProfile(
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        EnterpriseProfileResponse enterpriseProfileresponse = enterpriseService.findEnterpriseProfile(memberDetails);
-        return new ResponseEntity<>(enterpriseProfileresponse, HttpStatus.OK);
+        EnterpriseProfileResponse enterpriseProfileResponse = enterpriseService.findEnterpriseProfile(memberDetails);
+        return new ResponseEntity<>(enterpriseProfileResponse, HttpStatus.OK);
     }
 
     /**
@@ -73,13 +71,12 @@ public class EnterpriseController {
      * @param enterpriseProfileRequest
      * @return
      */
-
     @PutMapping("/enterprise/profile")
     public ResponseEntity<String> coverEnterpriseIntroduce(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody EnterpriseProfileRequest enterpriseProfileRequest) {
 
-        enterpriseService.updateIntro(memberDetails, enterpriseProfileRequest);
+        enterpriseService.updateIntro(memberDetails.getId(), enterpriseProfileRequest);
         return new ResponseEntity<>("profile ok", HttpStatus.OK);
     }
 

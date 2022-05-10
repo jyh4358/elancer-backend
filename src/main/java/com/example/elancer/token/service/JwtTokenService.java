@@ -33,7 +33,7 @@ public class JwtTokenService {
 
 
     /**
-     * local login
+     * 회원 로그인
      * @param requestDto
      * @return
      */
@@ -46,15 +46,17 @@ public class JwtTokenService {
         return new MemberLoginResponse(member.getName(), jwtTokenProvider.createToken(member.getUserId()), member.getRefreshToken());
     }
 
-
+    /**
+     * 소셜 로그인
+     * @param code
+     * @return
+     */
     @Transactional
     public MemberLoginResponse loginMemberByProvider(String code) {
         AccessToken accessToken = providerService.getAccessToken(code);
-        System.out.println("accessToken = " + accessToken);
         GoogleProfile googleProfile = providerService.getProfile(accessToken.getAccess_token());
 
         // userId는 구글에서 가져온 email key(sub)을 이용하여 만듬. ex) google_12321321321
-
         String userId = createUserId(googleProfile.getSub());
 
         Optional<Member> findMember = memberRepository.findByUserId(userId);

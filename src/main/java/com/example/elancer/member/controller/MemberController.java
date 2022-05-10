@@ -23,48 +23,56 @@ import javax.servlet.http.HttpServletResponse;
 public class MemberController {
 
     private final JwtTokenService jwtTokenService;
-    private final JwtTokenProvider jwtTokenProvider;
 
-
+    /**
+     * 회원 로그인
+     * @param loginRequest
+     * @return
+     */
     @PostMapping("/login")
-    public ResponseEntity<MemberLoginResponse> login(@RequestBody MemberLoginRequest loginRequest, HttpServletResponse response) {
+    public ResponseEntity<MemberLoginResponse> login(
+            @RequestBody MemberLoginRequest loginRequest
+    ) {
         MemberLoginResponse loginResponse = jwtTokenService.loginMember(loginRequest);
-        response.addCookie(getCookie(loginResponse.getRefreshToken()));
         return new ResponseEntity(loginResponse, HttpStatus.OK);
     }
 
 
-    @PostMapping("/test")
-    public String test(){
-
-        return "<h1>test 통과</h1>";
-    }
-
+    /**
+     * 소셜 로그인
+     * @param authCode
+     * @param response
+     * @return
+     */
     @PostMapping("/login/google")
     public MemberLoginResponse loginBy(@RequestBody AuthCode authCode, HttpServletResponse response) {
-
 
         System.out.println("code = " + authCode.getCode());
         MemberLoginResponse responseDto = jwtTokenService.loginMemberByProvider(authCode.getCode());
 
-        response.addCookie(getCookie(responseDto.getRefreshToken()));
-
         return responseDto;
     }
 
+
+    /**
+     * token 재발급
+     * @param tokenRequestDto
+     * @param response
+     * @return
+     */
     @PostMapping("/reissue")
     public ResponseEntity<TokenResponse> reIssue(@RequestBody TokenRequest tokenRequestDto, HttpServletResponse response) {
         TokenResponse responseDto = jwtTokenService.reIssue(tokenRequestDto);
-        response.addCookie(getCookie(responseDto.getRefreshToken()));
         return new ResponseEntity(responseDto, HttpStatus.OK);
     }
 
-    private Cookie getCookie(String refreshToken) {
-        Cookie cookie = new Cookie("refreshToken", refreshToken);
-        cookie.setMaxAge(30 * 24 * 60 * 60);
-        cookie.setSecure(true);   // https 통신이 아닌경우에는 쿠키를 전송하지 않음
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        return cookie;
-    }
+    // local repository를 사용하는 방식으로, cookie 사용 x
+//    private Cookie getCookie(String refreshToken) {
+//        Cookie cookie = new Cookie("refreshToken", refreshToken);
+//        cookie.setMaxAge(30 * 24 * 60 * 60);
+//        cookie.setSecure(true);   // https 통신이 아닌경우에는 쿠키를 전송하지 않음
+//        cookie.setHttpOnly(true);
+//        cookie.setPath("/");
+//        return cookie;
+//    }
 }

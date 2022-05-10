@@ -348,12 +348,21 @@ include::{snippets}/enterprise-account-find/request-headers.adoc[]
 include::{snippets}/enterprise-account-find/response-headers.adoc[]
 include::{snippets}/enterprise-account-find/response-fields.adoc[]
 
-
 [[resources-enterprise-profile]]
 == 기업 프로필 정보 수정
 include::{snippets}/enterprise-profile/http-request.adoc[]
 include::{snippets}/enterprise-profile/request-headers.adoc[]
 include::{snippets}/enterprise-profile/request-fields.adoc[]
 
+
+
+[[resources-enterprise-profile-find]]
+== 기업 프로필 정보 조회
+요청
+include::{snippets}/enterprise-profile-find/http-request.adoc[]
+include::{snippets}/enterprise-profile-find/request-headers.adoc[]
+응답
+include::{snippets}/enterprise-profile-find/response-headers.adoc[]
+include::{snippets}/enterprise-profile-find/response-fields.adoc[]
 
 

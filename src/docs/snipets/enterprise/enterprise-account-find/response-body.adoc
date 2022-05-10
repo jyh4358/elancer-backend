@@ -1,10 +1,10 @@
 [source,options="nowrap"]
 ----
 {
-  "companyName" : "湲곗뾽紐�",
+  "companyName" : "기업명",
   "companyPeople" : 10,
-  "name" : "湲곗뾽",
-  "position" : "�궗�옣",
+  "name" : "기업",
+  "position" : "사장",
   "phone" : "000-0000-0000",
   "telNumber" : "000-1111-1111",
   "email" : "enterprise@gmail.com",

@@ -22,5 +22,5 @@ $ echo '{
   "idNumber" : "111-111-111"
 }' | http PUT 'http://localhost:8080/enterprise' \
     'Content-Type:application/json;charset=UTF-8' \
-    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODIzNjAsImV4cCI6MTY1MjE4MjQ0Nn0.A_vNSB7LHRf8stu0jg-arwD0hITT06YVNKOq30lazic'
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODMwNTYsImV4cCI6MTY1MjE4MzE0Mn0.ispGAdGs1qzSozMdTVqQTvLnSkixTTJJsa6fkW475Ac'
 ----

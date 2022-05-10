@@ -86,13 +86,14 @@ public class EnterpriseService {
 
     /**
      * 기업 프로필 업데이트
-     * @param memberDetails
+     * @param num
      * @param enterpriseProfileRequest
      */
     @Transactional
-    public void updateIntro(MemberDetails memberDetails, EnterpriseProfileRequest enterpriseProfileRequest) {
+    public void updateIntro(
+            Long num, EnterpriseProfileRequest enterpriseProfileRequest) {
 
-        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
+        Enterprise enterprise = enterpriseRepository.findById(num).orElseThrow(NotExistEnterpriseException::new);
 
         List<EnterpriseMainBiz> enterpriseMainBizs = getEnterpriseMainBizs(enterpriseProfileRequest);
         List<EnterpriseSubBiz> enterpriseSubBizs = getEnterpriseSubBizs(enterpriseProfileRequest);

@@ -2,7 +2,7 @@
 ----
 PUT /enterprise/profile HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODIzNjAsImV4cCI6MTY1MjE4MjQ0N30.rq081VLX8cd0ZTf6ohE3J6BeAEXRxF-axLMluY9BVbM
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODMwNTYsImV4cCI6MTY1MjE4MzE0M30.SDek0_mfroR9n9WWQ4KC0RMBhneAbpdJjADpcf_3VbY
 Content-Length: 242
 Host: localhost:8080
 

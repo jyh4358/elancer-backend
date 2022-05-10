@@ -9,5 +9,5 @@ $ echo '{
   "subBizCodes" : [ "sub_biz1", "sub_biz2", "sub_biz3" ]
 }' | http PUT 'http://localhost:8080/enterprise/profile' \
     'Content-Type:application/json;charset=UTF-8' \
-    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODIzNjAsImV4cCI6MTY1MjE4MjQ0N30.rq081VLX8cd0ZTf6ohE3J6BeAEXRxF-axLMluY9BVbM'
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODMwNTYsImV4cCI6MTY1MjE4MzE0M30.SDek0_mfroR9n9WWQ4KC0RMBhneAbpdJjADpcf_3VbY'
 ----
