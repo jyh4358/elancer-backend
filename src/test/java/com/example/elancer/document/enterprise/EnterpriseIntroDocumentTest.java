@@ -1,6 +1,10 @@
-package com.example.elancer.document;
+package com.example.elancer.document.enterprise;
 
+import com.example.elancer.common.EnterpriseHelper;
+import com.example.elancer.document.common.DocumentBaseTest;
+import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
+import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.testconfig.RestDocsConfiguration;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,22 +32,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("h2")
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class)
-public class EnterpriseIntroDocumentTest {
-
-    @Autowired
-    protected ObjectMapper objectMapper;
-
-    @Autowired
-    protected MockMvc mockMvc;
+public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
 
 //    @Test
     @DisplayName("기업 프로필 문서화")
     public void 기업_프로필_문서화() throws Exception {
+
+        //given
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository);
+
         List<String> mainBizCodes = new ArrayList<>();
         mainBizCodes.add("main_biz1");
         mainBizCodes.add("main_biz2");
@@ -52,6 +49,7 @@ public class EnterpriseIntroDocumentTest {
         subBizCodes.add("sub_biz1");
         subBizCodes.add("sub_biz2");
         subBizCodes.add("sub_biz3");
+
 
         EnterpriseIntroRequest enterpriseIntroRequest = new EnterpriseIntroRequest(
                 "프로필 title",
@@ -62,12 +60,12 @@ public class EnterpriseIntroDocumentTest {
                 subBizCodes
         );
 
-        mockMvc.perform(post("/enterprise/{id}/intro")
+        mockMvc.perform(post("/enterprise/profile")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(enterpriseIntroRequest)))
                 .andExpectAll(status().isOk())
                 .andDo(print())
-                .andDo(document("enterprise-intro",
+                .andDo(document("enterprise-profile",
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),

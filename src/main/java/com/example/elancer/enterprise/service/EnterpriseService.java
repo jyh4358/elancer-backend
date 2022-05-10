@@ -1,15 +1,20 @@
 package com.example.elancer.enterprise.service;
 
+import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.domain.enterpriseintro.*;
+import com.example.elancer.enterprise.dto.EnterpriseAccountDetailResponse;
 import com.example.elancer.enterprise.dto.EnterpriseIntroRequest;
-import com.example.elancer.enterprise.dto.EnterpriseJoinAndUpdateRequest;
+import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
+import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.enterprise.repository.MainBusinessRepository;
 import com.example.elancer.enterprise.repository.SubBusinessRepository;
 import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.member.domain.Address;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,21 +33,39 @@ public class EnterpriseService {
     private final MainBusinessRepository mainBusinessRepository;
     private final SubBusinessRepository subBusinessRepository;
 
+
+
     @Transactional
-    public Long join(EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest) {
+    public void coverEnterpriseAccountInfo(MemberDetails memberDetails, EnterpriseUpdateRequest enterpriseUpdateRequest) {
 
-        enterpriseJoinAndUpdateRequest.checkPwd();
-        checkDuplicate(enterpriseJoinAndUpdateRequest.getUserId());
-        enterpriseJoinAndUpdateRequest.setPassword1(passwordEncoder.encode(enterpriseJoinAndUpdateRequest.getPassword1()));
-        Enterprise enterprise = enterpriseJoinAndUpdateRequest.toEntity();
+        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(EnterpriseCheckUserIdException::new);
+        RightRequestChecker.checkPasswordMatch(enterpriseUpdateRequest.getPassword1(), enterpriseUpdateRequest.getPassword2());
 
-        enterpriseRepository.save(enterprise);
-        return enterprise.getNum();
+        enterprise.updateEnterprise(
+                passwordEncoder.encode(enterpriseUpdateRequest.getPassword1()),
+                enterpriseUpdateRequest.getName(),
+                enterpriseUpdateRequest.getPhone(),
+                enterpriseUpdateRequest.getEmail(),
+                enterpriseUpdateRequest.getCompanyName(),
+                enterpriseUpdateRequest.getCompanyPeople(),
+                enterpriseUpdateRequest.getPosition(),
+                enterpriseUpdateRequest.getTelNumber(),
+                enterpriseUpdateRequest.getWebsite(),
+                enterpriseUpdateRequest.getAddress(),
+                enterpriseUpdateRequest.getBizContents(),
+                enterpriseUpdateRequest.getSales(),
+                enterpriseUpdateRequest.getIdNumber()
+        );
+    }
+
+    public EnterpriseAccountDetailResponse findDetailEnterpriseAccount(Long num) {
+        Enterprise enterprise = enterpriseRepository.findById(num).orElseThrow(NotExistEnterpriseException::new);
+        return EnterpriseAccountDetailResponse.of(enterprise);
     }
 
 
     @Transactional
-    public void enterpriseUpdate(String userId, EnterpriseJoinAndUpdateRequest enterpriseJoinAndUpdateRequest) {
+    public void enterpriseUpdate(String userId, EnterpriseJoinRequest enterpriseJoinRequest) {
 //        enterpriseRepository.findByUserId(userId);
 
     }
@@ -50,12 +73,12 @@ public class EnterpriseService {
 
 
     @Transactional
-    public void updateIntro(Long id, EnterpriseIntroRequest enterpriseIntroRequest, String etc) {
+    public void updateIntro(MemberDetails memberDetails, EnterpriseIntroRequest enterpriseIntroRequest) {
 
-        Enterprise enterprise = enterpriseRepository.findById(id).orElseThrow(NotExistEnterpriseException::new);
+        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
 
-        List<EnterpriseMainBiz> enterpriseMainBizs = getEnterpriseMainBizs(enterpriseIntroRequest, etc);
-        List<EnterpriseSubBiz> enterpriseSubBizs = getEnterpriseSubBizs(enterpriseIntroRequest, etc);
+        List<EnterpriseMainBiz> enterpriseMainBizs = getEnterpriseMainBizs(enterpriseIntroRequest);
+        List<EnterpriseSubBiz> enterpriseSubBizs = getEnterpriseSubBizs(enterpriseIntroRequest);
 
 
         EnterpriseIntro enterpriseIntro = EnterpriseIntro.of(enterpriseIntroRequest.getIntroTitle(), enterpriseMainBizs, enterpriseSubBizs, enterprise);
@@ -83,15 +106,15 @@ public class EnterpriseService {
             throw new EnterpriseCheckUserIdException();
         }
     }
-    private List<EnterpriseSubBiz> getEnterpriseSubBizs(EnterpriseIntroRequest enterpriseIntroRequest, String etc) {
+    private List<EnterpriseSubBiz> getEnterpriseSubBizs(EnterpriseIntroRequest enterpriseIntroRequest) {
         List<SubBusiness> subBusiness = subBusinessRepository.findSubBusiness(enterpriseIntroRequest.getSubBizCodes());
-        return EnterpriseSubBiz.createList(subBusiness, etc);
+        return EnterpriseSubBiz.createList(subBusiness);
     }
 
-    private List<EnterpriseMainBiz> getEnterpriseMainBizs(EnterpriseIntroRequest enterpriseIntroRequest, String etc) {
+    private List<EnterpriseMainBiz> getEnterpriseMainBizs(EnterpriseIntroRequest enterpriseIntroRequest) {
 
         List<MainBusiness> mainBusiness = mainBusinessRepository.findMainBusiness(enterpriseIntroRequest.getMainBizCodes());
-        return EnterpriseMainBiz.createList(mainBusiness, etc);
+        return EnterpriseMainBiz.createList(mainBusiness);
     }
 
 }

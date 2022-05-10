@@ -22,7 +22,6 @@ public class EnterpriseIntroRequest {
     private String idNumber;
 
     // todo - 이후에 사업자 등록증 파일 등록 구현
-
     private List<String> mainBizCodes = new ArrayList<>();
     private List<String> subBizCodes = new ArrayList<>();
 

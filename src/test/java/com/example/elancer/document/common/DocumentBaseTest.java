@@ -1,6 +1,7 @@
 package com.example.elancer.document.common;
 
 import com.example.elancer.common.database.DatabaseClean;
+import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.testconfig.RestDocsConfiguration;
@@ -41,7 +42,9 @@ public class DocumentBaseTest {
     protected FreelancerProfileRepository freelancerProfileRepository;
 
     @Autowired
+    protected EnterpriseRepository enterpriseRepository;
+
+    @Autowired
     protected PasswordEncoder passwordEncoder;
 
 }
-

@@ -5,7 +5,7 @@ INSERT INTO `elancer`.`main_business` (`main_code`, `biz_name`) VALUES ('main_bi
 INSERT INTO `elancer`.`main_business` (`main_code`, `biz_name`) VALUES ('main_biz4', 'GIS개발');
 INSERT INTO `elancer`.`main_business` (`main_code`, `biz_name`) VALUES ('main_biz5', 'POS개발');
 INSERT INTO `elancer`.`main_business` (`main_code`, `biz_name`) VALUES ('main_biz6', 'SI사업');
-INSERT INTO `elancer`.`main_business` (`main_code`, `biz_name`) VALUES ('main_biz7', '기타');
+INSERT INTO `elancer`.`main_business` (`main_code`, `biz_name`) VALUES ('main_etc', '기타');
 
 --  업무 분야
 INSERT INTO `elancer`.`sub_business` (`sub_code`, `biz_name`) VALUES ('sub_biz1', '쇼핑몰');
@@ -30,7 +30,7 @@ INSERT INTO `elancer`.`sub_business` (`sub_code`, `biz_name`) VALUES ('sub_biz19
 INSERT INTO `elancer`.`sub_business` (`sub_code`, `biz_name`) VALUES ('sub_biz20', '자동차');
 INSERT INTO `elancer`.`sub_business` (`sub_code`, `biz_name`) VALUES ('sub_biz21', '암호화페');
 INSERT INTO `elancer`.`sub_business` (`sub_code`, `biz_name`) VALUES ('sub_biz22', '블록체인');
-INSERT INTO `elancer`.`sub_business` (`sub_code`, `biz_name`) VALUES ('sub_biz23', '기타');
+INSERT INTO `elancer`.`sub_business` (`sub_code`, `biz_name`) VALUES ('sub_etc', '기타');
 
 
 

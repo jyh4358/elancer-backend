@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter @Setter
 @AllArgsConstructor
-public class EnterpriseJoinAndUpdateRequest {
+public class EnterpriseJoinRequest {
 
     @NotBlank
     private String userId;

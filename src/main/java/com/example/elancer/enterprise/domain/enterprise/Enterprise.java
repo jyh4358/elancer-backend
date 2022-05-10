@@ -47,9 +47,6 @@ public class Enterprise extends Member {
     private String telNumber; // 담당자 전좌번호
 
     @NotNull
-    @Embedded
-    private Address address;
-    @NotNull
     private String bizContents;
 
     private int sales;
@@ -86,6 +83,27 @@ public class Enterprise extends Member {
         this.idNumber = idNumber;
         this.idPhoto = idPhoto;
     }
+
+    public void initialIntro(EnterpriseIntro enterpriseIntro) {
+        this.enterpriseIntro = enterpriseIntro;
+    }
+
+    public void updateEnterprise(String password, String name,
+                                 String phone, String email,
+                                 String companyName, int companyPeople, String position,
+                                 String telNumber, String website, Address address,
+                                 String bizContents, int sales, String idNumber) {
+        updateMember(name, password, email, phone, website, address);
+        this.companyName = companyName;
+        this.companyPeople = companyPeople;
+        this.position = position;
+        this.telNumber = telNumber;
+        this.bizContents = bizContents;
+        this.sales = sales;
+        this.idNumber = idNumber;
+
+    }
+
 
     public void updateIntro(EnterpriseIntro enterpriseIntro, String bizContents, int sales, String idNumber) {
         this.enterpriseIntro = enterpriseIntro;
