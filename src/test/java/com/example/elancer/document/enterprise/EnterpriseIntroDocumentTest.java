@@ -60,7 +60,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                 subBizCodes
         );
 
-        mockMvc.perform(post("/enterprise/{num}/profile".replace("{num}", String.valueOf(enterprise.getNum())))
+        mockMvc.perform(post("/enterprise/profile")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(enterpriseIntroRequest)))
                 .andExpectAll(status().isOk())

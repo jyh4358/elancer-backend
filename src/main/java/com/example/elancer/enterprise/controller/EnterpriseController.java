@@ -18,6 +18,12 @@ public class EnterpriseController {
 
     private final EnterpriseService enterpriseService;
 
+    /**
+     * 기업 정보 수정
+     * @param memberDetails
+     * @param enterpriseUpdateRequest
+     * @return
+     */
     @PutMapping("/enterprise")
     public ResponseEntity<Void> coverEnterpriseAccountInfo(
             @AuthenticationPrincipal MemberDetails memberDetails,
@@ -27,6 +33,11 @@ public class EnterpriseController {
         return null;
     }
 
+    /**
+     * 기업 정보 조회
+     * @param memberDetails
+     * @return
+     */
     @GetMapping("/enterprise")
     public ResponseEntity<EnterpriseAccountDetailResponse> findDetailEnterpriseAccount(
             @AuthenticationPrincipal MemberDetails memberDetails
@@ -36,7 +47,12 @@ public class EnterpriseController {
 
     }
 
-
+    /**
+     * 기업 프로필 수정
+     * @param memberDetails
+     * @param enterpriseIntroRequest
+     * @return
+     */
 
     @PostMapping("/enterprise/profile")
     public ResponseEntity<String> coverEnterpriseIntroduce(
@@ -44,7 +60,7 @@ public class EnterpriseController {
             @Validated @RequestBody EnterpriseIntroRequest enterpriseIntroRequest) {
 
         enterpriseService.updateIntro(memberDetails, enterpriseIntroRequest);
-        return null;
+        return new ResponseEntity<>("profile ok", HttpStatus.OK);
     }
 
 
