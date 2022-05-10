@@ -1,0 +1,13 @@
+[source,bash]
+----
+$ echo '{
+  "introTitle" : "프로필 title",
+  "bizContents" : "SI",
+  "sales" : 100000000,
+  "idNumber" : "123-123-123",
+  "mainBizCodes" : [ "main_biz1", "main_biz2", "main_biz3" ],
+  "subBizCodes" : [ "sub_biz1", "sub_biz2", "sub_biz3" ]
+}' | http PUT 'http://localhost:8080/enterprise/profile' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODIzNjAsImV4cCI6MTY1MjE4MjQ0N30.rq081VLX8cd0ZTf6ohE3J6BeAEXRxF-axLMluY9BVbM'
+----

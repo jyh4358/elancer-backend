@@ -53,11 +53,11 @@
 |`+String+`
 |회원 우편번호 필드
 
-|`+address.address1+`
+|`+address.mainAddress+`
 |`+String+`
 |회원 주소 필드
 
-|`+address.address2+`
+|`+address.detailAddress+`
 |`+String+`
 |회원 상세 주소 필드
 

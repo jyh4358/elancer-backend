@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/enterprise' -i -X GET \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODIzNTksImV4cCI6MTY1MjE4MjQ0Nn0.CFEN8VTPXyUvzCr8cD7JfUajZ6am7-wu9hkMtDqtCN8'
+----

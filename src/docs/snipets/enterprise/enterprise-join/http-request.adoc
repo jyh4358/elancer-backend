@@ -2,7 +2,7 @@
 ----
 POST /enterprise HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 552
+Content-Length: 560
 Host: localhost:8080
 
 {
@@ -20,8 +20,8 @@ Host: localhost:8080
   "address" : {
     "country" : "KR",
     "zipcode" : "123",
-    "address1" : "주소1",
-    "address2" : "주소2"
+    "mainAddress" : "주소1",
+    "detailAddress" : "주소2"
   },
   "bizContents" : "주요 사업",
   "sales" : 10000000,

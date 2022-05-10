@@ -1,0 +1,11 @@
+[source,options="nowrap"]
+----
+{
+  "introTitle" : "프로필 title",
+  "bizContents" : "SI",
+  "sales" : 100000000,
+  "idNumber" : "123-123-123",
+  "mainBizCodes" : [ "main_biz1", "main_biz2", "main_biz3" ],
+  "subBizCodes" : [ "sub_biz1", "sub_biz2", "sub_biz3" ]
+}
+----

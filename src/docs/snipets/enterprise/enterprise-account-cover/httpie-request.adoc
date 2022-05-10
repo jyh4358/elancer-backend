@@ -1,0 +1,26 @@
+[source,bash]
+----
+$ echo '{
+  "companyName" : "변경된 회사 이름",
+  "companyPeople" : 20,
+  "name" : "변경된 이름",
+  "position" : "부장",
+  "password1" : "12345",
+  "password2" : "12345",
+  "phone" : "01033333333",
+  "telNumber" : "01044444444",
+  "email" : "changedEmail@gmail.com",
+  "website" : "www.changedWebsite.com",
+  "address" : {
+    "country" : "CN",
+    "zipcode" : "경기도",
+    "mainAddress" : "주소1",
+    "detailAddress" : "주소2"
+  },
+  "bizContents" : "쇼핑몰",
+  "sales" : 200000000,
+  "idNumber" : "111-111-111"
+}' | http PUT 'http://localhost:8080/enterprise' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODIzNjAsImV4cCI6MTY1MjE4MjQ0Nn0.A_vNSB7LHRf8stu0jg-arwD0hITT06YVNKOq30lazic'
+----

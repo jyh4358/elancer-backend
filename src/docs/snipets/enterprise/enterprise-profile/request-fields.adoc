@@ -1,0 +1,28 @@
+|===
+|Path|Type|Description
+
+|`+introTitle+`
+|`+String+`
+|프로필 타이틀 필드
+
+|`+bizContents+`
+|`+String+`
+|주요 사업 내용
+
+|`+sales+`
+|`+Integer+`
+|연간 매출액
+
+|`+idNumber+`
+|`+String+`
+|사업자 등록 번호
+
+|`+mainBizCodes+`
+|`+List<String>+`
+|사업 분야
+
+|`+subBizCodes+`
+|`+List<String>+`
+|업무 분야
+
+|===

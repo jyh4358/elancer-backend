@@ -480,6 +480,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#resources-freelancer-profile-enum-names-find">프리랜서 프로필 이넘 네임리스트 정보</a></li>
 <li><a href="#_기업">기업</a></li>
 <li><a href="#resources-enterprise-join">기업 회원가입</a></li>
+<li><a href="#resources-enterprise-account-cover">기업 회원 정보 수정</a></li>
+<li><a href="#resources-enterprise-account-find">기업 회원 정보 조회</a></li>
+<li><a href="#resources-enterprise-profile">기업 프로필 정보 수정</a></li>
 </ul>
 </li>
 </ul>
@@ -706,7 +709,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyNywiZXhwIjoxNjUyMDk5MjEzfQ.wNK6Wz462KEn1ge_kCp3E22DcVAj6nbNAtn9s6-ncHw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MSwiZXhwIjoxNjUyMTgyNDQ3fQ.ux8d0hrsQJ_M3aODuTlk66Nc85Cp58kBo9Zt1qSc-QY
 Content-Length: 843
 Host: localhost:8080
 
@@ -920,7 +923,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyNiwiZXhwIjoxNjUyMDk5MjEzfQ.eVyPslMOoGjODLF54eC4yodEAFJQ5B6dArmT5_mJzBw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MCwiZXhwIjoxNjUyMTgyNDQ3fQ.iRskmeOh-x8vXbaWlyrpTD97c0TYTCb1AKYHVaqd9hk
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1126,7 +1129,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/intro HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMCwiZXhwIjoxNjUyMDk5MjE2fQ.PTXV7UNzkV-UQ9vGXSrXXmKVMzf-rpFX8ViDxUWYLcU
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2NCwiZXhwIjoxNjUyMTgyNDUwfQ.gH44IMw5Yn0mv7s93U7ZWP3M-mdm6pkz8JYNcLN6NmY
 Content-Length: 145
 Host: localhost:8080
 
@@ -1218,7 +1221,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/academic-ability HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMCwiZXhwIjoxNjUyMDk5MjE2fQ.PTXV7UNzkV-UQ9vGXSrXXmKVMzf-rpFX8ViDxUWYLcU
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2NCwiZXhwIjoxNjUyMTgyNDUwfQ.gH44IMw5Yn0mv7s93U7ZWP3M-mdm6pkz8JYNcLN6NmY
 Content-Length: 263
 Host: localhost:8080
 
@@ -1328,7 +1331,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/career HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMCwiZXhwIjoxNjUyMDk5MjE2fQ.PTXV7UNzkV-UQ9vGXSrXXmKVMzf-rpFX8ViDxUWYLcU
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2NCwiZXhwIjoxNjUyMTgyNDUwfQ.gH44IMw5Yn0mv7s93U7ZWP3M-mdm6pkz8JYNcLN6NmY
 Content-Length: 242
 Host: localhost:8080
 
@@ -1431,7 +1434,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/education-license-language HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMSwiZXhwIjoxNjUyMDk5MjE3fQ.85wgB_zrEoTli0rjBkL1mO5iOgWhAL6PRUGHzV-nHwA
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2NSwiZXhwIjoxNjUyMTgyNDUxfQ.Mq_UNLE7BBopLL9htFlKzm0pZGxGATkiZ2sgwFydFR4
 Content-Length: 505
 Host: localhost:8080
 
@@ -1570,7 +1573,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/project-history HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMSwiZXhwIjoxNjUyMDk5MjE3fQ.85wgB_zrEoTli0rjBkL1mO5iOgWhAL6PRUGHzV-nHwA
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2NSwiZXhwIjoxNjUyMTgyNDUxfQ.Mq_UNLE7BBopLL9htFlKzm0pZGxGATkiZ2sgwFydFR4
 Content-Length: 594
 Host: localhost:8080
 
@@ -1739,7 +1742,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/freelancer-profile HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMCwiZXhwIjoxNjUyMDk5MjE3fQ.XAgB6pz7gmQyXJkk5JAX7xDg6o37G4_eC1zMj83V1xo
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2NCwiZXhwIjoxNjUyMTgyNDUxfQ.Zc2MfGENe1D6o9KXCp8ddHsyn7vRi7MlRXe_G2XF4uY
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2081,7 +2084,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/freelancer-profile/simple HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEzMSwiZXhwIjoxNjUyMDk5MjE4fQ.2bQBtdngdA-MA3oXAF3UcaS4Be01RLEwtagTjPdJPKE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2NSwiZXhwIjoxNjUyMTgyNDUxfQ.Mq_UNLE7BBopLL9htFlKzm0pZGxGATkiZ2sgwFydFR4
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2481,7 +2484,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/developer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE1fQ._t7tmroQPsC9BCMWh-KIRK7YdiWCFLIrf0P6ERpVD2M
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MiwiZXhwIjoxNjUyMTgyNDQ4fQ.hL5_7VeNctNEx6Y2zA8-V5PJ4YpjISYT1gvfhixoZwk
 Content-Length: 406
 Host: localhost:8080
 
@@ -2615,7 +2618,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/developer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE2fQ.etDGwkQimPVj74285_QBX46fpAzVaeACkHoN2Ynz_ow
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MywiZXhwIjoxNjUyMTgyNDUwfQ.qJ5az5Ef9JjOmGzUkcSrxR86iVdIAQui2i5ZyDmnMpU
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2731,7 +2734,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/publisher HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE1fQ._t7tmroQPsC9BCMWh-KIRK7YdiWCFLIrf0P6ERpVD2M
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MiwiZXhwIjoxNjUyMTgyNDQ5fQ.cdUWbxWG5nqXAH54el2rdAqjOcpPyUniVWY2_MNKC1I
 Content-Length: 91
 Host: localhost:8080
 
@@ -2809,7 +2812,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/publisher HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE2fQ.etDGwkQimPVj74285_QBX46fpAzVaeACkHoN2Ynz_ow
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MywiZXhwIjoxNjUyMTgyNDUwfQ.qJ5az5Ef9JjOmGzUkcSrxR86iVdIAQui2i5ZyDmnMpU
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2877,7 +2880,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/designer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE0fQ.a2VN2RKVtMT1f-p1Jjp4tWDDetptWWAUlu02Whnq6aE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MSwiZXhwIjoxNjUyMTgyNDQ4fQ.LSTpxfQ_oyQpx-sdZmNYwkHYNKrWr1x8H98ks7gB7ws
 Content-Length: 185
 Host: localhost:8080
 
@@ -2969,7 +2972,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/designer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE1fQ.jNXGBPKnXiEPElSAb6G9hsSUP3pRMA49-x6b9bH60h0
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MywiZXhwIjoxNjUyMTgyNDQ5fQ.hwbhz4unHYIJMUcZu_BYJVy8D3lECkui8UrcPLysrA4
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3049,7 +3052,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE0fQ.a2VN2RKVtMT1f-p1Jjp4tWDDetptWWAUlu02Whnq6aE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MiwiZXhwIjoxNjUyMTgyNDQ4fQ.hL5_7VeNctNEx6Y2zA8-V5PJ4YpjISYT1gvfhixoZwk
 Content-Length: 88
 Host: localhost:8080
 
@@ -3127,7 +3130,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE1fQ.jNXGBPKnXiEPElSAb6G9hsSUP3pRMA49-x6b9bH60h0
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MywiZXhwIjoxNjUyMTgyNDQ5fQ.hwbhz4unHYIJMUcZu_BYJVy8D3lECkui8UrcPLysrA4
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3195,7 +3198,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/crowd-worker HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyNywiZXhwIjoxNjUyMDk5MjE0fQ.gtJOvrJ4bfszsiEvUg7rdLbANAaA_LOheZg53BNDjhI
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MSwiZXhwIjoxNjUyMTgyNDQ4fQ.LSTpxfQ_oyQpx-sdZmNYwkHYNKrWr1x8H98ks7gB7ws
 Content-Length: 4
 Host: localhost:8080
 
@@ -3214,7 +3217,7 @@ null</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/etc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOCwiZXhwIjoxNjUyMDk5MjE0fQ.a2VN2RKVtMT1f-p1Jjp4tWDDetptWWAUlu02Whnq6aE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MiwiZXhwIjoxNjUyMTgyNDQ4fQ.hL5_7VeNctNEx6Y2zA8-V5PJ4YpjISYT1gvfhixoZwk
 Content-Length: 84
 Host: localhost:8080
 
@@ -3292,7 +3295,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/etc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjA5OTEyOSwiZXhwIjoxNjUyMDk5MjE1fQ.jNXGBPKnXiEPElSAb6G9hsSUP3pRMA49-x6b9bH60h0
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjE4MjM2MywiZXhwIjoxNjUyMTgyNDQ5fQ.hwbhz4unHYIJMUcZu_BYJVy8D3lECkui8UrcPLysrA4
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3657,14 +3660,566 @@ Host: localhost:8080</code></pre>
 <div class="sect1">
 <h2 id="resources-enterprise-join"><a class="link" href="#resources-enterprise-join">기업 회원가입</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>개인정보 입력을 통해 프리랜서 회원가입을 진행한다.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /enterprise HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 560
+Host: localhost:8080
 
+{
+  "userId" : "joinDocsEnterprise",
+  "password1" : "1234",
+  "password2" : "1234",
+  "name" : "name",
+  "phone" : "01000000000",
+  "email" : "test@gmail.com",
+  "companyName" : "test company",
+  "companyPeople" : 10,
+  "position" : "사장",
+  "telNumber" : "01011111111",
+  "website" : "www.test.com",
+  "address" : {
+    "country" : "KR",
+    "zipcode" : "123",
+    "mainAddress" : "주소1",
+    "detailAddress" : "주소2"
+  },
+  "bizContents" : "주요 사업",
+  "sales" : 10000000,
+  "idNumber" : "사업자 번호(123-123-123)"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>userId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 아이디 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>password1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 비밀번호 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>password2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 비밀번호 확인 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 담당자 성명 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>phone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 회사 전화번호 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 이메일 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>companyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 회사명 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>companyPeople</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 회사 인원수 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 담당자 직책 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>telNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 담당자 휴대폰 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>website</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 웹사이트 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.country</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CountryType.STRING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소 국적 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.zipcode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 우편번호 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.mainAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.detailAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 상세 주소 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bizContents</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주요 사업내용 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sales</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 연간 매출액 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>idNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 사업자 번호 필드</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-enterprise-account-cover"><a class="link" href="#resources-enterprise-account-cover">기업 회원 정보 수정</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /enterprise HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODIzNjAsImV4cCI6MTY1MjE4MjQ0Nn0.A_vNSB7LHRf8stu0jg-arwD0hITT06YVNKOq30lazic
+Content-Length: 552
+Host: localhost:8080
+
+{
+  "companyName" : "변경된 회사 이름",
+  "companyPeople" : 20,
+  "name" : "변경된 이름",
+  "position" : "부장",
+  "password1" : "12345",
+  "password2" : "12345",
+  "phone" : "01033333333",
+  "telNumber" : "01044444444",
+  "email" : "changedEmail@gmail.com",
+  "website" : "www.changedWebsite.com",
+  "address" : {
+    "country" : "CN",
+    "zipcode" : "경기도",
+    "mainAddress" : "주소1",
+    "detailAddress" : "주소2"
+  },
+  "bizContents" : "쇼핑몰",
+  "sales" : 200000000,
+  "idNumber" : "111-111-111"
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>companyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회사명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>companyPeople</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회사 인원수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">담당자명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">직책</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>password1</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">비밀번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>password2</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">비밀번호 확인</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>phone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">전화번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>telNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">담당자 휴대폰</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이메일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>website</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">웹사이트</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.country</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CountryType.STRING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소 국적 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.zipcode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 우편번호 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.mainAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.detailAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 상세 주소 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bizContents</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">주요 사업내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sales</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">연간 매출액</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>idNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사업자등록번호</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-enterprise-account-find"><a class="link" href="#resources-enterprise-account-find">기업 회원 정보 조회</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>요청</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /enterprise HTTP/1.1
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODIzNTksImV4cCI6MTY1MjE4MjQ0Nn0.CFEN8VTPXyUvzCr8cD7JfUajZ6am7-wu9hkMtDqtCN8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>응답</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>companyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회사명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>companyPeople</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회사 인원수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">담당자명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">직책</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>phone</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">전화번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>telNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">담당자 휴대폰</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이메일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>website</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">웹사이트</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.country</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CountryType.STRING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소 국적 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.zipcode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 우편번호 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.mainAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>address.detailAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 상세 주소 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bizContents</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">주요 사업내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sales</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">연간 매출액</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>idNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사업자등록번호</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-enterprise-profile"><a class="link" href="#resources-enterprise-profile">기업 프로필 정보 수정</a></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /enterprise/profile HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODIzNjAsImV4cCI6MTY1MjE4MjQ0N30.rq081VLX8cd0ZTf6ohE3J6BeAEXRxF-axLMluY9BVbM
+Content-Length: 242
+Host: localhost:8080
+
+{
+  "introTitle" : "프로필 title",
+  "bizContents" : "SI",
+  "sales" : 100000000,
+  "idNumber" : "123-123-123",
+  "mainBizCodes" : [ "main_biz1", "main_biz2", "main_biz3" ],
+  "subBizCodes" : [ "sub_biz1", "sub_biz2", "sub_biz3" ]
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로필 타이틀 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>bizContents</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">주요 사업 내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sales</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Integer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">연간 매출액</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>idNumber</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사업자 등록 번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>mainBizCodes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사업 분야</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>subBizCodes</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">업무 분야</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-05-07 17:40:38 +0900
+Last updated 2022-05-10 20:29:47 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

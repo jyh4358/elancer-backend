@@ -1,0 +1,22 @@
+[source,options="nowrap"]
+----
+{
+  "companyName" : "湲곗뾽紐�",
+  "companyPeople" : 10,
+  "name" : "湲곗뾽",
+  "position" : "�궗�옣",
+  "phone" : "000-0000-0000",
+  "telNumber" : "000-1111-1111",
+  "email" : "enterprise@gmail.com",
+  "website" : "www.enterprise.com",
+  "address" : {
+    "country" : "KR",
+    "zipcode" : "zipcode",
+    "mainAddress" : "address1",
+    "detailAddress" : "address2"
+  },
+  "bizContents" : "SI",
+  "sales" : 100000000,
+  "idNumber" : "123-123-123"
+}
+----
