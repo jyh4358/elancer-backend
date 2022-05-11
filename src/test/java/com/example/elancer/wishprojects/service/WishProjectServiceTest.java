@@ -3,17 +3,13 @@ package com.example.elancer.wishprojects.service;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancer.model.MailReceptionState;
-import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.member.domain.Address;
-import com.example.elancer.member.domain.CountryType;
-import com.example.elancer.member.domain.MemberType;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectBackGround;
 import com.example.elancer.project.repository.ProjectRepository;
+import com.example.elancer.wishprojects.dto.WishProjectDeleteRequest;
 import com.example.elancer.wishprojects.dto.WishProjectSaveRequest;
 import com.example.elancer.wishprojects.model.WishProject;
 import com.example.elancer.wishprojects.repository.WishProjectRepository;
@@ -23,7 +19,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -77,8 +72,9 @@ class WishProjectServiceTest extends ServiceBaseTest {
 
         WishProject wishProject = wishProjectRepository.save(WishProject.createWishProject(freelancer, project));
 
+        WishProjectDeleteRequest wishProjectDeleteRequest = new WishProjectDeleteRequest(wishProject.getNum());
         //when
-        wishProjectService.deleteWishProject(memberDetails, wishProject.getNum());
+        wishProjectService.deleteWishProject(memberDetails, wishProjectDeleteRequest);
 
         //then
         List<WishProject> wishProjects = wishProjectRepository.findAll();

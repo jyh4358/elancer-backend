@@ -283,6 +283,26 @@ include::{snippets}/freelancer-profile-etc-find/response-headers.adoc[]
 include::{snippets}/freelancer-profile-etc-find/response-fields.adoc[]
 include::{snippets}/freelancer-profile-etc-find/response-body.adoc[]
 
+[[resources-wish-project-save]]
+== 프리랜서 프로젝트 찜 정보 저장
+
+프로젝트 식별자정보를 통해 프로젝트를 등록한다.
+
+include::{snippets}/wish-project-save/http-request.adoc[]
+include::{snippets}/wish-project-save/request-headers.adoc[]
+include::{snippets}/wish-project-save/request-fields.adoc[]
+include::{snippets}/wish-project-save/request-body.adoc[]
+
+[[resources-wish-project-delete]]
+== 프리랜서 프로젝트 찜 정보 삭제
+
+프로젝트찜 식별자정보를 통해 프로젝트찜을 삭제한다.
+
+include::{snippets}/wish-project-delete/http-request.adoc[]
+include::{snippets}/wish-project-delete/request-headers.adoc[]
+include::{snippets}/wish-project-delete/request-fields.adoc[]
+include::{snippets}/wish-project-delete/request-body.adoc[]
+
 [[resources-freelancer-countryType-names-find]]
 == 프리랜서 거주국가 네임리스트 정보
 

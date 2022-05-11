@@ -1,6 +1,7 @@
 package com.example.elancer.wishprojects.controller;
 
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.wishprojects.dto.WishProjectDeleteRequest;
 import com.example.elancer.wishprojects.dto.WishProjectSaveRequest;
 import com.example.elancer.wishprojects.service.WishProjectService;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +31,9 @@ public class WishProjectController {
     @DeleteMapping(WishProjectControllerPath.WISH_PROJECT_DELETE)
     public ResponseEntity<Void> deleteWishProject(
             @AuthenticationPrincipal MemberDetails memberDetails,
-            @Validated @RequestBody WishProjectSaveRequest wishProjectSaveRequest
+            @Validated @RequestBody WishProjectDeleteRequest wishProjectDeleteRequest
     ) {
-        wishProjectService.saveWishProject(memberDetails, wishProjectSaveRequest);
+        wishProjectService.deleteWishProject(memberDetails, wishProjectDeleteRequest);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 }

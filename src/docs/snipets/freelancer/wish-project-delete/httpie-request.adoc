@@ -1,0 +1,8 @@
+[source,bash]
+----
+$ echo '{
+  "wishProjectNum" : 1
+}' | http DELETE 'http://localhost:8080/wish-project' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjI4MDcyNSwiZXhwIjoxNjUyMjgwODExfQ.UIyeSwvza0x4oyWRVVXcLgmtIGj-CV_5TUC2ssIge5U'
+----

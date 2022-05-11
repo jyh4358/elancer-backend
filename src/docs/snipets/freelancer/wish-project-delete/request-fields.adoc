@@ -1,0 +1,8 @@
+|===
+|Path|Type|Description
+
+|`+wishProjectNum+`
+|`+Long+`
+|프로젝트찜에 대한 식별자 정보 필드.
+
+|===

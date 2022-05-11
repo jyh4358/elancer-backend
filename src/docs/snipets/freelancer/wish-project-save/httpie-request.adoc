@@ -1,0 +1,8 @@
+[source,bash]
+----
+$ echo '{
+  "projectNum" : 1
+}' | http POST 'http://localhost:8080/wish-project' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjI3OTY2MywiZXhwIjoxNjUyMjc5NzQ5fQ.BKsLr_MtPVwwnFF4eU7Bwnswe6Gdcvl6YNRzxSJSEjE'
+----

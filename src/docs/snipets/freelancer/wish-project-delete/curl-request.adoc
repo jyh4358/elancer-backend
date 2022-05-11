@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/wish-project' -i -X DELETE \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MjI4MDcyNSwiZXhwIjoxNjUyMjgwODExfQ.UIyeSwvza0x4oyWRVVXcLgmtIGj-CV_5TUC2ssIge5U' \
+    -d '{
+  "wishProjectNum" : 1
+}'
+----
