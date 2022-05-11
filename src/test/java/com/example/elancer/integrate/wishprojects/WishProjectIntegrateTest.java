@@ -19,6 +19,7 @@ import com.example.elancer.wishprojects.dto.WishProjectSaveRequest;
 import com.example.elancer.wishprojects.model.WishProject;
 import com.example.elancer.wishprojects.repository.WishProjectRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +104,10 @@ public class WishProjectIntegrateTest extends IntegrateBaseTest {
         //then
         List<WishProject> wishProjects = wishProjectRepository.findAll();
         Assertions.assertThat(wishProjects).hasSize(0);
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

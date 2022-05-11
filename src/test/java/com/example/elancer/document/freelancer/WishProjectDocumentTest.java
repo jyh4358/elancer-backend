@@ -16,6 +16,7 @@ import com.example.elancer.wishprojects.dto.WishProjectDeleteRequest;
 import com.example.elancer.wishprojects.dto.WishProjectSaveRequest;
 import com.example.elancer.wishprojects.model.WishProject;
 import com.example.elancer.wishprojects.repository.WishProjectRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,5 +100,10 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("wishProjectNum").type("Long").description("프로젝트찜에 대한 식별자 정보 필드.")
                         )
                 ));
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseClean.clean();
     }
 }

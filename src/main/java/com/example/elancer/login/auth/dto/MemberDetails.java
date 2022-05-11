@@ -40,8 +40,8 @@ public class MemberDetails implements UserDetails{
                 .build();
     }
 
-    public MemberDetails(String userid) {
-        this.userId = userId;
+    public MemberDetails(Long id) {
+        this.id = id;
     }
 
     public boolean checkPresentId() {

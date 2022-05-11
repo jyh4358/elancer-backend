@@ -28,7 +28,7 @@ public class RightRequestChecker {
     }
 
     public static void checkMemberDetail(MemberDetails memberDetails) {
-        if (memberDetails == null || !memberDetails.checkPresentId()) {
+        if (memberDetails == null /*|| !memberDetails.checkPresentId()*/) {
             throw new ImpossibleException("로그인 되지 않은, 권한없는 사용자의 요청입니다. 요청을 다시 확인해 주세요.");
         }
     }

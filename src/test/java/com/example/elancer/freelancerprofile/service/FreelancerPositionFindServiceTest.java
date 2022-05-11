@@ -1,15 +1,14 @@
 package com.example.elancer.freelancerprofile.service;
 
-import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
-import com.example.elancer.freelancerprofile.dto.PublisherResponse;
 import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.PlannerResponse;
 import com.example.elancer.freelancerprofile.dto.PositionEtcResponse;
+import com.example.elancer.freelancerprofile.dto.PublisherResponse;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
@@ -101,11 +100,7 @@ class FreelancerPositionFindServiceTest {
 
         Long profileNum = 1L;
 
-        MemberDetails memberDetails = MemberDetails.builder()
-                .id(freelancer.getNum())
-                .userId("userId")
-                .role(null)
-                .build();
+        MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java, spring", "backend");
         List<JavaSkill> javaSkills = Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, developer), JavaSkill.createJavaSkill(JavaDetailSkill.BACK_END, developer));
@@ -156,14 +151,7 @@ class FreelancerPositionFindServiceTest {
         Freelancer freelancer = Freelancer.createFreelancer("userId", "password", "name", null, null, null, null, MemberType.FREELANCER,
                 MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer , PositionType.DEVELOPER);
-
-        Long profileNum = 1L;
-
-        MemberDetails memberDetails = MemberDetails.builder()
-                .id(freelancer.getNum())
-                .userId("userId")
-                .role(null)
-                .build();
+        MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, "etcPubSkill");
         List<PublishingSkill> publishingSkillList = Arrays.asList(PublishingSkill.createPublishingSkill(PublishingDetailSkill.HTML5, publisher), PublishingSkill.createPublishingSkill(PublishingDetailSkill.CSS, publisher));
@@ -189,13 +177,7 @@ class FreelancerPositionFindServiceTest {
                 MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
-        Long profileNum = 1L;
-
-        MemberDetails memberDetails = MemberDetails.builder()
-                .id(freelancer.getNum())
-                .userId("userId")
-                .role(null)
-                .build();
+        MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
         List<DesignRole> designRoles = Arrays.asList(DesignRole.createDesignRole(DesignDetailRole.APP_DESIGN, designer), DesignRole.createDesignRole(DesignDetailRole.GAME_DESIGN, designer));
@@ -231,13 +213,7 @@ class FreelancerPositionFindServiceTest {
                 MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
-        Long profileNum = 1L;
-
-        MemberDetails memberDetails = MemberDetails.builder()
-                .id(freelancer.getNum())
-                .userId("userId")
-                .role(null)
-                .build();
+        MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
         List<PlannerField> plannerFields = Arrays.asList(PlannerField.createPlannerField(PlannerDetailField.APP_PLAN, planner), PlannerField.createPlannerField(PlannerDetailField.WEB_PLAN, planner));
@@ -264,13 +240,7 @@ class FreelancerPositionFindServiceTest {
                 MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
-        Long profileNum = 1L;
-
-        MemberDetails memberDetails = MemberDetails.builder()
-                .id(freelancer.getNum())
-                .userId("userId")
-                .role(null)
-                .build();
+        MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
         List<EtcRole> etcRoles = Arrays.asList(EtcRole.createEtcRole(EtcDetailRole.DBA, positionEtc));

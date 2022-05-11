@@ -75,11 +75,7 @@ class FreelancerProfileFindServiceTest {
                 MailReceptionState.RECEPTION, WorkPossibleState.POSSIBLE, null);
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
-        MemberDetails memberDetails = MemberDetails.builder()
-                .id(freelancer.getNum())
-                .userId("userId")
-                .role(null)
-                .build();
+        MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
                 "고등학교",
@@ -256,11 +252,7 @@ class FreelancerProfileFindServiceTest {
 
         FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
 
-        MemberDetails memberDetails = MemberDetails.builder()
-                .id(freelancer.getNum())
-                .userId("userId")
-                .role(null)
-                .build();
+        MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
                 "고등학교",
