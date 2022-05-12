@@ -41,14 +41,6 @@ public class OAuthControllerTest {
                 .andExpect(status().isOk());
     }
 
-//    @Test
-    @DisplayName("권한을 없는 유저는 로그인 페이지로 이동")
-    @WithAnonymousUser
-    public void member() throws Exception {
-        mvc.perform(get("/member"))
-                .andDo(print())
-                .andExpect(status().is3xxRedirection());
-    }
 
 //    @Test
 //    @DisplayName("소셜로그인")
