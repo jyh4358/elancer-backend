@@ -5,6 +5,7 @@ import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
+import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.integrate.freelancer.LoginHelper;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
@@ -30,11 +31,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class EnterpriseDocumentTest extends DocumentBaseTest {
 
-    @Autowired
-    protected ObjectMapper objectMapper;
-
-    @Autowired
-    protected MockMvc mockMvc;
 
     @AfterEach
     void tearDown() {
@@ -98,7 +94,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
     @Test
     public void 기업_계정정보_수정_문서화() throws Exception{
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
-        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
         EnterpriseUpdateRequest enterpriseUpdateRequest = new EnterpriseUpdateRequest(
                 "변경된 회사 이름",
@@ -155,7 +151,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
     public void 기업_계정정보_조회_문서화() throws Exception{
 
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
-        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
         mockMvc.perform(get("/enterprise")
                         .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))

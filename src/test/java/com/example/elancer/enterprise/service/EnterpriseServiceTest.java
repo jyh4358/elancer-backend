@@ -123,9 +123,6 @@ class EnterpriseServiceTest extends ServiceBaseTest {
     }
 
 
-
-
-
 //    @Test
 //    @DisplayName("기업 게정 프로파일 정보를 조회한다.")
 //    public void enterpriseIntroUpdate() {

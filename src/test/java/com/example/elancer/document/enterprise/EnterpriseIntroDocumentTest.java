@@ -4,8 +4,8 @@ import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseProfileRequest;
-import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.service.EnterpriseService;
+import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.integrate.freelancer.LoginHelper;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
@@ -22,7 +22,8 @@ import java.util.List;
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,7 +43,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
 
         //given
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
-        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
         List<String> mainBizCodes = new ArrayList<>();
         mainBizCodes.add("main_biz1");
@@ -92,7 +93,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
     public void 기업_프로필_조회_문서화() throws Exception {
         //given
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
-        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
         List<String> mainBizCodes = new ArrayList<>();
         mainBizCodes.add("main_biz1");

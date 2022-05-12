@@ -13,7 +13,7 @@ public class EnterpriseHelper {
         Enterprise enterprise = Enterprise.builder()
                 .userId("enterpriseId")
                 .password(passwordEncoder.encode("pwd"))
-                .name("기업")
+                .name("회원이름")
                 .phone("000-0000-0000")
                 .email("enterprise@gmail.com")
                 .website("www.enterprise.com")

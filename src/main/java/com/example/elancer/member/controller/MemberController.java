@@ -1,5 +1,6 @@
 package com.example.elancer.member.controller;
 
+import com.example.elancer.member.dto.MemberOAuthLoginResponse;
 import com.example.elancer.token.dto.*;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.example.elancer.token.service.JwtTokenService;
@@ -41,14 +42,12 @@ public class MemberController {
     /**
      * 소셜 로그인
      * @param authCode
-     * @param response
      * @return
      */
     @PostMapping("/login/google")
-    public MemberLoginResponse loginBy(@RequestBody AuthCode authCode, HttpServletResponse response) {
+    public MemberOAuthLoginResponse loginBy(@RequestBody AuthCode authCode) {
 
-        System.out.println("code = " + authCode.getCode());
-        MemberLoginResponse responseDto = jwtTokenService.loginMemberByProvider(authCode.getCode());
+        MemberOAuthLoginResponse responseDto = jwtTokenService.loginMemberByProvider(authCode.getCode());
 
         return responseDto;
     }

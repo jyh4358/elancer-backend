@@ -1,6 +1,7 @@
 package com.example.elancer.token.service;
 
 import com.example.elancer.login.auth.service.ProviderService;
+import com.example.elancer.member.dto.MemberOAuthLoginResponse;
 import com.example.elancer.token.jwt.AccessToken;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.example.elancer.token.dto.*;
@@ -52,7 +53,7 @@ public class JwtTokenService {
      * @return
      */
     @Transactional
-    public MemberLoginResponse loginMemberByProvider(String code) {
+    public MemberOAuthLoginResponse loginMemberByProvider(String code) {
         AccessToken accessToken = providerService.getAccessToken(code);
         GoogleProfile googleProfile = providerService.getProfile(accessToken.getAccess_token());
 
@@ -63,9 +64,9 @@ public class JwtTokenService {
         if (findMember.isPresent()) {
             Member member = findMember.get();
             member.updateRefreshToken(jwtTokenProvider.createRefreshToken());
-            return new MemberLoginResponse(member.getName(), jwtTokenProvider.createToken(member.getUserId()), member.getRefreshToken());
+            return new MemberOAuthLoginResponse(member.getName(), member.getEmail(), jwtTokenProvider.createToken(member.getUserId()), member.getRefreshToken());
         } else {
-            return new MemberLoginResponse(userId, "", "");
+            return new MemberOAuthLoginResponse(userId, googleProfile.getEmail(), "", "");
         }
     }
 
