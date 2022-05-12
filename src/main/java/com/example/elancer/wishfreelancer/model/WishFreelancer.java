@@ -1,4 +1,4 @@
-package com.example.elancer.enterprise.domain;
+package com.example.elancer.wishfreelancer.model;
 
 import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
@@ -6,12 +6,15 @@ import com.example.elancer.freelancer.model.Freelancer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class HeartScrap extends BasicEntity {
+public class WishFreelancer extends BasicEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enter_num")
@@ -21,12 +24,13 @@ public class HeartScrap extends BasicEntity {
     @JoinColumn(name = "free_num")
     private Freelancer freelancer;
 
-    public HeartScrap(Freelancer freelancer) {
+    public WishFreelancer(Enterprise enterprise, Freelancer freelancer) {
+        this.enterprise = enterprise;
         this.freelancer = freelancer;
     }
 
-    public void insertEnterprise(Enterprise enterprise) {
-        this.enterprise = enterprise;
+    public static WishFreelancer createWishFreelancer(Enterprise enterprise, Freelancer freelancer) {
+        return new WishFreelancer(enterprise, freelancer);
     }
 
     /**

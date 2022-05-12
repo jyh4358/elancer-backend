@@ -1,4 +1,4 @@
-package com.example.elancer.project.domain;
+package com.example.elancer.project.model;
 
 public enum ProjectType {
 
