@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.service;
+package com.example.elancer.freelancerprofile.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

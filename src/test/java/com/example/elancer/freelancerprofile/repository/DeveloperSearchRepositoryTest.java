@@ -3,19 +3,14 @@ package com.example.elancer.freelancerprofile.repository;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancer.model.FreelancerWorkType;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancer.model.KOSAState;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.PresentWorkState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
-import com.example.elancer.freelancer.model.WorkType;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
-import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
-import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
-import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
@@ -32,10 +27,8 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
-import com.example.elancer.freelancerprofile.service.WorkArea;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
-import com.example.elancer.member.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -44,15 +37,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Slice;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("h2")
@@ -99,6 +89,8 @@ class DeveloperSearchRepositoryTest {
         List<DBSkill> dbSkills = new ArrayList<>();
         dbSkills.addAll(Arrays.asList(DBSkill.createDBSkill(DBDetailSkill.MARIADB, developer), DBSkill.createDBSkill(DBDetailSkill.MYSQL, developer)));
         String etc = "etc1";
+
+
 
         developer.coverDeveloperSkills(
                 javaSkills,
