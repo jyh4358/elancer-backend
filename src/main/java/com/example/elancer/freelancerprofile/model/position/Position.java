@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -35,5 +36,19 @@ public abstract class Position extends BasicEntity {
     public Position(PositionType positionType, FreelancerProfile freelancerProfile) {
         this.positionType = positionType;
         this.freelancerProfile = freelancerProfile;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return Objects.equals(num, position.num) && createdDate == position.createdDate && updatedDate == position.updatedDate &&
+                positionType == position.positionType && Objects.equals(freelancerProfile, position.freelancerProfile);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(num, createdDate, updatedDate, positionType, freelancerProfile);
     }
 }
