@@ -1,6 +1,7 @@
 package com.example.elancer.member.domain;
 
 import com.example.elancer.common.model.BasicEntity;
+import com.example.elancer.common.model.WorkAssessment;
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -37,6 +38,8 @@ public abstract class Member extends BasicEntity {
      */
     private String refreshToken;
 
+    @Embedded
+    private WorkAssessment workAssessment;
 
     @Enumerated(EnumType.STRING)
     private MemberType role;
@@ -79,5 +82,9 @@ public abstract class Member extends BasicEntity {
     public void updateRefreshToken(String refreshToken) {
 
         this.refreshToken = refreshToken;
+    }
+
+    public void plusWorkAssessment(int expertise, int scheduleAdherence, int initiative, int communication, int reEmploymentIntention) {
+        this.workAssessment.estimatedFreelancerWorkAbility(expertise, scheduleAdherence, initiative, communication, reEmploymentIntention);
     }
 }

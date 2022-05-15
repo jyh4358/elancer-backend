@@ -45,8 +45,6 @@ public class FreelancerProfile extends BasicEntity {
     private String introduceVideoURL;
     private String introduceContent;
 
-    @Embedded
-    private WorkAssessment workAssessment;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "freelancerProfile", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AcademicAbility> academicAbilities = new ArrayList<>();
@@ -73,7 +71,6 @@ public class FreelancerProfile extends BasicEntity {
         this.greeting = greeting;
         this.freelancer = freelancer;
         this.position = positionType.getFunction().apply(this);
-        this.workAssessment = new WorkAssessment(0, 0, 0, 0, 0);
     }
 
     public void coverIntroduceInFreelancer(String introduceName, IntroBackGround introBackGround, String introduceVideoURL, String introduceContent) {
@@ -142,10 +139,6 @@ public class FreelancerProfile extends BasicEntity {
         }
 
         return this.position.getPositionType();
-    }
-
-    public void plusWorkAssessment(int expertise, int scheduleAdherence, int initiative, int communication, int reEmploymentIntention) {
-        this.workAssessment.estimatedFreelancerWorkAbility(expertise, scheduleAdherence, initiative, communication, reEmploymentIntention);
     }
 
 }

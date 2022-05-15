@@ -16,29 +16,22 @@ public class WorkAssessment {
     private int communication;
     private int reEmploymentIntention;
 
+    private int assessmentCount;
     private int totalRawScore;
     private double totalActiveScore;
 
-    public WorkAssessment(int expertise, int scheduleAdherence, int initiative, int communication, int reEmploymentIntention) {
-        this.expertise = expertise;
-        this.scheduleAdherence = scheduleAdherence;
-        this.initiative = initiative;
-        this.communication = communication;
-        this.reEmploymentIntention = reEmploymentIntention;
-    }
-
     public void estimatedFreelancerWorkAbility(int expertise, int scheduleAdherence, int initiative, int communication, int reEmploymentIntention) {
-        this.expertise = expertise;
-        this.scheduleAdherence = scheduleAdherence;
-        this.initiative = initiative;
-        this.communication = communication;
-        this.reEmploymentIntention = reEmploymentIntention;
-        calculateScore(expertise + scheduleAdherence + initiative + communication + reEmploymentIntention);
+        this.expertise += expertise;
+        this.scheduleAdherence += scheduleAdherence;
+        this.initiative += initiative;
+        this.communication += communication;
+        this.reEmploymentIntention += reEmploymentIntention;
+        this.assessmentCount += 1;
+        calculateScore();
     }
 
-    private void calculateScore(int totalSum) {
-        this.totalRawScore += totalSum;
-        this.totalActiveScore = (double) ((totalRawScore / 5) / 2);
+    private void calculateScore() {
+        this.totalRawScore += this.expertise + this.scheduleAdherence + this.initiative + this.communication + this.reEmploymentIntention;
+        this.totalActiveScore = (double) ((totalRawScore / 5) / assessmentCount);
     }
-
 }
