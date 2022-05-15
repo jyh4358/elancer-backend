@@ -74,7 +74,6 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     private PositionEtcRepository positionEtcRepository;
 
 
-
     @DisplayName("프리랜서 프로필 개발자 상세 조회 통합테스트")
     @Test
     public void 프리랜서_프로필_개발자_상세조회() throws Exception {

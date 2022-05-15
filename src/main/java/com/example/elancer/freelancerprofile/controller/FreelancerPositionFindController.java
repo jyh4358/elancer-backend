@@ -60,4 +60,6 @@ public class FreelancerPositionFindController {
         return new ResponseEntity<PositionEtcResponse>(positionEtcResponse, HttpStatus.OK);
     }
 
+    //TODO 예외핸들러 추가해야한다.
+
 }
