@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.dto.response;
 
+import com.example.elancer.common.model.WorkAssessment;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.FreelancerThumbnail;
 import com.example.elancer.freelancer.model.IntroBackGround;
@@ -50,12 +51,12 @@ public class FreelancerProfileSimpleResponse {
                 freelancerProfile.getNum(),
                 freelancerProfile.getFreelancer().getName(),
                 Optional.ofNullable(freelancerProfile.getFreelancer().getFreelancerThumbnail()).map(FreelancerThumbnail::getThumbnailPath).orElse(null),
-                freelancerProfile.getWorkAssessment().getExpertise(),
-                freelancerProfile.getWorkAssessment().getScheduleAdherence(),
-                freelancerProfile.getWorkAssessment().getInitiative(),
-                freelancerProfile.getWorkAssessment().getCommunication(),
-                freelancerProfile.getWorkAssessment().getReEmploymentIntention(),
-                freelancerProfile.getWorkAssessment().getTotalActiveScore(),
+                Optional.ofNullable(freelancerProfile.getFreelancer().getWorkAssessment()).map(WorkAssessment::getExpertise).orElse(null),
+                Optional.ofNullable(freelancerProfile.getFreelancer().getWorkAssessment()).map(WorkAssessment::getScheduleAdherence).orElse(null),
+                Optional.ofNullable(freelancerProfile.getFreelancer().getWorkAssessment()).map(WorkAssessment::getInitiative).orElse(null),
+                Optional.ofNullable(freelancerProfile.getFreelancer().getWorkAssessment()).map(WorkAssessment::getCommunication).orElse(null),
+                Optional.ofNullable(freelancerProfile.getFreelancer().getWorkAssessment()).map(WorkAssessment::getReEmploymentIntention).orElse(null),
+                Optional.ofNullable(freelancerProfile.getFreelancer().getWorkAssessment()).map(WorkAssessment::getTotalActiveScore).orElse(null),
                 freelancerProfile.getIntroduceName(),
                 freelancerProfile.getIntroBackGround(),
                 freelancerProfile.getGreeting(),
