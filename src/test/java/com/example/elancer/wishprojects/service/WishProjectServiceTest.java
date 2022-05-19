@@ -6,8 +6,9 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.project.model.Project;
-import com.example.elancer.project.model.ProjectBackGround;
+import com.example.elancer.member.domain.Address;
+import com.example.elancer.member.domain.CountryType;
+import com.example.elancer.project.model.*;
 import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.wishprojects.dto.WishProjectDeleteRequest;
 import com.example.elancer.wishprojects.dto.WishProjectSaveRequest;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -44,8 +46,33 @@ class WishProjectServiceTest extends ServiceBaseTest {
 
         MemberDetails memberDetails = new MemberDetails(freelancer.getNum(), freelancer.getUserId(), freelancer.getRole());
 
-        Project project = projectRepository.save(new Project(ProjectBackGround.BLACK));
-
+        Project project = projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.ANALYSIS,
+                "쇼핑몰",
+                PositionType.DEVELOPER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                "기업 이름",
+                "담당자명",
+                "사장",
+                "010-0000-0000",
+                "010-1111-1111",
+                "projecttest@gmail.com"
+        ));
         WishProjectSaveRequest wishProjectSaveRequest = new WishProjectSaveRequest(project.getNum());
 
         //when
@@ -68,8 +95,33 @@ class WishProjectServiceTest extends ServiceBaseTest {
 
         MemberDetails memberDetails = new MemberDetails(freelancer.getNum(), freelancer.getUserId(), freelancer.getRole());
 
-        Project project = projectRepository.save(new Project(ProjectBackGround.BLACK));
-
+        Project project = projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.ANALYSIS,
+                "쇼핑몰",
+                PositionType.DEVELOPER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                "기업 이름",
+                "담당자명",
+                "사장",
+                "010-0000-0000",
+                "010-1111-1111",
+                "projecttest@gmail.com"
+        ));
         WishProject wishProject = wishProjectRepository.save(WishProject.createWishProject(freelancer, project));
 
         WishProjectDeleteRequest wishProjectDeleteRequest = new WishProjectDeleteRequest(wishProject.getNum());

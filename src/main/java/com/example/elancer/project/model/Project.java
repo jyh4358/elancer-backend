@@ -1,6 +1,7 @@
 package com.example.elancer.project.model;
 
 import com.example.elancer.common.model.BasicEntity;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.member.domain.Address;
 import lombok.AccessLevel;
 import lombok.Getter;
