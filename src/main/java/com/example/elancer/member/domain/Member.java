@@ -53,6 +53,7 @@ public abstract class Member extends BasicEntity {
         this.website = website;
         this.address = address;
         this.role = role;
+        this.workAssessment = new WorkAssessment(0, 0, 0, 0, 0);
     }
 
     public void updateMember(

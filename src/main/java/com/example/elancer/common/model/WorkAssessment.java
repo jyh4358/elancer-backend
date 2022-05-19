@@ -20,6 +20,14 @@ public class WorkAssessment {
     private int totalRawScore;
     private double totalActiveScore;
 
+    public WorkAssessment(int expertise, int scheduleAdherence, int initiative, int communication, int reEmploymentIntention) {
+        this.expertise = expertise;
+        this.scheduleAdherence = scheduleAdherence;
+        this.initiative = initiative;
+        this.communication = communication;
+        this.reEmploymentIntention = reEmploymentIntention;
+    }
+
     public void estimatedFreelancerWorkAbility(int expertise, int scheduleAdherence, int initiative, int communication, int reEmploymentIntention) {
         this.expertise += expertise;
         this.scheduleAdherence += scheduleAdherence;
