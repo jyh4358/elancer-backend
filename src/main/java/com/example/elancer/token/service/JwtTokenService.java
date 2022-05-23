@@ -44,7 +44,7 @@ public class JwtTokenService {
         if (!passwordEncoder.matches(requestDto.getPassword(), member.getPassword()))
             throw new UserPasswordException();
         member.updateRefreshToken(jwtTokenProvider.createRefreshToken());
-        return new MemberLoginResponse(member.getName(), jwtTokenProvider.createToken(member.getUserId()), member.getRefreshToken());
+        return new MemberLoginResponse(member.getRole(), jwtTokenProvider.createToken(member.getUserId()), member.getRefreshToken());
     }
 
     /**

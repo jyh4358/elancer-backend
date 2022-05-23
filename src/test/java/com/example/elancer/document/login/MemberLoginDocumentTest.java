@@ -64,7 +64,7 @@ public class MemberLoginDocumentTest extends DocumentBaseTest {
                                 headerWithName(org.springframework.http.HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
                         ),
                         responseFields(
-                                fieldWithPath("username").type("String").description("회원 이름"),
+                                fieldWithPath("memberType").type("MemberType").description("회원 이름"),
                                 fieldWithPath("accessToken").type("String").description("jwt access 토큰"),
                                 fieldWithPath("refreshToken").type("String").description("jwt refresh 토큰")
                         )
