@@ -42,12 +42,14 @@ public class EnterpriseController {
      * @return
      */
     @PutMapping("/enterprise")
-    public ResponseEntity<Void> coverEnterpriseAccountInfo(
+    public ResponseEntity<EnterpriseAccountDetailResponse> coverEnterpriseAccountInfo(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody EnterpriseUpdateRequest enterpriseUpdateRequest
     ) {
-        enterpriseService.coverEnterpriseAccountInfo(memberDetails, enterpriseUpdateRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+        System.out.println("put enterprise");
+        System.out.println("memberDetails.getId() = " + memberDetails.getId());
+        EnterpriseAccountDetailResponse enterpriseAccountInfo = enterpriseService.coverEnterpriseAccountInfo(memberDetails, enterpriseUpdateRequest);
+        return new ResponseEntity<>(enterpriseAccountInfo, HttpStatus.OK);
     }
 
 

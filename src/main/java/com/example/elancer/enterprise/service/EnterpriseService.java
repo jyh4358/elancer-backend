@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,26 +49,45 @@ public class EnterpriseService {
      * @param enterpriseUpdateRequest
      */
     @Transactional
-    public void coverEnterpriseAccountInfo(MemberDetails memberDetails, EnterpriseUpdateRequest enterpriseUpdateRequest) {
+    public EnterpriseAccountDetailResponse coverEnterpriseAccountInfo(MemberDetails memberDetails, EnterpriseUpdateRequest enterpriseUpdateRequest) {
 
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(EnterpriseCheckUserIdException::new);
-        RightRequestChecker.checkPasswordMatch(enterpriseUpdateRequest.getPassword1(), enterpriseUpdateRequest.getPassword2());
-
-        enterprise.updateEnterprise(
-                passwordEncoder.encode(enterpriseUpdateRequest.getPassword1()),
-                enterpriseUpdateRequest.getName(),
-                enterpriseUpdateRequest.getPhone(),
-                enterpriseUpdateRequest.getEmail(),
-                enterpriseUpdateRequest.getCompanyName(),
-                enterpriseUpdateRequest.getCompanyPeople(),
-                enterpriseUpdateRequest.getPosition(),
-                enterpriseUpdateRequest.getTelNumber(),
-                enterpriseUpdateRequest.getWebsite(),
-                enterpriseUpdateRequest.getAddress(),
-                enterpriseUpdateRequest.getBizContents(),
-                enterpriseUpdateRequest.getSales(),
-                enterpriseUpdateRequest.getIdNumber()
-        );
+        if (StringUtils.hasText(enterpriseUpdateRequest.getPassword1())) {
+            RightRequestChecker.checkPasswordMatch(enterpriseUpdateRequest.getPassword1(), enterpriseUpdateRequest.getPassword2());
+            enterprise.updateEnterprise(
+                    passwordEncoder.encode(enterpriseUpdateRequest.getPassword1()),
+                    enterpriseUpdateRequest.getName(),
+                    enterpriseUpdateRequest.getPhone(),
+                    enterpriseUpdateRequest.getEmail(),
+                    enterpriseUpdateRequest.getCompanyName(),
+                    enterpriseUpdateRequest.getCompanyPeople(),
+                    enterpriseUpdateRequest.getPosition(),
+                    enterpriseUpdateRequest.getTelNumber(),
+                    enterpriseUpdateRequest.getWebsite(),
+                    enterpriseUpdateRequest.getAddress(),
+                    enterpriseUpdateRequest.getBizContents(),
+                    enterpriseUpdateRequest.getSales(),
+                    enterpriseUpdateRequest.getIdNumber()
+            );
+        }
+        else {
+            enterprise.updateEnterprise(
+                    enterprise.getPassword(),
+                    enterpriseUpdateRequest.getName(),
+                    enterpriseUpdateRequest.getPhone(),
+                    enterpriseUpdateRequest.getEmail(),
+                    enterpriseUpdateRequest.getCompanyName(),
+                    enterpriseUpdateRequest.getCompanyPeople(),
+                    enterpriseUpdateRequest.getPosition(),
+                    enterpriseUpdateRequest.getTelNumber(),
+                    enterpriseUpdateRequest.getWebsite(),
+                    enterpriseUpdateRequest.getAddress(),
+                    enterpriseUpdateRequest.getBizContents(),
+                    enterpriseUpdateRequest.getSales(),
+                    enterpriseUpdateRequest.getIdNumber()
+            );
+        }
+        return EnterpriseAccountDetailResponse.of(enterprise);
     }
 
 

@@ -2,9 +2,7 @@ package com.example.elancer.enterprise.dto;
 
 
 import com.example.elancer.member.domain.Address;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -12,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class EnterpriseUpdateRequest {
 
@@ -27,10 +26,8 @@ public class EnterpriseUpdateRequest {
 
     private String position;
 
-    @NotBlank
     private String password1;
 
-    @NotBlank
     private String password2;
 
     @NotBlank
