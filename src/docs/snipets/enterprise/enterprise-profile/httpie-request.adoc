@@ -11,5 +11,5 @@ $ echo '{
   "subEtc" : "업무 분야 기타"
 }' | http PUT 'http://localhost:8080/enterprise/profile' \
     'Content-Type:application/json;charset=UTF-8' \
-    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTM2NjA4NTUsImV4cCI6MTY1MzY2MDk0MX0.UDJufkZNdV7uNyDswEOLK0jo_vee1fS_EL4s7XxP2EY'
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTM2NjkyNzIsImV4cCI6MTY1MzY2OTM1OH0.KKb5DcyVUibaP8QLsiqFmtJJP7lEHKRsd-GwAjaiBoQ'
 ----

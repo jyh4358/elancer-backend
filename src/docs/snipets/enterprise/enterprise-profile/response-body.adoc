@@ -6,8 +6,8 @@
   "sales" : 100000000,
   "idNumber" : "123-123-123",
   "mainBizCodes" : [ ],
-  "mainEtc" : null,
+  "mainEtc" : "",
   "subBizCodes" : [ ],
-  "subEtc" : null
+  "subEtc" : ""
 }
 ----

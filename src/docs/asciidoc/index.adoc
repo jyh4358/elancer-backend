@@ -384,7 +384,7 @@ include::{snippets}/enterprise-profile/request-fields.adoc[]
 include::{snippets}/enterprise-profile-find/http-request.adoc[]
 include::{snippets}/enterprise-profile-find/request-headers.adoc[]
 응답
-include::{snippets}/enterprise-profile-find/http-response.adoc[]
+include::{snippets}/enterprise-profile-find/response-body.adoc[]
 include::{snippets}/enterprise-profile-find/response-headers.adoc[]
 include::{snippets}/enterprise-profile-find/response-fields.adoc[]
 

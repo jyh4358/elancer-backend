@@ -2,7 +2,7 @@
 ----
 $ curl 'http://localhost:8080/enterprise' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTM2NjA4NTQsImV4cCI6MTY1MzY2MDk0MX0.yzyX4h7MhSPDQR_-n8OJJ1N5_rVcMNBzYLUwu1CGke0' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTM2NjkyNzEsImV4cCI6MTY1MzY2OTM1OH0.kXnkj6h-CsMUQlKYuVTH-NWsIOCJEKVVPJ64YH-sv4g' \
     -d '{
   "companyName" : "변경된 회사 이름",
   "companyPeople" : 20,

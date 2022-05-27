@@ -11,16 +11,16 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 298
+Content-Length: 206
 
 {
   "introTitle" : "프로필 title",
   "bizContents" : "SI",
   "sales" : 100000000,
   "idNumber" : "123-123-123",
-  "mainBizCodes" : [ "main_biz1", "main_biz2", "main_biz3" ],
+  "mainBizCodes" : [ ],
   "mainEtc" : "",
-  "subBizCodes" : [ "sub_biz1", "sub_biz2", "sub_etc" ],
-  "subEtc" : "업무 분야 기타"
+  "subBizCodes" : [ ],
+  "subEtc" : ""
 }
 ----

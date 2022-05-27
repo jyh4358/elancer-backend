@@ -1,5 +1,5 @@
 [source,bash]
 ----
 $ curl 'http://localhost:8080/enterprise' -i -X GET \
-    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTM2NjA4NTQsImV4cCI6MTY1MzY2MDk0MH0.A8NWY65gC-dZzQox0iJV9ZL7gPN769kp4X2YNGM6o18'
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTM2NjkyNzEsImV4cCI6MTY1MzY2OTM1N30.deFM4C9l62C7BWm7SVQIvgbtVJpBTYWHQDNvL5-v9bU'
 ----
