@@ -2,13 +2,15 @@
 ----
 $ curl 'http://localhost:8080/enterprise/profile' -i -X PUT \
     -H 'Content-Type: application/json;charset=UTF-8' \
-    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTIxODMwNTYsImV4cCI6MTY1MjE4MzE0M30.SDek0_mfroR9n9WWQ4KC0RMBhneAbpdJjADpcf_3VbY' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTM2NjA4NTUsImV4cCI6MTY1MzY2MDk0MX0.UDJufkZNdV7uNyDswEOLK0jo_vee1fS_EL4s7XxP2EY' \
     -d '{
   "introTitle" : "프로필 title",
   "bizContents" : "SI",
   "sales" : 100000000,
   "idNumber" : "123-123-123",
   "mainBizCodes" : [ "main_biz1", "main_biz2", "main_biz3" ],
-  "subBizCodes" : [ "sub_biz1", "sub_biz2", "sub_biz3" ]
+  "mainEtc" : "사업 분야 기타",
+  "subBizCodes" : [ "sub_biz1", "sub_biz2", "sub_biz3" ],
+  "subEtc" : "업무 분야 기타"
 }'
 ----

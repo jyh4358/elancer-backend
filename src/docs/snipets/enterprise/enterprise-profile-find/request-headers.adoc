@@ -1,0 +1,7 @@
+|===
+|Name|Description
+
+|`+Authorization+`
+|jwt 토큰 인증 헤더 필드.
+
+|===

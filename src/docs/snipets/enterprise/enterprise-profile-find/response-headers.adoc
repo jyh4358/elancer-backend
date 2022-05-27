@@ -1,0 +1,7 @@
+|===
+|Name|Description
+
+|`+Content-Type+`
+|응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답 
+
+|===

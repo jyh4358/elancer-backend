@@ -3,7 +3,7 @@
 {
   "companyName" : "기업명",
   "companyPeople" : 10,
-  "name" : "기업",
+  "name" : "회원이름",
   "position" : "사장",
   "phone" : "000-0000-0000",
   "telNumber" : "000-1111-1111",

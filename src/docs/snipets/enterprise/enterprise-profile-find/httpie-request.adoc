@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ http GET 'http://localhost:8080/enterprise/profile' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTM2NjgzMzUsImV4cCI6MTY1MzY2ODQyMX0.d3dJspgLnDF7wLjqw84k8okjF-tryOzyy1xdkFksf2o'
+----

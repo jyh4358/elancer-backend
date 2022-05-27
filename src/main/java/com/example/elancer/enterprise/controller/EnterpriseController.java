@@ -74,12 +74,12 @@ public class EnterpriseController {
      * @return
      */
     @PutMapping("/enterprise/profile")
-    public ResponseEntity<String> coverEnterpriseIntroduce(
+    public ResponseEntity<EnterpriseProfileResponse> coverEnterpriseIntroduce(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody EnterpriseProfileRequest enterpriseProfileRequest) {
 
-        enterpriseService.updateIntro(memberDetails.getId(), enterpriseProfileRequest);
-        return new ResponseEntity<>("profile ok", HttpStatus.OK);
+        EnterpriseProfileResponse enterpriseProfileResponse = enterpriseService.updateIntro(memberDetails.getId(), enterpriseProfileRequest);
+        return new ResponseEntity<>(enterpriseProfileResponse, HttpStatus.OK);
     }
 
 

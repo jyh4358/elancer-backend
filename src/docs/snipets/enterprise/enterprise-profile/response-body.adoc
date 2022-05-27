@@ -1,4 +1,13 @@
 [source,options="nowrap"]
 ----
-profile ok
+{
+  "introTitle" : "프로필 title",
+  "bizContents" : "SI",
+  "sales" : 100000000,
+  "idNumber" : "123-123-123",
+  "mainBizCodes" : [ ],
+  "mainEtc" : null,
+  "subBizCodes" : [ ],
+  "subEtc" : null
+}
 ----

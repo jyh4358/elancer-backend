@@ -46,4 +46,8 @@ public class EnterpriseMainBiz extends BasicEntity{
     public void setEnterpriseIntro(EnterpriseIntro enterpriseIntro) {
         this.enterpriseIntro = enterpriseIntro;
     }
+
+    public void setEtc(String etc) {
+        this.etc = etc;
+    }
 }

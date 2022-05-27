@@ -110,24 +110,27 @@ public class EnterpriseService {
      * @param enterpriseProfileRequest
      */
     @Transactional
-    public void updateIntro(
-            Long num, EnterpriseProfileRequest enterpriseProfileRequest) {
+    public EnterpriseProfileResponse updateIntro(Long num, EnterpriseProfileRequest enterpriseProfileRequest) {
 
         Enterprise enterprise = enterpriseRepository.findById(num).orElseThrow(NotExistEnterpriseException::new);
+
 
         List<EnterpriseMainBiz> enterpriseMainBizs = getEnterpriseMainBizs(enterpriseProfileRequest);
         List<EnterpriseSubBiz> enterpriseSubBizs = getEnterpriseSubBizs(enterpriseProfileRequest);
 
+        mainEtcInsert(enterpriseProfileRequest, enterpriseMainBizs);
+        subEtcInsert(enterpriseProfileRequest, enterpriseSubBizs);
+
 
         EnterpriseIntro enterpriseIntro = EnterpriseIntro.of(enterpriseProfileRequest.getIntroTitle(), enterpriseMainBizs, enterpriseSubBizs, enterprise);
-
 
         enterprise.updateIntro(enterpriseIntro,
                 enterpriseProfileRequest.getBizContents(),
                 enterpriseProfileRequest.getSales(),
                 enterpriseProfileRequest.getIdNumber());
-
+        return EnterpriseProfileResponse.of(enterprise);
     }
+
 
     /**
      * 인재 스크랩 조회
@@ -156,9 +159,23 @@ public class EnterpriseService {
     }
 
     private List<EnterpriseMainBiz> getEnterpriseMainBizs(EnterpriseProfileRequest enterpriseProfileRequest) {
-
         List<MainBusiness> mainBusiness = mainBusinessRepository.findMainBusiness(enterpriseProfileRequest.getMainBizCodes());
         return EnterpriseMainBiz.createList(mainBusiness);
     }
 
+    private void mainEtcInsert(EnterpriseProfileRequest enterpriseProfileRequest, List<EnterpriseMainBiz> enterpriseMainBizs) {
+        for (EnterpriseMainBiz enterpriseMainBiz : enterpriseMainBizs) {
+            if (enterpriseMainBiz.getMainBusiness().getCode().equals("main_etc")) {
+                enterpriseMainBiz.setEtc(enterpriseProfileRequest.getMainEtc());
+            }
+        }
+    }
+
+    private void subEtcInsert(EnterpriseProfileRequest enterpriseProfileRequest, List<EnterpriseSubBiz> enterpriseSubBizs) {
+        for (EnterpriseSubBiz enterpriseSubBiz : enterpriseSubBizs) {
+            if (enterpriseSubBiz.getSubBusiness().getCode().equals("sub_etc")) {
+                enterpriseSubBiz.setEtc(enterpriseProfileRequest.getSubEtc());
+            }
+        }
+    }
 }
