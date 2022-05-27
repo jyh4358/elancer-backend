@@ -46,8 +46,6 @@ public class EnterpriseController {
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody EnterpriseUpdateRequest enterpriseUpdateRequest
     ) {
-        System.out.println("put enterprise");
-        System.out.println("memberDetails.getId() = " + memberDetails.getId());
         EnterpriseAccountDetailResponse enterpriseAccountInfo = enterpriseService.coverEnterpriseAccountInfo(memberDetails, enterpriseUpdateRequest);
         return new ResponseEntity<>(enterpriseAccountInfo, HttpStatus.OK);
     }

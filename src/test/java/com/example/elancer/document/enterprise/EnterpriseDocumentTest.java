@@ -142,6 +142,26 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
                                 fieldWithPath("sales").type("Integer").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자등록번호")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("companyName").type("String").description("회사명"),
+                                fieldWithPath("companyPeople").type("Integer").description("회사 인원수"),
+                                fieldWithPath("name").type("String").description("담당자명"),
+                                fieldWithPath("position").type("String").description("직책"),
+                                fieldWithPath("phone").type("String").description("전화번호"),
+                                fieldWithPath("telNumber").type("String").description("담당자 휴대폰"),
+                                fieldWithPath("email").type("String").description("이메일"),
+                                fieldWithPath("website").type("String").description("웹사이트"),
+                                fieldWithPath("address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("bizContents").type("String").description("주요 사업내용"),
+                                fieldWithPath("sales").type("Integer").description("연간 매출액"),
+                                fieldWithPath("idNumber").type("String").description("사업자등록번호")
                         )
                 ));
     }

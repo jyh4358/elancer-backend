@@ -1,21 +1,30 @@
 package com.example.elancer.document.enterprise;
 
 import com.example.elancer.common.EnterpriseHelper;
+import com.example.elancer.common.MainBusinessHelper;
+import com.example.elancer.common.SubBusinessHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseProfileRequest;
 import com.example.elancer.enterprise.dto.EnterpriseProfileResponse;
+import com.example.elancer.enterprise.repository.MainBusinessRepository;
+import com.example.elancer.enterprise.repository.SubBusinessRepository;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.integrate.freelancer.LoginHelper;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
+import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +43,12 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
     @Autowired
     EnterpriseService enterpriseService;
 
+    @Autowired
+    MainBusinessRepository mainBusinessRepository;
+
+    @Autowired
+    SubBusinessRepository subBusinessRepository;
+
     @AfterEach
     void tearDown() {
         databaseClean.clean();
@@ -45,6 +60,8 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
 
         //given
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MainBusinessHelper.사업분야_데이터_생성(mainBusinessRepository);
+        SubBusinessHelper.업무분야_데이터_생성(subBusinessRepository);
         MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
         List<String> mainBizCodes = new ArrayList<>();
@@ -54,7 +71,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
         List<String> subBizCodes = new ArrayList<>();
         subBizCodes.add("sub_biz1");
         subBizCodes.add("sub_biz2");
-        subBizCodes.add("sub_biz3");
+        subBizCodes.add("sub_etc");
 
         EnterpriseProfileRequest enterpriseProfileRequest = new EnterpriseProfileRequest(
                 "프로필 title",
@@ -62,7 +79,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                 100000000,
                 "123-123-123",
                 mainBizCodes,
-                "사업 분야 기타",
+                "",
                 subBizCodes,
                 "업무 분야 기타"
         );
@@ -90,6 +107,19 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("mainEtc").type("String").description("사업 분야 기타"),
                                 fieldWithPath("subBizCodes").type("List<String>").description("업무 분야"),
                                 fieldWithPath("subEtc").type("String").description("업무 분야 기타")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답 ")
+                        ),
+                        responseFields(
+                                fieldWithPath("introTitle").type("String").description("프로필 타이틀 필드"),
+                                fieldWithPath("bizContents").type("String").description("주요 사업 내용"),
+                                fieldWithPath("sales").type("Integer").description("연간 매출액"),
+                                fieldWithPath("idNumber").type("String").description("사업자 등록 번호"),
+                                fieldWithPath("mainBizCodes").type("List<String>").description("사업 분야"),
+                                fieldWithPath("mainEtc").type("String").description("사업 분야 기타"),
+                                fieldWithPath("subBizCodes").type("List<String>").description("업무 분야"),
+                                fieldWithPath("subEtc").type("String").description("업무 분야 기타")
                         )
                 ));
     }
@@ -99,6 +129,8 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
     public void 기업_프로필_조회_문서화() throws Exception {
         //given
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MainBusinessHelper.사업분야_데이터_생성(mainBusinessRepository);
+        SubBusinessHelper.업무분야_데이터_생성(subBusinessRepository);
         MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
         List<String> mainBizCodes = new ArrayList<>();
@@ -125,6 +157,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
         EnterpriseProfileResponse enterpriseProfileResponse = enterpriseService.updateIntro(enterprise.getNum(), enterpriseProfileRequest);
 
         mockMvc.perform(get("/enterprise/profile")
+                        .contentType(MediaType.APPLICATION_JSON)
                         .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
