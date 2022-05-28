@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.model.position.developer;
 
+import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -22,6 +23,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -145,5 +147,29 @@ public class Developer extends Position {
         this.dbSkills = dbSkills;
     }
 
-
+    public List<String> getAllSkillNames() {
+        List<String> allSkills = new ArrayList<>();
+        allSkills.addAll(javaSkills.stream()
+                .map(javaSkill -> javaSkill.getJavaDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(mobileAppSkills.stream()
+                .map(mobileAppSkill -> mobileAppSkill.getMobileAppDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(phpOrAspSkills.stream()
+                .map(phpOrAspSkill -> phpOrAspSkill.getPhpOrAspDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(dotNetSkills.stream()
+                .map(dotNetSkill -> dotNetSkill.getDotNetDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(javaScriptSkills.stream()
+                .map(javaScriptSkill -> javaScriptSkill.getJavaScriptDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(cSkills.stream()
+                .map(cSkill -> cSkill.getCDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(dbSkills.stream()
+                .map(dbSkill -> dbSkill.getDbDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        return allSkills;
+    }
 }

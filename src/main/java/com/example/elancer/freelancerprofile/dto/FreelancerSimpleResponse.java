@@ -12,10 +12,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FreelancerSimpleResponse {
+    private Long freelancerNum;
     private String positionName;
     private String freelancerName;
     private IntroBackGround introBackGround;
@@ -27,6 +29,7 @@ public class FreelancerSimpleResponse {
     private List<String> projectNames;
 
     public FreelancerSimpleResponse(
+            Long freelancerNum,
             String positionName,
             String freelancerName,
             IntroBackGround introBackGround,
@@ -36,23 +39,41 @@ public class FreelancerSimpleResponse {
             String etcSkill,
             List<String> projectNames
     ) {
+        this.freelancerNum = freelancerNum;
         this.positionName = positionName;
         this.freelancerName = freelancerName;
         this.introBackGround = introBackGround;
         this.careerYear = careerYear;
+        this.wishState = false;
         this.greeting = greeting;
         this.skills = skills;
         this.etcSkill = etcSkill;
         this.projectNames = projectNames;
     }
 
-//    public static FreelancerSimpleResponse of(Developer developer) {
-//        return new FreelancerSimpleResponse(
-//                developer.getPositionType().getDesc(),
-//                developer.getFreelancerProfile().getFreelancer().getName(),
-//                developer.getFreelancerProfile().getIntroBackGround(),
-//                developer.getFreelancerProfile().getFreelancer().getFreelancerAccountInfo().getCareerYear(),
-//                developer.getFreelancerProfile().getGreeting(),
-//        )
-//    }
+
+    public static FreelancerSimpleResponse of(Developer developer) {
+        return new FreelancerSimpleResponse(
+                developer.getFreelancerProfile().getFreelancer().getNum(),
+                developer.getPositionType().getDesc(),
+                developer.getFreelancerProfile().getFreelancer().getName(),
+                developer.getFreelancerProfile().getIntroBackGround(),
+                developer.getFreelancerProfile().getFreelancer().getFreelancerAccountInfo().getCareerYear(),
+                developer.getFreelancerProfile().getGreeting(),
+                developer.getAllSkillNames(),
+                developer.getEtcSkill(),
+                developer.getFreelancerProfile().getProjectHistoryNames()
+        );
+    }
+
+    public static List<FreelancerSimpleResponse> listOf(List<Developer> developers) {
+        return developers.stream()
+                .map(FreelancerSimpleResponse::of)
+                .collect(Collectors.toList());
+    }
+
+    public void switchWishState() {
+        this.wishState = true;
+    }
+
 }

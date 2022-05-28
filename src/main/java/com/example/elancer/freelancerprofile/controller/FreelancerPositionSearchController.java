@@ -2,6 +2,7 @@ package com.example.elancer.freelancerprofile.controller;
 
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
+import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.service.FreelancerPositionSearchService;
@@ -23,7 +24,7 @@ public class FreelancerPositionSearchController {
     private final FreelancerPositionSearchService freelancerPositionSearchService;
 
     @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_DEVELOPER_SEARCH)
-    public ResponseEntity<FreelancerSimpleResponse> searchDevelopers(
+    public ResponseEntity<FreelancerSimpleResponses> searchDevelopers(
             @RequestParam(required = false) PositionType positionType,
             @RequestParam(required = false) List<String> majorSkillKeywords,
             @RequestParam(required = false) String minorSkill,
@@ -33,6 +34,6 @@ public class FreelancerPositionSearchController {
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
         freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips, workArea, memberDetails);
-        return new ResponseEntity<FreelancerSimpleResponse>(HttpStatus.OK);
+        return new ResponseEntity<FreelancerSimpleResponses>(HttpStatus.OK);
     }
 }
