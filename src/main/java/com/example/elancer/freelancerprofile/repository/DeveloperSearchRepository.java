@@ -4,6 +4,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.dto.QFreelancerSimpleResponse;
+import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.QPosition;
@@ -40,7 +41,7 @@ public class DeveloperSearchRepository {
             String minorSkill,
             List<HopeWorkState> hopeWorkStates,
             List<PositionWorkManShip> positionWorkManShips,
-            String workArea
+            WorkArea workArea
     ) {
         BooleanBuilder builder = new BooleanBuilder();
 
@@ -51,7 +52,6 @@ public class DeveloperSearchRepository {
         eqPositionWorkShipConds(positionWorkManShips, builder);
         eqWorkAreaConds(workArea, builder);
 
-
         QueryResults<Developer> developerQueryResults = jpaQueryFactory.selectFrom(developer)
                 .innerJoin(developer.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
@@ -61,12 +61,12 @@ public class DeveloperSearchRepository {
         return new SliceImpl<Developer>(developerQueryResults.getResults());
     }
 
-    private void eqWorkAreaConds(String area, BooleanBuilder builder) {
+    private void eqWorkAreaConds(WorkArea area, BooleanBuilder builder) {
         if (area == null) {
             return ;
         }
 
-        builder.and(freelancer.address.mainAddress.containsIgnoreCase(area));
+        builder.and(freelancer.address.mainAddress.containsIgnoreCase(area.getDesc()));
     }
 
     private void eqMajorSkillConds(List<String> majorSkillKeywords, BooleanBuilder builder) {
@@ -119,7 +119,6 @@ public class DeveloperSearchRepository {
         if (positionWorkManShips == null) {
             return;
         }
-//        Expressions.booleanOperation(Ops.AND)
 
         for (PositionWorkManShip positionWorkManShip : positionWorkManShips) {
             if (positionWorkManShip.equals(PositionWorkManShip.SENIOR)) {
