@@ -73,6 +73,7 @@ public class JwtTokenProvider {
 
     // Request의 Header에서 token 값을 가져옵니다. "Authorization" : "TOKEN값'
     public String resolveToken(HttpServletRequest request) {
+
         return request.getHeader(AUTHORITIES_KEY);
     }
 

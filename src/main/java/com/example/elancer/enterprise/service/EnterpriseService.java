@@ -34,15 +34,17 @@ public class EnterpriseService {
 
     /**
      * 기업 정보 조회
-     * @param num
+     * @param memberDetails
      * @return
      */
-    public EnterpriseAccountDetailResponse findDetailEnterpriseAccount(Long num) {
-        Enterprise enterprise = enterpriseRepository.findById(num).orElseThrow(NotExistEnterpriseException::new);
+    public EnterpriseAccountDetailResponse findDetailEnterpriseAccount(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
         return EnterpriseAccountDetailResponse.of(enterprise);
     }
 
     public EnterpriseSimpleDetailResponse findSimpleEnterpriseInfo(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
         EnterpriseSimpleDetailResponse simpleDetailResponse = EnterpriseSimpleDetailResponse.of(enterprise);
         return simpleDetailResponse;
@@ -112,13 +114,13 @@ public class EnterpriseService {
 
     /**
      * 기업 프로필 업데이트
-     * @param num
+     * @param memberDetails
      * @param enterpriseProfileRequest
      */
     @Transactional
-    public EnterpriseProfileResponse updateIntro(Long num, EnterpriseProfileRequest enterpriseProfileRequest) {
-
-        Enterprise enterprise = enterpriseRepository.findById(num).orElseThrow(NotExistEnterpriseException::new);
+    public EnterpriseProfileResponse updateIntro(MemberDetails memberDetails, EnterpriseProfileRequest enterpriseProfileRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
 
 
         List<EnterpriseMainBiz> enterpriseMainBizs = getEnterpriseMainBizs(enterpriseProfileRequest);

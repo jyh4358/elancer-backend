@@ -12,6 +12,7 @@ import com.example.elancer.enterprise.repository.SubBusinessRepository;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.Before;
@@ -142,6 +143,11 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
         subBizCodes.add("sub_biz2");
         subBizCodes.add("sub_etc");
 
+        MemberDetails memberDetails = new MemberDetails(
+                enterprise.getNum(),
+                enterprise.getUserId(),
+                enterprise.getRole());
+
 
         EnterpriseProfileRequest enterpriseProfileRequest = new EnterpriseProfileRequest(
                 "프로필 title",
@@ -154,7 +160,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                 "업무 분야 기타"
         );
 
-        EnterpriseProfileResponse enterpriseProfileResponse = enterpriseService.updateIntro(enterprise.getNum(), enterpriseProfileRequest);
+        enterpriseService.updateIntro(memberDetails, enterpriseProfileRequest);
 
         mockMvc.perform(get("/enterprise/profile")
                         .contentType(MediaType.APPLICATION_JSON)

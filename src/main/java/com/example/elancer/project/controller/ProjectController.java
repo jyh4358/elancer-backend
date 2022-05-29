@@ -26,7 +26,6 @@ public class ProjectController {
     public ResponseEntity<EnterpriseSimpleDetailResponse> saveProject(
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-
         EnterpriseSimpleDetailResponse simpleEnterpriseInfo = enterpriseService.findSimpleEnterpriseInfo(memberDetails);
 
         return new ResponseEntity<>(simpleEnterpriseInfo, HttpStatus.OK);

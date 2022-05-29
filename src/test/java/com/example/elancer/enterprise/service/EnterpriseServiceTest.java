@@ -100,7 +100,7 @@ class EnterpriseServiceTest extends ServiceBaseTest {
                 enterprise.getRole());
 
         // when
-        EnterpriseAccountDetailResponse enterpriseAccountInfo = enterpriseService.findDetailEnterpriseAccount(memberDetails.getId());
+        EnterpriseAccountDetailResponse enterpriseAccountInfo = enterpriseService.findDetailEnterpriseAccount(memberDetails);
 
         // then
         Assertions.assertThat(enterpriseAccountInfo.getCompanyName()).isEqualTo(enterprise.getCompanyName());

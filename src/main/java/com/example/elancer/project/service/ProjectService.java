@@ -1,5 +1,6 @@
 package com.example.elancer.project.service;
 
+import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
@@ -21,6 +22,7 @@ public class ProjectService {
 
     @Transactional
     public void saveProject(MemberDetails memberDetails, ProjectSaveRequest projectSaveRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
 
         enterprise.updateEnterpriseInfo(

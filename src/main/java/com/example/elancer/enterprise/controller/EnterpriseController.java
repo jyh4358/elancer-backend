@@ -29,7 +29,7 @@ public class EnterpriseController {
     public ResponseEntity<EnterpriseAccountDetailResponse> findDetailEnterpriseAccount(
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        EnterpriseAccountDetailResponse enterpriseAccountInfo = enterpriseService.findDetailEnterpriseAccount(memberDetails.getId());
+        EnterpriseAccountDetailResponse enterpriseAccountInfo = enterpriseService.findDetailEnterpriseAccount(memberDetails);
         return new ResponseEntity<>(enterpriseAccountInfo, HttpStatus.OK);
 
     }
@@ -75,7 +75,7 @@ public class EnterpriseController {
     public ResponseEntity<EnterpriseProfileResponse> coverEnterpriseIntroduce(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody EnterpriseProfileRequest enterpriseProfileRequest) {
-        EnterpriseProfileResponse enterpriseProfileResponse = enterpriseService.updateIntro(memberDetails.getId(), enterpriseProfileRequest);
+        EnterpriseProfileResponse enterpriseProfileResponse = enterpriseService.updateIntro(memberDetails, enterpriseProfileRequest);
         return new ResponseEntity<>(enterpriseProfileResponse, HttpStatus.OK);
     }
 
