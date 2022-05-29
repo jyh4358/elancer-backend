@@ -3,18 +3,13 @@ package com.example.elancer.document.enterprise;
 import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.enterprise.domain.enterprise.Enterprise;
-import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.project.dto.ProjectSaveRequest;
-import com.example.elancer.project.model.EnterpriseLogo;
-import com.example.elancer.project.model.ProjectBackGround;
-import com.example.elancer.project.model.ProjectStep;
-import com.example.elancer.project.model.ProjectType;
+import com.example.elancer.project.model.*;
 import com.example.elancer.token.jwt.JwtTokenProvider;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -82,7 +77,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                 EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
-                PositionType.DEVELOPER,
+                PositionKind.DEVELOPER,
                 "자바",
                 "쇼핑몰 프로젝트",
                 10,
@@ -117,12 +112,12 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         requestFields(
-                                fieldWithPath("projectType").type("ProjectType").description("재택(TELEWORKING), 상주(WORKING)"),
+                                fieldWithPath("projectType").type("ProjectType").description("TELEWORKING(재택), WORKING(상주)"),
                                 fieldWithPath("projectBackGround").type("ProjectBackGround").description("색상"),
-                                fieldWithPath("enterpriseLogo").type("EnterpriseLogo").description("기업 로고"),
-                                fieldWithPath("projectStep").type("ProjectStep").description("프로젝트 단계"),
+                                fieldWithPath("enterpriseLogo").type("EnterpriseLogo").description("SAMSUNG(삼성), LG(LG), KT(KT), SK(SK), COUPANG(쿠팡), WOOWAHAN(우아한형제들),LOTTE(롯데), NONGYUP(농협), SHINHAN(신한), IBK(기업), KBSTAR(국민)"),
+                                fieldWithPath("projectStep").type("ProjectStep").description("ANALYSIS(분석/설계), PLAN(기획), DESIGN(디자인), PUBLISHING(퍼블리싱), DEVELOP(개발), OPERATION(운영중)"),
                                 fieldWithPath("mainBiz").type("String").description("업무 분야"),
-                                fieldWithPath("positionType").type("PositionType").description("관련기술"),
+                                fieldWithPath("positionKind").type("PositionKind").description("DEVELOPER(개발자), PUBLISHER(퍼블리셔), DESIGNER(디자이너), PLANNER(기획자), CROWD_WORKER(크라우드워커), ETC(기타)"),
                                 fieldWithPath("skill").type("String").description("관련 기술"),
                                 fieldWithPath("projectName").type("String").description("프로젝트 명"),
                                 fieldWithPath("headCount").type("Integer").description("모집 인원"),

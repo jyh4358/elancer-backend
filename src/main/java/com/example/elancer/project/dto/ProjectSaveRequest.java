@@ -1,6 +1,5 @@
 package com.example.elancer.project.dto;
 
-import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.project.model.*;
 import lombok.AccessLevel;
@@ -19,7 +18,7 @@ public class ProjectSaveRequest {
     private EnterpriseLogo enterpriseLogo;
     private ProjectStep projectStep;
     private String mainBiz;
-    private PositionType positionType;
+    private PositionKind positionKind;
     private String skill;
     private String projectName;
     private Integer headCount;
@@ -51,7 +50,7 @@ public class ProjectSaveRequest {
                 .enterpriseLogo(enterpriseLogo)
                 .projectStep(projectStep)
                 .mainBiz(mainBiz)
-                .positionType(positionType)
+                .positionKind(positionKind)
                 .skill(skill)
                 .projectName(projectName)
                 .headCount(headCount)

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum PositionType {
+public enum PositionKind {
     DEVELOPER("개발자"),
     PUBLISHER("퍼블리셔"),
     DESIGNER("디자이너"),

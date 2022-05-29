@@ -1,7 +1,6 @@
 package com.example.elancer.project.model;
 
 import com.example.elancer.common.model.BasicEntity;
-import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.member.domain.Address;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -24,7 +23,7 @@ public class Project extends BasicEntity {
     private EnterpriseLogo enterpriseLogo;
     private ProjectStep projectStep;
     private String mainBiz;
-    private PositionType positionType;
+    private PositionKind positionKind;
     private String skill;
     private String projectName;
     private Integer headCount;
@@ -49,7 +48,7 @@ public class Project extends BasicEntity {
                    EnterpriseLogo enterpriseLogo,
                    ProjectStep projectStep,
                    String mainBiz,
-                   PositionType positionType,
+                   PositionKind positionKind,
                    String skill,
                    String projectName,
                    Integer headCount,
@@ -71,7 +70,7 @@ public class Project extends BasicEntity {
         this.enterpriseLogo = enterpriseLogo;
         this.projectStep = projectStep;
         this.mainBiz = mainBiz;
-        this.positionType = positionType;
+        this.positionKind = positionKind;
         this.skill = skill;
         this.projectName = projectName;
         this.headCount = headCount;
