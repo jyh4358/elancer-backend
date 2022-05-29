@@ -399,3 +399,20 @@ include::{snippets}/enterprise-profile-find/response-headers.adoc[]
 include::{snippets}/enterprise-profile-find/response-fields.adoc[]
 
 
+== 프로젝트
+[[resources-project-save-find]]
+== 프로젝트 등록 GET 요청
+요청
+include::{snippets}/project-save-find/http-request.adoc[]
+include::{snippets}/project-save-find/request-headers.adoc[]
+응답
+include::{snippets}/project-save-find/http-response.adoc[]
+include::{snippets}/project-save-find/response-headers.adoc[]
+include::{snippets}/project-save-find/response-fields.adoc[]
+
+[[resources-project-save]]
+== 프로젝트 등록
+요청
+include::{snippets}/project-save/http-request.adoc[]
+include::{snippets}/project-save/request-headers.adoc[]
+include::{snippets}/project-save/request-fields.adoc[]

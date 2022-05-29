@@ -72,6 +72,12 @@ public abstract class Member extends BasicEntity {
         this.address = address;
     }
 
+    public void updateInfo(String name, String phone, String email) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+    }
+
     public String getRoleKey() {
         return this.role.getKey();
     }

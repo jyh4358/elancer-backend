@@ -27,7 +27,6 @@ public class Enterprise extends Member {
     /**
      * companyName : 회사명
      * companyPeople : 회사 인원수
-     * position : 담당자명
      * position : 직책
      * telNumber : 담당자 휴대폰
      * website : 웹사이트
@@ -111,6 +110,19 @@ public class Enterprise extends Member {
         this.sales = sales;
         this.idNumber = idNumber;
 
+    }
+
+    public void updateEnterpriseInfo(String companyName,
+                                     String name,
+                                     String position,
+                                     String phone,
+                                     String telNumber,
+                                     String email
+    ) {
+        updateInfo(name, phone, email);
+        this.companyName = companyName;
+        this.position = position;
+        this.telNumber = telNumber;
     }
 
 

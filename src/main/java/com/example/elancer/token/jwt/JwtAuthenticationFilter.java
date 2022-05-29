@@ -37,7 +37,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         log.info("JwtAuthenticationFilter 실행");
 
         response.setCharacterEncoding("utf-8");
-        response.setContentType("application/json;charset=UTF-8");
+        response.setContentType("application/json");
 
         try {
             if (token != null && jwtTokenProvider.validateToken(token)) {

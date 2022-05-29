@@ -6,26 +6,20 @@ import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
-import com.example.elancer.integrate.freelancer.LoginHelper;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

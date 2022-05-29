@@ -72,12 +72,8 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
                 10000000,
                 5,
                 3,
-                "기업 이름",
-                "담당자명",
-                "사장",
-                "010-0000-0000",
-                "010-1111-1111",
-                "projecttest@gmail.com"
+                30,
+                35
         ));
 
         WishProjectSaveRequest wishProjectSaveRequest = new WishProjectSaveRequest(project.getNum());
@@ -128,12 +124,8 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
                 10000000,
                 5,
                 3,
-                "기업 이름",
-                "담당자명",
-                "사장",
-                "010-0000-0000",
-                "010-1111-1111",
-                "projecttest@gmail.com"
+                30,
+                35
         ));
         WishProject wishProject = wishProjectRepository.save(new WishProject(freelancer, project));
 

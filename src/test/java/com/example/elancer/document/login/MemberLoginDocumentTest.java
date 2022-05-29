@@ -50,7 +50,6 @@ public class MemberLoginDocumentTest extends DocumentBaseTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(memberLoginRequest)))
                 .andExpectAll(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())
                 .andDo(document("member-login",
                         requestHeaders(

@@ -42,6 +42,12 @@ public class EnterpriseService {
         return EnterpriseAccountDetailResponse.of(enterprise);
     }
 
+    public EnterpriseSimpleDetailResponse findSimpleEnterpriseInfo(MemberDetails memberDetails) {
+        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
+        EnterpriseSimpleDetailResponse simpleDetailResponse = EnterpriseSimpleDetailResponse.of(enterprise);
+        return simpleDetailResponse;
+    }
+
 
     /**
      * 기업 정보 수정

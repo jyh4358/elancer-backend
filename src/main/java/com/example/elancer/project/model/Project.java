@@ -4,6 +4,7 @@ import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.member.domain.Address;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +20,7 @@ import java.time.LocalDate;
 public class Project extends BasicEntity {
 
     private ProjectType projectType;
-    private ProjectBackGround bgColor;
+    private ProjectBackGround projectBackGround;
     private EnterpriseLogo enterpriseLogo;
     private ProjectStep projectStep;
     private String mainBiz;
@@ -37,17 +38,14 @@ public class Project extends BasicEntity {
     private Integer maxMoney;
     private Integer careerYear;
     private Integer careerMonth;
+    private Integer minDesiredAge;
+    private Integer maxDesiredAge;
     // todo - 요구사항 정의서 나중에 추가
 
-    private String companyName;
-    private String name;
-    private String position;
-    private String phone;
-    private String telNumber;
-    private String email;
 
+    @Builder
     public Project(ProjectType projectType,
-                   ProjectBackGround bgColor,
+                   ProjectBackGround projectBackGround,
                    EnterpriseLogo enterpriseLogo,
                    ProjectStep projectStep,
                    String mainBiz,
@@ -65,14 +63,11 @@ public class Project extends BasicEntity {
                    Integer maxMoney,
                    Integer careerYear,
                    Integer careerMonth,
-                   String companyName,
-                   String name,
-                   String position,
-                   String phone,
-                   String telNumber,
-                   String email) {
+                   Integer minDesiredAge,
+                   Integer maxDesiredAge
+    ) {
         this.projectType = projectType;
-        this.bgColor = bgColor;
+        this.projectBackGround = projectBackGround;
         this.enterpriseLogo = enterpriseLogo;
         this.projectStep = projectStep;
         this.mainBiz = mainBiz;
@@ -90,12 +85,8 @@ public class Project extends BasicEntity {
         this.maxMoney = maxMoney;
         this.careerYear = careerYear;
         this.careerMonth = careerMonth;
-        this.companyName = companyName;
-        this.name = name;
-        this.position = position;
-        this.phone = phone;
-        this.telNumber = telNumber;
-        this.email = email;
+        this.minDesiredAge = minDesiredAge;
+        this.maxDesiredAge = maxDesiredAge;
     }
 }
 
