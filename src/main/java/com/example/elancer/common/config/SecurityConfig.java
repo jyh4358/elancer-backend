@@ -1,8 +1,10 @@
 package com.example.elancer.common.config;
 
+import com.example.elancer.login.auth.service.SecurityOAuth2UserService;
+import com.example.elancer.token.jwt.CustomAuthenticationEntryPoint;
 import com.example.elancer.token.jwt.JwtAuthenticationFilter;
 import com.example.elancer.token.jwt.JwtTokenProvider;
-import com.example.elancer.login.auth.service.SecurityOAuth2UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final SecurityOAuth2UserService securityOAuth2UserService;
 
     private final JwtTokenProvider jwtTokenProvider;
+
+    private final ObjectMapper objectMapper;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -54,8 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/member").authenticated()
                 .anyRequest().permitAll()
                 .and()
-
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .exceptionHandling()
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                .and()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, objectMapper), UsernamePasswordAuthenticationFilter.class);
 
 
 

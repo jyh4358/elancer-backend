@@ -21,11 +21,12 @@ public class SecurityUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+        log.info("UserDeailService 호출========================");
         Member member = memberRepository.findByUserId(userId).orElseThrow(UserIdNotFoundException::new);
 
         MemberDetails memberDetails = MemberDetails.userDetailsFrom(member);
 
-        log.info("UserDeailService 호출========================");
+
 
         return memberDetails;
     }

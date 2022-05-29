@@ -75,7 +75,6 @@ public class EnterpriseController {
     public ResponseEntity<EnterpriseProfileResponse> coverEnterpriseIntroduce(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody EnterpriseProfileRequest enterpriseProfileRequest) {
-
         EnterpriseProfileResponse enterpriseProfileResponse = enterpriseService.updateIntro(memberDetails.getId(), enterpriseProfileRequest);
         return new ResponseEntity<>(enterpriseProfileResponse, HttpStatus.OK);
     }

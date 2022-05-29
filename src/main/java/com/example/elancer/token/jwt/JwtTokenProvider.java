@@ -1,12 +1,14 @@
 package com.example.elancer.token.jwt;
 
+import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
+import com.example.elancer.token.exception.CustomJwtExpiredException;
+import com.example.elancer.token.exception.CustomJwtMalformedException;
+import com.example.elancer.token.exception.CustomJwtSignatureException;
+import com.example.elancer.token.exception.InvalidRefreshTokenException;
 import com.example.elancer.token.jwt.property.JwtProperty;
 import com.example.elancer.login.auth.service.SecurityUserDetailsService;
 import com.example.elancer.member.domain.MemberType;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -81,7 +83,11 @@ public class JwtTokenProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
             return true;
         } catch (ExpiredJwtException e) {
-            return false;
+            throw new CustomJwtExpiredException();
+        } catch (MalformedJwtException e) {
+            throw new CustomJwtMalformedException();
+        } catch (SignatureException e) {
+            throw new CustomJwtSignatureException();
         }
     }
 

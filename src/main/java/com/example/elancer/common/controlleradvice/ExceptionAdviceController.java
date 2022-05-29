@@ -2,6 +2,7 @@ package com.example.elancer.common.controlleradvice;
 
 import com.example.elancer.common.exception.ExceptionMessage;
 import com.example.elancer.common.exception.WrongRequestException;
+import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.freelancer.exception.NotExistFreelancerException;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +52,16 @@ public class ExceptionAdviceController {
         log.error(e.getClass() + ": " + e.getMessage());
         return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({NotExistEnterpriseException.class})
+    public ResponseEntity<ExceptionMessage> handleNotExistEnterpriseException(NotExistEnterpriseException e) {
+        log.error(e.getClass() + ": " + e.getMessage());
+        return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+
+
 
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
 //    @ExceptionHandler(MethodArgumentNotValidException.class)

@@ -53,7 +53,7 @@ public class EnterpriseService {
 
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(EnterpriseCheckUserIdException::new);
         if (StringUtils.hasText(enterpriseUpdateRequest.getPassword1())) {
-            RightRequestChecker.checkPasswordMatch(enterpriseUpdateRequest.getPassword1(), enterpriseUpdateRequest.getPassword2());
+            RightRequestChecker.checkPasswordMatchEnterprise(enterpriseUpdateRequest.getPassword1(), enterpriseUpdateRequest.getPassword2());
             enterprise.updateEnterprise(
                     passwordEncoder.encode(enterpriseUpdateRequest.getPassword1()),
                     enterpriseUpdateRequest.getName(),
