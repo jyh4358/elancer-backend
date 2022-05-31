@@ -416,3 +416,40 @@ include::{snippets}/project-save-find/response-fields.adoc[]
 include::{snippets}/project-save/http-request.adoc[]
 include::{snippets}/project-save/request-headers.adoc[]
 include::{snippets}/project-save/request-fields.adoc[]
+
+== 문의
+[[resources-contact-save-get]]
+== 문의 등록 GET 요청
+요청
+include::{snippets}/contact-save-get/http-request.adoc[]
+include::{snippets}/contact-save-get/request-headers.adoc[]
+응답
+include::{snippets}/contact-save-get/http-response.adoc[]
+include::{snippets}/contact-save-get/response-fields.adoc[]
+
+
+[[resources-contact-save]]
+== 문의 등록
+요청
+include::{snippets}/contact-save/http-request.adoc[]
+include::{snippets}/contact-save/request-headers.adoc[]
+include::{snippets}/contact-save/request-fields.adoc[]
+
+[[resources-contact-cover]]
+== 문의 수정
+요청
+include::{snippets}/contact-cover/http-request.adoc[]
+include::{snippets}/contact-cover/request-headers.adoc[]
+include::{snippets}/contact-cover/request-fields.adoc[]
+
+[[resources-contacts]]
+== 문의 리스트
+요청
+include::{snippets}/contacts/http-request.adoc[]
+include::{snippets}/contacts/request-headers.adoc[]
+응답
+include::{snippets}/contacts/http-response.adoc[]
+include::{snippets}/contacts/response-headers.adoc[]
+include::{snippets}/contacts/response-fields.adoc[]
+
+

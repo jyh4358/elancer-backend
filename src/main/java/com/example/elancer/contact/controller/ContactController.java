@@ -2,6 +2,7 @@ package com.example.elancer.contact.controller;
 
 import com.example.elancer.contact.dto.ContactListResponse;
 import com.example.elancer.contact.dto.ContactRequest;
+import com.example.elancer.contact.dto.ContactResponse;
 import com.example.elancer.contact.dto.ContactSaveRequest;
 import com.example.elancer.contact.service.ContactService;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,11 +42,13 @@ public class ContactController {
     }
 
     @GetMapping("/contacts")
-    public ResponseEntity<ContactListResponse> findContactList(@AuthenticationPrincipal MemberDetails memberDetails) {
+    public ResponseEntity<List<ContactResponse>> findContactList(@AuthenticationPrincipal MemberDetails memberDetails) {
 
-        ContactListResponse contactListResponse = new ContactListResponse(contactService.findContacts(memberDetails));
-
-        return new ResponseEntity<>(contactListResponse, HttpStatus.OK);
+//        ContactListResponse contactListResponse = new ContactListResponse(contactService.findContacts(memberDetails));
+//
+//        return new ResponseEntity<>(contactListResponse, HttpStatus.OK);
+        List<ContactResponse> contacts = contactService.findContacts(memberDetails);
+        return new ResponseEntity<>(contacts, HttpStatus.OK);
     }
 
     @PutMapping("/contact-cover")

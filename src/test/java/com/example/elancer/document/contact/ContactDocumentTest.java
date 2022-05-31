@@ -19,6 +19,7 @@ import org.springframework.http.MediaType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -131,10 +132,15 @@ public class ContactDocumentTest extends DocumentBaseTest {
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
         MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
-        List<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact("제목 title1", "내용 content1"));
-        contacts.add(new Contact("제목 title2", "내용 content2"));
-        contacts.add(new Contact("제목 title3", "내용 content3"));
+        Contact contact1 = new Contact("제목 title1", "내용 content1");
+        Contact contact2 = new Contact("제목 title2", "내용 content2");
+        Contact contact3 = new Contact("제목 title3", "내용 content3");
+
+        contact1.setMember(enterprise);
+        contact2.setMember(enterprise);
+        contact3.setMember(enterprise);
+
+        List<Contact> contacts = List.of(contact1, contact2, contact3);
 
         contactRepository.saveAll(contacts);
 
@@ -151,7 +157,9 @@ public class ContactDocumentTest extends DocumentBaseTest {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
                         ),
                         responseFields(
-                                fieldWithPath("contactResponses").type("List<ContactResponse>").description("문의 리스트")
+                                fieldWithPath("[].num").type("Long").description("문의 식별자"),
+                                fieldWithPath("[].title").type("String").description("문의 제목"),
+                                fieldWithPath("[].content").type("String").description("문의 내용")
                         )
                 ));
 
