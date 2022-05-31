@@ -40,7 +40,7 @@ class WishFreelancerServiceTest extends ServiceBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 
 

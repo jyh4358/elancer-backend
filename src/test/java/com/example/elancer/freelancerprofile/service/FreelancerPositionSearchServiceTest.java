@@ -50,10 +50,6 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         tx.begin();
 
         Freelancer freelancer1 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id1");
-        FreelancerProfile freelancerProfile1 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer1, PositionType.DEVELOPER));
-        developerRepository.deleteById(freelancerProfile1.getPosition().getNum());
-        Developer javaDeveloper1 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile1, "java,spring", "role"));
-        freelancerProfile1.coverPosition(javaDeveloper1);
         freelancer1.updateFreelancer(
                 freelancer1.getName(),
                 freelancer1.getPassword(),
@@ -77,11 +73,13 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 freelancer1.getFreelancerAccountInfo().getHopeWorkCountry(),
                 null
         );
+        freelancerRepository.save(freelancer1);
+        FreelancerProfile freelancerProfile1 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer1, PositionType.DEVELOPER));
+        developerRepository.deleteById(freelancerProfile1.getPosition().getNum());
+        Developer javaDeveloper1 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile1, "java,spring", "role"));
+        freelancerProfile1.coverPosition(javaDeveloper1);
 
         Freelancer freelancer2 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id2");
-        FreelancerProfile freelancerProfile2 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer2, PositionType.DEVELOPER));
-        developerRepository.deleteById(freelancerProfile2.getPosition().getNum());
-        Developer javaDeveloper2 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile2, "java,spring,django", "role"));
         freelancer2.updateFreelancer(
                 freelancer2.getName(),
                 freelancer2.getPassword(),
@@ -105,11 +103,12 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 freelancer2.getFreelancerAccountInfo().getHopeWorkCountry(),
                 null
         );
+        freelancerRepository.save(freelancer2);
+        FreelancerProfile freelancerProfile2 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer2, PositionType.DEVELOPER));
+        developerRepository.deleteById(freelancerProfile2.getPosition().getNum());
+        Developer javaDeveloper2 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile2, "java,spring,django", "role"));
 
         Freelancer freelancer3 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id3");
-        FreelancerProfile freelancerProfile3 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer3, PositionType.DEVELOPER));
-        developerRepository.deleteById(freelancerProfile3.getPosition().getNum());
-        Developer javaDeveloper3 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile3, "java,swing", "role"));
         freelancer3.updateFreelancer(
                 freelancer3.getName(),
                 freelancer3.getPassword(),
@@ -133,12 +132,13 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 freelancer3.getFreelancerAccountInfo().getHopeWorkCountry(),
                 null
         );
+        freelancerRepository.save(freelancer3);
+        FreelancerProfile freelancerProfile3 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer3, PositionType.DEVELOPER));
+        developerRepository.deleteById(freelancerProfile3.getPosition().getNum());
+        Developer javaDeveloper3 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile3, "java,swing", "role"));
 
 
         Freelancer freelancer4 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id4");
-        FreelancerProfile freelancerProfile4 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer4, PositionType.DEVELOPER));
-        developerRepository.deleteById(freelancerProfile4.getPosition().getNum());
-        Developer developer4 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile4, "node.js,C", "role"));
         freelancer4.updateFreelancer(
                 freelancer4.getName(),
                 freelancer4.getPassword(),
@@ -162,12 +162,13 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 freelancer4.getFreelancerAccountInfo().getHopeWorkCountry(),
                 null
         );
+        freelancerRepository.save(freelancer4);
+        FreelancerProfile freelancerProfile4 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer4, PositionType.DEVELOPER));
+        developerRepository.deleteById(freelancerProfile4.getPosition().getNum());
+        Developer developer4 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile4, "node.js,C", "role"));
 
 
         Freelancer freelancer5 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id5");
-        FreelancerProfile freelancerProfile5 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer5, PositionType.DEVELOPER));
-        developerRepository.deleteById(freelancerProfile5.getPosition().getNum());
-        Developer developer5 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile5, "mysql,python", "role"));
         freelancer5.updateFreelancer(
                 freelancer5.getName(),
                 freelancer5.getPassword(),
@@ -191,6 +192,10 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 freelancer5.getFreelancerAccountInfo().getHopeWorkCountry(),
                 null
         );
+        freelancerRepository.save(freelancer5);
+        FreelancerProfile freelancerProfile5 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer5, PositionType.DEVELOPER));
+        developerRepository.deleteById(freelancerProfile5.getPosition().getNum());
+        Developer developer5 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile5, "mysql,python", "role"));
 
         tx.commit();
 
@@ -250,10 +255,9 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(1);
     }
 
-    @DisplayName("개발자 목록 주요스킬과 경력으로 검색한다.")
+    @DisplayName("개발자 목록 주요스킬과 주니어 경력으로 검색한다.")
     @Test
-    public void 개발자_주요스킬_경력_검색() {
-        List<Developer> all = developerRepository.findAll();
+    public void 개발자_주요스킬_경력_검색_주니어() {
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 null,
@@ -268,8 +272,59 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(1);
     }
 
+    @DisplayName("개발자 목록 주요스킬과 미들 경력으로 검색한다.")
+    @Test
+    public void 개발자_주요스킬_경력_검색_미들() {
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
+                PositionType.DEVELOPER,
+                null,
+                null,
+                null,
+                Arrays.asList(PositionWorkManShip.MIDDLE),
+                null,
+                memberDetails
+        );
+
+        //then
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
+    }
+
+    @DisplayName("개발자 목록 주요스킬과 시니어 경력으로 검색한다.")
+    @Test
+    public void 개발자_주요스킬_경력_검색_시니어() {
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
+                PositionType.DEVELOPER,
+                null,
+                null,
+                null,
+                Arrays.asList(PositionWorkManShip.SENIOR),
+                null,
+                memberDetails
+        );
+
+        //then
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
+    }
+
+    @DisplayName("개발자 목록 주요스킬과 근무형태를 상주로 검색한다.")
+    @Test
+    public void 개발자_주요스킬_근무형태_상주() {
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
+                PositionType.DEVELOPER,
+                null,
+                null,
+                Arrays.asList(HopeWorkState.AT_COMPANY),
+                null,
+                null,
+                memberDetails
+        );
+
+        //then
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
+    }
+
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

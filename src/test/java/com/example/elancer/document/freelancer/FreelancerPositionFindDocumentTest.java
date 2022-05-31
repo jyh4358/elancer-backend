@@ -3,13 +3,7 @@ package com.example.elancer.document.freelancer;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancerprofile.controller.FreelancerPositionControllerPath;
 import com.example.elancer.freelancerprofile.controller.FreelancerPositionFindControllerPath;
-import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.position.PositionEtcCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.position.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
@@ -41,24 +35,12 @@ import com.example.elancer.freelancerprofile.model.position.planner.PlannerField
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
-import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
-import com.example.elancer.freelancerprofile.repository.career.CareerRepository;
-import com.example.elancer.freelancerprofile.repository.education.EducationRepository;
-import com.example.elancer.freelancerprofile.repository.language.LanguageRepository;
-import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
-import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
-import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
-import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtcRepository;
-import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
-import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
-import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
 import com.example.elancer.integrate.freelancer.LoginHelper;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
@@ -302,6 +284,6 @@ public class FreelancerPositionFindDocumentTest extends DocumentBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

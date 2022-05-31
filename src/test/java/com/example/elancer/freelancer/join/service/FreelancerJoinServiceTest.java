@@ -12,17 +12,14 @@ import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.repository.position.PositionRepository;
-import com.example.elancer.s3.service.S3UploadService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 class FreelancerJoinServiceTest extends ServiceBaseTest {
@@ -104,6 +101,6 @@ class FreelancerJoinServiceTest extends ServiceBaseTest {
 
     @AfterEach
     void tearDown() {
-        this.databaseClean.clean();
+        this.databaseCleaner.clean();
     }
 }

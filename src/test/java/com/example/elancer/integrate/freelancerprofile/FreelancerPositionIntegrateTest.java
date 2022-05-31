@@ -235,6 +235,6 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

@@ -17,7 +17,6 @@ import com.example.elancer.freelancer.model.WorkType;
 import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
-import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
@@ -28,7 +27,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithUserDetails;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -201,6 +199,6 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }
