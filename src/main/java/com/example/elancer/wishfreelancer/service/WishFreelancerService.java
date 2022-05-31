@@ -1,6 +1,6 @@
 package com.example.elancer.wishfreelancer.service;
 
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.exception.NotExistFreelancerException;

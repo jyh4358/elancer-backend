@@ -1,6 +1,6 @@
 package com.example.elancer.enterprise.repository;
 
-import com.example.elancer.enterprise.domain.enterpriseintro.SubBusiness;
+import com.example.elancer.enterprise.model.enterpriseintro.SubBusiness;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

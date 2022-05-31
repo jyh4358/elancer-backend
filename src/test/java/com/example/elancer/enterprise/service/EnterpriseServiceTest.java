@@ -7,7 +7,7 @@ import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;

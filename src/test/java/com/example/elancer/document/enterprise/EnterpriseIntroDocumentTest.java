@@ -4,28 +4,21 @@ import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.MainBusinessHelper;
 import com.example.elancer.common.SubBusinessHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseProfileRequest;
-import com.example.elancer.enterprise.dto.EnterpriseProfileResponse;
 import com.example.elancer.enterprise.repository.MainBusinessRepository;
 import com.example.elancer.enterprise.repository.SubBusinessRepository;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
-import com.example.elancer.integrate.freelancer.LoginHelper;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +29,6 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class EnterpriseIntroDocumentTest extends DocumentBaseTest {

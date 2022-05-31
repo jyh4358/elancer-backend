@@ -1,7 +1,7 @@
 package com.example.elancer.enterprise.join.service;
 
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
-import com.example.elancer.enterprise.domain.enterpriseintro.EnterpriseIntro;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseIntro;
 import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class EnterpriseJoinService {
 
     private final EnterpriseRepository enterpriseRepository;

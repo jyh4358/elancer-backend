@@ -1,7 +1,7 @@
 package com.example.elancer.enterprise.dto;
 
 import com.example.elancer.member.domain.Address;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.exception.CheckPasswordException;
 import com.example.elancer.member.domain.MemberType;
 import lombok.AccessLevel;

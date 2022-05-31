@@ -1,4 +1,4 @@
-package com.example.elancer.enterprise.domain.enterpriseintro;
+package com.example.elancer.enterprise.model.enterpriseintro;
 
 import com.example.elancer.common.model.BasicEntity;
 import lombok.*;
@@ -8,36 +8,33 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "enterprise_mainbiz")
+@Table(name = "enterprise_subbiz")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class EnterpriseMainBiz extends BasicEntity{
+public class EnterpriseSubBiz extends BasicEntity{
 
-//    @Id @GeneratedValue
-//    @Column(name = "enterprise_mainbiz_id")
-//    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "enIntro_num")
     private EnterpriseIntro enterpriseIntro;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "main_code")
-    private MainBusiness mainBusiness;
+    @JoinColumn(name = "sub_code")
+    private SubBusiness subBusiness;
 
     private String etc;
 
     @Builder
-    public EnterpriseMainBiz(EnterpriseIntro enterpriseIntro, MainBusiness mainBusiness, String etc) {
+    public EnterpriseSubBiz(Long id, EnterpriseIntro enterpriseIntro, SubBusiness subBusiness) {
         this.enterpriseIntro = enterpriseIntro;
-        this.mainBusiness = mainBusiness;
+        this.subBusiness = subBusiness;
         this.etc = etc;
     }
 
-    public static List<EnterpriseMainBiz> createList(List<MainBusiness> mainBusinesses) {
-        return mainBusinesses.stream().map((s) ->
-                        EnterpriseMainBiz.builder()
-                                .mainBusiness(s)
+    public static List<EnterpriseSubBiz> createList(List<SubBusiness> subBusinesses) {
+        return subBusinesses.stream().map((s) ->
+                        EnterpriseSubBiz.builder()
+                                .subBusiness(s)
                                 .build())
                 .collect(Collectors.toList());
 

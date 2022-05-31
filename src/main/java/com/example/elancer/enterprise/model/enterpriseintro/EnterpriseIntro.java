@@ -1,7 +1,7 @@
-package com.example.elancer.enterprise.domain.enterpriseintro;
+package com.example.elancer.enterprise.model.enterpriseintro;
 
 import com.example.elancer.common.model.BasicEntity;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

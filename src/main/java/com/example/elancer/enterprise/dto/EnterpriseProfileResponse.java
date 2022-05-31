@@ -1,15 +1,13 @@
 package com.example.elancer.enterprise.dto;
 
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
-import com.example.elancer.enterprise.domain.enterpriseintro.EnterpriseIntro;
-import com.example.elancer.enterprise.domain.enterpriseintro.EnterpriseMainBiz;
-import com.example.elancer.enterprise.domain.enterpriseintro.EnterpriseSubBiz;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseMainBiz;
+import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseSubBiz;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.StringUtils;
 
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

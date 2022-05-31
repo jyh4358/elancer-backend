@@ -1,4 +1,4 @@
-package com.example.elancer.enterprise.domain.enterprise;
+package com.example.elancer.enterprise.model.enterprise;
 
 import lombok.AccessLevel;
 import lombok.Builder;

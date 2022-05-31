@@ -2,7 +2,7 @@ package com.example.elancer.document.enterprise;
 
 import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;

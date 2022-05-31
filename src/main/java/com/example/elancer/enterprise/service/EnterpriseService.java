@@ -1,8 +1,8 @@
 package com.example.elancer.enterprise.service;
 
 import com.example.elancer.common.checker.RightRequestChecker;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
-import com.example.elancer.enterprise.domain.enterpriseintro.*;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterpriseintro.*;
 import com.example.elancer.enterprise.dto.*;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

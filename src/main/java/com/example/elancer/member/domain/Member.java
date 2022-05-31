@@ -2,10 +2,15 @@ package com.example.elancer.member.domain;
 
 import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.common.model.WorkAssessment;
+import com.example.elancer.contact.model.Contact;
+import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseIntro;
+import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseSubBiz;
 import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -43,6 +48,10 @@ public abstract class Member extends BasicEntity {
 
     @Enumerated(EnumType.STRING)
     private MemberType role;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Contact> contacts = new ArrayList<>();
+
 
     public Member(String userId, String password, String name, String phone, String email, String website, Address address, MemberType role) {
         this.userId = userId;

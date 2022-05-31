@@ -1,6 +1,6 @@
 package com.example.elancer.enterprise.dto;
 
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.member.domain.Address;
 import lombok.*;
 

@@ -1,7 +1,7 @@
 package com.example.elancer.project.service;
 
 import com.example.elancer.common.checker.RightRequestChecker;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;

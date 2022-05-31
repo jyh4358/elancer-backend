@@ -1,7 +1,7 @@
-package com.example.elancer.enterprise.domain.enterprise;
+package com.example.elancer.enterprise.model.enterprise;
 
-import com.example.elancer.enterprise.domain.HeartScrap;
-import com.example.elancer.enterprise.domain.enterpriseintro.EnterpriseIntro;
+import com.example.elancer.enterprise.model.HeartScrap;
+import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseIntro;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.domain.MemberType;
@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static javax.persistence.FetchType.LAZY;
 

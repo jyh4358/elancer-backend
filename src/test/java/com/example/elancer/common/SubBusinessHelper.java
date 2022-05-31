@@ -1,6 +1,6 @@
 package com.example.elancer.common;
 
-import com.example.elancer.enterprise.domain.enterpriseintro.SubBusiness;
+import com.example.elancer.enterprise.model.enterpriseintro.SubBusiness;
 import com.example.elancer.enterprise.repository.SubBusinessRepository;
 
 import java.util.ArrayList;

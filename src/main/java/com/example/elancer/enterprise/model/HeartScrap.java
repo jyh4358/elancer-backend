@@ -1,7 +1,7 @@
-package com.example.elancer.enterprise.domain;
+package com.example.elancer.enterprise.model;
 
 import com.example.elancer.common.model.BasicEntity;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.freelancer.model.Freelancer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

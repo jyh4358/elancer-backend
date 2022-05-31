@@ -1,7 +1,7 @@
 package com.example.elancer.enterprise.join.service;
 
 import com.example.elancer.common.basetest.ServiceBaseTest;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.exception.CheckPasswordException;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
