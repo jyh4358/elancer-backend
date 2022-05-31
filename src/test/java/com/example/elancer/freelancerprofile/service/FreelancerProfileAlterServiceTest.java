@@ -11,8 +11,6 @@ import com.example.elancer.freelancerprofile.dto.request.EducationCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
-import com.example.elancer.freelancer.model.MailReceptionState;
-import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
@@ -36,9 +34,6 @@ import com.example.elancer.freelancerprofile.repository.language.LanguageReposit
 import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.member.domain.Address;
-import com.example.elancer.member.domain.CountryType;
-import com.example.elancer.member.domain.MemberType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -280,6 +275,6 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

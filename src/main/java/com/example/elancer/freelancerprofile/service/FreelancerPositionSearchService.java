@@ -44,11 +44,6 @@ public class FreelancerPositionSearchService {
             WorkArea workArea,
             MemberDetails memberDetails
     ) {
-        List<Developer> all = developerRepository.findAll();
-        System.out.println(all.get(0).getFreelancerProfile().getFreelancer().getFreelancerAccountInfo().getCareerYear());
-        System.out.println(all.get(1).getFreelancerProfile().getFreelancer().getFreelancerAccountInfo().getCareerYear());
-        System.out.println(all.get(2).getFreelancerProfile().getFreelancer().getFreelancerAccountInfo().getCareerYear());
-        RightRequestChecker.checkMemberDetail(memberDetails);
         Slice<Developer> developers= developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips, workArea);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = FreelancerSimpleResponse.listOf(developers.getContent());
 
@@ -64,7 +59,7 @@ public class FreelancerPositionSearchService {
     }
 
     private void confirmWishFreelancerToRequester(MemberDetails memberDetails, List<FreelancerSimpleResponse> freelancerSimpleResponses) {
-        if (memberDetails.getRole().equals(MemberType.ENTERPRISE)) {
+        if (memberDetails != null && memberDetails.getRole().equals(MemberType.ENTERPRISE)) {
             List<WishFreelancer> wishFreelancersByEnterprise = wishFreelancerRepository.findByEnterpriseNum(memberDetails.getId());
             List<Long> wishFreelancerNums = wishFreelancersByEnterprise.stream()
                     .map(WishFreelancer::getFreelancer)

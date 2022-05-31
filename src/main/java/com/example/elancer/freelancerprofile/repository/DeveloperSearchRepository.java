@@ -63,7 +63,7 @@ public class DeveloperSearchRepository {
 
     private void eqWorkAreaConds(WorkArea area, BooleanBuilder builder) {
         if (area == null) {
-            return ;
+            return;
         }
 
         builder.and(freelancer.address.mainAddress.containsIgnoreCase(area.getDesc()));

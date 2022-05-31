@@ -28,7 +28,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 
     @Test

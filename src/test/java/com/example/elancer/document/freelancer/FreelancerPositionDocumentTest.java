@@ -3,39 +3,16 @@ package com.example.elancer.document.freelancer;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancerprofile.controller.FreelancerPositionControllerPath;
-import com.example.elancer.freelancerprofile.controller.FreelancerProfileAlterControllerPath;
-import com.example.elancer.freelancerprofile.controller.FreelancerProfileFindControllerPath;
-import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequests;
-import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequests;
-import com.example.elancer.freelancerprofile.dto.request.EducationAndLicenseAndLanguageRequests;
-import com.example.elancer.freelancerprofile.dto.request.EducationCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PositionEtcCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PublisherCoverRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
-import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
-import com.example.elancer.freelancerprofile.model.academic.state.AcademicState;
-import com.example.elancer.freelancerprofile.model.academic.state.SchoolLevel;
-import com.example.elancer.freelancerprofile.model.career.Career;
-import com.example.elancer.freelancerprofile.model.career.CompanyPosition;
-import com.example.elancer.freelancerprofile.model.education.Education;
-import com.example.elancer.freelancerprofile.model.language.Language;
-import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
-import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetDetailSkill;
@@ -46,9 +23,6 @@ import com.example.elancer.freelancerprofile.model.position.developer.phpaspskil
 import com.example.elancer.freelancerprofile.model.position.etc.EtcDetailRole;
 import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
-import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
-import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
-import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
 import com.example.elancer.freelancerprofile.repository.career.CareerRepository;
 import com.example.elancer.freelancerprofile.repository.education.EducationRepository;
@@ -64,9 +38,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
@@ -299,6 +271,6 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

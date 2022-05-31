@@ -1,6 +1,6 @@
 package com.example.elancer.document.common;
 
-import com.example.elancer.common.database.DatabaseClean;
+import com.example.elancer.common.database.DatabaseCleaner;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
@@ -30,7 +30,7 @@ public class DocumentBaseTest {
     protected MockMvc mockMvc;
 
     @Autowired
-    protected DatabaseClean databaseClean;
+    protected DatabaseCleaner databaseCleaner;
 
     @Autowired
     protected JwtTokenService jwtTokenService;

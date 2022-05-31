@@ -1,16 +1,13 @@
 package com.example.elancer.integrate.common;
 
-import com.example.elancer.common.database.DatabaseClean;
+import com.example.elancer.common.database.DatabaseCleaner;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.token.service.JwtTokenService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
@@ -32,7 +29,7 @@ public class IntegrateBaseTest {
     protected FreelancerProfileRepository freelancerProfileRepository;
 
     @Autowired
-    protected DatabaseClean databaseClean;
+    protected DatabaseCleaner databaseCleaner;
 
     @Autowired
     protected JwtTokenService jwtTokenService;

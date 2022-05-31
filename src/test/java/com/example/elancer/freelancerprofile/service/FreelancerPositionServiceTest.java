@@ -3,8 +3,6 @@ package com.example.elancer.freelancerprofile.service;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancer.model.MailReceptionState;
-import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
@@ -61,16 +59,12 @@ import com.example.elancer.freelancerprofile.repository.position.planner.Planner
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublishingSkillRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.member.domain.Address;
-import com.example.elancer.member.domain.CountryType;
-import com.example.elancer.member.domain.MemberType;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -353,6 +347,6 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

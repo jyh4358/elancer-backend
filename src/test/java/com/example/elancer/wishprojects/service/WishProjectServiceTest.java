@@ -127,6 +127,6 @@ class WishProjectServiceTest extends ServiceBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

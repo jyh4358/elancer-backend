@@ -1,7 +1,6 @@
 package com.example.elancer.integrate.freelancerprofile;
 
 import com.example.elancer.common.FreelancerHelper;
-import com.example.elancer.freelancer.controller.FreelancerEnumControllerPath;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
@@ -555,6 +554,6 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }
