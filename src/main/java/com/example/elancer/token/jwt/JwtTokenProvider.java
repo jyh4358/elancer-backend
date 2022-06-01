@@ -22,6 +22,7 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     public static final String AUTHORITIES_KEY = "Authorization";
+    public static final String REFRESH_KEY = "Refresh-Authorization";
 
     private final String secretKey;
     private final Long accessExpired;
@@ -39,7 +40,7 @@ public class JwtTokenProvider {
 
     public String createToken(String userId) {
         Claims claims = Jwts.claims().setSubject(userId); // JWT payload 에 저장되는 정보단위, 보통 여기서 user를 식별하는 값을 넣는다.
-
+        System.out.println("accessExpired = " + accessExpired);
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장
@@ -52,6 +53,7 @@ public class JwtTokenProvider {
 
     public String createRefreshToken() {
         Date now = new Date();
+        System.out.println("refreshExpired = " + refreshExpired);
 
         return Jwts.builder()
                 .setIssuedAt(now)
@@ -73,8 +75,11 @@ public class JwtTokenProvider {
 
     // Request의 Header에서 token 값을 가져옵니다. "Authorization" : "TOKEN값'
     public String resolveToken(HttpServletRequest request) {
-
         return request.getHeader(AUTHORITIES_KEY);
+    }
+
+    public String resolveRefreshToken(HttpServletRequest request) {
+        return request.getHeader(REFRESH_KEY);
     }
 
     // 토큰의 유효성 + 만료일자 확인

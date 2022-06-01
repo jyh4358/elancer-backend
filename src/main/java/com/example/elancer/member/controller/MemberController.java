@@ -55,13 +55,10 @@ public class MemberController {
 
     /**
      * token 재발급
-     * @param tokenRequestDto
-     * @param response
-     * @return
      */
     @PostMapping("/reissue")
-    public ResponseEntity<TokenResponse> reIssue(@RequestBody TokenRequest tokenRequestDto, HttpServletResponse response) {
-        TokenResponse responseDto = jwtTokenService.reIssue(tokenRequestDto);
+    public ResponseEntity<TokenResponse> reIssue(HttpServletRequest request) {
+        TokenResponse responseDto = jwtTokenService.reIssue(request);
         return new ResponseEntity(responseDto, HttpStatus.OK);
     }
 

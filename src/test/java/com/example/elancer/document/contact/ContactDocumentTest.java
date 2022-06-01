@@ -157,6 +157,7 @@ public class ContactDocumentTest extends DocumentBaseTest {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
                         ),
                         responseFields(
+                                fieldWithPath("[]").type("List<ContactResponse>").description("문의 리스트"),
                                 fieldWithPath("[].num").type("Long").description("문의 식별자"),
                                 fieldWithPath("[].title").type("String").description("문의 제목"),
                                 fieldWithPath("[].content").type("String").description("문의 내용")

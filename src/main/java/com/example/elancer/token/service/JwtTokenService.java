@@ -2,6 +2,7 @@ package com.example.elancer.token.service;
 
 import com.example.elancer.login.auth.service.ProviderService;
 import com.example.elancer.member.dto.MemberOAuthLoginResponse;
+import com.example.elancer.member.exception.NotExistMemberException;
 import com.example.elancer.token.jwt.AccessToken;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.example.elancer.token.dto.*;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Service
@@ -83,26 +85,20 @@ public class JwtTokenService {
 
 
     @Transactional
-    public TokenResponse reIssue(TokenRequest tokenRequestDto) {
-        if (!jwtTokenProvider.validateToken(tokenRequestDto.getRefreshToken()))
+    public TokenResponse reIssue(HttpServletRequest request) {
+        if (!jwtTokenProvider.validateToken(jwtTokenProvider.resolveRefreshToken(request)))
             throw new InvalidRefreshTokenException();
 
-        Member member = findMemberByToken(tokenRequestDto);
+        String userId = jwtTokenProvider.getUserId(jwtTokenProvider.resolveToken(request));
+        Member member = memberRepository.findByUserId(userId).orElseThrow(NotExistMemberException::new);
 
-        if (!member.getRefreshToken().equals(tokenRequestDto.getRefreshToken()))
+        if (!member.getRefreshToken().equals(jwtTokenProvider.resolveRefreshToken(request)))
             throw new InvalidRefreshTokenException();
 
         String accessToken = jwtTokenProvider.createToken(member.getUserId());
         String refreshToken = jwtTokenProvider.createRefreshToken();
         member.updateRefreshToken(refreshToken);
         return new TokenResponse(accessToken, refreshToken);
-    }
-
-    public Member findMemberByToken(TokenRequest tokenRequestDto) {
-        Authentication auth = jwtTokenProvider.getAuthentication(tokenRequestDto.getAccessToken());
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        String userId = userDetails.getUsername();
-        return memberRepository.findByUserId(userId).orElseThrow(UserIdNotFoundException::new);
     }
 
     private String createUserId(String sub) {
