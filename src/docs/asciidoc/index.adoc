@@ -453,3 +453,23 @@ include::{snippets}/contacts/response-headers.adoc[]
 include::{snippets}/contacts/response-fields.adoc[]
 
 
+== JWT
+[[resources-member-login]]
+== 로그인
+요청
+include::{snippets}/member-login/http-request.adoc[]
+include::{snippets}/member-login/request-headers.adoc[]
+include::{snippets}/member-login/request-fields.adoc[]
+응답
+include::{snippets}/member-login/http-response.adoc[]
+include::{snippets}/member-login/response-headers.adoc[]
+include::{snippets}/member-login/response-fields.adoc[]
+
+== token 재발급
+요청
+include::{snippets}/reissue/http-request.adoc[]
+include::{snippets}/reissue/request-headers.adoc[]
+응답
+include::{snippets}/reissue/http-response.adoc[]
+include::{snippets}/reissue/response-headers.adoc[]
+include::{snippets}/reissue/response-fields.adoc[]

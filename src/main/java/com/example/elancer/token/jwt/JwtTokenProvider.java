@@ -40,7 +40,6 @@ public class JwtTokenProvider {
 
     public String createToken(String userId) {
         Claims claims = Jwts.claims().setSubject(userId); // JWT payload 에 저장되는 정보단위, 보통 여기서 user를 식별하는 값을 넣는다.
-        System.out.println("accessExpired = " + accessExpired);
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장
@@ -53,7 +52,6 @@ public class JwtTokenProvider {
 
     public String createRefreshToken() {
         Date now = new Date();
-        System.out.println("refreshExpired = " + refreshExpired);
 
         return Jwts.builder()
                 .setIssuedAt(now)
