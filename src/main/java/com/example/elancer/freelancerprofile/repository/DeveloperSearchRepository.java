@@ -3,7 +3,6 @@ package com.example.elancer.freelancerprofile.repository;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
-import com.example.elancer.freelancerprofile.dto.QFreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
