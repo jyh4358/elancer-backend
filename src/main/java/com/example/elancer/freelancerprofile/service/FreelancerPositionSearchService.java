@@ -1,7 +1,6 @@
 package com.example.elancer.freelancerprofile.service;
 
 import com.example.elancer.common.checker.RightRequestChecker;
-import com.example.elancer.enterprise.domain.enterprise.Enterprise;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
