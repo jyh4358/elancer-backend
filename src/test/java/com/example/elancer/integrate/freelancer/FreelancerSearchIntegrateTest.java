@@ -27,6 +27,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -205,19 +206,22 @@ public class FreelancerSearchIntegrateTest extends IntegrateBaseTest {
     @DisplayName("프리랜서 개발자 검색 통합테스트")
     @Test
     public void 프래랜서_개발자_검색_통합테스트() throws Exception {
-        //given & when
+        //given
+        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+        data.add("positionType", String.valueOf(PositionType.DEVELOPER));
+        data.add("majorSkillKeywords", String.valueOf("java"));
+        data.add("minorSkill", null);
+        data.add("hopeWorkStates", null);
+        data.add("positionWorkManShips", null);
+        data.add("workArea", null);
+
+        //when & then
         mockMvc.perform(get(FreelancerPositionSearchControllerPath.FREELANCER_DEVELOPER_SEARCH)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .param("positionType", String.valueOf(PositionType.DEVELOPER))
-                        .param("majorSkillKeywords", "java", "spring")
-                        .param("minorSkill", "")
-                        .param("hopeWorkStates", "")
-                        .param("positionWorkManShips", "")
-                        .param("workArea", ""))
+                        .params(data))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("freelancerSimpleResponseList", hasSize(3)))
                 .andDo(print())
                 .andReturn();
-        //then
     }
 }
