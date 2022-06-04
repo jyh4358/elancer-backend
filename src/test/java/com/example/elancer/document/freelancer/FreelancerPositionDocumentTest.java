@@ -29,7 +29,7 @@ import com.example.elancer.freelancerprofile.repository.education.EducationRepos
 import com.example.elancer.freelancerprofile.repository.language.LanguageRepository;
 import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
-import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.common.LoginHelper;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;

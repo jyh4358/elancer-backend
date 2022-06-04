@@ -1,29 +1,25 @@
-package com.example.elancer.freelancerprofile.service;
+package com.example.elancer.integrate.freelancer;
 
-import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.FreelancerHelper;
-import com.example.elancer.common.basetest.ServiceBaseTest;
-import com.example.elancer.enterprise.model.enterprise.Enterprise;
-import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.HopeWorkState;
-import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
+import com.example.elancer.freelancerprofile.controller.FreelancerPositionSearchControllerPath;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
-import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
-import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
-import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.wishfreelancer.model.WishFreelancer;
-import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
+import com.example.elancer.integrate.common.IntegrateBaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -31,26 +27,17 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
+import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-    @Autowired
-    private FreelancerPositionSearchService freelancerPositionSearchService;
+public class FreelancerSearchIntegrateTest extends IntegrateBaseTest {
 
     @Autowired
     private DeveloperRepository developerRepository;
-
-    @Autowired
-    private FreelancerProfileRepository freelancerProfileRepository;
-
-    @Autowired
-    private EnterpriseRepository enterpriseRepository;
-
-    @Autowired
-    private WishFreelancerRepository wishFreelancerRepository;
-
-    private MemberDetails memberDetails;
 
     private Freelancer freelancer1;
 
@@ -213,153 +200,24 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         tx.commit();
 
         entityManagerFactory.close();
-
-        memberDetails = new MemberDetails(freelancer1.getNum(), freelancer1.getUserId(), freelancer1.getRole());
     }
 
-    @DisplayName("개발자 목록을 주요 스킬만 검색한다.")
+    @DisplayName("프리랜서 개발자 검색 통합테스트")
     @Test
-    public void 개발자_주요스킬_검색() {
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
-                PositionType.DEVELOPER,
-                Arrays.asList("java", "spring"),
-                null,
-                null,
-                null,
-                null,
-                memberDetails
-        );
-
+    public void 프래랜서_개발자_검색_통합테스트() throws Exception {
+        //given & when
+        mockMvc.perform(get(FreelancerPositionSearchControllerPath.FREELANCER_DEVELOPER_SEARCH)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .param("positionType", String.valueOf(PositionType.DEVELOPER))
+                        .param("majorSkillKeywords", "java", "spring")
+                        .param("minorSkill", "")
+                        .param("hopeWorkStates", "")
+                        .param("positionWorkManShips", "")
+                        .param("workArea", ""))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("freelancerSimpleResponseList", hasSize(3)))
+                .andDo(print())
+                .andReturn();
         //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
-    }
-
-    @DisplayName("개발자 목록 자바만 검색한다.")
-    @Test
-    public void 개발자_주요스킬_자바만_검색() {
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
-                PositionType.DEVELOPER,
-                Arrays.asList("java"),
-                null,
-                null,
-                null,
-                null,
-                memberDetails
-        );
-
-        //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(3);
-    }
-
-    @DisplayName("개발자 목록 노드만 검색한다.")
-    @Test
-    public void 개발자_주요스킬_노드만_검색() {
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
-                PositionType.DEVELOPER,
-                Arrays.asList("node"),
-                null,
-                null,
-                null,
-                null,
-                memberDetails
-        );
-
-        //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(1);
-    }
-
-    @DisplayName("개발자 목록 주요스킬과 주니어 경력으로 검색한다.")
-    @Test
-    public void 개발자_주요스킬_경력_검색_주니어() {
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
-                PositionType.DEVELOPER,
-                null,
-                null,
-                null,
-                Arrays.asList(PositionWorkManShip.JUNIOR),
-                null,
-                memberDetails
-        );
-
-        //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(1);
-    }
-
-    @DisplayName("개발자 목록 주요스킬과 미들 경력으로 검색한다.")
-    @Test
-    public void 개발자_주요스킬_경력_검색_미들() {
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
-                PositionType.DEVELOPER,
-                null,
-                null,
-                null,
-                Arrays.asList(PositionWorkManShip.MIDDLE),
-                null,
-                memberDetails
-        );
-
-        //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
-    }
-
-    @DisplayName("개발자 목록 주요스킬과 시니어 경력으로 검색한다.")
-    @Test
-    public void 개발자_주요스킬_경력_검색_시니어() {
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
-                PositionType.DEVELOPER,
-                null,
-                null,
-                null,
-                Arrays.asList(PositionWorkManShip.SENIOR),
-                null,
-                memberDetails
-        );
-
-        //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
-    }
-
-    @DisplayName("개발자 목록 주요스킬과 근무형태를 상주로 검색한다.")
-    @Test
-    public void 개발자_주요스킬_근무형태_상주() {
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
-                PositionType.DEVELOPER,
-                null,
-                null,
-                Arrays.asList(HopeWorkState.AT_COMPANY),
-                null,
-                null,
-                memberDetails
-        );
-
-        //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
-    }
-
-    @DisplayName("개발자 목록 검색시 인재스크랩과 겹치면 해당 인스턴스의 좋아요가 활성된다.")
-    @Test
-    public void 개발자_검색_인재스크랩_좋아요_적용() {
-        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
-        WishFreelancer wishFreelancer = wishFreelancerRepository.save(WishFreelancer.createWishFreelancer(enterprise, freelancer1));
-        MemberDetails enterpriseMemberDetails = MemberDetails.userDetailsFrom(enterprise);
-
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
-                PositionType.DEVELOPER,
-                Arrays.asList("java", "spring"),
-                null,
-                null,
-                null,
-                null,
-                enterpriseMemberDetails
-        );
-
-        //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList().get(0).isWishState()).isTrue();
-    }
-
-    @AfterEach
-    void tearDown() {
-        databaseCleaner.clean();
     }
 }
