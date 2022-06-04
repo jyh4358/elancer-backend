@@ -119,7 +119,7 @@ public class DeveloperSearchRepository {
     }
 
     private void eqMinorSkills(String minorSkill, BooleanBuilder booleanBuilder) {
-        if (minorSkill == null) {
+        if (minorSkill == null || minorSkill.isBlank()) {
             return;
         }
 
