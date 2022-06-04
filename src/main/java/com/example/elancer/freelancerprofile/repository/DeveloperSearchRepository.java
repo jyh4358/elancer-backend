@@ -1,21 +1,12 @@
 package com.example.elancer.freelancerprofile.repository;
 
-import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.HopeWorkState;
-import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
-import com.example.elancer.freelancerprofile.model.position.QPosition;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
-import com.example.elancer.member.domain.QAddress;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
-import com.querydsl.core.types.Expression;
-import com.querydsl.core.types.Ops;
-import com.querydsl.core.types.Predicate;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
@@ -26,7 +17,6 @@ import java.util.List;
 
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
 import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.freelancerProfile;
-import static com.example.elancer.freelancerprofile.model.position.QPosition.position;
 import static com.example.elancer.freelancerprofile.model.position.developer.QDeveloper.developer;
 
 @Repository

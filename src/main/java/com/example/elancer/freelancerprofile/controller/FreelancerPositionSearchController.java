@@ -33,7 +33,7 @@ public class FreelancerPositionSearchController {
             @RequestParam(required = false) WorkArea workArea,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips, workArea, memberDetails);
-        return new ResponseEntity<FreelancerSimpleResponses>(HttpStatus.OK);
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips, workArea, memberDetails);
+        return new ResponseEntity<FreelancerSimpleResponses>(freelancerSimpleResponses, HttpStatus.OK);
     }
 }

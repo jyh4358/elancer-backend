@@ -1,6 +1,7 @@
 package com.example.elancer.integrate.freelancer;
 
 import com.example.elancer.common.FreelancerHelper;
+import com.example.elancer.common.LoginHelper;
 import com.example.elancer.freelancer.controller.FreelancerControllerPath;
 import com.example.elancer.freelancer.controller.FreelancerEnumControllerPath;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;

@@ -1,37 +1,8 @@
 package com.example.elancer.integrate.wishprojects;
 
-import com.example.elancer.common.FreelancerHelper;
-import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancerprofile.model.FreelancerProfile;
-import com.example.elancer.freelancerprofile.model.position.PositionType;
-import com.example.elancer.integrate.common.IntegrateBaseTest;
-import com.example.elancer.integrate.freelancer.LoginHelper;
-import com.example.elancer.member.dto.MemberLoginResponse;
-import com.example.elancer.member.repository.MemberRepository;
-import com.example.elancer.project.model.Project;
-import com.example.elancer.project.model.ProjectBackGround;
-import com.example.elancer.project.repository.ProjectRepository;
-import com.example.elancer.token.jwt.JwtTokenProvider;
-import com.example.elancer.token.service.JwtTokenService;
-import com.example.elancer.wishprojects.controller.WishProjectControllerPath;
-import com.example.elancer.wishprojects.dto.WishProjectDeleteRequest;
-import com.example.elancer.wishprojects.dto.WishProjectSaveRequest;
-import com.example.elancer.wishprojects.model.WishProject;
-import com.example.elancer.wishprojects.repository.WishProjectRepository;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.List;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //public class WishProjectIntegrateTest extends IntegrateBaseTest {
 //    @Autowired
