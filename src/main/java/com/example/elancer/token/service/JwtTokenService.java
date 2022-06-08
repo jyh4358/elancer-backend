@@ -1,22 +1,20 @@
 package com.example.elancer.token.service;
 
-import com.example.elancer.login.auth.service.ProviderService;
-import com.example.elancer.member.dto.MemberOAuthLoginResponse;
-import com.example.elancer.member.exception.NotExistMemberException;
-import com.example.elancer.token.jwt.AccessToken;
-import com.example.elancer.token.jwt.JwtTokenProvider;
-import com.example.elancer.token.dto.*;
-import com.example.elancer.token.exception.InvalidRefreshTokenException;
 import com.example.elancer.login.auth.dto.GoogleProfile;
 import com.example.elancer.login.auth.exception.UserIdNotFoundException;
 import com.example.elancer.login.auth.exception.UserPasswordException;
+import com.example.elancer.login.auth.service.ProviderService;
+import com.example.elancer.member.domain.Member;
 import com.example.elancer.member.dto.MemberLoginRequest;
 import com.example.elancer.member.dto.MemberLoginResponse;
-import com.example.elancer.member.domain.Member;
+import com.example.elancer.member.dto.MemberOAuthLoginResponse;
+import com.example.elancer.member.exception.NotExistMemberException;
 import com.example.elancer.member.repository.MemberRepository;
+import com.example.elancer.token.dto.TokenResponse;
+import com.example.elancer.token.exception.InvalidRefreshTokenException;
+import com.example.elancer.token.jwt.AccessToken;
+import com.example.elancer.token.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,31 +64,27 @@ public class JwtTokenService {
         if (findMember.isPresent()) {
             Member member = findMember.get();
             member.updateRefreshToken(jwtTokenProvider.createRefreshToken());
-            return new MemberOAuthLoginResponse(member.getName(), member.getEmail(), jwtTokenProvider.createToken(member.getUserId()), member.getRefreshToken());
+            return new MemberOAuthLoginResponse(
+                    member.getName(),
+                    member.getEmail(),
+                    jwtTokenProvider.createToken(member.getUserId()),
+                    member.getRefreshToken());
         } else {
-            return new MemberOAuthLoginResponse(userId, googleProfile.getEmail(), "", "");
+            return new MemberOAuthLoginResponse(
+                    userId,
+                    googleProfile.getEmail(),
+                    "",
+                    "");
         }
     }
-
-    // 보류
-//    private Member saveMember(String email) {
-//        Member member = Member.builder()
-//                .email(profile.getEmail())
-//                .password(null)
-//                .provider(provider)
-//                .build();
-//        Member saveMember = memberRepository.save(member);
-//        return saveMember;
-//    }
-
 
     @Transactional
     public TokenResponse reIssue(HttpServletRequest request) {
         if (!jwtTokenProvider.validateToken(jwtTokenProvider.resolveRefreshToken(request)))
             throw new InvalidRefreshTokenException();
 
-        String userId = jwtTokenProvider.getUserId(jwtTokenProvider.resolveToken(request));
-        Member member = memberRepository.findByUserId(userId).orElseThrow(NotExistMemberException::new);
+        Member member = memberRepository.findByRefreshToken(
+                jwtTokenProvider.resolveRefreshToken(request)).orElseThrow(NotExistMemberException::new);
 
         if (!member.getRefreshToken().equals(jwtTokenProvider.resolveRefreshToken(request)))
             throw new InvalidRefreshTokenException();
