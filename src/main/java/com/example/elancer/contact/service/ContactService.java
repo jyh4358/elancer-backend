@@ -1,6 +1,7 @@
 package com.example.elancer.contact.service;
 
 import com.example.elancer.common.checker.RightRequestChecker;
+import com.example.elancer.contact.dto.ContactDeleteRequest;
 import com.example.elancer.contact.dto.ContactResponse;
 import com.example.elancer.contact.dto.ContactRequest;
 import com.example.elancer.contact.dto.ContactSaveRequest;
@@ -30,7 +31,6 @@ public class ContactService {
         RightRequestChecker.checkMemberDetail(memberDetails);
         Member member = memberRepository.findById(memberDetails.getId()).orElseThrow(NotExistMemberException::new);
         Contact contact = Contact.of(contactSaveRequest.getTitle(), contactSaveRequest.getContent());
-        System.out.println("contactSaveRequest.getTitle() + contactSaveRequest.getContent() = " + contactSaveRequest.getTitle() + contactSaveRequest.getContent());
         contact.setMember(member);
 
         contactRepository.save(contact);
@@ -47,5 +47,12 @@ public class ContactService {
         RightRequestChecker.checkMemberDetail(memberDetails);
         Contact contact = contactRepository.findById(contactRequest.getNum()).orElseThrow(NotExistContactException::new);
         contact.updateContact(contactRequest.getTitle(), contactRequest.getContent());
+    }
+
+    @Transactional
+    public void deleteContact(MemberDetails memberDetails, ContactDeleteRequest contactDeleteRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        Contact contact = contactRepository.findById(contactDeleteRequest.getContactNum()).orElseThrow(NotExistContactException::new);
+        contactRepository.delete(contact);
     }
 }

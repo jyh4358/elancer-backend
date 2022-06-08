@@ -1,9 +1,6 @@
 package com.example.elancer.contact.controller;
 
-import com.example.elancer.contact.dto.ContactListResponse;
-import com.example.elancer.contact.dto.ContactRequest;
-import com.example.elancer.contact.dto.ContactResponse;
-import com.example.elancer.contact.dto.ContactSaveRequest;
+import com.example.elancer.contact.dto.*;
 import com.example.elancer.contact.service.ContactService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.dto.MemberContactResponse;
@@ -59,4 +56,16 @@ public class ContactController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping("/contact-delete")
+    public ResponseEntity<Void> deleteContact(
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody ContactDeleteRequest contactDeleteRequest
+    ){
+        contactService.deleteContact(memberDetails, contactDeleteRequest);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
 }

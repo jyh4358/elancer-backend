@@ -1,6 +1,7 @@
 package com.example.elancer.document.contact;
 
 import com.example.elancer.common.EnterpriseHelper;
+import com.example.elancer.contact.dto.ContactDeleteRequest;
 import com.example.elancer.contact.dto.ContactRequest;
 import com.example.elancer.contact.dto.ContactSaveRequest;
 import com.example.elancer.contact.model.Contact;
@@ -8,7 +9,11 @@ import com.example.elancer.contact.repository.ContactRepository;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
+import com.example.elancer.member.domain.Address;
+import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.project.dto.ProjectDeleteRequest;
+import com.example.elancer.project.model.*;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -163,6 +169,42 @@ public class ContactDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("[].content").type("String").description("문의 내용")
                         )
                 ));
+    }
 
+    @Test
+    @DisplayName("문의 삭제 문서화 테스트")
+    public void 문의_삭제_문서화() throws Exception{
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        Contact contact = contactRepository.save(new Contact(
+                "title",
+                "content"
+        ));
+
+        ContactDeleteRequest contactDeleteRequest = new ContactDeleteRequest(
+                contact.getNum()
+        );
+
+
+        mockMvc.perform(delete("/contact-delete")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
+                        .content(objectMapper.writeValueAsString(contactDeleteRequest)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("contact-delete",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        requestFields(
+                                fieldWithPath("contactNum").type("Long").description("프로젝트 식별자")
+                        )
+
+                ));
     }
 }

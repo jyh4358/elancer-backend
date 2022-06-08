@@ -3,16 +3,15 @@ package com.example.elancer.project.controller;
 import com.example.elancer.enterprise.dto.EnterpriseSimpleDetailResponse;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.project.dto.ProjectDeleteRequest;
 import com.example.elancer.project.dto.ProjectSaveRequest;
 import com.example.elancer.project.service.ProjectService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,10 +33,21 @@ public class ProjectController {
     @PostMapping("/project-save")
     public ResponseEntity<Void> saveProject(
             @AuthenticationPrincipal MemberDetails memberDetails,
-            ProjectSaveRequest projectSaveRequest
+            @Validated @RequestBody ProjectSaveRequest projectSaveRequest
     ) {
         projectService.saveProject(memberDetails, projectSaveRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping("/project-delete")
+    public ResponseEntity<Void> deleteProject(
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody ProjectDeleteRequest projectDeleteRequest
+    ){
+        projectService.deleteProject(memberDetails, projectDeleteRequest);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 }

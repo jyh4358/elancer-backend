@@ -7,12 +7,15 @@ import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.project.dto.ProjectDeleteRequest;
 import com.example.elancer.project.dto.ProjectSaveRequest;
 import com.example.elancer.project.model.*;
+import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
@@ -21,12 +24,14 @@ import java.time.LocalDate;
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class ProjectDocumentTest extends DocumentBaseTest {
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @AfterEach
     void tearDown() {
@@ -143,6 +148,60 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("telNumber").type("String").description("담당자 휴대폰"),
                                 fieldWithPath("email").type("String").description("이메일")
                         )
+                ));
+    }
+    @Test
+    @DisplayName("프로젝트 삭제 문서화 테스트")
+    public void 프로젝트_삭제_문서화() throws Exception{
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        Project project = projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.ANALYSIS,
+                "쇼핑몰",
+                PositionKind.DEVELOPER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35
+        ));
+
+        ProjectDeleteRequest projectDeleteRequest = new ProjectDeleteRequest(
+                project.getNum()
+        );
+
+        mockMvc.perform(delete("/project-delete")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
+                        .content(objectMapper.writeValueAsString(projectDeleteRequest)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("project-delete",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        requestFields(
+                                fieldWithPath("projectNum").type("Long").description("프로젝트 식별자")
+                        )
+
                 ));
     }
 }
