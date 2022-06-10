@@ -19,7 +19,7 @@ public class EnterpriseProfileResponse {
     private String introTitle;
     private String bizContents;
 
-    private Integer sales;
+    private Long sales;
     private String idNumber;
 
     // todo - 이후에 사업자 등록증 파일 등록 구현

@@ -46,7 +46,7 @@ public class EnterpriseUpdateRequest {
 
     private String bizContents;
 
-    private Integer sales;
+    private Long sales;
 
     private String idNumber;
 

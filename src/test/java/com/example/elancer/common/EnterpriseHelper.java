@@ -24,7 +24,7 @@ public class EnterpriseHelper {
                 .position("사장")
                 .telNumber("000-1111-1111")
                 .bizContents("SI")
-                .sales(100000000)
+                .sales(100000000L)
                 .idNumber("123-123-123")
                 .build();
 

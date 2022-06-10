@@ -50,7 +50,7 @@ class EnterpriseJoinServiceTest extends ServiceBaseTest {
                 "www.test.com",
                 new Address(CountryType.KR, "123", "주소1", "주소2"),
                 "주요 사업",
-                10000000,
+                10000000L,
                 "사업자 번호(123-123-123)"
         );
 
@@ -98,7 +98,7 @@ class EnterpriseJoinServiceTest extends ServiceBaseTest {
                 "www.test.com",
                 new Address(CountryType.KR, "123", "주소1", "주소2"),
                 "주요 사업",
-                10000000,
+                10000000L,
                 "사업자 번호(123-123-123)"
         );
         EnterpriseJoinRequest enterpriseJoinRequest2 = new EnterpriseJoinRequest(
@@ -115,7 +115,7 @@ class EnterpriseJoinServiceTest extends ServiceBaseTest {
                 "www.test.com",
                 new Address(CountryType.KR, "123", "주소1", "주소2"),
                 "주요 사업2",
-                10000000,
+                10000000L,
                 "사업자 번호(123-123-123)2"
         );
 
@@ -148,7 +148,7 @@ class EnterpriseJoinServiceTest extends ServiceBaseTest {
                 "www.test.com",
                 new Address(CountryType.KR, "123", "주소1", "주소2"),
                 "주요 사업",
-                10000000,
+                10000000L,
                 "사업자 번호(123-123-123)"
         );
 

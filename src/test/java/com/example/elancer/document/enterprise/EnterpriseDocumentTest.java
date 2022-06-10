@@ -48,7 +48,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                 "www.test.com",
                 new Address(CountryType.KR, "123", "주소1", "주소2"),
                 "주요 사업",
-                10000000,
+                10000000L,
                 "사업자 번호(123-123-123)"
         );
 
@@ -78,7 +78,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("address.mainAddress").type("String").description("회원 주소 필드"),
                                 fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("bizContents").type("String").description("회원 주요 사업내용 필드"),
-                                fieldWithPath("sales").type("Integer").description("회원 연간 매출액 필드"),
+                                fieldWithPath("sales").type("Long").description("회원 연간 매출액 필드"),
                                 fieldWithPath("idNumber").type("String").description("회원 사업자 번호 필드")
                         )
                 ));
@@ -103,7 +103,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                 "www.changedWebsite.com",
                 new Address(CountryType.CN, "경기도", "주소1", "주소2"),
                 "쇼핑몰",
-                200000000,
+                200000000L,
                 "111-111-111"
         );
 
@@ -134,7 +134,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("address.mainAddress").type("String").description("회원 주소 필드"),
                                 fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
-                                fieldWithPath("sales").type("Integer").description("연간 매출액"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자등록번호")
                         ),
                         responseHeaders(
@@ -154,7 +154,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("address.mainAddress").type("String").description("회원 주소 필드"),
                                 fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
-                                fieldWithPath("sales").type("Integer").description("연간 매출액"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자등록번호")
                         )
                 ));
@@ -192,7 +192,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("address.mainAddress").type("String").description("회원 주소 필드"),
                                 fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
-                                fieldWithPath("sales").type("Integer").description("연간 매출액"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자등록번호")
                         )
                 ));

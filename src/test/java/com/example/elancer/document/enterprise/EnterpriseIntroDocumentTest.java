@@ -69,7 +69,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
         EnterpriseProfileRequest enterpriseProfileRequest = new EnterpriseProfileRequest(
                 "프로필 title",
                 "SI",
-                100000000,
+                100000000L,
                 "123-123-123",
                 mainBizCodes,
                 "",
@@ -94,7 +94,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                         requestFields(
                                 fieldWithPath("introTitle").type("String").description("프로필 타이틀 필드"),
                                 fieldWithPath("bizContents").type("String").description("주요 사업 내용"),
-                                fieldWithPath("sales").type("Integer").description("연간 매출액"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자 등록 번호"),
                                 fieldWithPath("mainBizCodes").type("List<String>").description("사업 분야"),
                                 fieldWithPath("mainEtc").type("String").description("사업 분야 기타"),
@@ -107,7 +107,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                         responseFields(
                                 fieldWithPath("introTitle").type("String").description("프로필 타이틀 필드"),
                                 fieldWithPath("bizContents").type("String").description("주요 사업 내용"),
-                                fieldWithPath("sales").type("Integer").description("연간 매출액"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자 등록 번호"),
                                 fieldWithPath("mainBizCodes").type("List<String>").description("사업 분야"),
                                 fieldWithPath("mainEtc").type("String").description("사업 분야 기타"),
@@ -144,7 +144,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
         EnterpriseProfileRequest enterpriseProfileRequest = new EnterpriseProfileRequest(
                 "프로필 title",
                 "SI",
-                100000000,
+                100000000L,
                 "123-123-123",
                 mainBizCodes,
                 "",
@@ -169,7 +169,7 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                         responseFields(
                                 fieldWithPath("introTitle").type("String").description("프로필 타이틀 필드"),
                                 fieldWithPath("bizContents").type("String").description("주요 사업 내용"),
-                                fieldWithPath("sales").type("Integer").description("연간 매출액"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자 등록 번호"),
                                 fieldWithPath("mainBizCodes").type("List<String>").description("사업 분야"),
                                 fieldWithPath("mainEtc").type("String").description("사업 분야 기타"),

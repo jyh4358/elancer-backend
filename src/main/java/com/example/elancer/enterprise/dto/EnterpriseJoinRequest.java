@@ -47,7 +47,7 @@ public class EnterpriseJoinRequest {
 
     private String bizContents;
 
-    private Integer sales;
+    private Long sales;
     @NotBlank
     private String idNumber;
 

@@ -20,7 +20,7 @@ public class EnterpriseAccountDetailResponse {
     private String website;
     private Address address;
     private String bizContents;
-    private Integer sales;
+    private Long sales;
     private String idNumber;
 
     public static EnterpriseAccountDetailResponse of(Enterprise enterprise) {

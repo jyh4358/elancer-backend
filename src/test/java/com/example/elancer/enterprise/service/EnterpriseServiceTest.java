@@ -59,7 +59,7 @@ class EnterpriseServiceTest extends ServiceBaseTest {
                 "www.changedWebsite.com",
                 new Address(CountryType.CN, "경기도", "주소1", "주소2"),
                 "쇼핑몰",
-                200000000,
+                200000000L,
                 "111-111-111"
         );
 
@@ -121,39 +121,5 @@ class EnterpriseServiceTest extends ServiceBaseTest {
 
 
     }
-
-
-//    @Test
-//    @DisplayName("기업 게정 프로파일 정보를 조회한다.")
-//    public void enterpriseIntroUpdate() {
-//
-//        //given
-//        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository);
-//
-//        List<String> mainBiz = new ArrayList<>();
-//        mainBiz.add("main_biz1");
-//        mainBiz.add("main_biz2");
-//
-//        List<String> subBiz = new ArrayList<>();
-//        subBiz.add("sub_biz1");
-//        subBiz.add("sub_biz2");
-//
-//        EnterpriseProfileRequest enterpriseIntroRequest = new EnterpriseProfileRequest("타이틀", "SI", 1000, "123-123-123",  mainBiz, subBiz);
-//
-//
-//        //when
-//        enterpriseService.updateIntro(memberNum, enterpriseIntroRequest, null);
-//
-//
-//        //then
-//        Enterprise result = enterpriseRepository.findById(memberNum).get();
-//        assertThat(result.getEnterpriseIntro().getIntroTitle()).isEqualTo(enterpriseIntroRequest.getIntroTitle());
-//        assertThat(result.getEnterpriseIntro().getEnterpriseMainBizs().size()).isEqualTo(2);
-//        assertThat(result.getEnterpriseIntro().getEnterpriseSubBizs().size()).isEqualTo(2);
-//
-//
-//    }
-
-
 
 }

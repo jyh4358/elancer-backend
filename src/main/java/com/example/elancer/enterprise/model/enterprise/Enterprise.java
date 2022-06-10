@@ -47,7 +47,7 @@ public class Enterprise extends Member {
     @NotNull
     private String bizContents;
 
-    private int sales;
+    private Long sales;
     @NotNull
     @Column(name = "idNumber")
     private String idNumber;
@@ -69,7 +69,7 @@ public class Enterprise extends Member {
                       String phone, String email, MemberType role,
                       String companyName, int companyPeople, String position,
                       String telNumber, String website, Address address,
-                      String bizContents, int sales, String idNumber, IdPhoto idPhoto) {
+                      String bizContents, Long sales, String idNumber, IdPhoto idPhoto) {
 
         super(userId, password, name, phone, email, website, address, role);
         this.companyName = companyName;
@@ -90,7 +90,7 @@ public class Enterprise extends Member {
                                  String phone, String email,
                                  String companyName, int companyPeople, String position,
                                  String telNumber, String website, Address address,
-                                 String bizContents, int sales, String idNumber) {
+                                 String bizContents, Long sales, String idNumber) {
         updateMember(name, password, email, phone, website, address);
         this.companyName = companyName;
         this.companyPeople = companyPeople;
@@ -103,7 +103,7 @@ public class Enterprise extends Member {
     }
 
 
-    public void updateIntro(EnterpriseIntro enterpriseIntro, String bizContents, int sales, String idNumber) {
+    public void updateIntro(EnterpriseIntro enterpriseIntro, String bizContents, Long sales, String idNumber) {
         this.enterpriseIntro = enterpriseIntro;
         this.bizContents = bizContents;
         this.sales = sales;
