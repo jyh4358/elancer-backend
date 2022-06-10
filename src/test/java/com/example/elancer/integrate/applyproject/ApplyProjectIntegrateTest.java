@@ -22,6 +22,7 @@ import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,5 +88,10 @@ public class ApplyProjectIntegrateTest extends IntegrateBaseTest {
         //then
         List<ApplyProject> applyProjects = applyProjectRepository.findAll();
         Assertions.assertThat(applyProjects).hasSize(1);
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleaner.clean();
     }
 }

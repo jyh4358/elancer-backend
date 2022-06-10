@@ -21,6 +21,7 @@ import com.example.elancer.project.model.ProjectType;
 import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,5 +94,10 @@ public class ApplyProjectDocumentTest extends DocumentBaseTest {
                         )
                         ));
 
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleaner.clean();
     }
 }
