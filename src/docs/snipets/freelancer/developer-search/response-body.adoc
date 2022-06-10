@@ -1,0 +1,17 @@
+[source,options="nowrap"]
+----
+{
+  "freelancerSimpleResponseList" : [ {
+    "freelancerNum" : 1,
+    "positionName" : "개발자",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 3,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ ],
+    "etcSkill" : null,
+    "projectNames" : [ ]
+  } ]
+}
+----
