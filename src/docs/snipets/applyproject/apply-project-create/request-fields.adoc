@@ -1,0 +1,8 @@
+|===
+|Path|Type|Description
+
+|`+projectNum+`
+|`+Long+`
+|프로젝트 식별자 정보 필드.
+
+|===

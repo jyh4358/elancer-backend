@@ -10,6 +10,7 @@ import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -223,5 +224,10 @@ public class FreelancerSearchIntegrateTest extends IntegrateBaseTest {
                 .andExpect(jsonPath("freelancerSimpleResponseList", hasSize(3)))
                 .andDo(print())
                 .andReturn();
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleaner.clean();
     }
 }

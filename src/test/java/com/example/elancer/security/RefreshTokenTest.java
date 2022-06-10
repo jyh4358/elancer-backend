@@ -9,6 +9,7 @@ import com.example.elancer.member.controller.MemberController;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.example.elancer.token.service.JwtTokenService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,10 @@ public class RefreshTokenTest extends IntegrateBaseTest {
                 .header(JwtTokenProvider.REFRESH_KEY, memberLoginResponse.getRefreshToken()))
                 .andExpect(status().isOk());
         //then
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleaner.clean();
     }
 }
