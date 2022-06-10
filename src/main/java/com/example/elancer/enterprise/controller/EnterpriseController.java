@@ -76,8 +76,12 @@ public class EnterpriseController {
         return new ResponseEntity<>(enterpriseProfileResponse, HttpStatus.OK);
     }
 
+    /**
+     * 기업 대쉬보드 프로필 정보 조회
+     * @param memberDetails
+     * @return
+     */
     @GetMapping("enterprise-profile")
-
     public ResponseEntity<EnterpriseDashBoardProfileResponse> findDashBoardProfile(
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {

@@ -40,6 +40,6 @@ public class WorkAssessment {
 
     private void calculateScore() {
         this.totalRawScore += this.expertise + this.scheduleAdherence + this.initiative + this.communication + this.reEmploymentIntention;
-        this.totalActiveScore = (double) ((totalRawScore / 5) / assessmentCount);
+        this.totalActiveScore = (double) Math.round((((totalRawScore / 5) / assessmentCount) * 10.0) / 10.0);
     }
 }

@@ -198,4 +198,37 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                 ));
 
     }
+
+    @DisplayName("기업 대쉬보드 프로필 조회 문서화")
+    @Test
+    public void 기업_대쉬보드_프로필_조회_문서화() throws Exception{
+
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        mockMvc.perform(get("/enterprise-profile")
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("dashboard-profile",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("expertise").type("int").description("전문성"),
+                                fieldWithPath("scheduleAdherence").type("int").description("일정준수"),
+                                fieldWithPath("initiative").type("int").description("적극성"),
+                                fieldWithPath("communication").type("int").description("의사소통"),
+                                fieldWithPath("reEmploymentIntention").type("int").description("재고용 의사"),
+                                fieldWithPath("totalActiveScore").type("double").description("활동 평가"),
+                                fieldWithPath("enterpriseType").type("String").description("기업형태"),
+                                fieldWithPath("bizContents").type("String").description("사업자등록번호"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액")
+                        )
+                ));
+
+    }
 }
