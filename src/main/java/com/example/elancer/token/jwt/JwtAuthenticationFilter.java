@@ -54,7 +54,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
             map.put("errortype", "Forbidden");
             map.put("code", "402");
-            map.put("message", "만료된 토큰입니다. Refresh 토큰이 필요합니다.");
+            map.put("message", "access 토큰입니다. Refresh 토큰이 필요합니다.");
 
             log.error("만료된 토큰");
             response.getWriter().write(objectMapper.writeValueAsString(map));
@@ -63,8 +63,12 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             Map<String, String> map = new HashMap<>();
 
             map.put("errortype", "Forbidden");
-            map.put("code", "400");
+            map.put("code", "402");
             map.put("message", "변조된 토큰입니다. 로그인이 필요합니다.");
+
+            map.put("errortype", "Forbidden");
+            map.put("code", "402");
+            map.put("message", ".refresh가 만료되었습니다. 다시 로그인해주세요");
 
             log.error("변조된 토큰");
             response.getWriter().write(objectMapper.writeValueAsString(map));
