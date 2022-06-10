@@ -17,6 +17,7 @@ import com.example.elancer.project.model.ProjectStep;
 import com.example.elancer.project.model.ProjectType;
 import com.example.elancer.project.repository.ProjectRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +76,10 @@ class ApplyProjectServiceTest extends ServiceBaseTest {
         //then
         List<ApplyProject> applyProjects = applyProjectRepository.findAll();
         Assertions.assertThat(applyProjects).hasSize(1);
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleaner.clean();
     }
 }
