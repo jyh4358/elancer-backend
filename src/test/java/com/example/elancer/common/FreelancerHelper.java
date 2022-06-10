@@ -21,7 +21,7 @@ public class FreelancerHelper {
                 "phone",
                 "email",
                 "website",
-                new Address(CountryType.KR, "zipcode","address1", "address2"),
+                new Address(CountryType.KR, "zipcode","서울시 동작구", "address2"),
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,
                 WorkPossibleState.POSSIBLE,
