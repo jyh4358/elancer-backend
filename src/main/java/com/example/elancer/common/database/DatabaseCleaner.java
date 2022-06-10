@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class DatabaseClean {
+public class DatabaseCleaner {
     @Autowired(required = false)
     private DataSource dataSource;
 

@@ -1,7 +1,6 @@
 package com.example.elancer.integrate.freelancerprofile;
 
 import com.example.elancer.common.FreelancerHelper;
-import com.example.elancer.freelancer.controller.FreelancerEnumControllerPath;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
@@ -41,7 +40,7 @@ import com.example.elancer.freelancerprofile.repository.language.LanguageReposit
 import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
-import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.common.LoginHelper;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.assertj.core.api.Assertions;
@@ -555,6 +554,6 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

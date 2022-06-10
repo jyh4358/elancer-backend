@@ -1,4 +1,4 @@
-package com.example.elancer.integrate.freelancer;
+package com.example.elancer.common;
 
 import com.example.elancer.member.dto.MemberLoginRequest;
 import com.example.elancer.member.dto.MemberLoginResponse;

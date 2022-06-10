@@ -1,17 +1,18 @@
 package com.example.elancer.freelancerprofile.repository;
 
 import com.example.elancer.freelancer.model.HopeWorkState;
-import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
+import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
-import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.BooleanOperation;
+import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
@@ -23,41 +24,120 @@ import static com.example.elancer.freelancerprofile.model.position.developer.QDe
 public class DeveloperSearchRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
-    public Slice<FreelancerSimpleResponse> findFreelancerProfileByFetch(
+    public Slice<Developer> findFreelancerProfileByFetch(
             PositionType positionType,
-            List<String> majorSkillKeywords,
+            List<String> majorSkillConditions,
             String minorSkill,
             List<HopeWorkState> hopeWorkStates,
-            List<PositionWorkManShip> positionWorkManShips
+            List<PositionWorkManShip> positionWorkManShips,
+            WorkArea workArea
     ) {
-//        jpaQueryFactory.selectFrom(developer)
-//                .innerJoin(developer.freelancerProfile, freelancerProfile).fetchJoin()
-//                .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
-//                .where(
-//                        developer.positionType.eq(positionType),
-//                        eqMajorSkills(majorSkillKeywords),
-//                        eqMinorSkills(minorSkill),
-//
-//
-//                )
-//                .fetchResults();
-        return null;
+        BooleanBuilder builder = new BooleanBuilder();
+
+        builder.and(developer.positionType.eq(positionType));
+        eqMinorSkills(minorSkill, builder);
+        eqMajorSkillConds(majorSkillConditions, builder);
+        eqHopeWorkStateConds(hopeWorkStates, builder);
+        eqPositionWorkShipConds(positionWorkManShips, builder);
+        eqWorkAreaConds(workArea, builder);
+
+        QueryResults<Developer> developerQueryResults = jpaQueryFactory.selectFrom(developer)
+                .innerJoin(developer.freelancerProfile, freelancerProfile).fetchJoin()
+                .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
+                .where(builder)
+                .fetchResults();
+
+        return new SliceImpl<Developer>(developerQueryResults.getResults());
     }
 
-    private List<BooleanExpression> eqMajorSkills(List<String> majorSkillKeywords) {
-        if (majorSkillKeywords.size() == 0 || majorSkillKeywords == null) {
-            return null;
+    private void eqWorkAreaConds(WorkArea area, BooleanBuilder builder) {
+        if (area == null) {
+            return;
         }
 
-        List<BooleanExpression> tuples = new ArrayList<>();
+        builder.and(freelancer.address.mainAddress.containsIgnoreCase(area.getDesc()));
+    }
+
+    private void eqMajorSkillConds(List<String> majorSkillKeywords, BooleanBuilder builder) {
+        if (majorSkillKeywords == null) {
+            return;
+        }
+
         for (String majorSkillKeyword : majorSkillKeywords) {
-            tuples.add(developer.focusSkill.containsIgnoreCase(majorSkillKeyword));
+            builder.and(developer.focusSkill.containsIgnoreCase(majorSkillKeyword));
+        }
+    }
+
+    private void eqHopeWorkStateConds(List<HopeWorkState> hopeWorkStates, BooleanBuilder builder) {
+        if (hopeWorkStates == null) {
+            return;
         }
 
-        return tuples;
+//        for (int i =0; i < hopeWorkStates.size(); i++) {
+//            if (hopeWorkStates.get(i).equals(HopeWorkState.AT_HALF_COMPANY)) {
+//                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
+//                        .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
+//                continue;
+//            }
+//
+//            if (i == 0) {
+//                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
+//                continue;
+//            }
+//            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
+//        }
+        int count = 0;
+        for (HopeWorkState hopeWorkState : hopeWorkStates) {
+            if (hopeWorkState.equals(HopeWorkState.AT_HALF_COMPANY)) {
+                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
+                        .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
+                continue;
+            }
+
+            if (count == 0) {
+                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+                count++;
+                continue;
+            }
+
+            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+        }
     }
 
-    private BooleanExpression eqMinorSkills(String minorSkill) {
-        return developer.etcSkill.containsIgnoreCase(minorSkill);
+    private void eqPositionWorkShipConds(List<PositionWorkManShip> positionWorkManShips, BooleanBuilder builder) {
+        if (positionWorkManShips == null) {
+            return;
+        }
+
+        for (PositionWorkManShip positionWorkManShip : positionWorkManShips) {
+            if (positionWorkManShip.equals(PositionWorkManShip.SENIOR)) {
+                builder.and(freelancer.freelancerAccountInfo.careerYear.goe(positionWorkManShip.getYearInLine()));
+                continue;
+            }
+            builder.and(freelancer.freelancerAccountInfo.careerYear.between(positionWorkManShip.getYearInLine(), positionWorkManShip.getYearOutLine()));
+        }
     }
+
+    private void eqMinorSkills(String minorSkill, BooleanBuilder booleanBuilder) {
+        if (minorSkill == null || minorSkill.isBlank()) {
+            return;
+        }
+
+        booleanBuilder.and(developer.etcSkill.containsIgnoreCase(minorSkill));
+//        return developer.etcSkill.containsIgnoreCase(minorSkill);
+
+    }
+
+//    private List<BooleanExpression> eqMajorSkills(List<String> majorSkillKeywords) {
+//        if (majorSkillKeywords.size() == 0 || majorSkillKeywords == null) {
+//            return null;
+//        }
+//
+//        List<BooleanExpression> tuples = new ArrayList<>();
+//        for (String majorSkillKeyword : majorSkillKeywords) {
+//            tuples.add(developer.focusSkill.containsIgnoreCase(majorSkillKeyword));
+//        }
+//
+//        return tuples;
+//    }
 }

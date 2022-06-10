@@ -27,7 +27,7 @@ class EnterpriseJoinServiceTest extends ServiceBaseTest {
 
     @AfterEach
     void tearDown() {
-        this.databaseClean.clean();
+        this.databaseCleaner.clean();
     }
 
 

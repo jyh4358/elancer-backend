@@ -194,6 +194,6 @@ class FreelancerServiceTest extends ServiceBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

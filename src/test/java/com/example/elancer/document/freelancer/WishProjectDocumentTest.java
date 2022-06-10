@@ -5,7 +5,7 @@ import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
-import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.common.LoginHelper;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
@@ -150,6 +150,6 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

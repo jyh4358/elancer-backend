@@ -1,0 +1,4 @@
+GET http://localhost:8080/developers?positionType=DEVELOPER&majorSkillKeywords=java
+Content-Type: application/json
+
+

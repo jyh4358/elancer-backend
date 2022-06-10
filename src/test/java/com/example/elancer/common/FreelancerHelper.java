@@ -21,6 +21,24 @@ public class FreelancerHelper {
                 "phone",
                 "email",
                 "website",
+                new Address(CountryType.KR, "zipcode","서울시 동작구", "address2"),
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2021, 02, 01)
+        );
+
+        return freelancerRepository.save(freelancer);
+    }
+
+    public static Freelancer 프리랜서_생성_아이디(FreelancerRepository freelancerRepository, PasswordEncoder passwordEncoder, String id) {
+        Freelancer freelancer = Freelancer.createFreelancer(
+                id,
+                passwordEncoder.encode("pwd"),
+                "name",
+                "phone",
+                "email",
+                "website",
                 new Address(CountryType.KR, "zipcode","address1", "address2"),
                 MemberType.FREELANCER,
                 MailReceptionState.RECEPTION,

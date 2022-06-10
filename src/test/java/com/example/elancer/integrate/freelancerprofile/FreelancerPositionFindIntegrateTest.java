@@ -41,7 +41,7 @@ import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtc
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
-import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.common.LoginHelper;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
@@ -50,7 +50,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
-import javax.persistence.EntityManager;
 import java.util.Arrays;
 import java.util.List;
 
@@ -72,7 +71,6 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
     private PlannerRepository plannerRepository;
     @Autowired
     private PositionEtcRepository positionEtcRepository;
-
 
 
     @DisplayName("프리랜서 프로필 개발자 상세 조회 통합테스트")
@@ -250,6 +248,6 @@ public class FreelancerPositionFindIntegrateTest extends IntegrateBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

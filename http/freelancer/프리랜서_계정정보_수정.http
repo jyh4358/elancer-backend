@@ -1,5 +1,7 @@
-PUT http://localhost:8080/freelancer/1
+PUT http://localhost:8080/freelancer
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzA5NTQzMCwiZXhwIjoxNjQ3MDk3MjMwfQ.LZpdVjKuhViOYTYT2ory5k4l4ClP43ihhP3TxIzQQ4c
+
 
 # info
 # CountryType 구성 {
@@ -71,7 +73,7 @@ Content-Type: application/json
 
 #req
 {
-  "name": "계정 이름",
+  "name": "계정 이름2",
   "password": "계정password",
   "passwordCheck": "계정password",
   "birthDate": "2000-01-01",

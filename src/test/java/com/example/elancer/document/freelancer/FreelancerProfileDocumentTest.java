@@ -32,19 +32,12 @@ import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
-import com.example.elancer.freelancerprofile.repository.academic.AcademicRepository;
-import com.example.elancer.freelancerprofile.repository.career.CareerRepository;
-import com.example.elancer.freelancerprofile.repository.education.EducationRepository;
-import com.example.elancer.freelancerprofile.repository.language.LanguageRepository;
-import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
-import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
-import com.example.elancer.integrate.freelancer.LoginHelper;
+import com.example.elancer.common.LoginHelper;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
@@ -622,6 +615,6 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 }

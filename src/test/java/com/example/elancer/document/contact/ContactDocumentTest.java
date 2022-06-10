@@ -43,7 +43,7 @@ public class ContactDocumentTest extends DocumentBaseTest {
 
     @AfterEach
     void tearDown() {
-        databaseClean.clean();
+        databaseCleaner.clean();
     }
 
     @Test

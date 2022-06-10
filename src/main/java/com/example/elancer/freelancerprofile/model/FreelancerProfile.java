@@ -26,6 +26,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Entity
@@ -70,6 +71,7 @@ public class FreelancerProfile extends BasicEntity {
     public FreelancerProfile(String greeting, Freelancer freelancer, PositionType positionType) {
         this.greeting = greeting;
         this.freelancer = freelancer;
+        //TODO min 쿼리날아가는지 확인
         this.position = positionType.getFunction().apply(this);
     }
 
@@ -141,4 +143,9 @@ public class FreelancerProfile extends BasicEntity {
         return this.position.getPositionType();
     }
 
+    public List<String> getProjectHistoryNames() {
+        return this.projectHistories.stream()
+                .map(ProjectHistory::getProjectTitle)
+                .collect(Collectors.toList());
+    }
 }
