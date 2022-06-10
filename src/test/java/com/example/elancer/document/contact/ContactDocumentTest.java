@@ -166,7 +166,8 @@ public class ContactDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("[]").type("List<ContactResponse>").description("문의 리스트"),
                                 fieldWithPath("[].num").type("Long").description("문의 식별자"),
                                 fieldWithPath("[].title").type("String").description("문의 제목"),
-                                fieldWithPath("[].content").type("String").description("문의 내용")
+                                fieldWithPath("[].content").type("String").description("문의 내용"),
+                                fieldWithPath("[].localDate").type("LocalDate").description("문의 날짜")
                         )
                 ));
     }

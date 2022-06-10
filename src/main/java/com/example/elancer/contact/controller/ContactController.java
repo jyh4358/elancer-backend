@@ -41,9 +41,6 @@ public class ContactController {
     @GetMapping("/contacts")
     public ResponseEntity<List<ContactResponse>> findContactList(@AuthenticationPrincipal MemberDetails memberDetails) {
 
-//        ContactListResponse contactListResponse = new ContactListResponse(contactService.findContacts(memberDetails));
-//
-//        return new ResponseEntity<>(contactListResponse, HttpStatus.OK);
         List<ContactResponse> contacts = contactService.findContacts(memberDetails);
         return new ResponseEntity<>(contacts, HttpStatus.OK);
     }
