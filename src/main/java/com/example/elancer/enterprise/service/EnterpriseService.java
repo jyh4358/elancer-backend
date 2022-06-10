@@ -138,6 +138,13 @@ public class EnterpriseService {
         return EnterpriseProfileResponse.of(enterprise);
     }
 
+    public EnterpriseDashBoardProfileResponse findDashBoardProfile(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
+
+        return EnterpriseDashBoardProfileResponse.of(enterprise);
+
+    }
 
     /**
      * 인재 스크랩 조회
@@ -185,4 +192,5 @@ public class EnterpriseService {
             }
         }
     }
+
 }

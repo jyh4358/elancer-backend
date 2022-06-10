@@ -1,9 +1,6 @@
 package com.example.elancer.enterprise.controller;
 
-import com.example.elancer.enterprise.dto.EnterpriseAccountDetailResponse;
-import com.example.elancer.enterprise.dto.EnterpriseProfileRequest;
-import com.example.elancer.enterprise.dto.EnterpriseProfileResponse;
-import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
+import com.example.elancer.enterprise.dto.*;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
@@ -79,7 +76,15 @@ public class EnterpriseController {
         return new ResponseEntity<>(enterpriseProfileResponse, HttpStatus.OK);
     }
 
+    @GetMapping("enterprise-profile")
 
+    public ResponseEntity<EnterpriseDashBoardProfileResponse> findDashBoardProfile(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
 
+        EnterpriseDashBoardProfileResponse dashBoardProfile = enterpriseService.findDashBoardProfile(memberDetails);
+
+        return new ResponseEntity<>(dashBoardProfile, HttpStatus.OK);
+    }
 
 }
