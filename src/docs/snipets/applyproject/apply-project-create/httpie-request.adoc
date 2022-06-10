@@ -1,0 +1,8 @@
+[source,bash]
+----
+$ echo '{
+  "projectNum" : 1
+}' | http POST 'http://localhost:8080/apply-project' \
+    'Content-Type:application/json;charset=UTF-8' \
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDgyOTcxNSwiZXhwIjoxNjU0ODI5NzIxfQ.0X430xlonvSOiZPOHJE3OTbkRFJRHnjHugJJewaToBA'
+----

@@ -1,0 +1,9 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/apply-project' -i -X POST \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDgyOTcxNSwiZXhwIjoxNjU0ODI5NzIxfQ.0X430xlonvSOiZPOHJE3OTbkRFJRHnjHugJJewaToBA' \
+    -d '{
+  "projectNum" : 1
+}'
+----
