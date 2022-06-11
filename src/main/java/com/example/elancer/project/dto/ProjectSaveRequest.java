@@ -66,6 +66,7 @@ public class ProjectSaveRequest {
                 .careerMonth(careerMonth)
                 .minDesiredAge(minDesiredAge)
                 .maxDesiredAge(maxDesiredAge)
+                .projectStatus(ProjectStatus.PROGRESS)
                 .build();
     }
 }

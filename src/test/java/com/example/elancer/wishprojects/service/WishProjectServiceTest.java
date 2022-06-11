@@ -8,12 +8,7 @@ import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
-import com.example.elancer.project.model.EnterpriseLogo;
-import com.example.elancer.project.model.PositionKind;
-import com.example.elancer.project.model.Project;
-import com.example.elancer.project.model.ProjectBackGround;
-import com.example.elancer.project.model.ProjectStep;
-import com.example.elancer.project.model.ProjectType;
+import com.example.elancer.project.model.*;
 import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.wishprojects.dto.WishProjectDeleteRequest;
 import com.example.elancer.wishprojects.dto.WishProjectSaveRequest;
@@ -72,7 +67,8 @@ class WishProjectServiceTest extends ServiceBaseTest {
                 5,
                 3,
                 30,
-                35
+                35,
+                ProjectStatus.PROGRESS
         ));
         WishProjectSaveRequest wishProjectSaveRequest = new WishProjectSaveRequest(project.getNum());
 
@@ -117,7 +113,8 @@ class WishProjectServiceTest extends ServiceBaseTest {
                 5,
                 3,
                 30,
-                35
+                35,
+                ProjectStatus.PROGRESS
         ));
         WishProject wishProject = wishProjectRepository.save(WishProject.createWishProject(freelancer, project));
 

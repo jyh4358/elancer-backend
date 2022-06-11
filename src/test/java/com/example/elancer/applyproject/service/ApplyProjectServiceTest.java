@@ -9,12 +9,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
-import com.example.elancer.project.model.EnterpriseLogo;
-import com.example.elancer.project.model.PositionKind;
-import com.example.elancer.project.model.Project;
-import com.example.elancer.project.model.ProjectBackGround;
-import com.example.elancer.project.model.ProjectStep;
-import com.example.elancer.project.model.ProjectType;
+import com.example.elancer.project.model.*;
 import com.example.elancer.project.repository.ProjectRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -64,7 +59,8 @@ class ApplyProjectServiceTest extends ServiceBaseTest {
                 5,
                 3,
                 30,
-                35
+                35,
+                ProjectStatus.PROGRESS
         ));
 
         ApplyProjectCreateRequest applyProjectCreateRequest = new ApplyProjectCreateRequest(project.getNum());

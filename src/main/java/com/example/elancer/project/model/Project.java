@@ -39,6 +39,7 @@ public class Project extends BasicEntity {
     private Integer careerMonth;
     private Integer minDesiredAge;
     private Integer maxDesiredAge;
+    private ProjectStatus projectStatus;
     // todo - 요구사항 정의서 나중에 추가
 
 
@@ -63,7 +64,8 @@ public class Project extends BasicEntity {
                    Integer careerYear,
                    Integer careerMonth,
                    Integer minDesiredAge,
-                   Integer maxDesiredAge
+                   Integer maxDesiredAge,
+                   ProjectStatus projectStatus
     ) {
         this.projectType = projectType;
         this.projectBackGround = projectBackGround;
@@ -86,6 +88,7 @@ public class Project extends BasicEntity {
         this.careerMonth = careerMonth;
         this.minDesiredAge = minDesiredAge;
         this.maxDesiredAge = maxDesiredAge;
+        this.projectStatus = projectStatus;
     }
 }
 

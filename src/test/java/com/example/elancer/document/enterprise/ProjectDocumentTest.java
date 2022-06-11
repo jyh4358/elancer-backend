@@ -177,7 +177,8 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                 5,
                 3,
                 30,
-                35
+                35,
+                ProjectStatus.PROGRESS
         ));
 
         ProjectDeleteRequest projectDeleteRequest = new ProjectDeleteRequest(

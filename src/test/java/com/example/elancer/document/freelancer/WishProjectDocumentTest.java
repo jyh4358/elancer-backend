@@ -73,7 +73,8 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
                 5,
                 3,
                 30,
-                35
+                35,
+                ProjectStatus.PROGRESS
         ));
 
         WishProjectSaveRequest wishProjectSaveRequest = new WishProjectSaveRequest(project.getNum());
@@ -125,7 +126,8 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
                 5,
                 3,
                 30,
-                35
+                35,
+                ProjectStatus.PROGRESS
         ));
         WishProject wishProject = wishProjectRepository.save(new WishProject(freelancer, project));
 
