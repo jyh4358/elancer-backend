@@ -17,7 +17,7 @@ public class RightRequestChecker {
     }
 
     public static void checkFreelancerProfileAndRequester(FreelancerProfile freelancerProfile, MemberDetails memberDetails) {
-        if (memberDetails.checkPresentId() && !freelancerProfile.getNum().equals(memberDetails.getId())) {
+        if (memberDetails.checkPresentId() && !freelancerProfile.getFreelancer().getNum().equals(memberDetails.getId())) {
             throw new WrongRequestException("프로필에 대한 요청자와 프리랜서가 동일하지 않습니다. 잘못된 요청입니다.");
         }
     }

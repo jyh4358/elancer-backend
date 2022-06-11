@@ -22,7 +22,7 @@ import java.util.Date;
 public class JwtTokenProvider {
 
     public static final String AUTHORITIES_KEY = "Authorization";
-    public static final String REFRESH_KEY = "Refresh-Authorization";
+    public static final String REFRESH_KEY = "RefreshAuthorization";
 
     private final String secretKey;
     private final Long accessExpired;
