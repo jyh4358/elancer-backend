@@ -23,7 +23,7 @@ public class InterviewProjectController {
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody InterviewProjectRequest interviewProjectRequest
     ) {
-        interviewProjectService.createApplyProject(interviewProjectRequest, memberDetails);
+        interviewProjectService.createInterviewProject(interviewProjectRequest, memberDetails);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

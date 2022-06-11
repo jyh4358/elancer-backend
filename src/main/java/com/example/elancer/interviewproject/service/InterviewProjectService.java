@@ -24,7 +24,7 @@ public class InterviewProjectService {
     private final ProjectRepository projectRepository;
 
     @Transactional
-    public void createApplyProject(InterviewProjectRequest interviewProjectRequest, MemberDetails memberDetails) {
+    public void createInterviewProject(InterviewProjectRequest interviewProjectRequest, MemberDetails memberDetails) {
         RightRequestChecker.checkMemberDetail(memberDetails);
         Freelancer freelancer = freelancerRepository.findById(interviewProjectRequest.getFreelancerNum()).orElseThrow(NotExistFreelancerException::new);
         Project project = projectRepository.findById(interviewProjectRequest.getProjectNum()).orElseThrow(NotExistProjectException::new);
