@@ -73,7 +73,6 @@ public class FreelancerProfileAlterService {
         freelancerProfile.coverCareers(careers);
     }
 
-
     @Transactional
     public void coverFreelancerProjectHistory(MemberDetails memberDetails, ProjectHistoryCoverRequest projectHistoryCoverRequest) {
         RightRequestChecker.checkMemberDetail(memberDetails);
