@@ -19,7 +19,7 @@ public class EnterpriseDashBoardProfileResponse {
 
     private String enterpriseType;
 
-    private String bizContents;
+    private String idNumber;
 
     private Long sales;
 
@@ -32,7 +32,7 @@ public class EnterpriseDashBoardProfileResponse {
                 .reEmploymentIntention(enterprise.getWorkAssessment().getReEmploymentIntention())
                 .totalActiveScore(enterprise.getWorkAssessment().getTotalActiveScore())
                 .enterpriseType((enterprise.getSales() < 30_000_000_000L) ? "중소기업" : "중견기업")
-                .bizContents(enterprise.getBizContents())
+                .idNumber(enterprise.getIdNumber())
                 .sales(enterprise.getSales())
                 .build();
     }
