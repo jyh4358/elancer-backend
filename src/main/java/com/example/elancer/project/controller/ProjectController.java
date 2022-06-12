@@ -5,6 +5,7 @@ import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.ProjectDeleteRequest;
 import com.example.elancer.project.dto.ProjectSaveRequest;
+import com.example.elancer.project.dto.ProjectStartRequest;
 import com.example.elancer.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -45,6 +46,16 @@ public class ProjectController {
             @Validated @RequestBody ProjectDeleteRequest projectDeleteRequest
     ){
         projectService.deleteProject(memberDetails, projectDeleteRequest);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/project-start")
+    public ResponseEntity<Void> startProject(
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody ProjectStartRequest projectStartRequest
+    ) {
+        projectService.startProject(memberDetails, projectStartRequest);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
