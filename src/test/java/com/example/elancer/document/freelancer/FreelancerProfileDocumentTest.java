@@ -16,7 +16,8 @@ import com.example.elancer.freelancerprofile.dto.request.EducationCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.academic.state.AcademicState;
@@ -231,7 +232,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        ProjectHistoryCoverRequest projectHistoryCoverRequest = new ProjectHistoryCoverRequest(
+        ProjectHistoryRequest projectHistoryRequest = new ProjectHistoryRequest(
                 "projectTitle",
                 LocalDate.of(2020, 12, 01),
                 LocalDate.of(2021, 9, 01),
@@ -249,6 +250,8 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
                 "담당업무"
         );
 
+        ProjectHistoryCoverRequests projectHistoryCoverRequest = new ProjectHistoryCoverRequests(Arrays.asList(projectHistoryRequest));
+
         //when & then
         mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -262,21 +265,21 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
                                 headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         requestFields(
-                                fieldWithPath("projectTitle").type("String").description("프리랜서 프로젝트 수행이력 프로젝트명 정보 필드."),
-                                fieldWithPath("projectStartDate").type("LocalDate").description("프리랜서 프로젝트 수행이력 프로젝트 시작년월 정보 필드."),
-                                fieldWithPath("projectEndDate").type("LocalDate").description("프리랜서 프로젝트 수행이력 프로젝트 종료년월 정보 필드."),
-                                fieldWithPath("clientCompany").type("String").description("프리랜서 프로젝트 수행이력 고객사 정보 필드."),
-                                fieldWithPath("workCompany").type("String").description("프리랜서 프로젝트 수행이력 근무사 정보 필드."),
-                                fieldWithPath("developField").type("DevelopField").description("프리랜서 프로젝트 수행이력 개발분야 정보 필드."),
-                                fieldWithPath("developRole").type("String").description("프리랜서 프로젝트 수행이력 역할 정보 필드."),
-                                fieldWithPath("developEnvironmentModel").type("String").description("프리랜서 프로젝트 수행이력 개발환경 기종 정보 필드."),
-                                fieldWithPath("developEnvironmentOS").type("String").description("프리랜서 프로젝트 수행이력 개발환경 os 정보 필드."),
-                                fieldWithPath("developEnvironmentLanguage").type("String").description("프리랜서 프로젝트 수행이력 개발환경 언어 정보 필드."),
-                                fieldWithPath("developEnvironmentDBName").type("String").description("프리랜서 프로젝트 수행이력 개발환경 DB 정보 필드."),
-                                fieldWithPath("developEnvironmentTool").type("String").description("프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드."),
-                                fieldWithPath("developEnvironmentCommunication").type("String").description("프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드."),
-                                fieldWithPath("developEnvironmentEtc").type("String").description("프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드."),
-                                fieldWithPath("responsibilityTask").type("String").description("프리랜서 프로젝트 수행이력 담당업무 정보 필드.")
+                                fieldWithPath("projectHistoryRequestList.[0].projectTitle").type("String").description("프리랜서 프로젝트 수행이력 프로젝트명 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].projectStartDate").type("LocalDate").description("프리랜서 프로젝트 수행이력 프로젝트 시작년월 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].projectEndDate").type("LocalDate").description("프리랜서 프로젝트 수행이력 프로젝트 종료년월 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].clientCompany").type("String").description("프리랜서 프로젝트 수행이력 고객사 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].workCompany").type("String").description("프리랜서 프로젝트 수행이력 근무사 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].developField").type("DevelopField").description("프리랜서 프로젝트 수행이력 개발분야 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].developRole").type("String").description("프리랜서 프로젝트 수행이력 역할 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].developEnvironmentModel").type("String").description("프리랜서 프로젝트 수행이력 개발환경 기종 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].developEnvironmentOS").type("String").description("프리랜서 프로젝트 수행이력 개발환경 os 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].developEnvironmentLanguage").type("String").description("프리랜서 프로젝트 수행이력 개발환경 언어 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].developEnvironmentDBName").type("String").description("프리랜서 프로젝트 수행이력 개발환경 DB 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].developEnvironmentTool").type("String").description("프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].developEnvironmentCommunication").type("String").description("프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].developEnvironmentEtc").type("String").description("프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드."),
+                                fieldWithPath("projectHistoryRequestList.[0].responsibilityTask").type("String").description("프리랜서 프로젝트 수행이력 담당업무 정보 필드.")
                         )
                 ));
     }

@@ -4,7 +4,7 @@ import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverReq
 import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequests;
 import com.example.elancer.freelancerprofile.dto.request.EducationAndLicenseAndLanguageRequests;
 import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequests;
 import com.example.elancer.freelancerprofile.service.FreelancerProfileAlterService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,9 +51,9 @@ public class FreelancerProfileAlterController {
     @PutMapping(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER)
     public ResponseEntity<Void> coverFreelancerProjectHistory(
             @AuthenticationPrincipal MemberDetails memberDetails,
-            @Validated @RequestBody ProjectHistoryCoverRequest projectHistoryCoverRequest
+            @Validated @RequestBody ProjectHistoryCoverRequests projectHistoryCoverRequests
     ) {
-        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, projectHistoryCoverRequest);
+        freelancerProfileAlterService.coverFreelancerProjectHistory(memberDetails, projectHistoryCoverRequests);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 

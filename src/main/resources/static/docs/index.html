@@ -605,7 +605,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 389
+Content-Length: 377
 Host: localhost:8080
 
 {
@@ -724,8 +724,8 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjEwOCwiZXhwIjoxNjU0OTMzOTA4fQ.B3oHffIu3p9-cFCr1yHlbbvbLp7VJwTYGHMOJstbm-M
-Content-Length: 843
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4NiwiZXhwIjoxNjU1MzUwNDQ2fQ.u9ZfmWjuA1kZsstn94HW_azjp2HzH8Zky6L8DI0KWEA
+Content-Length: 816
 Host: localhost:8080
 
 {
@@ -938,7 +938,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjEwNywiZXhwIjoxNjU0OTMzOTA3fQ.bXi27ZEXmg95_6wvLcwv0ac_RQymKH5bfb0Y3CzD40g
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4NiwiZXhwIjoxNjU1MzUwNDQ2fQ.u9ZfmWjuA1kZsstn94HW_azjp2HzH8Zky6L8DI0KWEA
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1144,11 +1144,12 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/intro HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMSwiZXhwIjoxNjU0OTMzOTExfQ.xf4IzPztzK5Mbu9DWSYmoki9kFv8LV-Ven4eDLa8APQ
-Content-Length: 145
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MCwiZXhwIjoxNjU1MzUwNDUwfQ.I4zWlClb6keTpb5DC4JSnd4uPICalV8l7bR1xZ5EqjM
+Content-Length: 167
 Host: localhost:8080
 
 {
+  "greeting" : "greeting",
   "introName" : "introName",
   "introBackGround" : "COBALT_BLUE",
   "introVideoUrl" : "introVideoUrl",
@@ -1193,6 +1194,11 @@ Host: localhost:8080
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>greeting</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 한줄소개 정보 필드.</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>introName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 소개이름 정보 필드.</p></td>
@@ -1217,6 +1223,7 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "greeting" : "greeting",
   "introName" : "introName",
   "introBackGround" : "COBALT_BLUE",
   "introVideoUrl" : "introVideoUrl",
@@ -1236,8 +1243,8 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/academic-ability HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMSwiZXhwIjoxNjU0OTMzOTExfQ.xf4IzPztzK5Mbu9DWSYmoki9kFv8LV-Ven4eDLa8APQ
-Content-Length: 263
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MSwiZXhwIjoxNjU1MzUwNDUxfQ.AuMJBmquW2Hcs0kKnU2ZSJufcLBMDWefSpq2bADLcQ8
+Content-Length: 254
 Host: localhost:8080
 
 {
@@ -1346,8 +1353,8 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/career HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMCwiZXhwIjoxNjU0OTMzOTEwfQ.zqADb6BV7Rve6z38gupW6QeGkw4HHuvIFEQeFwtEt6k
-Content-Length: 242
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MCwiZXhwIjoxNjU1MzUwNDUwfQ.I4zWlClb6keTpb5DC4JSnd4uPICalV8l7bR1xZ5EqjM
+Content-Length: 234
 Host: localhost:8080
 
 {
@@ -1449,8 +1456,8 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/education-license-language HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMSwiZXhwIjoxNjU0OTMzOTExfQ.xf4IzPztzK5Mbu9DWSYmoki9kFv8LV-Ven4eDLa8APQ
-Content-Length: 505
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MSwiZXhwIjoxNjU1MzUwNDUxfQ.AuMJBmquW2Hcs0kKnU2ZSJufcLBMDWefSpq2bADLcQ8
+Content-Length: 489
 Host: localhost:8080
 
 {
@@ -1588,8 +1595,8 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/project-history HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMiwiZXhwIjoxNjU0OTMzOTEyfQ.Q8WEjWH2itxZFdPxxRUrRzI_W4CVRf6yFoOc9PRLhxM
-Content-Length: 594
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MiwiZXhwIjoxNjU1MzUwNDUyfQ.3EdcKDaxIb--3ucPp-LWOr2Qbl4lJg4UaQQomMm35zI
+Content-Length: 578
 Host: localhost:8080
 
 {
@@ -1757,7 +1764,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/freelancer-profile HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMSwiZXhwIjoxNjU0OTMzOTExfQ.xf4IzPztzK5Mbu9DWSYmoki9kFv8LV-Ven4eDLa8APQ
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MSwiZXhwIjoxNjU1MzUwNDUxfQ.AuMJBmquW2Hcs0kKnU2ZSJufcLBMDWefSpq2bADLcQ8
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2099,7 +2106,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/freelancer-profile/simple HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMiwiZXhwIjoxNjU0OTMzOTEyfQ.Q8WEjWH2itxZFdPxxRUrRzI_W4CVRf6yFoOc9PRLhxM
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MiwiZXhwIjoxNjU1MzUwNDUyfQ.3EdcKDaxIb--3ucPp-LWOr2Qbl4lJg4UaQQomMm35zI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2499,8 +2506,8 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/developer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjEwOSwiZXhwIjoxNjU0OTMzOTA5fQ.OvKWVsNc8clRUfkQcmFQS9ij4n3CAZV1Pfdj4E_es4A
-Content-Length: 406
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4OCwiZXhwIjoxNjU1MzUwNDQ4fQ.SMRT93k4JoqkwCwXPselBJD5BcamCymCQTEQ1WHXMAw
+Content-Length: 395
 Host: localhost:8080
 
 {
@@ -2633,7 +2640,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/developer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMCwiZXhwIjoxNjU0OTMzOTEwfQ.zqADb6BV7Rve6z38gupW6QeGkw4HHuvIFEQeFwtEt6k
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4OSwiZXhwIjoxNjU1MzUwNDQ5fQ.HSTOHCUGkJXZU1GLR9K76KUJECCPitBugP72Npu0SgI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2749,8 +2756,8 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/publisher HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjEwOSwiZXhwIjoxNjU0OTMzOTA5fQ.OvKWVsNc8clRUfkQcmFQS9ij4n3CAZV1Pfdj4E_es4A
-Content-Length: 91
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4OCwiZXhwIjoxNjU1MzUwNDQ4fQ.SMRT93k4JoqkwCwXPselBJD5BcamCymCQTEQ1WHXMAw
+Content-Length: 88
 Host: localhost:8080
 
 {
@@ -2827,7 +2834,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/publisher HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMCwiZXhwIjoxNjU0OTMzOTEwfQ.zqADb6BV7Rve6z38gupW6QeGkw4HHuvIFEQeFwtEt6k
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MCwiZXhwIjoxNjU1MzUwNDUwfQ.I4zWlClb6keTpb5DC4JSnd4uPICalV8l7bR1xZ5EqjM
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2895,8 +2902,8 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/designer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjEwOCwiZXhwIjoxNjU0OTMzOTA4fQ.B3oHffIu3p9-cFCr1yHlbbvbLp7VJwTYGHMOJstbm-M
-Content-Length: 185
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4NywiZXhwIjoxNjU1MzUwNDQ3fQ.q8tBbv-r4l9ukgll2gQr4V-TBhoHcJMwptw20yITEZg
+Content-Length: 180
 Host: localhost:8080
 
 {
@@ -2987,7 +2994,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/designer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjEwOSwiZXhwIjoxNjU0OTMzOTA5fQ.OvKWVsNc8clRUfkQcmFQS9ij4n3CAZV1Pfdj4E_es4A
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4OSwiZXhwIjoxNjU1MzUwNDQ5fQ.HSTOHCUGkJXZU1GLR9K76KUJECCPitBugP72Npu0SgI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3067,8 +3074,8 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjEwOCwiZXhwIjoxNjU0OTMzOTA4fQ.B3oHffIu3p9-cFCr1yHlbbvbLp7VJwTYGHMOJstbm-M
-Content-Length: 88
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4NywiZXhwIjoxNjU1MzUwNDQ3fQ.q8tBbv-r4l9ukgll2gQr4V-TBhoHcJMwptw20yITEZg
+Content-Length: 85
 Host: localhost:8080
 
 {
@@ -3145,7 +3152,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMCwiZXhwIjoxNjU0OTMzOTEwfQ.zqADb6BV7Rve6z38gupW6QeGkw4HHuvIFEQeFwtEt6k
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4OSwiZXhwIjoxNjU1MzUwNDQ5fQ.HSTOHCUGkJXZU1GLR9K76KUJECCPitBugP72Npu0SgI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3213,7 +3220,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/crowd-worker HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjEwOCwiZXhwIjoxNjU0OTMzOTA4fQ.B3oHffIu3p9-cFCr1yHlbbvbLp7VJwTYGHMOJstbm-M
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4NywiZXhwIjoxNjU1MzUwNDQ3fQ.q8tBbv-r4l9ukgll2gQr4V-TBhoHcJMwptw20yITEZg
 Content-Length: 4
 Host: localhost:8080
 
@@ -3232,8 +3239,8 @@ null</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/etc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjEwOSwiZXhwIjoxNjU0OTMzOTA5fQ.OvKWVsNc8clRUfkQcmFQS9ij4n3CAZV1Pfdj4E_es4A
-Content-Length: 84
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4OCwiZXhwIjoxNjU1MzUwNDQ4fQ.SMRT93k4JoqkwCwXPselBJD5BcamCymCQTEQ1WHXMAw
+Content-Length: 81
 Host: localhost:8080
 
 {
@@ -3310,7 +3317,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/etc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMCwiZXhwIjoxNjU0OTMzOTEwfQ.zqADb6BV7Rve6z38gupW6QeGkw4HHuvIFEQeFwtEt6k
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM4OSwiZXhwIjoxNjU1MzUwNDQ5fQ.HSTOHCUGkJXZU1GLR9K76KUJECCPitBugP72Npu0SgI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3378,8 +3385,8 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /wish-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMywiZXhwIjoxNjU0OTMzOTEzfQ.igd8deILzNc_6Ox9EbW4ok0vM0AUJiduESC750InvZk
-Content-Length: 24
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MywiZXhwIjoxNjU1MzUwNDUzfQ.qeaaSAbsSRLy2p_zKQVTM_lTRbtTxHsmile96Q30V2g
+Content-Length: 22
 Host: localhost:8080
 
 {
@@ -3445,8 +3452,8 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /wish-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NDkzMjExMiwiZXhwIjoxNjU0OTMzOTEyfQ.Q8WEjWH2itxZFdPxxRUrRzI_W4CVRf6yFoOc9PRLhxM
-Content-Length: 28
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MDM5MywiZXhwIjoxNjU1MzUwNDUzfQ.qeaaSAbsSRLy2p_zKQVTM_lTRbtTxHsmile96Q30V2g
+Content-Length: 26
 Host: localhost:8080
 
 {
@@ -3938,7 +3945,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /enterprise HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 560
+Content-Length: 539
 Host: localhost:8080
 
 {
@@ -4101,8 +4108,8 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /enterprise HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDYsImV4cCI6MTY1NDkzMzkwNn0._KUE_zSiKtttJdjeIDaP_tV5Vqlzv48HRAZNfxznSmc
-Content-Length: 552
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzNzQsImV4cCI6MTY1NTM1MDQzNH0.lypGZuneYJMD_zdyn83iYg2oaySCLCLGcrNwZWF1Q0s
+Content-Length: 532
 Host: localhost:8080
 
 {
@@ -4267,7 +4274,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 500
+Content-Length: 482
 
 {
   "companyName" : "변경된 회사 이름",
@@ -4410,7 +4417,7 @@ Content-Length: 500
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /enterprise HTTP/1.1
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDUsImV4cCI6MTY1NDkzMzkwNX0.T5oucjKDSt6nIHjiFZn-4BsUkF-Uowsr5oks3b-uOcY
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzNzMsImV4cCI6MTY1NTM1MDQzM30._WUEblyK0WI69nIttowD-0DvUOHwZJZH6af21Dy4tbk
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -4448,7 +4455,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 473
+Content-Length: 455
 
 {
   "companyName" : "기업명",
@@ -4592,8 +4599,8 @@ Content-Length: 473
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /enterprise/profile HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDYsImV4cCI6MTY1NDkzMzkwNn0._KUE_zSiKtttJdjeIDaP_tV5Vqlzv48HRAZNfxznSmc
-Content-Length: 298
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzODQsImV4cCI6MTY1NTM1MDQ0NH0.R2rZOfXhZHsxIpTvx8GXpKK8MvYgzdnwKoHfoppXROk
+Content-Length: 289
 Host: localhost:8080
 
 {
@@ -4702,7 +4709,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 298
+Content-Length: 289
 
 {
   "introTitle" : "프로필 title",
@@ -4802,7 +4809,7 @@ Content-Length: 298
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /enterprise/profile HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDYsImV4cCI6MTY1NDkzMzkwNn0._KUE_zSiKtttJdjeIDaP_tV5Vqlzv48HRAZNfxznSmc
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzODUsImV4cCI6MTY1NTM1MDQ0NX0.q73qZZ7wfv5XTV-awNyS1JZZGh966HIGor6PbNK8RE4
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -4840,7 +4847,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 298
+Content-Length: 289
 
 {
   "introTitle" : "프로필 title",
@@ -4946,7 +4953,7 @@ Content-Length: 298
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /project-save HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDcsImV4cCI6MTY1NDkzMzkwN30.neE6J3NN7DjM69M-cFYJ2W56L4couh2TeoCF5K73_ME
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzODUsImV4cCI6MTY1NTM1MDQ0NX0.q73qZZ7wfv5XTV-awNyS1JZZGh966HIGor6PbNK8RE4
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -4988,7 +4995,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 190
+Content-Length: 183
 
 {
   "companyName" : "기업명",
@@ -5076,8 +5083,8 @@ Content-Length: 190
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /project-save HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDcsImV4cCI6MTY1NDkzMzkwN30.neE6J3NN7DjM69M-cFYJ2W56L4couh2TeoCF5K73_ME
-Content-Length: 947
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzODUsImV4cCI6MTY1NTM1MDQ0NX0.q73qZZ7wfv5XTV-awNyS1JZZGh966HIGor6PbNK8RE4
+Content-Length: 914
 Host: localhost:8080
 
 {
@@ -5092,9 +5099,9 @@ Host: localhost:8080
   "headCount" : 10,
   "inputHeadCount" : 10,
   "content" : "프로젝트 상세내용",
-  "projectStateDate" : "2022-06-11",
-  "projectEndDate" : "2022-07-11",
-  "recruitEndDate" : "2022-06-16",
+  "projectStateDate" : "2022-06-16",
+  "projectEndDate" : "2022-07-16",
+  "recruitEndDate" : "2022-06-21",
   "address" : {
     "country" : "KR",
     "zipcode" : "우편번호",
@@ -5322,7 +5329,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /contact-save HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDUsImV4cCI6MTY1NDkzMzkwNX0.T5oucjKDSt6nIHjiFZn-4BsUkF-Uowsr5oks3b-uOcY
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzODQsImV4cCI6MTY1NTM1MDQ0NH0.R2rZOfXhZHsxIpTvx8GXpKK8MvYgzdnwKoHfoppXROk
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -5360,7 +5367,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 98
+Content-Length: 94
 
 {
   "name" : "회원이름",
@@ -5412,8 +5419,8 @@ Content-Length: 98
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /contact-save HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDUsImV4cCI6MTY1NDkzMzkwNX0.T5oucjKDSt6nIHjiFZn-4BsUkF-Uowsr5oks3b-uOcY
-Content-Length: 64
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzODMsImV4cCI6MTY1NTM1MDQ0M30.5sHEMy8q51ixDv7WwHfwQHBBl1QAziujTanVGmqTHJM
+Content-Length: 61
 Host: localhost:8080
 
 {
@@ -5482,8 +5489,8 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /contact-cover HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDUsImV4cCI6MTY1NDkzMzkwNX0.T5oucjKDSt6nIHjiFZn-4BsUkF-Uowsr5oks3b-uOcY
-Content-Length: 99
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzODQsImV4cCI6MTY1NTM1MDQ0NH0.R2rZOfXhZHsxIpTvx8GXpKK8MvYgzdnwKoHfoppXROk
+Content-Length: 95
 Host: localhost:8080
 
 {
@@ -5558,7 +5565,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /contacts HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMDUsImV4cCI6MTY1NDkzMzkwNX0.T5oucjKDSt6nIHjiFZn-4BsUkF-Uowsr5oks3b-uOcY
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzODMsImV4cCI6MTY1NTM1MDQ0M30.5sHEMy8q51ixDv7WwHfwQHBBl1QAziujTanVGmqTHJM
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -5596,23 +5603,23 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 344
+Content-Length: 329
 
 [ {
   "num" : 1,
   "title" : "제목 title1",
   "content" : "내용 content1",
-  "localDate" : "2022-06-11"
+  "localDate" : "2022-06-16"
 }, {
   "num" : 2,
   "title" : "제목 title2",
   "content" : "내용 content2",
-  "localDate" : "2022-06-11"
+  "localDate" : "2022-06-16"
 }, {
   "num" : 3,
   "title" : "제목 title3",
   "content" : "내용 content3",
-  "localDate" : "2022-06-11"
+  "localDate" : "2022-06-16"
 } ]</code></pre>
 </div>
 </div>
@@ -5693,7 +5700,7 @@ Content-Length: 344
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /login HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 56
+Content-Length: 53
 Host: localhost:8080
 
 {
@@ -5762,12 +5769,12 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 334
+Content-Length: 330
 
 {
   "memberType" : "ENTERPRISE",
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMTQsImV4cCI6MTY1NDkzMzkxNH0.UBxxW1EXcw2nTK3ahabnHhG5lxH9k_cEEeIFZmvYmZw",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTQ5MzIxMTQsImV4cCI6MTY1NTAxODUxNH0.st3DrI5ccLGCu68fcuTpVZLXDHQat425avVmca70XS8"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzOTUsImV4cCI6MTY1NTM1MDQ1NX0.6Qqk4q1ZqTsuF28uO5m4OB_QISAKKcqbbGBNa8LN2x8",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTUzNTAzOTUsImV4cCI6MTY1NTM1MDk5OX0.nxDuQ-E77h-rUHHTX_P5WUtJHv6808lkmzc1wvZPMbE"
 }</code></pre>
 </div>
 </div>
@@ -5832,8 +5839,8 @@ Content-Length: 334
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /reissue HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMTMsImV4cCI6MTY1NDkzMzkxM30.mnP_x3GydjVXZ_PPEpPRXLW5Z3lz5JUkj1gVpAL0jI4
-RefreshAuthorization: eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTQ5MzIxMTMsImV4cCI6MTY1NTAxODUxM30.oVrZoOUYwusiWgPw7_WhFFRVSepXxqO3ZWQuoGQRXAE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzOTQsImV4cCI6MTY1NTM1MDQ1NH0.yvB8ggDTyRasf0uC6F1eLmtnL0-qzuYBvkM6PgVX--o
+RefreshAuthorization: eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTUzNTAzOTQsImV4cCI6MTY1NTM1MDk5OX0.4fwiQ8vDr9Zwh6qo4-3qJ9bO5iVesHnkdb8mWcdhCXg
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -5875,11 +5882,11 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 302
+Content-Length: 299
 
 {
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTQ5MzIxMTMsImV4cCI6MTY1NDkzMzkxM30.mnP_x3GydjVXZ_PPEpPRXLW5Z3lz5JUkj1gVpAL0jI4",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTQ5MzIxMTMsImV4cCI6MTY1NTAxODUxM30.oVrZoOUYwusiWgPw7_WhFFRVSepXxqO3ZWQuoGQRXAE"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTUzNTAzOTQsImV4cCI6MTY1NTM1MDQ1NH0.yvB8ggDTyRasf0uC6F1eLmtnL0-qzuYBvkM6PgVX--o",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTUzNTAzOTQsImV4cCI6MTY1NTM1MDk5OX0.4fwiQ8vDr9Zwh6qo4-3qJ9bO5iVesHnkdb8mWcdhCXg"
 }</code></pre>
 </div>
 </div>
@@ -5933,7 +5940,7 @@ Content-Length: 302
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-06-11 16:17:40 +0900
+Last updated 2022-06-10 11:59:38 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

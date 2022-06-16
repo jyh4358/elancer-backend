@@ -10,7 +10,8 @@ import com.example.elancer.freelancerprofile.dto.request.EducationCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryRequest;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
@@ -75,29 +76,15 @@ public class FreelancerProfileAlterService {
     }
 
     @Transactional
-    public void coverFreelancerProjectHistory(MemberDetails memberDetails, ProjectHistoryCoverRequest projectHistoryCoverRequest) {
+    public void coverFreelancerProjectHistory(MemberDetails memberDetails, ProjectHistoryCoverRequests projectHistoryCoverRequest) {
         RightRequestChecker.checkMemberDetail(memberDetails);
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
-        freelancerProfile.plusProjectHistory(ProjectHistory.createProjectHistory(
-                projectHistoryCoverRequest.getProjectTitle(),
-                projectHistoryCoverRequest.getProjectStartDate(),
-                projectHistoryCoverRequest.getProjectEndDate(),
-                projectHistoryCoverRequest.getClientCompany(),
-                projectHistoryCoverRequest.getWorkCompany(),
-                projectHistoryCoverRequest.getDevelopField(),
-                projectHistoryCoverRequest.getDevelopRole(),
-                DevelopEnvironment.of(
-                        projectHistoryCoverRequest.getDevelopEnvironmentModel(),
-                        projectHistoryCoverRequest.getDevelopEnvironmentOS(),
-                        projectHistoryCoverRequest.getDevelopEnvironmentLanguage(),
-                        projectHistoryCoverRequest.getDevelopEnvironmentDBName(),
-                        projectHistoryCoverRequest.getDevelopEnvironmentTool(),
-                        projectHistoryCoverRequest.getDevelopEnvironmentCommunication(),
-                        projectHistoryCoverRequest.getDevelopEnvironmentEtc()
-                ),
-                projectHistoryCoverRequest.getResponsibilityTask()
-        ));
+        List<ProjectHistory> projectHistories = projectHistoryCoverRequest.getProjectHistoryRequestList().stream()
+                .map(ProjectHistoryRequest::toProjectHistory)
+                .collect(Collectors.toList());
+
+        freelancerProfile.coverProjectHistory(projectHistories);
     }
 
     @Transactional
