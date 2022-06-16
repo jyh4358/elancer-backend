@@ -69,7 +69,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        IntroduceCoverRequest introduceCoverRequest = new IntroduceCoverRequest("introName", IntroBackGround.COBALT_BLUE, "introVideoUrl", "introContent");
+        IntroduceCoverRequest introduceCoverRequest = new IntroduceCoverRequest("greeting","introName", IntroBackGround.COBALT_BLUE, "introVideoUrl", "introContent");
 
         //when & then
         mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_INTRO_COVER)
@@ -84,6 +84,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
                                 headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         requestFields(
+                                fieldWithPath("greeting").type("String").description("프리랜서 프로필 한줄소개 정보 필드."),
                                 fieldWithPath("introName").type("String").description("프리랜서 소개이름 정보 필드."),
                                 fieldWithPath("introBackGround").type("IntroBackGround").description("프리랜서 소개배경 정보 필드."),
                                 fieldWithPath("introVideoUrl").type("String").description("프리랜서 소개영상 URL 정보 필드."),
@@ -343,7 +344,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
         IntroBackGround introBackGround = IntroBackGround.COBALT_BLUE;
         String introduceVideoURL = "소개 영상 주소";
         String introduceContent = "소개 내용";
-        freelancerProfile.coverIntroduceInFreelancer(introduceName, introBackGround, introduceVideoURL, introduceContent);
+        freelancerProfile.coverIntroduceInFreelancer(freelancerProfile.getGreeting(), introduceName, introBackGround, introduceVideoURL, introduceContent);
 
         freelancerProfile.coverAcademicAbilities(Arrays.asList(academicAbility));
         freelancerProfile.coverCareers(Arrays.asList(career));
@@ -481,7 +482,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
         IntroBackGround introBackGround = IntroBackGround.COBALT_BLUE;
         String introduceVideoURL = "소개 영상 주소";
         String introduceContent = "소개 내용";
-        freelancerProfile.coverIntroduceInFreelancer(introduceName, introBackGround, introduceVideoURL, introduceContent);
+        freelancerProfile.coverIntroduceInFreelancer(freelancerProfile.getGreeting(),introduceName, introBackGround, introduceVideoURL, introduceContent);
 
         freelancerProfile.coverAcademicAbilities(Arrays.asList(academicAbility));
         freelancerProfile.coverCareers(Arrays.asList(career));

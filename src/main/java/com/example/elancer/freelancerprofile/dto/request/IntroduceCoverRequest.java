@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class IntroduceCoverRequest {
+    private String greeting;
     private String introName;
     private IntroBackGround introBackGround;
     private String introVideoUrl;
