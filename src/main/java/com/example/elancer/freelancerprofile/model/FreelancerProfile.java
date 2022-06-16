@@ -75,7 +75,8 @@ public class FreelancerProfile extends BasicEntity {
         this.position = positionType.getFunction().apply(this);
     }
 
-    public void coverIntroduceInFreelancer(String introduceName, IntroBackGround introBackGround, String introduceVideoURL, String introduceContent) {
+    public void coverIntroduceInFreelancer(String greeting, String introduceName, IntroBackGround introBackGround, String introduceVideoURL, String introduceContent) {
+        this.greeting = greeting;
         this.introduceName = introduceName;
         this.introBackGround = introBackGround;
         this.introduceVideoURL = introduceVideoURL;

@@ -41,6 +41,7 @@ public class FreelancerProfileAlterService {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         freelancerProfile.coverIntroduceInFreelancer(
+                introduceCoverRequest.getGreeting(),
                 introduceCoverRequest.getIntroName(),
                 introduceCoverRequest.getIntroBackGround(),
                 introduceCoverRequest.getIntroVideoUrl(),

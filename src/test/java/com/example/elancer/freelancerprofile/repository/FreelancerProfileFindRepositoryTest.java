@@ -125,7 +125,7 @@ class FreelancerProfileFindRepositoryTest {
         IntroBackGround introBackGround = IntroBackGround.COBALT_BLUE;
         String introduceVideoURL = "소개 영상 주소";
         String introduceContent = "소개 내용";
-        freelancerProfile.coverIntroduceInFreelancer(introduceName, introBackGround, introduceVideoURL, introduceContent);
+        freelancerProfile.coverIntroduceInFreelancer(freelancerProfile.getGreeting(), introduceName, introBackGround, introduceVideoURL, introduceContent);
 
         freelancerProfile.coverAcademicAbilities(Arrays.asList(academicAbility, academicAbility2));
         freelancerProfile.coverCareers(Arrays.asList(career));

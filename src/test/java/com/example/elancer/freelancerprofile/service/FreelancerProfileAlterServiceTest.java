@@ -78,7 +78,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         IntroduceCoverRequest introduceCoverRequest =
-                new IntroduceCoverRequest("testname", IntroBackGround.COBALT_BLUE, "url", "introContent");
+                new IntroduceCoverRequest("greeting","testname", IntroBackGround.COBALT_BLUE, "url", "introContent");
 
         MemberDetails memberDetails = MemberDetails.builder()
                 .id(freelancer.getNum())
