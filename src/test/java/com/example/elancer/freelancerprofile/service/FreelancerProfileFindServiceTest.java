@@ -147,7 +147,7 @@ class FreelancerProfileFindServiceTest {
         freelancerProfile.coverEducation(Arrays.asList(education));
         freelancerProfile.coverLicense(Arrays.asList(license));
         freelancerProfile.coverLanguage(Arrays.asList(language));
-        freelancerProfile.plusProjectHistory(projectHistory);
+        freelancerProfile.coverProjectHistory(Arrays.asList(projectHistory));
         freelancerProfile.coverPosition(developer);
 
         when(freelancerProfileFindRepository.findFreelancerProfileByFetch(any())).thenReturn(Optional.of(freelancerProfile));
@@ -324,7 +324,7 @@ class FreelancerProfileFindServiceTest {
         freelancerProfile.coverEducation(Arrays.asList(education));
         freelancerProfile.coverLicense(Arrays.asList(license));
         freelancerProfile.coverLanguage(Arrays.asList(language));
-        freelancerProfile.plusProjectHistory(projectHistory);
+        freelancerProfile.coverProjectHistory(Arrays.asList(projectHistory));
         freelancerProfile.coverPosition(developer);
 
 

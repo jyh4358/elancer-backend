@@ -1,11 +1,12 @@
 [source,bash]
 ----
 $ echo '{
+  "greeting" : "greeting",
   "introName" : "introName",
   "introBackGround" : "COBALT_BLUE",
   "introVideoUrl" : "introVideoUrl",
   "introContent" : "introContent"
 }' | http PUT 'http://localhost:8080/freelancer-profile/intro' \
     'Content-Type:application/json;charset=UTF-8' \
-    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1MTk0MTQ3MiwiZXhwIjoxNjUxOTQxNTU5fQ.93jx2_rlhvFCjNQyV9JPVCyCVcio0-TkN7RP6ifPy8s'
+    'Authorization:eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NTM1MjkxMSwiZXhwIjoxNjU1MzUyOTcxfQ.DcFPecO816hJIUXQiq9QvEc_eJFBaKVqypA4_DF34tM'
 ----

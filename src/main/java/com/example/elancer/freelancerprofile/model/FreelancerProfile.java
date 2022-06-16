@@ -103,9 +103,12 @@ public class FreelancerProfile extends BasicEntity {
         this.careers.addAll(careers);
     }
 
-    public void plusProjectHistory(ProjectHistory projectHistory) {
-        this.projectHistories.add(projectHistory);
-        projectHistory.setFreelancerProfile(this);
+    public void coverProjectHistory(List<ProjectHistory> projectHistories) {
+        this.projectHistories.clear();
+        for (ProjectHistory projectHistory : projectHistories) {
+            projectHistory.setFreelancerProfile(this);
+        }
+        this.projectHistories.addAll(projectHistories);
     }
 
     public void coverEducation(List<Education> educations) {

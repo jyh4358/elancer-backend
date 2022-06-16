@@ -13,7 +13,8 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.academic.state.SchoolLevel;
@@ -181,7 +182,7 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        ProjectHistoryCoverRequest projectHistoryCoverRequest = new ProjectHistoryCoverRequest(
+        ProjectHistoryRequest projectHistoryRequest = new ProjectHistoryRequest(
                 "projectTitle",
                 LocalDate.of(2020, 12, 01),
                 LocalDate.of(2021, 9, 01),
@@ -199,6 +200,8 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
                 "담당업무"
         );
 
+        ProjectHistoryCoverRequests projectHistoryCoverRequest = new ProjectHistoryCoverRequests(Arrays.asList(projectHistoryRequest));
+
         MemberDetails memberDetails = MemberDetails.builder()
                 .id(freelancer.getNum())
                 .userId(freelancer.getUserId())
@@ -211,21 +214,21 @@ class FreelancerProfileAlterServiceTest extends ServiceBaseTest {
         //then
         List<ProjectHistory> projectHistories = projectHistoryRepository.findAll();
         Assertions.assertThat(projectHistories).hasSize(1);
-        Assertions.assertThat(projectHistories.get(0).getProjectTitle()).isEqualTo(projectHistoryCoverRequest.getProjectTitle());
-        Assertions.assertThat(projectHistories.get(0).getProjectStartDate()).isEqualTo(projectHistoryCoverRequest.getProjectStartDate());
-        Assertions.assertThat(projectHistories.get(0).getProjectEndDate()).isEqualTo(projectHistoryCoverRequest.getProjectEndDate());
-        Assertions.assertThat(projectHistories.get(0).getClientCompany()).isEqualTo(projectHistoryCoverRequest.getClientCompany());
-        Assertions.assertThat(projectHistories.get(0).getWorkCompany()).isEqualTo(projectHistoryCoverRequest.getWorkCompany());
-        Assertions.assertThat(projectHistories.get(0).getDevelopField()).isEqualTo(projectHistoryCoverRequest.getDevelopField());
-        Assertions.assertThat(projectHistories.get(0).getDevelopRole()).isEqualTo(projectHistoryCoverRequest.getDevelopRole());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentModel()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentModel());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentOS()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentOS());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentLanguage()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentLanguage());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentDBName()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentDBName());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentTool()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentTool());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentCommunication()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentCommunication());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentEtc()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentEtc());
-        Assertions.assertThat(projectHistories.get(0).getResponsibilityTask()).isEqualTo(projectHistoryCoverRequest.getResponsibilityTask());
+        Assertions.assertThat(projectHistories.get(0).getProjectTitle()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getProjectTitle());
+        Assertions.assertThat(projectHistories.get(0).getProjectStartDate()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getProjectStartDate());
+        Assertions.assertThat(projectHistories.get(0).getProjectEndDate()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getProjectEndDate());
+        Assertions.assertThat(projectHistories.get(0).getClientCompany()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getClientCompany());
+        Assertions.assertThat(projectHistories.get(0).getWorkCompany()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getWorkCompany());
+        Assertions.assertThat(projectHistories.get(0).getDevelopField()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getDevelopField());
+        Assertions.assertThat(projectHistories.get(0).getDevelopRole()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getDevelopRole());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentModel()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getDevelopEnvironmentModel());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentOS()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getDevelopEnvironmentOS());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentLanguage()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getDevelopEnvironmentLanguage());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentDBName()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getDevelopEnvironmentDBName());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentTool()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getDevelopEnvironmentTool());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentCommunication()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getDevelopEnvironmentCommunication());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentEtc()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getDevelopEnvironmentEtc());
+        Assertions.assertThat(projectHistories.get(0).getResponsibilityTask()).isEqualTo(projectHistoryCoverRequest.getProjectHistoryRequestList().get(0).getResponsibilityTask());
     }
 
     @DisplayName("프리랜서 프로필 교육 및 자격사항 저장 테스트")

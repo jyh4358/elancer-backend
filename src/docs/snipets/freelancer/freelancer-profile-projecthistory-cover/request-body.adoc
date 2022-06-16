@@ -1,20 +1,38 @@
 [source,options="nowrap"]
 ----
 {
-  "projectTitle" : "projectTitle",
-  "projectStartDate" : "2020-12-01",
-  "projectEndDate" : "2021-09-01",
-  "clientCompany" : "clientCompany",
-  "workCompany" : "workCompany",
-  "developField" : "APPLICATION",
-  "developRole" : "백엔드 개발자",
-  "developEnvironmentModel" : "model",
-  "developEnvironmentOS" : "OS",
-  "developEnvironmentLanguage" : "language",
-  "developEnvironmentDBName" : "mysql",
-  "developEnvironmentTool" : "tool",
-  "developEnvironmentCommunication" : "communication",
-  "developEnvironmentEtc" : null,
-  "responsibilityTask" : "담당업무"
+  "projectHistoryRequestList" : [ {
+    "projectTitle" : "projectTitle",
+    "projectStartDate" : "2020-12-01",
+    "projectEndDate" : "2021-09-01",
+    "clientCompany" : "clientCompany",
+    "workCompany" : "workCompany",
+    "developField" : "APPLICATION",
+    "developRole" : "백엔드 개발자",
+    "developEnvironmentModel" : "model",
+    "developEnvironmentOS" : "OS",
+    "developEnvironmentLanguage" : "language",
+    "developEnvironmentDBName" : "mysql",
+    "developEnvironmentTool" : "tool",
+    "developEnvironmentCommunication" : "communication",
+    "developEnvironmentEtc" : null,
+    "responsibilityTask" : "담당업무"
+  }, {
+    "projectTitle" : "projectTitle2",
+    "projectStartDate" : "2020-11-01",
+    "projectEndDate" : "2021-08-01",
+    "clientCompany" : "clientCompany2",
+    "workCompany" : "workCompany2",
+    "developField" : "APPLICATION",
+    "developRole" : "프론트엔드 개발자",
+    "developEnvironmentModel" : "model2",
+    "developEnvironmentOS" : "OS2",
+    "developEnvironmentLanguage" : "language2",
+    "developEnvironmentDBName" : "mysql2",
+    "developEnvironmentTool" : "tool2",
+    "developEnvironmentCommunication" : "communication2",
+    "developEnvironmentEtc" : null,
+    "responsibilityTask" : "담당업무2"
+  } ]
 }
 ----

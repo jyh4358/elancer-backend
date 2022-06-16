@@ -1,6 +1,10 @@
 |===
 |Path|Type|Description
 
+|`+greeting+`
+|`+String+`
+|프리랜서 프로필 한줄소개 정보 필드.
+
 |`+introName+`
 |`+String+`
 |프리랜서 소개이름 정보 필드.

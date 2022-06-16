@@ -16,7 +16,8 @@ import com.example.elancer.freelancerprofile.dto.request.EducationCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.LanguageCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.LicenseCoverRequest;
-import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequest;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequests;
+import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryRequest;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import com.example.elancer.freelancerprofile.model.academic.state.AcademicState;
@@ -167,7 +168,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        ProjectHistoryCoverRequest projectHistoryCoverRequest = new ProjectHistoryCoverRequest(
+        ProjectHistoryRequest projectHistoryRequest = new ProjectHistoryRequest(
                 "projectTitle",
                 LocalDate.of(2020, 12, 01),
                 LocalDate.of(2021, 9, 01),
@@ -184,6 +185,8 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
                 null,
                 "담당업무"
         );
+
+        ProjectHistoryCoverRequests projectHistoryCoverRequest = new ProjectHistoryCoverRequests(Arrays.asList(projectHistoryRequest));
 
         //when
         프리랜서_프로필_프로젝트이력_저장_요청(freelancerProfile, projectHistoryCoverRequest, memberLoginResponse);
@@ -297,7 +300,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         freelancerProfile.coverEducation(Arrays.asList(education));
         freelancerProfile.coverLicense(Arrays.asList(license));
         freelancerProfile.coverLanguage(Arrays.asList(language));
-        freelancerProfile.plusProjectHistory(projectHistory);
+        freelancerProfile.coverProjectHistory(Arrays.asList(projectHistory));
         freelancerProfile.coverPosition(developer);
 
         freelancerProfileRepository.save(freelancerProfile);
@@ -391,7 +394,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         freelancerProfile.coverEducation(Arrays.asList(education));
         freelancerProfile.coverLicense(Arrays.asList(license));
         freelancerProfile.coverLanguage(Arrays.asList(language));
-        freelancerProfile.plusProjectHistory(projectHistory);
+        freelancerProfile.coverProjectHistory(Arrays.asList(projectHistory));
         freelancerProfile.coverPosition(developer);
 
         freelancerProfileRepository.save(freelancerProfile);
@@ -494,33 +497,33 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         Assertions.assertThat(career.getCareerEndDate()).isEqualTo(careerCoverRequest.getCareerEndDate());
     }
 
-    private void 프리랜서_프로필_프로젝트이력_저장_요청(FreelancerProfile freelancerProfile, ProjectHistoryCoverRequest projectHistoryCoverRequest, MemberLoginResponse memberLoginResponse) throws Exception {
+    private void 프리랜서_프로필_프로젝트이력_저장_요청(FreelancerProfile freelancerProfile, ProjectHistoryCoverRequests projectHistoryCoverRequests, MemberLoginResponse memberLoginResponse) throws Exception {
         mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
-                        .content(objectMapper.writeValueAsString(projectHistoryCoverRequest)))
+                        .content(objectMapper.writeValueAsString(projectHistoryCoverRequests)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
 
-    private void 프리랜서_프로필_프로젝트이력_저장_요청결과_검증(ProjectHistoryCoverRequest projectHistoryCoverRequest) {
+    private void 프리랜서_프로필_프로젝트이력_저장_요청결과_검증(ProjectHistoryCoverRequests projectHistoryCoverRequests) {
         List<ProjectHistory> projectHistories = projectHistoryRepository.findAll();
         Assertions.assertThat(projectHistories).hasSize(1);
-        Assertions.assertThat(projectHistories.get(0).getProjectTitle()).isEqualTo(projectHistoryCoverRequest.getProjectTitle());
-        Assertions.assertThat(projectHistories.get(0).getProjectStartDate()).isEqualTo(projectHistoryCoverRequest.getProjectStartDate());
-        Assertions.assertThat(projectHistories.get(0).getProjectEndDate()).isEqualTo(projectHistoryCoverRequest.getProjectEndDate());
-        Assertions.assertThat(projectHistories.get(0).getClientCompany()).isEqualTo(projectHistoryCoverRequest.getClientCompany());
-        Assertions.assertThat(projectHistories.get(0).getWorkCompany()).isEqualTo(projectHistoryCoverRequest.getWorkCompany());
-        Assertions.assertThat(projectHistories.get(0).getDevelopField()).isEqualTo(projectHistoryCoverRequest.getDevelopField());
-        Assertions.assertThat(projectHistories.get(0).getDevelopRole()).isEqualTo(projectHistoryCoverRequest.getDevelopRole());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentModel()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentModel());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentOS()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentOS());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentLanguage()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentLanguage());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentDBName()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentDBName());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentTool()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentTool());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentCommunication()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentCommunication());
-        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentEtc()).isEqualTo(projectHistoryCoverRequest.getDevelopEnvironmentEtc());
-        Assertions.assertThat(projectHistories.get(0).getResponsibilityTask()).isEqualTo(projectHistoryCoverRequest.getResponsibilityTask());
+        Assertions.assertThat(projectHistories.get(0).getProjectTitle()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getProjectTitle());
+        Assertions.assertThat(projectHistories.get(0).getProjectStartDate()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getProjectStartDate());
+        Assertions.assertThat(projectHistories.get(0).getProjectEndDate()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getProjectEndDate());
+        Assertions.assertThat(projectHistories.get(0).getClientCompany()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getClientCompany());
+        Assertions.assertThat(projectHistories.get(0).getWorkCompany()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getWorkCompany());
+        Assertions.assertThat(projectHistories.get(0).getDevelopField()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getDevelopField());
+        Assertions.assertThat(projectHistories.get(0).getDevelopRole()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getDevelopRole());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentModel()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getDevelopEnvironmentModel());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentOS()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getDevelopEnvironmentOS());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentLanguage()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getDevelopEnvironmentLanguage());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentDBName()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getDevelopEnvironmentDBName());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentTool()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getDevelopEnvironmentTool());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentCommunication()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getDevelopEnvironmentCommunication());
+        Assertions.assertThat(projectHistories.get(0).getDevelopEnvironment().getDevelopEnvironmentEtc()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getDevelopEnvironmentEtc());
+        Assertions.assertThat(projectHistories.get(0).getResponsibilityTask()).isEqualTo(projectHistoryCoverRequests.getProjectHistoryRequestList().get(0).getResponsibilityTask());
     }
 
     private void 프리랜서_프로필_교육및자격사항_저장_요청(FreelancerProfile freelancerProfile, EducationAndLicenseAndLanguageRequests educationAndLicenseAndLanguageRequests, MemberLoginResponse memberLoginResponse) throws Exception {
