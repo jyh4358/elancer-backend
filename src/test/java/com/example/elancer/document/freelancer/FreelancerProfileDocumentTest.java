@@ -232,7 +232,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        ProjectHistoryRequest projectHistoryRequest = new ProjectHistoryRequest(
+        ProjectHistoryRequest projectHistoryRequest1 = new ProjectHistoryRequest(
                 "projectTitle",
                 LocalDate.of(2020, 12, 01),
                 LocalDate.of(2021, 9, 01),
@@ -250,7 +250,25 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
                 "담당업무"
         );
 
-        ProjectHistoryCoverRequests projectHistoryCoverRequest = new ProjectHistoryCoverRequests(Arrays.asList(projectHistoryRequest));
+        ProjectHistoryRequest projectHistoryRequest2 = new ProjectHistoryRequest(
+                "projectTitle2",
+                LocalDate.of(2020, 11, 01),
+                LocalDate.of(2021, 8, 01),
+                "clientCompany2",
+                "workCompany2",
+                DevelopField.APPLICATION,
+                "프론트엔드 개발자",
+                "model2",
+                "OS2",
+                "language2",
+                "mysql2",
+                "tool2",
+                "communication2",
+                null,
+                "담당업무2"
+        );
+
+        ProjectHistoryCoverRequests projectHistoryCoverRequest = new ProjectHistoryCoverRequests(Arrays.asList(projectHistoryRequest1, projectHistoryRequest2));
 
         //when & then
         mockMvc.perform(put(FreelancerProfileAlterControllerPath.FREELANCER_PROFILE_PROJECT_HISTORY_COVER)
@@ -354,7 +372,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
         freelancerProfile.coverEducation(Arrays.asList(education));
         freelancerProfile.coverLicense(Arrays.asList(license));
         freelancerProfile.coverLanguage(Arrays.asList(language));
-        freelancerProfile.plusProjectHistory(projectHistory);
+        freelancerProfile.coverProjectHistory(Arrays.asList(projectHistory));
         freelancerProfile.coverPosition(developer);
 
         freelancerProfileRepository.save(freelancerProfile);
@@ -492,7 +510,7 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
         freelancerProfile.coverEducation(Arrays.asList(education));
         freelancerProfile.coverLicense(Arrays.asList(license));
         freelancerProfile.coverLanguage(Arrays.asList(language));
-        freelancerProfile.plusProjectHistory(projectHistory);
+        freelancerProfile.coverProjectHistory(Arrays.asList(projectHistory));
         freelancerProfile.coverPosition(developer);
 
         freelancerProfileRepository.save(freelancerProfile);

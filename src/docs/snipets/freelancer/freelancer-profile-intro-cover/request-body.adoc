@@ -1,6 +1,7 @@
 [source,options="nowrap"]
 ----
 {
+  "greeting" : "greeting",
   "introName" : "introName",
   "introBackGround" : "COBALT_BLUE",
   "introVideoUrl" : "introVideoUrl",

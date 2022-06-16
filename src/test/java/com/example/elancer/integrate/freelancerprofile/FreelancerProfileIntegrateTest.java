@@ -300,7 +300,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         freelancerProfile.coverEducation(Arrays.asList(education));
         freelancerProfile.coverLicense(Arrays.asList(license));
         freelancerProfile.coverLanguage(Arrays.asList(language));
-        freelancerProfile.plusProjectHistory(projectHistory);
+        freelancerProfile.coverProjectHistory(Arrays.asList(projectHistory));
         freelancerProfile.coverPosition(developer);
 
         freelancerProfileRepository.save(freelancerProfile);
@@ -394,7 +394,7 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
         freelancerProfile.coverEducation(Arrays.asList(education));
         freelancerProfile.coverLicense(Arrays.asList(license));
         freelancerProfile.coverLanguage(Arrays.asList(language));
-        freelancerProfile.plusProjectHistory(projectHistory);
+        freelancerProfile.coverProjectHistory(Arrays.asList(projectHistory));
         freelancerProfile.coverPosition(developer);
 
         freelancerProfileRepository.save(freelancerProfile);
