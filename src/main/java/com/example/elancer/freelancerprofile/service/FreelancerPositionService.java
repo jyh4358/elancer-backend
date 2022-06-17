@@ -73,7 +73,7 @@ public class FreelancerPositionService {
     @Transactional
     public void coverFreelancerPositionToPublisher(MemberDetails memberDetails, PublisherCoverRequest publisherCoverRequest) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Publisher publisher = Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile, publisherCoverRequest.getEtcSkill());
         publisher.coverPublishingSkill(publisherCoverRequest.toPublishingSkill(publisher));
@@ -84,7 +84,7 @@ public class FreelancerPositionService {
     @Transactional
     public void coverFreelancerPositionToDesigner(MemberDetails memberDetails, DesignerCoverRequest designerCoverRequest) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
         designer.coverDesignRoleAndSkill(
@@ -100,7 +100,7 @@ public class FreelancerPositionService {
     @Transactional
     public void coverFreelancerPositionToPlanner(MemberDetails memberDetails, PlannerCoverRequest plannerCoverRequest) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
         planner.coverAllField(plannerCoverRequest.toPlannerField(planner), plannerCoverRequest.getEtcField());
@@ -111,7 +111,7 @@ public class FreelancerPositionService {
     @Transactional
     public void coverFreelancerPositionToCrowdWorker(MemberDetails memberDetails) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         CrowdWorker crowdWorker = new CrowdWorker(PositionType.CROWD_WORKER, freelancerProfile);
 
@@ -121,7 +121,7 @@ public class FreelancerPositionService {
     @Transactional
     public void coverFreelancerPositionToEtc(MemberDetails memberDetails, PositionEtcCoverRequest positionEtcCoverRequest) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        FreelancerProfile freelancerProfile = freelancerProfileRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(NotExistFreelancerProfileException::new);
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         PositionEtc positionEtc = PositionEtc.createBasicPositionEtc(PositionType.ETC, freelancerProfile);
         positionEtc.coverAllField(positionEtcCoverRequest.toEtcRole(positionEtc), positionEtcCoverRequest.getPositionEtcRole());
