@@ -225,7 +225,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("reEmploymentIntention").type("int").description("재고용 의사"),
                                 fieldWithPath("totalActiveScore").type("double").description("활동 평가"),
                                 fieldWithPath("enterpriseType").type("String").description("기업형태"),
-                                fieldWithPath("bizContents").type("String").description("사업자등록번호"),
+                                fieldWithPath("idNumber").type("String").description("사업자등록번호"),
                                 fieldWithPath("sales").type("Long").description("연간 매출액")
                         )
                 ));
