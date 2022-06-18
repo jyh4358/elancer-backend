@@ -3,23 +3,18 @@ package com.example.elancer.document.enterprise;
 import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
+import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
-import com.example.elancer.project.dto.ProjectDeleteRequest;
-import com.example.elancer.project.dto.ProjectSaveRequest;
-import com.example.elancer.project.model.*;
-import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-
-import java.time.LocalDate;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -28,31 +23,156 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ProjectDocumentTest extends DocumentBaseTest {
+public class EnterpriseDocumentTest extends DocumentBaseTest {
 
-    @Autowired
-    private ProjectRepository projectRepository;
 
     @AfterEach
     void tearDown() {
         databaseCleaner.clean();
     }
 
-
     @Test
-    @DisplayName("프로젝트 등록 Get 요청 문서화 테스트")
-    public void 프로젝트_등록_GET_요청_문서화() throws Exception {
+    @DisplayName("기업 회원가입 문서화 테스트")
+    public void 기업_회원가입_문서화() throws Exception {
+        EnterpriseJoinRequest enterpriseJoinRequest = new EnterpriseJoinRequest(
+                "joinDocsEnterprise",
+                "1234",
+                "1234",
+                "name",
+                "01000000000",
+                "test@gmail.com",
+                "test company",
+                10,
+                "사장",
+                "01011111111",
+                "www.test.com",
+                new Address(CountryType.KR, "123", "주소1", "주소2"),
+                "주요 사업",
+                10000000L,
+                "사업자 번호(123-123-123)"
+        );
+
+        mockMvc.perform(post("/enterprise")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(objectMapper.writeValueAsString(enterpriseJoinRequest)))
+                .andExpectAll(status().isCreated())
+                .andDo(print())
+                .andDo(document("enterprise-join",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                        ),
+                        requestFields(
+                                fieldWithPath("userId").type("String").description("회원 아이디 필드"),
+                                fieldWithPath("password1").type("String").description("회원 비밀번호 필드"),
+                                fieldWithPath("password2").type("String").description("회원 비밀번호 확인 필드"),
+                                fieldWithPath("name").type("String").description("회원 담당자 성명 필드"),
+                                fieldWithPath("phone").type("String").description("회원 회사 전화번호 필드"),
+                                fieldWithPath("email").type("String").description("회원 이메일 필드"),
+                                fieldWithPath("companyName").type("String").description("회원 회사명 필드"),
+                                fieldWithPath("companyPeople").type("Integer").description("회원 회사 인원수 필드"),
+                                fieldWithPath("position").type("String").description("회원 담당자 직책 필드"),
+                                fieldWithPath("telNumber").type("String").description("회원 담당자 휴대폰 필드"),
+                                fieldWithPath("website").type("String").description("회원 웹사이트 필드"),
+                                fieldWithPath("address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("bizContents").type("String").description("회원 주요 사업내용 필드"),
+                                fieldWithPath("sales").type("Long").description("회원 연간 매출액 필드"),
+                                fieldWithPath("idNumber").type("String").description("회원 사업자 번호 필드")
+                        )
+                ));
+    }
+
+    @DisplayName("기업 계정 정보 수정 문서화")
+    @Test
+    public void 기업_계정정보_수정_문서화() throws Exception{
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
         MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
-        mockMvc.perform(get("/project-save")
+        EnterpriseUpdateRequest enterpriseUpdateRequest = new EnterpriseUpdateRequest(
+                "변경된 회사 이름",
+                20,
+                "변경된 이름",
+                "부장",
+                "12345",
+                "12345",
+                "01033333333",
+                "01044444444",
+                "changedEmail@gmail.com",
+                "www.changedWebsite.com",
+                new Address(CountryType.CN, "경기도", "주소1", "주소2"),
+                "쇼핑몰",
+                200000000L,
+                "111-111-111"
+        );
+
+        mockMvc.perform(put("/enterprise")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
+                        .content(objectMapper.writeValueAsString(enterpriseUpdateRequest)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("enterprise-account-cover",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        requestFields(
+                                fieldWithPath("companyName").type("String").description("회사명"),
+                                fieldWithPath("companyPeople").type("Integer").description("회사 인원수"),
+                                fieldWithPath("name").type("String").description("담당자명"),
+                                fieldWithPath("position").type("String").description("직책"),
+                                fieldWithPath("password1").type("String").description("비밀번호"),
+                                fieldWithPath("password2").type("String").description("비밀번호 확인"),
+                                fieldWithPath("phone").type("String").description("전화번호"),
+                                fieldWithPath("telNumber").type("String").description("담당자 휴대폰"),
+                                fieldWithPath("email").type("String").description("이메일"),
+                                fieldWithPath("website").type("String").description("웹사이트"),
+                                fieldWithPath("address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("bizContents").type("String").description("주요 사업내용"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
+                                fieldWithPath("idNumber").type("String").description("사업자등록번호")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("companyName").type("String").description("회사명"),
+                                fieldWithPath("companyPeople").type("Integer").description("회사 인원수"),
+                                fieldWithPath("name").type("String").description("담당자명"),
+                                fieldWithPath("position").type("String").description("직책"),
+                                fieldWithPath("phone").type("String").description("전화번호"),
+                                fieldWithPath("telNumber").type("String").description("담당자 휴대폰"),
+                                fieldWithPath("email").type("String").description("이메일"),
+                                fieldWithPath("website").type("String").description("웹사이트"),
+                                fieldWithPath("address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("bizContents").type("String").description("주요 사업내용"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
+                                fieldWithPath("idNumber").type("String").description("사업자등록번호")
+                        )
+                ));
+    }
+
+    @DisplayName("기업 계정 정보 조회 문서화")
+    @Test
+    public void 기업_계정정보_조회_문서화() throws Exception{
+
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        mockMvc.perform(get("/enterprise")
                         .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("project-save-find",
+                .andDo(document("enterprise-account-find",
                         requestHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
                                 headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
                         responseHeaders(
@@ -60,150 +180,55 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                         ),
                         responseFields(
                                 fieldWithPath("companyName").type("String").description("회사명"),
+                                fieldWithPath("companyPeople").type("Integer").description("회사 인원수"),
                                 fieldWithPath("name").type("String").description("담당자명"),
                                 fieldWithPath("position").type("String").description("직책"),
-                                fieldWithPath("telNumber").type("String").description("회사 전화번호"),
-                                fieldWithPath("phone").type("String").description("담당자 전화번호"),
-                                fieldWithPath("email").type("String").description("이메일")
-                        )
-
-                ));
-    }
-
-    @Test
-    @DisplayName("프로젝트 등록 문서화 테스트")
-    public void 프로젝트_등록_문서화() throws Exception {
-        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
-        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
-
-        ProjectSaveRequest projectSaveRequest = new ProjectSaveRequest(
-                ProjectType.TELEWORKING,
-                ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
-                ProjectStep.ANALYSIS,
-                "쇼핑몰",
-                PositionKind.DEVELOPER,
-                "자바",
-                "쇼핑몰 프로젝트",
-                10,
-                10,
-                "프로젝트 상세내용",
-                LocalDate.now(),
-                LocalDate.now().plusMonths(1L),
-                LocalDate.now().plusDays(5L),
-                new Address(CountryType.KR, "우편번호", "주소", "상세주소"),
-                1000000,
-                10000000,
-                3,
-                3,
-                30,
-                35,
-                "테스트회사",
-                "담당자명",
-                "사장",
-                "010-0000-0000",
-                "010-1111-1111",
-                "project@gmail.com");
-
-        mockMvc.perform(post("/project-save")
-                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
-                        .content(objectMapper.writeValueAsString(projectSaveRequest)))
-                .andExpect(status().isOk())
-                .andDo(print())
-                .andDo(document("project-save",
-                        requestHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
-                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
-                        ),
-                        requestFields(
-                                fieldWithPath("projectType").type("ProjectType").description("TELEWORKING(재택), WORKING(상주)"),
-                                fieldWithPath("projectBackGround").type("ProjectBackGround").description("색상"),
-                                fieldWithPath("enterpriseLogo").type("EnterpriseLogo").description("SAMSUNG(삼성), LG(LG), KT(KT), SK(SK), COUPANG(쿠팡), WOOWAHAN(우아한형제들),LOTTE(롯데), NONGYUP(농협), SHINHAN(신한), IBK(기업), KBSTAR(국민)"),
-                                fieldWithPath("projectStep").type("ProjectStep").description("ANALYSIS(분석/설계), PLAN(기획), DESIGN(디자인), PUBLISHING(퍼블리싱), DEVELOP(개발), OPERATION(운영중)"),
-                                fieldWithPath("mainBiz").type("String").description("업무 분야"),
-                                fieldWithPath("positionKind").type("PositionKind").description("DEVELOPER(개발자), PUBLISHER(퍼블리셔), DESIGNER(디자이너), PLANNER(기획자), CROWD_WORKER(크라우드워커), ETC(기타)"),
-                                fieldWithPath("skill").type("String").description("관련 기술"),
-                                fieldWithPath("projectName").type("String").description("프로젝트 명"),
-                                fieldWithPath("headCount").type("Integer").description("모집 인원"),
-                                fieldWithPath("inputHeadCount").type("Integer").description("총 투입인력"),
-                                fieldWithPath("content").type("String").description("프로젝트 상세내용"),
-                                fieldWithPath("projectStateDate").type("LocalDate").description("프로젝트 시작 날짜"),
-                                fieldWithPath("projectEndDate").type("LocalDate").description("프로젝트 종료 날짜"),
-                                fieldWithPath("recruitEndDate").type("LocalDate").description("프로젝트 모집 마감일"),
-                                fieldWithPath("address.country").type("CountryType.STRING").description("근무지 주소 국적 필드"),
-                                fieldWithPath("address.zipcode").type("String").description("근무지 우편번호 필드"),
-                                fieldWithPath("address.mainAddress").type("String").description("근무지 주소 필드"),
-                                fieldWithPath("address.detailAddress").type("String").description("근무지 상세 주소 필드"),
-                                fieldWithPath("minMoney").type("Integer").description("예상 월 단가 최소"),
-                                fieldWithPath("maxMoney").type("Integer").description("예상 월 단가 최대"),
-                                fieldWithPath("careerYear").type("Integer").description("희망 경력(년)"),
-                                fieldWithPath("careerMonth").type("Integer").description("희망 경력(월)"),
-                                fieldWithPath("minDesiredAge").type("Integer").description("희망 연령 최소"),
-                                fieldWithPath("maxDesiredAge").type("Integer").description("희망 연령 최대"),
-                                fieldWithPath("companyName").type("String").description("회사명"),
-                                fieldWithPath("name").type("String").description("담당자명"),
-                                fieldWithPath("position").type("String").description("직책"),
-                                fieldWithPath("phone").type("String").description("회사 전화번호"),
+                                fieldWithPath("phone").type("String").description("전화번호"),
                                 fieldWithPath("telNumber").type("String").description("담당자 휴대폰"),
-                                fieldWithPath("email").type("String").description("이메일")
+                                fieldWithPath("email").type("String").description("이메일"),
+                                fieldWithPath("website").type("String").description("웹사이트"),
+                                fieldWithPath("address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("bizContents").type("String").description("주요 사업내용"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
+                                fieldWithPath("idNumber").type("String").description("사업자등록번호")
                         )
                 ));
+
     }
+
+    @DisplayName("기업 대쉬보드 프로필 조회 문서화")
     @Test
-    @DisplayName("프로젝트 삭제 문서화 테스트")
-    public void 프로젝트_삭제_문서화() throws Exception{
+    public void 기업_대쉬보드_프로필_조회_문서화() throws Exception{
+
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
         MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
-        Project project = projectRepository.save(new Project(
-                ProjectType.TELEWORKING,
-                ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
-                ProjectStep.ANALYSIS,
-                "쇼핑몰",
-                PositionKind.DEVELOPER,
-                "Java",
-                "쇼핑몰 프로젝트",
-                5,
-                5,
-                "1.프로젝트 명 .....",
-                LocalDate.now(),
-                LocalDate.now().plusMonths(1L),
-                LocalDate.now().plusDays(10L),
-                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
-                6000000,
-                10000000,
-                5,
-                3,
-                30,
-                35,
-                ProjectStatus.PROGRESS,
-                enterprise
-        ));
-
-        ProjectDeleteRequest projectDeleteRequest = new ProjectDeleteRequest(
-                project.getNum()
-        );
-
-        mockMvc.perform(delete("/project-delete")
-                        .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
-                        .content(objectMapper.writeValueAsString(projectDeleteRequest)))
+        mockMvc.perform(get("/enterprise-profile")
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("project-delete",
+                .andDo(document("dashboard-profile",
                         requestHeaders(
-                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
                                 headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
                         ),
-                        requestHeaders(
+                        responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
                         ),
-                        requestFields(
-                                fieldWithPath("projectNum").type("Long").description("프로젝트 식별자")
+                        responseFields(
+                                fieldWithPath("expertise").type("int").description("전문성"),
+                                fieldWithPath("scheduleAdherence").type("int").description("일정준수"),
+                                fieldWithPath("initiative").type("int").description("적극성"),
+                                fieldWithPath("communication").type("int").description("의사소통"),
+                                fieldWithPath("reEmploymentIntention").type("int").description("재고용 의사"),
+                                fieldWithPath("totalActiveScore").type("double").description("활동 평가"),
+                                fieldWithPath("enterpriseType").type("String").description("기업형태"),
+                                fieldWithPath("bizContents").type("String").description("사업자등록번호"),
+                                fieldWithPath("sales").type("Long").description("연간 매출액")
                         )
-
                 ));
+
     }
 }
