@@ -1,5 +1,7 @@
 package com.example.elancer.project.dto;
 
+import com.example.elancer.member.domain.Address;
+import com.example.elancer.project.model.FreelancerWorkmanShip;
 import com.example.elancer.project.model.ProjectType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -19,7 +21,13 @@ public class RecommendProjectResponse {
 
     private String projectName;
 
+    private FreelancerWorkmanShip freelancerWorkmanShip;
 
+    private Long projectPeriod;
+
+    private Address address;
+
+    private String pays;
 
 
 }

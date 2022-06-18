@@ -6,6 +6,7 @@ import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.ProjectDeleteRequest;
 import com.example.elancer.project.dto.ProjectProcessingRequest;
 import com.example.elancer.project.dto.ProjectSaveRequest;
+import com.example.elancer.project.dto.RecommendProjectResponse;
 import com.example.elancer.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -74,4 +75,10 @@ public class ProjectController {
         projectService.finishProject(memberDetails, projectProcessingRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+//    @GetMapping("/recommend-project")
+//    public ResponseEntity<RecommendProjectResponse> RecommendProject() {
+//
+//
+//    }
 }
