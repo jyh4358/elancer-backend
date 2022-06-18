@@ -1,10 +1,7 @@
 package com.example.elancer.token.jwt;
 
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
-import com.example.elancer.token.exception.CustomJwtExpiredException;
-import com.example.elancer.token.exception.CustomJwtMalformedException;
-import com.example.elancer.token.exception.CustomJwtSignatureException;
-import com.example.elancer.token.exception.InvalidRefreshTokenException;
+import com.example.elancer.token.exception.*;
 import com.example.elancer.token.jwt.property.JwtProperty;
 import com.example.elancer.login.auth.service.SecurityUserDetailsService;
 import com.example.elancer.member.domain.MemberType;
@@ -87,6 +84,19 @@ public class JwtTokenProvider {
             return true;
         } catch (ExpiredJwtException e) {
             throw new CustomJwtExpiredException();
+        } catch (MalformedJwtException e) {
+            throw new CustomJwtMalformedException();
+        } catch (SignatureException e) {
+            throw new CustomJwtSignatureException();
+        }
+    }
+    public boolean validateRefreshToken(String jwtToken) {
+        try {
+            // 만료된 토큰이면 ExpiredJwtException 예외를 던져준다.
+            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+            return true;
+        } catch (ExpiredJwtException e) {
+            throw new CustomRefreshJwtExpiredException();
         } catch (MalformedJwtException e) {
             throw new CustomJwtMalformedException();
         } catch (SignatureException e) {

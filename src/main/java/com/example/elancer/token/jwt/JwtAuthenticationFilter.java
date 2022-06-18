@@ -3,6 +3,7 @@ package com.example.elancer.token.jwt;
 import com.example.elancer.token.exception.CustomJwtExpiredException;
 import com.example.elancer.token.exception.CustomJwtMalformedException;
 import com.example.elancer.token.exception.CustomJwtSignatureException;
+import com.example.elancer.token.exception.CustomRefreshJwtExpiredException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
@@ -59,13 +60,19 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             log.error("만료된 토큰");
             response.getWriter().write(objectMapper.writeValueAsString(map));
             log.info("생성된 response = {}", response);
+        } catch (CustomRefreshJwtExpiredException e) {
+            Map<String, String> map = new HashMap<>();
+
+            map.put("errortype", "Forbidden");
+            map.put("code", "403");
+            map.put("message", "refresh 토큰이 만료되었습니다. 다시 로그인을 해주세요.");
+
         } catch (CustomJwtMalformedException | CustomJwtSignatureException e) {
             Map<String, String> map = new HashMap<>();
 
             map.put("errortype", "Forbidden");
             map.put("code", "402");
             map.put("message", "변조된 토큰입니다. 다시 로그인을 해주세요.");
-
 
 
             log.error("변조된 토큰");
