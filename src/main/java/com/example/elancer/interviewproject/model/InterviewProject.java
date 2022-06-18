@@ -1,6 +1,5 @@
 package com.example.elancer.interviewproject.model;
 
-import com.example.elancer.applyproject.model.ApplyProject;
 import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.project.model.Project;
@@ -33,5 +32,9 @@ public class InterviewProject extends BasicEntity {
 
     public static InterviewProject createApplyProject(Freelancer freelancer, Project project) {
         return new InterviewProject(freelancer, project);
+    }
+
+    public void changeInterviewStatus(InterviewSatus interviewSatus) {
+        this.interviewSatus = interviewSatus;
     }
 }

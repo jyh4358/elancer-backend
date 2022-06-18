@@ -1,7 +1,10 @@
 package com.example.elancer.wishprojects.service;
 
+import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.basetest.ServiceBaseTest;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -34,6 +37,9 @@ class WishProjectServiceTest extends ServiceBaseTest {
     @Autowired
     private WishProjectRepository wishProjectRepository;
 
+    @Autowired
+    private EnterpriseRepository enterpriseRepository;
+
 
     @DisplayName("프로젝트찜을 생성한다.")
     @Test
@@ -41,7 +47,7 @@ class WishProjectServiceTest extends ServiceBaseTest {
         //given
         String memberId = "memberId";
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
-
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.PLANNER));
 
         MemberDetails memberDetails = new MemberDetails(freelancer.getNum(), freelancer.getUserId(), freelancer.getRole());
@@ -68,7 +74,8 @@ class WishProjectServiceTest extends ServiceBaseTest {
                 3,
                 30,
                 35,
-                ProjectStatus.PROGRESS
+                ProjectStatus.PROGRESS,
+                enterprise
         ));
         WishProjectSaveRequest wishProjectSaveRequest = new WishProjectSaveRequest(project.getNum());
 
@@ -86,7 +93,7 @@ class WishProjectServiceTest extends ServiceBaseTest {
         //given
         String memberId = "memberId";
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
-
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.CROWD_WORKER));
 
@@ -114,7 +121,8 @@ class WishProjectServiceTest extends ServiceBaseTest {
                 3,
                 30,
                 35,
-                ProjectStatus.PROGRESS
+                ProjectStatus.PROGRESS,
+                enterprise
         ));
         WishProject wishProject = wishProjectRepository.save(WishProject.createWishProject(freelancer, project));
 

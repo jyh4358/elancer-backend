@@ -20,5 +20,8 @@ public class ServiceBaseTest {
     protected PasswordEncoder passwordEncoder;
 
     @Autowired
+    protected EnterpriseRepository enterpriseRepository;
+
+    @Autowired
     protected DatabaseCleaner databaseCleaner;
 }

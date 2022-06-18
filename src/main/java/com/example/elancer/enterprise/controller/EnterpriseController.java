@@ -81,7 +81,7 @@ public class EnterpriseController {
      * @param memberDetails
      * @return
      */
-    @GetMapping("enterprise-profile")
+    @GetMapping("/enterprise-profile")
     public ResponseEntity<EnterpriseDashBoardProfileResponse> findDashBoardProfile(
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {

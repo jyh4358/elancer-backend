@@ -4,8 +4,8 @@ import com.example.elancer.enterprise.dto.EnterpriseSimpleDetailResponse;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.ProjectDeleteRequest;
+import com.example.elancer.project.dto.ProjectProcessingRequest;
 import com.example.elancer.project.dto.ProjectSaveRequest;
-import com.example.elancer.project.dto.ProjectStartRequest;
 import com.example.elancer.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -44,21 +44,34 @@ public class ProjectController {
     public ResponseEntity<Void> deleteProject(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody ProjectDeleteRequest projectDeleteRequest
-    ){
+    ) {
         projectService.deleteProject(memberDetails, projectDeleteRequest);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/project-start")
+    /**
+     * 프로젝트 진행 요청
+     *
+     * @param memberDetails
+     * @param projectProcessingRequest
+     */
+    @PostMapping("/start-project")
     public ResponseEntity<Void> startProject(
             @AuthenticationPrincipal MemberDetails memberDetails,
-            @Validated @RequestBody ProjectStartRequest projectStartRequest
+            @Validated @RequestBody ProjectProcessingRequest projectProcessingRequest
     ) {
-        projectService.startProject(memberDetails, projectStartRequest);
+        projectService.startProject(memberDetails, projectProcessingRequest);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    @PostMapping("/finish-project")
+    public ResponseEntity<Void> finishProject(
+            @AuthenticationPrincipal MemberDetails memberDetails,
+            @Validated @RequestBody ProjectProcessingRequest projectProcessingRequest
+    ) {
+        projectService.finishProject(memberDetails, projectProcessingRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

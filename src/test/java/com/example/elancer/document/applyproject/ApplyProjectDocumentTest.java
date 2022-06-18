@@ -4,9 +4,12 @@ import com.example.elancer.applyproject.controller.ApplyProjectControllerPath;
 import com.example.elancer.applyproject.dto.ApplyProjectCreateRequest;
 import com.example.elancer.applyproject.model.ApplyProject;
 import com.example.elancer.applyproject.repository.ApplyProjectRepository;
+import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.LoginHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import com.example.elancer.member.domain.Address;
@@ -40,12 +43,16 @@ public class ApplyProjectDocumentTest extends DocumentBaseTest {
     @Autowired
     private ProjectRepository projectRepository;
 
+    @Autowired
+    private EnterpriseRepository enterpriseRepository;
+
 
     @DisplayName("프로젝트 지원 문서화")
     @Test
     public void 프로젝트_지원_생성() throws Exception {
         //given
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
         MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
@@ -69,7 +76,8 @@ public class ApplyProjectDocumentTest extends DocumentBaseTest {
                 3,
                 30,
                 35,
-                ProjectStatus.PROGRESS
+                ProjectStatus.PROGRESS,
+                enterprise
         ));
 
         ApplyProjectCreateRequest applyProjectCreateRequest = new ApplyProjectCreateRequest(project.getNum());
@@ -88,7 +96,7 @@ public class ApplyProjectDocumentTest extends DocumentBaseTest {
                         requestFields(
                                 fieldWithPath("projectNum").type("Long").description("프로젝트 식별자 정보 필드.")
                         )
-                        ));
+                ));
 
     }
 

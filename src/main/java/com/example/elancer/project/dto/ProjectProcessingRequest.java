@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ProjectStartRequest {
+public class ProjectProcessingRequest {
     @NotNull
     private Long projectNum;
 }

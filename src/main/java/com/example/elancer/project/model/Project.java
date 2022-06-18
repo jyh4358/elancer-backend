@@ -1,6 +1,7 @@
 package com.example.elancer.project.model;
 
 import com.example.elancer.common.model.BasicEntity;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.member.domain.Address;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
@@ -42,6 +45,9 @@ public class Project extends BasicEntity {
     private ProjectStatus projectStatus;
     // todo - 요구사항 정의서 나중에 추가
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Enterprise enterprise;
+
 
     @Builder
     public Project(ProjectType projectType,
@@ -65,7 +71,8 @@ public class Project extends BasicEntity {
                    Integer careerMonth,
                    Integer minDesiredAge,
                    Integer maxDesiredAge,
-                   ProjectStatus projectStatus
+                   ProjectStatus projectStatus,
+                   Enterprise enterprise
     ) {
         this.projectType = projectType;
         this.projectBackGround = projectBackGround;
@@ -88,6 +95,11 @@ public class Project extends BasicEntity {
         this.careerMonth = careerMonth;
         this.minDesiredAge = minDesiredAge;
         this.maxDesiredAge = maxDesiredAge;
+        this.projectStatus = projectStatus;
+        this.enterprise = enterprise;
+    }
+
+    public void changeProjectStatus(ProjectStatus projectStatus) {
         this.projectStatus = projectStatus;
     }
 }

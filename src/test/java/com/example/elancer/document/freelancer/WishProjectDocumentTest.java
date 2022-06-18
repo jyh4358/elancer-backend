@@ -1,7 +1,9 @@
 package com.example.elancer.document.freelancer;
 
+import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -48,6 +50,7 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
     public void 프로젝트찜_저장_문서화() throws Exception {
         //given
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
         MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.ETC));
@@ -74,7 +77,8 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
                 3,
                 30,
                 35,
-                ProjectStatus.PROGRESS
+                ProjectStatus.PROGRESS,
+                enterprise
         ));
 
         WishProjectSaveRequest wishProjectSaveRequest = new WishProjectSaveRequest(project.getNum());
@@ -101,6 +105,7 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
     public void 프로젝트찜_삭제_문서화() throws Exception {
         //given
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
         MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.ETC));
@@ -127,7 +132,8 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
                 3,
                 30,
                 35,
-                ProjectStatus.PROGRESS
+                ProjectStatus.PROGRESS,
+                enterprise
         ));
         WishProject wishProject = wishProjectRepository.save(new WishProject(freelancer, project));
 

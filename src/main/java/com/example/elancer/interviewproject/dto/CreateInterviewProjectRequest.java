@@ -10,10 +10,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class InterviewProjectRequest {
+public class CreateInterviewProjectRequest {
     @NotNull
-    private Long projectNum;
-
-    @NotNull
-    private Long freelancerNum;
+    private Long applyProjectNum;
 }

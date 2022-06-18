@@ -7,6 +7,9 @@ import com.example.elancer.freelancer.join.exception.FreelancerCheckPasswordExce
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.member.domain.Member;
+import com.example.elancer.project.model.Project;
+import com.example.elancer.waitproject.model.WaitProject;
 
 public class RightRequestChecker {
 
@@ -40,5 +43,16 @@ public class RightRequestChecker {
         }
     }
 
+    public static void checkMemberAndWaitProject(MemberDetails memberDetails, Member member) {
+        if (memberDetails.getId().equals(member.getNum())) {
+            throw new WrongRequestException("투입된 유저가 아닙니다. 다시 시도해 주세요.");
+        }
+    }
 
+
+    public static void checkMemberAndProject(MemberDetails memberDetails, Project project) {
+        if (memberDetails.getId().equals(project.getEnterprise().getNum())) {
+            throw new WrongRequestException("해당 프로젝트에 대한 권한이 없습니다.");
+        }
+    }
 }

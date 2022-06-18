@@ -4,8 +4,11 @@ import com.example.elancer.applyproject.controller.ApplyProjectControllerPath;
 import com.example.elancer.applyproject.dto.ApplyProjectCreateRequest;
 import com.example.elancer.applyproject.model.ApplyProject;
 import com.example.elancer.applyproject.repository.ApplyProjectRepository;
+import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.LoginHelper;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.controller.FreelancerControllerPath;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
@@ -39,12 +42,16 @@ public class ApplyProjectIntegrateTest extends IntegrateBaseTest {
     @Autowired
     private ApplyProjectRepository applyProjectRepository;
 
+    @Autowired
+    private EnterpriseRepository enterpriseRepository;
+
 
     @DisplayName("프로젝트 지원 통합테스트")
     @Test
     public void 프로젝트_지원_생성() throws Exception {
         //given
         Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
         MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
@@ -68,7 +75,8 @@ public class ApplyProjectIntegrateTest extends IntegrateBaseTest {
                 3,
                 30,
                 35,
-                ProjectStatus.PROGRESS
+                ProjectStatus.PROGRESS,
+                enterprise
         ));
 
         ApplyProjectCreateRequest applyProjectCreateRequest = new ApplyProjectCreateRequest(project.getNum());
