@@ -33,7 +33,8 @@ public class FreelancerProfileFindRepository {
 
     public Optional<FreelancerProfile> findFreelancerProfileByFetch(Long freelancerNum) {
         FreelancerProfile freelancerProfileByFetch = jpaQueryFactory.selectFrom(freelancerProfile)
-                .leftJoin(freelancerProfile.academicAbilities, academicAbility).fetchJoin()
+                .distinct()
+                .leftJoin(freelancerProfile.academicAbilities, academicAbility)/*.fetchJoin()*/
                 .leftJoin(freelancerProfile.careers, career)/*.fetchJoin()*/
                 .leftJoin(freelancerProfile.educations, education)/*.fetchJoin()*/
                 .leftJoin(freelancerProfile.licenses, license)/*.fetchJoin()*/
