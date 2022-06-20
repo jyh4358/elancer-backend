@@ -12,5 +12,6 @@ public enum FreelancerWorkmanShip {
 
     FreelancerWorkmanShip(String desc) {
         this.desc = desc;
+
     }
 }

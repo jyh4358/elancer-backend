@@ -427,6 +427,16 @@ include::{snippets}/project-save/http-request.adoc[]
 include::{snippets}/project-save/request-headers.adoc[]
 include::{snippets}/project-save/request-fields.adoc[]
 
+[[resources-project-rocommend]]
+== 추천 프로젝트 리스트 GET 요청
+요청
+include::{snippets}/project-recommend-find/http-request.adoc[]
+
+응답
+include::{snippets}/project-recommend-find/http-response.adoc[]
+include::{snippets}/project-recommend-find/response-headers.adoc[]
+include::{snippets}/project-recommend-find/response-fields.adoc[]
+
 == 문의
 [[resources-contact-save-get]]
 == 문의 등록 GET 요청

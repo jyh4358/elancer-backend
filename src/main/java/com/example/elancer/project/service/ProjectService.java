@@ -8,6 +8,7 @@ import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.ProjectDeleteRequest;
 import com.example.elancer.project.dto.ProjectProcessingRequest;
 import com.example.elancer.project.dto.ProjectSaveRequest;
+import com.example.elancer.project.dto.RecommendProjectResponse;
 import com.example.elancer.project.exception.NotEnoughHeadCount;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectStatus;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -77,5 +79,13 @@ public class ProjectService {
         RightRequestChecker.checkMemberAndProject(memberDetails, project);
 
         project.changeProjectStatus(ProjectStatus.COMPLETION);
+    }
+
+
+    public List<RecommendProjectResponse> findRecommendProject() {
+        List<Project> recommendProjects = projectRepository.findRandomProject();
+        System.out.println("recommendProjects.size() = " + recommendProjects.size());
+        return recommendProjects.stream().map(s ->
+                RecommendProjectResponse.of(s)).collect(Collectors.toList());
     }
 }

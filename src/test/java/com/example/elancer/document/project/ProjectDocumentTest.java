@@ -1,4 +1,4 @@
-package com.example.elancer.document.enterprise;
+package com.example.elancer.document.project;
 
 import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
@@ -202,6 +202,66 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                         ),
                         requestFields(
                                 fieldWithPath("projectNum").type("Long").description("프로젝트 식별자")
+                        )
+
+                ));
+    }
+
+    @Test
+    @DisplayName("추천 프로젝트 요청 문서화 테스트")
+    public void 추천_프로젝트_GET_요청_문서화() throws Exception {
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        for (int i = 0; i < 10; i++) {
+            projectRepository.save(new Project(
+                    ProjectType.TELEWORKING,
+                    ProjectBackGround.BLACK,
+                    EnterpriseLogo.COUPANG,
+                    ProjectStep.ANALYSIS,
+                    "쇼핑몰",
+                    PositionKind.DEVELOPER,
+                    "Java",
+                    "쇼핑몰 프로젝트" + i,
+                    5,
+                    5,
+                    "1.프로젝트 명 .....",
+                    LocalDate.now(),
+                    LocalDate.now().plusMonths(1L),
+                    LocalDate.now().plusDays(10L),
+                    new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                    6000000,
+                    10000000,
+                    5,
+                    3,
+                    30,
+                    35,
+                    ProjectStatus.PROGRESS,
+                    enterprise
+            ));
+
+        }
+
+        mockMvc.perform(get("/recommend-project")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("project-recommend-find",
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
+                                fieldWithPath("[].endDays").type("Long").description("프로젝트 지원 마감일자(day)"),
+                                fieldWithPath("[].skills").type("List<String>").description("스킬 정보"),
+                                fieldWithPath("[].projectName").type("String").description("프로젝트 명"),
+                                fieldWithPath("[].freelancerWorkmanShip").type("FreelancerWorkmanShip").description("JUNIOR(\"초급\"), MIDDLE(\"중급\"), SENIOR(\"고급\")"),
+                                fieldWithPath("[].projectPeriod").type("Long").description("프로젝트 기간(Month)"),
+                                fieldWithPath("[].address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("[].address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("[].address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)")
                         )
 
                 ));

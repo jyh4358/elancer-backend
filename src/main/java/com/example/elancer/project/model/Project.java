@@ -7,17 +7,16 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.criterion.BetweenExpression;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
-@Entity
-@Table(name = "project")
-@Getter
+@Entity @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Project extends BasicEntity {
 
@@ -36,7 +35,9 @@ public class Project extends BasicEntity {
     private LocalDate projectEndDate;
     private LocalDate recruitEndDate;
     private Address address;
+    @Column(columnDefinition = "0")
     private Integer minMoney;
+    @Column(columnDefinition = "0")
     private Integer maxMoney;
     private Integer careerYear;
     private Integer careerMonth;
@@ -102,5 +103,31 @@ public class Project extends BasicEntity {
     public void changeProjectStatus(ProjectStatus projectStatus) {
         this.projectStatus = projectStatus;
     }
+
+    public List<String> skillListConverter() {
+        return Arrays.stream(skill.split(",")).map(s -> s.trim()).collect(Collectors.toList());
+    }
+
+    public FreelancerWorkmanShip careerToWorkmanshipConverter() {
+        if (5L > careerYear) {
+            return FreelancerWorkmanShip.JUNIOR;
+        } else if (10L > careerYear) {
+            return FreelancerWorkmanShip.MIDDLE;
+        } else {
+            return FreelancerWorkmanShip.SENIOR;
+        }
+    }
+
+    public String payConverter() {
+        if (minMoney == 0 && maxMoney == 0) {
+            return "비공개";
+        } else if (minMoney == 0 && maxMoney != 0) {
+            return "협의가능";
+        } else {
+            return maxMoney.toString();
+        }
+    }
+
+
 }
 

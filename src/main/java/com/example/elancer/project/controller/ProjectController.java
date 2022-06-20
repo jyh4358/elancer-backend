@@ -15,6 +15,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class ProjectController {
@@ -76,9 +78,10 @@ public class ProjectController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @GetMapping("/recommend-project")
-//    public ResponseEntity<RecommendProjectResponse> RecommendProject() {
-//
-//
-//    }
+    @GetMapping("/recommend-project")
+    public ResponseEntity<List<RecommendProjectResponse>> RecommendProject() {
+        List<RecommendProjectResponse> recommendProject = projectService.findRecommendProject();
+
+        return new ResponseEntity<>(recommendProject, HttpStatus.OK);
+    }
 }
