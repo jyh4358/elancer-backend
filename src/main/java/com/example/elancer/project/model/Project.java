@@ -7,7 +7,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.criterion.BetweenExpression;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,11 +19,16 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Project extends BasicEntity {
 
+    @Enumerated(EnumType.STRING)
     private ProjectType projectType;
+    @Enumerated(EnumType.STRING)
     private ProjectBackGround projectBackGround;
+    @Enumerated(EnumType.STRING)
     private EnterpriseLogo enterpriseLogo;
+    @Enumerated(EnumType.STRING)
     private ProjectStep projectStep;
     private String mainBiz;
+    @Enumerated(EnumType.STRING)
     private PositionKind positionKind;
     private String skill;
     private String projectName;
@@ -35,14 +39,13 @@ public class Project extends BasicEntity {
     private LocalDate projectEndDate;
     private LocalDate recruitEndDate;
     private Address address;
-    @Column(columnDefinition = "0")
     private Integer minMoney;
-    @Column(columnDefinition = "0")
     private Integer maxMoney;
     private Integer careerYear;
     private Integer careerMonth;
     private Integer minDesiredAge;
     private Integer maxDesiredAge;
+    @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
     // todo - 요구사항 정의서 나중에 추가
 

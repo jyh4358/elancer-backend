@@ -15,7 +15,7 @@ public enum ProjectBackGround {
     ORANGE("주황색")
     ;
 
-    private String desc;
+    final private String desc;
 
     ProjectBackGround(String desc) {
         this.desc = desc;

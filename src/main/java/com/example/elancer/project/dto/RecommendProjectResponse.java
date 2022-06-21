@@ -1,9 +1,7 @@
 package com.example.elancer.project.dto;
 
 import com.example.elancer.member.domain.Address;
-import com.example.elancer.project.model.FreelancerWorkmanShip;
-import com.example.elancer.project.model.Project;
-import com.example.elancer.project.model.ProjectType;
+import com.example.elancer.project.model.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +16,10 @@ import java.util.List;
 public class RecommendProjectResponse {
 
     private ProjectType projectType;
+
+    private ProjectBackGround projectBackGround;
+
+    private PositionKind positionKind;
 
     private Long endDays;
 
@@ -35,6 +37,8 @@ public class RecommendProjectResponse {
 
     @Builder
     public RecommendProjectResponse(ProjectType projectType,
+                                    ProjectBackGround projectBackGround,
+                                    PositionKind positionKind,
                                     Long endDays,
                                     List<String> skills,
                                     String projectName,
@@ -43,6 +47,8 @@ public class RecommendProjectResponse {
                                     Address address,
                                     String pay) {
         this.projectType = projectType;
+        this.projectBackGround = projectBackGround;
+        this.positionKind = positionKind;
         this.endDays = endDays;
         this.skills = skills;
         this.projectName = projectName;
@@ -55,6 +61,8 @@ public class RecommendProjectResponse {
     public static RecommendProjectResponse of(Project project) {
         return RecommendProjectResponse.builder()
                 .projectType(project.getProjectType())
+                .projectBackGround(project.getProjectBackGround())
+                .positionKind(project.getPositionKind())
                 .endDays(ChronoUnit.DAYS.between(LocalDate.now(), project.getProjectEndDate()))
                 .skills(project.skillListConverter())
                 .projectName(project.getProjectName())

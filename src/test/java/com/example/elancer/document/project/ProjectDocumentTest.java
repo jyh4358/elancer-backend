@@ -211,7 +211,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
     @DisplayName("추천 프로젝트 요청 문서화 테스트")
     public void 추천_프로젝트_GET_요청_문서화() throws Exception {
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
-        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
 
         for (int i = 0; i < 10; i++) {
             projectRepository.save(new Project(
@@ -252,6 +251,8 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                         ),
                         responseFields(
                                 fieldWithPath("[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
+                                fieldWithPath("[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
+                                fieldWithPath("[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
                                 fieldWithPath("[].endDays").type("Long").description("프로젝트 지원 마감일자(day)"),
                                 fieldWithPath("[].skills").type("List<String>").description("스킬 정보"),
                                 fieldWithPath("[].projectName").type("String").description("프로젝트 명"),
