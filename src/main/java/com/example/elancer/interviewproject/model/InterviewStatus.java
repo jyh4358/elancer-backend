@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum InterviewSatus {
+public enum InterviewStatus {
     WAITING("대기"),
     ACCEPT("수락");
 

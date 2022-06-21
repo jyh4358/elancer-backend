@@ -3,10 +3,7 @@ package com.example.elancer.project.controller;
 import com.example.elancer.enterprise.dto.EnterpriseSimpleDetailResponse;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.project.dto.ProjectDeleteRequest;
-import com.example.elancer.project.dto.ProjectProcessingRequest;
-import com.example.elancer.project.dto.ProjectSaveRequest;
-import com.example.elancer.project.dto.RecommendProjectResponse;
+import com.example.elancer.project.dto.*;
 import com.example.elancer.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -83,6 +80,16 @@ public class ProjectController {
         List<RecommendProjectResponse> recommendProject = projectService.findRecommendProject();
 
         return new ResponseEntity<>(recommendProject, HttpStatus.OK);
+    }
+
+    @GetMapping("/enterprise-project")
+    public ResponseEntity<List<DashboardProjectResponse>> dashboardProjectList(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+
+        List<DashboardProjectResponse> dashboardProject = projectService.findDashboardProject(memberDetails);
+
+        return new ResponseEntity<>(dashboardProject, HttpStatus.OK);
     }
 
 

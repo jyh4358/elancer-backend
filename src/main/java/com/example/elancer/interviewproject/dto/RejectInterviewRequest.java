@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class RejectInterviewRequest {
-    private Long interviewProjectNum;
+    private Long projectNum;
+    private Long freelancerNum;
 }

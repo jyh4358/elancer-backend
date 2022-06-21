@@ -12,5 +12,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class CreateInterviewProjectRequest {
     @NotNull
-    private Long applyProjectNum;
+    private Long projectNum;
+    @NotNull
+    private Long freelancerNum;
 }

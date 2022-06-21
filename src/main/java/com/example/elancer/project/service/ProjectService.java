@@ -1,14 +1,16 @@
 package com.example.elancer.project.service;
 
+import com.example.elancer.applyproject.model.ApplyProject;
+import com.example.elancer.applyproject.repository.ApplyProjectRepository;
 import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
+import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.interviewproject.model.InterviewProject;
+import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.project.dto.ProjectDeleteRequest;
-import com.example.elancer.project.dto.ProjectProcessingRequest;
-import com.example.elancer.project.dto.ProjectSaveRequest;
-import com.example.elancer.project.dto.RecommendProjectResponse;
+import com.example.elancer.project.dto.*;
 import com.example.elancer.project.exception.NotEnoughHeadCount;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectStatus;
@@ -31,6 +33,8 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final EnterpriseRepository enterpriseRepository;
     private final WaitProjectRepository waitProjectRepository;
+    private final ApplyProjectRepository applyProjectRepository;
+    private final InterviewProjectRepository interviewProjectRepository;
 
     @Transactional
     public void saveProject(MemberDetails memberDetails, ProjectSaveRequest projectSaveRequest) {
@@ -46,6 +50,7 @@ public class ProjectService {
                 projectSaveRequest.getEmail());
 
         Project project = projectSaveRequest.toEntity();
+        project.setEnterprise(enterprise);
 
         projectRepository.save(project);
     }
@@ -87,5 +92,41 @@ public class ProjectService {
         System.out.println("recommendProjects.size() = " + recommendProjects.size());
         return recommendProjects.stream().map(s ->
                 RecommendProjectResponse.of(s)).collect(Collectors.toList());
+    }
+
+    public List<DashboardProjectResponse> findDashboardProject(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        List<Project> findProjects = projectRepository.findByEnterprise_Num(memberDetails.getId());
+        List<DashboardProjectResponse> findList = findProjects.stream().map(s ->
+                DashboardProjectResponse.of(
+                        s,
+                        (int) applyProjectRepository.countByProject_Num(s.getNum()),
+                        (int) interviewProjectRepository.countByProject_Num(s.getNum()),
+                        searchApplicantList(s),
+                        searchInterviewRequesterList(s)
+                )
+        ).collect(Collectors.toList());
+        return findList;
+    }
+
+    public List<ApplicantDto> searchApplicantList(Project project) {
+        List<ApplyProject> findApplyProjects = applyProjectRepository.findByProject_Num(project.getNum());
+        List<Freelancer> freelancers = findApplyProjects.stream().map(s ->
+                s.getFreelancer()
+        ).collect(Collectors.toList());
+
+        return ApplicantDto.createApplicantList(freelancers);
+    }
+
+    public List<InterviewRequestDto> searchInterviewRequesterList(Project project) {
+        List<InterviewProject> findInterviewProjects = interviewProjectRepository.findByProject_Num(project.getNum());
+
+
+        return findInterviewProjects.stream().map(s ->
+                InterviewRequestDto.of(
+                        s.getFreelancer(),
+                        s.getInterviewStatus()
+                )
+        ).collect(Collectors.toList());
     }
 }

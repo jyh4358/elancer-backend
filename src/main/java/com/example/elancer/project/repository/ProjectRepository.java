@@ -9,4 +9,6 @@ import java.util.List;
 public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query(value = "select * from Project order by RAND() limit 6", nativeQuery = true)
     List<Project> findRandomProject();
+
+    List<Project> findByEnterprise_Num(Long enterpriseNum);
 }

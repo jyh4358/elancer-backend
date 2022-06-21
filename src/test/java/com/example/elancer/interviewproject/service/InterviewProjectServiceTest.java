@@ -1,6 +1,5 @@
 package com.example.elancer.interviewproject.service;
 
-import com.example.elancer.applyproject.model.ApplyProject;
 import com.example.elancer.applyproject.repository.ApplyProjectRepository;
 import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.FreelancerHelper;
@@ -8,20 +7,11 @@ import com.example.elancer.common.basetest.ServiceBaseTest;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.interviewproject.model.InterviewProject;
-import com.example.elancer.interviewproject.model.InterviewSatus;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.member.domain.Address;
-import com.example.elancer.member.domain.CountryType;
-import com.example.elancer.project.model.*;
 import com.example.elancer.project.repository.ProjectRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.time.LocalDate;
 
 class InterviewProjectServiceTest extends ServiceBaseTest {
 
@@ -86,7 +76,7 @@ class InterviewProjectServiceTest extends ServiceBaseTest {
 //        InterviewProject interviewProject = interviewProjectRepository.findAll().get(0);
 //        Assertions.assertThat(interviewProject.getProject().getNum()).isEqualTo(project.getNum());
 //        Assertions.assertThat(interviewProject.getFreelancer().getNum()).isEqualTo(freelancer.getNum());
-//        Assertions.assertThat(interviewProject.getInterviewSatus()).isEqualTo(InterviewSatus.WAITING);
+//        Assertions.assertThat(interviewProject.getInterviewStatus()).isEqualTo(InterviewStatus.WAITING);
 
     }
 

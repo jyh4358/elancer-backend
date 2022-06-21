@@ -8,5 +8,9 @@ import java.util.Optional;
 
 public interface InterviewProjectRepository extends JpaRepository<InterviewProject, Long> {
 
+    long countByProject_Num(Long projectNum);
+
     List<InterviewProject> findByProject_Num(Long projectNum);
+
+    Optional<InterviewProject> findByProject_NumAndFreelancer_Num(Long projectNum, Long freelancerNum);
 }

@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class AcceptInterviewRequest {
-    private Long interviewProjectNum;
+    private Long projectNum;
 }

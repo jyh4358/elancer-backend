@@ -1,5 +1,6 @@
 package com.example.elancer.interviewproject.service;
 
+import com.example.elancer.applyproject.exception.NotExistApplyProject;
 import com.example.elancer.applyproject.repository.ApplyProjectRepository;
 import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancer.exception.NotExistFreelancerException;
@@ -8,7 +9,7 @@ import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.interviewproject.dto.*;
 import com.example.elancer.interviewproject.exception.NotExistInterviewException;
 import com.example.elancer.interviewproject.model.InterviewProject;
-import com.example.elancer.interviewproject.model.InterviewSatus;
+import com.example.elancer.interviewproject.model.InterviewStatus;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.exception.NotExistProjectException;
@@ -34,24 +35,32 @@ public class InterviewProjectService {
     @Transactional
     public void createInterviewProject(CreateInterviewProjectRequest createInterviewProjectRequest, MemberDetails memberDetails) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        // todo - 프로젝트와 프리랜서 check 해줘야하는지 ..
-        applyProjectRepository.findById(createInterviewProjectRequest.getApplyProjectNum()).orElseThrow();
-//        Project project = projectRepository.findById(createInterviewProjectRequest.getProjectNum()).orElseThrow(NotExistProjectException::new);
-//        interviewProjectRepository.save(InterviewProject.createApplyProject(freelancer, project));
+
+        Project project = projectRepository.findById(createInterviewProjectRequest.getProjectNum()).orElseThrow(NotExistProjectException::new);
+        Freelancer freelancer = freelancerRepository.findById(createInterviewProjectRequest.getFreelancerNum()).orElseThrow(NotExistFreelancerException::new);
+        applyProjectRepository.findByProject_NumAndFreelancer_Num(project.getNum(), freelancer.getNum()).orElseThrow(NotExistApplyProject::new);
+
+        interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
     }
 
     @Transactional
     public void acceptInterview(MemberDetails memberDetails, AcceptInterviewRequest acceptInterviewRequest) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        InterviewProject interviewProject = interviewProjectRepository.findById(acceptInterviewRequest.getInterviewProjectNum()).orElseThrow(NotExistInterviewException::new);
-        interviewProject.changeInterviewStatus(InterviewSatus.ACCEPT);
+        Project project = projectRepository.findById(acceptInterviewRequest.getProjectNum()).orElseThrow(NotExistProjectException::new);
+
+        InterviewProject interviewProject = interviewProjectRepository.findByProject_NumAndFreelancer_Num(project.getNum(), memberDetails.getId()).orElseThrow(NotExistInterviewException::new);
+        interviewProject.changeInterviewStatus(InterviewStatus.ACCEPT);
     }
 
     @Transactional
     public void rejectInterview(MemberDetails memberDetails, RejectInterviewRequest rejectInterviewRequest) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        InterviewProject interviewProject = interviewProjectRepository.findById(rejectInterviewRequest.getInterviewProjectNum()).orElseThrow(NotExistInterviewException::new);
-        interviewProject.changeInterviewStatus(InterviewSatus.WAITING);
+        Project project = projectRepository.findById(rejectInterviewRequest.getProjectNum()).orElseThrow(NotExistProjectException::new);
+        Freelancer freelancer = freelancerRepository.findById(rejectInterviewRequest.getFreelancerNum()).orElseThrow(NotExistFreelancerException::new);
+
+
+        InterviewProject interviewProject = interviewProjectRepository.findByProject_NumAndFreelancer_Num(project.getNum(), freelancer.getNum()).orElseThrow(NotExistInterviewException::new);
+        interviewProject.changeInterviewStatus(InterviewStatus.WAITING);
     }
 
     public List<InterviewProjectResponse> interviewProjectList(InterviewProjectRequest interviewProjectRequest, MemberDetails memberDetails) {
@@ -62,6 +71,6 @@ public class InterviewProjectService {
                         s.getFreelancer().getNum(),
                         s.getFreelancer().getName(),
                         s.getFreelancer().getPhone(),
-                        s.getInterviewSatus())).collect(Collectors.toList());
+                        s.getInterviewStatus())).collect(Collectors.toList());
     }
 }

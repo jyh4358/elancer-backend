@@ -131,6 +131,22 @@ public class Project extends BasicEntity {
         }
     }
 
+    public String demandCareer() {
+        if (careerYear == 0 && careerMonth == 0) {
+            return "무관";
+        } else if (5L > careerYear) {
+            return FreelancerWorkmanShip.JUNIOR.getDesc();
+        } else if (10L > careerYear) {
+            return FreelancerWorkmanShip.MIDDLE.getDesc();
+        } else {
+            return FreelancerWorkmanShip.SENIOR.getDesc();
+        }
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
+
 
 }
 

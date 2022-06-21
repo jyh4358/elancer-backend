@@ -7,16 +7,15 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class InterviewProject extends BasicEntity {
 
-    private InterviewSatus interviewSatus;
+    @Enumerated(EnumType.STRING)
+    private InterviewStatus interviewStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Freelancer freelancer;
@@ -24,17 +23,17 @@ public class InterviewProject extends BasicEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
 
-    public InterviewProject(Freelancer freelancer, Project project) {
-        this.interviewSatus = InterviewSatus.WAITING;
+    public InterviewProject(InterviewStatus interviewStatus, Freelancer freelancer, Project project) {
+        this.interviewStatus = interviewStatus;
         this.freelancer = freelancer;
         this.project = project;
     }
 
-    public static InterviewProject createApplyProject(Freelancer freelancer, Project project) {
-        return new InterviewProject(freelancer, project);
+    public static InterviewProject createInterviewProject(Freelancer freelancer, Project project) {
+        return new InterviewProject(InterviewStatus.WAITING, freelancer, project);
     }
 
-    public void changeInterviewStatus(InterviewSatus interviewSatus) {
-        this.interviewSatus = interviewSatus;
+    public void changeInterviewStatus(InterviewStatus interviewStatus) {
+        this.interviewStatus = interviewStatus;
     }
 }

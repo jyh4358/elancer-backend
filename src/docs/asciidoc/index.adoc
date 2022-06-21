@@ -427,6 +427,16 @@ include::{snippets}/project-save/http-request.adoc[]
 include::{snippets}/project-save/request-headers.adoc[]
 include::{snippets}/project-save/request-fields.adoc[]
 
+[[resources-enterprise-dashboard-project-list]]
+== 기업 대쉬보드 프로젝트 리스트 요청
+요청
+include::{snippets}/enterprise-dashboard-project-list/http-request.adoc[]
+응답
+include::{snippets}/enterprise-dashboard-project-list/http-response.adoc[]
+include::{snippets}/enterprise-dashboard-project-list/response-headers.adoc[]
+include::{snippets}/enterprise-dashboard-project-list/response-fields.adoc[]
+
+
 [[resources-project-rocommend]]
 == 추천 프로젝트 리스트 GET 요청
 요청
@@ -436,6 +446,35 @@ include::{snippets}/project-recommend-find/http-request.adoc[]
 include::{snippets}/project-recommend-find/http-response.adoc[]
 include::{snippets}/project-recommend-find/response-headers.adoc[]
 include::{snippets}/project-recommend-find/response-fields.adoc[]
+
+
+[[resources-apply-project-create]]
+== 프로젝트 지원 요청
+요청
+include::{snippets}/apply-project-create/http-request.adoc[]
+include::{snippets}/apply-project-create/request-headers.adoc[]
+include::{snippets}/apply-project-create/request-fields.adoc[]
+
+[[resources-interview-project]]
+== 기업 프로젝트 인터뷰 요청
+요청
+include::{snippets}/interview-project/http-request.adoc[]
+include::{snippets}/interview-project/request-headers.adoc[]
+include::{snippets}/interview-project/request-fields.adoc[]
+
+[[accept-interview-project]]
+== 프리랜서가 인터뷰 수락 요청
+요청
+include::{snippets}/accept-interview-project/http-request.adoc[]
+include::{snippets}/accept-interview-project/request-headers.adoc[]
+include::{snippets}/accept-interview-project/request-fields.adoc[]
+
+[[resources-reject-interview-project]]
+== 기업이 인터뷰 철회 요청
+요청
+include::{snippets}/reject-interview-project/http-request.adoc[]
+include::{snippets}/reject-interview-project/request-headers.adoc[]
+include::{snippets}/reject-interview-project/request-fields.adoc[]
 
 == 문의
 [[resources-contact-save-get]]
