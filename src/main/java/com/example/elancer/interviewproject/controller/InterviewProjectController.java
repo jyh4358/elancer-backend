@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -73,7 +70,7 @@ public class InterviewProjectController {
      * @param rejectInterviewRequest
      * @return
      */
-    @PostMapping("/reject-interview-project")
+    @DeleteMapping("/reject-interview-project")
     public ResponseEntity<Void> rejectInterview(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody RejectInterviewRequest rejectInterviewRequest

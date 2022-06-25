@@ -5,11 +5,13 @@ import com.example.elancer.waitproject.dto.ExcludeWaitProject;
 import com.example.elancer.waitproject.dto.LeaveProjectRequest;
 import com.example.elancer.waitproject.dto.WaitProjectRequest;
 import com.example.elancer.waitproject.service.WaitProjectService;
+import com.example.elancer.waitproject.service.WithdrawFreelancerRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,7 +44,7 @@ public class WaitProjectController {
      * @param leaveProjectRequest
      * @return
      */
-    @PostMapping("/leave-wait-project")
+    @DeleteMapping("/leave-wait-project")
     public ResponseEntity<Void> leaveWaitProject(
             @AuthenticationPrincipal MemberDetails memberDetails,
             @Validated @RequestBody LeaveProjectRequest leaveProjectRequest
@@ -54,15 +56,15 @@ public class WaitProjectController {
     /**
      * 기업이 프로젝트에 투입된 프리랜서 투입 철회 요청
      * @param memberDetails
-     * @param leaveProjectRequest
+     * @param withdrawFreelancerRequest
      * @return
      */
-    @PostMapping("/exclude-wait-project")
+    @DeleteMapping("/exclude-wait-project")
     public ResponseEntity<Void> excludeWaitProject(
             @AuthenticationPrincipal MemberDetails memberDetails,
-            @Validated @RequestBody LeaveProjectRequest leaveProjectRequest
+            @Validated @RequestBody WithdrawFreelancerRequest withdrawFreelancerRequest
     ) {
-        waitProjectService.excludeProject(leaveProjectRequest, memberDetails);
+        waitProjectService.excludeProject(withdrawFreelancerRequest, memberDetails);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

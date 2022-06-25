@@ -436,6 +436,15 @@ include::{snippets}/enterprise-dashboard-project-list/http-response.adoc[]
 include::{snippets}/enterprise-dashboard-project-list/response-headers.adoc[]
 include::{snippets}/enterprise-dashboard-project-list/response-fields.adoc[]
 
+[[resources-wait-project-list]]
+== 기업 조율 프로젝트 리스트 요청
+요청
+include::{snippets}/wait-project-list/http-request.adoc[]
+응답
+include::{snippets}/wait-project-list/http-response.adoc[]
+include::{snippets}/wait-project-list/response-headers.adoc[]
+include::{snippets}/wait-project-list/response-fields.adoc[]
+
 
 [[resources-project-rocommend]]
 == 추천 프로젝트 리스트 GET 요청
@@ -475,6 +484,28 @@ include::{snippets}/accept-interview-project/request-fields.adoc[]
 include::{snippets}/reject-interview-project/http-request.adoc[]
 include::{snippets}/reject-interview-project/request-headers.adoc[]
 include::{snippets}/reject-interview-project/request-fields.adoc[]
+
+[[resources-wait-project-save]]
+== 기업이 프리랜서 조욜중 요청
+요청
+include::{snippets}/wait-project-save/http-request.adoc[]
+include::{snippets}/wait-project-save/request-headers.adoc[]
+include::{snippets}/wait-project-save/request-fields.adoc[]
+
+[[resources-leave-wait-project]]
+== 프리랜서가 프로젝트 투입 거절 요청
+요청
+include::{snippets}/leave-wait-project/http-request.adoc[]
+include::{snippets}/leave-wait-project/request-headers.adoc[]
+include::{snippets}/leave-wait-project/request-fields.adoc[]
+
+[[resources-exclude-wait-project]]
+== 기업이 프리랜서 투입 철회 요청
+요청
+include::{snippets}/exclude-wait-project/http-request.adoc[]
+include::{snippets}/exclude-wait-project/request-headers.adoc[]
+include::{snippets}/exclude-wait-project/request-fields.adoc[]
+
 
 == 문의
 [[resources-contact-save-get]]

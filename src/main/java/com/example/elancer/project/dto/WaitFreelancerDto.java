@@ -6,41 +6,29 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ApplicantDto {
-
+public class WaitFreelancerDto {
     private Long num;
     private String name;
+    private String phone;
     private int careerYear;
     private PositionType positionType;
 
-    public ApplicantDto(Long num, String name) {
+    public WaitFreelancerDto(Long num, String name, String phone, int careerYear, PositionType positionType) {
         this.num = num;
         this.name = name;
-    }
-
-    public ApplicantDto(Long num, String name, int careerYear, PositionType positionType) {
-        this.num = num;
-        this.name = name;
+        this.phone = phone;
         this.careerYear = careerYear;
         this.positionType = positionType;
     }
 
-    public static ApplicantDto of(Freelancer freelancer) {
-        return new ApplicantDto(
+    public static WaitFreelancerDto of(Freelancer freelancer) {
+        return new WaitFreelancerDto(
                 freelancer.getNum(),
                 freelancer.getName(),
+                freelancer.getPhone(),
                 freelancer.getFreelancerAccountInfo().getCareerYear(),
                 freelancer.getFreelancerProfile().getPosition().getPositionType());
-    }
-
-    public static List<ApplicantDto> createApplicantList(List<Freelancer> freelancers) {
-        return freelancers.stream().map(s ->
-                ApplicantDto.of(s))
-                .collect(Collectors.toList());
     }
 }

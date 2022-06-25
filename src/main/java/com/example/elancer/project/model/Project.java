@@ -2,7 +2,9 @@ package com.example.elancer.project.model;
 
 import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseMainBiz;
 import com.example.elancer.member.domain.Address;
+import com.example.elancer.waitproject.model.WaitProject;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,6 +55,8 @@ public class Project extends BasicEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Enterprise enterprise;
 
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<WaitProject> waitProjects = new ArrayList<>();
 
     @Builder
     public Project(ProjectType projectType,

@@ -92,5 +92,14 @@ public class ProjectController {
         return new ResponseEntity<>(dashboardProject, HttpStatus.OK);
     }
 
+    @GetMapping("/wait-project")
+    public ResponseEntity<List<WaitProjectResponse>> waitProjectList(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        List<WaitProjectResponse> waitProject = projectService.findWaitProject(memberDetails);
+
+        return new ResponseEntity<>(waitProject, HttpStatus.OK);
+    }
+
 
 }

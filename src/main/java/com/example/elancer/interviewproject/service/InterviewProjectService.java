@@ -60,7 +60,7 @@ public class InterviewProjectService {
 
 
         InterviewProject interviewProject = interviewProjectRepository.findByProject_NumAndFreelancer_Num(project.getNum(), freelancer.getNum()).orElseThrow(NotExistInterviewException::new);
-        interviewProject.changeInterviewStatus(InterviewStatus.WAITING);
+        interviewProjectRepository.delete(interviewProject);
     }
 
     public List<InterviewProjectResponse> interviewProjectList(InterviewProjectRequest interviewProjectRequest, MemberDetails memberDetails) {

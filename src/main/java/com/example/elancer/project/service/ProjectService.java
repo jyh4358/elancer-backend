@@ -109,6 +109,22 @@ public class ProjectService {
         return findList;
     }
 
+    public List<WaitProjectResponse> findWaitProject(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        List<Project> findProjects = projectRepository.findWithWaitProject(memberDetails.getId());
+        List<WaitProjectResponse> findList = findProjects.stream().map(s ->
+                WaitProjectResponse.of(
+                        s,
+                        (int) waitProjectRepository.countByProject_Num(s.getNum()),
+                        searchWaitFreelancerList(s)
+                )
+        ).collect(Collectors.toList());
+
+        return findList;
+    }
+
+
+
     public List<ApplicantDto> searchApplicantList(Project project) {
         List<ApplyProject> findApplyProjects = applyProjectRepository.findByProject_Num(project.getNum());
         List<Freelancer> freelancers = findApplyProjects.stream().map(s ->
@@ -129,4 +145,14 @@ public class ProjectService {
                 )
         ).collect(Collectors.toList());
     }
+    private List<WaitFreelancerDto> searchWaitFreelancerList(Project project) {
+        List<WaitProject> findWaitFreelancer = waitProjectRepository.findByProject_Num(project.getNum());
+
+        return findWaitFreelancer.stream().map(s ->
+                WaitFreelancerDto.of(
+                        s.getFreelancer()
+                )
+        ).collect(Collectors.toList());
+    }
+
 }
