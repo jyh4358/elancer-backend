@@ -427,6 +427,13 @@ include::{snippets}/project-save/http-request.adoc[]
 include::{snippets}/project-save/request-headers.adoc[]
 include::{snippets}/project-save/request-fields.adoc[]
 
+[[resources-project-delete]]
+== 프로젝트 삭제
+요청
+include::{snippets}/project-delete/http-request.adoc[]
+include::{snippets}/project-delete/request-headers.adoc[]
+include::{snippets}/project-delete/request-fields.adoc[]
+
 [[resources-enterprise-dashboard-project-list]]
 == 기업 대쉬보드 프로젝트 리스트 요청
 요청
@@ -444,6 +451,26 @@ include::{snippets}/wait-project-list/http-request.adoc[]
 include::{snippets}/wait-project-list/http-response.adoc[]
 include::{snippets}/wait-project-list/response-headers.adoc[]
 include::{snippets}/wait-project-list/response-fields.adoc[]
+
+[[resources-processing-project-list]]
+== 기업 진행 프로젝트 리스트 요청
+요청
+include::{snippets}/processing-project-list/http-request.adoc[]
+응답
+include::{snippets}/processing-project-list/http-response.adoc[]
+include::{snippets}/processing-project-list/response-headers.adoc[]
+include::{snippets}/processing-project-list/response-fields.adoc[]
+
+[[resources-finish-project-list]]
+== 기업 완료 프로젝트 리스트 요청
+요청
+include::{snippets}/finish-project-list/http-request.adoc[]
+응답
+include::{snippets}/finish-project-list/http-response.adoc[]
+include::{snippets}/finish-project-list/response-headers.adoc[]
+include::{snippets}/finish-project-list/response-fields.adoc[]
+
+
 
 
 [[resources-project-rocommend]]
@@ -507,6 +534,22 @@ include::{snippets}/exclude-wait-project/request-headers.adoc[]
 include::{snippets}/exclude-wait-project/request-fields.adoc[]
 
 
+[[resources-start-project]]
+== 기업이 프로젝트 진행 시작 요청
+요청
+include::{snippets}/start-project/http-request.adoc[]
+include::{snippets}/start-project/request-headers.adoc[]
+include::{snippets}/start-project/request-fields.adoc[]
+
+[[resources-finish-project]]
+== 기업이 프로젝트 진행 완료 요청
+요청
+include::{snippets}/finish-project/http-request.adoc[]
+include::{snippets}/finish-project/request-headers.adoc[]
+include::{snippets}/finish-project/request-fields.adoc[]
+
+
+
 == 문의
 [[resources-contact-save-get]]
 == 문의 등록 GET 요청
@@ -542,6 +585,12 @@ include::{snippets}/contacts/http-response.adoc[]
 include::{snippets}/contacts/response-headers.adoc[]
 include::{snippets}/contacts/response-fields.adoc[]
 
+[[resources-contact-delete]]
+== 문의 삭제
+요청
+include::{snippets}/contact-delete/http-request.adoc[]
+include::{snippets}/contact-delete/request-headers.adoc[]
+include::{snippets}/contact-delete/request-fields.adoc[]
 
 == JWT
 [[resources-member-login]]

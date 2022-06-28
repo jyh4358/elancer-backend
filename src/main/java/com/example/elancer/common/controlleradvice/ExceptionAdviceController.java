@@ -5,6 +5,8 @@ import com.example.elancer.common.exception.WrongRequestException;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.freelancer.exception.NotExistFreelancerException;
 import com.example.elancer.freelancerprofile.exception.NotExistFreelancerProfileException;
+import com.example.elancer.interviewproject.exception.PresentInterviewFreelancerException;
+import com.example.elancer.waitproject.exception.CheckInterviewStatusException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +58,20 @@ public class ExceptionAdviceController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({NotExistEnterpriseException.class})
     public ResponseEntity<ExceptionMessage> handleNotExistEnterpriseException(NotExistEnterpriseException e) {
+        log.error(e.getClass() + ": " + e.getMessage());
+        return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({PresentInterviewFreelancerException.class})
+    public ResponseEntity<ExceptionMessage> handlePresentInterviewFreelancerException(PresentInterviewFreelancerException e) {
+        log.error(e.getClass() + ": " + e.getMessage());
+        return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({CheckInterviewStatusException.class})
+    public ResponseEntity<ExceptionMessage> handleCheckInterviewStatusException(CheckInterviewStatusException e) {
         log.error(e.getClass() + ": " + e.getMessage());
         return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
     }

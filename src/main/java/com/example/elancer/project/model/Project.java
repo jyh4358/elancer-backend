@@ -1,8 +1,10 @@
 package com.example.elancer.project.model;
 
+import com.example.elancer.applyproject.model.ApplyProject;
 import com.example.elancer.common.model.BasicEntity;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseMainBiz;
+import com.example.elancer.interviewproject.model.InterviewProject;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.waitproject.model.WaitProject;
 import lombok.AccessLevel;
@@ -57,6 +59,12 @@ public class Project extends BasicEntity {
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<WaitProject> waitProjects = new ArrayList<>();
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<InterviewProject> interviewProjects = new ArrayList<>();
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<ApplyProject> applyProjects = new ArrayList<>();
 
     @Builder
     public Project(ProjectType projectType,

@@ -7,14 +7,15 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class WaitProject extends BasicEntity {
+
+    @Enumerated(EnumType.STRING)
+    private WaitStatus waitStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Freelancer freelancer;
@@ -22,12 +23,19 @@ public class WaitProject extends BasicEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Project project;
 
+
+
     public WaitProject(Freelancer freelancer, Project project) {
+        this.waitStatus = WaitStatus.WAITING;
         this.freelancer = freelancer;
         this.project = project;
     }
 
     public static WaitProject createWaitProject(Freelancer freelancer, Project project) {
         return new WaitProject(freelancer, project);
+    }
+
+    public void changeWaitStatus() {
+        this.waitStatus = WaitStatus.WORKING;
     }
 }

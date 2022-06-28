@@ -7,6 +7,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.interviewproject.exception.NotExistInterviewException;
 import com.example.elancer.interviewproject.model.InterviewProject;
+import com.example.elancer.interviewproject.model.InterviewStatus;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.exception.NotExistProjectException;
@@ -14,6 +15,7 @@ import com.example.elancer.project.model.Project;
 import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.waitproject.dto.LeaveProjectRequest;
 import com.example.elancer.waitproject.dto.WaitProjectRequest;
+import com.example.elancer.waitproject.exception.CheckInterviewStatusException;
 import com.example.elancer.waitproject.exeption.NotExistWaitProject;
 import com.example.elancer.waitproject.model.WaitProject;
 import com.example.elancer.waitproject.repsitory.WaitProjectRepository;
@@ -37,8 +39,13 @@ public class WaitProjectService {
         Freelancer freelancer = freelancerRepository.findById(waitProjectRequest.getFreelancerNum()).orElseThrow(NotExistFreelancerException::new);
         Project project = projectRepository.findById(waitProjectRequest.getProjectNum()).orElseThrow(NotExistProjectException::new);
         InterviewProject interviewProject = interviewProjectRepository.findByProject_NumAndFreelancer_Num(project.getNum(), freelancer.getNum()).orElseThrow(NotExistInterviewException::new);
-        interviewProjectRepository.delete(interviewProject);
-        waitProjectRepository.save(WaitProject.createWaitProject(freelancer, project));
+        if (interviewProject.getInterviewStatus().equals(InterviewStatus.ACCEPT)) {
+            interviewProjectRepository.delete(interviewProject);
+            waitProjectRepository.save(WaitProject.createWaitProject(freelancer, project));
+        } else {
+            throw new CheckInterviewStatusException();
+        }
+
 
     }
 

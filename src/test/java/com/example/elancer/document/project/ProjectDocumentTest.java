@@ -16,13 +16,16 @@ import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.interviewproject.model.InterviewProject;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
+import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.project.dto.ProjectDeleteRequest;
+import com.example.elancer.project.dto.ProjectProcessingRequest;
 import com.example.elancer.project.dto.ProjectSaveRequest;
 import com.example.elancer.project.model.*;
 import com.example.elancer.project.repository.ProjectRepository;
+import com.example.elancer.project.service.ProjectService;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.example.elancer.waitproject.model.WaitProject;
 import com.example.elancer.waitproject.repsitory.WaitProjectRepository;
@@ -55,6 +58,9 @@ public class ProjectDocumentTest extends DocumentBaseTest {
 
     @Autowired
     private WaitProjectRepository waitProjectRepository;
+
+    @Autowired
+    private ProjectService projectService;
 
     @AfterEach
     void tearDown() {
@@ -444,6 +450,281 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("[].waitFreelancerLists.[].positionType").type("PositionType").description(" DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")")
                         )
 
+                ));
+    }
+
+    @Test
+    @DisplayName("기업 진행 프로젝트 리스트 요청 문서화 테스트")
+    public void 기업_진행_프로젝트_리스트_GET_요청_문서화() throws Exception {
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        MemberDetails memberDetails = new MemberDetails(enterprise.getNum(), enterprise.getUserId(), enterprise.getRole());
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        freelancerProfileRepository.save(new FreelancerProfile(null, freelancer, PositionType.DEVELOPER));
+        for (int i = 0; i < 2; i++) {
+            Project project = projectRepository.save(new Project(
+                    ProjectType.TELEWORKING,
+                    ProjectBackGround.BLACK,
+                    EnterpriseLogo.COUPANG,
+                    ProjectStep.ANALYSIS,
+                    "쇼핑몰",
+                    PositionKind.DEVELOPER,
+                    "Java",
+                    "쇼핑몰 프로젝트" + i,
+                    5,
+                    5,
+                    "1.프로젝트 명 .....",
+                    LocalDate.now(),
+                    LocalDate.now().plusMonths(1L),
+                    LocalDate.now().plusDays(10L),
+                    new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                    6000000,
+                    10000000,
+                    5,
+                    3,
+                    30,
+                    35,
+                    ProjectStatus.PROGRESS,
+                    enterprise
+            ));
+            applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
+            interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
+            waitProjectRepository.save(WaitProject.createWaitProject(freelancer, project));
+            projectService.startProject(memberDetails, new ProjectProcessingRequest(project.getNum()));
+
+        }
+
+        mockMvc.perform(get("/processing-project")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
+                .andExpect(status().isOk())
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("processing-project-list",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("[].projectName").type("String").description("프로젝트 명"),
+                                fieldWithPath("[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
+                                fieldWithPath("[].demandCareer").type("String").description("요구 경력"),
+                                fieldWithPath("[].headCount").type("int").description("모집 인원"),
+                                fieldWithPath("[].projectStateDate").type("LocalDate").description("프로젝트 시작 날짜"),
+                                fieldWithPath("[].projectEndDate").type("LocalDate").description("프로젝트 종료 날짜"),
+                                fieldWithPath("[].minMoney").type("int").description("예상 월 단가(최소)"),
+                                fieldWithPath("[].maxMoney").type("int").description("예상 월 단가(최대)"),
+                                fieldWithPath("[].createdDate").type("LocalDate").description("프로젝트 등록 날짜"),
+                                fieldWithPath("[].processingFreelancerCount").type("int").description("진행 프로젝트의 프리랜서 수"),
+                                fieldWithPath("[].waitFreelancerDto.[].num").type("Long").description("진행 프로젝트의 프리랜서 식별자"),
+                                fieldWithPath("[].waitFreelancerDto.[].name").type("String").description("진행 프로젝트의 프리랜서 이름"),
+                                fieldWithPath("[].waitFreelancerDto.[].phone").type("String").description("진행 프로젝트의 프리랜서 핸드폰"),
+                                fieldWithPath("[].waitFreelancerDto.[].careerYear").type("int").description("진행 프로젝트의 프리랜서 경력"),
+                                fieldWithPath("[].waitFreelancerDto.[].positionType").type("PositionType").description(" DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")")
+                        )
+
+                ));
+    }
+
+    @Test
+    @DisplayName("기업 완료 프로젝트 리스트 요청 문서화 테스트")
+    public void 기업_완료_프로젝트_리스트_GET_요청_문서화() throws Exception {
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        MemberDetails memberDetails = new MemberDetails(enterprise.getNum(), enterprise.getUserId(), enterprise.getRole());
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        freelancerProfileRepository.save(new FreelancerProfile(null, freelancer, PositionType.DEVELOPER));
+        for (int i = 0; i < 2; i++) {
+            Project project = projectRepository.save(new Project(
+                    ProjectType.TELEWORKING,
+                    ProjectBackGround.BLACK,
+                    EnterpriseLogo.COUPANG,
+                    ProjectStep.ANALYSIS,
+                    "쇼핑몰",
+                    PositionKind.DEVELOPER,
+                    "Java",
+                    "쇼핑몰 프로젝트" + i,
+                    5,
+                    5,
+                    "1.프로젝트 명 .....",
+                    LocalDate.now(),
+                    LocalDate.now().plusMonths(1L),
+                    LocalDate.now().plusDays(10L),
+                    new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                    6000000,
+                    10000000,
+                    5,
+                    3,
+                    30,
+                    35,
+                    ProjectStatus.PROGRESS,
+                    enterprise
+            ));
+            applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
+            interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
+            waitProjectRepository.save(WaitProject.createWaitProject(freelancer, project));
+            projectService.startProject(memberDetails, new ProjectProcessingRequest(project.getNum()));
+            projectService.finishProject(memberDetails, new ProjectProcessingRequest(project.getNum()));
+
+        }
+
+        mockMvc.perform(get("/finish-project")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
+                .andExpect(status().isOk())
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("finish-project-list",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("[].projectName").type("String").description("프로젝트 명"),
+                                fieldWithPath("[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
+                                fieldWithPath("[].demandCareer").type("String").description("요구 경력"),
+                                fieldWithPath("[].headCount").type("int").description("모집 인원"),
+                                fieldWithPath("[].projectStateDate").type("LocalDate").description("프로젝트 시작 날짜"),
+                                fieldWithPath("[].projectEndDate").type("LocalDate").description("프로젝트 종료 날짜"),
+                                fieldWithPath("[].minMoney").type("int").description("예상 월 단가(최소)"),
+                                fieldWithPath("[].maxMoney").type("int").description("예상 월 단가(최대)"),
+                                fieldWithPath("[].createdDate").type("LocalDate").description("프로젝트 등록 날짜"),
+                                fieldWithPath("[].processingFreelancerCount").type("int").description("진행 프로젝트의 프리랜서 수"),
+                                fieldWithPath("[].waitFreelancerDto.[].num").type("Long").description("진행 프로젝트의 프리랜서 식별자"),
+                                fieldWithPath("[].waitFreelancerDto.[].name").type("String").description("진행 프로젝트의 프리랜서 이름"),
+                                fieldWithPath("[].waitFreelancerDto.[].phone").type("String").description("진행 프로젝트의 프리랜서 핸드폰"),
+                                fieldWithPath("[].waitFreelancerDto.[].careerYear").type("int").description("진행 프로젝트의 프리랜서 경력"),
+                                fieldWithPath("[].waitFreelancerDto.[].positionType").type("PositionType").description(" DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")")
+                        )
+
+                ));
+    }
+
+    @Test
+    @DisplayName("프로젝트 진행 시작 문서화 테스트")
+    public void 프로젝트_진행_시작_문서화() throws Exception {
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        freelancerProfileRepository.save(new FreelancerProfile(null, freelancer, PositionType.DEVELOPER));
+
+        Project project = projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.ANALYSIS,
+                "쇼핑몰",
+                PositionKind.DEVELOPER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35,
+                ProjectStatus.PROGRESS,
+                enterprise
+        ));
+        applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
+        interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
+        waitProjectRepository.save(WaitProject.createWaitProject(freelancer, project));
+
+
+        ProjectProcessingRequest projectProcessingRequest = new ProjectProcessingRequest(project.getNum());
+
+        mockMvc.perform(post("/start-project")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
+                        .content(objectMapper.writeValueAsString(projectProcessingRequest)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("start-project",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        requestFields(
+                                fieldWithPath("projectNum").type("Long").description("프로젝트 식별자")
+                        )
+                ));
+    }
+
+    @Test
+    @DisplayName("프로젝트 진행 종료 문서화 테스트")
+    public void 프로젝트_진행_종료_문서화() throws Exception {
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        MemberDetails memberDetails = new MemberDetails(enterprise.getNum(), enterprise.getUserId(), enterprise.getRole());
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        freelancerProfileRepository.save(new FreelancerProfile(null, freelancer, PositionType.DEVELOPER));
+
+        Project project = projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.ANALYSIS,
+                "쇼핑몰",
+                PositionKind.DEVELOPER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35,
+                ProjectStatus.PROGRESS,
+                enterprise
+        ));
+        applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
+        interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
+        waitProjectRepository.save(WaitProject.createWaitProject(freelancer, project));
+        projectService.startProject(memberDetails, new ProjectProcessingRequest(project.getNum()));
+
+
+        ProjectProcessingRequest projectProcessingRequest = new ProjectProcessingRequest(project.getNum());
+
+        mockMvc.perform(post("/finish-project")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
+                        .content(objectMapper.writeValueAsString(projectProcessingRequest)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("finish-project",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        requestFields(
+                                fieldWithPath("projectNum").type("Long").description("프로젝트 식별자")
+                        )
                 ));
     }
 }

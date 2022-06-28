@@ -16,6 +16,7 @@ import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectStatus;
 import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.waitproject.model.WaitProject;
+import com.example.elancer.waitproject.model.WaitStatus;
 import com.example.elancer.waitproject.repsitory.WaitProjectRepository;
 import com.example.elancer.wishprojects.exception.NotExistProjectException;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -68,13 +70,13 @@ public class ProjectService {
         RightRequestChecker.checkMemberDetail(memberDetails);
         Project project = projectRepository.findById(projectProcessingRequest.getProjectNum()).orElseThrow(NotExistProjectException::new);
         RightRequestChecker.checkMemberAndProject(memberDetails, project);
-        List<WaitProject> waitProjects = waitProjectRepository.findByProject_Num(project.getNum());
 
-        if (waitProjects.size() > project.getHeadCount()) {
-            project.changeProjectStatus(ProjectStatus.PROGRESS);
-        } else {
-            throw new NotEnoughHeadCount();
-        }
+        List<WaitProject> findWaitProject = waitProjectRepository.findByProject_Num(project.getNum());
+        findWaitProject.forEach(
+                s -> s.changeWaitStatus()
+        );
+
+        project.changeProjectStatus(ProjectStatus.PROGRESS);
     }
 
     @Transactional
@@ -111,18 +113,41 @@ public class ProjectService {
 
     public List<WaitProjectResponse> findWaitProject(MemberDetails memberDetails) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        List<Project> findProjects = projectRepository.findWithWaitProject(memberDetails.getId());
+        List<Project> findProjects = projectRepository.findWithWaitProjectAndWaitStatus(memberDetails.getId(), WaitStatus.WAITING);
         List<WaitProjectResponse> findList = findProjects.stream().map(s ->
                 WaitProjectResponse.of(
                         s,
-                        (int) waitProjectRepository.countByProject_Num(s.getNum()),
-                        searchWaitFreelancerList(s)
+                        (int) waitProjectRepository.countByProject_NumAndWaitStatus(s.getNum(), WaitStatus.WAITING),
+                        searchWaitFreelancerList(s, WaitStatus.WAITING)
                 )
         ).collect(Collectors.toList());
 
         return findList;
     }
 
+    public List<ProcessingProjectResponse> findProcessingProject(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        List<Project> findProjects = projectRepository.findByEnterprise_NumAndProjectStatus(memberDetails.getId(), ProjectStatus.PROGRESS);
+        List<ProcessingProjectResponse> findList = findProjects.stream().map(s ->
+                ProcessingProjectResponse.of(
+                        s,
+                        (int) waitProjectRepository.countByProject_NumAndWaitStatus(s.getNum(), WaitStatus.WORKING),
+                        searchWaitFreelancerList(s, WaitStatus.WORKING)
+                )).collect(Collectors.toList());
+        return findList;
+    }
+
+    public List<ProcessingProjectResponse> findFinishProject(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        List<Project> findProjects = projectRepository.findByEnterprise_NumAndProjectStatus(memberDetails.getId(), ProjectStatus.COMPLETION);
+        List<ProcessingProjectResponse> findList = findProjects.stream().map(s ->
+                ProcessingProjectResponse.of(
+                        s,
+                        (int) waitProjectRepository.countByProject_NumAndWaitStatus(s.getNum(), WaitStatus.WORKING),
+                        searchWaitFreelancerList(s, WaitStatus.WORKING)
+                )).collect(Collectors.toList());
+        return findList;
+    }
 
 
     public List<ApplicantDto> searchApplicantList(Project project) {
@@ -145,8 +170,8 @@ public class ProjectService {
                 )
         ).collect(Collectors.toList());
     }
-    private List<WaitFreelancerDto> searchWaitFreelancerList(Project project) {
-        List<WaitProject> findWaitFreelancer = waitProjectRepository.findByProject_Num(project.getNum());
+    private List<WaitFreelancerDto> searchWaitFreelancerList(Project project, WaitStatus waitStatus) {
+        List<WaitProject> findWaitFreelancer = waitProjectRepository.findByProject_NumAndWaitStatus(project.getNum(), waitStatus);
 
         return findWaitFreelancer.stream().map(s ->
                 WaitFreelancerDto.of(

@@ -51,7 +51,7 @@ public class RightRequestChecker {
 
 
     public static void checkMemberAndProject(MemberDetails memberDetails, Project project) {
-        if (memberDetails.getId().equals(project.getEnterprise().getNum())) {
+        if (!memberDetails.getId().equals(project.getEnterprise().getNum())) {
             throw new WrongRequestException("해당 프로젝트에 대한 권한이 없습니다.");
         }
     }

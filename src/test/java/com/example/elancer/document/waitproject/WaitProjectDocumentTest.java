@@ -11,6 +11,7 @@ import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.interviewproject.model.InterviewProject;
+import com.example.elancer.interviewproject.model.InterviewStatus;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
@@ -95,7 +96,9 @@ public class WaitProjectDocumentTest extends DocumentBaseTest {
                 enterprise
         ));
         applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
-        interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
+        InterviewProject interviewProject = InterviewProject.createInterviewProject(freelancer, project);
+        interviewProject.changeInterviewStatus(InterviewStatus.ACCEPT);
+        interviewProjectRepository.save(interviewProject);
 
         WaitProjectRequest waitProjectRequest = new WaitProjectRequest(project.getNum(), freelancer.getNum());
 

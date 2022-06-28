@@ -8,6 +8,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.interviewproject.dto.*;
 import com.example.elancer.interviewproject.exception.NotExistInterviewException;
+import com.example.elancer.interviewproject.exception.PresentInterviewFreelancerException;
 import com.example.elancer.interviewproject.model.InterviewProject;
 import com.example.elancer.interviewproject.model.InterviewStatus;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
@@ -38,7 +39,12 @@ public class InterviewProjectService {
 
         Project project = projectRepository.findById(createInterviewProjectRequest.getProjectNum()).orElseThrow(NotExistProjectException::new);
         Freelancer freelancer = freelancerRepository.findById(createInterviewProjectRequest.getFreelancerNum()).orElseThrow(NotExistFreelancerException::new);
+
         applyProjectRepository.findByProject_NumAndFreelancer_Num(project.getNum(), freelancer.getNum()).orElseThrow(NotExistApplyProject::new);
+
+        if (interviewProjectRepository.findByProject_NumAndFreelancer_Num(project.getNum(), freelancer.getNum()).isPresent()) {
+            throw new PresentInterviewFreelancerException();
+        }
 
         interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
     }

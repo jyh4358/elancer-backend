@@ -101,5 +101,21 @@ public class ProjectController {
         return new ResponseEntity<>(waitProject, HttpStatus.OK);
     }
 
+    @GetMapping("/processing-project")
+    public ResponseEntity<List<ProcessingProjectResponse>> processingProjectList(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        List<ProcessingProjectResponse> processingProjectResponses = projectService.findProcessingProject(memberDetails);
+        return new ResponseEntity<>(processingProjectResponses, HttpStatus.OK);
+    }
+
+    @GetMapping("/finish-project")
+    public ResponseEntity<List<ProcessingProjectResponse>> finishProjectList(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        List<ProcessingProjectResponse> finishProject = projectService.findFinishProject(memberDetails);
+        return new ResponseEntity<>(finishProject, HttpStatus.OK);
+    }
+
 
 }
