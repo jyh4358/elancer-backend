@@ -3,7 +3,7 @@ package com.example.elancer.integrate.freelancerprofile;
 
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancerprofile.controller.FreelancerPositionFindControllerPath;
+import com.example.elancer.freelancerprofile.controller.position.FreelancerPositionFindControllerPath;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;

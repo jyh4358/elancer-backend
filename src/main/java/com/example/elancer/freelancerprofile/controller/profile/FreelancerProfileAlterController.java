@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.controller;
+package com.example.elancer.freelancerprofile.controller.profile;
 
 import com.example.elancer.freelancerprofile.dto.request.AcademicAbilityCoverRequests;
 import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequests;

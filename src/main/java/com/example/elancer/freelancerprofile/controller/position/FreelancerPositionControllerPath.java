@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.controller;
+package com.example.elancer.freelancerprofile.controller.position;
 
 public class FreelancerPositionControllerPath {
     public static final String FREELANCER_PROFILE_POSITION_DEVELOPER_COVER = "/freelancer-profile/developer";

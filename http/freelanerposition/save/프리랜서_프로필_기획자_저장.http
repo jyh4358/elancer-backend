@@ -1,5 +1,7 @@
-PUT http://localhost:8080/freelancer-profile/1/planner
+PUT http://localhost:8080/freelancer-profile/planner
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cmlSUlJSUiIsImlhdCI6MTY1NTc5NTg5NiwiZXhwIjoxNjU1Nzk2MDE2fQ.czR41h4KQ2qZs1VO6Rd2LXlBbM9FQBSJQSx8SebW4BA
+
 
 #info
 # PlannerDetailField 구성 {

@@ -4,7 +4,7 @@ import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.HopeWorkState;
-import com.example.elancer.freelancerprofile.controller.FreelancerPositionSearchControllerPath;
+import com.example.elancer.freelancerprofile.controller.position.FreelancerPositionSearchControllerPath;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;

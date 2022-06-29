@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -37,6 +38,8 @@ public abstract class Position extends BasicEntity {
         this.positionType = positionType;
         this.freelancerProfile = freelancerProfile;
     }
+
+    abstract List<String> getAllSkills();
 
     @Override
     public boolean equals(Object o) {

@@ -1,0 +1,15 @@
+POST http://localhost:8080/login
+Content-Type: application/json
+
+#res
+#{
+#  "memberType": "FREELANCER",
+#  "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cmlSUlJSUiIsImlhdCI6MTY1NTc5NTg5NiwiZXhwIjoxNjU1Nzk2MDE2fQ.czR41h4KQ2qZs1VO6Rd2LXlBbM9FQBSJQSx8SebW4BA",
+#  "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTU3OTU4OTYsImV4cCI6MTY1NTgwMTk0NH0.v2PhnrmouUOK5u7Rm5CaiFCXD4tB3sdATfqBrfAZvDk"
+#}
+
+
+{
+  "userId": "uriRRRRR",
+  "password": "1234"
+}

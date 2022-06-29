@@ -1,7 +1,6 @@
-package com.example.elancer.freelancerprofile.controller;
+package com.example.elancer.freelancerprofile.controller.position;
 
 import com.example.elancer.freelancer.model.HopeWorkState;
-import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
