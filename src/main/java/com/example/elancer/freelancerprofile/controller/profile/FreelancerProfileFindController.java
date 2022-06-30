@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.controller.profile;
 
+import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.freelancerprofile.dto.response.FreelancerDetailResponse;
 import com.example.elancer.freelancerprofile.dto.response.FreelancerProfileSimpleResponse;
 import com.example.elancer.freelancerprofile.service.profile.FreelancerProfileFindService;
@@ -30,5 +31,13 @@ public class FreelancerProfileFindController {
     ) {
         FreelancerProfileSimpleResponse simpleFreelancerAccount = freelancerProfileFindService.findSimpleFreelancerAccount(memberDetails);
         return new ResponseEntity<FreelancerProfileSimpleResponse>(simpleFreelancerAccount, HttpStatus.OK);
+    }
+
+    @GetMapping(FreelancerProfileFindControllerPath.FREELANCER_FINDS)
+    public ResponseEntity<FreelancerSimpleResponses> findFreelancers(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        FreelancerSimpleResponses simpleFreelancers = freelancerProfileFindService.findSimpleFreelancers(memberDetails);
+        return new ResponseEntity<FreelancerSimpleResponses>(simpleFreelancers, HttpStatus.OK);
     }
 }

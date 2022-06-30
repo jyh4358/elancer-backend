@@ -1,13 +1,9 @@
 package com.example.elancer.freelancerprofile.dto;
 
-import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancerprofile.model.position.Position;
-import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
-import com.querydsl.core.annotations.QueryProjection;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -25,7 +21,6 @@ public class FreelancerSimpleResponse {
     private boolean wishState;
     private String greeting;
     private List<String> skills;
-    private String etcSkill;
     private List<String> projectNames;
 
     public FreelancerSimpleResponse(
@@ -36,7 +31,6 @@ public class FreelancerSimpleResponse {
             int careerYear,
             String greeting,
             List<String> skills,
-            String etcSkill,
             List<String> projectNames
     ) {
         this.freelancerNum = freelancerNum;
@@ -47,29 +41,20 @@ public class FreelancerSimpleResponse {
         this.wishState = false;
         this.greeting = greeting;
         this.skills = skills;
-        this.etcSkill = etcSkill;
         this.projectNames = projectNames;
     }
 
-
-    public static FreelancerSimpleResponse of(Developer developer) {
+    public static FreelancerSimpleResponse of(Position position) {
         return new FreelancerSimpleResponse(
-                developer.getFreelancerProfile().getFreelancer().getNum(),
-                developer.getPositionType().getDesc(),
-                developer.getFreelancerProfile().getFreelancer().getName(),
-                developer.getFreelancerProfile().getIntroBackGround(),
-                developer.getFreelancerProfile().getFreelancer().getFreelancerAccountInfo().getCareerYear(),
-                developer.getFreelancerProfile().getGreeting(),
-                developer.getAllSkillNames(),
-                developer.getEtcSkill(),
-                developer.getFreelancerProfile().getProjectHistoryNames()
+                position.getFreelancerProfile().getFreelancer().getNum(),
+                position.getPositionType().getDesc(),
+                position.getFreelancerProfile().getFreelancer().getName(),
+                position.getFreelancerProfile().getIntroBackGround(),
+                position.getFreelancerProfile().getFreelancer().getFreelancerAccountInfo().getCareerYear(),
+                position.getFreelancerProfile().getGreeting(),
+                position.getAllSkillNames(),
+                position.getFreelancerProfile().getProjectHistoryNames()
         );
-    }
-
-    public static List<FreelancerSimpleResponse> listOf(List<Developer> developers) {
-        return developers.stream()
-                .map(FreelancerSimpleResponse::of)
-                .collect(Collectors.toList());
     }
 
     public void switchWishState() {

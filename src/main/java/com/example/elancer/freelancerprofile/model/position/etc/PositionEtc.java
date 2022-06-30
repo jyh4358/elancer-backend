@@ -37,9 +37,12 @@ public class PositionEtc extends Position {
 
     @Override
     public List<String> getAllSkillNames() {
-        return etcRoles.stream()
+        List<String> allSkillNames = new ArrayList<>();
+        allSkillNames.addAll(etcRoles.stream()
                 .map(etcRole -> etcRole.getEtcDetailRole().getDesc())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+        allSkillNames.add(positionEtcField);
+        return allSkillNames;
     }
 
     public void coverAllField(List<EtcRole> etcRoles, String positionEtcField) {

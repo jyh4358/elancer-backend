@@ -37,9 +37,12 @@ public class Publisher extends Position {
 
     @Override
     public List<String> getAllSkillNames() {
-        return publishingSkills.stream()
+        List<String> allSkillNames = new ArrayList<>();
+        allSkillNames.addAll(publishingSkills.stream()
                 .map(publishingSkill -> publishingSkill.getPublishingDetailSkill().getDesc())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+        allSkillNames.add(etcSkill);
+        return allSkillNames;
     }
 
     public void coverPublishingSkill(List<PublishingSkill> publishingSkillList) {

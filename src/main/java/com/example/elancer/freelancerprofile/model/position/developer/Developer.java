@@ -73,29 +73,30 @@ public class Developer extends Position {
 
     @Override
     public List<String> getAllSkillNames() {
-        List<String> allSkills = new ArrayList<>();
-        allSkills.addAll(javaSkills.stream()
+        List<String> allSkillNames = new ArrayList<>();
+        allSkillNames.addAll(javaSkills.stream()
                 .map(javaSkill -> javaSkill.getJavaDetailSkill().getDesc())
                 .collect(Collectors.toList()));
-        allSkills.addAll(mobileAppSkills.stream()
+        allSkillNames.addAll(mobileAppSkills.stream()
                 .map(mobileAppSkill -> mobileAppSkill.getMobileAppDetailSkill().getDesc())
                 .collect(Collectors.toList()));
-        allSkills.addAll(phpOrAspSkills.stream()
+        allSkillNames.addAll(phpOrAspSkills.stream()
                 .map(phpOrAspSkill -> phpOrAspSkill.getPhpOrAspDetailSkill().getDesc())
                 .collect(Collectors.toList()));
-        allSkills.addAll(dotNetSkills.stream()
+        allSkillNames.addAll(dotNetSkills.stream()
                 .map(dotNetSkill -> dotNetSkill.getDotNetDetailSkill().getDesc())
                 .collect(Collectors.toList()));
-        allSkills.addAll(javaScriptSkills.stream()
+        allSkillNames.addAll(javaScriptSkills.stream()
                 .map(javaScriptSkill -> javaScriptSkill.getJavaScriptDetailSkill().getDesc())
                 .collect(Collectors.toList()));
-        allSkills.addAll(cSkills.stream()
+        allSkillNames.addAll(cSkills.stream()
                 .map(cSkill -> cSkill.getCDetailSkill().getDesc())
                 .collect(Collectors.toList()));
-        allSkills.addAll(dbSkills.stream()
+        allSkillNames.addAll(dbSkills.stream()
                 .map(dbSkill -> dbSkill.getDbDetailSkill().getDesc())
                 .collect(Collectors.toList()));
-        return allSkills;
+        allSkillNames.add(etcSkill);
+        return allSkillNames;
     }
 
     public void coverDeveloperSkills(
