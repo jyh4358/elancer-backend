@@ -3,18 +3,17 @@ package com.example.elancer.freelancerprofile.model.position.publisher;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
-import com.example.elancer.freelancerprofile.model.position.developer.javaskill.JavaSkill;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -23,7 +22,7 @@ import java.util.List;
 public class Publisher extends Position {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "publisher", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PublishingSkill> publishingSkillList = new ArrayList<>();
+    private List<PublishingSkill> publishingSkills = new ArrayList<>();
 
     private String etcSkill;
 
@@ -36,11 +35,18 @@ public class Publisher extends Position {
         return new Publisher(positionType, freelancerProfile, etcSkill);
     }
 
+    @Override
+    public List<String> getAllSkillNames() {
+        return publishingSkills.stream()
+                .map(publishingSkill -> publishingSkill.getPublishingDetailSkill().getDesc())
+                .collect(Collectors.toList());
+    }
+
     public void coverPublishingSkill(List<PublishingSkill> publishingSkillList) {
-        this.publishingSkillList.clear();
+        this.publishingSkills.clear();
         for (PublishingSkill publishingSkill : publishingSkillList) {
             publishingSkill.setPublisher(this);
         }
-        this.publishingSkillList.addAll(publishingSkillList);
+        this.publishingSkills.addAll(publishingSkillList);
     }
 }

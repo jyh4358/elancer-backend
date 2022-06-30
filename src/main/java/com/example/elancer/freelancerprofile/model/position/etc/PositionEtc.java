@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -32,6 +33,13 @@ public class PositionEtc extends Position {
 
     public static PositionEtc createBasicPositionEtc(PositionType positionType, FreelancerProfile freelancerProfile) {
         return new PositionEtc(positionType, freelancerProfile);
+    }
+
+    @Override
+    public List<String> getAllSkillNames() {
+        return etcRoles.stream()
+                .map(etcRole -> etcRole.getEtcDetailRole().getDesc())
+                .collect(Collectors.toList());
     }
 
     public void coverAllField(List<EtcRole> etcRoles, String positionEtcField) {

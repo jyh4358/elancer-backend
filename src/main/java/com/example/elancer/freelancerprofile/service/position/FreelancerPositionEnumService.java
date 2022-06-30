@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.service;
+package com.example.elancer.freelancerprofile.service.position;
 
 import com.example.elancer.freelancerprofile.dto.DeveloperSkillsResponse;
 import com.example.elancer.freelancerprofile.dto.ProfileEnumResponse;

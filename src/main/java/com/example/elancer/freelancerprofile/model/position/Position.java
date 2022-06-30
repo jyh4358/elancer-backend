@@ -39,7 +39,7 @@ public abstract class Position extends BasicEntity {
         this.freelancerProfile = freelancerProfile;
     }
 
-    abstract List<String> getAllSkills();
+    public abstract List<String> getAllSkillNames();
 
     @Override
     public boolean equals(Object o) {

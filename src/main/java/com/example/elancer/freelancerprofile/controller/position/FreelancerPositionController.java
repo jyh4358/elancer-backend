@@ -5,7 +5,7 @@ import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCover
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PositionEtcCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PublisherCoverRequest;
-import com.example.elancer.freelancerprofile.service.FreelancerPositionService;
+import com.example.elancer.freelancerprofile.service.position.FreelancerPositionService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

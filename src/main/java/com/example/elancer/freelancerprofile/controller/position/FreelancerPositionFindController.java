@@ -5,7 +5,7 @@ import com.example.elancer.freelancerprofile.dto.DesignerResponse;
 import com.example.elancer.freelancerprofile.dto.DeveloperResponse;
 import com.example.elancer.freelancerprofile.dto.PlannerResponse;
 import com.example.elancer.freelancerprofile.dto.PositionEtcResponse;
-import com.example.elancer.freelancerprofile.service.FreelancerPositionFindService;
+import com.example.elancer.freelancerprofile.service.position.FreelancerPositionFindService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

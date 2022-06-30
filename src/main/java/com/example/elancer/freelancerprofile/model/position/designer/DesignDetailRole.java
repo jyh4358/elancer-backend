@@ -1,5 +1,8 @@
 package com.example.elancer.freelancerprofile.model.position.designer;
 
+import lombok.Getter;
+
+@Getter
 public enum DesignDetailRole {
     WEB_DESIGN("웹디자인"),
     APP_DESIGN("앱디자인"),

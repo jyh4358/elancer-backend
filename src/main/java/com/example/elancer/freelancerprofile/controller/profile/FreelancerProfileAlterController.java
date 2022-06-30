@@ -5,7 +5,7 @@ import com.example.elancer.freelancerprofile.dto.request.CareerCoverRequests;
 import com.example.elancer.freelancerprofile.dto.request.EducationAndLicenseAndLanguageRequests;
 import com.example.elancer.freelancerprofile.dto.request.IntroduceCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.ProjectHistoryCoverRequests;
-import com.example.elancer.freelancerprofile.service.FreelancerProfileAlterService;
+import com.example.elancer.freelancerprofile.service.profile.FreelancerProfileAlterService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -34,6 +34,7 @@ import com.example.elancer.freelancerprofile.repository.education.EducationRepos
 import com.example.elancer.freelancerprofile.repository.language.LanguageRepository;
 import com.example.elancer.freelancerprofile.repository.license.LicenseRepository;
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
+import com.example.elancer.freelancerprofile.service.profile.FreelancerProfileAlterService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;

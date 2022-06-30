@@ -2,7 +2,7 @@ package com.example.elancer.freelancerprofile.controller.profile;
 
 import com.example.elancer.freelancerprofile.dto.response.FreelancerDetailResponse;
 import com.example.elancer.freelancerprofile.dto.response.FreelancerProfileSimpleResponse;
-import com.example.elancer.freelancerprofile.service.FreelancerProfileFindService;
+import com.example.elancer.freelancerprofile.service.profile.FreelancerProfileFindService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

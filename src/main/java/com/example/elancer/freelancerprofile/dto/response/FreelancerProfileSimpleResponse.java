@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +47,8 @@ public class FreelancerProfileSimpleResponse {
     private List<LicenseResponse> licenseResponses;
     private List<LanguageResponse> languageResponses;
 
+    private List<String> allSkillNames;
+
     public static FreelancerProfileSimpleResponse of(FreelancerProfile freelancerProfile) {
         return new FreelancerProfileSimpleResponse(
                 freelancerProfile.getNum(),
@@ -70,7 +73,8 @@ public class FreelancerProfileSimpleResponse {
                 CareerResponse.listOf(freelancerProfile.getCareers()),
                 EducationResponse.listOf(freelancerProfile.getEducations()),
                 LicenseResponse.listOf(freelancerProfile.getLicenses()),
-                LanguageResponse.listOf(freelancerProfile.getLanguages())
+                LanguageResponse.listOf(freelancerProfile.getLanguages()),
+                freelancerProfile.getPosition().getAllSkillNames()
         );
     }
 }

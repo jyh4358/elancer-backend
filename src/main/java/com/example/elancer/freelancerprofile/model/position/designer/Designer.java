@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -36,6 +37,20 @@ public class Designer extends Position {
 
     public static Designer createBasicDesigner(PositionType positionType, FreelancerProfile freelancerProfile) {
         return new Designer(positionType, freelancerProfile);
+    }
+
+    @Override
+    public List<String> getAllSkillNames() {
+        List<String> designSkillNames = new ArrayList<>();
+        designSkillNames.addAll(designRoles.stream()
+                .map(designRole -> designRole.getDesignDetailRole().getDesc())
+                .collect(Collectors.toList()));
+
+        designSkillNames.addAll(designSkills.stream()
+                .map(designSkill -> designSkill.getDesignDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+
+        return designSkillNames;
     }
 
     public void coverDesignRoleAndSkill(List<DesignRole> designRoles, List<DesignSkill> designSkills, String etcRole,  String etcSkill) {

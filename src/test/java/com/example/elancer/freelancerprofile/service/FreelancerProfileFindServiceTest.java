@@ -1,6 +1,5 @@
 package com.example.elancer.freelancerprofile.service;
 
-import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.model.MailReceptionState;
@@ -25,6 +24,7 @@ import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileFindRepository;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
+import com.example.elancer.freelancerprofile.service.profile.FreelancerProfileFindService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;

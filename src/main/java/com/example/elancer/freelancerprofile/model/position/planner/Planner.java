@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -32,6 +33,13 @@ public class Planner extends Position {
 
     public static Planner createBasicPlanner(PositionType positionType, FreelancerProfile freelancerProfile) {
         return new Planner(positionType, freelancerProfile);
+    }
+
+    @Override
+    public List<String> getAllSkillNames() {
+        return plannerFields.stream()
+                .map(field -> field.getPlannerDetailField().getDesc())
+                .collect(Collectors.toList());
     }
 
     public void coverAllField(List<PlannerField> plannerFields, String etcField) {

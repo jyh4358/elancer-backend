@@ -20,7 +20,7 @@ public class CrowdWorker extends Position{
     }
 
     @Override
-    List<String> getAllSkills() {
+    public List<String> getAllSkillNames() {
         return null;
     }
 }

@@ -46,6 +46,7 @@ import com.example.elancer.freelancerprofile.repository.position.developer.Devel
 import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtcRepository;
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
+import com.example.elancer.freelancerprofile.service.position.FreelancerPositionFindService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.MemberType;
 import org.assertj.core.api.Assertions;
