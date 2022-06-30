@@ -2,7 +2,7 @@ package com.example.elancer.integrate.freelancerprofile;
 
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancerprofile.controller.FreelancerPositionControllerPath;
+import com.example.elancer.freelancerprofile.controller.position.FreelancerPositionControllerPath;
 import com.example.elancer.freelancerprofile.dto.request.position.DesignerCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.DeveloperCoverRequest;
 import com.example.elancer.freelancerprofile.dto.request.position.PlannerCoverRequest;

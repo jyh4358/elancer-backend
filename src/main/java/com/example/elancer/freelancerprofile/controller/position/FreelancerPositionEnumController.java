@@ -1,8 +1,8 @@
-package com.example.elancer.freelancerprofile.controller;
+package com.example.elancer.freelancerprofile.controller.position;
 
 import com.example.elancer.freelancerprofile.dto.DeveloperSkillsResponse;
 import com.example.elancer.freelancerprofile.dto.ProfileEnumResponse;
-import com.example.elancer.freelancerprofile.service.FreelancerPositionEnumService;
+import com.example.elancer.freelancerprofile.service.position.FreelancerPositionEnumService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

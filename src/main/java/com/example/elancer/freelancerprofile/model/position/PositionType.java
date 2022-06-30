@@ -1,13 +1,10 @@
 package com.example.elancer.freelancerprofile.model.position;
 
-import com.example.elancer.freelancerprofile.dto.response.PositionResponse;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
-import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Getter
 @AllArgsConstructor

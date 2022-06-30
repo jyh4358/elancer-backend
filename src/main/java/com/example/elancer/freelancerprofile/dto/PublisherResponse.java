@@ -20,7 +20,7 @@ public class PublisherResponse {
 
     public static PublisherResponse of(Publisher publisher) {
         return new PublisherResponse(
-                publisher.getPublishingSkillList().stream()
+                publisher.getPublishingSkills().stream()
                         .map(PublishingSkill::getPublishingDetailSkill)
                         .collect(Collectors.toList()),
                 publisher.getEtcSkill()

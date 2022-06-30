@@ -58,6 +58,7 @@ import com.example.elancer.freelancerprofile.repository.position.planner.PlanFie
 import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.freelancerprofile.repository.position.publisher.PublishingSkillRepository;
+import com.example.elancer.freelancerprofile.service.position.FreelancerPositionService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;

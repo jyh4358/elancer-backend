@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.service;
+package com.example.elancer.freelancerprofile.service.position;
 
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.HopeWorkState;

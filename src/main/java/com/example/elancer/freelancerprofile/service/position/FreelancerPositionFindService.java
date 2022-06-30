@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.service;
+package com.example.elancer.freelancerprofile.service.position;
 
 import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancerprofile.dto.PublisherResponse;

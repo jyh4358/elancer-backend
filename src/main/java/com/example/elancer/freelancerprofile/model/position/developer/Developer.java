@@ -71,6 +71,33 @@ public class Developer extends Position {
         return new Developer(positionType, freelancerProfile, focusSkill, role);
     }
 
+    @Override
+    public List<String> getAllSkillNames() {
+        List<String> allSkills = new ArrayList<>();
+        allSkills.addAll(javaSkills.stream()
+                .map(javaSkill -> javaSkill.getJavaDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(mobileAppSkills.stream()
+                .map(mobileAppSkill -> mobileAppSkill.getMobileAppDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(phpOrAspSkills.stream()
+                .map(phpOrAspSkill -> phpOrAspSkill.getPhpOrAspDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(dotNetSkills.stream()
+                .map(dotNetSkill -> dotNetSkill.getDotNetDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(javaScriptSkills.stream()
+                .map(javaScriptSkill -> javaScriptSkill.getJavaScriptDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(cSkills.stream()
+                .map(cSkill -> cSkill.getCDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        allSkills.addAll(dbSkills.stream()
+                .map(dbSkill -> dbSkill.getDbDetailSkill().getDesc())
+                .collect(Collectors.toList()));
+        return allSkills;
+    }
+
     public void coverDeveloperSkills(
             List<JavaSkill> javaSkills,
             List<MobileAppSkill> mobileAppSkills,
@@ -145,31 +172,5 @@ public class Developer extends Position {
             dbSkill.setDeveloper(this);
         }
         this.dbSkills = dbSkills;
-    }
-
-    public List<String> getAllSkillNames() {
-        List<String> allSkills = new ArrayList<>();
-        allSkills.addAll(javaSkills.stream()
-                .map(javaSkill -> javaSkill.getJavaDetailSkill().getDesc())
-                .collect(Collectors.toList()));
-        allSkills.addAll(mobileAppSkills.stream()
-                .map(mobileAppSkill -> mobileAppSkill.getMobileAppDetailSkill().getDesc())
-                .collect(Collectors.toList()));
-        allSkills.addAll(phpOrAspSkills.stream()
-                .map(phpOrAspSkill -> phpOrAspSkill.getPhpOrAspDetailSkill().getDesc())
-                .collect(Collectors.toList()));
-        allSkills.addAll(dotNetSkills.stream()
-                .map(dotNetSkill -> dotNetSkill.getDotNetDetailSkill().getDesc())
-                .collect(Collectors.toList()));
-        allSkills.addAll(javaScriptSkills.stream()
-                .map(javaScriptSkill -> javaScriptSkill.getJavaScriptDetailSkill().getDesc())
-                .collect(Collectors.toList()));
-        allSkills.addAll(cSkills.stream()
-                .map(cSkill -> cSkill.getCDetailSkill().getDesc())
-                .collect(Collectors.toList()));
-        allSkills.addAll(dbSkills.stream()
-                .map(dbSkill -> dbSkill.getDbDetailSkill().getDesc())
-                .collect(Collectors.toList()));
-        return allSkills;
     }
 }

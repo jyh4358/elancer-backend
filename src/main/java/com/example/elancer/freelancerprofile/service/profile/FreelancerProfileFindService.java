@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.service;
+package com.example.elancer.freelancerprofile.service.profile;
 
 import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.common.exception.ImpossibleException;
@@ -37,6 +37,5 @@ public class FreelancerProfileFindService {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.findByFreelancerNum(memberDetails.getId()).orElseThrow(() -> new ImpossibleException("발생 불가능한 예외 입니다. 프리랜서와 프리랜서 프로필 디비 데이터를 확인해 주세요."));
         RightRequestChecker.checkFreelancerProfileAndRequester(freelancerProfile, memberDetails);
         return FreelancerProfileSimpleResponse.of(freelancerProfile);
-
     }
 }

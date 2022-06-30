@@ -1,5 +1,6 @@
-GET http://localhost:8080/freelancer/1/freelancer-profile/simple
+GET http://localhost:8080/freelancer/freelancer-profile/simple
 Content-Type: application/json
+authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cmlSUlJSUiIsImlhdCI6MTY1NjU3NzY2NywiZXhwIjoxNjU2NTc3Nzg3fQ.c8tEfcGDRG7MG1z3ngk8PysrO0HmzhI0TsPQsuce4OQ
 
 #req
 #
