@@ -1,0 +1,156 @@
+GET http://localhost:8080/freelancers/freelancer-profiles
+Content-Type: application/json
+
+#res
+#{
+#  "freelancerSimpleResponseList": [
+#    {
+#      "freelancerNum": 70,
+#      "positionName": "퍼블리셔",
+#      "freelancerName": "minyoung",
+#      "introBackGround": null,
+#      "careerYear": 0,
+#      "wishState": false,
+#      "greeting": "안녕하세요 minyoung 입니다.",
+#      "skills": [
+#        null
+#      ],
+#      "projectNames": []
+#    },
+#    {
+#      "freelancerNum": 69,
+#      "positionName": "기획자",
+#      "freelancerName": "freelancer",
+#      "introBackGround": null,
+#      "careerYear": 1,
+#      "wishState": false,
+#      "greeting": "안녕하세요 freelancer 입니다.",
+#      "skills": [
+#        "쇼핑몰",
+#        "PM",
+#        "etcField"
+#      ],
+#      "projectNames": []
+#    },
+#    {
+#      "freelancerNum": 68,
+#      "positionName": "개발자",
+#      "freelancerName": "memberName",
+#      "introBackGround": null,
+#      "careerYear": 0,
+#      "wishState": false,
+#      "greeting": "안녕하세요 memberName 입니다.",
+#      "skills": [
+#        null
+#      ],
+#      "projectNames": []
+#    },
+#    {
+#      "freelancerNum": 67,
+#      "positionName": "개발자",
+#      "freelancerName": "test1",
+#      "introBackGround": null,
+#      "careerYear": 0,
+#      "wishState": false,
+#      "greeting": "안녕하세요 test1 입니다.",
+#      "skills": [
+#        null
+#      ],
+#      "projectNames": []
+#    },
+#    {
+#      "freelancerNum": 66,
+#      "positionName": "개발자",
+#      "freelancerName": "min",
+#      "introBackGround": null,
+#      "careerYear": 0,
+#      "wishState": false,
+#      "greeting": "안녕하세요 min 입니다.",
+#      "skills": [
+#        null
+#      ],
+#      "projectNames": []
+#    },
+#    {
+#      "freelancerNum": 65,
+#      "positionName": "개발자",
+#      "freelancerName": "memberName",
+#      "introBackGround": null,
+#      "careerYear": 0,
+#      "wishState": false,
+#      "greeting": "안녕하세요 memberName 입니다.",
+#      "skills": [
+#        null
+#      ],
+#      "projectNames": []
+#    },
+#    {
+#      "freelancerNum": 39,
+#      "positionName": "개발자",
+#      "freelancerName": "memberName",
+#      "introBackGround": null,
+#      "careerYear": 0,
+#      "wishState": false,
+#      "greeting": "안녕하세요 memberName 입니다.",
+#      "skills": [
+#        "Back-End",
+#        "Spring",
+#        "Hybrid",
+#        "PHP",
+#        "ASP.net",
+#        "node.js",
+#        "Server",
+#        "Oracle",
+#        "MySQL",
+#        "etc"
+#      ],
+#      "projectNames": []
+#    },
+#    {
+#      "freelancerNum": 38,
+#      "positionName": "개발자",
+#      "freelancerName": "memberName",
+#      "introBackGround": null,
+#      "careerYear": 0,
+#      "wishState": false,
+#      "greeting": "안녕하세요 memberName 입니다.",
+#      "skills": [
+#        "Back-End",
+#        "Spring",
+#        "Hybrid",
+#        "PHP",
+#        "ASP.net",
+#        "node.js",
+#        "Server",
+#        "Oracle",
+#        "MySQL",
+#        "etc"
+#      ],
+#      "projectNames": []
+#    },
+#    {
+#      "freelancerNum": 1,
+#      "positionName": "개발자",
+#      "freelancerName": "계정 이름",
+#      "introBackGround": "WHITE",
+#      "careerYear": 0,
+#      "wishState": false,
+#      "greeting": "안녕하세요 정민영 입니다.",
+#      "skills": [
+#        "Back-End",
+#        "Spring",
+#        "Hybrid",
+#        "PHP",
+#        "ASP.net",
+#        "node.js",
+#        "Server",
+#        "Oracle",
+#        "MySQL",
+#        "etc"
+#      ],
+#      "projectNames": []
+#    }
+#  ]
+#}
+#
+#Response code: 200; Time: 1642ms; Content length: 2033 bytes
