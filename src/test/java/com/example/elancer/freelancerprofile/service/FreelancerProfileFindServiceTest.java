@@ -333,7 +333,7 @@ class FreelancerProfileFindServiceTest {
         when(freelancerProfileRepository.findByFreelancerNum(any())).thenReturn(Optional.of(freelancerProfile));
 
         //when
-        FreelancerProfileSimpleResponse freelancerProfileSimpleResponse = freelancerProfileFindService.findSimpleFreelancerAccount(memberDetails);
+        FreelancerProfileSimpleResponse freelancerProfileSimpleResponse = freelancerProfileFindService.findSimpleMyAccountByFreelancer(memberDetails);
 
         //then
         Assertions.assertThat(freelancerProfileSimpleResponse.getName()).isEqualTo(freelancer.getName());

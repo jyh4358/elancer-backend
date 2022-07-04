@@ -237,7 +237,6 @@ class DeveloperSearchRepositoryTest {
         //일단 생각대로 동작은 함. 다만 java를 검색하면 javaScript의 주스킬 가진 사람도 나오긴하는데 이건 흔한거라..., 별개로 검색시 develper객체에 freelancer나 profile 내에 데이터가 없었던 현상은 em.clear랑 연관되있다고 판단.
         //then
         Assertions.assertThat(freelancers.getContent()).hasSize(1);
-//        Assertions.assertThat(freelancers.getContent().get(0).getFreelancerProfile().getFreelancer().getName()).isEqualTo(freelancer.getName());
     }
 
 }

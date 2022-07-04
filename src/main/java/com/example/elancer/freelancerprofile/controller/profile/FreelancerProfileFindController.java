@@ -29,7 +29,7 @@ public class FreelancerProfileFindController {
     public ResponseEntity<FreelancerProfileSimpleResponse> findSimpleFreelancerAccount(
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        FreelancerProfileSimpleResponse simpleFreelancerAccount = freelancerProfileFindService.findSimpleFreelancerAccount(memberDetails);
+        FreelancerProfileSimpleResponse simpleFreelancerAccount = freelancerProfileFindService.findSimpleMyAccountByFreelancer(memberDetails);
         return new ResponseEntity<FreelancerProfileSimpleResponse>(simpleFreelancerAccount, HttpStatus.OK);
     }
 

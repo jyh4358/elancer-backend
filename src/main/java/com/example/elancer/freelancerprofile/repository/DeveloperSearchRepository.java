@@ -45,6 +45,8 @@ public class DeveloperSearchRepository {
                 .innerJoin(developer.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
                 .where(builder)
+                .orderBy(developer.num.desc())
+                .limit(10)
                 .fetchResults();
 
         return new SliceImpl<Developer>(developerQueryResults.getResults());
