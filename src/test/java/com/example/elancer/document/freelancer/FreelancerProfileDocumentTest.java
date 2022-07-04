@@ -584,7 +584,8 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentTool").type("String").description("프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드."),
                                 fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentCommunication").type("String").description("프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드."),
                                 fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentEtc").type("String").description("프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드."),
-                                fieldWithPath("projectHistoryResponses.[0].responsibilityTask").type("String").description("프리랜서 프로젝트 수행이력 담당업무 정보 필드.")
+                                fieldWithPath("projectHistoryResponses.[0].responsibilityTask").type("String").description("프리랜서 프로젝트 수행이력 담당업무 정보 필드."),
+                                fieldWithPath("allSkillNames.[0]").type("String").description("모든 스킬")
                         )
                 ));
     }
