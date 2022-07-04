@@ -403,9 +403,10 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         ));
         applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
         interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
-        interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer2, project));
         waitProjectRepository.save(WaitProject.createWaitProject(freelancer, project));
         projectService.startProject(memberDetails, new ProjectProcessingRequest(project.getNum()));
+        applyProjectRepository.save(ApplyProject.createApplyProject(freelancer2, project));
+        interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer2, project));
         waitProjectRepository.save(WaitProject.createWaitProject(freelancer2, project));
 
         mockMvc.perform(get("/enterprise-project")

@@ -21,4 +21,6 @@ public interface ApplyProjectRepository extends JpaRepository<ApplyProject, Long
     List<ApplyProject> findByProject_Num(Long projectNum);
 
     Optional<ApplyProject> findByProject_NumAndFreelancer_Num(Long projectNum, Long freelancerNum);
+
+    void deleteAllByProject_Num(Long num);
 }

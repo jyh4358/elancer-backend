@@ -73,6 +73,8 @@ public class ProjectService {
         findWaitProject.forEach(
                 s -> s.changeWaitStatus()
         );
+        applyProjectRepository.deleteAllByProject_Num(project.getNum());
+        interviewProjectRepository.deleteAllByProject_Num(project.getNum());
 
         project.changeProjectStatus(ProjectStatus.PROGRESS);
     }
