@@ -344,7 +344,7 @@ include::{snippets}/freelancer-profile-enum-names-find/response-fields.adoc[]
 include::{snippets}/freelancer-profile-enum-names-find/response-body.adoc[]
 
 [[resources-developer-search]]
-== 프리랜서 포지션 검색 정보
+== 프리랜서 개발자 검색 정보
 
 프리랜서 포지션을 검색한다.
 
@@ -352,6 +352,21 @@ include::{snippets}/developer-search/http-request.adoc[]
 include::{snippets}/developer-search/response-headers.adoc[]
 include::{snippets}/developer-search/response-fields.adoc[]
 include::{snippets}/developer-search/response-body.adoc[]
+
+[[resources-freelancer-profile-finds]]
+== 프리랜서 개발자 검색 정보
+
+프리랜서 포지션을 검색한다.
+
+요청
+
+include::{snippets}/freelancer-profile-finds/http-request.adoc[]
+
+응답
+
+include::{snippets}/freelancer-profile-finds/response-headers.adoc[]
+include::{snippets}/freelancer-profile-finds/response-fields.adoc[]
+include::{snippets}/freelancer-profile-finds/response-body.adoc[]
 
 
 == 기업
