@@ -24,14 +24,14 @@ public class InterviewProjectController {
      * @param interviewProjectRequest
      * @return
      */
-    @GetMapping("/interview-project")
-    public ResponseEntity<List<InterviewProjectResponse>> interviewProjectList(
-            @AuthenticationPrincipal MemberDetails memberDetails,
-            @Validated @RequestBody InterviewProjectRequest interviewProjectRequest
-    ) {
-        List<InterviewProjectResponse> interviewProjectResponses = interviewProjectService.interviewProjectList(interviewProjectRequest, memberDetails);
-        return new ResponseEntity<>(interviewProjectResponses, HttpStatus.OK);
-    }
+//    @GetMapping("/interview-project")
+//    public ResponseEntity<List<InterviewProjectResponse>> interviewProjectList(
+//            @AuthenticationPrincipal MemberDetails memberDetails,
+//            @Validated @RequestBody InterviewProjectRequest interviewProjectRequest
+//    ) {
+//        List<InterviewProjectResponse> interviewProjectResponses = interviewProjectService.interviewProjectList(interviewProjectRequest, memberDetails);
+//        return new ResponseEntity<>(interviewProjectResponses, HttpStatus.OK);
+//    }
 
     /**
      * 기업이 프리랜서에게 인터뷰 요청

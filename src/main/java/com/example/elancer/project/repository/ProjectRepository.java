@@ -26,6 +26,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     List<Project> findWithWaitProjectAndWaitStatus(@Param("enterprise_num") Long enterprise_num,
                                                    @Param("waitStatus")WaitStatus waitStatus);
 
-
+    Long countByProjectStatus(ProjectStatus projectStatus);
 
 }

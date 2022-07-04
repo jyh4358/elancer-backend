@@ -11,7 +11,6 @@ import com.example.elancer.interviewproject.model.InterviewProject;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.*;
-import com.example.elancer.project.exception.NotEnoughHeadCount;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectStatus;
 import com.example.elancer.project.repository.ProjectRepository;
@@ -25,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -96,6 +94,22 @@ public class ProjectService {
                 RecommendProjectResponse.of(s)).collect(Collectors.toList());
     }
 
+    public ProjectListCount projectCount(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        List<Project> findProjects = projectRepository.findByEnterprise_Num(memberDetails.getId());
+        List<Long> findProjectNumList = findProjects.stream().map(s -> s.getNum()).collect(Collectors.toList());
+
+        ProjectListCount projectListCount = ProjectListCount.of(
+                applyProjectRepository.countByProject_NumGroupByProject_Num(findProjectNumList).size(),
+                interviewProjectRepository.countInterviewProject(findProjectNumList).size(),
+                waitProjectRepository.countWaitProject(findProjectNumList).size(),
+                projectRepository.countByProjectStatus(ProjectStatus.PROGRESS).intValue(),
+                projectRepository.countByProjectStatus(ProjectStatus.COMPLETION).intValue()
+        );
+
+        return projectListCount;
+    }
+
     public List<DashboardProjectResponse> findDashboardProject(MemberDetails memberDetails) {
         RightRequestChecker.checkMemberDetail(memberDetails);
         List<Project> findProjects = projectRepository.findByEnterprise_Num(memberDetails.getId());
@@ -104,7 +118,37 @@ public class ProjectService {
                         s,
                         (int) applyProjectRepository.countByProject_Num(s.getNum()),
                         (int) interviewProjectRepository.countByProject_Num(s.getNum()),
+                        (int) waitProjectRepository.countByProject_NumAndWaitStatus(s.getNum(), WaitStatus.WAITING),
+                        (int) waitProjectRepository.countByProject_NumAndWaitStatus(s.getNum(), WaitStatus.WORKING),
                         searchApplicantList(s),
+                        searchInterviewRequesterList(s),
+                        searchWaitFreelancerList(s, WaitStatus.WAITING),
+                        searchWaitFreelancerList(s, WaitStatus.WORKING)
+                )
+        ).collect(Collectors.toList());
+        return findList;
+    }
+    public List<ApplyProjectResponse> findApplyProject(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        List<Project> findProjects = projectRepository.findByEnterprise_Num(memberDetails.getId());
+        List<ApplyProjectResponse> findList = findProjects.stream().map(s ->
+                ApplyProjectResponse.of(
+                        s,
+                        (int) applyProjectRepository.countByProject_Num(s.getNum()),
+                        searchApplicantList(s)
+                )
+        ).collect(Collectors.toList());
+
+        return findList;
+    }
+
+    public List<InterviewProjectResponse> findInterviewProject(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        List<Project> findProjects = projectRepository.findByEnterprise_Num(memberDetails.getId());
+        List<InterviewProjectResponse> findList = findProjects.stream().map(s ->
+                InterviewProjectResponse.of(
+                        s,
+                        (int) interviewProjectRepository.countByProject_Num(s.getNum()),
                         searchInterviewRequesterList(s)
                 )
         ).collect(Collectors.toList());
@@ -159,12 +203,12 @@ public class ProjectService {
         return ApplicantDto.createApplicantList(freelancers);
     }
 
-    public List<InterviewRequestDto> searchInterviewRequesterList(Project project) {
+    public List<InterviewFreelancerDto> searchInterviewRequesterList(Project project) {
         List<InterviewProject> findInterviewProjects = interviewProjectRepository.findByProject_Num(project.getNum());
 
 
         return findInterviewProjects.stream().map(s ->
-                InterviewRequestDto.of(
+                InterviewFreelancerDto.of(
                         s.getFreelancer(),
                         s.getInterviewStatus()
                 )
@@ -179,5 +223,6 @@ public class ProjectService {
                 )
         ).collect(Collectors.toList());
     }
+
 
 }

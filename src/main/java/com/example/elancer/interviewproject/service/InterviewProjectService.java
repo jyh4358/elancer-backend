@@ -69,14 +69,14 @@ public class InterviewProjectService {
         interviewProjectRepository.delete(interviewProject);
     }
 
-    public List<InterviewProjectResponse> interviewProjectList(InterviewProjectRequest interviewProjectRequest, MemberDetails memberDetails) {
-        RightRequestChecker.checkMemberDetail(memberDetails);
-        List<InterviewProject> interviewProjects = interviewProjectRepository.findByProject_Num(interviewProjectRequest.getProjectNum());
-        return interviewProjects.stream().map(s ->
-                new InterviewProjectResponse(
-                        s.getFreelancer().getNum(),
-                        s.getFreelancer().getName(),
-                        s.getFreelancer().getPhone(),
-                        s.getInterviewStatus())).collect(Collectors.toList());
-    }
+//    public List<InterviewProjectResponse> interviewProjectList(InterviewProjectRequest interviewProjectRequest, MemberDetails memberDetails) {
+//        RightRequestChecker.checkMemberDetail(memberDetails);
+//        List<InterviewProject> interviewProjects = interviewProjectRepository.findByProject_Num(interviewProjectRequest.getProjectNum());
+//        return interviewProjects.stream().map(s ->
+//                new InterviewProjectResponse(
+//                        s.getFreelancer().getNum(),
+//                        s.getFreelancer().getName(),
+//                        s.getFreelancer().getPhone(),
+//                        s.getInterviewStatus())).collect(Collectors.toList());
+//    }
 }

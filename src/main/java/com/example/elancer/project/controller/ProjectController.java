@@ -82,6 +82,13 @@ public class ProjectController {
         return new ResponseEntity<>(recommendProject, HttpStatus.OK);
     }
 
+    @GetMapping("/project-list-count")
+    public ResponseEntity<ProjectListCount> projectListCount(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        return new ResponseEntity<>(projectService.projectCount(memberDetails), HttpStatus.OK);
+    }
+
     @GetMapping("/enterprise-project")
     public ResponseEntity<List<DashboardProjectResponse>> dashboardProjectList(
             @AuthenticationPrincipal MemberDetails memberDetails
@@ -90,6 +97,22 @@ public class ProjectController {
         List<DashboardProjectResponse> dashboardProject = projectService.findDashboardProject(memberDetails);
 
         return new ResponseEntity<>(dashboardProject, HttpStatus.OK);
+    }
+
+    @GetMapping("/apply-project")
+    public ResponseEntity<List<ApplyProjectResponse>> applyProjectList(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        List<ApplyProjectResponse> applyProject = projectService.findApplyProject(memberDetails);
+        return new ResponseEntity<>(applyProject, HttpStatus.OK);
+    }
+
+    @GetMapping("/interview-project")
+    public ResponseEntity<List<InterviewProjectResponse>> interviewProjectList(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        List<InterviewProjectResponse> interviewProject = projectService.findInterviewProject(memberDetails);
+        return new ResponseEntity<>(interviewProject, HttpStatus.OK);
     }
 
     @GetMapping("/wait-project")

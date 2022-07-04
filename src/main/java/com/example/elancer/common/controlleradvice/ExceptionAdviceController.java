@@ -27,21 +27,14 @@ public class ExceptionAdviceController {
         return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(Arrays.toString(e.getStackTrace())), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler({NullPointerException.class})
-    public ResponseEntity<ExceptionMessage> handleNullPointerException(NullPointerException e) {
-        log.error(e.getClass() + ": " + e.getMessage());
-        return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(Arrays.toString(e.getStackTrace())), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({NotExistFreelancerException.class})
     public ResponseEntity<ExceptionMessage> handleNotExistFreelancerException(NotExistFreelancerException e) {
         log.error(e.getClass() + ": " + e.getMessage());
         return new ResponseEntity<ExceptionMessage>(ExceptionMessage.of(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({NotExistFreelancerProfileException.class})
     public ResponseEntity<ExceptionMessage> handleNotExistFreelancerProfileException(NotExistFreelancerProfileException e) {
         log.error(e.getClass() + ": " + e.getMessage());

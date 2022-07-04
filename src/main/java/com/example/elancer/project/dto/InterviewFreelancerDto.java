@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class InterviewRequestDto {
+public class InterviewFreelancerDto {
     private Long num;
     private String name;
     private String phone;
@@ -17,14 +17,14 @@ public class InterviewRequestDto {
     private int careerYear;
     private PositionType positionType;
 
-    public InterviewRequestDto(Long num, String name, String phone, InterviewStatus interviewStatus) {
+    public InterviewFreelancerDto(Long num, String name, String phone, InterviewStatus interviewStatus) {
         this.num = num;
         this.name = name;
         this.phone = phone;
         this.interviewStatus = interviewStatus;
     }
 
-    public InterviewRequestDto(Long num, String name, String phone, InterviewStatus interviewStatus, int careerYear, PositionType positionType) {
+    public InterviewFreelancerDto(Long num, String name, String phone, InterviewStatus interviewStatus, int careerYear, PositionType positionType) {
         this.num = num;
         this.name = name;
         this.phone = phone;
@@ -33,8 +33,8 @@ public class InterviewRequestDto {
         this.positionType = positionType;
     }
 
-    public static InterviewRequestDto of(Freelancer freelancer, InterviewStatus interviewStatus) {
-        return new InterviewRequestDto(
+    public static InterviewFreelancerDto of(Freelancer freelancer, InterviewStatus interviewStatus) {
+        return new InterviewFreelancerDto(
                 freelancer.getNum(),
                 freelancer.getName(),
                 freelancer.getPhone(),

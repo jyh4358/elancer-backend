@@ -434,6 +434,16 @@ include::{snippets}/project-delete/http-request.adoc[]
 include::{snippets}/project-delete/request-headers.adoc[]
 include::{snippets}/project-delete/request-fields.adoc[]
 
+[[resources-project-list-count]]
+== 프로젝트 갯수 요청
+요청
+include::{snippets}/project-list-count/http-request.adoc[]
+응답
+include::{snippets}/project-list-count/http-response.adoc[]
+include::{snippets}/project-list-count/response-headers.adoc[]
+include::{snippets}/project-list-count/response-fields.adoc[]
+
+
 [[resources-enterprise-dashboard-project-list]]
 == 기업 대쉬보드 프로젝트 리스트 요청
 요청
@@ -442,6 +452,25 @@ include::{snippets}/enterprise-dashboard-project-list/http-request.adoc[]
 include::{snippets}/enterprise-dashboard-project-list/http-response.adoc[]
 include::{snippets}/enterprise-dashboard-project-list/response-headers.adoc[]
 include::{snippets}/enterprise-dashboard-project-list/response-fields.adoc[]
+
+[[resources-apply-project-list]]
+== 기업 지원 프로젝트 리스트 요청
+요청
+include::{snippets}/apply-project-list/http-request.adoc[]
+응답
+include::{snippets}/apply-project-list/http-response.adoc[]
+include::{snippets}/apply-project-list/response-headers.adoc[]
+include::{snippets}/apply-project-list/response-body.adoc[]
+
+[[resources-interview-project-list]]
+== 기업 인터뷰 프로젝트 리스트 요청
+요청
+include::{snippets}/interview-project-list/http-request.adoc[]
+응답
+include::{snippets}/interview-project-list/http-response.adoc[]
+include::{snippets}/interview-project-list/response-headers.adoc[]
+include::{snippets}/interview-project-list/response-fields.adoc[]
+
 
 [[resources-wait-project-list]]
 == 기업 조율 프로젝트 리스트 요청

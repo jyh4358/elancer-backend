@@ -24,5 +24,9 @@ public interface WaitProjectRepository extends JpaRepository<WaitProject, Long> 
     long countByProject_Num(Long projectNum);
     long countByProject_NumAndWaitStatus(Long projectNum, WaitStatus waitStatus);
 
+    @Query("select count(wp.project.num) from WaitProject wp where wp.project.num in :numList and wp.waitStatus = 'WAITING' group by wp.project.num")
+    List<Long> countWaitProject(@Param("numList") List<Long> numList);
+
+
     void deleteAllByProject_Num(Long projectNum);
 }
