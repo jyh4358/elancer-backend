@@ -1,0 +1,44 @@
+|===
+|Path|Type|Description
+
+|`+freelancerSimpleResponseList+`
+|`+List<String>+`
+|프리랜서 요약 정보 데이터 리스트.
+
+|`+freelancerSimpleResponseList.[0].freelancerNum+`
+|`+Long+`
+|프리랜서 식별자 정보 필드.
+
+|`+freelancerSimpleResponseList.[0].positionName+`
+|`+String+`
+|프리랜서 포지션이름 정보 필드.
+
+|`+freelancerSimpleResponseList.[0].freelancerName+`
+|`+String+`
+|프리랜서 이름 정보 필드.
+
+|`+freelancerSimpleResponseList.[0].introBackGround+`
+|`+IntroBackGround+`
+|프리랜서 프로필 배경화면 정보 필드.
+
+|`+freelancerSimpleResponseList.[0].careerYear+`
+|`+int+`
+|프리랜서 경력 정보 필드.
+
+|`+freelancerSimpleResponseList.[0].wishState+`
+|`+boolean+`
+|사용자의 프리랜서 스크랩여부 정보 필드.
+
+|`+freelancerSimpleResponseList.[0].greeting+`
+|`+String+`
+|프리랜서 소개말 정보 필드.
+
+|`+freelancerSimpleResponseList.[0].skills+`
+|`+List<String>+`
+|프리랜서 개발자 주요스킬 정보 필드.
+
+|`+freelancerSimpleResponseList.[0].projectNames+`
+|`+ListL<String>+`
+|프리랜서 개발자 기타스킬 정보 필드.
+
+|===

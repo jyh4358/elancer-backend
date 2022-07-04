@@ -1,0 +1,26 @@
+[source,options="nowrap"]
+----
+{
+  "freelancerSimpleResponseList" : [ {
+    "freelancerNum" : 2,
+    "positionName" : "기획자",
+    "freelancerName" : "name2",
+    "introBackGround" : "COBALT_BLUE",
+    "careerYear" : 0,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ null ],
+    "projectNames" : [ ]
+  }, {
+    "freelancerNum" : 1,
+    "positionName" : "개발자",
+    "freelancerName" : "name",
+    "introBackGround" : "COBALT_BLUE",
+    "careerYear" : 0,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ null ],
+    "projectNames" : [ ]
+  } ]
+}
+----

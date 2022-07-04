@@ -354,9 +354,9 @@ include::{snippets}/developer-search/response-fields.adoc[]
 include::{snippets}/developer-search/response-body.adoc[]
 
 [[resources-freelancer-profile-finds]]
-== 프리랜서 개발자 검색 정보
+== 프리랜서 목록 조회 정보(인덱스 페이지)
 
-프리랜서 포지션을 검색한다.
+이랜서 인덱스 페이지의 프리랜서 목록을 검색한다.
 
 요청
 
