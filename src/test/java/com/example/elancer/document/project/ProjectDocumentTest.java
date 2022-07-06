@@ -139,6 +139,236 @@ public class ProjectDocumentTest extends DocumentBaseTest {
 
                 ));
     }
+    @Test
+    @DisplayName("프로젝트 메인 페이지 리스트 요청 문서화 테스트")
+    public void 프로젝트_메인_페이지_리스트_요청_문서화() throws Exception {
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        freelancerProfileRepository.save(new FreelancerProfile(null, freelancer, PositionType.DEVELOPER));
+
+        Project project = projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.DEVELOP,
+                "쇼핑몰",
+                PositionKind.DEVELOPER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35,
+                ProjectStatus.PROGRESS,
+                enterprise
+        ));
+        projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.DEVELOP,
+                "쇼핑몰",
+                PositionKind.PUBLISHER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35,
+                ProjectStatus.PROGRESS,
+                enterprise
+        ));
+        projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.DEVELOP,
+                "쇼핑몰",
+                PositionKind.DESIGNER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35,
+                ProjectStatus.PROGRESS,
+                enterprise
+        ));
+        projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.DEVELOP,
+                "쇼핑몰",
+                PositionKind.PLANNER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35,
+                ProjectStatus.PROGRESS,
+                enterprise
+        ));
+        projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.DEVELOP,
+                "쇼핑몰",
+                PositionKind.ETC,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35,
+                ProjectStatus.PROGRESS,
+                enterprise
+        ));
+
+
+
+        mockMvc.perform(get("/project-index-list", project.getNum())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("project-index-list",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("developerProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("developerProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
+                                fieldWithPath("developerProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
+                                fieldWithPath("developerProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
+                                fieldWithPath("developerProjectList.[].endDays").type("Long").description("프로젝트 지원 마감일자(day)"),
+                                fieldWithPath("developerProjectList.[].skills").type("List<String>").description("스킬 정보"),
+                                fieldWithPath("developerProjectList.[].projectName").type("String").description("프로젝트 명"),
+                                fieldWithPath("developerProjectList.[].freelancerWorkmanShip").type("FreelancerWorkmanShip").description("JUNIOR(\"초급\"), MIDDLE(\"중급\"), SENIOR(\"고급\")"),
+                                fieldWithPath("developerProjectList.[].projectPeriod").type("Long").description("프로젝트 기간(Month)"),
+                                fieldWithPath("developerProjectList.[].address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("developerProjectList.[].address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("developerProjectList.[].address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("developerProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("developerProjectList.[].content").type("String").description("프로젝트 내용"),
+                                fieldWithPath("developerProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("publisherProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("publisherProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
+                                fieldWithPath("publisherProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
+                                fieldWithPath("publisherProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
+                                fieldWithPath("publisherProjectList.[].endDays").type("Long").description("프로젝트 지원 마감일자(day)"),
+                                fieldWithPath("publisherProjectList.[].skills").type("List<String>").description("스킬 정보"),
+                                fieldWithPath("publisherProjectList.[].projectName").type("String").description("프로젝트 명"),
+                                fieldWithPath("publisherProjectList.[].freelancerWorkmanShip").type("FreelancerWorkmanShip").description("JUNIOR(\"초급\"), MIDDLE(\"중급\"), SENIOR(\"고급\")"),
+                                fieldWithPath("publisherProjectList.[].projectPeriod").type("Long").description("프로젝트 기간(Month)"),
+                                fieldWithPath("publisherProjectList.[].address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("publisherProjectList.[].address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("publisherProjectList.[].address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("publisherProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("publisherProjectList.[].content").type("String").description("프로젝트 내용"),
+                                fieldWithPath("publisherProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("designerProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("designerProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
+                                fieldWithPath("designerProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
+                                fieldWithPath("designerProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
+                                fieldWithPath("designerProjectList.[].endDays").type("Long").description("프로젝트 지원 마감일자(day)"),
+                                fieldWithPath("designerProjectList.[].skills").type("List<String>").description("스킬 정보"),
+                                fieldWithPath("designerProjectList.[].projectName").type("String").description("프로젝트 명"),
+                                fieldWithPath("designerProjectList.[].freelancerWorkmanShip").type("FreelancerWorkmanShip").description("JUNIOR(\"초급\"), MIDDLE(\"중급\"), SENIOR(\"고급\")"),
+                                fieldWithPath("designerProjectList.[].projectPeriod").type("Long").description("프로젝트 기간(Month)"),
+                                fieldWithPath("designerProjectList.[].address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("designerProjectList.[].address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("designerProjectList.[].address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("designerProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("designerProjectList.[].content").type("String").description("프로젝트 내용"),
+                                fieldWithPath("designerProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("plannerProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("plannerProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
+                                fieldWithPath("plannerProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
+                                fieldWithPath("plannerProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
+                                fieldWithPath("plannerProjectList.[].endDays").type("Long").description("프로젝트 지원 마감일자(day)"),
+                                fieldWithPath("plannerProjectList.[].skills").type("List<String>").description("스킬 정보"),
+                                fieldWithPath("plannerProjectList.[].projectName").type("String").description("프로젝트 명"),
+                                fieldWithPath("plannerProjectList.[].freelancerWorkmanShip").type("FreelancerWorkmanShip").description("JUNIOR(\"초급\"), MIDDLE(\"중급\"), SENIOR(\"고급\")"),
+                                fieldWithPath("plannerProjectList.[].projectPeriod").type("Long").description("프로젝트 기간(Month)"),
+                                fieldWithPath("plannerProjectList.[].address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("plannerProjectList.[].address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("plannerProjectList.[].address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("plannerProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("plannerProjectList.[].content").type("String").description("프로젝트 내용"),
+                                fieldWithPath("plannerProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("etcProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("etcProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
+                                fieldWithPath("etcProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
+                                fieldWithPath("etcProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
+                                fieldWithPath("etcProjectList.[].endDays").type("Long").description("프로젝트 지원 마감일자(day)"),
+                                fieldWithPath("etcProjectList.[].skills").type("List<String>").description("스킬 정보"),
+                                fieldWithPath("etcProjectList.[].projectName").type("String").description("프로젝트 명"),
+                                fieldWithPath("etcProjectList.[].freelancerWorkmanShip").type("FreelancerWorkmanShip").description("JUNIOR(\"초급\"), MIDDLE(\"중급\"), SENIOR(\"고급\")"),
+                                fieldWithPath("etcProjectList.[].projectPeriod").type("Long").description("프로젝트 기간(Month)"),
+                                fieldWithPath("etcProjectList.[].address.country").type("CountryType.STRING").description("회원 주소 국적 필드"),
+                                fieldWithPath("etcProjectList.[].address.zipcode").type("String").description("회원 우편번호 필드"),
+                                fieldWithPath("etcProjectList.[].address.mainAddress").type("String").description("회원 주소 필드"),
+                                fieldWithPath("etcProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
+                                fieldWithPath("etcProjectList.[].content").type("String").description("프로젝트 내용"),
+                                fieldWithPath("etcProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)")
+                        )
+
+                ));
+    }
 
     @Test
     @DisplayName("프로젝트 포지션 타입에 따른 리스트 문서화 테스트")

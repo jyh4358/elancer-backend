@@ -146,11 +146,11 @@ public class ProjectService {
     }
 
 
-    public List<ProjectBoxResponse> findRecommendProject() {
+    public List<RecommendProjectResponse> findRecommendProject() {
         List<Project> recommendProjects = projectRepository.findRandomProject();
         System.out.println("recommendProjects.size() = " + recommendProjects.size());
         return recommendProjects.stream().map(s ->
-                ProjectBoxResponse.cardBoxOf(s)).collect(Collectors.toList());
+                RecommendProjectResponse.of(s)).collect(Collectors.toList());
     }
 
     public ProjectListCount projectCount(MemberDetails memberDetails) {
