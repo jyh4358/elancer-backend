@@ -229,7 +229,6 @@ class DeveloperSearchRepositoryTest {
         Slice<Developer> freelancers = developerSearchRepository.findFreelancerProfileByFetch(
                 PositionType.DEVELOPER,
                 StringEditor.editStringToStringList("java"),
-                null/*"etc1"*/,
                 HopeWorkState.AT_COMPANY,
                 null/*Arrays.asList(PositionWorkManShip.MIDDLE)*/,
                 null/*WorkArea.SEOUL.getDesc()*/

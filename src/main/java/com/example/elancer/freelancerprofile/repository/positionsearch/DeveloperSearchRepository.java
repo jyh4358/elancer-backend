@@ -27,7 +27,6 @@ public class DeveloperSearchRepository {
     public Slice<Developer> findFreelancerProfileByFetch(
             PositionType positionType,
             List<String> majorSkillConditions,
-            String minorSkill,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea
@@ -35,7 +34,6 @@ public class DeveloperSearchRepository {
         BooleanBuilder builder = new BooleanBuilder();
 
         builder.and(developer.positionType.eq(positionType));
-        eqMinorSkills(minorSkill, builder);
         eqMajorSkillConds(majorSkillConditions, builder);
         eqHopeWorkStateConds(hopeWorkState, builder);
         eqPositionWorkShipConds(positionWorkManShip, builder);
@@ -94,13 +92,5 @@ public class DeveloperSearchRepository {
         }
 
         builder.and(freelancer.freelancerAccountInfo.careerYear.between(positionWorkManShip.getYearInLine(), positionWorkManShip.getYearOutLine()));
-    }
-
-    private void eqMinorSkills(String minorSkill, BooleanBuilder booleanBuilder) {
-        if (minorSkill == null || minorSkill.isBlank()) {
-            return;
-        }
-
-        booleanBuilder.and(developer.etcSkill.containsIgnoreCase(minorSkill));
     }
 }

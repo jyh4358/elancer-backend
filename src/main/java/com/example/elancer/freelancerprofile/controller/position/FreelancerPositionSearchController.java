@@ -26,13 +26,12 @@ public class FreelancerPositionSearchController {
     public ResponseEntity<FreelancerSimpleResponses> searchDevelopers(
             @RequestParam(required = false) PositionType positionType,
             @RequestParam(required = false) List<String> majorSkillKeywords,
-            @RequestParam(required = false) String minorSkill,
             @RequestParam(required = false) HopeWorkState hopeWorkState,
             @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
             @RequestParam(required = false) WorkArea workArea,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, minorSkill, hopeWorkState, positionWorkManShip, workArea, memberDetails);
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, memberDetails);
         return new ResponseEntity<FreelancerSimpleResponses>(freelancerSimpleResponses, HttpStatus.OK);
     }
 }

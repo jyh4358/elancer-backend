@@ -5,7 +5,6 @@ import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.freelancerprofile.model.WorkArea;
-import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
@@ -30,13 +29,12 @@ public class FreelancerPositionSearchService {
     public FreelancerSimpleResponses searchDevelopers(
             PositionType positionType,
             List<String> majorSkillKeywords,
-            String minorSkill,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
             MemberDetails memberDetails
     ) {
-        Slice<Developer> developers= developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, minorSkill, hopeWorkState, positionWorkManShip, workArea);
+        Slice<Developer> developers= developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = developers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());

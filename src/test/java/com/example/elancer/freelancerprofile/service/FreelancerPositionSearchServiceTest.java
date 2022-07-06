@@ -225,7 +225,6 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 null,
                 null,
                 null,
-                null,
                 memberDetails
         );
 
@@ -239,7 +238,6 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 Arrays.asList("java"),
-                null,
                 null,
                 null,
                 null,
@@ -259,7 +257,6 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 null,
                 null,
                 null,
-                null,
                 memberDetails
         );
 
@@ -272,7 +269,6 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
     public void 개발자_주요스킬_경력_검색_주니어() {
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
-                null,
                 null,
                 null,
                 PositionWorkManShip.JUNIOR,
@@ -291,7 +287,6 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 PositionType.DEVELOPER,
                 null,
                 null,
-                null,
                 PositionWorkManShip.MIDDLE,
                 null,
                 memberDetails
@@ -308,7 +303,6 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 PositionType.DEVELOPER,
                 null,
                 null,
-                null,
                 PositionWorkManShip.SENIOR,
                 null,
                 memberDetails
@@ -323,7 +317,6 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
     public void 개발자_주요스킬_근무형태_상주() {
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
-                null,
                 null,
                 HopeWorkState.AT_COMPANY,
                 null,
@@ -345,7 +338,6 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 Arrays.asList("java", "spring"),
-                null,
                 null,
                 null,
                 null,
