@@ -16,11 +16,9 @@ public interface ApplyProjectRepository extends JpaRepository<ApplyProject, Long
     @Query("select count(ap.project.num) from ApplyProject ap where ap.project.num in :numList group by ap.project.num")
     List<Long> countByProject_NumGroupByProject_Num(@Param("numList") List<Long> numList);
 
-
-
     List<ApplyProject> findByProject_Num(Long projectNum);
 
     Optional<ApplyProject> findByProject_NumAndFreelancer_Num(Long projectNum, Long freelancerNum);
 
-    void deleteAllByProject_Num(Long num);
+    List<ApplyProject> findByFreelancerNum(Long freelancerNum);
 }

@@ -17,6 +17,8 @@ public interface InterviewProjectRepository extends JpaRepository<InterviewProje
 
     List<InterviewProject> findByProject_Num(Long projectNum);
 
+    List<InterviewProject> findByFreelancerNum(Long freelancerNum);
+
     Optional<InterviewProject> findByProject_NumAndFreelancer_Num(Long projectNum, Long freelancerNum);
 
     void deleteAllByProject_Num(Long num);
