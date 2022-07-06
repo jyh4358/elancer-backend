@@ -75,19 +75,6 @@ public class DeveloperSearchRepository {
             return;
         }
 
-//        for (int i =0; i < hopeWorkStates.size(); i++) {
-//            if (hopeWorkStates.get(i).equals(HopeWorkState.AT_HALF_COMPANY)) {
-//                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
-//                        .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
-//                continue;
-//            }
-//
-//            if (i == 0) {
-//                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
-//                continue;
-//            }
-//            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkStates.get(i)));
-//        }
         int count = 0;
         for (HopeWorkState hopeWorkState : hopeWorkStates) {
             if (hopeWorkState.equals(HopeWorkState.AT_HALF_COMPANY)) {
@@ -126,20 +113,5 @@ public class DeveloperSearchRepository {
         }
 
         booleanBuilder.and(developer.etcSkill.containsIgnoreCase(minorSkill));
-//        return developer.etcSkill.containsIgnoreCase(minorSkill);
-
     }
-
-//    private List<BooleanExpression> eqMajorSkills(List<String> majorSkillKeywords) {
-//        if (majorSkillKeywords.size() == 0 || majorSkillKeywords == null) {
-//            return null;
-//        }
-//
-//        List<BooleanExpression> tuples = new ArrayList<>();
-//        for (String majorSkillKeyword : majorSkillKeywords) {
-//            tuples.add(developer.focusSkill.containsIgnoreCase(majorSkillKeyword));
-//        }
-//
-//        return tuples;
-//    }
 }
