@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.repository;
+package com.example.elancer.freelancerprofile.repository.positionsearch;
 
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
@@ -28,8 +28,8 @@ public class DeveloperSearchRepository {
             PositionType positionType,
             List<String> majorSkillConditions,
             String minorSkill,
-            List<HopeWorkState> hopeWorkStates,
-            List<PositionWorkManShip> positionWorkManShips,
+            HopeWorkState hopeWorkState,
+            PositionWorkManShip positionWorkManShip,
             WorkArea workArea
     ) {
         BooleanBuilder builder = new BooleanBuilder();
@@ -37,8 +37,8 @@ public class DeveloperSearchRepository {
         builder.and(developer.positionType.eq(positionType));
         eqMinorSkills(minorSkill, builder);
         eqMajorSkillConds(majorSkillConditions, builder);
-        eqHopeWorkStateConds(hopeWorkStates, builder);
-        eqPositionWorkShipConds(positionWorkManShips, builder);
+        eqHopeWorkStateConds(hopeWorkState, builder);
+        eqPositionWorkShipConds(positionWorkManShip, builder);
         eqWorkAreaConds(workArea, builder);
 
         QueryResults<Developer> developerQueryResults = jpaQueryFactory.selectFrom(developer)
@@ -70,41 +70,30 @@ public class DeveloperSearchRepository {
         }
     }
 
-    private void eqHopeWorkStateConds(List<HopeWorkState> hopeWorkStates, BooleanBuilder builder) {
-        if (hopeWorkStates == null) {
+    private void eqHopeWorkStateConds(HopeWorkState hopeWorkState, BooleanBuilder builder) {
+        if (hopeWorkState == null) {
             return;
         }
 
-        int count = 0;
-        for (HopeWorkState hopeWorkState : hopeWorkStates) {
-            if (hopeWorkState.equals(HopeWorkState.AT_HALF_COMPANY)) {
-                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
-                        .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
-                continue;
-            }
-
-            if (count == 0) {
-                builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
-                count++;
-                continue;
-            }
-
-            builder.or(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
+        if (hopeWorkState.equals(HopeWorkState.AT_HALF_COMPANY)) {
+            builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_HOME))
+                    .or(freelancer.freelancerAccountInfo.hopeWorkState.eq(HopeWorkState.AT_COMPANY));
         }
+
+        builder.and(freelancer.freelancerAccountInfo.hopeWorkState.eq(hopeWorkState));
     }
 
-    private void eqPositionWorkShipConds(List<PositionWorkManShip> positionWorkManShips, BooleanBuilder builder) {
-        if (positionWorkManShips == null) {
+    private void eqPositionWorkShipConds(PositionWorkManShip positionWorkManShip, BooleanBuilder builder) {
+        if (positionWorkManShip == null) {
             return;
         }
 
-        for (PositionWorkManShip positionWorkManShip : positionWorkManShips) {
-            if (positionWorkManShip.equals(PositionWorkManShip.SENIOR)) {
-                builder.and(freelancer.freelancerAccountInfo.careerYear.goe(positionWorkManShip.getYearInLine()));
-                continue;
-            }
-            builder.and(freelancer.freelancerAccountInfo.careerYear.between(positionWorkManShip.getYearInLine(), positionWorkManShip.getYearOutLine()));
+        if (positionWorkManShip.equals(PositionWorkManShip.SENIOR)) {
+            builder.and(freelancer.freelancerAccountInfo.careerYear.goe(positionWorkManShip.getYearInLine()));
+            return;
         }
+
+        builder.and(freelancer.freelancerAccountInfo.careerYear.between(positionWorkManShip.getYearInLine(), positionWorkManShip.getYearOutLine()));
     }
 
     private void eqMinorSkills(String minorSkill, BooleanBuilder booleanBuilder) {

@@ -27,6 +27,7 @@ import com.example.elancer.freelancerprofile.model.position.developer.mobileskil
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspSkill;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
+import com.example.elancer.freelancerprofile.repository.positionsearch.DeveloperSearchRepository;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import org.assertj.core.api.Assertions;
@@ -229,7 +230,7 @@ class DeveloperSearchRepositoryTest {
                 PositionType.DEVELOPER,
                 StringEditor.editStringToStringList("java"),
                 null/*"etc1"*/,
-                Arrays.asList(HopeWorkState.AT_COMPANY, HopeWorkState.AT_HOME),
+                HopeWorkState.AT_COMPANY,
                 null/*Arrays.asList(PositionWorkManShip.MIDDLE)*/,
                 null/*WorkArea.SEOUL.getDesc()*/
         );

@@ -9,7 +9,7 @@ import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
-import com.example.elancer.freelancerprofile.repository.DeveloperSearchRepository;
+import com.example.elancer.freelancerprofile.repository.positionsearch.DeveloperSearchRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,12 +31,12 @@ public class FreelancerPositionSearchService {
             PositionType positionType,
             List<String> majorSkillKeywords,
             String minorSkill,
-            List<HopeWorkState> hopeWorkStates,
-            List<PositionWorkManShip> positionWorkManShips,
+            HopeWorkState hopeWorkState,
+            PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
             MemberDetails memberDetails
     ) {
-        Slice<Developer> developers= developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips, workArea);
+        Slice<Developer> developers= developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, minorSkill, hopeWorkState, positionWorkManShip, workArea);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = developers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());

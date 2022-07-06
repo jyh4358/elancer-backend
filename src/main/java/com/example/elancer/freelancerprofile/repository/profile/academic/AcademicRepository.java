@@ -1,4 +1,4 @@
-package com.example.elancer.freelancerprofile.repository.academic;
+package com.example.elancer.freelancerprofile.repository.profile.academic;
 
 import com.example.elancer.freelancerprofile.model.academic.AcademicAbility;
 import org.springframework.data.jpa.repository.JpaRepository;

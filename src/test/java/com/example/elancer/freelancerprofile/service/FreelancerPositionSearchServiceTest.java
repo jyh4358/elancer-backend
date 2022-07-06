@@ -275,7 +275,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 null,
                 null,
                 null,
-                Arrays.asList(PositionWorkManShip.JUNIOR),
+                PositionWorkManShip.JUNIOR,
                 null,
                 memberDetails
         );
@@ -292,7 +292,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 null,
                 null,
                 null,
-                Arrays.asList(PositionWorkManShip.MIDDLE),
+                PositionWorkManShip.MIDDLE,
                 null,
                 memberDetails
         );
@@ -309,7 +309,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 null,
                 null,
                 null,
-                Arrays.asList(PositionWorkManShip.SENIOR),
+                PositionWorkManShip.SENIOR,
                 null,
                 memberDetails
         );
@@ -325,7 +325,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
                 PositionType.DEVELOPER,
                 null,
                 null,
-                Arrays.asList(HopeWorkState.AT_COMPANY),
+                HopeWorkState.AT_COMPANY,
                 null,
                 null,
                 memberDetails
