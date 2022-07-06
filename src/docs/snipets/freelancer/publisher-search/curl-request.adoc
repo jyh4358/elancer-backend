@@ -1,0 +1,5 @@
+[source,bash]
+----
+$ curl 'http://localhost:8080/publishers?positionType=PUBLISHER&majorSkillKeywords=html&hopeWorkState=&positionWorkManShip=&workArea=&hopeWorkState=&positionWorkManShip=&workArea=' -i -X GET \
+    -H 'Content-Type: application/json;charset=UTF-8'
+----

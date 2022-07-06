@@ -353,6 +353,18 @@ include::{snippets}/developer-search/response-headers.adoc[]
 include::{snippets}/developer-search/response-fields.adoc[]
 include::{snippets}/developer-search/response-body.adoc[]
 
+[[resources-publisher-search]]
+== 프리랜서 퍼블리셔 검색 정보
+
+프리랜서 퍼블리셔를 검색한다.
+
+include::{snippets}/publisher-search/http-request.adoc[]
+include::{snippets}/publisher-search/response-headers.adoc[]
+include::{snippets}/publisher-search/response-fields.adoc[]
+include::{snippets}/publisher-search/response-body.adoc[]
+
+
+
 [[resources-freelancer-profile-finds]]
 == 프리랜서 목록 조회 정보(인덱스 페이지)
 

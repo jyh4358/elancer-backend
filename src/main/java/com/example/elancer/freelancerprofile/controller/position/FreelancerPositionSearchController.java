@@ -38,4 +38,60 @@ public class FreelancerPositionSearchController {
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable, memberDetails);
         return new ResponseEntity<FreelancerSimpleResponses>(freelancerSimpleResponses, HttpStatus.OK);
     }
+
+    @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_PUBLISHER_SEARCH)
+    public ResponseEntity<FreelancerSimpleResponses> searchPublishers(
+            @RequestParam(required = false) PositionType positionType,
+            @RequestParam(required = false) List<String> majorSkillKeywords,
+            @RequestParam(required = false) HopeWorkState hopeWorkState,
+            @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
+            @RequestParam(required = false) WorkArea workArea,
+            @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 10) Pageable pageable,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchPublishers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable, memberDetails);
+        return new ResponseEntity<FreelancerSimpleResponses>(freelancerSimpleResponses, HttpStatus.OK);
+    }
+
+    @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_DESIGNER_SEARCH)
+    public ResponseEntity<FreelancerSimpleResponses> searchDesigners(
+            @RequestParam(required = false) PositionType positionType,
+            @RequestParam(required = false) List<String> majorSkillKeywords,
+            @RequestParam(required = false) HopeWorkState hopeWorkState,
+            @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
+            @RequestParam(required = false) WorkArea workArea,
+            @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 10) Pageable pageable,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDesigners(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable, memberDetails);
+        return new ResponseEntity<FreelancerSimpleResponses>(freelancerSimpleResponses, HttpStatus.OK);
+    }
+
+    @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_PLANNER_SEARCH)
+    public ResponseEntity<FreelancerSimpleResponses> searchPlanners(
+            @RequestParam(required = false) PositionType positionType,
+            @RequestParam(required = false) List<String> majorSkillKeywords,
+            @RequestParam(required = false) HopeWorkState hopeWorkState,
+            @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
+            @RequestParam(required = false) WorkArea workArea,
+            @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 10) Pageable pageable,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchPlanners(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable, memberDetails);
+        return new ResponseEntity<FreelancerSimpleResponses>(freelancerSimpleResponses, HttpStatus.OK);
+    }
+
+    @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_POSITION_ETC_SEARCH)
+    public ResponseEntity<FreelancerSimpleResponses> searchPositionEtc(
+            @RequestParam(required = false) PositionType positionType,
+            @RequestParam(required = false) List<String> majorSkillKeywords,
+            @RequestParam(required = false) HopeWorkState hopeWorkState,
+            @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
+            @RequestParam(required = false) WorkArea workArea,
+            @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 10) Pageable pageable,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchPositionEtc(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable, memberDetails);
+        return new ResponseEntity<FreelancerSimpleResponses>(freelancerSimpleResponses, HttpStatus.OK);
+    }
 }

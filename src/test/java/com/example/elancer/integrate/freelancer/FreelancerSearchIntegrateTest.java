@@ -7,7 +7,13 @@ import com.example.elancer.freelancerprofile.controller.position.FreelancerPosit
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.position.planner.Planner;
+import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
+import com.example.elancer.freelancerprofile.repository.position.designer.DesignerRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
+import com.example.elancer.freelancerprofile.repository.position.etc.PositionEtcRepository;
+import com.example.elancer.freelancerprofile.repository.position.planner.PlannerRepository;
+import com.example.elancer.freelancerprofile.repository.position.publisher.PublisherRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +41,17 @@ public class FreelancerSearchIntegrateTest extends IntegrateBaseTest {
     @Autowired
     private DeveloperRepository developerRepository;
 
-    private Freelancer freelancer1;
+    @Autowired
+    private PublisherRepository publisherRepository;
+
+    @Autowired
+    private DesignerRepository designerRepository;
+
+    @Autowired
+    private PlannerRepository plannerRepository;
+
+    @Autowired
+    private PositionEtcRepository positionEtcRepository;
 
     @BeforeEach
     void setUp() {
@@ -45,7 +61,7 @@ public class FreelancerSearchIntegrateTest extends IntegrateBaseTest {
 
         tx.begin();
 
-        freelancer1 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id1");
+        Freelancer freelancer1 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id1");
         freelancer1.updateFreelancer(
                 freelancer1.getName(),
                 freelancer1.getPassword(),
@@ -205,7 +221,6 @@ public class FreelancerSearchIntegrateTest extends IntegrateBaseTest {
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("positionType", String.valueOf(PositionType.DEVELOPER));
         data.add("majorSkillKeywords", String.valueOf("java"));
-        data.add("minorSkill", null);
         data.add("hopeWorkStates", null);
         data.add("positionWorkManShips", null);
         data.add("workArea", null);
@@ -216,8 +231,119 @@ public class FreelancerSearchIntegrateTest extends IntegrateBaseTest {
                         .params(data))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("freelancerSimpleResponseList", hasSize(3)))
-                .andDo(print())
-                .andReturn();
+                .andDo(print());
+    }
+
+    @DisplayName("프리랜서 퍼블리셔 검색 통합테스트")
+    @Test
+    public void 프리랜서_퍼블리셔_검색_통합테스트() throws Exception {
+        //given
+        Freelancer freelancer1 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id1");
+        freelancer1.updateFreelancer(
+                freelancer1.getName(),
+                freelancer1.getPassword(),
+                freelancer1.getEmail(),
+                freelancer1.getPhone(),
+                freelancer1.getWebsite(),
+                freelancer1.getAddress(),
+                freelancer1.getBirthDate(),
+                3,
+                3,
+                0,
+                100,
+                new ArrayList<>(),
+                null,
+                null,
+                freelancer1.getFreelancerAccountInfo().getMailReceptionState(),
+                freelancer1.getFreelancerAccountInfo().getPresentWorkState(),
+                HopeWorkState.AT_HOME,
+                freelancer1.getFreelancerAccountInfo().getWorkPossibleState(),
+                freelancer1.getFreelancerAccountInfo().getWorkStartPossibleDate(),
+                freelancer1.getFreelancerAccountInfo().getHopeWorkCountry(),
+                null
+        );
+        freelancerRepository.save(freelancer1);
+        FreelancerProfile freelancerProfile1 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer1, PositionType.DEVELOPER));
+        developerRepository.deleteById(freelancerProfile1.getPosition().getNum());
+
+        Publisher publisher1 = publisherRepository.save(Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile1, "html, css"));
+        freelancerProfile1.coverPosition(publisher1);
+
+        Freelancer freelancer2 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id2");
+        freelancer2.updateFreelancer(
+                freelancer2.getName(),
+                freelancer2.getPassword(),
+                freelancer2.getEmail(),
+                freelancer2.getPhone(),
+                freelancer2.getWebsite(),
+                freelancer2.getAddress(),
+                freelancer2.getBirthDate(),
+                6,
+                3,
+                0,
+                100,
+                new ArrayList<>(),
+                null,
+                null,
+                freelancer2.getFreelancerAccountInfo().getMailReceptionState(),
+                freelancer2.getFreelancerAccountInfo().getPresentWorkState(),
+                HopeWorkState.AT_COMPANY,
+                freelancer2.getFreelancerAccountInfo().getWorkPossibleState(),
+                freelancer2.getFreelancerAccountInfo().getWorkStartPossibleDate(),
+                freelancer2.getFreelancerAccountInfo().getHopeWorkCountry(),
+                null
+        );
+        freelancerRepository.save(freelancer2);
+        FreelancerProfile freelancerProfile2 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer2, PositionType.DEVELOPER));
+        developerRepository.deleteById(freelancerProfile2.getPosition().getNum());
+        Publisher publisher2 = publisherRepository.save(Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile2, "html, css"));
+        freelancerProfile1.coverPosition(publisher2);
+
+        Freelancer freelancer3 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id3");
+        freelancer3.updateFreelancer(
+                freelancer3.getName(),
+                freelancer3.getPassword(),
+                freelancer3.getEmail(),
+                freelancer3.getPhone(),
+                freelancer3.getWebsite(),
+                freelancer3.getAddress(),
+                freelancer3.getBirthDate(),
+                11,
+                3,
+                0,
+                100,
+                new ArrayList<>(),
+                null,
+                null,
+                freelancer3.getFreelancerAccountInfo().getMailReceptionState(),
+                freelancer3.getFreelancerAccountInfo().getPresentWorkState(),
+                HopeWorkState.AT_HOME,
+                freelancer3.getFreelancerAccountInfo().getWorkPossibleState(),
+                freelancer3.getFreelancerAccountInfo().getWorkStartPossibleDate(),
+                freelancer3.getFreelancerAccountInfo().getHopeWorkCountry(),
+                null
+        );
+        freelancerRepository.save(freelancer3);
+        FreelancerProfile freelancerProfile3 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer3, PositionType.DEVELOPER));
+        developerRepository.deleteById(freelancerProfile3.getPosition().getNum());
+        Publisher publisher3 = publisherRepository.save(Publisher.createBasicPublisher(PositionType.PUBLISHER, freelancerProfile3, "html, css"));
+        freelancerProfile1.coverPosition(publisher3);
+
+        MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+        data.add("positionType", String.valueOf(PositionType.PUBLISHER));
+        data.add("majorSkillKeywords", String.valueOf("html"));
+        data.add("hopeWorkState", null);
+        data.add("positionWorkManShip", null);
+        data.add("workArea", null);
+
+        //when & then
+        mockMvc.perform(get(FreelancerPositionSearchControllerPath.FREELANCER_PUBLISHER_SEARCH)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .params(data))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("freelancerSimpleResponseList", hasSize(3)))
+                .andDo(print());
+
     }
 
     @AfterEach

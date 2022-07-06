@@ -1,0 +1,36 @@
+[source,options="nowrap"]
+----
+{
+  "freelancerSimpleResponseList" : [ {
+    "freelancerNum" : 3,
+    "positionName" : "퍼블리셔",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 11,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ "html, css" ],
+    "projectNames" : [ ]
+  }, {
+    "freelancerNum" : 2,
+    "positionName" : "퍼블리셔",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 6,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ "html, css" ],
+    "projectNames" : [ ]
+  }, {
+    "freelancerNum" : 1,
+    "positionName" : "퍼블리셔",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 3,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ "html, css" ],
+    "projectNames" : [ ]
+  } ]
+}
+----
