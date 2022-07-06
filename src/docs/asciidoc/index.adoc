@@ -363,6 +363,36 @@ include::{snippets}/publisher-search/response-headers.adoc[]
 include::{snippets}/publisher-search/response-fields.adoc[]
 include::{snippets}/publisher-search/response-body.adoc[]
 
+[[resources-designer-search]]
+== 프리랜서 디자이너 검색 정보
+
+프리랜서 디자이너를 검색한다.
+
+include::{snippets}/designer-search/http-request.adoc[]
+include::{snippets}/designer-search/response-headers.adoc[]
+include::{snippets}/designer-search/response-fields.adoc[]
+include::{snippets}/designer-search/response-body.adoc[]
+
+[[resources-planner-search]]
+== 프리랜서 기획자 검색 정보
+
+프리랜서 기획자를 검색한다.
+
+include::{snippets}/planner-search/http-request.adoc[]
+include::{snippets}/planner-search/response-headers.adoc[]
+include::{snippets}/planner-search/response-fields.adoc[]
+include::{snippets}/planner-search/response-body.adoc[]
+
+[[resources-position-etc-search]]
+== 프리랜서 기타포지션 검색 정보
+
+프리랜서 기타포지션을 검색한다.
+
+include::{snippets}/position-etc-search/http-request.adoc[]
+include::{snippets}/position-etc-search/response-headers.adoc[]
+include::{snippets}/position-etc-search/response-fields.adoc[]
+include::{snippets}/position-etc-search/response-body.adoc[]
+
 
 
 [[resources-freelancer-profile-finds]]

@@ -1,0 +1,36 @@
+[source,options="nowrap"]
+----
+{
+  "freelancerSimpleResponseList" : [ {
+    "freelancerNum" : 3,
+    "positionName" : "디자이너",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 11,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ null, null ],
+    "projectNames" : [ ]
+  }, {
+    "freelancerNum" : 2,
+    "positionName" : "디자이너",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 6,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ null, null ],
+    "projectNames" : [ ]
+  }, {
+    "freelancerNum" : 1,
+    "positionName" : "디자이너",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 3,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ null, null ],
+    "projectNames" : [ ]
+  } ]
+}
+----

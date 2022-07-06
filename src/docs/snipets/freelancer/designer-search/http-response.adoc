@@ -1,0 +1,49 @@
+[source,http,options="nowrap"]
+----
+HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=utf-8
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 828
+
+{
+  "freelancerSimpleResponseList" : [ {
+    "freelancerNum" : 3,
+    "positionName" : "디자이너",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 11,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ null, null ],
+    "projectNames" : [ ]
+  }, {
+    "freelancerNum" : 2,
+    "positionName" : "디자이너",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 6,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ null, null ],
+    "projectNames" : [ ]
+  }, {
+    "freelancerNum" : 1,
+    "positionName" : "디자이너",
+    "freelancerName" : "name",
+    "introBackGround" : null,
+    "careerYear" : 3,
+    "wishState" : false,
+    "greeting" : "greeting",
+    "skills" : [ null, null ],
+    "projectNames" : [ ]
+  } ]
+}
+----

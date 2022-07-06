@@ -1,0 +1,19 @@
+|===
+|Parameter|Description
+
+|`+positionType+`
+|프리랜서 포지션 검색 필드
+
+|`+majorSkillKeywords+`
+|개발자 주요스킬 검색 필드
+
+|`+hopeWorkState+`
+|프리랜서 근무 위치 검색 필드
+
+|`+positionWorkManShip+`
+|프리랜서 숙련도 검색 필드
+
+|`+workArea+`
+|프리랜서 거주 지역 검색 필드
+
+|===
