@@ -4,6 +4,8 @@ import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
+import com.example.elancer.freelancer.model.MailReceptionState;
+import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancerprofile.controller.position.FreelancerPositionEnumControllerPath;
 import com.example.elancer.freelancerprofile.controller.profile.FreelancerProfileAlterControllerPath;
 import com.example.elancer.freelancerprofile.controller.profile.FreelancerProfileFindControllerPath;
@@ -30,10 +32,14 @@ import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
 import com.example.elancer.common.LoginHelper;
+import com.example.elancer.member.domain.Address;
+import com.example.elancer.member.domain.CountryType;
+import com.example.elancer.member.domain.MemberType;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.junit.jupiter.api.AfterEach;
@@ -46,6 +52,7 @@ import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
@@ -586,6 +593,97 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentEtc").type("String").description("프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드."),
                                 fieldWithPath("projectHistoryResponses.[0].responsibilityTask").type("String").description("프리랜서 프로젝트 수행이력 담당업무 정보 필드."),
                                 fieldWithPath("allSkillNames.[0]").type("String").description("모든 스킬")
+                        )
+                ));
+    }
+
+    @DisplayName("프리랜서 프로필 인덱스 페이지 리스트 조회 문서화")
+    @Test
+    public void 프리랜서_프로필_인덱스페이지_리스트조회_문서화() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
+                "userId",
+                "password",
+                "name",
+                "phone",
+                "email",
+                null,
+                new Address(CountryType.KR,
+                        "경기",
+                        "성남",
+                        "판교"
+                ),
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2020, 02, 01)
+        ));
+
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
+
+        freelancerProfileRepository.save(freelancerProfile);
+
+        Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java", "role");
+
+        String introduceName = "소개글";
+        IntroBackGround introBackGround = IntroBackGround.COBALT_BLUE;
+        String introduceVideoURL = "소개 영상 주소";
+        String introduceContent = "소개 내용";
+        freelancerProfile.coverIntroduceInFreelancer(freelancerProfile.getGreeting(), introduceName, introBackGround, introduceVideoURL, introduceContent);
+        freelancerProfile.coverPosition(developer);
+        freelancerProfileRepository.save(freelancerProfile);
+
+        Freelancer freelancer2 = freelancerRepository.save(Freelancer.createFreelancer(
+                "userId2",
+                "password2",
+                "name2",
+                "phone2",
+                "email2",
+                null,
+                new Address(CountryType.KR,
+                        "경기",
+                        "성남",
+                        "판교2"
+                ),
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2020, 02, 01)
+        ));
+
+        FreelancerProfile freelancerProfile2 = new FreelancerProfile("greeting", freelancer2, PositionType.PLANNER);
+        freelancerProfileRepository.save(freelancerProfile2);
+
+        Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile2);
+
+        String introduceName2 = "소개글";
+        IntroBackGround introBackGround2 = IntroBackGround.COBALT_BLUE;
+        String introduceVideoURL2 = "소개 영상 주소";
+        String introduceContent2 = "소개 내용";
+        freelancerProfile2.coverIntroduceInFreelancer(freelancerProfile2.getGreeting(), introduceName2, introBackGround2, introduceVideoURL2, introduceContent2);
+        freelancerProfile2.coverPosition(planner);
+        freelancerProfileRepository.save(freelancerProfile2);
+
+        //when & then
+        mockMvc.perform(get(FreelancerProfileFindControllerPath.FREELANCER_FINDS)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("freelancer-profile-finds",
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                        ),
+                        responseFields(
+                                fieldWithPath("freelancerSimpleResponseList").type("List<String>").description("프리랜서 요약 정보 데이터 리스트."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].freelancerNum").type("Long").description("프리랜서 식별자 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].positionName").type("String").description("프리랜서 포지션이름 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].freelancerName").type("String").description("프리랜서 이름 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].introBackGround").type("IntroBackGround").description("프리랜서 프로필 배경화면 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].careerYear").type("int").description("프리랜서 경력 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].wishState").type("boolean").description("사용자의 프리랜서 스크랩여부 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].greeting").type("String").description("프리랜서 소개말 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].skills").type("List<String>").description("프리랜서 개발자 주요스킬 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드.")
                         )
                 ));
     }

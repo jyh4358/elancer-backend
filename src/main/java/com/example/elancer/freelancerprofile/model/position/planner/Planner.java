@@ -37,9 +37,13 @@ public class Planner extends Position {
 
     @Override
     public List<String> getAllSkillNames() {
-        return plannerFields.stream()
+        List<String> allSkillNames = new ArrayList<>();
+        allSkillNames.addAll(plannerFields.stream()
                 .map(field -> field.getPlannerDetailField().getDesc())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
+        allSkillNames.add(etcField);
+
+        return allSkillNames;
     }
 
     public void coverAllField(List<PlannerField> plannerFields, String etcField) {

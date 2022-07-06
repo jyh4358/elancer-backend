@@ -3,6 +3,8 @@ package com.example.elancer.integrate.freelancerprofile;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
+import com.example.elancer.freelancer.model.MailReceptionState;
+import com.example.elancer.freelancer.model.WorkPossibleState;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.controller.position.FreelancerPositionEnumControllerPath;
 import com.example.elancer.freelancerprofile.controller.profile.FreelancerProfileAlterControllerPath;
@@ -30,6 +32,7 @@ import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
@@ -42,6 +45,10 @@ import com.example.elancer.freelancerprofile.repository.license.LicenseRepositor
 import com.example.elancer.freelancerprofile.repository.projecthistory.ProjectHistoryRepository;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
 import com.example.elancer.common.LoginHelper;
+import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.member.domain.Address;
+import com.example.elancer.member.domain.CountryType;
+import com.example.elancer.member.domain.MemberType;
 import com.example.elancer.member.dto.MemberLoginResponse;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import org.assertj.core.api.Assertions;
@@ -55,6 +62,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -406,6 +414,82 @@ public class FreelancerProfileIntegrateTest extends IntegrateBaseTest {
                         .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value(freelancer.getName()))
+                .andDo(print());
+
+    }
+
+    @DisplayName("프리랜서 프로필 인덱스 페이지 리스트 조회 통합테스트")
+    @Test
+    public void 프리랜서_프로필_생성순_리스트_조회() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(Freelancer.createFreelancer(
+                "userId",
+                "password",
+                "name",
+                "phone",
+                "email",
+                null,
+                new Address(CountryType.KR,
+                        "경기",
+                        "성남",
+                        "판교"
+                ),
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2020, 02, 01)
+        ));
+
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
+
+        freelancerProfileRepository.save(freelancerProfile);
+
+        Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java", "role");
+
+        String introduceName = "소개글";
+        IntroBackGround introBackGround = IntroBackGround.COBALT_BLUE;
+        String introduceVideoURL = "소개 영상 주소";
+        String introduceContent = "소개 내용";
+        freelancerProfile.coverIntroduceInFreelancer(freelancerProfile.getGreeting(), introduceName, introBackGround, introduceVideoURL, introduceContent);
+        freelancerProfile.coverPosition(developer);
+        freelancerProfileRepository.save(freelancerProfile);
+
+        Freelancer freelancer2 = freelancerRepository.save(Freelancer.createFreelancer(
+                "userId2",
+                "password2",
+                "name2",
+                "phone2",
+                "email2",
+                null,
+                new Address(CountryType.KR,
+                        "경기",
+                        "성남",
+                        "판교2"
+                ),
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2020, 02, 01)
+        ));
+
+        FreelancerProfile freelancerProfile2 = new FreelancerProfile("greeting", freelancer2, PositionType.PLANNER);
+        freelancerProfileRepository.save(freelancerProfile2);
+
+        Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile2);
+
+        String introduceName2 = "소개글";
+        IntroBackGround introBackGround2 = IntroBackGround.COBALT_BLUE;
+        String introduceVideoURL2 = "소개 영상 주소";
+        String introduceContent2 = "소개 내용";
+        freelancerProfile2.coverIntroduceInFreelancer(freelancerProfile2.getGreeting(), introduceName2, introBackGround2, introduceVideoURL2, introduceContent2);
+        freelancerProfile2.coverPosition(planner);
+        freelancerProfileRepository.save(freelancerProfile2);
+
+        //when & then
+        mockMvc.perform(get(FreelancerProfileFindControllerPath.FREELANCER_FINDS)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("freelancerSimpleResponseList", hasSize(2)))
                 .andDo(print());
 
     }

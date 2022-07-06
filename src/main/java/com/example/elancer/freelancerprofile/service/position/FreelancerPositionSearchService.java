@@ -1,18 +1,16 @@
 package com.example.elancer.freelancerprofile.service.position;
 
-import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.common.likechecker.FreelancerLikeChecker;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.freelancerprofile.model.WorkArea;
+import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.repository.DeveloperSearchRepository;
-import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
-import com.example.elancer.member.domain.MemberType;
-import com.example.elancer.wishfreelancer.model.WishFreelancer;
 import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Slice;
@@ -39,29 +37,12 @@ public class FreelancerPositionSearchService {
             MemberDetails memberDetails
     ) {
         Slice<Developer> developers= developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, minorSkill, hopeWorkStates, positionWorkManShips, workArea);
-        List<FreelancerSimpleResponse> freelancerSimpleResponses = FreelancerSimpleResponse.listOf(developers.getContent());
-
-        confirmWishFreelancerToRequester(memberDetails, freelancerSimpleResponses);
+        List<FreelancerSimpleResponse> freelancerSimpleResponses = developers.getContent().stream()
+                .map(FreelancerSimpleResponse::of)
+                .collect(Collectors.toList());
+        FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, freelancerSimpleResponses, wishFreelancerRepository);
 
         return new FreelancerSimpleResponses(freelancerSimpleResponses);
     }
 
-    private void confirmWishFreelancerToRequester(MemberDetails memberDetails, List<FreelancerSimpleResponse> freelancerSimpleResponses) {
-        if (memberDetails != null && memberDetails.getRole().equals(MemberType.ENTERPRISE)) {
-            List<WishFreelancer> wishFreelancersByEnterprise = wishFreelancerRepository.findByEnterpriseNum(memberDetails.getId());
-            List<Long> wishFreelancerNums = wishFreelancersByEnterprise.stream()
-                    .map(WishFreelancer::getFreelancer)
-                    .map(Freelancer::getNum)
-                    .collect(Collectors.toList());
-            checkSearchResultInWishFreelancers(freelancerSimpleResponses, wishFreelancerNums);
-        }
-    }
-
-    private void checkSearchResultInWishFreelancers(List<FreelancerSimpleResponse> freelancerSimpleResponses, List<Long> wishFreelancerNums) {
-        for (FreelancerSimpleResponse freelancerSimpleResponse : freelancerSimpleResponses) {
-            if (wishFreelancerNums.contains(freelancerSimpleResponse.getFreelancerNum())) {
-                freelancerSimpleResponse.switchWishState();
-            }
-        }
-    }
 }

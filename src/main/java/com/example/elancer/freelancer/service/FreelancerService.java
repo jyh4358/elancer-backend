@@ -1,5 +1,6 @@
 package com.example.elancer.freelancer.service;
 
+import com.example.elancer.applyproject.repository.ApplyProjectRepository;
 import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
 import com.example.elancer.freelancer.dto.FreelancerAccountDetailResponse;
@@ -24,6 +25,7 @@ public class FreelancerService {
     private final CareerFormRepository careerFormRepository;
     private final PasswordEncoder passwordEncoder;
     private final S3UploadService s3UploadService;
+    private final ApplyProjectRepository applyProjectRepository;
 
     @Transactional
     public void coverFreelancerAccountInfo(MemberDetails memberDetails, FreelancerAccountCoverRequest freelancerAccountCoverRequest) {
@@ -81,6 +83,17 @@ public class FreelancerService {
         RightRequestChecker.checkMemberDetail(memberDetails);
         Freelancer freelancer = freelancerRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerException::new);
         RightRequestChecker.checkFreelancerAndRequester(freelancer, memberDetails);
+        return FreelancerAccountDetailResponse.of(freelancer);
+    }
+
+    @Transactional(readOnly = true)
+    public FreelancerAccountDetailResponse findFreelancerObtainOrders(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        // 지원현황, 인터뷰 요청, 찜목록, 낙찰 프로젝트 카운트, 지원현황, 인터뷰 요청, 찜목록, 낙찰 프로젝트 목록
+        Freelancer freelancer = freelancerRepository.findById(memberDetails.getId()).orElseThrow(NotExistFreelancerException::new);
+        RightRequestChecker.checkFreelancerAndRequester(freelancer, memberDetails);
+
+
         return FreelancerAccountDetailResponse.of(freelancer);
     }
 }

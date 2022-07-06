@@ -45,10 +45,12 @@ public class Designer extends Position {
         designSkillNames.addAll(designRoles.stream()
                 .map(designRole -> designRole.getDesignDetailRole().getDesc())
                 .collect(Collectors.toList()));
+        designSkillNames.add(etcRole);
 
         designSkillNames.addAll(designSkills.stream()
                 .map(designSkill -> designSkill.getDesignDetailSkill().getDesc())
                 .collect(Collectors.toList()));
+        designSkillNames.add(etcSkill);
 
         return designSkillNames;
     }

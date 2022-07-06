@@ -4,7 +4,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
-import com.example.elancer.freelancer.repository.FreelancerRepository;
+import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.freelancerprofile.dto.response.FreelancerDetailResponse;
 import com.example.elancer.freelancerprofile.dto.response.FreelancerProfileSimpleResponse;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
@@ -19,6 +19,7 @@ import com.example.elancer.freelancerprofile.model.language.LanguageAbility;
 import com.example.elancer.freelancerprofile.model.license.License;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopEnvironment;
 import com.example.elancer.freelancerprofile.model.projecthistory.DevelopField;
 import com.example.elancer.freelancerprofile.model.projecthistory.ProjectHistory;
@@ -29,6 +30,7 @@ import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.domain.MemberType;
+import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -59,12 +61,12 @@ class FreelancerProfileFindServiceTest {
     private FreelancerProfileRepository freelancerProfileRepository;
 
     @Mock
-    private FreelancerRepository freelancerRepository;
+    private WishFreelancerRepository wishFreelancerRepository;
 
 
     @BeforeEach
     void setUp() {
-        this.freelancerProfileFindService = new FreelancerProfileFindService(freelancerProfileFindRepository, freelancerProfileRepository, freelancerRepository);
+        this.freelancerProfileFindService = new FreelancerProfileFindService(freelancerProfileFindRepository, freelancerProfileRepository, wishFreelancerRepository);
     }
 
     @DisplayName("프리랜서 프로필 정보를 조회할수 있다.")
@@ -331,7 +333,7 @@ class FreelancerProfileFindServiceTest {
         when(freelancerProfileRepository.findByFreelancerNum(any())).thenReturn(Optional.of(freelancerProfile));
 
         //when
-        FreelancerProfileSimpleResponse freelancerProfileSimpleResponse = freelancerProfileFindService.findSimpleFreelancerAccount(memberDetails);
+        FreelancerProfileSimpleResponse freelancerProfileSimpleResponse = freelancerProfileFindService.findSimpleMyAccountByFreelancer(memberDetails);
 
         //then
         Assertions.assertThat(freelancerProfileSimpleResponse.getName()).isEqualTo(freelancer.getName());
@@ -408,5 +410,88 @@ class FreelancerProfileFindServiceTest {
         Assertions.assertThat(freelancerProfileSimpleResponse.getLanguageResponses().get(0).getLanguageName()).isEqualTo(language.getLanguageName());
         Assertions.assertThat(freelancerProfileSimpleResponse.getLanguageResponses().get(0).getLanguageAbility()).isEqualTo(language.getLanguageAbility());
         Assertions.assertThat(freelancerProfileSimpleResponse.getLanguageResponses().get(0).getLanguageAbilityDescription()).isEqualTo(language.getLanguageAbility().getDesc());
+    }
+
+    @DisplayName("프리랜서 프로필 요약 정보 리스트를 조트할수 있다.")
+    @Test
+    public void 프리랜서_프로필_요약_정보_리스트_조회() {
+        //given
+        Freelancer freelancer = Freelancer.createFreelancer(
+                "userId",
+                "password",
+                "name",
+                "phone",
+                "email",
+                null,
+                new Address(CountryType.KR,
+                        "경기",
+                        "성남",
+                        "판교"
+                ),
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2020, 02, 01)
+        );
+
+        FreelancerProfile freelancerProfile = new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER);
+
+        MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
+
+        Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java", "role");
+
+        String introduceName = "소개글";
+        IntroBackGround introBackGround = IntroBackGround.COBALT_BLUE;
+        String introduceVideoURL = "소개 영상 주소";
+        String introduceContent = "소개 내용";
+        freelancerProfile.coverIntroduceInFreelancer(freelancerProfile.getGreeting(), introduceName, introBackGround, introduceVideoURL, introduceContent);
+        freelancerProfile.coverPosition(developer);
+
+        Freelancer freelancer2 = Freelancer.createFreelancer(
+                "userId2",
+                "password2",
+                "name2",
+                "phone2",
+                "email2",
+                null,
+                new Address(CountryType.KR,
+                        "경기",
+                        "성남",
+                        "판교2"
+                ),
+                MemberType.FREELANCER,
+                MailReceptionState.RECEPTION,
+                WorkPossibleState.POSSIBLE,
+                LocalDate.of(2020, 02, 01)
+        );
+
+        FreelancerProfile freelancerProfile2 = new FreelancerProfile("greeting", freelancer2, PositionType.PLANNER);
+
+        Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile2);
+
+        String introduceName2 = "소개글";
+        IntroBackGround introBackGround2 = IntroBackGround.COBALT_BLUE;
+        String introduceVideoURL2 = "소개 영상 주소";
+        String introduceContent2 = "소개 내용";
+        freelancerProfile2.coverIntroduceInFreelancer(freelancerProfile2.getGreeting(), introduceName2, introBackGround2, introduceVideoURL2, introduceContent2);
+        freelancerProfile2.coverPosition(planner);
+
+
+        when(freelancerProfileFindRepository.findFreelancersByCreateDate()).thenReturn(Arrays.asList(freelancerProfile2, freelancerProfile));
+
+        //when
+        FreelancerSimpleResponses responses = freelancerProfileFindService.findSimpleFreelancers(memberDetails);
+
+        //then
+        Assertions.assertThat(responses.getFreelancerSimpleResponseList()).hasSize(2);
+        Assertions.assertThat(responses.getFreelancerSimpleResponseList().get(0).getFreelancerName()).isEqualTo(freelancer2.getName());
+        Assertions.assertThat(responses.getFreelancerSimpleResponseList().get(0).getGreeting()).isEqualTo(freelancerProfile2.getGreeting());
+        Assertions.assertThat(responses.getFreelancerSimpleResponseList().get(0).getCareerYear()).isEqualTo(freelancer2.getFreelancerAccountInfo().getCareerYear());
+        Assertions.assertThat(responses.getFreelancerSimpleResponseList().get(0).getPositionName()).isEqualTo(freelancerProfile2.getPosition().getPositionType().getDesc());
+        Assertions.assertThat(responses.getFreelancerSimpleResponseList().get(1).getFreelancerName()).isEqualTo(freelancer.getName());
+        Assertions.assertThat(responses.getFreelancerSimpleResponseList().get(1).getGreeting()).isEqualTo(freelancerProfile.getGreeting());
+        Assertions.assertThat(responses.getFreelancerSimpleResponseList().get(1).getCareerYear()).isEqualTo(freelancer.getFreelancerAccountInfo().getCareerYear());
+        Assertions.assertThat(responses.getFreelancerSimpleResponseList().get(1).getPositionName()).isEqualTo(freelancerProfile.getPosition().getPositionType().getDesc());
+
     }
 }
