@@ -193,7 +193,7 @@ public class FreelancerDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("mainAddress").type("String").description("회원 거주지 시동구 정보 필드"),
                                 fieldWithPath("detailAddress").type("String").description("회원 거주지 읍면리 정보 필드"),
                                 fieldWithPath("freelancerWorkTypes").type("List<FreelancerWorkType>").description("회원 업무분야 정보 필드"),
-                                fieldWithPath("wokEtcField").type("String").description("회원 업무분야 직접입력 정보 필드"),
+                                fieldWithPath("workEtcField").type("String").description("회원 업무분야 직접입력 정보 필드"),
                                 fieldWithPath("careerForm").type("MultipartFile").description("회원 경력기술서 정보 필드"),
                                 fieldWithPath("careerYear").type("int").description("회원 경력 년수 정보 필드"),
                                 fieldWithPath("careerMonth").type("int").description("회원 경력 개월수 정보 필드"),
