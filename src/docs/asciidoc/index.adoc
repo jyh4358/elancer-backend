@@ -328,7 +328,9 @@ include::{snippets}/freelancer-worktype-names-find/response-body.adoc[]
 
 프리랜서 프로필 개발자 스킬 & 경험 네임리스트 정보를 조회한다.
 
+요청
 include::{snippets}/freelancer-profile-developer-skills-find/http-request.adoc[]
+응답
 include::{snippets}/freelancer-profile-developer-skills-find/response-headers.adoc[]
 include::{snippets}/freelancer-profile-developer-skills-find/response-fields.adoc[]
 include::{snippets}/freelancer-profile-developer-skills-find/response-body.adoc[]
@@ -338,7 +340,9 @@ include::{snippets}/freelancer-profile-developer-skills-find/response-body.adoc[
 
 프리랜서 프로필 이넘 네임리스트 정보를 조회한다.
 
+요청
 include::{snippets}/freelancer-profile-enum-names-find/http-request.adoc[]
+응답
 include::{snippets}/freelancer-profile-enum-names-find/response-headers.adoc[]
 include::{snippets}/freelancer-profile-enum-names-find/response-fields.adoc[]
 include::{snippets}/freelancer-profile-enum-names-find/response-body.adoc[]
@@ -348,7 +352,9 @@ include::{snippets}/freelancer-profile-enum-names-find/response-body.adoc[]
 
 프리랜서 포지션을 검색한다.
 
+요청
 include::{snippets}/developer-search/http-request.adoc[]
+응답
 include::{snippets}/developer-search/response-headers.adoc[]
 include::{snippets}/developer-search/response-fields.adoc[]
 include::{snippets}/developer-search/response-body.adoc[]
@@ -358,7 +364,9 @@ include::{snippets}/developer-search/response-body.adoc[]
 
 프리랜서 퍼블리셔를 검색한다.
 
+요청
 include::{snippets}/publisher-search/http-request.adoc[]
+응답
 include::{snippets}/publisher-search/response-headers.adoc[]
 include::{snippets}/publisher-search/response-fields.adoc[]
 include::{snippets}/publisher-search/response-body.adoc[]
@@ -368,7 +376,9 @@ include::{snippets}/publisher-search/response-body.adoc[]
 
 프리랜서 디자이너를 검색한다.
 
+요청
 include::{snippets}/designer-search/http-request.adoc[]
+응답
 include::{snippets}/designer-search/response-headers.adoc[]
 include::{snippets}/designer-search/response-fields.adoc[]
 include::{snippets}/designer-search/response-body.adoc[]
@@ -378,7 +388,9 @@ include::{snippets}/designer-search/response-body.adoc[]
 
 프리랜서 기획자를 검색한다.
 
+요청
 include::{snippets}/planner-search/http-request.adoc[]
+응답
 include::{snippets}/planner-search/response-headers.adoc[]
 include::{snippets}/planner-search/response-fields.adoc[]
 include::{snippets}/planner-search/response-body.adoc[]
@@ -388,7 +400,10 @@ include::{snippets}/planner-search/response-body.adoc[]
 
 프리랜서 기타포지션을 검색한다.
 
+요청
 include::{snippets}/position-etc-search/http-request.adoc[]
+
+응답
 include::{snippets}/position-etc-search/response-headers.adoc[]
 include::{snippets}/position-etc-search/response-fields.adoc[]
 include::{snippets}/position-etc-search/response-body.adoc[]
@@ -409,6 +424,21 @@ include::{snippets}/freelancer-profile-finds/http-request.adoc[]
 include::{snippets}/freelancer-profile-finds/response-headers.adoc[]
 include::{snippets}/freelancer-profile-finds/response-fields.adoc[]
 include::{snippets}/freelancer-profile-finds/response-body.adoc[]
+
+[[resources-freelancer-obtainOrder-find]]
+== 프리랜서 수주관리 조회 정보
+
+프리랜서 수주관리의 데이터를 조회한다.
+
+요청
+
+include::{snippets}/freelancer-obtainOrder-find/http-request.adoc[]
+
+응답
+
+include::{snippets}/freelancer-obtainOrder-find/response-headers.adoc[]
+include::{snippets}/freelancer-obtainOrder-find/response-fields.adoc[]
+include::{snippets}/freelancer-obtainOrder-find/response-body.adoc[]
 
 
 == 기업

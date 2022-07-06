@@ -23,7 +23,6 @@ public class FreelancerObtainOrdersResponse {
     private int interviewProjectCount;
     private int joinedProjectCount;
     private int wishProjectCount;
-
     private List<ProjectBasicResponse> applyProjectResponses;
     private List<ProjectBasicResponse> interviewProjectResponses;
     private List<ProjectBasicResponse> joinedProjectResponses;
