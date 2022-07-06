@@ -24,8 +24,10 @@ public class InterviewProjectResponse {
     private int minMoney;
     private int maxMoney;
     private LocalDate createdDate;
+    private int applyFreelancerCount;
     private int interviewFreelancerCount;
     private List<InterviewFreelancerDto> interviewFreelancerList = new ArrayList<>();
+    private List<ApplicantDto> applyFreelancerList = new ArrayList<>();
 
     @Builder
     public InterviewProjectResponse(Long projectNum,
@@ -38,8 +40,11 @@ public class InterviewProjectResponse {
                                     int minMoney,
                                     int maxMoney,
                                     LocalDate createdDate,
+                                    int applyFreelancerCount,
                                     int interviewFreelancerCount,
-                                    List<InterviewFreelancerDto> interviewFreelancerList) {
+                                    List<InterviewFreelancerDto> interviewFreelancerList,
+                                    List<ApplicantDto> applyFreelancerList
+    ) {
         this.projectNum = projectNum;
         this.projectName = projectName;
         this.positionKind = positionKind;
@@ -50,13 +55,18 @@ public class InterviewProjectResponse {
         this.minMoney = minMoney;
         this.maxMoney = maxMoney;
         this.createdDate = createdDate;
+        this.applyFreelancerCount = applyFreelancerCount;
         this.interviewFreelancerCount = interviewFreelancerCount;
         this.interviewFreelancerList = interviewFreelancerList;
+        this.applyFreelancerList = applyFreelancerList;
     }
 
     public static InterviewProjectResponse of(Project project,
+                                              int applyFreelancerCount,
                                               int interviewFreelancerCount,
-                                              List<InterviewFreelancerDto> interviewFreelancerList) {
+                                              List<ApplicantDto> applyFreelancerList,
+                                              List<InterviewFreelancerDto> interviewFreelancerList
+    ) {
         return InterviewProjectResponse.builder()
                 .projectNum(project.getNum())
                 .projectName(project.getProjectName())
@@ -68,7 +78,9 @@ public class InterviewProjectResponse {
                 .minMoney(project.getMinMoney())
                 .maxMoney(project.getMaxMoney())
                 .createdDate(LocalDate.from(project.getCreatedDate()))
+                .applyFreelancerCount(applyFreelancerCount)
                 .interviewFreelancerCount(interviewFreelancerCount)
+                .applyFreelancerList(applyFreelancerList)
                 .interviewFreelancerList(interviewFreelancerList)
                 .build();
     }

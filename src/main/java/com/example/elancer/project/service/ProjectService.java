@@ -133,11 +133,14 @@ public class ProjectService {
     public List<ApplyProjectResponse> findApplyProject(MemberDetails memberDetails) {
         RightRequestChecker.checkMemberDetail(memberDetails);
         List<Project> findProjects = projectRepository.findByEnterprise_Num(memberDetails.getId());
-        List<ApplyProjectResponse> findList = findProjects.stream().map(s ->
+        List<Project> existApplyProject = findProjects.stream().filter(s -> s.getApplyProjects().size() > 0).collect(Collectors.toList());
+        List<ApplyProjectResponse> findList = existApplyProject.stream().map(s ->
                 ApplyProjectResponse.of(
                         s,
                         (int) applyProjectRepository.countByProject_Num(s.getNum()),
-                        searchApplicantList(s)
+                        (int) interviewProjectRepository.countByProject_Num(s.getNum()),
+                        searchApplicantList(s),
+                        searchInterviewRequesterList(s)
                 )
         ).collect(Collectors.toList());
 
@@ -147,10 +150,13 @@ public class ProjectService {
     public List<InterviewProjectResponse> findInterviewProject(MemberDetails memberDetails) {
         RightRequestChecker.checkMemberDetail(memberDetails);
         List<Project> findProjects = projectRepository.findByEnterprise_Num(memberDetails.getId());
-        List<InterviewProjectResponse> findList = findProjects.stream().map(s ->
+        List<Project> existInterviewProject = findProjects.stream().filter(s -> s.getInterviewProjects().size() > 0).collect(Collectors.toList());
+        List<InterviewProjectResponse> findList = existInterviewProject.stream().map(s ->
                 InterviewProjectResponse.of(
                         s,
+                        (int) applyProjectRepository.countByProject_Num(s.getNum()),
                         (int) interviewProjectRepository.countByProject_Num(s.getNum()),
+                        searchApplicantList(s),
                         searchInterviewRequesterList(s)
                 )
         ).collect(Collectors.toList());

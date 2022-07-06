@@ -500,6 +500,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                     enterprise
             ));
             applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
+            interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
 
         }
 
@@ -529,10 +530,17 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("[].maxMoney").type("int").description("예상 월 단가(최대)"),
                                 fieldWithPath("[].createdDate").type("LocalDate").description("프로젝트 등록 날짜"),
                                 fieldWithPath("[].applyFreelancerCount").type("int").description("지원 프리랜서 수"),
+                                fieldWithPath("[].interviewFreelancerCount").type("int").description("인터뷰 프리랜서 수"),
                                 fieldWithPath("[].applyFreelancerList.[].num").type("Long").description("지원 프리랜서 식별자"),
                                 fieldWithPath("[].applyFreelancerList.[].name").type("String").description("지원 프리랜서 이름"),
                                 fieldWithPath("[].applyFreelancerList.[].careerYear").type("int").description("지원 프리랜서 경력"),
-                                fieldWithPath("[].applyFreelancerList.[].positionType").type("PositionType").description(" DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")")
+                                fieldWithPath("[].applyFreelancerList.[].positionType").type("PositionType").description(" DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
+                                fieldWithPath("[].interviewFreelancerList.[].num").type("Long").description("인터뷰 프리랜서 식별자"),
+                                fieldWithPath("[].interviewFreelancerList.[].name").type("String").description("인터뷰 프리랜서 이름"),
+                                fieldWithPath("[].interviewFreelancerList.[].phone").type("String").description("인터뷰 프리랜서 핸드폰"),
+                                fieldWithPath("[].interviewFreelancerList.[].interviewStatus").type("InterviewStatus").description("WAITING(\"대기\"), ACCEPT(\"수락\")"),
+                                fieldWithPath("[].interviewFreelancerList.[].careerYear").type("int").description("인터뷰 프리랜서 경력"),
+                                fieldWithPath("[].interviewFreelancerList.[].positionType").type("PositionType").description(" DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")")
                         )
 
                 ));
@@ -601,7 +609,12 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("[].minMoney").type("int").description("예상 월 단가(최소)"),
                                 fieldWithPath("[].maxMoney").type("int").description("예상 월 단가(최대)"),
                                 fieldWithPath("[].createdDate").type("LocalDate").description("프로젝트 등록 날짜"),
+                                fieldWithPath("[].applyFreelancerCount").type("int").description("지원 프리랜서 수"),
                                 fieldWithPath("[].interviewFreelancerCount").type("int").description("인터뷰 프리랜서 수"),
+                                fieldWithPath("[].applyFreelancerList.[].num").type("Long").description("지원 프리랜서 식별자"),
+                                fieldWithPath("[].applyFreelancerList.[].name").type("String").description("지원 프리랜서 이름"),
+                                fieldWithPath("[].applyFreelancerList.[].careerYear").type("int").description("지원 프리랜서 경력"),
+                                fieldWithPath("[].applyFreelancerList.[].positionType").type("PositionType").description(" DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
                                 fieldWithPath("[].interviewFreelancerList.[].num").type("Long").description("인터뷰 프리랜서 식별자"),
                                 fieldWithPath("[].interviewFreelancerList.[].name").type("String").description("인터뷰 프리랜서 이름"),
                                 fieldWithPath("[].interviewFreelancerList.[].phone").type("String").description("인터뷰 프리랜서 핸드폰"),
@@ -678,11 +691,11 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("[].maxMoney").type("int").description("예상 월 단가(최대)"),
                                 fieldWithPath("[].createdDate").type("LocalDate").description("프로젝트 등록 날짜"),
                                 fieldWithPath("[].waitFreelancerCount").type("int").description("조욜중 프리랜서 수"),
-                                fieldWithPath("[].waitFreelancerLists.[].num").type("Long").description("조율중 프리랜서 식별자"),
-                                fieldWithPath("[].waitFreelancerLists.[].name").type("String").description("조율중 프리랜서 이름"),
-                                fieldWithPath("[].waitFreelancerLists.[].phone").type("String").description("조율중 프리랜서 핸드폰"),
-                                fieldWithPath("[].waitFreelancerLists.[].careerYear").type("int").description("조율중 프리랜서 경력"),
-                                fieldWithPath("[].waitFreelancerLists.[].positionType").type("PositionType").description(" DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")")
+                                fieldWithPath("[].waitFreelancerList.[].num").type("Long").description("조율중 프리랜서 식별자"),
+                                fieldWithPath("[].waitFreelancerList.[].name").type("String").description("조율중 프리랜서 이름"),
+                                fieldWithPath("[].waitFreelancerList.[].phone").type("String").description("조율중 프리랜서 핸드폰"),
+                                fieldWithPath("[].waitFreelancerList.[].careerYear").type("int").description("조율중 프리랜서 경력"),
+                                fieldWithPath("[].waitFreelancerList.[].positionType").type("PositionType").description(" DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")")
                         )
 
                 ));

@@ -25,21 +25,27 @@ public class ApplyProjectResponse {
     private int maxMoney;
     private LocalDate createdDate;
     private int applyFreelancerCount;
+    private int interviewFreelancerCount;
     private List<ApplicantDto> applyFreelancerList = new ArrayList<>();
+    private List<InterviewFreelancerDto> interviewFreelancerList = new ArrayList<>();
 
     @Builder
     public ApplyProjectResponse(Long projectNum,
-                               String projectName,
-                               PositionKind positionKind,
-                               String demandCareer,
-                               int headCount,
-                               LocalDate projectStateDate,
-                               LocalDate projectEndDate,
-                               int minMoney,
-                               int maxMoney,
-                               LocalDate createdDate,
-                               int applyFreelancerCount,
-                               List<ApplicantDto> applyFreelancerList) {
+                                String projectName,
+                                PositionKind positionKind,
+                                String demandCareer,
+                                int headCount,
+                                LocalDate projectStateDate,
+                                LocalDate projectEndDate,
+                                int minMoney,
+                                int maxMoney,
+                                LocalDate createdDate,
+                                int applyFreelancerCount,
+                                int interviewFreelancerCount,
+                                List<ApplicantDto> applyFreelancerList,
+                                List<InterviewFreelancerDto> interviewFreelancerList
+    ) {
+
         this.projectNum = projectNum;
         this.projectName = projectName;
         this.positionKind = positionKind;
@@ -51,12 +57,18 @@ public class ApplyProjectResponse {
         this.maxMoney = maxMoney;
         this.createdDate = createdDate;
         this.applyFreelancerCount = applyFreelancerCount;
+        this.interviewFreelancerCount = interviewFreelancerCount;
         this.applyFreelancerList = applyFreelancerList;
+        this.interviewFreelancerList = interviewFreelancerList;
     }
 
     public static ApplyProjectResponse of(Project project,
-                                         int applyFreelancerCount,
-                                         List<ApplicantDto> applyFreelancerList) {
+                                          int applyFreelancerCount,
+                                          int interviewFreelancerCount,
+                                          List<ApplicantDto> applyFreelancerList,
+                                          List<InterviewFreelancerDto> interviewFreelancerList
+    ) {
+
         return ApplyProjectResponse.builder()
                 .projectNum(project.getNum())
                 .projectName(project.getProjectName())
@@ -69,7 +81,9 @@ public class ApplyProjectResponse {
                 .maxMoney(project.getMaxMoney())
                 .createdDate(LocalDate.from(project.getCreatedDate()))
                 .applyFreelancerCount(applyFreelancerCount)
+                .interviewFreelancerCount(interviewFreelancerCount)
                 .applyFreelancerList(applyFreelancerList)
+                .interviewFreelancerList(interviewFreelancerList)
                 .build();
     }
 }

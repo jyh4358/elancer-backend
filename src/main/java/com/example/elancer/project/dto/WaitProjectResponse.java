@@ -25,7 +25,7 @@ public class WaitProjectResponse {
     private int maxMoney;
     private LocalDate createdDate;
     private int waitFreelancerCount;
-    private List<WaitFreelancerDto> waitFreelancerLists = new ArrayList<>();
+    private List<WaitFreelancerDto> waitFreelancerList = new ArrayList<>();
 
     @Builder
     public WaitProjectResponse(Long projectNum,
@@ -39,7 +39,7 @@ public class WaitProjectResponse {
                                int maxMoney,
                                LocalDate createdDate,
                                int waitFreelancerCount,
-                               List<WaitFreelancerDto> waitFreelancerLists) {
+                               List<WaitFreelancerDto> waitFreelancerList) {
         this.projectNum = projectNum;
         this.projectName = projectName;
         this.positionKind = positionKind;
@@ -51,12 +51,12 @@ public class WaitProjectResponse {
         this.maxMoney = maxMoney;
         this.createdDate = createdDate;
         this.waitFreelancerCount = waitFreelancerCount;
-        this.waitFreelancerLists = waitFreelancerLists;
+        this.waitFreelancerList = waitFreelancerList;
     }
 
     public static WaitProjectResponse of(Project project,
                                          int waitFreelancerCount,
-                                         List<WaitFreelancerDto> waitFreelancerLists) {
+                                         List<WaitFreelancerDto> waitFreelancerList) {
         return WaitProjectResponse.builder()
                 .projectNum(project.getNum())
                 .projectName(project.getProjectName())
@@ -69,7 +69,7 @@ public class WaitProjectResponse {
                 .maxMoney(project.getMaxMoney())
                 .createdDate(LocalDate.from(project.getCreatedDate()))
                 .waitFreelancerCount(waitFreelancerCount)
-                .waitFreelancerLists(waitFreelancerLists)
+                .waitFreelancerList(waitFreelancerList)
                 .build();
     }
 
