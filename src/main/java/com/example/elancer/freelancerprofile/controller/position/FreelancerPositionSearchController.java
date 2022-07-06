@@ -8,6 +8,9 @@ import com.example.elancer.freelancerprofile.service.position.FreelancerPosition
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -29,9 +32,10 @@ public class FreelancerPositionSearchController {
             @RequestParam(required = false) HopeWorkState hopeWorkState,
             @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
             @RequestParam(required = false) WorkArea workArea,
+            @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 10) Pageable pageable,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, memberDetails);
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable, memberDetails);
         return new ResponseEntity<FreelancerSimpleResponses>(freelancerSimpleResponses, HttpStatus.OK);
     }
 }

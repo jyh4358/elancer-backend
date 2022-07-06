@@ -5,8 +5,12 @@ import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
+import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
+import com.example.elancer.freelancerprofile.model.position.publisher.QPublishingSkill;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
+import com.querydsl.core.types.dsl.ListPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -19,38 +23,39 @@ import java.util.List;
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
 import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.freelancerProfile;
 import static com.example.elancer.freelancerprofile.model.position.developer.QDeveloper.developer;
+import static com.example.elancer.freelancerprofile.model.position.publisher.QPublisher.publisher;
 
 @Repository
 @RequiredArgsConstructor
-public class DeveloperSearchRepository {
+public class PublisherSearchRepository {
     private final JPAQueryFactory jpaQueryFactory;
 
-    public Slice<Developer> searchDevelopers(
+    public Slice<Publisher> searchPublishers(
             PositionType positionType,
             List<String> majorSkillConditions,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
-            Pageable pageable,
-            WorkArea workArea
+            WorkArea workArea,
+            Pageable pageable
     ) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        builder.and(developer.positionType.eq(positionType));
+        builder.and(publisher.positionType.eq(positionType));
         eqMajorSkillConds(majorSkillConditions, builder);
         eqHopeWorkStateConds(hopeWorkState, builder);
         eqPositionWorkShipConds(positionWorkManShip, builder);
         eqWorkAreaConds(workArea, builder);
 
-        QueryResults<Developer> developerQueryResults = jpaQueryFactory.selectFrom(developer)
-                .innerJoin(developer.freelancerProfile, freelancerProfile).fetchJoin()
+        QueryResults<Publisher> publisherQueryResults = jpaQueryFactory.selectFrom(publisher)
+                .innerJoin(publisher.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
                 .where(builder)
-                .orderBy(developer.num.desc())
+                .orderBy(publisher.num.desc())
                 .offset(pageable.getPageNumber())
                 .limit(pageable.getPageSize())
                 .fetchResults();
 
-        return new SliceImpl<Developer>(developerQueryResults.getResults());
+        return new SliceImpl<Publisher>(publisherQueryResults.getResults());
     }
 
     private void eqWorkAreaConds(WorkArea area, BooleanBuilder builder) {
@@ -67,7 +72,7 @@ public class DeveloperSearchRepository {
         }
 
         for (String majorSkillKeyword : majorSkillKeywords) {
-            builder.and(developer.focusSkill.containsIgnoreCase(majorSkillKeyword));
+            builder.or(publisher.etcSkill.containsIgnoreCase(majorSkillKeyword));
         }
     }
 

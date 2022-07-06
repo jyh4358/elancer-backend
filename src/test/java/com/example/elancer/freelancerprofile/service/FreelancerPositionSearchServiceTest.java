@@ -24,6 +24,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -219,13 +220,14 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
     @DisplayName("개발자 목록을 주요 스킬만 검색한다.")
     @Test
     public void 개발자_주요스킬_검색() {
+        PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 Arrays.asList("java", "spring"),
                 null,
                 null,
                 null,
-                memberDetails
+                pageable, memberDetails
         );
 
         //then
@@ -235,13 +237,14 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
     @DisplayName("개발자 목록 자바만 검색한다.")
     @Test
     public void 개발자_주요스킬_자바만_검색() {
+        PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 Arrays.asList("java"),
                 null,
                 null,
                 null,
-                memberDetails
+                pageable, memberDetails
         );
 
         //then
@@ -251,13 +254,14 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
     @DisplayName("개발자 목록 노드만 검색한다.")
     @Test
     public void 개발자_주요스킬_노드만_검색() {
+        PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 Arrays.asList("node"),
                 null,
                 null,
                 null,
-                memberDetails
+                pageable, memberDetails
         );
 
         //then
@@ -267,13 +271,14 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
     @DisplayName("개발자 목록 주요스킬과 주니어 경력으로 검색한다.")
     @Test
     public void 개발자_주요스킬_경력_검색_주니어() {
+        PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 null,
                 null,
                 PositionWorkManShip.JUNIOR,
                 null,
-                memberDetails
+                pageable, memberDetails
         );
 
         //then
@@ -283,13 +288,14 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
     @DisplayName("개발자 목록 주요스킬과 미들 경력으로 검색한다.")
     @Test
     public void 개발자_주요스킬_경력_검색_미들() {
+        PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 null,
                 null,
                 PositionWorkManShip.MIDDLE,
                 null,
-                memberDetails
+                pageable, memberDetails
         );
 
         //then
@@ -299,13 +305,14 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
     @DisplayName("개발자 목록 주요스킬과 시니어 경력으로 검색한다.")
     @Test
     public void 개발자_주요스킬_경력_검색_시니어() {
+        PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 null,
                 null,
                 PositionWorkManShip.SENIOR,
                 null,
-                memberDetails
+                pageable, memberDetails
         );
 
         //then
@@ -315,13 +322,14 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
     @DisplayName("개발자 목록 주요스킬과 근무형태를 상주로 검색한다.")
     @Test
     public void 개발자_주요스킬_근무형태_상주() {
+        PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 null,
                 HopeWorkState.AT_COMPANY,
                 null,
                 null,
-                memberDetails
+                pageable, memberDetails
         );
 
         //then
@@ -335,13 +343,14 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         WishFreelancer wishFreelancer = wishFreelancerRepository.save(WishFreelancer.createWishFreelancer(enterprise, freelancer1));
         MemberDetails enterpriseMemberDetails = MemberDetails.userDetailsFrom(enterprise);
 
+        PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
                 Arrays.asList("java", "spring"),
                 null,
                 null,
                 null,
-                enterpriseMemberDetails
+                pageable, enterpriseMemberDetails
         );
 
         //then

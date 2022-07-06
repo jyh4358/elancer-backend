@@ -8,10 +8,13 @@ import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.example.elancer.freelancerprofile.repository.positionsearch.DeveloperSearchRepository;
+import com.example.elancer.freelancerprofile.repository.positionsearch.PublisherSearchRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FreelancerPositionSearchService {
     private final DeveloperSearchRepository developerSearchRepository;
+    private final PublisherSearchRepository publisherSearchRepository;
     private final WishFreelancerRepository wishFreelancerRepository;
 
     @Transactional(readOnly = true)
@@ -32,9 +36,10 @@ public class FreelancerPositionSearchService {
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
+            Pageable pageable,
             MemberDetails memberDetails
     ) {
-        Slice<Developer> developers= developerSearchRepository.findFreelancerProfileByFetch(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea);
+        Slice<Developer> developers = developerSearchRepository.searchDevelopers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, pageable, workArea);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = developers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());

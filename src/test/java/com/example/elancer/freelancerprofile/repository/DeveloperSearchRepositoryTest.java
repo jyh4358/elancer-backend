@@ -35,6 +35,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
@@ -226,12 +227,13 @@ class DeveloperSearchRepositoryTest {
         //when
         Developer developer1 = developerRepository.findById(savedDeveloper3.getNum()).get();
         List<Developer> all = developerRepository.findAll();
-        Slice<Developer> freelancers = developerSearchRepository.findFreelancerProfileByFetch(
+        PageRequest pageable = PageRequest.of(0, 10);
+        Slice<Developer> freelancers = developerSearchRepository.searchDevelopers(
                 PositionType.DEVELOPER,
                 StringEditor.editStringToStringList("java"),
                 HopeWorkState.AT_COMPANY,
                 null/*Arrays.asList(PositionWorkManShip.MIDDLE)*/,
-                null/*WorkArea.SEOUL.getDesc()*/
+                pageable, null/*WorkArea.SEOUL.getDesc()*/
         );
 
         //일단 생각대로 동작은 함. 다만 java를 검색하면 javaScript의 주스킬 가진 사람도 나오긴하는데 이건 흔한거라..., 별개로 검색시 develper객체에 freelancer나 profile 내에 데이터가 없었던 현상은 em.clear랑 연관되있다고 판단.
