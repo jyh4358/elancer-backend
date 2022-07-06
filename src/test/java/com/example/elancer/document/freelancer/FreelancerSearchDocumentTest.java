@@ -127,9 +127,8 @@ public class FreelancerSearchDocumentTest extends DocumentBaseTest {
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("positionType", String.valueOf(PositionType.DEVELOPER));
         data.add("majorSkillKeywords", "java");
-        data.add("minorSkill", null);
-        data.add("hopeWorkStates", null);
-        data.add("positionWorkManShips", null);
+        data.add("hopeWorkState", null);
+        data.add("positionWorkManShip", null);
         data.add("workArea", null);
 
         //when & then
