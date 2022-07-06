@@ -1,6 +1,7 @@
 package com.example.elancer.freelancer.service;
 
 import com.example.elancer.applyproject.model.ApplyProject;
+import com.example.elancer.applyproject.repository.ApplyProjectRepository;
 import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.basetest.ServiceBaseTest;
@@ -37,6 +38,8 @@ import com.example.elancer.waitproject.model.WaitProject;
 import com.example.elancer.waitproject.repsitory.WaitProjectRepository;
 import com.example.elancer.wishfreelancer.model.WishFreelancer;
 import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
+import com.example.elancer.wishprojects.model.WishProject;
+import com.example.elancer.wishprojects.repository.WishProjectRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -70,8 +73,11 @@ class FreelancerServiceTest extends ServiceBaseTest {
     @Autowired
     private WaitProjectRepository waitProjectRepository;
 
-//    @Autowired
-//    private
+    @Autowired
+    private ApplyProjectRepository applyProjectRepository;
+
+    @Autowired
+    private WishProjectRepository wishProjectRepository;
 
     @DisplayName("프리랜서 계정 정보가 업데이트 된다")
     @Test
@@ -265,18 +271,73 @@ class FreelancerServiceTest extends ServiceBaseTest {
                 enterprise
         ));
 
-        ApplyProject applyProject = ApplyProject.createApplyProject(freelancer, project);
+        ApplyProject applyProject = applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
 
-        InterviewProject interviewProject = InterviewProject.createInterviewProject(freelancer, project);
+        InterviewProject interviewProject = interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
 
         WaitProject waitProject = waitProjectRepository.save(WaitProject.createWaitProject(freelancer, project));
 
+        WishProject wishProject = wishProjectRepository.save(WishProject.createWishProject(freelancer, project));
+
         //when
-//        FreelancerObtainOrdersResponse freelancerObtainOrders = freelancerService.findFreelancerObtainOrders(memberDetails);
+        FreelancerObtainOrdersResponse freelancerObtainOrders = freelancerService.findFreelancerObtainOrders(memberDetails);
 
         //then
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectCount()).isEqualTo(1);
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectCount()).isEqualTo(1);
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectCount()).isEqualTo(1);
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectCount()).isEqualTo(1);
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses()).hasSize(1);
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getProjectNum()).isEqualTo(project.getNum());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getProjectName()).isEqualTo(project.getProjectName());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getPositionKind()).isEqualTo(project.getPositionKind());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getDemandCareer()).isEqualTo(project.demandCareer());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getHeadCount()).isEqualTo(project.getHeadCount());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getHeadCount()).isEqualTo(project.getHeadCount());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getProjectStateDate()).isEqualTo(project.getProjectStateDate());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getProjectEndDate()).isEqualTo(project.getProjectEndDate());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getMinMoney()).isEqualTo(project.getMinMoney());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getMaxMoney()).isEqualTo(project.getMaxMoney());
+        Assertions.assertThat(freelancerObtainOrders.getApplyProjectResponses().get(0).getCreatedDate()).isEqualTo(project.getCreatedDate().toLocalDate());
 
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses()).hasSize(1);
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getProjectNum()).isEqualTo(project.getNum());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getProjectName()).isEqualTo(project.getProjectName());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getPositionKind()).isEqualTo(project.getPositionKind());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getDemandCareer()).isEqualTo(project.demandCareer());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getHeadCount()).isEqualTo(project.getHeadCount());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getHeadCount()).isEqualTo(project.getHeadCount());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getProjectStateDate()).isEqualTo(project.getProjectStateDate());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getProjectEndDate()).isEqualTo(project.getProjectEndDate());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getMinMoney()).isEqualTo(project.getMinMoney());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getMaxMoney()).isEqualTo(project.getMaxMoney());
+        Assertions.assertThat(freelancerObtainOrders.getInterviewProjectResponses().get(0).getCreatedDate()).isEqualTo(project.getCreatedDate().toLocalDate());
 
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses()).hasSize(1);
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getProjectNum()).isEqualTo(project.getNum());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getProjectName()).isEqualTo(project.getProjectName());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getPositionKind()).isEqualTo(project.getPositionKind());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getDemandCareer()).isEqualTo(project.demandCareer());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getHeadCount()).isEqualTo(project.getHeadCount());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getHeadCount()).isEqualTo(project.getHeadCount());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getProjectStateDate()).isEqualTo(project.getProjectStateDate());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getProjectEndDate()).isEqualTo(project.getProjectEndDate());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getMinMoney()).isEqualTo(project.getMinMoney());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getMaxMoney()).isEqualTo(project.getMaxMoney());
+        Assertions.assertThat(freelancerObtainOrders.getJoinedProjectResponses().get(0).getCreatedDate()).isEqualTo(project.getCreatedDate().toLocalDate());
+
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses()).hasSize(1);
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getProjectNum()).isEqualTo(project.getNum());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getProjectName()).isEqualTo(project.getProjectName());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getPositionKind()).isEqualTo(project.getPositionKind());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getDemandCareer()).isEqualTo(project.demandCareer());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getHeadCount()).isEqualTo(project.getHeadCount());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getHeadCount()).isEqualTo(project.getHeadCount());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getProjectStateDate()).isEqualTo(project.getProjectStateDate());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getProjectEndDate()).isEqualTo(project.getProjectEndDate());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getMinMoney()).isEqualTo(project.getMinMoney());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getMaxMoney()).isEqualTo(project.getMaxMoney());
+        Assertions.assertThat(freelancerObtainOrders.getWishProjectResponses().get(0).getCreatedDate()).isEqualTo(project.getCreatedDate().toLocalDate());
     }
 
     @AfterEach

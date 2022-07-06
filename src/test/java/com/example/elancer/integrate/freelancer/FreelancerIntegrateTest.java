@@ -1,7 +1,12 @@
 package com.example.elancer.integrate.freelancer;
 
+import com.example.elancer.applyproject.model.ApplyProject;
+import com.example.elancer.applyproject.repository.ApplyProjectRepository;
+import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.LoginHelper;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.controller.FreelancerControllerPath;
 import com.example.elancer.freelancer.controller.FreelancerEnumControllerPath;
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
@@ -18,10 +23,25 @@ import com.example.elancer.freelancer.model.WorkType;
 import com.example.elancer.freelancer.repository.FreelancerWorkTypeRepository;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.integrate.common.IntegrateBaseTest;
+import com.example.elancer.interviewproject.model.InterviewProject;
+import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
+import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.project.model.EnterpriseLogo;
+import com.example.elancer.project.model.PositionKind;
+import com.example.elancer.project.model.Project;
+import com.example.elancer.project.model.ProjectBackGround;
+import com.example.elancer.project.model.ProjectStatus;
+import com.example.elancer.project.model.ProjectStep;
+import com.example.elancer.project.model.ProjectType;
+import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.token.jwt.JwtTokenProvider;
+import com.example.elancer.waitproject.model.WaitProject;
+import com.example.elancer.waitproject.repsitory.WaitProjectRepository;
+import com.example.elancer.wishprojects.model.WishProject;
+import com.example.elancer.wishprojects.repository.WishProjectRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -33,6 +53,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -44,6 +65,24 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
 
     @Autowired
     private FreelancerWorkTypeRepository freelancerWorkTypeRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private EnterpriseRepository enterpriseRepository;
+
+    @Autowired
+    private InterviewProjectRepository interviewProjectRepository;
+
+    @Autowired
+    private WaitProjectRepository waitProjectRepository;
+
+    @Autowired
+    private ApplyProjectRepository applyProjectRepository;
+
+    @Autowired
+    private WishProjectRepository wishProjectRepository;
 
     @DisplayName("프리랜서 회원가입 통합테스트")
     @Test
@@ -173,6 +212,70 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
                         .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("name").value(updatedFreelancer.getName()))
+                .andDo(print());
+    }
+
+    @DisplayName("프리랜서 수주관리 정보 조회 통합테스트")
+    @Test
+    public void 프래랜서_수주관리_조회_통합테스트() throws Exception {
+        //given
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
+        MemberDetails memberDetails = MemberDetails.builder()
+                .id(freelancer.getNum())
+                .userId(freelancer.getUserId())
+                .role(freelancer.getRole())
+                .build();
+
+        Project project = projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.ANALYSIS,
+                "쇼핑몰",
+                PositionKind.DEVELOPER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35,
+                ProjectStatus.PROGRESS,
+                enterprise
+        ));
+
+        ApplyProject applyProject = applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
+
+        InterviewProject interviewProject = interviewProjectRepository.save(InterviewProject.createInterviewProject(freelancer, project));
+
+        WaitProject waitProject = waitProjectRepository.save(WaitProject.createWaitProject(freelancer, project));
+
+        WishProject wishProject = wishProjectRepository.save(WishProject.createWishProject(freelancer, project));
+
+        //when & then
+        mockMvc.perform(get(FreelancerControllerPath.FREELANCER_OBTAIN_ORDER_FIND)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("applyProjectCount").value(1))
+                .andExpect(jsonPath("interviewProjectCount").value(1))
+                .andExpect(jsonPath("joinedProjectCount").value(1))
+                .andExpect(jsonPath("wishProjectCount").value(1))
+                .andExpect(jsonPath("applyProjectResponses", hasSize(1)))
+                .andExpect(jsonPath("interviewProjectResponses", hasSize(1)))
+                .andExpect(jsonPath("joinedProjectResponses", hasSize(1)))
+                .andExpect(jsonPath("wishProjectResponses", hasSize(1)))
                 .andDo(print());
     }
 

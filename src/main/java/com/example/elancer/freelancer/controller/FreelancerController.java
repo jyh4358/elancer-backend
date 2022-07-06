@@ -2,6 +2,7 @@ package com.example.elancer.freelancer.controller;
 
 import com.example.elancer.freelancer.dto.FreelancerAccountCoverRequest;
 import com.example.elancer.freelancer.dto.FreelancerAccountDetailResponse;
+import com.example.elancer.freelancer.dto.response.FreelancerObtainOrdersResponse;
 import com.example.elancer.freelancer.service.FreelancerService;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -39,6 +40,14 @@ public class FreelancerController {
     ) {
         FreelancerAccountDetailResponse freelancerAccountInfo = freelancerService.findDetailFreelancerAccount(memberDetails);
         return new ResponseEntity<FreelancerAccountDetailResponse>(freelancerAccountInfo, HttpStatus.OK);
+    }
+
+    @GetMapping(FreelancerControllerPath.FREELANCER_OBTAIN_ORDER_FIND)
+    public ResponseEntity<FreelancerObtainOrdersResponse> findFreelancerObtainOrders(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        FreelancerObtainOrdersResponse freelancerObtainOrders = freelancerService.findFreelancerObtainOrders(memberDetails);
+        return new ResponseEntity<FreelancerObtainOrdersResponse>(freelancerObtainOrders, HttpStatus.OK);
     }
     //Todo min 예외 핸들러 필요 - 서비스 로직 참고해서 추가할것.
 }
