@@ -30,6 +30,24 @@ public class ProjectController {
         return new ResponseEntity<>(projectDetailResponse, HttpStatus.OK);
     }
 
+    @GetMapping("/project-index-list")
+    public ResponseEntity<IndexProjectResponse> findIndexProjectList() {
+
+        IndexProjectResponse indexProjectList = projectService.findIndexProjectList();
+
+        return new ResponseEntity<>(indexProjectList, HttpStatus.OK);
+    }
+
+    @GetMapping("/project-list")
+    public ResponseEntity<List<ProjectBoxResponse>> findProjectList(
+            @RequestParam(required = false) String projectKind,
+            @RequestParam(required = false) String skill
+    ) {
+        projectService.searchProjectList(projectKind, skill);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @GetMapping("/project-save")
     public ResponseEntity<EnterpriseSimpleDetailResponse> saveProject(
@@ -61,9 +79,6 @@ public class ProjectController {
 
     /**
      * 프로젝트 진행 요청
-     *
-     * @param memberDetails
-     * @param projectProcessingRequest
      */
     @PostMapping("/start-project")
     public ResponseEntity<Void> startProject(
@@ -85,8 +100,8 @@ public class ProjectController {
     }
 
     @GetMapping("/recommend-project")
-    public ResponseEntity<List<RecommendProjectResponse>> RecommendProject() {
-        List<RecommendProjectResponse> recommendProject = projectService.findRecommendProject();
+    public ResponseEntity<List<ProjectBoxResponse>> RecommendProject() {
+        List<ProjectBoxResponse> recommendProject = projectService.findRecommendProject();
 
         return new ResponseEntity<>(recommendProject, HttpStatus.OK);
     }

@@ -3,12 +3,14 @@ package com.example.elancer.project.dto;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.project.model.FreelancerWorkmanShip;
 import com.example.elancer.project.model.Project;
+import com.example.elancer.project.model.ProjectStep;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Array;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,8 @@ public class ProjectDetailResponse {
     private int headCount;
     private int inputHeadCount;
     private String content;
+    private Long endDays;
+    private ProjectStep projectStep;
     private List<SimpleFreelancerDto> simpleFreelancerList = new ArrayList<>();
 
 
@@ -37,6 +41,8 @@ public class ProjectDetailResponse {
                                  int headCount,
                                  int inputHeadCount,
                                  String content,
+                                 Long endDays,
+                                 ProjectStep projectStep,
                                  List<SimpleFreelancerDto> simpleFreelancerList
     ) {
         this.projectName = projectName;
@@ -48,6 +54,8 @@ public class ProjectDetailResponse {
         this.headCount = headCount;
         this.inputHeadCount = inputHeadCount;
         this.content = content;
+        this.endDays = endDays;
+        this.projectStep = projectStep;
         this.simpleFreelancerList = simpleFreelancerList;
     }
 
@@ -65,6 +73,8 @@ public class ProjectDetailResponse {
                 .headCount(project.getHeadCount())
                 .inputHeadCount(project.getInputHeadCount())
                 .content(project.getContent())
+                .endDays(ChronoUnit.DAYS.between(LocalDate.now(), project.getProjectEndDate()))
+                .projectStep(project.getProjectStep())
                 .simpleFreelancerList(simpleFreelancerList)
                 .build();
     }

@@ -1,5 +1,6 @@
 package com.example.elancer.project.repository;
 
+import com.example.elancer.project.model.PositionKind;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectStatus;
 import com.example.elancer.waitproject.model.WaitStatus;
@@ -27,5 +28,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
                                                    @Param("waitStatus")WaitStatus waitStatus);
 
     Long countByProjectStatus(ProjectStatus projectStatus);
+
+    List<Project> findTop3ByPositionKindOrderByNumDesc(PositionKind developer);
 
 }

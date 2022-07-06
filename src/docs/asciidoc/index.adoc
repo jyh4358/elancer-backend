@@ -547,6 +547,17 @@ include::{snippets}/project-delete/http-request.adoc[]
 include::{snippets}/project-delete/request-headers.adoc[]
 include::{snippets}/project-delete/request-fields.adoc[]
 
+[[resources-project-index-list]]
+== 프로젝트 인덱스 페이지 리스트 요청
+요청
+include::{snippets}/project-index-list/http-request.adoc[]
+include::{snippets}/project-index-list/request-headers.adoc[]
+응답
+include::{snippets}/project-index-list/http-response.adoc[]
+include::{snippets}/project-index-list/response-headers.adoc[]
+include::{snippets}/project-index-list/response-fields.adoc[]
+
+
 [[resources-project-list-count]]
 == 프로젝트 갯수 요청
 요청

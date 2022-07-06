@@ -14,7 +14,9 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RecommendProjectResponse {
+public class ProjectBoxResponse {
+
+    private Long projectNum;
 
     private ProjectType projectType;
 
@@ -36,17 +38,24 @@ public class RecommendProjectResponse {
 
     private String pay;
 
+    private String content;
+
     @Builder
-    public RecommendProjectResponse(ProjectType projectType,
-                                    ProjectBackGround projectBackGround,
-                                    PositionKind positionKind,
-                                    Long endDays,
-                                    List<String> skills,
-                                    String projectName,
-                                    FreelancerWorkmanShip freelancerWorkmanShip,
-                                    Long projectPeriod,
-                                    Address address,
-                                    String pay) {
+    public ProjectBoxResponse(
+            Long projectNum,
+            ProjectType projectType,
+            ProjectBackGround projectBackGround,
+            PositionKind positionKind,
+            Long endDays,
+            List<String> skills,
+            String projectName,
+            FreelancerWorkmanShip freelancerWorkmanShip,
+            Long projectPeriod,
+            Address address,
+            String pay,
+            String content
+    ) {
+        this.projectNum = projectNum;
         this.projectType = projectType;
         this.projectBackGround = projectBackGround;
         this.positionKind = positionKind;
@@ -57,10 +66,12 @@ public class RecommendProjectResponse {
         this.projectPeriod = projectPeriod;
         this.address = address;
         this.pay = pay;
+        this.content = content;
     }
 
-    public static RecommendProjectResponse of(Project project) {
-        return RecommendProjectResponse.builder()
+    public static ProjectBoxResponse cardBoxOf(Project project) {
+        return ProjectBoxResponse.builder()
+                .projectNum(project.getNum())
                 .projectType(project.getProjectType())
                 .projectBackGround(project.getProjectBackGround())
                 .positionKind(project.getPositionKind())
@@ -71,6 +82,23 @@ public class RecommendProjectResponse {
                 .projectPeriod(ChronoUnit.MONTHS.between(project.getProjectStateDate(), project.getProjectEndDate()))
                 .address(project.getAddress())
                 .pay(project.payConverter())
+                .build();
+    }
+
+    public static ProjectBoxResponse listBoxOf(Project project) {
+        return ProjectBoxResponse.builder()
+                .projectNum(project.getNum())
+                .projectType(project.getProjectType())
+                .projectBackGround(project.getProjectBackGround())
+                .positionKind(project.getPositionKind())
+                .endDays(ChronoUnit.DAYS.between(LocalDate.now(), project.getProjectEndDate()))
+                .skills(project.skillListConverter())
+                .projectName(project.getProjectName())
+                .freelancerWorkmanShip(project.careerToWorkmanshipConverter())
+                .projectPeriod(ChronoUnit.MONTHS.between(project.getProjectStateDate(), project.getProjectEndDate()))
+                .address(project.getAddress())
+                .pay(project.payConverter())
+                .content(project.getContent())
                 .build();
     }
 

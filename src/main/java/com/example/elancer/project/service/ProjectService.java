@@ -11,6 +11,7 @@ import com.example.elancer.interviewproject.model.InterviewProject;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.*;
+import com.example.elancer.project.model.PositionKind;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectStatus;
 import com.example.elancer.project.repository.ProjectRepository;
@@ -45,6 +46,42 @@ public class ProjectService {
         ).collect(Collectors.toList());
 
         return ProjectDetailResponse.of(project, simpleFreelancerDtoList);
+    }
+
+    public void searchProjectList(String projectKind, String skill) {
+
+    }
+
+    public IndexProjectResponse findIndexProjectList() {
+        List<Project> developProject = projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.DEVELOPER);
+        List<Project> publisherProject= projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.PUBLISHER);
+        List<Project> designerProject= projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.DESIGNER);
+        List<Project> plannerProject= projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.PLANNER);
+        List<Project> etcProject= projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.ETC);
+
+        IndexProjectResponse indexProjectResponse = new IndexProjectResponse();
+
+        indexProjectResponse.setDeveloperProjectList(developProject.stream().map(s ->
+                ProjectBoxResponse.listBoxOf(s)
+        ).collect(Collectors.toList()));
+
+        indexProjectResponse.setPublisherProjectList(publisherProject.stream().map(s ->
+                ProjectBoxResponse.listBoxOf(s)
+        ).collect(Collectors.toList()));
+
+        indexProjectResponse.setDesignerProjectList(designerProject.stream().map(s ->
+                ProjectBoxResponse.listBoxOf(s)
+        ).collect(Collectors.toList()));
+
+        indexProjectResponse.setPlannerProjectList(plannerProject.stream().map(s ->
+                ProjectBoxResponse.listBoxOf(s)
+        ).collect(Collectors.toList()));
+
+        indexProjectResponse.setEtcProjectList(etcProject.stream().map(s ->
+                ProjectBoxResponse.listBoxOf(s)
+        ).collect(Collectors.toList()));
+
+        return indexProjectResponse;
     }
 
     @Transactional
@@ -100,11 +137,11 @@ public class ProjectService {
     }
 
 
-    public List<RecommendProjectResponse> findRecommendProject() {
+    public List<ProjectBoxResponse> findRecommendProject() {
         List<Project> recommendProjects = projectRepository.findRandomProject();
         System.out.println("recommendProjects.size() = " + recommendProjects.size());
         return recommendProjects.stream().map(s ->
-                RecommendProjectResponse.of(s)).collect(Collectors.toList());
+                ProjectBoxResponse.cardBoxOf(s)).collect(Collectors.toList());
     }
 
     public ProjectListCount projectCount(MemberDetails memberDetails) {
@@ -242,5 +279,6 @@ public class ProjectService {
                 )
         ).collect(Collectors.toList());
     }
+
 
 }
