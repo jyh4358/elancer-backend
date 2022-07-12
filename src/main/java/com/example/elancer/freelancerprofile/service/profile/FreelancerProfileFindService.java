@@ -2,6 +2,7 @@ package com.example.elancer.freelancerprofile.service.profile;
 
 import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.common.exception.ImpossibleException;
+import com.example.elancer.common.exception.WrongRequestException;
 import com.example.elancer.common.likechecker.FreelancerLikeChecker;
 import com.example.elancer.freelancer.exception.NotExistFreelancerException;
 import com.example.elancer.freelancer.model.Freelancer;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 public class FreelancerProfileFindService {
     private final FreelancerProfileFindRepository freelancerProfileFindRepository;
     private final FreelancerProfileRepository freelancerProfileRepository;
+    private final FreelancerRepository freelancerRepository;
     private final WishFreelancerRepository wishFreelancerRepository;
 
     @Transactional(readOnly = true)
@@ -57,5 +59,15 @@ public class FreelancerProfileFindService {
         FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, freelancerSimpleResponses, wishFreelancerRepository);
 
         return new FreelancerSimpleResponses(freelancerSimpleResponses);
+    }
+
+    @Transactional(readOnly = true)
+    public FreelancerProfileSimpleResponse findSimpleFreelancer(Long freelancerNum) {
+        if (freelancerNum == null) {
+            throw new WrongRequestException("프리랜서 정보가 필요합니다. 잘못된 요청입니다.");
+        }
+
+        Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
+        return FreelancerProfileSimpleResponse.of(freelancer.getFreelancerProfile());
     }
 }

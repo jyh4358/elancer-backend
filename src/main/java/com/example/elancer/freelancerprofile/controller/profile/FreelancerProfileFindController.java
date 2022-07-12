@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,7 +27,7 @@ public class FreelancerProfileFindController {
     }
 
     @GetMapping(FreelancerProfileFindControllerPath.FREELANCER_PROFILE_FIND_SIMPLE)
-    public ResponseEntity<FreelancerProfileSimpleResponse> findSimpleFreelancerAccount(
+    public ResponseEntity<FreelancerProfileSimpleResponse> findSimpleMyAccountByFreelancer(
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
         FreelancerProfileSimpleResponse simpleFreelancerAccount = freelancerProfileFindService.findSimpleMyAccountByFreelancer(memberDetails);
@@ -40,4 +41,13 @@ public class FreelancerProfileFindController {
         FreelancerSimpleResponses simpleFreelancers = freelancerProfileFindService.findSimpleFreelancers(memberDetails);
         return new ResponseEntity<FreelancerSimpleResponses>(simpleFreelancers, HttpStatus.OK);
     }
+
+    @GetMapping(FreelancerProfileFindControllerPath.FREELANCER_FIND)
+    public ResponseEntity<FreelancerProfileSimpleResponse> findSimpleFreelancerAccount(
+            @PathVariable Long freelancerNum
+    ) {
+        FreelancerProfileSimpleResponse simpleFreelancer = freelancerProfileFindService.findSimpleFreelancer(freelancerNum);
+        return new ResponseEntity<FreelancerProfileSimpleResponse>(simpleFreelancer, HttpStatus.OK);
+    }
+
 }

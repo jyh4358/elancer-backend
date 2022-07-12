@@ -4,6 +4,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.IntroBackGround;
 import com.example.elancer.freelancer.model.MailReceptionState;
 import com.example.elancer.freelancer.model.WorkPossibleState;
+import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.freelancerprofile.dto.response.FreelancerDetailResponse;
 import com.example.elancer.freelancerprofile.dto.response.FreelancerProfileSimpleResponse;
@@ -63,10 +64,13 @@ class FreelancerProfileFindServiceTest {
     @Mock
     private WishFreelancerRepository wishFreelancerRepository;
 
+    @Mock
+    private FreelancerRepository freelancerRepository;
+
 
     @BeforeEach
     void setUp() {
-        this.freelancerProfileFindService = new FreelancerProfileFindService(freelancerProfileFindRepository, freelancerProfileRepository, wishFreelancerRepository);
+        this.freelancerProfileFindService = new FreelancerProfileFindService(freelancerProfileFindRepository, freelancerProfileRepository, freelancerRepository, wishFreelancerRepository);
     }
 
     @DisplayName("프리랜서 프로필 정보를 조회할수 있다.")

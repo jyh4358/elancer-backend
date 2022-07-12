@@ -688,6 +688,152 @@ public class FreelancerProfileDocumentTest extends DocumentBaseTest {
                 ));
     }
 
+    @DisplayName("검색된 프리랜서 상세조회 문서화")
+    @Test
+    public void 프리랜서_검색_상세조회_문서화() throws Exception {
+        //given
+        Freelancer freelancer = freelancerRepository.save(FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder));
+        MemberLoginResponse memberLoginResponse = LoginHelper.로그인(freelancer.getUserId(), jwtTokenService);
+
+        FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer , PositionType.DEVELOPER));
+
+        AcademicAbility academicAbility = AcademicAbility.createAcademicAbility(
+                "고등학교",
+                SchoolLevel.HIGH_SCHOOL,
+                LocalDate.of(2012, 02, 01),
+                LocalDate.of(2015, 02, 01),
+                AcademicState.GRADUATION,
+                "문과"
+        );
+
+        Career career = Career.createCareer(
+                "삼성",
+                "개발팀",
+                CompanyPosition.ASSISTANT_MANAGER,
+                LocalDate.of(2020, 02, 01),
+                LocalDate.of(2021, 02, 01)
+        );
+
+        Education education = Education.createEducation(
+                "특수교육",
+                "특수기관",
+                LocalDate.of(2020, 02, 01),
+                LocalDate.of(2021, 02, 01)
+        );
+
+        License license = License.createLicense("특수 자격증", "특수 기관", LocalDate.of(2019, 02, 22));
+
+        Language language = Language.createLanguage("영어", LanguageAbility.MIDDLE);
+
+        ProjectHistory projectHistory = ProjectHistory.createProjectHistory(
+                "프로젝트명",
+                LocalDate.of(2020, 02, 01),
+                LocalDate.of(2021, 02, 01),
+                "고객사명",
+                "상주사명",
+                DevelopField.APPLICATION,
+                "backend",
+                DevelopEnvironment.of(
+                        "model",
+                        "Ms",
+                        "language",
+                        "DB",
+                        "Tool",
+                        "통신",
+                        "기타"
+                ),
+                "담당업무는 백엔드 개발"
+        );
+
+        Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java", "role");
+
+        String introduceName = "소개글";
+        IntroBackGround introBackGround = IntroBackGround.COBALT_BLUE;
+        String introduceVideoURL = "소개 영상 주소";
+        String introduceContent = "소개 내용";
+        freelancerProfile.coverIntroduceInFreelancer(freelancerProfile.getGreeting(),introduceName, introBackGround, introduceVideoURL, introduceContent);
+
+        freelancerProfile.coverAcademicAbilities(Arrays.asList(academicAbility));
+        freelancerProfile.coverCareers(Arrays.asList(career));
+        freelancerProfile.coverEducation(Arrays.asList(education));
+        freelancerProfile.coverLicense(Arrays.asList(license));
+        freelancerProfile.coverLanguage(Arrays.asList(language));
+        freelancerProfile.coverProjectHistory(Arrays.asList(projectHistory));
+        freelancerProfile.coverPosition(developer);
+
+        freelancerProfileRepository.save(freelancerProfile);
+
+        //when & then
+        String path = FreelancerProfileFindControllerPath.FREELANCER_FIND.replace("{freelancerNum}", String.valueOf(freelancer.getNum()));
+        mockMvc.perform(RestDocumentationRequestBuilders.get(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("search-freelancer-simple-find",
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                        ),
+                        responseFields(
+                                fieldWithPath("profileNum").type("Long").description("프리랜서 프로필 식별자 정보 필드."),
+                                fieldWithPath("name").type("String").description("프리랜서 이름 정보 필드."),
+                                fieldWithPath("thumbnailPath").type("String").description("프리랜서 섬네일 url주소 정보 필드."),
+                                fieldWithPath("expertise").type("int").description("프리랜서 활동평가 전문성 정보 필드."),
+                                fieldWithPath("scheduleAdherence").type("int").description("프리랜서 활동평가 일정준수 정보 필드."),
+                                fieldWithPath("initiative").type("int").description("프리랜서 활동평가 적극성 정보 필드."),
+                                fieldWithPath("communication").type("int").description("프리랜서 활동평가 의사소통 정보 필드."),
+                                fieldWithPath("reemploymentIntention").type("int").description("프리랜서 활동평가 재고용의사 정보 필드."),
+                                fieldWithPath("totalActiveScore").type("Double").description("프리랜서 활동평가 총 평점 정보 필드."),
+                                fieldWithPath("introduceName").type("String").description("프리랜서 프로필 소개이름 정보 필드."),
+                                fieldWithPath("introBackGround").type("IntroBackGround").description("프리랜서 프로필 소개배경 정보 필드."),
+                                fieldWithPath("greeting").type("String").description("프리랜서 프로필 인사말 정보 필드."),
+                                fieldWithPath("careerYear").type("int").description("프리랜서 경력년수 정보 필드."),
+                                fieldWithPath("positionType").type("PositionType").description("프리랜서 프로필 포지션(스킬) 정보 필드."),
+                                fieldWithPath("positionTypeDescription").type("String").description("프리랜서 프로필 포지션(스킬) 설명 정보 필드."),
+                                fieldWithPath("introduceVideoUrl").type("String").description("프리랜서 프로필 소개영상 URL 정보 필드."),
+                                fieldWithPath("introduceContent").type("String").description("프리랜서 프로필 소개 글 정보 필드."),
+                                fieldWithPath("academicAbilityResponses.[0].schoolName").type("String").description("프리랜서 학력정보 학교명 정보 필드."),
+                                fieldWithPath("academicAbilityResponses.[0].schoolLevel").type("SchoolLevel").description("프리랜서 학력정보 학력단계 정보 필드."),
+                                fieldWithPath("academicAbilityResponses.[0].schoolLevelDescription").type("String").description("프리랜서 학력정보 학력단계 설명 정보 필드."),
+                                fieldWithPath("academicAbilityResponses.[0].enterSchoolDate").type("LocalDate").description("프리랜서 학력정보 입학일 정보 필드."),
+                                fieldWithPath("academicAbilityResponses.[0].graduationDate").type("LocalDate").description("프리랜서 학력정보 졸업일 정보 필드."),
+                                fieldWithPath("academicAbilityResponses.[0].academicState").type("AcademicState").description("프리랜서 학력정보 현재상태 정보 필드."),
+                                fieldWithPath("academicAbilityResponses.[0].majorName").type("String").description("프리랜서 학력정보 전공 정보 필드."),
+                                fieldWithPath("careerResponses.[0].companyName").type("String").description("프리랜서 근무경력 회사명 정보 필드."),
+                                fieldWithPath("careerResponses.[0].departmentName").type("String").description("프리랜서 근무경력 부서명 정보 필드."),
+                                fieldWithPath("careerResponses.[0].companyPosition").type("CompanyPosition").description("프리랜서 근무경력 직책 정보 필드."),
+                                fieldWithPath("careerResponses.[0].companyPositionDescription").type("String").description("프리랜서 근무경력 직책 설명 정보 필드."),
+                                fieldWithPath("careerResponses.[0].careerStartDate").type("LocalDate").description("프리랜서 근무경력 근무시작월 정보 필드."),
+                                fieldWithPath("careerResponses.[0].careerEndDate").type("LocalDate").description("프리랜서 근무경력 퇴사월 정보 필드."),
+                                fieldWithPath("educationResponses.[0].educationTitle").type("String").description("프리랜서 교육 교육명 정보 필드."),
+                                fieldWithPath("educationResponses.[0].educationOrganization").type("String").description("프리랜서 교육 교육기관명 정보 필드."),
+                                fieldWithPath("educationResponses.[0].educationStartDate").type("LocalDate").description("프리랜서 교육 교육시작년월 정보 필드."),
+                                fieldWithPath("educationResponses.[0].educationEndDate").type("LocalDate").description("프리랜서 교육 교육수료년월 정보 필드."),
+                                fieldWithPath("licenseResponses.[0].licenseTitle").type("String").description("프리랜서 자격증 자격증명 정보 필드."),
+                                fieldWithPath("licenseResponses.[0].licenseIssuer").type("String").description("프리랜서 자격증 발급기관 정보 필드."),
+                                fieldWithPath("licenseResponses.[0].acquisitionDate").type("LocalDate").description("프리랜서 자격증 취득년월 정보 필드."),
+                                fieldWithPath("languageResponses.[0].languageName").type("String").description("프리랜서 외국어 외국어명 정보 필드."),
+                                fieldWithPath("languageResponses.[0].languageAbility").type("LanguageAbility").description("프리랜서 외국어 실력 정보 필드."),
+                                fieldWithPath("languageResponses.[0].languageAbilityDescription").type("LanguageAbility").description("프리랜서 외국어 실력 설명 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].projectTitle").type("String").description("프리랜서 프로젝트 수행이력 프로젝트명 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].projectStartDate").type("LocalDate").description("프리랜서 프로젝트 수행이력 프로젝트 시작년월 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].projectEndDate").type("LocalDate").description("프리랜서 프로젝트 수행이력 프로젝트 종료년월 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].clientCompany").type("String").description("프리랜서 프로젝트 수행이력 고객사 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].workCompany").type("String").description("프리랜서 프로젝트 수행이력 근무사 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].developField").type("DevelopField").description("프리랜서 프로젝트 수행이력 개발분야 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].developRole").type("String").description("프리랜서 프로젝트 수행이력 역할 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentModel").type("String").description("프리랜서 프로젝트 수행이력 개발환경 기종 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentOS").type("String").description("프리랜서 프로젝트 수행이력 개발환경 os 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentLanguage").type("String").description("프리랜서 프로젝트 수행이력 개발환경 언어 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentDBName").type("String").description("프리랜서 프로젝트 수행이력 개발환경 DB 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentTool").type("String").description("프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentCommunication").type("String").description("프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].developEnvironment.developEnvironmentEtc").type("String").description("프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드."),
+                                fieldWithPath("projectHistoryResponses.[0].responsibilityTask").type("String").description("프리랜서 프로젝트 수행이력 담당업무 정보 필드."),
+                                fieldWithPath("allSkillNames.[0]").type("String").description("모든 스킬")
+                        )
+                ));
+    }
+
     @DisplayName("프리랜서 프로필 개발자 스킬 & 경험 조회 문서화")
     @Test
     public void 프리랜서_프로필_개발자_스킬_경험_조회_문서화() throws Exception {
