@@ -440,6 +440,21 @@ include::{snippets}/freelancer-obtainOrder-find/response-headers.adoc[]
 include::{snippets}/freelancer-obtainOrder-find/response-fields.adoc[]
 include::{snippets}/freelancer-obtainOrder-find/response-body.adoc[]
 
+[[resources-search-freelancer-simple-find]]
+== 검색된 프리랜서 단건조회 정보
+
+검색된 프리랜서의 단건 데이터를 조회한다.
+
+요청
+
+include::{snippets}/search-freelancer-simple-find/http-request.adoc[]
+
+응답
+
+include::{snippets}/search-freelancer-simple-find/response-headers.adoc[]
+include::{snippets}/search-freelancer-simple-find/response-fields.adoc[]
+include::{snippets}/search-freelancer-simple-find/response-body.adoc[]
+
 
 == 기업
 
