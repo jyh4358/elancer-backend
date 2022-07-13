@@ -53,6 +53,7 @@ public class ProjectService {
         return ProjectDetailResponse.of(project, simpleFreelancerDtoList);
     }
 
+
     public Slice<ProjectBoxResponse> searchProjectList(String position, String skill, ProjectSearchCondition projectSearchCondition, Pageable pageable) {
 
         Slice<Project> searchProject = projectSearchRepository.findSearchProject(getPositionKind(position), skill, projectSearchCondition, pageable);
@@ -288,6 +289,7 @@ public class ProjectService {
                 )
         ).collect(Collectors.toList());
     }
+
 
     private PositionKind getPositionKind(String position) {
         if (position == null) {

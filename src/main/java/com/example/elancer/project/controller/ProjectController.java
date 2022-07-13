@@ -51,9 +51,6 @@ public class ProjectController {
             @PageableDefault(size = 10, sort = "num",direction = Sort.Direction.DESC) Pageable pageable
 
     ) {
-        System.out.println("position = " + position);
-        System.out.println("skill = " + skill);
-        System.out.println("projectSearchCondition = " + projectSearchCondition);
         Slice<ProjectBoxResponse> projectBoxResponses = projectService.searchProjectList(position, skill, projectSearchCondition, pageable);
         InfinityListResponse infinityListResponse = InfinityListResponse.of(projectBoxResponses.getContent(), !projectBoxResponses.isLast());
         return new ResponseEntity<>(infinityListResponse, HttpStatus.OK);

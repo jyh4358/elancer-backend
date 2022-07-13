@@ -1,20 +1,22 @@
 package com.example.elancer.project.repository;
 
 import com.example.elancer.project.dto.ProjectSearchCondition;
-import com.example.elancer.project.model.*;
+import com.example.elancer.project.model.FreelancerWorkmanShip;
+import com.example.elancer.project.model.PositionKind;
+import com.example.elancer.project.model.Project;
+import com.example.elancer.project.model.ProjectType;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
 import static com.example.elancer.project.model.QProject.project;
+
 
 @Repository
 @RequiredArgsConstructor
