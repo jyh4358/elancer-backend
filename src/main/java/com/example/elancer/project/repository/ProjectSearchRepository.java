@@ -36,9 +36,7 @@ public class ProjectSearchRepository {
 
         List<Project> content = queryFactory
                 .selectFrom(project)
-                .where(
-
-                )
+                .where(builder)
                 .orderBy(project.num.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)

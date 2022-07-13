@@ -568,6 +568,17 @@ include::{snippets}/project-list/http-response.adoc[]
 include::{snippets}/project-list/response-headers.adoc[]
 include::{snippets}/project-list/response-fields.adoc[]
 
+[[resources-project-search]]
+== 프로젝트 검색 필터에 따른 리스트 요청
+요청
+include::{snippets}/project-list-search/http-request.adoc[]
+include::{snippets}/project-list-search/request-fields.adoc[]
+include::{snippets}/project-list-search/request-headers.adoc[]
+응답
+include::{snippets}/project-list/http-response.adoc[]
+include::{snippets}/project-list/response-headers.adoc[]
+include::{snippets}/project-list/response-fields.adoc[]
+
 
 
 

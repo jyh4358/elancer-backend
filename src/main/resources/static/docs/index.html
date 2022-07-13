@@ -487,6 +487,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#resources-position-etc-search">프리랜서 기타포지션 검색 정보</a></li>
 <li><a href="#resources-freelancer-profile-finds">프리랜서 목록 조회 정보(인덱스 페이지)</a></li>
 <li><a href="#resources-freelancer-obtainOrder-find">프리랜서 수주관리 조회 정보</a></li>
+<li><a href="#resources-search-freelancer-simple-find">검색된 프리랜서 단건조회 정보</a></li>
 <li><a href="#_기업">기업</a></li>
 <li><a href="#resources-enterprise-join">기업 회원가입</a></li>
 <li><a href="#resources-enterprise-account-cover">기업 회원 정보 수정</a></li>
@@ -500,6 +501,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#resources-project-delete">프로젝트 삭제</a></li>
 <li><a href="#resources-project-index-list">프로젝트 인덱스 페이지 리스트 요청</a></li>
 <li><a href="#resources-project-list">프로젝트 포지션 타입에 따른 리스트 요청</a></li>
+<li><a href="#resources-project-search">프로젝트 검색 필터에 따른 리스트 요청</a></li>
 <li><a href="#resources-project-list-count">프로젝트 갯수 요청</a></li>
 <li><a href="#resources-enterprise-dashboard-project-list">기업 대쉬보드 프로젝트 리스트 요청</a></li>
 <li><a href="#resources-apply-project-list">기업 지원 프로젝트 리스트 요청</a></li>
@@ -752,7 +754,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MCwiZXhwIjoxNjU3MTEyNjYwfQ.SCfP3bdeRAh0brdEoxmI0uCwcHYFRSk0qCDf1PdeNtI
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMSwiZXhwIjoxNjU3NzE0NTMxfQ.oaEC78I0vV5Jis6FmOPlLp_nZCu_EhB0frQefUKft6M
 Content-Length: 843
 Host: localhost:8080
 
@@ -966,7 +968,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MCwiZXhwIjoxNjU3MTEyNjYwfQ.SCfP3bdeRAh0brdEoxmI0uCwcHYFRSk0qCDf1PdeNtI
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMSwiZXhwIjoxNjU3NzE0NTMxfQ.oaEC78I0vV5Jis6FmOPlLp_nZCu_EhB0frQefUKft6M
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -1172,7 +1174,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/intro HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MywiZXhwIjoxNjU3MTEyNjYzfQ.dT14lGhpkQzGKDB6XJy5si4GMZpdEarPJiZK9kkElMw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNCwiZXhwIjoxNjU3NzE0NTM0fQ.o069RaephS3DWk-dNA-4aoyYreuoW7kpxHAbMS3wAV4
 Content-Length: 173
 Host: localhost:8080
 
@@ -1271,7 +1273,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/academic-ability HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MywiZXhwIjoxNjU3MTEyNjYzfQ.dT14lGhpkQzGKDB6XJy5si4GMZpdEarPJiZK9kkElMw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNCwiZXhwIjoxNjU3NzE0NTM0fQ.o069RaephS3DWk-dNA-4aoyYreuoW7kpxHAbMS3wAV4
 Content-Length: 263
 Host: localhost:8080
 
@@ -1381,7 +1383,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/career HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MywiZXhwIjoxNjU3MTEyNjYzfQ.dT14lGhpkQzGKDB6XJy5si4GMZpdEarPJiZK9kkElMw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNCwiZXhwIjoxNjU3NzE0NTM0fQ.o069RaephS3DWk-dNA-4aoyYreuoW7kpxHAbMS3wAV4
 Content-Length: 242
 Host: localhost:8080
 
@@ -1484,7 +1486,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/education-license-language HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2NCwiZXhwIjoxNjU3MTEyNjY0fQ.MwAuhFdkiQY_zi8LQM4yuhSrlu4ihtRp1VJtX-X9i7c
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNSwiZXhwIjoxNjU3NzE0NTM1fQ.g2zptG03NpKhN3Xe0BJ_yvUHeIKglMvWQhCVILXcoF8
 Content-Length: 505
 Host: localhost:8080
 
@@ -1623,7 +1625,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/project-history HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2NCwiZXhwIjoxNjU3MTEyNjY0fQ.MwAuhFdkiQY_zi8LQM4yuhSrlu4ihtRp1VJtX-X9i7c
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNSwiZXhwIjoxNjU3NzE0NTM1fQ.g2zptG03NpKhN3Xe0BJ_yvUHeIKglMvWQhCVILXcoF8
 Content-Length: 1312
 Host: localhost:8080
 
@@ -1828,7 +1830,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/freelancer-profile/detail HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MywiZXhwIjoxNjU3MTEyNjYzfQ.dT14lGhpkQzGKDB6XJy5si4GMZpdEarPJiZK9kkElMw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNSwiZXhwIjoxNjU3NzE0NTM1fQ.g2zptG03NpKhN3Xe0BJ_yvUHeIKglMvWQhCVILXcoF8
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2170,7 +2172,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/freelancer-profile/simple HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2NCwiZXhwIjoxNjU3MTEyNjY0fQ.MwAuhFdkiQY_zi8LQM4yuhSrlu4ihtRp1VJtX-X9i7c
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNSwiZXhwIjoxNjU3NzE0NTM1fQ.g2zptG03NpKhN3Xe0BJ_yvUHeIKglMvWQhCVILXcoF8
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2576,7 +2578,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/developer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MSwiZXhwIjoxNjU3MTEyNjYxfQ.n3pJI_ybA5WGXpp1XVsv039xa4bgcTy7NRwbKH7mCuM
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMiwiZXhwIjoxNjU3NzE0NTMyfQ.IOUUOGrv3uKnuI3-yb5L9nMBK7kceQYgHHd9wdQXCEE
 Content-Length: 406
 Host: localhost:8080
 
@@ -2710,7 +2712,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/developer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MiwiZXhwIjoxNjU3MTEyNjYyfQ.Vrb5EB5eMC2mVeszEnuXtXsFnrEuMTM7KsgbhpyQJk4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMywiZXhwIjoxNjU3NzE0NTMzfQ.ZCm7UH-kkgKu2-6Rk-9Mr5qigjMeFc_ivOQu01LCukI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2826,7 +2828,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/publisher HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MiwiZXhwIjoxNjU3MTEyNjYyfQ.Vrb5EB5eMC2mVeszEnuXtXsFnrEuMTM7KsgbhpyQJk4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMywiZXhwIjoxNjU3NzE0NTMzfQ.ZCm7UH-kkgKu2-6Rk-9Mr5qigjMeFc_ivOQu01LCukI
 Content-Length: 91
 Host: localhost:8080
 
@@ -2904,7 +2906,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/publisher HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MywiZXhwIjoxNjU3MTEyNjYzfQ.dT14lGhpkQzGKDB6XJy5si4GMZpdEarPJiZK9kkElMw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNCwiZXhwIjoxNjU3NzE0NTM0fQ.o069RaephS3DWk-dNA-4aoyYreuoW7kpxHAbMS3wAV4
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -2972,7 +2974,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/designer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MSwiZXhwIjoxNjU3MTEyNjYxfQ.n3pJI_ybA5WGXpp1XVsv039xa4bgcTy7NRwbKH7mCuM
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMiwiZXhwIjoxNjU3NzE0NTMyfQ.IOUUOGrv3uKnuI3-yb5L9nMBK7kceQYgHHd9wdQXCEE
 Content-Length: 185
 Host: localhost:8080
 
@@ -3064,7 +3066,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/designer HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MiwiZXhwIjoxNjU3MTEyNjYyfQ.Vrb5EB5eMC2mVeszEnuXtXsFnrEuMTM7KsgbhpyQJk4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMywiZXhwIjoxNjU3NzE0NTMzfQ.ZCm7UH-kkgKu2-6Rk-9Mr5qigjMeFc_ivOQu01LCukI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3144,7 +3146,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MSwiZXhwIjoxNjU3MTEyNjYxfQ.n3pJI_ybA5WGXpp1XVsv039xa4bgcTy7NRwbKH7mCuM
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMiwiZXhwIjoxNjU3NzE0NTMyfQ.IOUUOGrv3uKnuI3-yb5L9nMBK7kceQYgHHd9wdQXCEE
 Content-Length: 88
 Host: localhost:8080
 
@@ -3222,7 +3224,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/planner HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MiwiZXhwIjoxNjU3MTEyNjYyfQ.Vrb5EB5eMC2mVeszEnuXtXsFnrEuMTM7KsgbhpyQJk4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMywiZXhwIjoxNjU3NzE0NTMzfQ.ZCm7UH-kkgKu2-6Rk-9Mr5qigjMeFc_ivOQu01LCukI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3290,7 +3292,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/crowd-worker HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MCwiZXhwIjoxNjU3MTEyNjYwfQ.SCfP3bdeRAh0brdEoxmI0uCwcHYFRSk0qCDf1PdeNtI
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMiwiZXhwIjoxNjU3NzE0NTMyfQ.IOUUOGrv3uKnuI3-yb5L9nMBK7kceQYgHHd9wdQXCEE
 Content-Length: 4
 Host: localhost:8080
 
@@ -3309,7 +3311,7 @@ null</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /freelancer-profile/etc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MSwiZXhwIjoxNjU3MTEyNjYxfQ.n3pJI_ybA5WGXpp1XVsv039xa4bgcTy7NRwbKH7mCuM
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMiwiZXhwIjoxNjU3NzE0NTMyfQ.IOUUOGrv3uKnuI3-yb5L9nMBK7kceQYgHHd9wdQXCEE
 Content-Length: 84
 Host: localhost:8080
 
@@ -3387,7 +3389,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer-profile/etc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2MiwiZXhwIjoxNjU3MTEyNjYyfQ.Vrb5EB5eMC2mVeszEnuXtXsFnrEuMTM7KsgbhpyQJk4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMywiZXhwIjoxNjU3NzE0NTMzfQ.ZCm7UH-kkgKu2-6Rk-9Mr5qigjMeFc_ivOQu01LCukI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -3455,7 +3457,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /wish-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2NiwiZXhwIjoxNjU3MTEyNjY2fQ.2AekZlnQcL14I9ym19DRa1dCTmEd3rlLjuqAK2IuTWE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNywiZXhwIjoxNjU3NzE0NTM3fQ.tVoVGIb-WaMui5jyZiF9o91axMz4DxjHYIrXRqvDqVA
 Content-Length: 24
 Host: localhost:8080
 
@@ -3522,7 +3524,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /wish-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2NiwiZXhwIjoxNjU3MTEyNjY2fQ.2AekZlnQcL14I9ym19DRa1dCTmEd3rlLjuqAK2IuTWE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczNywiZXhwIjoxNjU3NzE0NTM3fQ.tVoVGIb-WaMui5jyZiF9o91axMz4DxjHYIrXRqvDqVA
 Content-Length: 28
 Host: localhost:8080
 
@@ -4590,7 +4592,7 @@ Host: localhost:8080</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancers/freelancer-profiles HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancers HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
@@ -4724,7 +4726,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancer/obtain-order HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg1OSwiZXhwIjoxNjU3MTEyNjU5fQ.hzvTYfw4FgjIFzqJfWLuNeMZL7vOmwj2q9Dfnrh4PY4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczMCwiZXhwIjoxNjU3NzE0NTMwfQ.jeH1ztjZpCzgKn6ZtU71jOaQo9BxbRm3I-0xaazkssI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -5018,11 +5020,11 @@ Host: localhost:8080</code></pre>
     "positionKind" : "DEVELOPER",
     "demandCareer" : "중급",
     "headCount" : 5,
-    "projectStateDate" : "2022-07-06",
-    "projectEndDate" : "2022-08-06",
+    "projectStateDate" : "2022-07-13",
+    "projectEndDate" : "2022-08-13",
     "minMoney" : 6000000,
     "maxMoney" : 10000000,
-    "createdDate" : "2022-07-06"
+    "createdDate" : "2022-07-13"
   } ],
   "interviewProjectResponses" : [ {
     "projectNum" : 1,
@@ -5030,11 +5032,11 @@ Host: localhost:8080</code></pre>
     "positionKind" : "DEVELOPER",
     "demandCareer" : "중급",
     "headCount" : 5,
-    "projectStateDate" : "2022-07-06",
-    "projectEndDate" : "2022-08-06",
+    "projectStateDate" : "2022-07-13",
+    "projectEndDate" : "2022-08-13",
     "minMoney" : 6000000,
     "maxMoney" : 10000000,
-    "createdDate" : "2022-07-06"
+    "createdDate" : "2022-07-13"
   } ],
   "joinedProjectResponses" : [ {
     "projectNum" : 1,
@@ -5042,11 +5044,11 @@ Host: localhost:8080</code></pre>
     "positionKind" : "DEVELOPER",
     "demandCareer" : "중급",
     "headCount" : 5,
-    "projectStateDate" : "2022-07-06",
-    "projectEndDate" : "2022-08-06",
+    "projectStateDate" : "2022-07-13",
+    "projectEndDate" : "2022-08-13",
     "minMoney" : 6000000,
     "maxMoney" : 10000000,
-    "createdDate" : "2022-07-06"
+    "createdDate" : "2022-07-13"
   } ],
   "wishProjectResponses" : [ {
     "projectNum" : 1,
@@ -5054,12 +5056,423 @@ Host: localhost:8080</code></pre>
     "positionKind" : "DEVELOPER",
     "demandCareer" : "중급",
     "headCount" : 5,
-    "projectStateDate" : "2022-07-06",
-    "projectEndDate" : "2022-08-06",
+    "projectStateDate" : "2022-07-13",
+    "projectEndDate" : "2022-08-13",
     "minMoney" : 6000000,
     "maxMoney" : 10000000,
-    "createdDate" : "2022-07-06"
+    "createdDate" : "2022-07-13"
   } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="resources-search-freelancer-simple-find"><a class="link" href="#resources-search-freelancer-simple-find">검색된 프리랜서 단건조회 정보</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>검색된 프리랜서의 단건 데이터를 조회한다.</p>
+</div>
+<div class="paragraph">
+<p>요청</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /freelancers/1 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>응답</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profileNum</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 식별자 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 이름 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>thumbnailPath</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 섬네일 url주소 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>expertise</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 전문성 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>scheduleAdherence</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 일정준수 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>initiative</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 적극성 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>communication</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 의사소통 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>reemploymentIntention</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 재고용의사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>totalActiveScore</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Double</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 활동평가 총 평점 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개이름 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>IntroBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개배경 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>greeting</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 인사말 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerYear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 경력년수 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PositionType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 포지션(스킬) 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionTypeDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 포지션(스킬) 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceVideoUrl</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개영상 URL 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>introduceContent</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로필 소개 글 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].schoolName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학교명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].schoolLevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>SchoolLevel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학력단계 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].schoolLevelDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 학력단계 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].enterSchoolDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 입학일 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].graduationDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 졸업일 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].academicState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>AcademicState</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 현재상태 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>academicAbilityResponses.[0].majorName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 학력정보 전공 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].companyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 회사명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].departmentName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 부서명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].companyPosition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CompanyPosition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 직책 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].companyPositionDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 직책 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].careerStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 근무시작월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>careerResponses.[0].careerEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 근무경력 퇴사월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationOrganization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육기관명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육시작년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>educationResponses.[0].educationEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 교육 교육수료년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseResponses.[0].licenseTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 자격증명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseResponses.[0].licenseIssuer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 발급기관 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>licenseResponses.[0].acquisitionDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 자격증 취득년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageResponses.[0].languageName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 외국어명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageResponses.[0].languageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LanguageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 실력 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>languageResponses.[0].languageAbilityDescription</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LanguageAbility</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 외국어 실력 설명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].projectTitle</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트명 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].projectStartDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트 시작년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].projectEndDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>LocalDate</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 프로젝트 종료년월 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].clientCompany</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 고객사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].workCompany</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 근무사 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>DevelopField</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발분야 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developRole</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 역할 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentModel</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 기종 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentOS</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 os 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentLanguage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 언어 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentDBName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 DB 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentTool</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 툴 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentCommunication</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 통신 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].developEnvironment.developEnvironmentEtc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 개발환경 기타 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectHistoryResponses.[0].responsibilityTask</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프리랜서 프로젝트 수행이력 담당업무 정보 필드.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>allSkillNames.[0]</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">모든 스킬</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-none hljs">{
+  "profileNum" : 1,
+  "name" : "name",
+  "thumbnailPath" : null,
+  "expertise" : 0,
+  "scheduleAdherence" : 0,
+  "initiative" : 0,
+  "communication" : 0,
+  "reemploymentIntention" : 0,
+  "totalActiveScore" : 0.0,
+  "introduceName" : "소개글",
+  "introBackGround" : "COBALT_BLUE",
+  "greeting" : "greeting",
+  "careerYear" : 0,
+  "positionType" : "DEVELOPER",
+  "positionTypeDescription" : "개발자",
+  "introduceVideoUrl" : "소개 영상 주소",
+  "introduceContent" : "소개 내용",
+  "projectHistoryResponses" : [ {
+    "projectTitle" : "프로젝트명",
+    "projectStartDate" : "2020-02-01",
+    "projectEndDate" : "2021-02-01",
+    "clientCompany" : "고객사명",
+    "workCompany" : "상주사명",
+    "developField" : "APPLICATION",
+    "developRole" : "backend",
+    "developEnvironment" : {
+      "developEnvironmentModel" : "model",
+      "developEnvironmentOS" : "Ms",
+      "developEnvironmentLanguage" : "language",
+      "developEnvironmentDBName" : "DB",
+      "developEnvironmentTool" : "Tool",
+      "developEnvironmentCommunication" : "통신",
+      "developEnvironmentEtc" : "기타"
+    },
+    "responsibilityTask" : "담당업무는 백엔드 개발"
+  } ],
+  "academicAbilityResponses" : [ {
+    "schoolName" : "고등학교",
+    "schoolLevel" : "HIGH_SCHOOL",
+    "schoolLevelDescription" : "고등학교",
+    "enterSchoolDate" : "2012-02-01",
+    "graduationDate" : "2015-02-01",
+    "academicState" : "GRADUATION",
+    "majorName" : "문과"
+  } ],
+  "careerResponses" : [ {
+    "companyName" : "삼성",
+    "departmentName" : "개발팀",
+    "companyPosition" : "ASSISTANT_MANAGER",
+    "companyPositionDescription" : "대리",
+    "careerStartDate" : "2020-02-01",
+    "careerEndDate" : "2021-02-01"
+  } ],
+  "educationResponses" : [ {
+    "educationTitle" : "특수교육",
+    "educationOrganization" : "특수기관",
+    "educationStartDate" : "2020-02-01",
+    "educationEndDate" : "2021-02-01"
+  } ],
+  "licenseResponses" : [ {
+    "licenseTitle" : "특수 자격증",
+    "licenseIssuer" : "특수 기관",
+    "acquisitionDate" : "2019-02-22"
+  } ],
+  "languageResponses" : [ {
+    "languageName" : "영어",
+    "languageAbility" : "MIDDLE",
+    "languageAbilityDescription" : "비즈니스 회화가능"
+  } ],
+  "allSkillNames" : [ null ]
 }</code></pre>
 </div>
 </div>
@@ -5244,7 +5657,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /enterprise HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NTgsImV4cCI6MTY1NzExMjY1OH0.ybXkR1-om_wag1IVbu-q8Ej7gKn658tqtwA1O25jwwE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MjksImV4cCI6MTY1NzcxNDUyOX0.WCbVbeoiY-sB5CF2I622sOItwT0JJ-3HNDRwCiWsGCE
 Content-Length: 552
 Host: localhost:8080
 
@@ -5553,7 +5966,7 @@ Content-Length: 500
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /enterprise HTTP/1.1
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NTgsImV4cCI6MTY1NzExMjY1OH0.ybXkR1-om_wag1IVbu-q8Ej7gKn658tqtwA1O25jwwE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MjksImV4cCI6MTY1NzcxNDUyOX0.WCbVbeoiY-sB5CF2I622sOItwT0JJ-3HNDRwCiWsGCE
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -5735,7 +6148,7 @@ Content-Length: 473
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /enterprise/profile HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NTksImV4cCI6MTY1NzExMjY1OX0.kx4opA9-33mDuRngFg6BmyD4yB06FOY-DSPCiD1Q_pU
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MzAsImV4cCI6MTY1NzcxNDUzMH0.f0j9vlytsjdIE6BguG1X5oQJUWg07zVUQI_DhhZixX8
 Content-Length: 298
 Host: localhost:8080
 
@@ -5945,7 +6358,7 @@ Content-Length: 298
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /enterprise/profile HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NTksImV4cCI6MTY1NzExMjY1OX0.kx4opA9-33mDuRngFg6BmyD4yB06FOY-DSPCiD1Q_pU
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MzAsImV4cCI6MTY1NzcxNDUzMH0.f0j9vlytsjdIE6BguG1X5oQJUWg07zVUQI_DhhZixX8
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -6089,7 +6502,7 @@ Content-Length: 298
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /project/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NzAsImV4cCI6MTY1NzExMjY3MH0.k2jl0w6O2zlGUJU3aDYE07TLaJWPSRt_tmkJSPPy2b4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDIsImV4cCI6MTY1NzcxNDU0Mn0.49FF9VlLrjxYMH5y3dy9Z5mZpla52PRP3DqvjUCf-XI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -6131,9 +6544,10 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 490
+Content-Length: 573
 
 {
+  "positionKind" : "DEVELOPER",
   "projectName" : "쇼핑몰 프로젝트",
   "pay" : "10000000",
   "freelancerWorkmanShip" : "MIDDLE",
@@ -6148,6 +6562,8 @@ Content-Length: 490
   "headCount" : 5,
   "inputHeadCount" : 5,
   "content" : "1.프로젝트 명 .....",
+  "endDays" : 31,
+  "projectStep" : "ANALYSIS",
   "simpleFreelancerList" : [ {
     "thumbnailUrl" : "",
     "username" : "name"
@@ -6187,6 +6603,11 @@ Content-Length: 490
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionKind</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PositionKind</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVELOPER("개발자"), PUBLISHER("퍼블리셔"), DESIGNER("디자이너"), PLANNER("기획자"), ETC("기타")</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectName</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
@@ -6248,6 +6669,16 @@ Content-Length: 490
 <td class="tableblock halign-left valign-top"><p class="tableblock">프로젝트 내용</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>endDays</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로젝트 지원 마감일자(day)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectStep</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ProjectStep</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"ANALYSIS(분석/설계), PLAN(기획), DESIGN(디자인), PUBLISHING(퍼블리싱), DEVELOP(개발), OPERATION(운영중)"</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>simpleFreelancerList.[].thumbnailUrl</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">지원 프리랜서 프로필 URL</p></td>
@@ -6271,7 +6702,7 @@ Content-Length: 490
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /project-save HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NzEsImV4cCI6MTY1NzExMjY3MX0.ScRpePvp_4q1BhbnSZC1T7H6FmNhqdO4elMs9JBSFdQ
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDMsImV4cCI6MTY1NzcxNDU0M30.6OrktRKY0vRElgJM8NcjHmNCg-A2BWCXYS-qXCebLcQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -6401,7 +6832,7 @@ Content-Length: 190
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /project-save HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NzEsImV4cCI6MTY1NzExMjY3MX0.ScRpePvp_4q1BhbnSZC1T7H6FmNhqdO4elMs9JBSFdQ
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDMsImV4cCI6MTY1NzcxNDU0M30.6OrktRKY0vRElgJM8NcjHmNCg-A2BWCXYS-qXCebLcQ
 Content-Length: 947
 Host: localhost:8080
 
@@ -6417,9 +6848,9 @@ Host: localhost:8080
   "headCount" : 10,
   "inputHeadCount" : 10,
   "content" : "프로젝트 상세내용",
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
-  "recruitEndDate" : "2022-07-11",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
+  "recruitEndDate" : "2022-07-18",
   "address" : {
     "country" : "KR",
     "zipcode" : "우편번호",
@@ -6641,7 +7072,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /project-delete HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTczNjQwMDcsImV4cCI6MTY1NzM2NTgwN30.ODUr57ejB2hnRdxWQ11lBf8DLCNyzPeCAM07i76liOg
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDMsImV4cCI6MTY1NzcxNDU0M30.6OrktRKY0vRElgJM8NcjHmNCg-A2BWCXYS-qXCebLcQ
 Content-Length: 24
 Host: localhost:8080
 
@@ -6701,7 +7132,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /project-index-list HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTczNjQwMDUsImV4cCI6MTY1NzM2NTgwNX0.MfIgnaeHjULUB5h_dOmsK6TX-qQHSkNjIv6XXHvXP_g
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDEsImV4cCI6MTY1NzcxNDU0MX0.lRBmRBkifvgm7_vO2Iyf08sDgVVo2dzBnKkFkH3zYbg
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -7265,8 +7696,18 @@ Content-Length: 2810
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /project-list?position=DEVELOPER&amp;skill=Java HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTczNjQwMDUsImV4cCI6MTY1NzM2NTgwNX0.MfIgnaeHjULUB5h_dOmsK6TX-qQHSkNjIv6XXHvXP_g
-Host: localhost:8080</code></pre>
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDEsImV4cCI6MTY1NzcxNDU0MX0.lRBmRBkifvgm7_vO2Iyf08sDgVVo2dzBnKkFkH3zYbg
+Content-Length: 152
+Host: localhost:8080
+
+{
+  "positionKind" : null,
+  "skills" : null,
+  "projectType" : null,
+  "freelancerWorkmanShip" : null,
+  "region" : null,
+  "searchKey" : null
+}</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -7472,6 +7913,256 @@ Content-Length: 589
 </div>
 </div>
 <div class="sect1">
+<h2 id="resources-project-search"><a class="link" href="#resources-project-search">프로젝트 검색 필터에 따른 리스트 요청</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>요청</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /project-list HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDAsImV4cCI6MTY1NzcxNDU0MH0.6hTB-bMWKm9hyeXlaGs8YC-Xu8a2m9uYSBeWGhl7mJE
+Content-Length: 203
+Host: localhost:8080
+
+{
+  "positionKind" : "DEVELOPER",
+  "skills" : [ "java", "spring" ],
+  "projectType" : "BOTH_TELEWORKING_WORKING",
+  "freelancerWorkmanShip" : "MIDDLE",
+  "region" : "서울",
+  "searchKey" : ""
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>positionKind</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PositionKind</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVELOPER("개발자"), PUBLISHER("퍼블리셔"), DESIGNER("디자이너"), PLANNER("기획자"), CROWD_WORKER("크라우드워커"), ETC("기타")</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>skills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스킬</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ProjectType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TELEWORKING("재택"), WORKING("상주"), BOTH_TELEWORKING_WORKING("재택,상주")</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>freelancerWorkmanShip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FreelancerWorkmanShip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUNIOR("초급", 5), MIDDLE("중급", 10), SENIOR("고급", 15)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>region</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchKey</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">검색 단어</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jwt 토큰 인증 헤더 필드.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>응답</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=utf-8
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 589
+
+{
+  "projectBoxResponses" : [ {
+    "projectNum" : 1,
+    "projectType" : "TELEWORKING",
+    "projectBackGround" : "BLACK",
+    "positionKind" : "DEVELOPER",
+    "endDays" : 31,
+    "skills" : [ "Java" ],
+    "projectName" : "쇼핑몰 프로젝트",
+    "freelancerWorkmanShip" : "MIDDLE",
+    "projectPeriod" : 1,
+    "address" : {
+      "country" : "KR",
+      "zipcode" : "123-123",
+      "mainAddress" : "메인 주소",
+      "detailAddress" : "상세 주소"
+    },
+    "pay" : "10000000",
+    "content" : "1.프로젝트 명 ....."
+  } ],
+  "hasNext" : false
+}</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Content-Type</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].projectNum</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로젝트 식별자</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].projectType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ProjectType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TELEWORKING("재택"), WORKING("상주")</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].projectBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ProjectBackGround</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].positionKind</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PositionKind</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">DEVELOPER("개발자"), PUBLISHER("퍼블리셔"), DESIGNER("디자이너"), PLANNER("기획자"), CROWD_WORKER("크라우드워커"), ETC("기타")</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].endDays</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로젝트 지원 마감일자(day)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].skills</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List&lt;String&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">스킬 정보</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].projectName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로젝트 명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].freelancerWorkmanShip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>FreelancerWorkmanShip</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JUNIOR("초급"), MIDDLE("중급"), SENIOR("고급")</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].projectPeriod</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로젝트 기간(Month)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].address.country</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>CountryType.STRING</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소 국적 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].address.zipcode</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 우편번호 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].address.mainAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 주소 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].address.detailAddress</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">회원 상세 주소 필드</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로젝트 내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>projectBoxResponses.[].pay</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">급여 정보(비공개, 협의가능, 급여)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>hasNext</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">다음 페이지 여부</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
 <h2 id="resources-project-list-count"><a class="link" href="#resources-project-list-count">프로젝트 갯수 요청</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -7481,7 +8172,7 @@ Content-Length: 589
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /project-list-count HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjksImV4cCI6MTY1NzExMjY2OX0.FslYGFYO8uioIdHooKvUwjwPgMgNHpeB-HqcNobDhrg
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDEsImV4cCI6MTY1NzcxNDU0MX0.lRBmRBkifvgm7_vO2Iyf08sDgVVo2dzBnKkFkH3zYbg
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -7583,7 +8274,7 @@ Content-Length: 156
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /enterprise-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NzAsImV4cCI6MTY1NzExMjY3MH0.k2jl0w6O2zlGUJU3aDYE07TLaJWPSRt_tmkJSPPy2b4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDIsImV4cCI6MTY1NzcxNDU0Mn0.49FF9VlLrjxYMH5y3dy9Z5mZpla52PRP3DqvjUCf-XI
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -7612,11 +8303,11 @@ Content-Length: 1079
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "applyCount" : 1,
   "interviewCount" : 1,
   "waitCount" : 1,
@@ -7878,7 +8569,7 @@ Content-Length: 1079
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /apply-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NzEsImV4cCI6MTY1NzExMjY3MX0.ScRpePvp_4q1BhbnSZC1T7H6FmNhqdO4elMs9JBSFdQ
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDMsImV4cCI6MTY1NzcxNDU0M30.6OrktRKY0vRElgJM8NcjHmNCg-A2BWCXYS-qXCebLcQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -7906,11 +8597,11 @@ Content-Length: 1424
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "applyFreelancerCount" : 1,
   "interviewFreelancerCount" : 1,
   "applyFreelancerList" : [ {
@@ -7933,11 +8624,11 @@ Content-Length: 1424
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "applyFreelancerCount" : 1,
   "interviewFreelancerCount" : 1,
   "applyFreelancerList" : [ {
@@ -8113,7 +8804,7 @@ Content-Length: 1424
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /interview-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjgsImV4cCI6MTY1NzExMjY2OH0.t-NjNeZvKOb_Byyl3qanPwXsmnQkvk9zSTfjm1Bf1Nw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MzksImV4cCI6MTY1NzcxNDUzOX0.AmZOgj6L63TGB_JgSmVBNakVhlTESPmao32qYKCqYtM
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -8141,11 +8832,11 @@ Content-Length: 1424
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "applyFreelancerCount" : 1,
   "interviewFreelancerCount" : 1,
   "interviewFreelancerList" : [ {
@@ -8168,11 +8859,11 @@ Content-Length: 1424
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "applyFreelancerCount" : 1,
   "interviewFreelancerCount" : 1,
   "interviewFreelancerList" : [ {
@@ -8348,7 +9039,7 @@ Content-Length: 1424
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /wait-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjksImV4cCI6MTY1NzExMjY2OX0.FslYGFYO8uioIdHooKvUwjwPgMgNHpeB-HqcNobDhrg
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDAsImV4cCI6MTY1NzcxNDU0MH0.6hTB-bMWKm9hyeXlaGs8YC-Xu8a2m9uYSBeWGhl7mJE
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -8376,11 +9067,11 @@ Content-Length: 1002
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "waitFreelancerCount" : 1,
   "waitFreelancerList" : [ {
     "num" : 2,
@@ -8395,11 +9086,11 @@ Content-Length: 1002
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "waitFreelancerCount" : 1,
   "waitFreelancerList" : [ {
     "num" : 2,
@@ -8537,7 +9228,7 @@ Content-Length: 1002
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /processing-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjksImV4cCI6MTY1NzExMjY2OX0.FslYGFYO8uioIdHooKvUwjwPgMgNHpeB-HqcNobDhrg
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDAsImV4cCI6MTY1NzcxNDU0MH0.6hTB-bMWKm9hyeXlaGs8YC-Xu8a2m9uYSBeWGhl7mJE
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -8565,11 +9256,11 @@ Content-Length: 1012
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "processingFreelancerCount" : 1,
   "waitFreelancerDto" : [ {
     "num" : 2,
@@ -8584,11 +9275,11 @@ Content-Length: 1012
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "processingFreelancerCount" : 1,
   "waitFreelancerDto" : [ {
     "num" : 2,
@@ -8726,7 +9417,7 @@ Content-Length: 1012
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /finish-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjksImV4cCI6MTY1NzExMjY2OX0.FslYGFYO8uioIdHooKvUwjwPgMgNHpeB-HqcNobDhrg
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDEsImV4cCI6MTY1NzcxNDU0MX0.lRBmRBkifvgm7_vO2Iyf08sDgVVo2dzBnKkFkH3zYbg
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -8754,11 +9445,11 @@ Content-Length: 1012
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "processingFreelancerCount" : 1,
   "waitFreelancerDto" : [ {
     "num" : 2,
@@ -8773,11 +9464,11 @@ Content-Length: 1012
   "positionKind" : "DEVELOPER",
   "demandCareer" : "중급",
   "headCount" : 5,
-  "projectStateDate" : "2022-07-06",
-  "projectEndDate" : "2022-08-06",
+  "projectStateDate" : "2022-07-13",
+  "projectEndDate" : "2022-08-13",
   "minMoney" : 6000000,
   "maxMoney" : 10000000,
-  "createdDate" : "2022-07-06",
+  "createdDate" : "2022-07-13",
   "processingFreelancerCount" : 1,
   "waitFreelancerDto" : [ {
     "num" : 2,
@@ -8934,73 +9625,10 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 2606
+Content-Length: 2859
 
 [ {
-  "projectType" : "TELEWORKING",
-  "projectBackGround" : "BLACK",
-  "positionKind" : "DEVELOPER",
-  "endDays" : 31,
-  "skills" : [ "Java" ],
-  "projectName" : "쇼핑몰 프로젝트3",
-  "freelancerWorkmanShip" : "MIDDLE",
-  "projectPeriod" : 1,
-  "address" : {
-    "country" : "KR",
-    "zipcode" : "123-123",
-    "mainAddress" : "메인 주소",
-    "detailAddress" : "상세 주소"
-  },
-  "pay" : "10000000"
-}, {
-  "projectType" : "TELEWORKING",
-  "projectBackGround" : "BLACK",
-  "positionKind" : "DEVELOPER",
-  "endDays" : 31,
-  "skills" : [ "Java" ],
-  "projectName" : "쇼핑몰 프로젝트0",
-  "freelancerWorkmanShip" : "MIDDLE",
-  "projectPeriod" : 1,
-  "address" : {
-    "country" : "KR",
-    "zipcode" : "123-123",
-    "mainAddress" : "메인 주소",
-    "detailAddress" : "상세 주소"
-  },
-  "pay" : "10000000"
-}, {
-  "projectType" : "TELEWORKING",
-  "projectBackGround" : "BLACK",
-  "positionKind" : "DEVELOPER",
-  "endDays" : 31,
-  "skills" : [ "Java" ],
-  "projectName" : "쇼핑몰 프로젝트6",
-  "freelancerWorkmanShip" : "MIDDLE",
-  "projectPeriod" : 1,
-  "address" : {
-    "country" : "KR",
-    "zipcode" : "123-123",
-    "mainAddress" : "메인 주소",
-    "detailAddress" : "상세 주소"
-  },
-  "pay" : "10000000"
-}, {
-  "projectType" : "TELEWORKING",
-  "projectBackGround" : "BLACK",
-  "positionKind" : "DEVELOPER",
-  "endDays" : 31,
-  "skills" : [ "Java" ],
-  "projectName" : "쇼핑몰 프로젝트7",
-  "freelancerWorkmanShip" : "MIDDLE",
-  "projectPeriod" : 1,
-  "address" : {
-    "country" : "KR",
-    "zipcode" : "123-123",
-    "mainAddress" : "메인 주소",
-    "detailAddress" : "상세 주소"
-  },
-  "pay" : "10000000"
-}, {
+  "projectNum" : 6,
   "projectType" : "TELEWORKING",
   "projectBackGround" : "BLACK",
   "positionKind" : "DEVELOPER",
@@ -9015,8 +9643,64 @@ Content-Length: 2606
     "mainAddress" : "메인 주소",
     "detailAddress" : "상세 주소"
   },
-  "pay" : "10000000"
+  "pay" : "10000000",
+  "content" : null
 }, {
+  "projectNum" : 10,
+  "projectType" : "TELEWORKING",
+  "projectBackGround" : "BLACK",
+  "positionKind" : "DEVELOPER",
+  "endDays" : 31,
+  "skills" : [ "Java" ],
+  "projectName" : "쇼핑몰 프로젝트9",
+  "freelancerWorkmanShip" : "MIDDLE",
+  "projectPeriod" : 1,
+  "address" : {
+    "country" : "KR",
+    "zipcode" : "123-123",
+    "mainAddress" : "메인 주소",
+    "detailAddress" : "상세 주소"
+  },
+  "pay" : "10000000",
+  "content" : null
+}, {
+  "projectNum" : 5,
+  "projectType" : "TELEWORKING",
+  "projectBackGround" : "BLACK",
+  "positionKind" : "DEVELOPER",
+  "endDays" : 31,
+  "skills" : [ "Java" ],
+  "projectName" : "쇼핑몰 프로젝트4",
+  "freelancerWorkmanShip" : "MIDDLE",
+  "projectPeriod" : 1,
+  "address" : {
+    "country" : "KR",
+    "zipcode" : "123-123",
+    "mainAddress" : "메인 주소",
+    "detailAddress" : "상세 주소"
+  },
+  "pay" : "10000000",
+  "content" : null
+}, {
+  "projectNum" : 9,
+  "projectType" : "TELEWORKING",
+  "projectBackGround" : "BLACK",
+  "positionKind" : "DEVELOPER",
+  "endDays" : 31,
+  "skills" : [ "Java" ],
+  "projectName" : "쇼핑몰 프로젝트8",
+  "freelancerWorkmanShip" : "MIDDLE",
+  "projectPeriod" : 1,
+  "address" : {
+    "country" : "KR",
+    "zipcode" : "123-123",
+    "mainAddress" : "메인 주소",
+    "detailAddress" : "상세 주소"
+  },
+  "pay" : "10000000",
+  "content" : null
+}, {
+  "projectNum" : 3,
   "projectType" : "TELEWORKING",
   "projectBackGround" : "BLACK",
   "positionKind" : "DEVELOPER",
@@ -9031,7 +9715,26 @@ Content-Length: 2606
     "mainAddress" : "메인 주소",
     "detailAddress" : "상세 주소"
   },
-  "pay" : "10000000"
+  "pay" : "10000000",
+  "content" : null
+}, {
+  "projectNum" : 1,
+  "projectType" : "TELEWORKING",
+  "projectBackGround" : "BLACK",
+  "positionKind" : "DEVELOPER",
+  "endDays" : 31,
+  "skills" : [ "Java" ],
+  "projectName" : "쇼핑몰 프로젝트0",
+  "freelancerWorkmanShip" : "MIDDLE",
+  "projectPeriod" : 1,
+  "address" : {
+    "country" : "KR",
+    "zipcode" : "123-123",
+    "mainAddress" : "메인 주소",
+    "detailAddress" : "상세 주소"
+  },
+  "pay" : "10000000",
+  "content" : null
 } ]</code></pre>
 </div>
 </div>
@@ -9067,6 +9770,11 @@ Content-Length: 2606
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].projectNum</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로젝트 식별자</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].projectType</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>ProjectType</code></p></td>
@@ -9128,6 +9836,11 @@ Content-Length: 2606
 <td class="tableblock halign-left valign-top"><p class="tableblock">회원 상세 주소 필드</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].content</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로젝트 내용</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].pay</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">급여 정보(비공개, 협의가능, 급여)</p></td>
@@ -9146,7 +9859,7 @@ Content-Length: 2606
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /apply-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg1NywiZXhwIjoxNjU3MTEyNjU3fQ.NeQuCPqfok5j3USU-0EYXb--r5XBtU-kHIuJK_Id7CM
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjcyOCwiZXhwIjoxNjU3NzE0NTI4fQ.vVHvG0Xo_ym1kjugBtWYOPFnigBvDkc_bj9KFu83cYA
 Content-Length: 24
 Host: localhost:8080
 
@@ -9206,7 +9919,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /interview-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjYsImV4cCI6MTY1NzExMjY2Nn0.23xJSKhgKAV3uXes0SS_V89bk6eHKtsUzvuCc0nhZEY
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MzgsImV4cCI6MTY1NzcxNDUzOH0.eCKfQkRRcZAGl_2GCjcAr40ZEdZNUxJA0LfmxbRA6sU
 Content-Length: 48
 Host: localhost:8080
 
@@ -9276,7 +9989,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /accept-interview-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg2NywiZXhwIjoxNjU3MTEyNjY3fQ.b0v1tbYX9rs3Pttzf74nMtKupexzWehoIKC-DsC1alU
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjczOCwiZXhwIjoxNjU3NzE0NTM4fQ.r1s_pC0CXgx8Ict_KZY8YQJ0d87pydlpB4tCNJmM960
 Content-Length: 24
 Host: localhost:8080
 
@@ -9340,7 +10053,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /reject-interview-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjcsImV4cCI6MTY1NzExMjY2N30.2aboC61xMoyteWYjeNwVCl8RSkVrJnWcbYWu0Ogp-7U
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MzgsImV4cCI6MTY1NzcxNDUzOH0.eCKfQkRRcZAGl_2GCjcAr40ZEdZNUxJA0LfmxbRA6sU
 Content-Length: 48
 Host: localhost:8080
 
@@ -9410,7 +10123,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /wait-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NzIsImV4cCI6MTY1NzExMjY3Mn0.o8LPcYjQIxqUasH7cuHObrCE-VGwr63iZ9Pylepfz0k
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDQsImV4cCI6MTY1NzcxNDU0NH0.AE2uegH3eGMu1jb3TvqZ3KrSsJu6MzxzYOyq-jdmCEs
 Content-Length: 48
 Host: localhost:8080
 
@@ -9480,7 +10193,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /leave-wait-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzExMDg3MiwiZXhwIjoxNjU3MTEyNjcyfQ.hWJlbsC2os0lDtDZh1d65_67GWOd00GwduCregjb15w
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtZW1iZXJJZCIsImlhdCI6MTY1NzcxMjc0NCwiZXhwIjoxNjU3NzE0NTQ0fQ.j-a0BqWqKmuR-YpubhPx_0QSr2mWaAP0_1I_ENtSls8
 Content-Length: 24
 Host: localhost:8080
 
@@ -9544,7 +10257,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /exclude-wait-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NzIsImV4cCI6MTY1NzExMjY3Mn0.o8LPcYjQIxqUasH7cuHObrCE-VGwr63iZ9Pylepfz0k
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDQsImV4cCI6MTY1NzcxNDU0NH0.AE2uegH3eGMu1jb3TvqZ3KrSsJu6MzxzYOyq-jdmCEs
 Content-Length: 48
 Host: localhost:8080
 
@@ -9614,7 +10327,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /start-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NzAsImV4cCI6MTY1NzExMjY3MH0.k2jl0w6O2zlGUJU3aDYE07TLaJWPSRt_tmkJSPPy2b4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDMsImV4cCI6MTY1NzcxNDU0M30.6OrktRKY0vRElgJM8NcjHmNCg-A2BWCXYS-qXCebLcQ
 Content-Length: 24
 Host: localhost:8080
 
@@ -9678,7 +10391,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /finish-project HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NzAsImV4cCI6MTY1NzExMjY3MH0.k2jl0w6O2zlGUJU3aDYE07TLaJWPSRt_tmkJSPPy2b4
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3NDIsImV4cCI6MTY1NzcxNDU0Mn0.49FF9VlLrjxYMH5y3dy9Z5mZpla52PRP3DqvjUCf-XI
 Content-Length: 24
 Host: localhost:8080
 
@@ -9748,7 +10461,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /contact-save HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NTgsImV4cCI6MTY1NzExMjY1OH0.ybXkR1-om_wag1IVbu-q8Ej7gKn658tqtwA1O25jwwE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MjksImV4cCI6MTY1NzcxNDUyOX0.WCbVbeoiY-sB5CF2I622sOItwT0JJ-3HNDRwCiWsGCE
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -9838,7 +10551,7 @@ Content-Length: 98
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /contact-save HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NTcsImV4cCI6MTY1NzExMjY1N30.q3stx_Cz5CqEUn7POOq5uuTr2XcsYkQeMQJv6RPE7rw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MjgsImV4cCI6MTY1NzcxNDUyOH0.OgwFg-575svzWAuU7UEPvc0ntA8AOEjIoZE08kiOhvA
 Content-Length: 64
 Host: localhost:8080
 
@@ -9908,7 +10621,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /contact-cover HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NTgsImV4cCI6MTY1NzExMjY1OH0.ybXkR1-om_wag1IVbu-q8Ej7gKn658tqtwA1O25jwwE
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MjksImV4cCI6MTY1NzcxNDUyOX0.WCbVbeoiY-sB5CF2I622sOItwT0JJ-3HNDRwCiWsGCE
 Content-Length: 99
 Host: localhost:8080
 
@@ -9984,7 +10697,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /contacts HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NTcsImV4cCI6MTY1NzExMjY1N30.q3stx_Cz5CqEUn7POOq5uuTr2XcsYkQeMQJv6RPE7rw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MjgsImV4cCI6MTY1NzcxNDUyOH0.OgwFg-575svzWAuU7UEPvc0ntA8AOEjIoZE08kiOhvA
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -10028,17 +10741,17 @@ Content-Length: 344
   "num" : 1,
   "title" : "제목 title1",
   "content" : "내용 content1",
-  "localDate" : "2022-07-06"
+  "localDate" : "2022-07-13"
 }, {
   "num" : 2,
   "title" : "제목 title2",
   "content" : "내용 content2",
-  "localDate" : "2022-07-06"
+  "localDate" : "2022-07-13"
 }, {
   "num" : 3,
   "title" : "제목 title3",
   "content" : "내용 content3",
-  "localDate" : "2022-07-06"
+  "localDate" : "2022-07-13"
 } ]</code></pre>
 </div>
 </div>
@@ -10113,7 +10826,7 @@ Content-Length: 344
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /contact-delete HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NTcsImV4cCI6MTY1NzExMjY1N30.q3stx_Cz5CqEUn7POOq5uuTr2XcsYkQeMQJv6RPE7rw
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MjgsImV4cCI6MTY1NzcxNDUyOH0.OgwFg-575svzWAuU7UEPvc0ntA8AOEjIoZE08kiOhvA
 Content-Length: 24
 Host: localhost:8080
 
@@ -10252,8 +10965,8 @@ Content-Length: 334
 
 {
   "memberType" : "ENTERPRISE",
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjgsImV4cCI6MTY1NzExMjY2OH0.t-NjNeZvKOb_Byyl3qanPwXsmnQkvk9zSTfjm1Bf1Nw",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTcxMTA4NjgsImV4cCI6MTY1NzE5NzI2OH0.YSThSu-pvEhVIEmsJTxHwomT2z8P0HP4tbHSBwPVLj8"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MzksImV4cCI6MTY1NzcxNDUzOX0.AmZOgj6L63TGB_JgSmVBNakVhlTESPmao32qYKCqYtM",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc3MTI3MzksImV4cCI6MTY1Nzc5OTEzOX0.PlGEi08H5oVQ-GrDzUXLAl4IeJLqzOnGUSL6rF6xQLs"
 }</code></pre>
 </div>
 </div>
@@ -10318,8 +11031,8 @@ Content-Length: 334
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /reissue HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjgsImV4cCI6MTY1NzExMjY2OH0.t-NjNeZvKOb_Byyl3qanPwXsmnQkvk9zSTfjm1Bf1Nw
-RefreshAuthorization: eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTcxMTA4NjgsImV4cCI6MTY1NzE5NzI2OH0.YSThSu-pvEhVIEmsJTxHwomT2z8P0HP4tbHSBwPVLj8
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MzksImV4cCI6MTY1NzcxNDUzOX0.AmZOgj6L63TGB_JgSmVBNakVhlTESPmao32qYKCqYtM
+RefreshAuthorization: eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc3MTI3MzksImV4cCI6MTY1Nzc5OTEzOX0.PlGEi08H5oVQ-GrDzUXLAl4IeJLqzOnGUSL6rF6xQLs
 Host: localhost:8080</code></pre>
 </div>
 </div>
@@ -10364,8 +11077,8 @@ X-Frame-Options: DENY
 Content-Length: 302
 
 {
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTcxMTA4NjgsImV4cCI6MTY1NzExMjY2OH0.t-NjNeZvKOb_Byyl3qanPwXsmnQkvk9zSTfjm1Bf1Nw",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTcxMTA4NjgsImV4cCI6MTY1NzE5NzI2OH0.YSThSu-pvEhVIEmsJTxHwomT2z8P0HP4tbHSBwPVLj8"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbnRlcnByaXNlSWQiLCJpYXQiOjE2NTc3MTI3MzksImV4cCI6MTY1NzcxNDUzOX0.AmZOgj6L63TGB_JgSmVBNakVhlTESPmao32qYKCqYtM",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTc3MTI3MzksImV4cCI6MTY1Nzc5OTEzOX0.PlGEi08H5oVQ-GrDzUXLAl4IeJLqzOnGUSL6rF6xQLs"
 }</code></pre>
 </div>
 </div>
@@ -10419,7 +11132,7 @@ Content-Length: 302
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2022-07-06 21:32:28 +0900
+Last updated 2022-07-13 18:32:36 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

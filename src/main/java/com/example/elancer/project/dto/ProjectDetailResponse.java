@@ -2,6 +2,7 @@ package com.example.elancer.project.dto;
 
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.project.model.FreelancerWorkmanShip;
+import com.example.elancer.project.model.PositionKind;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectStep;
 import lombok.AccessLevel;
@@ -18,6 +19,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProjectDetailResponse {
+    private PositionKind positionKind;
     private String projectName;
     private String pay;
     private FreelancerWorkmanShip freelancerWorkmanShip;
@@ -33,7 +35,8 @@ public class ProjectDetailResponse {
 
 
     @Builder
-    public ProjectDetailResponse(String projectName,
+    public ProjectDetailResponse(PositionKind positionKind,
+                                 String projectName,
                                  String pay,
                                  FreelancerWorkmanShip freelancerWorkmanShip,
                                  Long projectPeriod, Address address,
@@ -45,6 +48,7 @@ public class ProjectDetailResponse {
                                  ProjectStep projectStep,
                                  List<SimpleFreelancerDto> simpleFreelancerList
     ) {
+        this.positionKind = positionKind;
         this.projectName = projectName;
         this.pay = pay;
         this.freelancerWorkmanShip = freelancerWorkmanShip;
@@ -64,6 +68,7 @@ public class ProjectDetailResponse {
             List<SimpleFreelancerDto> simpleFreelancerList
     ) {
         return ProjectDetailResponse.builder()
+                .positionKind(project.getPositionKind())
                 .projectName(project.getProjectName())
                 .pay(project.payConverter())
                 .freelancerWorkmanShip(project.careerToWorkmanshipConverter())

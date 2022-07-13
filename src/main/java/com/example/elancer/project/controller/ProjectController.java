@@ -47,10 +47,13 @@ public class ProjectController {
     public ResponseEntity<InfinityListResponse> findProjectList(
             @RequestParam(required = false) String position,
             @RequestParam(required = false) String skill,
-            @RequestBody ProjectSearchCondition projectSearchCondition,
+            @ModelAttribute ProjectSearchCondition projectSearchCondition,
             @PageableDefault(size = 10, sort = "num",direction = Sort.Direction.DESC) Pageable pageable
 
     ) {
+        System.out.println("position = " + position);
+        System.out.println("skill = " + skill);
+        System.out.println("projectSearchCondition = " + projectSearchCondition);
         Slice<ProjectBoxResponse> projectBoxResponses = projectService.searchProjectList(position, skill, projectSearchCondition, pageable);
         InfinityListResponse infinityListResponse = InfinityListResponse.of(projectBoxResponses.getContent(), !projectBoxResponses.isLast());
         return new ResponseEntity<>(infinityListResponse, HttpStatus.OK);
@@ -111,8 +114,8 @@ public class ProjectController {
     }
 
     @GetMapping("/recommend-project")
-    public ResponseEntity<List<RecommendProjectResponse>> RecommendProject() {
-        List<RecommendProjectResponse> recommendProject = projectService.findRecommendProject();
+    public ResponseEntity<List<ProjectBoxResponse>> RecommendProject() {
+        List<ProjectBoxResponse> recommendProject = projectService.findRecommendProject();
 
         return new ResponseEntity<>(recommendProject, HttpStatus.OK);
     }
