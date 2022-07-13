@@ -7,6 +7,7 @@ import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.interviewproject.model.InterviewProject;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -15,11 +16,14 @@ import com.example.elancer.project.model.PositionKind;
 import com.example.elancer.project.model.Project;
 import com.example.elancer.project.model.ProjectStatus;
 import com.example.elancer.project.repository.ProjectRepository;
+import com.example.elancer.project.repository.ProjectSearchRepository;
 import com.example.elancer.waitproject.model.WaitProject;
 import com.example.elancer.waitproject.model.WaitStatus;
 import com.example.elancer.waitproject.repsitory.WaitProjectRepository;
 import com.example.elancer.wishprojects.exception.NotExistProjectException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +36,7 @@ import java.util.stream.Collectors;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final ProjectSearchRepository projectSearchRepository;
     private final EnterpriseRepository enterpriseRepository;
     private final WaitProjectRepository waitProjectRepository;
     private final ApplyProjectRepository applyProjectRepository;
@@ -48,7 +53,11 @@ public class ProjectService {
         return ProjectDetailResponse.of(project, simpleFreelancerDtoList);
     }
 
-    public void searchProjectList(String projectKind, String skill) {
+    public Slice<ProjectBoxResponse> searchProjectList(String position, String skill, ProjectSearchCondition projectSearchCondition, Pageable pageable) {
+
+        Slice<Project> searchProject = projectSearchRepository.findSearchProject(getPositionKind(position), skill, projectSearchCondition, pageable);
+        return searchProject.map(s ->
+                ProjectBoxResponse.listBoxOf(s));
 
     }
 
@@ -278,6 +287,34 @@ public class ProjectService {
                         s.getFreelancer()
                 )
         ).collect(Collectors.toList());
+    }
+
+    private PositionKind getPositionKind(String position) {
+        if (position == null) {
+            return null;
+        }
+        PositionKind positionKind;
+        switch (position) {
+            case "DEVELOPER":
+                positionKind = PositionKind.DEVELOPER;
+                break;
+            case "PUBLISHER":
+                positionKind = PositionKind.PUBLISHER;
+                break;
+            case "DESIGNER":
+                positionKind = PositionKind.DESIGNER;
+                break;
+            case "PLANNER":
+                positionKind = PositionKind.PLANNER;
+                break;
+            case "ETC":
+                positionKind = PositionKind.ETC;
+                break;
+            default:
+                positionKind = null;
+        }
+
+        return positionKind;
     }
 
 

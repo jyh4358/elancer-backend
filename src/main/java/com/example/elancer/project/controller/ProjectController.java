@@ -4,8 +4,13 @@ import com.example.elancer.enterprise.dto.EnterpriseSimpleDetailResponse;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.*;
+import com.example.elancer.project.model.PositionKind;
 import com.example.elancer.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -39,13 +44,16 @@ public class ProjectController {
     }
 
     @GetMapping("/project-list")
-    public ResponseEntity<List<ProjectBoxResponse>> findProjectList(
-            @RequestParam(required = false) String projectKind,
-            @RequestParam(required = false) String skill
-    ) {
-        projectService.searchProjectList(projectKind, skill);
+    public ResponseEntity<InfinityListResponse> findProjectList(
+            @RequestParam(required = false) String position,
+            @RequestParam(required = false) String skill,
+            @RequestBody ProjectSearchCondition projectSearchCondition,
+            @PageableDefault(size = 10, sort = "num",direction = Sort.Direction.DESC) Pageable pageable
 
-        return new ResponseEntity<>(HttpStatus.OK);
+    ) {
+        Slice<ProjectBoxResponse> projectBoxResponses = projectService.searchProjectList(position, skill, projectSearchCondition, pageable);
+        InfinityListResponse infinityListResponse = InfinityListResponse.of(projectBoxResponses.getContent(), !projectBoxResponses.isLast());
+        return new ResponseEntity<>(infinityListResponse, HttpStatus.OK);
     }
 
 

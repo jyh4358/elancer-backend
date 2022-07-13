@@ -4,11 +4,13 @@ package com.example.elancer;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.login.auth.dto.OAuthAttributes;
 import com.example.elancer.member.domain.MemberType;
+import com.example.elancer.project.model.Project;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class HomeTestController {
 
-    @RequestMapping("/index")
-    public String home() {
+    @GetMapping("/index")
+    public String home(@RequestBody Project proejct) {
         return "home";
     }
 

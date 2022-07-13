@@ -557,6 +557,19 @@ include::{snippets}/project-index-list/http-response.adoc[]
 include::{snippets}/project-index-list/response-headers.adoc[]
 include::{snippets}/project-index-list/response-fields.adoc[]
 
+[[resources-project-list]]
+== 프로젝트 포지션 타입에 따른 리스트 요청
+요청
+include::{snippets}/project-list/http-request.adoc[]
+include::{snippets}/project-list/request-parameters.adoc[]
+include::{snippets}/project-list/request-headers.adoc[]
+응답
+include::{snippets}/project-list/http-response.adoc[]
+include::{snippets}/project-list/response-headers.adoc[]
+include::{snippets}/project-list/response-fields.adoc[]
+
+
+
 
 [[resources-project-list-count]]
 == 프로젝트 갯수 요청
@@ -580,6 +593,7 @@ include::{snippets}/enterprise-dashboard-project-list/response-fields.adoc[]
 [[resources-apply-project-list]]
 == 기업 지원 프로젝트 리스트 요청
 요청
+
 include::{snippets}/apply-project-list/http-request.adoc[]
 응답
 include::{snippets}/apply-project-list/http-response.adoc[]
