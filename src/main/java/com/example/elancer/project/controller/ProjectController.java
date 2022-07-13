@@ -21,6 +21,15 @@ public class ProjectController {
     private final ProjectService projectService;
     private final EnterpriseService enterpriseService;
 
+    @GetMapping("/project/{projectNum}")
+    public ResponseEntity<ProjectDetailResponse> detailProject(
+            @PathVariable Long projectNum
+    ) {
+        ProjectDetailResponse projectDetailResponse = projectService.findDetailProject(projectNum);
+
+        return new ResponseEntity<>(projectDetailResponse, HttpStatus.OK);
+    }
+
 
     @GetMapping("/project-save")
     public ResponseEntity<EnterpriseSimpleDetailResponse> saveProject(

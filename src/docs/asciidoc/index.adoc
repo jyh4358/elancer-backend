@@ -512,6 +512,17 @@ include::{snippets}/enterprise-profile-find/response-fields.adoc[]
 
 
 == 프로젝트
+[[resources-project-detail]]
+== 프로젝트 상세페이지 요청
+요청
+include::{snippets}/project-detail/http-request.adoc[]
+include::{snippets}/project-detail/request-headers.adoc[]
+응답
+include::{snippets}/project-detail/http-response.adoc[]
+include::{snippets}/project-detail/response-headers.adoc[]
+include::{snippets}/project-detail/response-fields.adoc[]
+
+
 [[resources-project-save-find]]
 == 프로젝트 등록 GET 요청
 요청

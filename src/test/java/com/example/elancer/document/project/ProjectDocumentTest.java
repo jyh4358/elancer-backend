@@ -69,6 +69,77 @@ public class ProjectDocumentTest extends DocumentBaseTest {
 
 
     @Test
+    @DisplayName("프로젝트 세부정보 요청 문서화 테스트")
+    public void 프로젝트_세부정보_GET_요청_문서화() throws Exception {
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        freelancerProfileRepository.save(new FreelancerProfile(null, freelancer, PositionType.DEVELOPER));
+
+        Project project = projectRepository.save(new Project(
+                ProjectType.TELEWORKING,
+                ProjectBackGround.BLACK,
+                EnterpriseLogo.COUPANG,
+                ProjectStep.ANALYSIS,
+                "쇼핑몰",
+                PositionKind.DEVELOPER,
+                "Java",
+                "쇼핑몰 프로젝트",
+                5,
+                5,
+                "1.프로젝트 명 .....",
+                LocalDate.now(),
+                LocalDate.now().plusMonths(1L),
+                LocalDate.now().plusDays(10L),
+                new Address(CountryType.KR, "123-123", "메인 주소", "상세 주소"),
+                6000000,
+                10000000,
+                5,
+                3,
+                30,
+                35,
+                ProjectStatus.PROGRESS,
+                enterprise
+        ));
+
+        applyProjectRepository.save(ApplyProject.createApplyProject(freelancer, project));
+
+        mockMvc.perform(get("/project/{projectNum}", project.getNum())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("project-detail",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("projectName").type("String").description("프로젝트명"),
+                                fieldWithPath("pay").type("String").description("프로젝트 단가"),
+                                fieldWithPath("freelancerWorkmanShip").type("FreelancerWorkmanShip").description("JUNIOR(\"초급\"), MIDDLE(\"중급\"), SENIOR(\"고급\")"),
+                                fieldWithPath("projectPeriod").type("Long").description("프로젝트 기간(Month)"),
+                                fieldWithPath("address.country").type("CountryType.STRING").description("근무지 주소 국적 필드"),
+                                fieldWithPath("address.zipcode").type("String").description("근무지 우편번호 필드"),
+                                fieldWithPath("address.mainAddress").type("String").description("근무지 주소 필드"),
+                                fieldWithPath("address.detailAddress").type("String").description("근무지 상세 주소 필드"),
+                                fieldWithPath("skills").type("List<String>").description("스킬 정보"),
+                                fieldWithPath("headCount").type("Integer").description("모집 인원"),
+                                fieldWithPath("inputHeadCount").type("Integer").description("총 투입인력"),
+                                fieldWithPath("content").type("String").description("프로젝트 내용"),
+                                fieldWithPath("simpleFreelancerList.[].thumbnailUrl").type("String").description("지원 프리랜서 프로필 URL"),
+                                fieldWithPath("simpleFreelancerList.[].username").type("String").description("지원 프리랜서 이름")
+                        )
+
+                ));
+    }
+
+
+    @Test
     @DisplayName("프로젝트 등록 Get 요청 문서화 테스트")
     public void 프로젝트_등록_GET_요청_문서화() throws Exception {
         Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);

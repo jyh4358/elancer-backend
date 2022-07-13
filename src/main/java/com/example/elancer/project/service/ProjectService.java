@@ -36,6 +36,17 @@ public class ProjectService {
     private final ApplyProjectRepository applyProjectRepository;
     private final InterviewProjectRepository interviewProjectRepository;
 
+    public ProjectDetailResponse findDetailProject(Long projectNum) {
+        Project project = projectRepository.findById(projectNum).orElseThrow(NotExistProjectException::new);
+        List<ApplyProject> applyFreelancer = applyProjectRepository.findByProject_Num(project.getNum());
+
+        List<SimpleFreelancerDto> simpleFreelancerDtoList = applyFreelancer.stream().map(s ->
+                SimpleFreelancerDto.of(s.getFreelancer())
+        ).collect(Collectors.toList());
+
+        return ProjectDetailResponse.of(project, simpleFreelancerDtoList);
+    }
+
     @Transactional
     public void saveProject(MemberDetails memberDetails, ProjectSaveRequest projectSaveRequest) {
         RightRequestChecker.checkMemberDetail(memberDetails);
@@ -231,6 +242,5 @@ public class ProjectService {
                 )
         ).collect(Collectors.toList());
     }
-
 
 }
