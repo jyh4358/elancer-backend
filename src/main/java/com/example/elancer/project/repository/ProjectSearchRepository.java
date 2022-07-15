@@ -23,18 +23,18 @@ import static com.example.elancer.project.model.QProject.project;
 public class ProjectSearchRepository {
     private final JPAQueryFactory queryFactory;
 
-    public Slice<Project> findSearchProject(PositionKind positionKind, String skill, ProjectSearchCondition projectSearchCondition, Pageable pageable) {
+    public Slice<Project> findSearchProject(PositionKind positionKind, String skill, PositionKind positionKindKey, List<String> skills, ProjectType projectType, FreelancerWorkmanShip freelancerWorkmanShip, String region, String searchKey, Pageable pageable) {
 
         BooleanBuilder builder = new BooleanBuilder();
         projectKindEq(positionKind, builder);
         skillContain(skill, builder);
 
-        projectKindEq(projectSearchCondition.getPositionKind(), builder);
-        projectSkillEq(projectSearchCondition.getSkills(), builder);
-        projectTypeEq(projectSearchCondition.getProjectType(), builder);
-        projectDemandCareer(projectSearchCondition.getFreelancerWorkmanShip(), builder);
-        projectReginContain(projectSearchCondition.getRegion(), builder);
-        projectSearchKeyContain(projectSearchCondition.getSearchKey(), builder);
+        projectKindEq(positionKindKey, builder);
+        projectSkillEq(skills, builder);
+        projectTypeEq(projectType, builder);
+        projectDemandCareer(freelancerWorkmanShip, builder);
+        projectReginContain(region, builder);
+        projectSearchKeyContain(searchKey, builder);
 
         List<Project> content = queryFactory
                 .selectFrom(project)

@@ -12,9 +12,7 @@ import com.example.elancer.interviewproject.model.InterviewProject;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.*;
-import com.example.elancer.project.model.PositionKind;
-import com.example.elancer.project.model.Project;
-import com.example.elancer.project.model.ProjectStatus;
+import com.example.elancer.project.model.*;
 import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.project.repository.ProjectSearchRepository;
 import com.example.elancer.waitproject.model.WaitProject;
@@ -54,9 +52,19 @@ public class ProjectService {
     }
 
 
-    public Slice<ProjectBoxResponse> searchProjectList(String position, String skill, ProjectSearchCondition projectSearchCondition, Pageable pageable) {
+    public Slice<ProjectBoxResponse> searchProjectList(String position, String skill, PositionKind positionKind, List<String> skills, ProjectType projectType, FreelancerWorkmanShip freelancerWorkmanShip, String region, String searchKey, Pageable pageable) {
 
-        Slice<Project> searchProject = projectSearchRepository.findSearchProject(getPositionKind(position), skill, projectSearchCondition, pageable);
+        Slice<Project> searchProject = projectSearchRepository.findSearchProject(
+                getPositionKind(position),
+                skill,
+                positionKind,
+                skills,
+                projectType,
+                freelancerWorkmanShip,
+                region,
+                searchKey,
+
+                pageable);
         return searchProject.map(s ->
                 ProjectBoxResponse.listBoxOf(s));
 

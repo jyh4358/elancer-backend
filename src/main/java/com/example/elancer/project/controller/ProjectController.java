@@ -4,7 +4,9 @@ import com.example.elancer.enterprise.dto.EnterpriseSimpleDetailResponse;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.*;
+import com.example.elancer.project.model.FreelancerWorkmanShip;
 import com.example.elancer.project.model.PositionKind;
+import com.example.elancer.project.model.ProjectType;
 import com.example.elancer.project.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -47,11 +49,27 @@ public class ProjectController {
     public ResponseEntity<InfinityListResponse> findProjectList(
             @RequestParam(required = false) String position,
             @RequestParam(required = false) String skill,
-            @ModelAttribute ProjectSearchCondition projectSearchCondition,
+            @RequestParam(required = false) PositionKind positionKind,
+            @RequestParam(required = false) List<String> skills,
+            @RequestParam(required = false) ProjectType projectType,
+            @RequestParam(required = false) FreelancerWorkmanShip freelancerWorkmanShip,
+            @RequestParam(required = false) String region,
+            @RequestParam(required = false) String searchKey,
             @PageableDefault(size = 10, sort = "num",direction = Sort.Direction.DESC) Pageable pageable
 
     ) {
-        Slice<ProjectBoxResponse> projectBoxResponses = projectService.searchProjectList(position, skill, projectSearchCondition, pageable);
+        System.out.println("position = " + position);
+        System.out.println("skill = " + skill);
+        Slice<ProjectBoxResponse> projectBoxResponses = projectService.searchProjectList(
+                position,
+                skill,
+                positionKind,
+                skills,
+                projectType,
+                freelancerWorkmanShip,
+                region,
+                searchKey,
+                pageable);
         InfinityListResponse infinityListResponse = InfinityListResponse.of(projectBoxResponses.getContent(), !projectBoxResponses.isLast());
         return new ResponseEntity<>(infinityListResponse, HttpStatus.OK);
     }
