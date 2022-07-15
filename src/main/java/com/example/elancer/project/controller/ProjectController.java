@@ -60,6 +60,17 @@ public class ProjectController {
     ) {
         System.out.println("position = " + position);
         System.out.println("skill = " + skill);
+        System.out.println("positionKind = " + positionKind);
+        if (skills != null){
+            for (String s : skills) {
+                System.out.println("s = " + s);
+            }
+        }
+        System.out.println("projectType = " + projectType);
+        System.out.println("freelancerWorkmanShip = " + freelancerWorkmanShip);
+        System.out.println("regin = " + region);
+        System.out.println("searchKey = " + searchKey);
+
         Slice<ProjectBoxResponse> projectBoxResponses = projectService.searchProjectList(
                 position,
                 skill,

@@ -63,7 +63,6 @@ public class ProjectService {
                 freelancerWorkmanShip,
                 region,
                 searchKey,
-
                 pageable);
         return searchProject.map(s ->
                 ProjectBoxResponse.listBoxOf(s));
