@@ -9,6 +9,7 @@ import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.wishfreelancer.exception.NotExistWishFreelancerException;
+import com.example.elancer.wishfreelancer.exception.PresentWishFreelancerException;
 import com.example.elancer.wishfreelancer.model.WishFreelancer;
 import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,9 @@ public class WishFreelancerService {
 
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
         Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
+        if (wishFreelancerRepository.findByFreelancerNum(enterprise.getNum()).isPresent()) {
+            throw new PresentWishFreelancerException();
+        }
 
         WishFreelancer wishFreelancer = WishFreelancer.createWishFreelancer(enterprise, freelancer);
         wishFreelancerRepository.save(wishFreelancer);
@@ -39,6 +43,8 @@ public class WishFreelancerService {
         RightRequestChecker.checkMemberDetail(memberDetails);
         Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
 
-        wishFreelancerRepository.delete(wishFreelancerRepository.findByFreelancerNum(freelancer.getNum()).orElseThrow(NotExistWishFreelancerException::new));
+        wishFreelancerRepository.delete(
+                wishFreelancerRepository.findByFreelancerNum(freelancer.getNum()).orElseThrow(NotExistWishFreelancerException::new)
+        );
     }
 }
