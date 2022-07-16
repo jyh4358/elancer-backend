@@ -37,11 +37,8 @@ public class WishFreelancerService {
     @Transactional
     public void deleteWishFreelancer(MemberDetails memberDetails, Long freelancerNum) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-
-        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
         Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
 
         wishFreelancerRepository.delete(wishFreelancerRepository.findByFreelancerNum(freelancer.getNum()).orElseThrow(NotExistWishFreelancerException::new));
-
     }
 }
