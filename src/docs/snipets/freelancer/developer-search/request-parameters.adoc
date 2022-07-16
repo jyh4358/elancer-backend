@@ -7,13 +7,10 @@
 |`+majorSkillKeywords+`
 |개발자 주요스킬 검색 필드
 
-|`+minorSkill+`
-|개발자 기타스킬 검색 필드
-
-|`+hopeWorkStates+`
+|`+hopeWorkState+`
 |프리랜서 근무 위치 검색 필드
 
-|`+positionWorkManShips+`
+|`+positionWorkManShip+`
 |프리랜서 숙련도 검색 필드
 
 |`+workArea+`

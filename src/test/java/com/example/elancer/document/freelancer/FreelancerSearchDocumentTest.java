@@ -158,7 +158,8 @@ public class FreelancerSearchDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("freelancerSimpleResponseList.[0].wishState").type("boolean").description("사용자의 프리랜서 스크랩여부 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[0].greeting").type("String").description("프리랜서 소개말 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[0].skills").type("List<String>").description("프리랜서 개발자 주요스킬 정보 필드."),
-                                fieldWithPath("freelancerSimpleResponseList.[0].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드.")
+                                fieldWithPath("freelancerSimpleResponseList.[0].projectNames").type("List<String>").description("프리랜서 개발자 기타스킬 정보 필드."),
+                                fieldWithPath("hasNext").type("boolean").description("마지막 페이지 여부 확인. => ture: 검색데이터 더 있음, false : 현재 응답된 데이터가 마지막 데이터.")
                         )
                         ));
     }
@@ -292,7 +293,8 @@ public class FreelancerSearchDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("freelancerSimpleResponseList.[].wishState").type("boolean").description("사용자의 프리랜서 스크랩여부 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[].greeting").type("String").description("프리랜서 소개말 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[].skills").type("List<String>").description("프리랜서 개발자 주요스킬 정보 필드."),
-                                fieldWithPath("freelancerSimpleResponseList.[].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드.")
+                                fieldWithPath("freelancerSimpleResponseList.[].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드."),
+                                fieldWithPath("hasNext").type("boolean").description("마지막 페이지 여부 확인. => ture: 검색데이터 더 있음, false : 현재 응답된 데이터가 마지막 데이터.")
                         )
                         ));
     }
@@ -426,7 +428,8 @@ public class FreelancerSearchDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("freelancerSimpleResponseList.[].wishState").type("boolean").description("사용자의 프리랜서 스크랩여부 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[].greeting").type("String").description("프리랜서 소개말 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[].skills").type("List<String>").description("프리랜서 개발자 주요스킬 정보 필드."),
-                                fieldWithPath("freelancerSimpleResponseList.[].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드.")
+                                fieldWithPath("freelancerSimpleResponseList.[].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드."),
+                                fieldWithPath("hasNext").type("boolean").description("마지막 페이지 여부 확인. => ture: 검색데이터 더 있음, false : 현재 응답된 데이터가 마지막 데이터.")
                         )
                         ));
     }
@@ -560,7 +563,8 @@ public class FreelancerSearchDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("freelancerSimpleResponseList.[].wishState").type("boolean").description("사용자의 프리랜서 스크랩여부 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[].greeting").type("String").description("프리랜서 소개말 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[].skills").type("List<String>").description("프리랜서 개발자 주요스킬 정보 필드."),
-                                fieldWithPath("freelancerSimpleResponseList.[].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드.")
+                                fieldWithPath("freelancerSimpleResponseList.[].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드."),
+                                fieldWithPath("hasNext").type("boolean").description("마지막 페이지 여부 확인. => ture: 검색데이터 더 있음, false : 현재 응답된 데이터가 마지막 데이터.")
                         )
                         ));
     }
@@ -694,7 +698,8 @@ public class FreelancerSearchDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("freelancerSimpleResponseList.[].wishState").type("boolean").description("사용자의 프리랜서 스크랩여부 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[].greeting").type("String").description("프리랜서 소개말 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[].skills").type("List<String>").description("프리랜서 개발자 주요스킬 정보 필드."),
-                                fieldWithPath("freelancerSimpleResponseList.[].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드.")
+                                fieldWithPath("freelancerSimpleResponseList.[].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드."),
+                                fieldWithPath("hasNext").type("boolean").description("마지막 페이지 여부 확인. => ture: 검색데이터 더 있음, false : 현재 응답된 데이터가 마지막 데이터.")
                         )
                         ));
     }

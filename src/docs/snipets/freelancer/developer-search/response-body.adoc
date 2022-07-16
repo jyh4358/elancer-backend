@@ -9,9 +9,9 @@
     "careerYear" : 3,
     "wishState" : false,
     "greeting" : "greeting",
-    "skills" : [ ],
-    "etcSkill" : null,
+    "skills" : [ null ],
     "projectNames" : [ ]
-  } ]
+  } ],
+  "hasNext" : false
 }
 ----

@@ -219,6 +219,23 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
 
     @DisplayName("개발자 목록을 주요 스킬만 검색한다.")
     @Test
+    public void 개발자_모두_검색() {
+        PageRequest pageable = PageRequest.of(0, 3);
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
+                PositionType.DEVELOPER,
+                null,
+                null,
+                null,
+                null,
+                pageable, memberDetails
+        );
+
+        //then
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(3);
+    }
+
+    @DisplayName("개발자 목록을 주요 스킬만 검색한다.")
+    @Test
     public void 개발자_주요스킬_검색() {
         PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(

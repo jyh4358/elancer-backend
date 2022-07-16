@@ -11,7 +11,7 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 312
+Content-Length: 315
 
 {
   "freelancerSimpleResponseList" : [ {
@@ -22,9 +22,9 @@ Content-Length: 312
     "careerYear" : 3,
     "wishState" : false,
     "greeting" : "greeting",
-    "skills" : [ ],
-    "etcSkill" : null,
+    "skills" : [ null ],
     "projectNames" : [ ]
-  } ]
+  } ],
+  "hasNext" : false
 }
 ----

@@ -58,7 +58,7 @@ public class FreelancerProfileFindService {
                 .collect(Collectors.toList());
         FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, freelancerSimpleResponses, wishFreelancerRepository);
 
-        return new FreelancerSimpleResponses(freelancerSimpleResponses);
+        return new FreelancerSimpleResponses(freelancerSimpleResponses, false);
     }
 
     @Transactional(readOnly = true)
