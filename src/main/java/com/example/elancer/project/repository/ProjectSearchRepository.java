@@ -1,5 +1,6 @@
 package com.example.elancer.project.repository;
 
+import com.example.elancer.common.utils.PageUtil;
 import com.example.elancer.project.dto.ProjectSearchCondition;
 import com.example.elancer.project.model.FreelancerWorkmanShip;
 import com.example.elancer.project.model.PositionKind;
@@ -44,10 +45,10 @@ public class ProjectSearchRepository {
                 .limit(pageable.getPageSize() + 1)
                 .fetch();
 
-        boolean hasNext = isContentSizeGreaterThanPageSize(content, pageable);
+        boolean hasNext = PageUtil.isContentSizeGreaterThanPageSize(content, pageable);
 
 
-        return new SliceImpl<>(hasNext ? subListLastContent(content, pageable) : content, pageable, hasNext);
+        return new SliceImpl<>(hasNext ? PageUtil.subListLastContent(content, pageable) : content, pageable, hasNext);
     }
 
     private void projectSearchKeyContain(String searchKey, BooleanBuilder builder) {
@@ -118,11 +119,4 @@ public class ProjectSearchRepository {
         builder.and(project.skill.containsIgnoreCase(skill));
     }
 
-    private boolean isContentSizeGreaterThanPageSize(List<Project> content, Pageable pageable) {
-        return pageable.isPaged() && content.size() > pageable.getPageSize();
-    }
-
-    private static List<Project> subListLastContent(List<Project> content, Pageable pageable) {
-        return content.subList(0, pageable.getPageSize());
-    }
 }
