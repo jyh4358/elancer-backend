@@ -163,7 +163,6 @@ public class EnterpriseService {
         RightRequestChecker.checkMemberDetail(memberDetails);
         wishFreelancerRepository.findByEnterpriseNum(memberDetails.getId());
 
-
     }
 
 
