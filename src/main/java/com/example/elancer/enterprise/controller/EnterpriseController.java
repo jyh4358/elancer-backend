@@ -2,6 +2,7 @@ package com.example.elancer.enterprise.controller;
 
 import com.example.elancer.enterprise.dto.*;
 import com.example.elancer.enterprise.service.EnterpriseService;
+import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -89,6 +92,14 @@ public class EnterpriseController {
         EnterpriseDashBoardProfileResponse dashBoardProfile = enterpriseService.findDashBoardProfile(memberDetails);
 
         return new ResponseEntity<>(dashBoardProfile, HttpStatus.OK);
+    }
+
+    @GetMapping("/wish-freelancer")
+    public ResponseEntity<List<FreelancerSimpleResponse>> findWishFreelancer(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        enterpriseService.findWishFreelancer(memberDetails);
+        return null;
     }
 
 }

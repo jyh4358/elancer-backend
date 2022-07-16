@@ -78,7 +78,7 @@ public class ProjectSearchRepository {
                     .and(project.careerYear.goe(FreelancerWorkmanShip.JUNIOR.getCareer()));
         }
         if (freelancerWorkmanShip.equals(FreelancerWorkmanShip.SENIOR)) {
-            builder.and(project.careerYear.goe(freelancerWorkmanShip.getCareer()));
+            builder.and(project.careerYear.goe(FreelancerWorkmanShip.MIDDLE.getCareer()));
         }
     }
 
@@ -88,10 +88,13 @@ public class ProjectSearchRepository {
         }
 
         if (projectType.equals(ProjectType.BOTH_TELEWORKING_WORKING)) {
+            builder.and(project.projectType.eq(projectType));
+        }
+
+        if (projectType.equals(ProjectType.BOTH_TELEWORKING_WORKING)) {
             builder.and(project.projectType.eq(ProjectType.WORKING))
                     .or(project.projectType.eq(ProjectType.TELEWORKING));
         }
-        builder.and(project.projectType.eq(projectType));
     }
 
     private void projectSkillEq(List<String> skills, BooleanBuilder builder) {
@@ -100,7 +103,7 @@ public class ProjectSearchRepository {
         }
 
         for (String skill : skills) {
-            builder.and(project.skill.eq(skill));
+            builder.and(project.skill.containsIgnoreCase(skill));
         }
     }
 

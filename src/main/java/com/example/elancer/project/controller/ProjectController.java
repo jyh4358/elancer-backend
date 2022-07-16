@@ -2,6 +2,7 @@ package com.example.elancer.project.controller;
 
 import com.example.elancer.enterprise.dto.EnterpriseSimpleDetailResponse;
 import com.example.elancer.enterprise.service.EnterpriseService;
+import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.*;
 import com.example.elancer.project.model.FreelancerWorkmanShip;
@@ -60,6 +61,17 @@ public class ProjectController {
     ) {
         System.out.println("position = " + position);
         System.out.println("skill = " + skill);
+        System.out.println("positionKind = " + positionKind);
+        if (skills != null){
+            for (String s : skills) {
+                System.out.println("s = " + s);
+            }
+        }
+        System.out.println("projectType = " + projectType);
+        System.out.println("freelancerWorkmanShip = " + freelancerWorkmanShip);
+        System.out.println("regin = " + region);
+        System.out.println("searchKey = " + searchKey);
+
         Slice<ProjectBoxResponse> projectBoxResponses = projectService.searchProjectList(
                 position,
                 skill,
@@ -192,6 +204,4 @@ public class ProjectController {
         List<ProcessingProjectResponse> finishProject = projectService.findFinishProject(memberDetails);
         return new ResponseEntity<>(finishProject, HttpStatus.OK);
     }
-
-
 }
