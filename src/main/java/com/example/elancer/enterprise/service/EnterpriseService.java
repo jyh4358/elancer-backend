@@ -162,7 +162,7 @@ public class EnterpriseService {
         ).collect(Collectors.toList());
         freelancerSimpleResponses.forEach(s -> s.switchWishState());
 
-        return new FreelancerSimpleResponses(freelancerSimpleResponses);
+        return new FreelancerSimpleResponses(freelancerSimpleResponses, false);
 
     }
 

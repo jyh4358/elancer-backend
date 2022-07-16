@@ -8,6 +8,7 @@ import com.example.elancer.freelancer.exception.NotExistFreelancerException;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.wishfreelancer.dto.WishFreelancerRequest;
 import com.example.elancer.wishfreelancer.exception.NotExistWishFreelancerException;
 import com.example.elancer.wishfreelancer.exception.PresentWishFreelancerException;
 import com.example.elancer.wishfreelancer.model.WishFreelancer;
@@ -26,10 +27,10 @@ public class WishFreelancerService {
     private final WishFreelancerRepository wishFreelancerRepository;
 
     @Transactional
-    public void addWishFreelancer(MemberDetails memberDetails, Long freelancerNum) {
+    public void addWishFreelancer(MemberDetails memberDetails, WishFreelancerRequest wishFreelancerRequest) {
 
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
-        Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
+        Freelancer freelancer = freelancerRepository.findById(wishFreelancerRequest.getFreelancerNum()).orElseThrow(NotExistFreelancerException::new);
         if (wishFreelancerRepository.findByFreelancerNum(enterprise.getNum()).isPresent()) {
             throw new PresentWishFreelancerException();
         }

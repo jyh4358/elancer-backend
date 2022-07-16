@@ -510,6 +510,17 @@ include::{snippets}/enterprise-profile-find/http-response.adoc[]
 include::{snippets}/enterprise-profile-find/response-headers.adoc[]
 include::{snippets}/enterprise-profile-find/response-fields.adoc[]
 
+[[resources-dashboard-wish-freelancer]]
+== 기업 인재 스크랩 리스트 요청
+요청
+include::{snippets}/dashboard-wish-freelancer/http-request.adoc[]
+include::{snippets}/dashboard-wish-freelancer/request-headers.adoc[]
+응답
+include::{snippets}/dashboard-wish-freelancer/http-response.adoc[]
+include::{snippets}/dashboard-wish-freelancer/response-headers.adoc[]
+include::{snippets}/dashboard-wish-freelancer/response-body.adoc[]
+
+
 
 == 프로젝트
 [[resources-project-detail]]
@@ -724,6 +735,19 @@ include::{snippets}/start-project/request-fields.adoc[]
 include::{snippets}/finish-project/http-request.adoc[]
 include::{snippets}/finish-project/request-headers.adoc[]
 include::{snippets}/finish-project/request-fields.adoc[]
+
+[[resources-wish-freelancer-save]]
+== 인재 스크랩 저장 요청
+요청
+include::{snippets}/wish-freelancer-save/http-request.adoc[]
+include::{snippets}/wish-freelancer-save/request-headers.adoc[]
+include::{snippets}/wish-freelancer-save/request-fields.adoc[]
+
+[[resources-wish-freelancer-delete]]
+== 인재 스크랩 삭제 요청
+요청
+include::{snippets}/wish-freelancer-delete/http-request.adoc[]
+include::{snippets}/wish-freelancer-delete/request-headers.adoc[]
 
 
 
