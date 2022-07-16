@@ -32,7 +32,7 @@ public class FreelancerPositionSearchController {
             @RequestParam(required = false) HopeWorkState hopeWorkState,
             @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
             @RequestParam(required = false) WorkArea workArea,
-            @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 10) Pageable pageable,
+            @PageableDefault(sort = "freelancerNum", direction = Sort.Direction.DESC, size = 10) Pageable pageable,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable, memberDetails);
