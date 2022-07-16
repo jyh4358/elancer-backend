@@ -1,6 +1,6 @@
 [source,http,options="nowrap"]
 ----
-GET /positionEtcers?positionType=ETC&majorSkillKeywords=&hopeWorkState=&positionWorkManShip=&workArea= HTTP/1.1
+GET /positionEtcers?positionType=ETC&majorSkillKeywords=&hopeWorkState=&positionWorkManShip=&workArea=&hopeWorkState=&positionWorkManShip=&workArea= HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080
 

@@ -1,5 +1,5 @@
 [source,bash]
 ----
-$ http GET 'http://localhost:8080/developers?positionType=DEVELOPER&majorSkillKeywords=java&minorSkill=&hopeWorkStates=&positionWorkManShips=&workArea=&minorSkill=&hopeWorkStates=&positionWorkManShips=&workArea=' \
+$ http GET 'http://localhost:8080/developers?positionType=DEVELOPER&majorSkillKeywords=java&hopeWorkState=&positionWorkManShip=&workArea=&hopeWorkState=&positionWorkManShip=&workArea=' \
     'Content-Type:application/json;charset=UTF-8'
 ----

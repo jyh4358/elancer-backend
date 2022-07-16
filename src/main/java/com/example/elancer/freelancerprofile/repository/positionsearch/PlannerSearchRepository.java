@@ -1,5 +1,6 @@
 package com.example.elancer.freelancerprofile.repository.positionsearch;
 
+import com.example.elancer.common.utils.PageUtil;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -45,16 +46,18 @@ public class PlannerSearchRepository {
         eqPositionWorkShipConds(positionWorkManShip, builder);
         eqWorkAreaConds(workArea, builder);
 
-        QueryResults<Planner> designerQueryResults = jpaQueryFactory.selectFrom(planner)
+        List<Planner> planners = jpaQueryFactory.selectFrom(planner)
                 .innerJoin(planner.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
                 .where(builder)
                 .orderBy(planner.num.desc())
                 .offset(pageable.getPageNumber())
-                .limit(pageable.getPageSize())
-                .fetchResults();
+                .limit(pageable.getPageSize() + 1)
+                .fetch();
 
-        return new SliceImpl<Planner>(designerQueryResults.getResults());
+        boolean hasNext = PageUtil.isContentSizeGreaterThanPageSize(planners, pageable);
+
+        return new SliceImpl<Planner>(hasNext ? PageUtil.subListLastContent(planners, pageable) : planners, pageable, hasNext);
     }
 
     private void eqWorkAreaConds(WorkArea area, BooleanBuilder builder) {

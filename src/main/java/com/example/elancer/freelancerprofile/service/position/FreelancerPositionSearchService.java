@@ -54,7 +54,7 @@ public class FreelancerPositionSearchService {
                 .collect(Collectors.toList());
         FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, freelancerSimpleResponses, wishFreelancerRepository);
 
-        return new FreelancerSimpleResponses(freelancerSimpleResponses);
+        return new FreelancerSimpleResponses(freelancerSimpleResponses, developers.hasNext());
     }
 
     @Transactional(readOnly = true)
@@ -73,7 +73,7 @@ public class FreelancerPositionSearchService {
                 .collect(Collectors.toList());
         FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, freelancerSimpleResponses, wishFreelancerRepository);
 
-        return new FreelancerSimpleResponses(freelancerSimpleResponses);
+        return new FreelancerSimpleResponses(freelancerSimpleResponses, publishers.hasNext());
     }
 
     @Transactional(readOnly = true)
@@ -92,7 +92,7 @@ public class FreelancerPositionSearchService {
                 .collect(Collectors.toList());
         FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, freelancerSimpleResponses, wishFreelancerRepository);
 
-        return new FreelancerSimpleResponses(freelancerSimpleResponses);
+        return new FreelancerSimpleResponses(freelancerSimpleResponses, designers.hasNext());
     }
 
     @Transactional(readOnly = true)
@@ -111,7 +111,7 @@ public class FreelancerPositionSearchService {
                 .collect(Collectors.toList());
         FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, freelancerSimpleResponses, wishFreelancerRepository);
 
-        return new FreelancerSimpleResponses(freelancerSimpleResponses);
+        return new FreelancerSimpleResponses(freelancerSimpleResponses, planners.hasNext());
     }
 
     @Transactional(readOnly = true)
@@ -130,6 +130,6 @@ public class FreelancerPositionSearchService {
                 .collect(Collectors.toList());
         FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, freelancerSimpleResponses, wishFreelancerRepository);
 
-        return new FreelancerSimpleResponses(freelancerSimpleResponses);
+        return new FreelancerSimpleResponses(freelancerSimpleResponses, positionEtcs.hasNext());
     }
 }

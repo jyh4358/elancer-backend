@@ -1,11 +1,13 @@
 package com.example.elancer.freelancerprofile.repository.positionsearch;
 
+import com.example.elancer.common.utils.PageUtil;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
 import com.example.elancer.freelancerprofile.model.position.designer.QDesigner;
+import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
@@ -44,16 +46,18 @@ public class DesignerSearchRepository {
         eqPositionWorkShipConds(positionWorkManShip, builder);
         eqWorkAreaConds(workArea, builder);
 
-        QueryResults<Designer> designerQueryResults = jpaQueryFactory.selectFrom(designer)
+        List<Designer> designers = jpaQueryFactory.selectFrom(designer)
                 .innerJoin(designer.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
                 .where(builder)
                 .orderBy(designer.num.desc())
                 .offset(pageable.getPageNumber())
-                .limit(pageable.getPageSize())
-                .fetchResults();
+                .limit(pageable.getPageSize() + 1)
+                .fetch();
 
-        return new SliceImpl<Designer>(designerQueryResults.getResults());
+        boolean hasNext = PageUtil.isContentSizeGreaterThanPageSize(designers, pageable);
+
+        return new SliceImpl<Designer>(hasNext ? PageUtil.subListLastContent(designers, pageable) : designers, pageable, hasNext);
     }
 
     private void eqWorkAreaConds(WorkArea area, BooleanBuilder builder) {

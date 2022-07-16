@@ -37,12 +37,12 @@
 |`+List<String>+`
 |프리랜서 개발자 주요스킬 정보 필드.
 
-|`+freelancerSimpleResponseList.[0].etcSkill+`
-|`+String+`
+|`+freelancerSimpleResponseList.[0].projectNames+`
+|`+List<String>+`
 |프리랜서 개발자 기타스킬 정보 필드.
 
-|`+freelancerSimpleResponseList.[0].projectNames+`
-|`+ListL<String>+`
-|프리랜서 개발자 기타스킬 정보 필드.
+|`+hasNext+`
+|`+boolean+`
+|마지막 페이지 여부 확인. => ture: 검색데이터 더 있음, false : 현재 응답된 데이터가 마지막 데이터.
 
 |===

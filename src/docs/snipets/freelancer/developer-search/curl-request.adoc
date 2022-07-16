@@ -1,5 +1,5 @@
 [source,bash]
 ----
-$ curl 'http://localhost:8080/developers?positionType=DEVELOPER&majorSkillKeywords=java&minorSkill=&hopeWorkStates=&positionWorkManShips=&workArea=&minorSkill=&hopeWorkStates=&positionWorkManShips=&workArea=' -i -X GET \
+$ curl 'http://localhost:8080/developers?positionType=DEVELOPER&majorSkillKeywords=java&hopeWorkState=&positionWorkManShip=&workArea=&page=0' -i -X GET \
     -H 'Content-Type: application/json;charset=UTF-8'
 ----
