@@ -306,6 +306,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("developerProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("developerProjectList.[].content").type("String").description("프로젝트 내용"),
                                 fieldWithPath("developerProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("developerProjectList.[].wishState").type("boolean").description("인재스크랩 여부"),
                                 fieldWithPath("publisherProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
                                 fieldWithPath("publisherProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("publisherProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
@@ -321,6 +322,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("publisherProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("publisherProjectList.[].content").type("String").description("프로젝트 내용"),
                                 fieldWithPath("publisherProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("publisherProjectList.[].wishState").type("boolean").description("인재스크랩 여부"),
                                 fieldWithPath("designerProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
                                 fieldWithPath("designerProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("designerProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
@@ -336,6 +338,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("designerProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("designerProjectList.[].content").type("String").description("프로젝트 내용"),
                                 fieldWithPath("designerProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("designerProjectList.[].wishState").type("boolean").description("인재스크랩 여부"),
                                 fieldWithPath("plannerProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
                                 fieldWithPath("plannerProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("plannerProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
@@ -351,6 +354,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("plannerProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("plannerProjectList.[].content").type("String").description("프로젝트 내용"),
                                 fieldWithPath("plannerProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("plannerProjectList.[].wishState").type("boolean").description("인재스크랩 여부"),
                                 fieldWithPath("etcProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
                                 fieldWithPath("etcProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("etcProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
@@ -365,7 +369,8 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("etcProjectList.[].address.mainAddress").type("String").description("회원 주소 필드"),
                                 fieldWithPath("etcProjectList.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("etcProjectList.[].content").type("String").description("프로젝트 내용"),
-                                fieldWithPath("etcProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)")
+                                fieldWithPath("etcProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("etcProjectList.[].wishState").type("boolean").description("인재스크랩 여부")
                         )
 
                 ));
@@ -444,6 +449,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("projectBoxResponses.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("projectBoxResponses.[].content").type("String").description("프로젝트 내용"),
                                 fieldWithPath("projectBoxResponses.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("projectBoxResponses.[].wishState").type("boolean").description("인재스크랩 여부"),
                                 fieldWithPath("hasNext").type("boolean").description("다음 페이지 여부")
 
                         )
@@ -534,6 +540,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("projectBoxResponses.[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("projectBoxResponses.[].content").type("String").description("프로젝트 내용"),
                                 fieldWithPath("projectBoxResponses.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("projectBoxResponses.[].wishState").type("boolean").description("인재 스크랩 여부"),
                                 fieldWithPath("hasNext").type("boolean").description("다음 페이지 여부")
 
                         )
@@ -766,7 +773,8 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("[].address.mainAddress").type("String").description("회원 주소 필드"),
                                 fieldWithPath("[].address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("[].content").type("String").description("프로젝트 내용"),
-                                fieldWithPath("[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)")
+                                fieldWithPath("[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
+                                fieldWithPath("[].wishState").type("boolean").description("인재스크랩 여부")
                         )
 
                 ));

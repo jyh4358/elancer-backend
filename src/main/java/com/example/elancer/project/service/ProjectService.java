@@ -7,7 +7,6 @@ import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
-import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.interviewproject.model.InterviewProject;
 import com.example.elancer.interviewproject.repository.InterviewProjectRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -71,34 +70,18 @@ public class ProjectService {
 
     public IndexProjectResponse findIndexProjectList() {
         List<Project> developProject = projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.DEVELOPER);
-        List<Project> publisherProject= projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.PUBLISHER);
-        List<Project> designerProject= projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.DESIGNER);
-        List<Project> plannerProject= projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.PLANNER);
-        List<Project> etcProject= projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.ETC);
+        List<Project> publisherProject = projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.PUBLISHER);
+        List<Project> designerProject = projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.DESIGNER);
+        List<Project> plannerProject = projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.PLANNER);
+        List<Project> etcProject = projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.ETC);
 
-        IndexProjectResponse indexProjectResponse = new IndexProjectResponse();
-
-        indexProjectResponse.setDeveloperProjectList(developProject.stream().map(s ->
-                ProjectBoxResponse.listBoxOf(s)
-        ).collect(Collectors.toList()));
-
-        indexProjectResponse.setPublisherProjectList(publisherProject.stream().map(s ->
-                ProjectBoxResponse.listBoxOf(s)
-        ).collect(Collectors.toList()));
-
-        indexProjectResponse.setDesignerProjectList(designerProject.stream().map(s ->
-                ProjectBoxResponse.listBoxOf(s)
-        ).collect(Collectors.toList()));
-
-        indexProjectResponse.setPlannerProjectList(plannerProject.stream().map(s ->
-                ProjectBoxResponse.listBoxOf(s)
-        ).collect(Collectors.toList()));
-
-        indexProjectResponse.setEtcProjectList(etcProject.stream().map(s ->
-                ProjectBoxResponse.listBoxOf(s)
-        ).collect(Collectors.toList()));
-
-        return indexProjectResponse;
+        return IndexProjectResponse.of(
+                developProject,
+                publisherProject,
+                designerProject,
+                plannerProject,
+                etcProject
+        );
     }
 
     @Transactional

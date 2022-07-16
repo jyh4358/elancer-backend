@@ -1,18 +1,27 @@
 package com.example.elancer.document.enterprise;
 
 import com.example.elancer.common.EnterpriseHelper;
+import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.document.common.DocumentBaseTest;
-import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancerprofile.model.FreelancerProfile;
+import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
+import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.token.jwt.JwtTokenProvider;
+import com.example.elancer.wishfreelancer.model.WishFreelancer;
+import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
+import com.example.elancer.wishprojects.repository.WishProjectRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
@@ -24,6 +33,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class EnterpriseDocumentTest extends DocumentBaseTest {
+
+    @Autowired
+    private WishFreelancerRepository wishFreelancerRepository;
+    private ProjectRepository projectRepository;
 
 
     @AfterEach
@@ -229,6 +242,44 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("sales").type("Long").description("연간 매출액")
                         )
                 ));
-
     }
+
+    @DisplayName("기업 인재 스크랩 조회 문서화")
+    @Test
+    public void 기업_인재_스크랩_조회_문서화() throws Exception{
+
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+        Freelancer freelancer = FreelancerHelper.프리랜서_생성(freelancerRepository, passwordEncoder);
+        freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
+
+        wishFreelancerRepository.save(WishFreelancer.createWishFreelancer(enterprise, freelancer));
+
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        mockMvc.perform(get("/wish-freelancer")
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("dashboard-wish-freelancer",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("freelancerSimpleResponseList").type("List<String>").description("프리랜서 요약 정보 데이터 리스트."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].freelancerNum").type("Long").description("프리랜서 식별자 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].positionName").type("String").description("프리랜서 포지션이름 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].freelancerName").type("String").description("프리랜서 이름 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].introBackGround").type("IntroBackGround").description("프리랜서 프로필 배경화면 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].careerYear").type("int").description("프리랜서 경력 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].wishState").type("boolean").description("사용자의 프리랜서 스크랩여부 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].greeting").type("String").description("프리랜서 소개말 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].skills").type("List<String>").description("프리랜서 개발자 주요스킬 정보 필드."),
+                                fieldWithPath("freelancerSimpleResponseList.[0].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드.")
+                        )
+                ));
+    }
+
 }
