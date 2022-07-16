@@ -46,8 +46,8 @@ public class DeveloperSearchRepository {
                 .innerJoin(developer.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
                 .where(builder)
-                .orderBy(developer.num.desc())
-                .offset(pageable.getPageNumber())
+//                .orderBy(developer.num.desc())
+                .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)
                 .fetch();
 
