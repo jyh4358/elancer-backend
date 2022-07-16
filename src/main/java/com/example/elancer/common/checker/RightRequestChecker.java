@@ -3,6 +3,7 @@ package com.example.elancer.common.checker;
 import com.example.elancer.common.exception.ImpossibleException;
 import com.example.elancer.common.exception.WrongRequestException;
 import com.example.elancer.enterprise.exception.EnterpriseCheckPasswordException;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.freelancer.join.exception.FreelancerCheckPasswordException;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
@@ -53,6 +54,12 @@ public class RightRequestChecker {
     public static void checkMemberAndProject(MemberDetails memberDetails, Project project) {
         if (!memberDetails.getId().equals(project.getEnterprise().getNum())) {
             throw new WrongRequestException("해당 프로젝트에 대한 권한이 없습니다.");
+        }
+    }
+
+    public static void checkEnterpriseAndRequester(MemberDetails memberDetails, Enterprise enterprise) {
+        if (!memberDetails.getId().equals(enterprise.getNum())) {
+            throw new WrongRequestException("요청자와 조회된 기업 정보가 틀립니다. 잘못된 요청입니다.");
         }
     }
 }

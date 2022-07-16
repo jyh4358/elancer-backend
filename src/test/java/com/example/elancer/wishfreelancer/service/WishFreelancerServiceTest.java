@@ -8,6 +8,7 @@ import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.wishfreelancer.dto.WishFreelancerRequest;
 import com.example.elancer.wishfreelancer.model.WishFreelancer;
 import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
 import org.assertj.core.api.Assertions;
@@ -54,8 +55,9 @@ class WishFreelancerServiceTest extends ServiceBaseTest {
 
         MemberDetails memberDetails = new MemberDetails(enterprise.getNum(), enterprise.getUserId(), enterprise.getRole());
 
+        WishFreelancerRequest wishFreelancerRequest = new WishFreelancerRequest(freelancer.getNum());
         // when
-        wishFreelancerService.addWishFreelancer(memberDetails, freelancer.getNum());
+        wishFreelancerService.addWishFreelancer(memberDetails, wishFreelancerRequest);
 
         // then
         WishFreelancer wishFreelancer = wishFreelancerRepository.findAll().get(0);

@@ -1,16 +1,18 @@
 package com.example.elancer.enterprise.service;
 
 import com.example.elancer.common.checker.RightRequestChecker;
-import com.example.elancer.enterprise.model.enterprise.Enterprise;
-import com.example.elancer.enterprise.model.enterpriseintro.*;
 import com.example.elancer.enterprise.dto.*;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterpriseintro.*;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.enterprise.repository.MainBusinessRepository;
 import com.example.elancer.enterprise.repository.SubBusinessRepository;
-import com.example.elancer.freelancer.model.Freelancer;
+import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
+import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.wishfreelancer.model.WishFreelancer;
 import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -148,20 +150,19 @@ public class EnterpriseService {
 
     }
 
-    /**
-     * 인재 스크랩 조회
-     * @param id
-     */
-    public void findScrap(Long id) {
-        Enterprise enterprise = enterpriseRepository.findScrapAndFreelancerFetchJoin(id).orElseThrow(NotExistEnterpriseException::new);
-        List<Freelancer> collect = enterprise.getHeartScraps().stream().map(scrap -> scrap.getFreelancer()).collect(Collectors.toList());
-        // todo - entityy -> dto 변환 로직 후 반환
-
-    }
-
-    public void findWishFreelancer(MemberDetails memberDetails) {
+    public FreelancerSimpleResponses findWishFreelancer(MemberDetails memberDetails) {
         RightRequestChecker.checkMemberDetail(memberDetails);
-        wishFreelancerRepository.findByEnterpriseNum(memberDetails.getId());
+        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
+        RightRequestChecker.checkEnterpriseAndRequester(memberDetails, enterprise);
+
+        List<WishFreelancer> findWishFreelancerByEnterprise = wishFreelancerRepository.findByEnterpriseNum(enterprise.getNum());
+        List<FreelancerSimpleResponse> freelancerSimpleResponses = findWishFreelancerByEnterprise.stream().map(s ->
+                FreelancerSimpleResponse.of(s.getFreelancer().getFreelancerProfile().getPosition()
+                )
+        ).collect(Collectors.toList());
+        freelancerSimpleResponses.forEach(s -> s.switchWishState());
+
+        return new FreelancerSimpleResponses(freelancerSimpleResponses);
 
     }
 

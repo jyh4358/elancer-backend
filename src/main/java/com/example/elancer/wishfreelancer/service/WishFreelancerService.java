@@ -8,6 +8,7 @@ import com.example.elancer.freelancer.exception.NotExistFreelancerException;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.wishfreelancer.dto.WishFreelancerRequest;
 import com.example.elancer.wishfreelancer.exception.NotExistWishFreelancerException;
 import com.example.elancer.wishfreelancer.model.WishFreelancer;
 import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
@@ -25,10 +26,10 @@ public class WishFreelancerService {
     private final WishFreelancerRepository wishFreelancerRepository;
 
     @Transactional
-    public void addWishFreelancer(MemberDetails memberDetails, Long freelancerNum) {
-
+    public void addWishFreelancer(MemberDetails memberDetails, WishFreelancerRequest wishFreelancerRequest) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
-        Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
+        Freelancer freelancer = freelancerRepository.findById(wishFreelancerRequest.getFreelancerNum()).orElseThrow(NotExistFreelancerException::new);
 
         WishFreelancer wishFreelancer = WishFreelancer.createWishFreelancer(enterprise, freelancer);
         wishFreelancerRepository.save(wishFreelancer);
@@ -39,6 +40,8 @@ public class WishFreelancerService {
         RightRequestChecker.checkMemberDetail(memberDetails);
         Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
 
-        wishFreelancerRepository.delete(wishFreelancerRepository.findByFreelancerNum(freelancer.getNum()).orElseThrow(NotExistWishFreelancerException::new));
+        wishFreelancerRepository.delete(
+                wishFreelancerRepository.findByFreelancerNum(freelancer.getNum()).orElseThrow(NotExistWishFreelancerException::new)
+        );
     }
 }

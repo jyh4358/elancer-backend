@@ -3,6 +3,7 @@ package com.example.elancer.enterprise.controller;
 import com.example.elancer.enterprise.dto.*;
 import com.example.elancer.enterprise.service.EnterpriseService;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
+import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -95,11 +96,11 @@ public class EnterpriseController {
     }
 
     @GetMapping("/wish-freelancer")
-    public ResponseEntity<List<FreelancerSimpleResponse>> findWishFreelancer(
+    public ResponseEntity<FreelancerSimpleResponses> findWishFreelancer(
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
-        enterpriseService.findWishFreelancer(memberDetails);
-        return null;
+        FreelancerSimpleResponses wishFreelancer = enterpriseService.findWishFreelancer(memberDetails);
+        return new ResponseEntity<>(wishFreelancer, HttpStatus.OK);
     }
 
 }
