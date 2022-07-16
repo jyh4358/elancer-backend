@@ -40,6 +40,8 @@ public class ProjectBoxResponse {
 
     private String content;
 
+    private boolean wishState;
+
     @Builder
     public ProjectBoxResponse(
             Long projectNum,
@@ -67,6 +69,7 @@ public class ProjectBoxResponse {
         this.address = address;
         this.pay = pay;
         this.content = content;
+        this.wishState = false;
     }
 
     public static ProjectBoxResponse cardBoxOf(Project project) {

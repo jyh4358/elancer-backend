@@ -2,6 +2,7 @@ package com.example.elancer.project.controller;
 
 import com.example.elancer.enterprise.dto.EnterpriseSimpleDetailResponse;
 import com.example.elancer.enterprise.service.EnterpriseService;
+import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.project.dto.*;
 import com.example.elancer.project.model.FreelancerWorkmanShip;
@@ -203,6 +204,4 @@ public class ProjectController {
         List<ProcessingProjectResponse> finishProject = projectService.findFinishProject(memberDetails);
         return new ResponseEntity<>(finishProject, HttpStatus.OK);
     }
-
-
 }

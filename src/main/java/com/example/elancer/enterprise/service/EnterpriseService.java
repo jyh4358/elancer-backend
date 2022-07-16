@@ -11,6 +11,7 @@ import com.example.elancer.enterprise.repository.MainBusinessRepository;
 import com.example.elancer.enterprise.repository.SubBusinessRepository;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.login.auth.dto.MemberDetails;
+import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class EnterpriseService {
     private final EnterpriseRepository enterpriseRepository;
     private final MainBusinessRepository mainBusinessRepository;
     private final SubBusinessRepository subBusinessRepository;
+    private final WishFreelancerRepository wishFreelancerRepository;
 
 
     /**
@@ -157,6 +159,13 @@ public class EnterpriseService {
 
     }
 
+    public void findWishFreelancer(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        wishFreelancerRepository.findByEnterpriseNum(memberDetails.getId());
+
+
+    }
+
 
     /**
      * 서비스 로직
@@ -192,5 +201,6 @@ public class EnterpriseService {
             }
         }
     }
+
 
 }

@@ -12,5 +12,5 @@ public interface WishFreelancerRepository extends JpaRepository<WishFreelancer, 
     @Query("delete from WishFreelancer w where w.enterprise = :enterpriseNum and w.freelancer = :freelancerNum")
     void deleteWithScrap(@Param("enterpriseNum") Long enterpriseNum, @Param("freelancerNum") Long freelancerNum);
 
-    List<WishFreelancer> findByEnterpriseNum(Long enterpriseNum);
+    List<WishFreelancer> findByEnterpriseNum(@Param("enter_num") Long enterpriseNum);
 }
