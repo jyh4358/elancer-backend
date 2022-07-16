@@ -1,5 +1,9 @@
 package com.example.elancer.wishfreelancer.controller;
 
+import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
+import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.repository.EnterpriseRepository;
+import com.example.elancer.freelancer.repository.FreelancerRepository;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import com.example.elancer.wishfreelancer.service.WishFreelancerService;
 import lombok.AllArgsConstructor;
@@ -33,6 +37,7 @@ public class WishFreelancerController {
             @AuthenticationPrincipal MemberDetails memberDetails,
             @PathVariable Long freelancerNum
     ) {
+
         wishFreelancerService.deleteWishFreelancer(memberDetails, freelancerNum);
         return new ResponseEntity<>(HttpStatus.OK);
     }

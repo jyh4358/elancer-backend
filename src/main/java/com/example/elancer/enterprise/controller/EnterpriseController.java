@@ -99,6 +99,7 @@ public class EnterpriseController {
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
         enterpriseService.findWishFreelancer(memberDetails);
+        return null;
     }
 
 }
