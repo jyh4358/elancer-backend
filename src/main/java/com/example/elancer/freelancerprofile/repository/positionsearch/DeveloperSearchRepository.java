@@ -3,27 +3,17 @@ package com.example.elancer.freelancerprofile.repository.positionsearch;
 import com.example.elancer.common.utils.PageUtil;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
-import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.cskill.QCSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.dbskill.QDBSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.dotnet.QDotNetSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.javascript.JavaScriptDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.javascript.QJavaScriptSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.javaskill.JavaDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.javaskill.JavaSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.javaskill.QJavaSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.QMobileAppSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.QPhpOrAspSkill;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +27,7 @@ import java.util.List;
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
 import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.freelancerProfile;
 import static com.example.elancer.freelancerprofile.model.position.developer.QDeveloper.developer;
-import static com.example.elancer.freelancerprofile.model.position.developer.cskill.QCSkill.cSkill;
+import static com.example.elancer.freelancerprofile.model.position.developer.cskill.QClangSkill.clangSkill;
 import static com.example.elancer.freelancerprofile.model.position.developer.dbskill.QDBSkill.dBSkill;
 import static com.example.elancer.freelancerprofile.model.position.developer.dotnet.QDotNetSkill.dotNetSkill;
 import static com.example.elancer.freelancerprofile.model.position.developer.javascript.QJavaScriptSkill.javaScriptSkill;
@@ -74,7 +64,7 @@ public class DeveloperSearchRepository {
                 .leftJoin(developer.phpOrAspSkills, phpOrAspSkill)
                 .leftJoin(developer.dotNetSkills, dotNetSkill)
                 .leftJoin(developer.javaScriptSkills, javaScriptSkill)
-                .leftJoin(developer.cSkills, cSkill)
+                .leftJoin(developer.cSkills, clangSkill)
                 .leftJoin(developer.dbSkills, dBSkill)
                 .distinct()
                 .where(builder)
@@ -120,7 +110,7 @@ public class DeveloperSearchRepository {
                 builder.or(javaScriptSkill.javaScriptDetailSkill.eq(JavaScriptDetailSkill.valueOf(majorSkillKeyword.toUpperCase())));
             }
             if (Arrays.stream(CDetailSkill.values()).anyMatch(cDetailSkill -> String.valueOf(cDetailSkill).equals(majorSkillKeyword.toUpperCase()))) {
-                builder.or(cSkill.cDetailSkill.eq(CDetailSkill.valueOf(majorSkillKeyword.toUpperCase())));
+                builder.or(clangSkill.cDetailSkill.eq(CDetailSkill.valueOf(majorSkillKeyword.toUpperCase())));
             }
             if (Arrays.stream(DBDetailSkill.values()).anyMatch(dbDetailSkill -> String.valueOf(dbDetailSkill).equals(majorSkillKeyword.toUpperCase()))) {
                 builder.or(dBSkill.dbDetailSkill.eq(DBDetailSkill.valueOf(majorSkillKeyword.toUpperCase())));
