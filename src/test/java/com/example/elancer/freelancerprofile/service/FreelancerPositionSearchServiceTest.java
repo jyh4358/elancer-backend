@@ -222,6 +222,33 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         developerRepository.deleteById(freelancerProfile5.getPosition().getNum());
         Developer developer5 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile5, "mysql,python", "role"));
 
+        Freelancer freelancer6 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id6");
+        freelancer6.updateFreelancer(
+                freelancer6.getName(),
+                freelancer6.getPassword(),
+                freelancer6.getEmail(),
+                freelancer6.getPhone(),
+                freelancer6.getWebsite(),
+                freelancer6.getAddress(),
+                freelancer6.getBirthDate(),
+                13,
+                3,
+                0,
+                100,
+                new ArrayList<>(),
+                null,
+                null,
+                freelancer6.getFreelancerAccountInfo().getMailReceptionState(),
+                freelancer6.getFreelancerAccountInfo().getPresentWorkState(),
+                HopeWorkState.AT_COMPANY,
+                freelancer6.getFreelancerAccountInfo().getWorkPossibleState(),
+                freelancer6.getFreelancerAccountInfo().getWorkStartPossibleDate(),
+                freelancer6.getFreelancerAccountInfo().getHopeWorkCountry(),
+                null
+        );
+        freelancerRepository.save(freelancer6);
+        FreelancerProfile freelancerProfile6 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer6, PositionType.DEVELOPER));
+
         tx.commit();
 
         entityManagerFactory.close();
@@ -278,6 +305,23 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
 
         //then
         Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(3);
+    }
+
+    @DisplayName("개발자 목록을 조건없이 검색한다.")
+    @Test
+    public void 개발자_조건없이_검색() {
+        PageRequest pageable = PageRequest.of(0, 10);
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
+                PositionType.DEVELOPER,
+                "",
+                null,
+                null,
+                null,
+                pageable, memberDetails
+        );
+
+        //then
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(6);
     }
 
     @DisplayName("개발자 목록 자바만 검색한다.")

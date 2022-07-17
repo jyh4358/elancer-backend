@@ -50,7 +50,12 @@ public class FreelancerPositionSearchService {
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        Slice<Developer> developers = developerSearchRepository.searchDevelopers(positionType, StringEditor.editStringToStringList(majorSkillKeywords), hopeWorkState, positionWorkManShip, pageable, workArea);
+        String tempSkillKeyword = majorSkillKeywords;
+        if (majorSkillKeywords.equals("")) {
+            tempSkillKeyword = null;
+        }
+
+        Slice<Developer> developers = developerSearchRepository.searchDevelopers(positionType, StringEditor.editStringToStringList(tempSkillKeyword), hopeWorkState, positionWorkManShip, pageable, workArea);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = developers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());

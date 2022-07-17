@@ -1,4 +1,4 @@
-GET http://localhost:8080/developers?positionType=DEVELOPER&majorSkillKeywords=java&hopeWorkState=&positionWorkManShip=&workArea=&page=0
+GET http://localhost:8080/developers?positionType=DEVELOPER&majorSkillKeywords=&hopeWorkState=&positionWorkManShip=&workArea=&page=0
 Content-Type: application/json
 
 

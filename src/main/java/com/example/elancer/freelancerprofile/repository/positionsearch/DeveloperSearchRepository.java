@@ -87,7 +87,7 @@ public class DeveloperSearchRepository {
     }
 
     private void eqMajorSkillConds(List<String> majorSkillKeywords, BooleanBuilder builder) {
-        if (majorSkillKeywords == null) {
+        if (majorSkillKeywords == null || majorSkillKeywords.isEmpty()) {
             return;
         }
 
