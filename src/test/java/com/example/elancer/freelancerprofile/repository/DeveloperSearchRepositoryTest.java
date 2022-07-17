@@ -77,7 +77,7 @@ class DeveloperSearchRepositoryTest {
         FreelancerProfile freelancerProfile = new FreelancerProfile("hi!", freelancer, PositionType.DEVELOPER);
         Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java,spring", "backend");
         List<JavaSkill> javaSkills = new ArrayList<>();
-        javaSkills.addAll(Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, developer), JavaSkill.createJavaSkill(JavaDetailSkill.BACKEND, developer)));
+        javaSkills.addAll(Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, developer), JavaSkill.createJavaSkill(JavaDetailSkill.BACK_END, developer)));
         List<MobileAppSkill> mobileAppSkills = new ArrayList<>();
         mobileAppSkills.addAll(Arrays.asList(MobileAppSkill.createMobileAppSkill(MobileAppDetailSkill.ANDROID, developer)));
         List<PhpOrAspSkill> phpOrAspSkills = new ArrayList<>();
@@ -85,7 +85,7 @@ class DeveloperSearchRepositoryTest {
         List<DotNetSkill> dotNetSkills = new ArrayList<>();
         dotNetSkills.addAll(Arrays.asList(DotNetSkill.createDotNetSkill(DotNetDetailSkill.C, developer)));
         List<JavaScriptSkill> javaScriptSkills = new ArrayList<>();
-        javaScriptSkills.addAll(Arrays.asList(JavaScriptSkill.createJavaScriptSkill(JavaScriptDetailSkill.ANGULAR, developer)));
+        javaScriptSkills.addAll(Arrays.asList(JavaScriptSkill.createJavaScriptSkill(JavaScriptDetailSkill.ANGULAR_JS, developer)));
         List<ClangSkill> cSkills = new ArrayList<>();
         cSkills.addAll(Arrays.asList(ClangSkill.createCSkill(CDetailSkill.EMBEDDED, developer)));
         List<DBSkill> dbSkills = new ArrayList<>();
@@ -140,7 +140,7 @@ class DeveloperSearchRepositoryTest {
         List<PhpOrAspSkill> phpOrAspSkills2 = new ArrayList<>();
         phpOrAspSkills2.addAll(Arrays.asList(PhpOrAspSkill.createPhpOrAspSkill(PhpOrAspDetailSkill.ASP, developer)));
         List<JavaScriptSkill> javaScriptSkills2 = new ArrayList<>();
-        javaScriptSkills2.addAll(Arrays.asList(JavaScriptSkill.createJavaScriptSkill(JavaScriptDetailSkill.NODEJS, developer)));
+        javaScriptSkills2.addAll(Arrays.asList(JavaScriptSkill.createJavaScriptSkill(JavaScriptDetailSkill.NODE_JS, developer)));
         List<DBSkill> dbSkills2 = new ArrayList<>();
         dbSkills2.addAll(Arrays.asList(DBSkill.createDBSkill(DBDetailSkill.ORACLE, developer), DBSkill.createDBSkill(DBDetailSkill.MYSQL, developer)));
         String etc2 = "etc2";

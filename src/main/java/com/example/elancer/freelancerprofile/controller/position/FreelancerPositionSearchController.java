@@ -28,7 +28,7 @@ public class FreelancerPositionSearchController {
     @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_DEVELOPER_SEARCH)
     public ResponseEntity<FreelancerSimpleResponses> searchDevelopers(
             @RequestParam(required = false) PositionType positionType,
-            @RequestParam(required = false) List<String> majorSkillKeywords,
+            @RequestParam(required = false) String majorSkillKeywords,
             @RequestParam(required = false) HopeWorkState hopeWorkState,
             @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
             @RequestParam(required = false) WorkArea workArea,
@@ -42,7 +42,7 @@ public class FreelancerPositionSearchController {
     @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_PUBLISHER_SEARCH)
     public ResponseEntity<FreelancerSimpleResponses> searchPublishers(
             @RequestParam(required = false) PositionType positionType,
-            @RequestParam(required = false) List<String> majorSkillKeywords,
+            @RequestParam(required = false) String majorSkillKeywords,
             @RequestParam(required = false) HopeWorkState hopeWorkState,
             @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
             @RequestParam(required = false) WorkArea workArea,
@@ -56,7 +56,7 @@ public class FreelancerPositionSearchController {
     @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_DESIGNER_SEARCH)
     public ResponseEntity<FreelancerSimpleResponses> searchDesigners(
             @RequestParam(required = false) PositionType positionType,
-            @RequestParam(required = false) List<String> majorSkillKeywords,
+            @RequestParam(required = false) String majorSkillKeywords,
             @RequestParam(required = false) HopeWorkState hopeWorkState,
             @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
             @RequestParam(required = false) WorkArea workArea,
@@ -70,7 +70,7 @@ public class FreelancerPositionSearchController {
     @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_PLANNER_SEARCH)
     public ResponseEntity<FreelancerSimpleResponses> searchPlanners(
             @RequestParam(required = false) PositionType positionType,
-            @RequestParam(required = false) List<String> majorSkillKeywords,
+            @RequestParam(required = false) String majorSkillKeywords,
             @RequestParam(required = false) HopeWorkState hopeWorkState,
             @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
             @RequestParam(required = false) WorkArea workArea,
@@ -84,7 +84,7 @@ public class FreelancerPositionSearchController {
     @GetMapping(FreelancerPositionSearchControllerPath.FREELANCER_POSITION_ETC_SEARCH)
     public ResponseEntity<FreelancerSimpleResponses> searchPositionEtc(
             @RequestParam(required = false) PositionType positionType,
-            @RequestParam(required = false) List<String> majorSkillKeywords,
+            @RequestParam(required = false) String majorSkillKeywords,
             @RequestParam(required = false) HopeWorkState hopeWorkState,
             @RequestParam(required = false) PositionWorkManShip positionWorkManShip,
             @RequestParam(required = false) WorkArea workArea,

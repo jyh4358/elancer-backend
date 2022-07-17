@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.service.position;
 
 import com.example.elancer.common.likechecker.FreelancerLikeChecker;
+import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
@@ -42,14 +43,14 @@ public class FreelancerPositionSearchService {
     @Transactional(readOnly = true)
     public FreelancerSimpleResponses searchDevelopers(
             PositionType positionType,
-            List<String> majorSkillKeywords,
+            String majorSkillKeywords,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        Slice<Developer> developers = developerSearchRepository.searchDevelopers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, pageable, workArea);
+        Slice<Developer> developers = developerSearchRepository.searchDevelopers(positionType, StringEditor.editStringToStringList(majorSkillKeywords), hopeWorkState, positionWorkManShip, pageable, workArea);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = developers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());
@@ -61,14 +62,14 @@ public class FreelancerPositionSearchService {
     @Transactional(readOnly = true)
     public FreelancerSimpleResponses searchPublishers(
             PositionType positionType,
-            List<String> majorSkillKeywords,
+            String majorSkillKeywords,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        Slice<Publisher> publishers = publisherSearchRepository.searchPublishers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable);
+        Slice<Publisher> publishers = publisherSearchRepository.searchPublishers(positionType, StringEditor.editStringToStringList(majorSkillKeywords), hopeWorkState, positionWorkManShip, workArea, pageable);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = publishers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());
@@ -80,14 +81,14 @@ public class FreelancerPositionSearchService {
     @Transactional(readOnly = true)
     public FreelancerSimpleResponses searchDesigners(
             PositionType positionType,
-            List<String> majorSkillKeywords,
+            String majorSkillKeywords,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        Slice<Designer> designers = designerSearchRepository.searchDesigners(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable);
+        Slice<Designer> designers = designerSearchRepository.searchDesigners(positionType, StringEditor.editStringToStringList(majorSkillKeywords), hopeWorkState, positionWorkManShip, workArea, pageable);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = designers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());
@@ -99,14 +100,14 @@ public class FreelancerPositionSearchService {
     @Transactional(readOnly = true)
     public FreelancerSimpleResponses searchPlanners(
             PositionType positionType,
-            List<String> majorSkillKeywords,
+            String majorSkillKeywords,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        Slice<Planner> planners = plannerSearchRepository.searchPlanners(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable);
+        Slice<Planner> planners = plannerSearchRepository.searchPlanners(positionType, StringEditor.editStringToStringList(majorSkillKeywords), hopeWorkState, positionWorkManShip, workArea, pageable);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = planners.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());
@@ -118,14 +119,14 @@ public class FreelancerPositionSearchService {
     @Transactional(readOnly = true)
     public FreelancerSimpleResponses searchPositionEtc(
             PositionType positionType,
-            List<String> majorSkillKeywords,
+            String majorSkillKeywords,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        Slice<PositionEtc> positionEtcs = positionEtcSearchRepository.searchPositionEtc(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable);
+        Slice<PositionEtc> positionEtcs = positionEtcSearchRepository.searchPositionEtc(positionType, StringEditor.editStringToStringList(majorSkillKeywords), hopeWorkState, positionWorkManShip, workArea, pageable);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = positionEtcs.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());

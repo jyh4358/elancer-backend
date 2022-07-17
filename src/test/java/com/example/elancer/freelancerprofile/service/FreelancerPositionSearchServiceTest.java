@@ -97,7 +97,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         developerRepository.deleteById(freelancerProfile1.getPosition().getNum());
         Developer javaDeveloper1 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile1, "java", "role"));
         List<JavaSkill> javaSkills = new ArrayList<>();
-        javaSkills.addAll(Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, javaDeveloper1), JavaSkill.createJavaSkill(JavaDetailSkill.BACKEND, javaDeveloper1)));
+        javaSkills.addAll(Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, javaDeveloper1), JavaSkill.createJavaSkill(JavaDetailSkill.BACK_END, javaDeveloper1)));
         List<MobileAppSkill> mobileAppSkills = new ArrayList<>();
         mobileAppSkills.addAll(Arrays.asList(MobileAppSkill.createMobileAppSkill(MobileAppDetailSkill.ANDROID, javaDeveloper1)));
         javaDeveloper1.coverDeveloperSkills(javaSkills, mobileAppSkills, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "");
@@ -252,7 +252,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
-                Arrays.asList("java", "spring"),
+                "java,spring",
                 null,
                 null,
                 null,
@@ -269,7 +269,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
-                StringEditor.editStringToStringList("spring,mysql"),
+                "spring,mysql",
                 null,
                 null,
                 null,
@@ -286,7 +286,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
-                Arrays.asList("java"),
+                "java",
                 null,
                 null,
                 null,
@@ -303,7 +303,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
-                Arrays.asList("node"),
+                "node",
                 null,
                 null,
                 null,
@@ -392,7 +392,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         PageRequest pageable = PageRequest.of(0, 10);
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
                 PositionType.DEVELOPER,
-                Arrays.asList("java", "spring"),
+                "java,spring",
                 null,
                 null,
                 null,

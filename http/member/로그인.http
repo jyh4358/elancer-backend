@@ -8,8 +8,9 @@ Content-Type: application/json
 #  "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTU3OTU4OTYsImV4cCI6MTY1NTgwMTk0NH0.v2PhnrmouUOK5u7Rm5CaiFCXD4tB3sdATfqBrfAZvDk"
 #}
 
+//  "userId": "uriRRRRR",
 
 {
-  "userId": "uriRRRRR",
+  "userId": "uriEEEEEe",
   "password": "1234"
 }

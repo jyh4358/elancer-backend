@@ -85,11 +85,11 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
         DeveloperCoverRequest developerCoverRequest = new DeveloperCoverRequest(
                 Arrays.asList("Java", "Spring"),
                 Arrays.asList("백엔드 개발자"),
-                Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACKEND),
+                Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACK_END),
                 Arrays.asList(MobileAppDetailSkill.ANDROID),
                 Arrays.asList(PhpOrAspDetailSkill.PHP),
                 Arrays.asList(DotNetDetailSkill.C),
-                Arrays.asList(JavaScriptDetailSkill.ANGULAR),
+                Arrays.asList(JavaScriptDetailSkill.ANGULAR_JS),
                 Arrays.asList(CDetailSkill.EMBEDDED),
                 Arrays.asList(DBDetailSkill.MARIADB, DBDetailSkill.MYSQL),
                 "etc"
@@ -144,7 +144,7 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
-                Arrays.asList(DesignDetailRole.APPDESIGN, DesignDetailRole.GAMEDESIGN),
+                Arrays.asList(DesignDetailRole.APP_DESIGN, DesignDetailRole.GAME_DESIGN),
                 "etcRole",
                 Arrays.asList(DesignDetailSkill.AFEREEFFECT, DesignDetailSkill.THREEDMAXANDMAYA),
                 "etcSkill"
@@ -172,7 +172,7 @@ public class FreelancerPositionIntegrateTest extends IntegrateBaseTest {
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APPPLAN), "etcField");
+        PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APP_PLAN), "etcField");
 
         //when
         mockMvc.perform(put(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_COVER)

@@ -4,10 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum JavaScriptDetailSkill {
-    NODEJS("node.js"),
-    ANGULAR("AngularJS"),
-    REACT("React.js"),
-    VUE("Vue.js"),
+    NODE_JS("node.js"),
+    ANGULAR_JS("AngularJS"),
+    REACT_JS("React.js"),
+    VUE_JS("Vue.js"),
     JQUERY("jQuery"),
     JAVASCRIPT("JavaScript")
     ;

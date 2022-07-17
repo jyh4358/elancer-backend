@@ -8,15 +8,15 @@ public enum PublishingDetailSkill {
     CSS("CSS"),
     ACTIONSCRIPT("ActionScript"),
     JQUERY("jQuery"),
-    REACT("React.js"),
-    VUE("Vue.js"),
+    REACT_JS("React.js"),
+    VUE_JS("Vue.js"),
     JAVASCRIPT("JavaScript"),
     WORDPRESS("WordPress"),
     BOOTSTRAP("BootStrap"),
     PHOTOSHOP("Photoshop"),
     FLASH("Flash"),
-    WEBACCESSIBILITY("웹접근성"),
-    WEBSTANDARD("웹표준"),
+    WEB_ACCESSIBILITY("웹접근성"),
+    WEB_STANDARD("웹표준"),
     GIT("Git")
     ;
 
