@@ -417,8 +417,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
 
         mockMvc.perform(get("/project-list?position=DEVELOPER&skill=Java")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
-                        .content(objectMapper.writeValueAsString(projectSearchCondition)))
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("project-list",
@@ -473,7 +472,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
-                "Java",
+                "Java, jsp",
                 "쇼핑몰 프로젝트",
                 5,
                 5,
@@ -492,34 +491,16 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                 enterprise
         ));
 
-        ProjectSearchCondition projectSearchCondition = new ProjectSearchCondition(
-                PositionKind.DEVELOPER,
-                Arrays.asList("java", "spring"),
-                ProjectType.BOTH_TELEWORKING_WORKING,
-                FreelancerWorkmanShip.MIDDLE,
-                "서울",
-                ""
-        );
 
-
-        mockMvc.perform(get("/project-list")
+        mockMvc.perform(get("/project-list?positionKind=DEVELOPER&skills=Java&skills=jsp")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken())
-                        .content(objectMapper.writeValueAsString(projectSearchCondition)))
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("project-list-search",
                         requestHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청"),
                                 headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
-                        ),
-                        requestFields(
-                                fieldWithPath("positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
-                                fieldWithPath("skills").type("List<String>").description("스킬"),
-                                fieldWithPath("projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\"), BOTH_TELEWORKING_WORKING(\"재택,상주\")"),
-                                fieldWithPath("freelancerWorkmanShip").type("FreelancerWorkmanShip").description("JUNIOR(\"초급\", 5), MIDDLE(\"중급\", 10), SENIOR(\"고급\", 15)"),
-                                fieldWithPath("region").type("String").description("지역1"),
-                                fieldWithPath("searchKey").type("String").description("검색 단어")
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
