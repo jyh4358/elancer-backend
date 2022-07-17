@@ -18,7 +18,7 @@ import com.example.elancer.freelancerprofile.model.position.designer.DesignSkill
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
+import com.example.elancer.freelancerprofile.model.position.developer.cskill.ClangSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetDetailSkill;
@@ -128,11 +128,11 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
         DeveloperCoverRequest developerCoverRequest = new DeveloperCoverRequest(
                 Arrays.asList("Java"),
                 Arrays.asList("백엔드 개발자"),
-                Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACK_END),
+                Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACKEND),
                 Arrays.asList(MobileAppDetailSkill.ANDROID),
                 Arrays.asList(PhpOrAspDetailSkill.PHP),
                 Arrays.asList(DotNetDetailSkill.C),
-                Arrays.asList(JavaScriptDetailSkill.ANGULAR_JS),
+                Arrays.asList(JavaScriptDetailSkill.ANGULAR),
                 Arrays.asList(CDetailSkill.EMBEDDED),
                 Arrays.asList(DBDetailSkill.MARIADB, DBDetailSkill.MYSQL),
                 "etc"
@@ -170,8 +170,8 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
         List<JavaScriptSkill> javaScriptSkills = javaScriptSkillRepository.findAll();
         Assertions.assertThat(javaScriptSkills).hasSize(1);
 
-        List<CSkill> cSkills = cSkillRepository.findAll();
-        Assertions.assertThat(cSkills).hasSize(1);
+        List<ClangSkill> clangSkills = cSkillRepository.findAll();
+        Assertions.assertThat(clangSkills).hasSize(1);
 
         List<DBSkill> dbSkills = dbSkillRepository.findAll();
         Assertions.assertThat(dbSkills).hasSize(2);
@@ -224,9 +224,9 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
-                Arrays.asList(DesignDetailRole.APP_DESIGN, DesignDetailRole.GAME_DESIGN),
+                Arrays.asList(DesignDetailRole.APPDESIGN, DesignDetailRole.GAMEDESIGN),
                 "etcRole",
-                Arrays.asList(DesignDetailSkill.AFERE_EFFECT, DesignDetailSkill.THREE_D_MAX_AND_MAYA),
+                Arrays.asList(DesignDetailSkill.AFEREEFFECT, DesignDetailSkill.THREEDMAXANDMAYA),
                 "etcSkill"
         );
 
@@ -249,13 +249,13 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
 
         List<DesignRole> designRoles = designRoleRepository.findAll();
         Assertions.assertThat(designRoles).hasSize(2);
-        Assertions.assertThat(designRoles.get(0).getDesignDetailRole()).isEqualTo(DesignDetailRole.APP_DESIGN);
-        Assertions.assertThat(designRoles.get(1).getDesignDetailRole()).isEqualTo(DesignDetailRole.GAME_DESIGN);
+        Assertions.assertThat(designRoles.get(0).getDesignDetailRole()).isEqualTo(DesignDetailRole.APPDESIGN);
+        Assertions.assertThat(designRoles.get(1).getDesignDetailRole()).isEqualTo(DesignDetailRole.GAMEDESIGN);
 
         List<DesignSkill> designSkills = designSkillRepository.findAll();
         Assertions.assertThat(designSkills).hasSize(2);
-        Assertions.assertThat(designSkills.get(0).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.AFERE_EFFECT);
-        Assertions.assertThat(designSkills.get(1).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.THREE_D_MAX_AND_MAYA);
+        Assertions.assertThat(designSkills.get(0).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.AFEREEFFECT);
+        Assertions.assertThat(designSkills.get(1).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.THREEDMAXANDMAYA);
     }
 
     @DisplayName("프리랜서 프로필 스킬이 기획자로 등록된다.")
@@ -267,7 +267,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APP_PLAN), "etcField");
+        PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APPPLAN), "etcField");
 
         MemberDetails memberDetails = MemberDetails.builder()
                 .id(freelancer.getNum())

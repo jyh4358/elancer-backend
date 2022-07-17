@@ -6,7 +6,9 @@ import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.position.developer.javaskill.JavaDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
+import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.PublishingSkill;
 import com.example.elancer.freelancerprofile.model.position.publisher.QPublishingSkill;
 import com.querydsl.core.BooleanBuilder;
@@ -19,12 +21,15 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
 import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.freelancerProfile;
 import static com.example.elancer.freelancerprofile.model.position.developer.QDeveloper.developer;
+import static com.example.elancer.freelancerprofile.model.position.developer.javaskill.QJavaSkill.javaSkill;
 import static com.example.elancer.freelancerprofile.model.position.publisher.QPublisher.publisher;
+import static com.example.elancer.freelancerprofile.model.position.publisher.QPublishingSkill.publishingSkill;
 
 @Repository
 @RequiredArgsConstructor
@@ -50,9 +55,11 @@ public class PublisherSearchRepository {
         List<Publisher> publishers = jpaQueryFactory.selectFrom(publisher)
                 .innerJoin(publisher.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
+                .leftJoin(publisher.publishingSkills, publishingSkill)
+                .distinct()
                 .where(builder)
                 .orderBy(publisher.num.desc())
-                .offset(pageable.getPageNumber())
+                .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)
                 .fetch();
 
@@ -76,6 +83,10 @@ public class PublisherSearchRepository {
 
         for (String majorSkillKeyword : majorSkillKeywords) {
             builder.or(publisher.etcSkill.containsIgnoreCase(majorSkillKeyword));
+
+            if (Arrays.stream(PublishingDetailSkill.values()).anyMatch(publishingDetailSkill -> String.valueOf(publishingDetailSkill).equals(majorSkillKeyword.toUpperCase()))) {
+                builder.or(publishingSkill.publishingDetailSkill.eq(PublishingDetailSkill.valueOf(majorSkillKeyword.toUpperCase())));
+            }
         }
     }
 

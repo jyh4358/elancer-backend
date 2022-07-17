@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum EtcDetailRole {
     PM("PM"),
     PL("PL"),
-    SYSTEM_ANALYSIS_AND_PLAN("시스템분석/설계"),
+    SYSTEMANALYSISANDPLAN("시스템분석/설계"),
     DA("DA"),
     DBA("DBA"),
     TA("TA"),

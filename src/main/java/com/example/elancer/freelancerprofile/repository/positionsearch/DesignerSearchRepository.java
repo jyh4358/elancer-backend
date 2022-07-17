@@ -5,10 +5,15 @@ import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
+import com.example.elancer.freelancerprofile.model.position.designer.QDesignRole;
+import com.example.elancer.freelancerprofile.model.position.designer.QDesignSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.QDesigner;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
+import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -18,12 +23,16 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
 import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.freelancerProfile;
+import static com.example.elancer.freelancerprofile.model.position.designer.QDesignRole.designRole;
+import static com.example.elancer.freelancerprofile.model.position.designer.QDesignSkill.designSkill;
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesigner.designer;
 import static com.example.elancer.freelancerprofile.model.position.publisher.QPublisher.publisher;
+import static com.example.elancer.freelancerprofile.model.position.publisher.QPublishingSkill.publishingSkill;
 
 @Repository
 @RequiredArgsConstructor
@@ -49,9 +58,12 @@ public class DesignerSearchRepository {
         List<Designer> designers = jpaQueryFactory.selectFrom(designer)
                 .innerJoin(designer.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
+                .leftJoin(designer.designRoles, designRole)
+                .leftJoin(designer.designSkills, designSkill)
+                .distinct()
                 .where(builder)
                 .orderBy(designer.num.desc())
-                .offset(pageable.getPageNumber())
+                .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)
                 .fetch();
 
@@ -75,6 +87,14 @@ public class DesignerSearchRepository {
 
         for (String majorSkillKeyword : majorSkillKeywords) {
             builder.or(designer.etcSkill.containsIgnoreCase(majorSkillKeyword)).or(designer.etcRole.containsIgnoreCase(majorSkillKeyword));
+
+            if (Arrays.stream(DesignDetailRole.values()).anyMatch(designDetailRole -> String.valueOf(designDetailRole).equals(majorSkillKeyword.toUpperCase()))) {
+                builder.or(designRole.designDetailRole.eq(DesignDetailRole.valueOf(majorSkillKeyword.toUpperCase())));
+            }
+
+            if (Arrays.stream(DesignDetailSkill.values()).anyMatch(designDetailSkill -> String.valueOf(designDetailSkill).equals(majorSkillKeyword.toUpperCase()))) {
+                builder.or(designSkill.designDetailSkill.eq(DesignDetailSkill.valueOf(majorSkillKeyword.toUpperCase())));
+            }
         }
     }
 
