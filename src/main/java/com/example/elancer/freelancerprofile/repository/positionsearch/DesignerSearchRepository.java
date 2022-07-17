@@ -8,14 +8,7 @@ import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
-import com.example.elancer.freelancerprofile.model.position.designer.QDesignRole;
-import com.example.elancer.freelancerprofile.model.position.designer.QDesignSkill;
-import com.example.elancer.freelancerprofile.model.position.designer.QDesigner;
-import com.example.elancer.freelancerprofile.model.position.developer.Developer;
-import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
-import com.example.elancer.freelancerprofile.model.position.publisher.PublishingDetailSkill;
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -31,8 +24,6 @@ import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.fre
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesignRole.designRole;
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesignSkill.designSkill;
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesigner.designer;
-import static com.example.elancer.freelancerprofile.model.position.publisher.QPublisher.publisher;
-import static com.example.elancer.freelancerprofile.model.position.publisher.QPublishingSkill.publishingSkill;
 
 @Repository
 @RequiredArgsConstructor

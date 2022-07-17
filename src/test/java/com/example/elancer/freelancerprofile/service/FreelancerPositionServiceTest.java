@@ -128,11 +128,11 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
         DeveloperCoverRequest developerCoverRequest = new DeveloperCoverRequest(
                 Arrays.asList("Java"),
                 Arrays.asList("백엔드 개발자"),
-                Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACKEND),
+                Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACK_END),
                 Arrays.asList(MobileAppDetailSkill.ANDROID),
                 Arrays.asList(PhpOrAspDetailSkill.PHP),
                 Arrays.asList(DotNetDetailSkill.C),
-                Arrays.asList(JavaScriptDetailSkill.ANGULAR),
+                Arrays.asList(JavaScriptDetailSkill.ANGULAR_JS),
                 Arrays.asList(CDetailSkill.EMBEDDED),
                 Arrays.asList(DBDetailSkill.MARIADB, DBDetailSkill.MYSQL),
                 "etc"
@@ -224,7 +224,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
-                Arrays.asList(DesignDetailRole.APPDESIGN, DesignDetailRole.GAMEDESIGN),
+                Arrays.asList(DesignDetailRole.APP_DESIGN, DesignDetailRole.GAME_DESIGN),
                 "etcRole",
                 Arrays.asList(DesignDetailSkill.AFEREEFFECT, DesignDetailSkill.THREEDMAXANDMAYA),
                 "etcSkill"
@@ -249,8 +249,8 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
 
         List<DesignRole> designRoles = designRoleRepository.findAll();
         Assertions.assertThat(designRoles).hasSize(2);
-        Assertions.assertThat(designRoles.get(0).getDesignDetailRole()).isEqualTo(DesignDetailRole.APPDESIGN);
-        Assertions.assertThat(designRoles.get(1).getDesignDetailRole()).isEqualTo(DesignDetailRole.GAMEDESIGN);
+        Assertions.assertThat(designRoles.get(0).getDesignDetailRole()).isEqualTo(DesignDetailRole.APP_DESIGN);
+        Assertions.assertThat(designRoles.get(1).getDesignDetailRole()).isEqualTo(DesignDetailRole.GAME_DESIGN);
 
         List<DesignSkill> designSkills = designSkillRepository.findAll();
         Assertions.assertThat(designSkills).hasSize(2);
@@ -267,7 +267,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APPPLAN), "etcField");
+        PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APP_PLAN), "etcField");
 
         MemberDetails memberDetails = MemberDetails.builder()
                 .id(freelancer.getNum())

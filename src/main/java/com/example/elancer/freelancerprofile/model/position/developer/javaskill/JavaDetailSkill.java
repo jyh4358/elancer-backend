@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum JavaDetailSkill {
-    FRONTEND("Front-End"),
-    BACKEND("Back-End"),
+    FRONT_END("Front-End"),
+    BACK_END("Back-End"),
     SPRING("Spring"),
     XPLATFORM("Xplatform"),
     MIPLATFORM("Miplatform"),

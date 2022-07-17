@@ -104,11 +104,11 @@ class FreelancerPositionFindServiceTest {
         MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         Developer developer = Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile, "java, spring", "backend");
-        List<JavaSkill> javaSkills = Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, developer), JavaSkill.createJavaSkill(JavaDetailSkill.BACKEND, developer));
+        List<JavaSkill> javaSkills = Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, developer), JavaSkill.createJavaSkill(JavaDetailSkill.BACK_END, developer));
         List<MobileAppSkill> mobileAppSkills = Arrays.asList(MobileAppSkill.createMobileAppSkill(MobileAppDetailSkill.ANDROID, developer));
         List<PhpOrAspSkill> phpOrAspSkills = Arrays.asList(PhpOrAspSkill.createPhpOrAspSkill(PhpOrAspDetailSkill.PHP, developer));
         List<DotNetSkill> dotNetSkills = Arrays.asList(DotNetSkill.createDotNetSkill(DotNetDetailSkill.C, developer));
-        List<JavaScriptSkill> javaScriptSkills = Arrays.asList(JavaScriptSkill.createJavaScriptSkill(JavaScriptDetailSkill.ANGULAR, developer));
+        List<JavaScriptSkill> javaScriptSkills = Arrays.asList(JavaScriptSkill.createJavaScriptSkill(JavaScriptDetailSkill.ANGULAR_JS, developer));
         List<ClangSkill> cSkills = Arrays.asList(ClangSkill.createCSkill(CDetailSkill.EMBEDDED, developer));
         List<DBSkill> dbSkills = Arrays.asList(DBSkill.createDBSkill(DBDetailSkill.MARIADB, developer), DBSkill.createDBSkill(DBDetailSkill.MYSQL, developer));
         String etc = "etc";
@@ -181,7 +181,7 @@ class FreelancerPositionFindServiceTest {
         MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         Designer designer = Designer.createBasicDesigner(PositionType.DESIGNER, freelancerProfile);
-        List<DesignRole> designRoles = Arrays.asList(DesignRole.createDesignRole(DesignDetailRole.APPDESIGN, designer), DesignRole.createDesignRole(DesignDetailRole.GAMEDESIGN, designer));
+        List<DesignRole> designRoles = Arrays.asList(DesignRole.createDesignRole(DesignDetailRole.APP_DESIGN, designer), DesignRole.createDesignRole(DesignDetailRole.GAME_DESIGN, designer));
         List<DesignSkill> designSkills = Arrays.asList(DesignSkill.createDesignSkill(DesignDetailSkill.FLASH, designer));
         String etcRole = "etcRole";
         String etcSkill = "etcSkill";
@@ -217,7 +217,7 @@ class FreelancerPositionFindServiceTest {
         MemberDetails memberDetails = MemberDetails.userDetailsFrom(freelancer);
 
         Planner planner = Planner.createBasicPlanner(PositionType.PLANNER, freelancerProfile);
-        List<PlannerField> plannerFields = Arrays.asList(PlannerField.createPlannerField(PlannerDetailField.APPPLAN, planner), PlannerField.createPlannerField(PlannerDetailField.WEBPLAN, planner));
+        List<PlannerField> plannerFields = Arrays.asList(PlannerField.createPlannerField(PlannerDetailField.APP_PLAN, planner), PlannerField.createPlannerField(PlannerDetailField.WEB_PLAN, planner));
         String etcField = "etcField";
         planner.coverAllField(plannerFields, etcField);
 

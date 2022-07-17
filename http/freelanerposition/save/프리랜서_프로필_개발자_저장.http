@@ -1,5 +1,7 @@
-PUT http://localhost:8080/freelancer-profile/5/developer
+PUT http://localhost:8080/freelancer-profile/developer
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cmlFRUVFRWUiLCJpYXQiOjE2NTgwNDQ2MjMsImV4cCI6MTY1ODA0NDc0M30.CURpjjIgUdM_Osaq4eCDLBMhko4vUBYcdgwD3C4W9P8
+
 
 #info
 # JavaDetailSkill 구성 {
@@ -88,13 +90,13 @@ Content-Type: application/json
 #req
 {
   "focusSkills": [
-    "java", "spring"
+    "jsp", "mybatis"
   ],
   "roles": [
     "백엔드 개발자"
   ],
   "javaDetailSkills": [
-    "BACK_END", "SPRING"
+    "JENKINS", "SPRING"
   ],
   "mobileAppDetailSkills": [
     "HYBRID"
@@ -106,7 +108,7 @@ Content-Type: application/json
     "ASP_DOT_NET"
   ],
   "javaScriptDetailSkills": [
-    "NODE_JS"
+    "NODEJS"
   ],
   "cDetailSkills": [
     "SERVER"
