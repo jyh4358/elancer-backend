@@ -3,7 +3,7 @@ package com.example.elancer.freelancerprofile.dto.request.position;
 import com.example.elancer.common.validatemessages.PositionRequestMessages;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
+import com.example.elancer.freelancerprofile.model.position.developer.cskill.ClangSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetDetailSkill;
@@ -92,12 +92,12 @@ public class DeveloperCoverRequest {
                 .collect(Collectors.toList());
     }
 
-    public List<CSkill> toCSkill(Developer developer) {
+    public List<ClangSkill> toCSkill(Developer developer) {
         if (this.cDetailSkills == null) {
             return new ArrayList<>();
         }
         return this.cDetailSkills.stream()
-                .map(cDetailSkill -> CSkill.createCSkill(cDetailSkill, developer))
+                .map(cDetailSkill -> ClangSkill.createCSkill(cDetailSkill, developer))
                 .collect(Collectors.toList());
     }
 

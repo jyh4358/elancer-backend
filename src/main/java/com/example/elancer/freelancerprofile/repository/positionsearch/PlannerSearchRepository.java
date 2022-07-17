@@ -5,9 +5,12 @@ import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
+import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
 import com.example.elancer.freelancerprofile.model.position.planner.Planner;
+import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
 import com.example.elancer.freelancerprofile.model.position.planner.QPlanner;
+import com.example.elancer.freelancerprofile.model.position.planner.QPlannerField;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -17,12 +20,15 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
 import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.freelancerProfile;
+import static com.example.elancer.freelancerprofile.model.position.designer.QDesignSkill.designSkill;
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesigner.designer;
 import static com.example.elancer.freelancerprofile.model.position.planner.QPlanner.planner;
+import static com.example.elancer.freelancerprofile.model.position.planner.QPlannerField.plannerField;
 import static com.example.elancer.freelancerprofile.model.position.publisher.QPublisher.publisher;
 
 @Repository
@@ -49,9 +55,11 @@ public class PlannerSearchRepository {
         List<Planner> planners = jpaQueryFactory.selectFrom(planner)
                 .innerJoin(planner.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
+                .leftJoin(planner.plannerFields, plannerField)
+                .distinct()
                 .where(builder)
                 .orderBy(planner.num.desc())
-                .offset(pageable.getPageNumber())
+                .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)
                 .fetch();
 
@@ -75,6 +83,10 @@ public class PlannerSearchRepository {
 
         for (String majorSkillKeyword : majorSkillKeywords) {
             builder.or(planner.etcField.containsIgnoreCase(majorSkillKeyword));
+
+            if (Arrays.stream(PlannerDetailField.values()).anyMatch(plannerDetailField -> String.valueOf(plannerDetailField).equals(majorSkillKeyword.toUpperCase()))) {
+                builder.or(plannerField.plannerDetailField.eq(PlannerDetailField.valueOf(majorSkillKeyword.toUpperCase())));
+            }
         }
     }
 

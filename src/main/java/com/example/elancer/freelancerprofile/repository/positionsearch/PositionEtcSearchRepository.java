@@ -6,8 +6,11 @@ import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
+import com.example.elancer.freelancerprofile.model.position.etc.EtcDetailRole;
 import com.example.elancer.freelancerprofile.model.position.etc.PositionEtc;
+import com.example.elancer.freelancerprofile.model.position.etc.QEtcRole;
 import com.example.elancer.freelancerprofile.model.position.etc.QPositionEtc;
+import com.example.elancer.freelancerprofile.model.position.planner.PlannerDetailField;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -17,12 +20,15 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
 import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.freelancerProfile;
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesigner.designer;
+import static com.example.elancer.freelancerprofile.model.position.etc.QEtcRole.etcRole;
 import static com.example.elancer.freelancerprofile.model.position.etc.QPositionEtc.positionEtc;
+import static com.example.elancer.freelancerprofile.model.position.planner.QPlannerField.plannerField;
 import static com.example.elancer.freelancerprofile.model.position.publisher.QPublisher.publisher;
 
 @Repository
@@ -49,9 +55,11 @@ public class PositionEtcSearchRepository {
         List<PositionEtc> positionEtcs = jpaQueryFactory.selectFrom(positionEtc)
                 .innerJoin(positionEtc.freelancerProfile, freelancerProfile).fetchJoin()
                 .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
+                .leftJoin(positionEtc.etcRoles, etcRole)
+                .distinct()
                 .where(builder)
                 .orderBy(positionEtc.num.desc())
-                .offset(pageable.getPageNumber())
+                .offset(pageable.getOffset())
                 .limit(pageable.getPageSize() + 1)
                 .fetch();
 
@@ -75,6 +83,10 @@ public class PositionEtcSearchRepository {
 
         for (String majorSkillKeyword : majorSkillKeywords) {
             builder.or(positionEtc.positionEtcField.containsIgnoreCase(majorSkillKeyword));
+
+            if (Arrays.stream(EtcDetailRole.values()).anyMatch(etcDetailRole -> String.valueOf(etcDetailRole).equals(majorSkillKeyword.toUpperCase()))) {
+                builder.or(etcRole.etcDetailRole.eq(EtcDetailRole.valueOf(majorSkillKeyword.toUpperCase())));
+            }
         }
     }
 

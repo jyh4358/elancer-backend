@@ -1,10 +1,9 @@
 package com.example.elancer.freelancerprofile.model.position.developer;
 
-import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.Position;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
-import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
+import com.example.elancer.freelancerprofile.model.position.developer.cskill.ClangSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.javascript.JavaScriptSkill;
@@ -17,7 +16,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -53,7 +51,7 @@ public class Developer extends Position {
     private List<JavaScriptSkill> javaScriptSkills = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "developer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CSkill> cSkills = new ArrayList<>();
+    private List<ClangSkill> cSkills = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "developer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DBSkill> dbSkills = new ArrayList<>();
@@ -105,7 +103,7 @@ public class Developer extends Position {
             List<PhpOrAspSkill> phpOrAspSkills,
             List<DotNetSkill> dotNetSkills,
             List<JavaScriptSkill> javaScriptSkills,
-            List<CSkill> cOrCPlusplusSkills,
+            List<ClangSkill> cOrCPlusplusSkills,
             List<DBSkill> dbSkills,
             String etcSkill
     ) {
@@ -151,10 +149,10 @@ public class Developer extends Position {
         this.dotNetSkills = dbSkills;
     }
 
-    private void coverCSkills(List<CSkill> cSkills) {
+    private void coverCSkills(List<ClangSkill> cSkills) {
         this.cSkills.clear();
-        for (CSkill cSkill : cSkills) {
-            cSkill.setDeveloper(this);
+        for (ClangSkill clangSkill : cSkills) {
+            clangSkill.setDeveloper(this);
         }
         this.cSkills = cSkills;
     }

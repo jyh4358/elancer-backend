@@ -12,6 +12,7 @@ import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.etc.PositionEtc;
 import com.example.elancer.freelancerprofile.model.position.planner.Planner;
 import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
+import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
 import com.example.elancer.freelancerprofile.repository.positionsearch.DesignerSearchRepository;
 import com.example.elancer.freelancerprofile.repository.positionsearch.DeveloperSearchRepository;
 import com.example.elancer.freelancerprofile.repository.positionsearch.PlannerSearchRepository;

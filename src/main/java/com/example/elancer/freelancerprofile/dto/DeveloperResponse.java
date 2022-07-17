@@ -3,7 +3,7 @@ package com.example.elancer.freelancerprofile.dto;
 import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
 import com.example.elancer.freelancerprofile.model.position.developer.cskill.CDetailSkill;
-import com.example.elancer.freelancerprofile.model.position.developer.cskill.CSkill;
+import com.example.elancer.freelancerprofile.model.position.developer.cskill.ClangSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dbskill.DBSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.dotnet.DotNetDetailSkill;
@@ -59,7 +59,7 @@ public class DeveloperResponse {
                         .map(JavaScriptSkill::getJavaScriptDetailSkill)
                         .collect(Collectors.toList()),
                 developer.getCSkills().stream()
-                        .map(CSkill::getCDetailSkill)
+                        .map(ClangSkill::getCDetailSkill)
                         .collect(Collectors.toList()),
                 developer.getDbSkills().stream()
                         .map(DBSkill::getDbDetailSkill)

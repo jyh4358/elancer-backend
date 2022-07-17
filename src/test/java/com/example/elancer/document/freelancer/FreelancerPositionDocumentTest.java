@@ -84,11 +84,11 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
         DeveloperCoverRequest developerCoverRequest = new DeveloperCoverRequest(
                 Arrays.asList("Java", "Spring"),
                 Arrays.asList("백엔드 개발자"),
-                Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACK_END),
+                Arrays.asList(JavaDetailSkill.SPRING, JavaDetailSkill.BACKEND),
                 Arrays.asList(MobileAppDetailSkill.ANDROID),
                 Arrays.asList(PhpOrAspDetailSkill.PHP),
                 Arrays.asList(DotNetDetailSkill.C),
-                Arrays.asList(JavaScriptDetailSkill.ANGULAR_JS),
+                Arrays.asList(JavaScriptDetailSkill.ANGULAR),
                 Arrays.asList(CDetailSkill.EMBEDDED),
                 Arrays.asList(DBDetailSkill.MARIADB, DBDetailSkill.MYSQL),
                 "etc"
@@ -163,9 +163,9 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
         DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
-                Arrays.asList(DesignDetailRole.APP_DESIGN, DesignDetailRole.GAME_DESIGN),
+                Arrays.asList(DesignDetailRole.APPDESIGN, DesignDetailRole.GAMEDESIGN),
                 "etcRole",
-                Arrays.asList(DesignDetailSkill.AFERE_EFFECT, DesignDetailSkill.THREE_D_MAX_AND_MAYA),
+                Arrays.asList(DesignDetailSkill.AFEREEFFECT, DesignDetailSkill.THREEDMAXANDMAYA),
                 "etcSkill"
         );
 
@@ -199,7 +199,7 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
 
         FreelancerProfile freelancerProfile = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer, PositionType.DEVELOPER));
 
-        PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APP_PLAN), "etcField");
+        PlannerCoverRequest plannerCoverRequest = new PlannerCoverRequest(Arrays.asList(PlannerDetailField.ACCOUNTING, PlannerDetailField.APPPLAN), "etcField");
 
         //when & then
         mockMvc.perform(put(FreelancerPositionControllerPath.FREELANCER_PROFILE_POSITION_PLANNER_COVER)

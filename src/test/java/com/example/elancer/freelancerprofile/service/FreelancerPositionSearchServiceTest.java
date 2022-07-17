@@ -3,6 +3,7 @@ package com.example.elancer.freelancerprofile.service;
 import com.example.elancer.common.EnterpriseHelper;
 import com.example.elancer.common.FreelancerHelper;
 import com.example.elancer.common.basetest.ServiceBaseTest;
+import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
@@ -12,6 +13,10 @@ import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.developer.Developer;
+import com.example.elancer.freelancerprofile.model.position.developer.javaskill.JavaDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.developer.javaskill.JavaSkill;
+import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppDetailSkill;
+import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppSkill;
 import com.example.elancer.freelancerprofile.repository.FreelancerProfileRepository;
 import com.example.elancer.freelancerprofile.repository.position.developer.DeveloperRepository;
 import com.example.elancer.freelancerprofile.service.position.FreelancerPositionSearchService;
@@ -32,6 +37,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
 
@@ -89,8 +95,14 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         freelancerRepository.save(freelancer1);
         FreelancerProfile freelancerProfile1 = freelancerProfileRepository.save(new FreelancerProfile("greeting", freelancer1, PositionType.DEVELOPER));
         developerRepository.deleteById(freelancerProfile1.getPosition().getNum());
-        Developer javaDeveloper1 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile1, "java,spring", "role"));
+        Developer javaDeveloper1 = developerRepository.save(Developer.createBasicDeveloper(PositionType.DEVELOPER, freelancerProfile1, "java", "role"));
+        List<JavaSkill> javaSkills = new ArrayList<>();
+        javaSkills.addAll(Arrays.asList(JavaSkill.createJavaSkill(JavaDetailSkill.SPRING, javaDeveloper1), JavaSkill.createJavaSkill(JavaDetailSkill.BACKEND, javaDeveloper1)));
+        List<MobileAppSkill> mobileAppSkills = new ArrayList<>();
+        mobileAppSkills.addAll(Arrays.asList(MobileAppSkill.createMobileAppSkill(MobileAppDetailSkill.ANDROID, javaDeveloper1)));
+        javaDeveloper1.coverDeveloperSkills(javaSkills, mobileAppSkills, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "");
         freelancerProfile1.coverPosition(javaDeveloper1);
+        developerRepository.save(javaDeveloper1);
 
         Freelancer freelancer2 = FreelancerHelper.프리랜서_생성_아이디(freelancerRepository, passwordEncoder, "id2");
         freelancer2.updateFreelancer(
@@ -248,7 +260,24 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         );
 
         //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(3);
+    }
+
+    @DisplayName("개발자 목록을 모든 스킬 검색한다.")
+    @Test
+    public void 개발자_모든스킬_검색() {
+        PageRequest pageable = PageRequest.of(0, 10);
+        FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchDevelopers(
+                PositionType.DEVELOPER,
+                StringEditor.editStringToStringList("spring,mysql"),
+                null,
+                null,
+                null,
+                pageable, memberDetails
+        );
+
+        //then
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(3);
     }
 
     @DisplayName("개발자 목록 자바만 검색한다.")
@@ -371,7 +400,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         );
 
         //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(3);
         //TODO false 다시봐야함.
         Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList().get(1).isWishState()).isFalse();
     }

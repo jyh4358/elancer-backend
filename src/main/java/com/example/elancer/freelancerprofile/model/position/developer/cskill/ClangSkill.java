@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CSkill extends BasicEntity {
+public class ClangSkill extends BasicEntity {
 
     @Enumerated(EnumType.STRING)
     private CDetailSkill cDetailSkill;
@@ -23,13 +23,13 @@ public class CSkill extends BasicEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Developer developer;
 
-    public CSkill(CDetailSkill cDetailSkill, Developer developer) {
+    public ClangSkill(CDetailSkill cDetailSkill, Developer developer) {
         this.cDetailSkill = cDetailSkill;
         this.developer = developer;
     }
 
-    public static CSkill createCSkill(CDetailSkill cDetailSkill, Developer developer) {
-        return new CSkill(cDetailSkill, developer);
+    public static ClangSkill createCSkill(CDetailSkill cDetailSkill, Developer developer) {
+        return new ClangSkill(cDetailSkill, developer);
     }
 
     public void setDeveloper(Developer developer) {
