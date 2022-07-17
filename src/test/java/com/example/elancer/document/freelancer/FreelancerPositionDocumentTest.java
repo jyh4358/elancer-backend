@@ -165,7 +165,7 @@ public class FreelancerPositionDocumentTest extends DocumentBaseTest {
         DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
                 Arrays.asList(DesignDetailRole.APP_DESIGN, DesignDetailRole.GAME_DESIGN),
                 "etcRole",
-                Arrays.asList(DesignDetailSkill.AFEREEFFECT, DesignDetailSkill.THREEDMAXANDMAYA),
+                Arrays.asList(DesignDetailSkill.AFERE_EFFECT, DesignDetailSkill.THREE_D_MAX_AND_MAYA),
                 "etcSkill"
         );
 

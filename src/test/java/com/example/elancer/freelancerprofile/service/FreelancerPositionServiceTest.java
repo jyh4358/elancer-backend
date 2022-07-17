@@ -226,7 +226,7 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
         DesignerCoverRequest designerCoverRequest = new DesignerCoverRequest(
                 Arrays.asList(DesignDetailRole.APP_DESIGN, DesignDetailRole.GAME_DESIGN),
                 "etcRole",
-                Arrays.asList(DesignDetailSkill.AFEREEFFECT, DesignDetailSkill.THREEDMAXANDMAYA),
+                Arrays.asList(DesignDetailSkill.AFERE_EFFECT, DesignDetailSkill.THREE_D_MAX_AND_MAYA),
                 "etcSkill"
         );
 
@@ -254,8 +254,8 @@ class FreelancerPositionServiceTest extends ServiceBaseTest {
 
         List<DesignSkill> designSkills = designSkillRepository.findAll();
         Assertions.assertThat(designSkills).hasSize(2);
-        Assertions.assertThat(designSkills.get(0).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.AFEREEFFECT);
-        Assertions.assertThat(designSkills.get(1).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.THREEDMAXANDMAYA);
+        Assertions.assertThat(designSkills.get(0).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.AFERE_EFFECT);
+        Assertions.assertThat(designSkills.get(1).getDesignDetailSkill()).isEqualTo(DesignDetailSkill.THREE_D_MAX_AND_MAYA);
     }
 
     @DisplayName("프리랜서 프로필 스킬이 기획자로 등록된다.")

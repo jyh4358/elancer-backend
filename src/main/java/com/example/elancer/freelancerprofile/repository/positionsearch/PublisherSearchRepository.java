@@ -46,7 +46,6 @@ public class PublisherSearchRepository {
     ) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        builder.and(publisher.positionType.eq(positionType));
         eqMajorSkillConds(majorSkillConditions, builder);
         eqHopeWorkStateConds(hopeWorkState, builder);
         eqPositionWorkShipConds(positionWorkManShip, builder);
@@ -77,7 +76,7 @@ public class PublisherSearchRepository {
     }
 
     private void eqMajorSkillConds(List<String> majorSkillKeywords, BooleanBuilder builder) {
-        if (majorSkillKeywords == null) {
+        if (majorSkillKeywords == null || majorSkillKeywords.isEmpty()) {
             return;
         }
 
