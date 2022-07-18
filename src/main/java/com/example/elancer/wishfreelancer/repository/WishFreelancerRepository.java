@@ -16,5 +16,5 @@ public interface WishFreelancerRepository extends JpaRepository<WishFreelancer, 
     void deleteWithScrap( Long freelancerNum);
 
     List<WishFreelancer> findByEnterpriseNum(@Param("enter_num") Long enterpriseNum);
-    Optional<WishFreelancer> findByFreelancerNum(@Param("free_num") Long freelancerNum);
+    Optional<WishFreelancer> findByFreelancerNumAndEnterpriseNum(Long freelancerNum, Long enterpriseNum);
 }

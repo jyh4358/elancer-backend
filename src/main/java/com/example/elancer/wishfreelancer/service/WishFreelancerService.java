@@ -31,7 +31,7 @@ public class WishFreelancerService {
 
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
         Freelancer freelancer = freelancerRepository.findById(wishFreelancerRequest.getFreelancerNum()).orElseThrow(NotExistFreelancerException::new);
-        if (wishFreelancerRepository.findByFreelancerNum(enterprise.getNum()).isPresent()) {
+        if (wishFreelancerRepository.findByFreelancerNumAndEnterpriseNum(freelancer.getNum(), enterprise.getNum()).isPresent()) {
             throw new PresentWishFreelancerException();
         }
 
@@ -45,7 +45,7 @@ public class WishFreelancerService {
         Freelancer freelancer = freelancerRepository.findById(freelancerNum).orElseThrow(NotExistFreelancerException::new);
 
         wishFreelancerRepository.delete(
-                wishFreelancerRepository.findByFreelancerNum(freelancer.getNum()).orElseThrow(NotExistWishFreelancerException::new)
+                wishFreelancerRepository.findByFreelancerNumAndEnterpriseNum(freelancer.getNum(), memberDetails.getId()).orElseThrow(NotExistWishFreelancerException::new)
         );
     }
 }
