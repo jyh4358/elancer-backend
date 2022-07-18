@@ -56,7 +56,7 @@ public class ProjectSearchRepository {
             return;
         }
         builder.and(project.projectName.containsIgnoreCase(searchKey))
-                .or(project.projectName.containsIgnoreCase(searchKey));
+                .or(project.content.containsIgnoreCase(searchKey));
     }
 
     private void projectReginContain(String region, BooleanBuilder builder) {
