@@ -46,7 +46,6 @@ public class PlannerSearchRepository {
     ) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        builder.and(planner.positionType.eq(positionType));
         eqMajorSkillConds(majorSkillConditions, builder);
         eqHopeWorkStateConds(hopeWorkState, builder);
         eqPositionWorkShipConds(positionWorkManShip, builder);

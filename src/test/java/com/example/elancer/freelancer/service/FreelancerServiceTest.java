@@ -36,8 +36,6 @@ import com.example.elancer.project.model.ProjectType;
 import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.waitproject.model.WaitProject;
 import com.example.elancer.waitproject.repsitory.WaitProjectRepository;
-import com.example.elancer.wishfreelancer.model.WishFreelancer;
-import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
 import com.example.elancer.wishprojects.model.WishProject;
 import com.example.elancer.wishprojects.repository.WishProjectRepository;
 import org.assertj.core.api.Assertions;
@@ -91,7 +89,6 @@ class FreelancerServiceTest extends ServiceBaseTest {
                 .role(freelancer.getRole())
                 .build();
 
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("fileName", "fileOriginName", null, (byte[]) null);
         FreelancerAccountCoverRequest freelancerAccountCoverRequest = new FreelancerAccountCoverRequest(
                 "멤버이름",
                 "패스워드",
@@ -106,7 +103,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
                 "중원구",
                 Arrays.asList(FreelancerWorkType.ACCOUNTING, FreelancerWorkType.BIGDATA),
                 null,
-                mockMultipartFile,
+                "path",
                 9,
                 5,
                 400,
@@ -213,7 +210,7 @@ class FreelancerServiceTest extends ServiceBaseTest {
         Assertions.assertThat(updatedFreelancer.getAddress().getZipcode()).isEqualTo(freelancerAccountInfo.getZipcode());
         Assertions.assertThat(updatedFreelancer.getAddress().getMainAddress()).isEqualTo(freelancerAccountInfo.getMainAddress());
         Assertions.assertThat(updatedFreelancer.getAddress().getDetailAddress()).isEqualTo(freelancerAccountInfo.getDetailAddress());
-        Assertions.assertThat(updatedFreelancer.getCareerFormFileName()).isNull();
+        Assertions.assertThat(updatedFreelancer.getCareerFormFilePath()).isNull();
         Assertions.assertThat(updatedFreelancer.getFreelancerAccountInfo().getWorkEtcField()).isEqualTo(freelancerAccountInfo.getWorkEtcField());
         Assertions.assertThat(updatedFreelancer.getFreelancerAccountInfo().getCareerYear()).isEqualTo(freelancerAccountInfo.getCareerYear());
         Assertions.assertThat(updatedFreelancer.getFreelancerAccountInfo().getCareerMonth()).isEqualTo(freelancerAccountInfo.getCareerMonth());

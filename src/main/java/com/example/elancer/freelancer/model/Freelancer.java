@@ -128,12 +128,12 @@ public class Freelancer extends Member {
         this.careerForm = careerForm;
     }
 
-    public String getCareerFormFileName() {
+    public String getCareerFormFilePath() {
         if (this.careerForm == null) {
             return null;
         }
 
-        return this.careerForm.getFileName();
+        return this.careerForm.getFilePath();
     }
 
     public List<FreelancerWorkType> getFreelancerWorkTypesInFreelancer() {

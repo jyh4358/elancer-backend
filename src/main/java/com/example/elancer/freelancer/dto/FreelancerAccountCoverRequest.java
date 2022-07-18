@@ -53,7 +53,7 @@ public class FreelancerAccountCoverRequest {
     private List<FreelancerWorkType> freelancerWorkTypes;
     private String workEtcField;
 
-    private MultipartFile careerForm;
+    private String careerForm;
 
     @NotNull(message = FreelancerRequestMessages.FREELANCER_CAREER_YEAR_NULL_MESSAGE)
     private int careerYear;

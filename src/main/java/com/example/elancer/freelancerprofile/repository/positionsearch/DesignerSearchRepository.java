@@ -40,7 +40,6 @@ public class DesignerSearchRepository {
     ) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        builder.and(designer.positionType.eq(positionType));
         eqMajorSkillConds(majorSkillConditions, builder);
         eqHopeWorkStateConds(hopeWorkState, builder);
         eqPositionWorkShipConds(positionWorkManShip, builder);

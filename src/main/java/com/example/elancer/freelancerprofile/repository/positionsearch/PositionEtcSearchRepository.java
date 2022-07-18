@@ -46,7 +46,6 @@ public class PositionEtcSearchRepository {
     ) {
         BooleanBuilder builder = new BooleanBuilder();
 
-        builder.and(positionEtc.positionType.eq(positionType));
         eqMajorSkillConds(majorSkillConditions, builder);
         eqHopeWorkStateConds(hopeWorkState, builder);
         eqPositionWorkShipConds(positionWorkManShip, builder);

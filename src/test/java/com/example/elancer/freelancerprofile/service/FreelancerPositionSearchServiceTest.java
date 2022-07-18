@@ -406,7 +406,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         );
 
         //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(3);
     }
 
     @DisplayName("개발자 목록 주요스킬과 근무형태를 상주로 검색한다.")
@@ -423,7 +423,7 @@ class FreelancerPositionSearchServiceTest extends ServiceBaseTest {
         );
 
         //then
-        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(2);
+        Assertions.assertThat(freelancerSimpleResponses.getFreelancerSimpleResponseList()).hasSize(3);
     }
 
     @DisplayName("개발자 목록 검색시 인재스크랩과 겹치면 해당 인스턴스의 좋아요가 활성된다.")

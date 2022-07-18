@@ -14,19 +14,17 @@ import javax.persistence.OneToOne;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CareerForm extends BasicEntity {
 
-    private String fileName;
     private String filePath;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Freelancer freelancer;
 
-    public CareerForm(String fileName, String filePath, Freelancer freelancer) {
-        this.fileName = fileName;
+    public CareerForm(String filePath, Freelancer freelancer) {
         this.filePath = filePath;
         this.freelancer = freelancer;
     }
 
-    public static CareerForm createCareerForm(String fileName, String filePath, Freelancer freelancer) {
-        return new CareerForm(fileName, filePath, freelancer);
+    public static CareerForm createCareerForm(String filePath, Freelancer freelancer) {
+        return new CareerForm(filePath, freelancer);
     }
 }

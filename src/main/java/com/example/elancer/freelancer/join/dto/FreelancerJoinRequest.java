@@ -39,5 +39,5 @@ public class FreelancerJoinRequest {
     private PositionType positionType;
     @NotNull
     private LocalDate workStartPossibleDate;
-    private MultipartFile thumbnail;
+    private String thumbnail;
 }
