@@ -33,7 +33,6 @@ public class FreelancerService {
     private final FreelancerRepository freelancerRepository;
     private final CareerFormRepository careerFormRepository;
     private final PasswordEncoder passwordEncoder;
-    private final S3UploadService s3UploadService;
     private final ApplyProjectRepository applyProjectRepository;
     private final InterviewProjectRepository interviewProjectRepository;
     private final WaitProjectSearchRepository waitProjectSearchRepository;
@@ -82,11 +81,7 @@ public class FreelancerService {
             return;
         }
 
-        CareerForm careerForm = CareerForm.createCareerForm(
-                freelancerAccountCoverRequest.getCareerForm().getName(),
-                s3UploadService.uploadForMultiFile(freelancerAccountCoverRequest.getCareerForm()),
-                freelancer
-        );
+        CareerForm careerForm = CareerForm.createCareerForm(freelancerAccountCoverRequest.getCareerForm(), freelancer);
         careerFormRepository.save(careerForm);
     }
 

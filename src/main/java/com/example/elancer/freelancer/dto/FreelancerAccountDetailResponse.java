@@ -1,6 +1,5 @@
 package com.example.elancer.freelancer.dto;
 
-import com.example.elancer.freelancer.model.CareerForm;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancer.model.FreelancerAccountInfo;
 import com.example.elancer.freelancer.model.FreelancerThumbnail;
@@ -65,7 +64,7 @@ public class FreelancerAccountDetailResponse {
                 Optional.ofNullable(freelancer.getAddress()).map(Address::getDetailAddress).orElse(null),
                 freelancer.getFreelancerWorkTypesInFreelancer(),
                 Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getWorkEtcField).orElse(null),
-                freelancer.getCareerFormFileName(),
+                freelancer.getCareerFormFilePath(),
                 Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getCareerYear).orElse(null),
                 Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getCareerMonth).orElse(null),
                 Optional.ofNullable(freelancer.getFreelancerAccountInfo()).map(FreelancerAccountInfo::getHopeMonthMinPay).orElse(null),

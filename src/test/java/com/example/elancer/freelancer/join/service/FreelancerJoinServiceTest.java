@@ -38,7 +38,6 @@ class FreelancerJoinServiceTest extends ServiceBaseTest {
     public void 프리랜서_가입() {
         //given
         String fileName = "testFileName";
-        MockMultipartFile thumbnail = new MockMultipartFile(fileName, fileName, null, (byte[]) null);
 
         FreelancerJoinRequest freelancerJoinRequest = new FreelancerJoinRequest(
                 "name",
@@ -51,7 +50,7 @@ class FreelancerJoinServiceTest extends ServiceBaseTest {
                 WorkPossibleState.POSSIBLE,
                 PositionType.DEVELOPER,
                 LocalDate.of(2021, 02, 01),
-                thumbnail
+                "path"
         );
 
         //when

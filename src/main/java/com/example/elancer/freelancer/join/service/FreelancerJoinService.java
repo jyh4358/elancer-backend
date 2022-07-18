@@ -27,7 +27,6 @@ public class FreelancerJoinService {
     private final PasswordEncoder bCryptPasswordEncoder;
     private final FreelancerProfileRepository freelancerProfileRepository;
     private final FreelancerThumbnailRepository freelancerThumbnailRepository;
-    private final S3UploadService s3UploadService;
 
     @Transactional
     public void joinFreelancer(FreelancerJoinRequest freelancerJoinRequest) {
@@ -58,8 +57,7 @@ public class FreelancerJoinService {
             return;
         }
 
-        String thumbnailPath = s3UploadService.uploadForMultiFile(freelancerJoinRequest.getThumbnail());
-        freelancerThumbnailRepository.save(FreelancerThumbnail.createFreelancerThumbnail(thumbnailPath, savedFreelancer));
+        freelancerThumbnailRepository.save(FreelancerThumbnail.createFreelancerThumbnail(freelancerJoinRequest.getThumbnail(), savedFreelancer));
     }
 
     private void initializeFreelancerProfile(Freelancer savedFreelancer, PositionType positionType) {
