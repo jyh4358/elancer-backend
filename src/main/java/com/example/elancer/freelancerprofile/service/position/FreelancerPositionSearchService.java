@@ -177,6 +177,8 @@ public class FreelancerPositionSearchService {
             hasNext = true;
         }
 
+        FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, responses, wishFreelancerRepository);
+
         return new FreelancerSimpleResponses(responses, hasNext);
     }
 }

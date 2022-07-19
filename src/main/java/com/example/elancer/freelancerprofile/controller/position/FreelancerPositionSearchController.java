@@ -99,7 +99,7 @@ public class FreelancerPositionSearchController {
 
     @GetMapping(FreelancerProfileFindControllerPath.FREELANCER_SEARCH_KEYWORD)
     public ResponseEntity<FreelancerSimpleResponses> searchFreelancerByKeyword(
-            @RequestParam("keyword") String keyword,
+            @RequestParam("searchKey") String keyword,
             @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 1) Pageable pageable,
             @AuthenticationPrincipal MemberDetails memberDetails
     ) {
