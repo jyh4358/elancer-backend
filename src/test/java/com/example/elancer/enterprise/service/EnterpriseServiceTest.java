@@ -60,7 +60,8 @@ class EnterpriseServiceTest extends ServiceBaseTest {
                 new Address(CountryType.CN, "경기도", "주소1", "주소2"),
                 "쇼핑몰",
                 200000000L,
-                "111-111-111"
+                "111-111-111",
+                "수정 thumbnail"
         );
 
         // when

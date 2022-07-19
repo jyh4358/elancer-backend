@@ -498,6 +498,15 @@ include::{snippets}/enterprise-profile/http-response.adoc[]
 include::{snippets}/enterprise-profile/response-headers.adoc[]
 include::{snippets}/enterprise-profile/response-fields.adoc[]
 
+[[resources-enterprise-thumbnail]]
+== 기업 썸내일 조회
+요청
+include::{snippets}/enterprise-thumbnail/http-request.adoc[]
+응답
+include::{snippets}/enterprise-thumbnail/http-response.adoc[]
+include::{snippets}/enterprise-thumbnail/response-headers.adoc[]
+include::{snippets}/enterprise-thumbnail/response-fields.adoc[]
+
 
 
 [[resources-enterprise-profile-find]]

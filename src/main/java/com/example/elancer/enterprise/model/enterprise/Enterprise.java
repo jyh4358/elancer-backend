@@ -49,12 +49,10 @@ public class Enterprise extends Member {
 
     private Long sales;
     @NotNull
-    @Column(name = "idNumber")
     private String idNumber;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idPhoto_id")
-    private IdPhoto idPhoto;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "enterprise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EnterpriseThumbnail enterpriseThumbnail;
 
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "enDetails_id", unique = true)
@@ -69,7 +67,7 @@ public class Enterprise extends Member {
                       String phone, String email, MemberType role,
                       String companyName, int companyPeople, String position,
                       String telNumber, String website, Address address,
-                      String bizContents, Long sales, String idNumber, IdPhoto idPhoto) {
+                      String bizContents, Long sales, String idNumber, EnterpriseThumbnail enterpriseThumbnail) {
 
         super(userId, password, name, phone, email, website, address, role);
         this.companyName = companyName;
@@ -79,7 +77,7 @@ public class Enterprise extends Member {
         this.bizContents = bizContents;
         this.sales = sales;
         this.idNumber = idNumber;
-        this.idPhoto = idPhoto;
+        this.enterpriseThumbnail = enterpriseThumbnail;
     }
 
     public void initialIntro(EnterpriseIntro enterpriseIntro) {
@@ -129,5 +127,6 @@ public class Enterprise extends Member {
         heartScraps.add(heartScrap);
         heartScrap.insertEnterprise(this);
     }
+
 
 }
