@@ -65,7 +65,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                 "주요 사업",
                 10000000L,
                 "사업자 번호(123-123-123)",
-                "www.thumbnailUrl.com"
+                "www.thumbnailUrl.com",
+                "www.fileUrl.com"
         );
 
         mockMvc.perform(post("/enterprise")
@@ -96,7 +97,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("bizContents").type("String").description("회원 주요 사업내용 필드"),
                                 fieldWithPath("sales").type("Long").description("회원 연간 매출액 필드"),
                                 fieldWithPath("idNumber").type("String").description("회원 사업자 번호 필드"),
-                                fieldWithPath("thumbnail").type("String").description("썸네일 url")
+                                fieldWithPath("thumbnail").type("String").description("썸네일 url"),
+                                fieldWithPath("bizRegistrationFile").type("String").description("파일 url")
                         )
                 ));
     }
@@ -122,7 +124,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                 "쇼핑몰",
                 200000000L,
                 "111-111-111",
-                "수정 Thumbnail"
+                "수정 Thumbnail",
+                "fileUrl"
         );
 
         mockMvc.perform(put("/enterprise")
@@ -154,7 +157,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
                                 fieldWithPath("sales").type("Long").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자등록번호"),
-                                fieldWithPath("thumbnail").type("String").description("썸내일")
+                                fieldWithPath("thumbnail").type("String").description("썸내일"),
+                                fieldWithPath("bizRegistration").type("String").description("저장된 파일 주소")
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
@@ -175,7 +179,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
                                 fieldWithPath("sales").type("Long").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자등록번호"),
-                                fieldWithPath("thumbnail").type("String").description("썸내일")
+                                fieldWithPath("thumbnail").type("String").description("썸내일"),
+                                fieldWithPath("bizRegistration").type("String").description("저장된 파일 주소")
                         )
                 ));
     }
@@ -214,7 +219,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
                                 fieldWithPath("sales").type("Long").description("연간 매출액"),
                                 fieldWithPath("idNumber").type("String").description("사업자등록번호"),
-                                fieldWithPath("thumbnail").type("String").description("썸내일")
+                                fieldWithPath("thumbnail").type("String").description("썸내일"),
+                                fieldWithPath("bizRegistration").type("String").description("저장된 파일 주소")
 
                         )
                 ));

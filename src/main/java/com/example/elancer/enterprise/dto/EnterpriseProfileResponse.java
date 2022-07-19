@@ -1,6 +1,7 @@
 package com.example.elancer.enterprise.dto;
 
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.EnterpriseBizRegistration;
 import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseMainBiz;
 import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseSubBiz;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter @Setter
@@ -27,6 +29,8 @@ public class EnterpriseProfileResponse {
     private String mainEtc;
     private List<String> subBizCodes = new ArrayList<>();
     private String subEtc;
+
+    private String bizRegistration;
 
 
     public static EnterpriseProfileResponse of(Enterprise enterprise) {
@@ -62,7 +66,8 @@ public class EnterpriseProfileResponse {
                 mainBizCodes,
                 mainEtc,
                 subBizCodes,
-                subEtc
+                subEtc,
+                Optional.ofNullable(enterprise.getEnterpriseBizRegistration()).map(EnterpriseBizRegistration::getFilePath).orElse(null)
         );
     }
 }

@@ -27,4 +27,6 @@ public class EnterpriseProfileRequest {
     private List<String> subBizCodes = new ArrayList<>();
     private String subEtc;
 
+    private String bizRegistration;
+
 }

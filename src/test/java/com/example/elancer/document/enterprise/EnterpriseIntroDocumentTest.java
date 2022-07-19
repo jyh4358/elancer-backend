@@ -74,7 +74,8 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                 mainBizCodes,
                 "",
                 subBizCodes,
-                "업무 분야 기타"
+                "업무 분야 기타",
+                "사업자 등록증 url"
         );
 
 
@@ -99,7 +100,8 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("mainBizCodes").type("List<String>").description("사업 분야"),
                                 fieldWithPath("mainEtc").type("String").description("사업 분야 기타"),
                                 fieldWithPath("subBizCodes").type("List<String>").description("업무 분야"),
-                                fieldWithPath("subEtc").type("String").description("업무 분야 기타")
+                                fieldWithPath("subEtc").type("String").description("업무 분야 기타"),
+                                fieldWithPath("bizRegistration").type("String").description("사업자 등록증 url")
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답 ")
@@ -112,7 +114,8 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("mainBizCodes").type("List<String>").description("사업 분야"),
                                 fieldWithPath("mainEtc").type("String").description("사업 분야 기타"),
                                 fieldWithPath("subBizCodes").type("List<String>").description("업무 분야"),
-                                fieldWithPath("subEtc").type("String").description("업무 분야 기타")
+                                fieldWithPath("subEtc").type("String").description("업무 분야 기타"),
+                                fieldWithPath("bizRegistration").type("String").description("사업자 등록증 url")
                         )
                 ));
     }
@@ -149,7 +152,8 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                 mainBizCodes,
                 "",
                 subBizCodes,
-                "업무 분야 기타"
+                "업무 분야 기타",
+                "사업자 등록증 url"
         );
 
         enterpriseService.updateIntro(memberDetails, enterpriseProfileRequest);
@@ -174,7 +178,8 @@ public class EnterpriseIntroDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("mainBizCodes").type("List<String>").description("사업 분야"),
                                 fieldWithPath("mainEtc").type("String").description("사업 분야 기타"),
                                 fieldWithPath("subBizCodes").type("List<String>").description("업무 분야"),
-                                fieldWithPath("subEtc").type("String").description("업무 분야 기타")
+                                fieldWithPath("subEtc").type("String").description("업무 분야 기타"),
+                                fieldWithPath("bizRegistration").type("String").description("사업자 등록증 url")
                         )
                 ));
 

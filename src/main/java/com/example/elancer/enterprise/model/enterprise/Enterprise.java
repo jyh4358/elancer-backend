@@ -54,6 +54,9 @@ public class Enterprise extends Member {
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "enterprise", cascade = CascadeType.ALL, orphanRemoval = true)
     private EnterpriseThumbnail enterpriseThumbnail;
 
+    @OneToOne(fetch = LAZY, mappedBy = "enterprise", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EnterpriseBizRegistration enterpriseBizRegistration;
+
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "enDetails_id", unique = true)
     private EnterpriseIntro enterpriseIntro;

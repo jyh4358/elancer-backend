@@ -1,6 +1,7 @@
 package com.example.elancer.enterprise.dto;
 
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.EnterpriseBizRegistration;
 import com.example.elancer.enterprise.model.enterprise.EnterpriseThumbnail;
 import com.example.elancer.freelancer.model.FreelancerThumbnail;
 import com.example.elancer.member.domain.Address;
@@ -27,6 +28,7 @@ public class EnterpriseAccountDetailResponse {
     private Long sales;
     private String idNumber;
     private String thumbnail;
+    private String bizRegistration;
 
     public static EnterpriseAccountDetailResponse of(Enterprise enterprise) {
         return EnterpriseAccountDetailResponse.builder()
@@ -43,6 +45,7 @@ public class EnterpriseAccountDetailResponse {
                 .sales(enterprise.getSales())
                 .idNumber(enterprise.getIdNumber())
                 .thumbnail(Optional.ofNullable(enterprise.getEnterpriseThumbnail()).map(EnterpriseThumbnail::getThumbnailPath).orElse(null))
+                .bizRegistration(Optional.ofNullable(enterprise.getEnterpriseBizRegistration()).map(EnterpriseBizRegistration::getFilePath).orElse(null))
                 .build();
     }
 }

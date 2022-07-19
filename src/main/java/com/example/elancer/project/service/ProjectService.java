@@ -146,6 +146,7 @@ public class ProjectService {
 
     public ProjectListCount projectCount(MemberDetails memberDetails) {
         RightRequestChecker.checkMemberDetail(memberDetails);
+        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
         List<Project> findProjects = projectRepository.findByEnterprise_Num(memberDetails.getId());
         List<Long> findProjectNumList = findProjects.stream().map(s -> s.getNum()).collect(Collectors.toList());
 
@@ -153,8 +154,8 @@ public class ProjectService {
                 applyProjectRepository.countByProject_NumGroupByProject_Num(findProjectNumList).size(),
                 interviewProjectRepository.countInterviewProject(findProjectNumList).size(),
                 waitProjectRepository.countWaitProject(findProjectNumList).size(),
-                projectRepository.countByProjectStatus(ProjectStatus.PROGRESS).intValue(),
-                projectRepository.countByProjectStatus(ProjectStatus.COMPLETION).intValue()
+                projectRepository.countByProjectStatusAndEnterpriseNum(ProjectStatus.PROGRESS, enterprise.getNum()).intValue(),
+                projectRepository.countByProjectStatusAndEnterpriseNum(ProjectStatus.COMPLETION, enterprise.getNum()).intValue()
         );
         // todo - 기업이 등록한 진행 프로젝트, 완료 프로젝트 검색하기
 

@@ -61,7 +61,8 @@ class EnterpriseServiceTest extends ServiceBaseTest {
                 "쇼핑몰",
                 200000000L,
                 "111-111-111",
-                "수정 thumbnail"
+                "수정 thumbnail",
+                "수정 file url"
         );
 
         // when

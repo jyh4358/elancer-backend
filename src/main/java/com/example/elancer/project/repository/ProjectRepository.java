@@ -28,6 +28,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
                                                    @Param("waitStatus")WaitStatus waitStatus);
 
     Long countByProjectStatus(ProjectStatus projectStatus);
+    Long countByProjectStatusAndEnterpriseNum(ProjectStatus projectStatus, Long enterpriseNum);
 
     List<Project> findTop3ByPositionKindOrderByNumDesc(PositionKind developer);
 

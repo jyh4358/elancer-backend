@@ -5,12 +5,10 @@ import com.example.elancer.enterprise.dto.*;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.EnterpriseBizRegistration;
 import com.example.elancer.enterprise.model.enterprise.EnterpriseThumbnail;
 import com.example.elancer.enterprise.model.enterpriseintro.*;
-import com.example.elancer.enterprise.repository.EnterpriseRepository;
-import com.example.elancer.enterprise.repository.EnterpriseThumbnailRepository;
-import com.example.elancer.enterprise.repository.MainBusinessRepository;
-import com.example.elancer.enterprise.repository.SubBusinessRepository;
+import com.example.elancer.enterprise.repository.*;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.login.auth.dto.MemberDetails;
@@ -37,6 +35,8 @@ public class EnterpriseService {
     private final SubBusinessRepository subBusinessRepository;
     private final WishFreelancerRepository wishFreelancerRepository;
     private final EnterpriseThumbnailRepository enterpriseThumbnailRepository;
+    private final EnterpriseBizRegistrationRepository enterpriseBizRegistrationRepository;
+
 
 
     /**
@@ -69,6 +69,7 @@ public class EnterpriseService {
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(EnterpriseCheckUserIdException::new);
 
         updateThumbnail(enterpriseUpdateRequest.getThumbnail(), enterprise);
+        updateBizRegistration(enterpriseUpdateRequest.getBizRegistration(), enterprise);
 
 
         if (StringUtils.hasText(enterpriseUpdateRequest.getPassword1())) {
@@ -113,6 +114,7 @@ public class EnterpriseService {
     }
 
 
+
     /**
      * 기업 프로필 정보 조회
      * @param memberDetails
@@ -145,6 +147,8 @@ public class EnterpriseService {
 
 
         EnterpriseIntro enterpriseIntro = EnterpriseIntro.of(enterpriseProfileRequest.getIntroTitle(), enterpriseMainBizs, enterpriseSubBizs, enterprise);
+
+        updateBizRegistration(enterpriseProfileRequest.getBizRegistration(), enterprise);
 
         enterprise.updateIntro(enterpriseIntro,
                 enterpriseProfileRequest.getBizContents(),
@@ -231,6 +235,17 @@ public class EnterpriseService {
             enterpriseThumbnailRepository.save(EnterpriseThumbnail.createEnterpriseThumbnail(thumbnail, enterprise));
         } else {
             enterprise.getEnterpriseThumbnail().updateThumbnailpath(thumbnail);
+        }
+    }
+
+    private void updateBizRegistration(String fileUrl, Enterprise enterprise) {
+        if (fileUrl == null) {
+            return;
+        }
+        if (enterprise.getEnterpriseBizRegistration() == null) {
+            enterpriseBizRegistrationRepository.save(EnterpriseBizRegistration.createEnterpriseBizRegistration(fileUrl, enterprise));
+        } else {
+            enterprise.getEnterpriseBizRegistration().updateBizRegistration(fileUrl);
         }
     }
 

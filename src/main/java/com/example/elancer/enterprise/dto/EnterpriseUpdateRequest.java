@@ -52,6 +52,8 @@ public class EnterpriseUpdateRequest {
 
     private String thumbnail;
 
+    private String bizRegistration;
+
     // todo - 이후에 사업자 등록증 파일 구현
 
 

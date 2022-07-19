@@ -53,6 +53,8 @@ public class EnterpriseJoinRequest {
 
     private String thumbnail;
 
+    private String bizRegistrationFile;
+
     // todo - 이후에 사업자 등록증 파일 구현
 
 

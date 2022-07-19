@@ -52,7 +52,8 @@ class EnterpriseJoinServiceTest extends ServiceBaseTest {
                 "주요 사업",
                 10000000L,
                 "사업자 번호(123-123-123)",
-                "www.thumbnailUrl.com"
+                "www.thumbnailUrl.com",
+                "www.fileUrl.com"
         );
 
         //when
@@ -101,7 +102,8 @@ class EnterpriseJoinServiceTest extends ServiceBaseTest {
                 "주요 사업",
                 10000000L,
                 "사업자 번호(123-123-123)",
-                "www.thumbnailUrl.com"
+                "www.thumbnailUrl.com",
+                "www.fileUrl.com"
         );
         EnterpriseJoinRequest enterpriseJoinRequest2 = new EnterpriseJoinRequest(
                 "testid",
@@ -119,7 +121,8 @@ class EnterpriseJoinServiceTest extends ServiceBaseTest {
                 "주요 사업2",
                 10000000L,
                 "사업자 번호(123-123-123)2",
-                "www.thumbnailUrl.com"
+                "www.thumbnailUrl.com",
+                "www.fileUrl.com"
         );
 
         //when
@@ -153,7 +156,8 @@ class EnterpriseJoinServiceTest extends ServiceBaseTest {
                 "주요 사업",
                 10000000L,
                 "사업자 번호(123-123-123)",
-                "www.thumbnailUrl.com"
+                "www.thumbnailUrl.com",
+                "www.fileUrl.com"
         );
 
         //when, then
