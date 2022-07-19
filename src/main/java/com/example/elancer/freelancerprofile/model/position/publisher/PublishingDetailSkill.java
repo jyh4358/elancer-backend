@@ -8,7 +8,7 @@ public enum PublishingDetailSkill {
     CSS("CSS"),
     ACTIONSCRIPT("ActionScript"),
     JQUERY("jQuery"),
-    REACT_JS("React.js"),
+    REACT("React.js"),
     VUE_JS("Vue.js"),
     JAVASCRIPT("JavaScript"),
     WORDPRESS("WordPress"),
