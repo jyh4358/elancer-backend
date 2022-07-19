@@ -2,7 +2,6 @@ package com.example.elancer.enterprise.controller;
 
 import com.example.elancer.enterprise.dto.*;
 import com.example.elancer.enterprise.service.EnterpriseService;
-import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
 import com.example.elancer.login.auth.dto.MemberDetails;
 import lombok.RequiredArgsConstructor;
@@ -10,16 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
 public class EnterpriseController {
 
     private final EnterpriseService enterpriseService;
-
 
     /**
      * 기업 정보 조회
@@ -101,6 +100,14 @@ public class EnterpriseController {
     ) {
         FreelancerSimpleResponses wishFreelancer = enterpriseService.findWishFreelancer(memberDetails);
         return new ResponseEntity<>(wishFreelancer, HttpStatus.OK);
+    }
+
+    @GetMapping("/enterprise-thumbnail")
+    public ResponseEntity<EnterpriseThumbnailResponse> getThumbnail(
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        EnterpriseThumbnailResponse enterpriseThumbnailResponse = enterpriseService.findThumbnail(memberDetails);
+        return new ResponseEntity<>(enterpriseThumbnailResponse, HttpStatus.OK);
     }
 
 }

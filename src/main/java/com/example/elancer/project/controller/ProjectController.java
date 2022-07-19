@@ -53,9 +53,9 @@ public class ProjectController {
             @RequestParam(required = false) PositionKind positionKind,
             @RequestParam(required = false) List<String> skills,
             @RequestParam(required = false) ProjectType projectType,
-            @RequestParam(required = false) FreelancerWorkmanShip freelancerWorkmanShip,
             @RequestParam(required = false) String region,
             @RequestParam(required = false) String searchKey,
+            @RequestParam(required = false) FreelancerWorkmanShip freelancerWorkmanShip,
             @PageableDefault(size = 10, sort = "num",direction = Sort.Direction.DESC) Pageable pageable
 
     ) {

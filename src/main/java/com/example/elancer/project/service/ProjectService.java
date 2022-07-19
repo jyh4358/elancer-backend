@@ -156,6 +156,7 @@ public class ProjectService {
                 projectRepository.countByProjectStatus(ProjectStatus.PROGRESS).intValue(),
                 projectRepository.countByProjectStatus(ProjectStatus.COMPLETION).intValue()
         );
+        // todo - 기업이 등록한 진행 프로젝트, 완료 프로젝트 검색하기
 
         return projectListCount;
     }

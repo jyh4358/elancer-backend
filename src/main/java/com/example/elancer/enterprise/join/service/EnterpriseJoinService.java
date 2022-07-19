@@ -1,10 +1,12 @@
 package com.example.elancer.enterprise.join.service;
 
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.EnterpriseThumbnail;
 import com.example.elancer.enterprise.model.enterpriseintro.EnterpriseIntro;
 import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
+import com.example.elancer.enterprise.repository.EnterpriseThumbnailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,7 @@ public class EnterpriseJoinService {
     private final EnterpriseRepository enterpriseRepository;
     private final PasswordEncoder bCryptPasswordEncoder;
 //    private final EnterpriseProfileRepository enterpriseProfileRepository;
-//    private final EnterpriseThumbnailRepository enterpriseThumbnailRepository;
+    private final EnterpriseThumbnailRepository enterpriseThumbnailRepository;
 
     @Transactional
     public void joinEnterprise(EnterpriseJoinRequest enterpriseJoinRequest) {
@@ -30,8 +32,17 @@ public class EnterpriseJoinService {
         EnterpriseIntro enterpriseIntro = EnterpriseIntro.initializeFrom(enterprise.getName());
         enterprise.initialIntro(enterpriseIntro);
 
-        enterpriseRepository.save(enterprise);
+        Enterprise savedEnterprise = enterpriseRepository.save(enterprise);
 
+        saveEnterpriseThumbnail(enterpriseJoinRequest, savedEnterprise);
+
+    }
+
+    private void saveEnterpriseThumbnail(EnterpriseJoinRequest enterpriseJoinRequest, Enterprise savedEnterprise) {
+        if (enterpriseJoinRequest.getThumbnail() == null) {
+            return;
+        }
+        enterpriseThumbnailRepository.save(EnterpriseThumbnail.createEnterpriseThumbnail(enterpriseJoinRequest.getThumbnail(), savedEnterprise));
     }
 
 

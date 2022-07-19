@@ -2,7 +2,10 @@ package com.example.elancer.enterprise.dto;
 
 
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.EnterpriseThumbnail;
 import lombok.*;
+
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -10,6 +13,8 @@ import lombok.*;
 @Builder
 public class EnterpriseDashBoardProfileResponse {
 
+
+    private String name;
     private int expertise;
     private int scheduleAdherence;
     private int initiative;
@@ -23,8 +28,11 @@ public class EnterpriseDashBoardProfileResponse {
 
     private Long sales;
 
+    private String thumbnail;
+
     public static EnterpriseDashBoardProfileResponse of(Enterprise enterprise) {
         return EnterpriseDashBoardProfileResponse.builder()
+                .name(enterprise.getName())
                 .expertise(enterprise.getWorkAssessment().getExpertise())
                 .scheduleAdherence(enterprise.getWorkAssessment().getScheduleAdherence())
                 .initiative(enterprise.getWorkAssessment().getInitiative())
@@ -34,6 +42,7 @@ public class EnterpriseDashBoardProfileResponse {
                 .enterpriseType((enterprise.getSales() < 30_000_000_000L) ? "중소기업" : "중견기업")
                 .idNumber(enterprise.getIdNumber())
                 .sales(enterprise.getSales())
+                .thumbnail(Optional.ofNullable(enterprise.getEnterpriseThumbnail()).map(EnterpriseThumbnail::getThumbnailPath).orElse(null))
                 .build();
     }
 

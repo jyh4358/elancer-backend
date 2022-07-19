@@ -6,6 +6,8 @@ import com.example.elancer.document.common.DocumentBaseTest;
 import com.example.elancer.enterprise.dto.EnterpriseJoinRequest;
 import com.example.elancer.enterprise.dto.EnterpriseUpdateRequest;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.EnterpriseThumbnail;
+import com.example.elancer.enterprise.repository.EnterpriseThumbnailRepository;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.freelancerprofile.model.FreelancerProfile;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -13,11 +15,9 @@ import com.example.elancer.integrate.enterprise.EnterpriseLoginHelper;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.member.domain.CountryType;
 import com.example.elancer.member.dto.MemberLoginResponse;
-import com.example.elancer.project.repository.ProjectRepository;
 import com.example.elancer.token.jwt.JwtTokenProvider;
 import com.example.elancer.wishfreelancer.model.WishFreelancer;
 import com.example.elancer.wishfreelancer.repository.WishFreelancerRepository;
-import com.example.elancer.wishprojects.repository.WishProjectRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,9 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
 
     @Autowired
     private WishFreelancerRepository wishFreelancerRepository;
-    private ProjectRepository projectRepository;
+
+    @Autowired
+    private EnterpriseThumbnailRepository enterpriseThumbnailRepository;
 
 
     @AfterEach
@@ -62,7 +64,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                 new Address(CountryType.KR, "123", "주소1", "주소2"),
                 "주요 사업",
                 10000000L,
-                "사업자 번호(123-123-123)"
+                "사업자 번호(123-123-123)",
+                "www.thumbnailUrl.com"
         );
 
         mockMvc.perform(post("/enterprise")
@@ -92,7 +95,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("bizContents").type("String").description("회원 주요 사업내용 필드"),
                                 fieldWithPath("sales").type("Long").description("회원 연간 매출액 필드"),
-                                fieldWithPath("idNumber").type("String").description("회원 사업자 번호 필드")
+                                fieldWithPath("idNumber").type("String").description("회원 사업자 번호 필드"),
+                                fieldWithPath("thumbnail").type("String").description("썸네일 url")
                         )
                 ));
     }
@@ -117,7 +121,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                 new Address(CountryType.CN, "경기도", "주소1", "주소2"),
                 "쇼핑몰",
                 200000000L,
-                "111-111-111"
+                "111-111-111",
+                "수정 Thumbnail"
         );
 
         mockMvc.perform(put("/enterprise")
@@ -148,7 +153,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
                                 fieldWithPath("sales").type("Long").description("연간 매출액"),
-                                fieldWithPath("idNumber").type("String").description("사업자등록번호")
+                                fieldWithPath("idNumber").type("String").description("사업자등록번호"),
+                                fieldWithPath("thumbnail").type("String").description("썸내일")
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
@@ -168,7 +174,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
                                 fieldWithPath("sales").type("Long").description("연간 매출액"),
-                                fieldWithPath("idNumber").type("String").description("사업자등록번호")
+                                fieldWithPath("idNumber").type("String").description("사업자등록번호"),
+                                fieldWithPath("thumbnail").type("String").description("썸내일")
                         )
                 ));
     }
@@ -206,7 +213,9 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("address.detailAddress").type("String").description("회원 상세 주소 필드"),
                                 fieldWithPath("bizContents").type("String").description("주요 사업내용"),
                                 fieldWithPath("sales").type("Long").description("연간 매출액"),
-                                fieldWithPath("idNumber").type("String").description("사업자등록번호")
+                                fieldWithPath("idNumber").type("String").description("사업자등록번호"),
+                                fieldWithPath("thumbnail").type("String").description("썸내일")
+
                         )
                 ));
 
@@ -231,6 +240,7 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
                         ),
                         responseFields(
+                                fieldWithPath("name").type("String").description("관리자 이름"),
                                 fieldWithPath("expertise").type("int").description("전문성"),
                                 fieldWithPath("scheduleAdherence").type("int").description("일정준수"),
                                 fieldWithPath("initiative").type("int").description("적극성"),
@@ -239,7 +249,8 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("totalActiveScore").type("double").description("활동 평가"),
                                 fieldWithPath("enterpriseType").type("String").description("기업형태"),
                                 fieldWithPath("idNumber").type("String").description("사업자등록번호"),
-                                fieldWithPath("sales").type("Long").description("연간 매출액")
+                                fieldWithPath("sales").type("Long").description("연간 매출액"),
+                                fieldWithPath("thumbnail").type("String").description("썸내일")
                         )
                 ));
     }
@@ -279,6 +290,35 @@ public class EnterpriseDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("freelancerSimpleResponseList.[0].skills").type("List<String>").description("프리랜서 개발자 주요스킬 정보 필드."),
                                 fieldWithPath("freelancerSimpleResponseList.[0].projectNames").type("ListL<String>").description("프리랜서 개발자 기타스킬 정보 필드."),
                                 fieldWithPath("hasNext").type("boolean").description("")
+                        )
+                ));
+    }
+    @DisplayName("기업 썸내일 조회 문서화")
+    @Test
+    public void 기업_썸내일_조회_문서화() throws Exception{
+
+        Enterprise enterprise = EnterpriseHelper.기업_생성(enterpriseRepository, passwordEncoder);
+
+        enterpriseThumbnailRepository.save(new EnterpriseThumbnail(
+                "www.thumbnailUrl.com",
+                enterprise
+        ));
+
+        MemberLoginResponse memberLoginResponse = EnterpriseLoginHelper.로그인(enterprise.getUserId(), jwtTokenService);
+
+        mockMvc.perform(get("/enterprise-thumbnail")
+                        .header(JwtTokenProvider.AUTHORITIES_KEY, memberLoginResponse.getAccessToken()))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("enterprise-thumbnail",
+                        requestHeaders(
+                                headerWithName(JwtTokenProvider.AUTHORITIES_KEY).description("jwt 토큰 인증 헤더 필드.")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        ),
+                        responseFields(
+                                fieldWithPath("thumbnail").type("String").description("기업 썸내일 URL")
                         )
                 ));
     }

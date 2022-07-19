@@ -5,8 +5,10 @@ import com.example.elancer.enterprise.dto.*;
 import com.example.elancer.enterprise.exception.EnterpriseCheckUserIdException;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.model.enterprise.EnterpriseThumbnail;
 import com.example.elancer.enterprise.model.enterpriseintro.*;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
+import com.example.elancer.enterprise.repository.EnterpriseThumbnailRepository;
 import com.example.elancer.enterprise.repository.MainBusinessRepository;
 import com.example.elancer.enterprise.repository.SubBusinessRepository;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
@@ -21,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,6 +36,7 @@ public class EnterpriseService {
     private final MainBusinessRepository mainBusinessRepository;
     private final SubBusinessRepository subBusinessRepository;
     private final WishFreelancerRepository wishFreelancerRepository;
+    private final EnterpriseThumbnailRepository enterpriseThumbnailRepository;
 
 
     /**
@@ -63,6 +67,10 @@ public class EnterpriseService {
     public EnterpriseAccountDetailResponse coverEnterpriseAccountInfo(MemberDetails memberDetails, EnterpriseUpdateRequest enterpriseUpdateRequest) {
 
         Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(EnterpriseCheckUserIdException::new);
+
+        updateThumbnail(enterpriseUpdateRequest.getThumbnail(), enterprise);
+
+
         if (StringUtils.hasText(enterpriseUpdateRequest.getPassword1())) {
             RightRequestChecker.checkPasswordMatchEnterprise(enterpriseUpdateRequest.getPassword1(), enterpriseUpdateRequest.getPassword2());
             enterprise.updateEnterprise(
@@ -79,6 +87,7 @@ public class EnterpriseService {
                     enterpriseUpdateRequest.getBizContents(),
                     enterpriseUpdateRequest.getSales(),
                     enterpriseUpdateRequest.getIdNumber()
+
             );
         }
         else {
@@ -98,6 +107,8 @@ public class EnterpriseService {
                     enterpriseUpdateRequest.getIdNumber()
             );
         }
+
+
         return EnterpriseAccountDetailResponse.of(enterprise);
     }
 
@@ -166,6 +177,16 @@ public class EnterpriseService {
 
     }
 
+    public EnterpriseThumbnailResponse findThumbnail(MemberDetails memberDetails) {
+        RightRequestChecker.checkMemberDetail(memberDetails);
+
+        Enterprise enterprise = enterpriseRepository.findById(memberDetails.getId()).orElseThrow(NotExistEnterpriseException::new);
+
+        return new EnterpriseThumbnailResponse(
+                Optional.ofNullable(enterprise.getEnterpriseThumbnail()).map(EnterpriseThumbnail::getThumbnailPath).orElse(null)
+        );
+    }
+
 
     /**
      * 서비스 로직
@@ -199,6 +220,17 @@ public class EnterpriseService {
             if (enterpriseSubBiz.getSubBusiness().getCode().equals("sub_etc")) {
                 enterpriseSubBiz.setEtc(enterpriseProfileRequest.getSubEtc());
             }
+        }
+    }
+
+    private void updateThumbnail(String thumbnail, Enterprise enterprise) {
+        if (thumbnail == null) {
+            return;
+        }
+        if (enterprise.getEnterpriseThumbnail() == null) {
+            enterpriseThumbnailRepository.save(EnterpriseThumbnail.createEnterpriseThumbnail(thumbnail, enterprise));
+        } else {
+            enterprise.getEnterpriseThumbnail().updateThumbnailpath(thumbnail);
         }
     }
 
