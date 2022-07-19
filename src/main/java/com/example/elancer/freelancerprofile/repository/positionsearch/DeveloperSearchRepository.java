@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.repository.positionsearch;
 
 import com.example.elancer.common.utils.PageUtil;
+import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -14,6 +15,7 @@ import com.example.elancer.freelancerprofile.model.position.developer.javaskill.
 import com.example.elancer.freelancerprofile.model.position.developer.mobileskill.MobileAppDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.PhpOrAspDetailSkill;
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -42,7 +44,7 @@ public class DeveloperSearchRepository {
 
     public Slice<Developer> searchDevelopers(
             PositionType positionType,
-            List<String> majorSkillConditions,
+            String majorSkillConditions,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             Pageable pageable,
@@ -86,13 +88,15 @@ public class DeveloperSearchRepository {
         builder.and(freelancer.address.mainAddress.containsIgnoreCase(area.getDesc()));
     }
 
-    private void eqMajorSkillConds(List<String> majorSkillKeywords, BooleanBuilder builder) {
-        if (majorSkillKeywords == null || majorSkillKeywords.isEmpty()) {
+    private void eqMajorSkillConds(String majorSkillKeywords, BooleanBuilder builder) {
+        if (majorSkillKeywords == null || majorSkillKeywords.isEmpty() || majorSkillKeywords.isBlank()) {
             return;
         }
 
-        for (String majorSkillKeyword : majorSkillKeywords) {
-            builder.or(developer.focusSkill.containsIgnoreCase(majorSkillKeyword));
+        List<String> tempMajorSkillKeywords = StringEditor.editStringToStringList(majorSkillKeywords);
+
+        for (String majorSkillKeyword : tempMajorSkillKeywords) {
+            builder.or(developer.focusSkill.containsIgnoreCase(majorSkillKeyword)).or(developer.etcSkill.containsIgnoreCase(majorSkillKeyword));
 
             if (Arrays.stream(JavaDetailSkill.values()).anyMatch(javaDetailSkill -> String.valueOf(javaDetailSkill).equals(majorSkillKeyword.toUpperCase()))) {
                 builder.or(javaSkill.javaDetailSkill.eq(JavaDetailSkill.valueOf(majorSkillKeyword.toUpperCase())));
@@ -142,5 +146,31 @@ public class DeveloperSearchRepository {
         }
 
         builder.and(freelancer.freelancerAccountInfo.careerYear.between(positionWorkManShip.getYearInLine(), positionWorkManShip.getYearOutLine()));
+    }
+
+    public Slice<Developer> searchDevelopersByKeyword(String keyword, Pageable pageable) {
+        BooleanBuilder builder = new BooleanBuilder();
+
+        eqMajorSkillConds(keyword, builder);
+
+        List<Developer> developers = jpaQueryFactory.selectFrom(developer)
+                .innerJoin(developer.freelancerProfile, freelancerProfile).fetchJoin()
+                .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
+                .leftJoin(developer.javaSkills, javaSkill)
+                .leftJoin(developer.mobileAppSkills, mobileAppSkill)
+                .leftJoin(developer.phpOrAspSkills, phpOrAspSkill)
+                .leftJoin(developer.dotNetSkills, dotNetSkill)
+                .leftJoin(developer.javaScriptSkills, javaScriptSkill)
+                .leftJoin(developer.cSkills, clangSkill)
+                .leftJoin(developer.dbSkills, dBSkill)
+                .distinct()
+                .where(builder)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize() + 1)
+                .fetch();
+
+        boolean hasNext = PageUtil.isContentSizeGreaterThanPageSize(developers, pageable);
+
+        return new SliceImpl<Developer>(hasNext ? PageUtil.subListLastContent(developers, pageable) : developers, pageable, hasNext);
     }
 }

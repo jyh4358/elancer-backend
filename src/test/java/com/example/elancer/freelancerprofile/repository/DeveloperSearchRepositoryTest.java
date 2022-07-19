@@ -230,7 +230,7 @@ class DeveloperSearchRepositoryTest {
         PageRequest pageable = PageRequest.of(0, 10);
         Slice<Developer> freelancers = developerSearchRepository.searchDevelopers(
                 PositionType.DEVELOPER,
-                StringEditor.editStringToStringList("java"),
+                "java",
                 HopeWorkState.AT_COMPANY,
                 null/*Arrays.asList(PositionWorkManShip.MIDDLE)*/,
                 pageable, null/*WorkArea.SEOUL.getDesc()*/

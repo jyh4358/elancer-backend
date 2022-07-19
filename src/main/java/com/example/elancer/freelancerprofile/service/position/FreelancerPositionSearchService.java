@@ -1,10 +1,12 @@
 package com.example.elancer.freelancerprofile.service.position;
 
+import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.common.likechecker.FreelancerLikeChecker;
 import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponse;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
+import com.example.elancer.freelancerprofile.dto.response.FreelancerProfileSimpleResponse;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
@@ -26,6 +28,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,7 +54,7 @@ public class FreelancerPositionSearchService {
     ) {
         String validSkillKeyword = verifySkillKeywords(majorSkillKeywords);
 
-        Slice<Developer> developers = developerSearchRepository.searchDevelopers(positionType, StringEditor.editStringToStringList(validSkillKeyword), hopeWorkState, positionWorkManShip, pageable, workArea);
+        Slice<Developer> developers = developerSearchRepository.searchDevelopers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, pageable, workArea);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = developers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());
@@ -70,9 +73,7 @@ public class FreelancerPositionSearchService {
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        String validSkillKeyword = verifySkillKeywords(majorSkillKeywords);
-
-        Slice<Publisher> publishers = publisherSearchRepository.searchPublishers(positionType, StringEditor.editStringToStringList(validSkillKeyword), hopeWorkState, positionWorkManShip, workArea, pageable);
+        Slice<Publisher> publishers = publisherSearchRepository.searchPublishers(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = publishers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());
@@ -91,9 +92,7 @@ public class FreelancerPositionSearchService {
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        String validSkillKeyword = verifySkillKeywords(majorSkillKeywords);
-
-        Slice<Designer> designers = designerSearchRepository.searchDesigners(positionType, StringEditor.editStringToStringList(validSkillKeyword), hopeWorkState, positionWorkManShip, workArea, pageable);
+        Slice<Designer> designers = designerSearchRepository.searchDesigners(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = designers.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());
@@ -112,9 +111,7 @@ public class FreelancerPositionSearchService {
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        String validSkillKeyword = verifySkillKeywords(majorSkillKeywords);
-
-        Slice<Planner> planners = plannerSearchRepository.searchPlanners(positionType, StringEditor.editStringToStringList(validSkillKeyword), hopeWorkState, positionWorkManShip, workArea, pageable);
+        Slice<Planner> planners = plannerSearchRepository.searchPlanners(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = planners.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());
@@ -133,9 +130,7 @@ public class FreelancerPositionSearchService {
             Pageable pageable,
             MemberDetails memberDetails
     ) {
-        String validSkillKeyword = verifySkillKeywords(majorSkillKeywords);
-
-        Slice<PositionEtc> positionEtcs = positionEtcSearchRepository.searchPositionEtc(positionType, StringEditor.editStringToStringList(validSkillKeyword), hopeWorkState, positionWorkManShip, workArea, pageable);
+        Slice<PositionEtc> positionEtcs = positionEtcSearchRepository.searchPositionEtc(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable);
         List<FreelancerSimpleResponse> freelancerSimpleResponses = positionEtcs.getContent().stream()
                 .map(FreelancerSimpleResponse::of)
                 .collect(Collectors.toList());
@@ -150,5 +145,40 @@ public class FreelancerPositionSearchService {
             tempSkillKeyword = null;
         }
         return tempSkillKeyword;
+    }
+
+    @Transactional(readOnly = true)
+    public FreelancerSimpleResponses searchFreelancerByKeyword(MemberDetails memberDetails, String keyword, Pageable pageable) {
+        RightRequestChecker.checkRequestKeyword(keyword);
+        List<FreelancerSimpleResponse> responses = new ArrayList<>();
+        boolean hasNext = false;
+        Slice<Developer> developers = developerSearchRepository.searchDevelopersByKeyword(keyword, pageable);
+        responses.addAll(developers.stream()
+                .map(FreelancerSimpleResponse::of)
+                .collect(Collectors.toList()));
+        Slice<Publisher> publishers = publisherSearchRepository.searchPublishersByKeyword(keyword, pageable);
+        responses.addAll(publishers.stream()
+                .map(FreelancerSimpleResponse::of)
+                .collect(Collectors.toList()));
+        Slice<Designer> designers = designerSearchRepository.searchDesignersByKeyword(keyword, pageable);
+        responses.addAll(designers.stream()
+                .map(FreelancerSimpleResponse::of)
+                .collect(Collectors.toList()));
+        Slice<Planner> planners = plannerSearchRepository.searchPlannersByKeyword(keyword, pageable);
+        responses.addAll(planners.stream()
+                .map(FreelancerSimpleResponse::of)
+                .collect(Collectors.toList()));
+        Slice<PositionEtc> positionEtcs = positionEtcSearchRepository.searchPositionEtcsByKeyword(keyword, pageable);
+        responses.addAll(positionEtcs.stream()
+                .map(FreelancerSimpleResponse::of)
+                .collect(Collectors.toList()));
+
+        if (developers.hasNext() || planners.hasNext() || designers.hasNext() || planners.hasNext() || positionEtcs.hasNext()) {
+            hasNext = true;
+        }
+
+        FreelancerLikeChecker.confirmWishFreelancerToRequester(memberDetails, responses, wishFreelancerRepository);
+
+        return new FreelancerSimpleResponses(responses, hasNext);
     }
 }

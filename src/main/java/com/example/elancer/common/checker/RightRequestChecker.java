@@ -62,4 +62,12 @@ public class RightRequestChecker {
             throw new WrongRequestException("요청자와 조회된 기업 정보가 틀립니다. 잘못된 요청입니다.");
         }
     }
+
+    public static void checkRequestKeyword(String keyword) {
+        if (keyword == null || keyword.isEmpty() || keyword.isBlank()) {
+            throw new WrongRequestException("검색 키워드가 없습니다. 키워드를 작성해주세요");
+        }
+    }
+
+
 }
