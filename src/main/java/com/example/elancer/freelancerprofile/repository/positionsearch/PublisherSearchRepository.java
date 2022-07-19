@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.repository.positionsearch;
 
 import com.example.elancer.common.utils.PageUtil;
+import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -27,7 +28,13 @@ import java.util.List;
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
 import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.freelancerProfile;
 import static com.example.elancer.freelancerprofile.model.position.developer.QDeveloper.developer;
+import static com.example.elancer.freelancerprofile.model.position.developer.cskill.QClangSkill.clangSkill;
+import static com.example.elancer.freelancerprofile.model.position.developer.dbskill.QDBSkill.dBSkill;
+import static com.example.elancer.freelancerprofile.model.position.developer.dotnet.QDotNetSkill.dotNetSkill;
+import static com.example.elancer.freelancerprofile.model.position.developer.javascript.QJavaScriptSkill.javaScriptSkill;
 import static com.example.elancer.freelancerprofile.model.position.developer.javaskill.QJavaSkill.javaSkill;
+import static com.example.elancer.freelancerprofile.model.position.developer.mobileskill.QMobileAppSkill.mobileAppSkill;
+import static com.example.elancer.freelancerprofile.model.position.developer.phpaspskill.QPhpOrAspSkill.phpOrAspSkill;
 import static com.example.elancer.freelancerprofile.model.position.publisher.QPublisher.publisher;
 import static com.example.elancer.freelancerprofile.model.position.publisher.QPublishingSkill.publishingSkill;
 
@@ -38,7 +45,7 @@ public class PublisherSearchRepository {
 
     public Slice<Publisher> searchPublishers(
             PositionType positionType,
-            List<String> majorSkillConditions,
+            String majorSkillConditions,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
@@ -75,12 +82,14 @@ public class PublisherSearchRepository {
         builder.and(freelancer.address.mainAddress.containsIgnoreCase(area.getDesc()));
     }
 
-    private void eqMajorSkillConds(List<String> majorSkillKeywords, BooleanBuilder builder) {
-        if (majorSkillKeywords == null || majorSkillKeywords.isEmpty()) {
+    private void eqMajorSkillConds(String majorSkillKeywords, BooleanBuilder builder) {
+        if (majorSkillKeywords == null || majorSkillKeywords.isEmpty() || majorSkillKeywords.isBlank()) {
             return;
         }
 
-        for (String majorSkillKeyword : majorSkillKeywords) {
+        List<String> tempMajorSkillKeywords = StringEditor.editStringToStringList(majorSkillKeywords);
+
+        for (String majorSkillKeyword : tempMajorSkillKeywords) {
             builder.or(publisher.etcSkill.containsIgnoreCase(majorSkillKeyword));
 
             if (Arrays.stream(PublishingDetailSkill.values()).anyMatch(publishingDetailSkill -> String.valueOf(publishingDetailSkill).equals(majorSkillKeyword.toUpperCase()))) {
@@ -113,5 +122,25 @@ public class PublisherSearchRepository {
         }
 
         builder.and(freelancer.freelancerAccountInfo.careerYear.between(positionWorkManShip.getYearInLine(), positionWorkManShip.getYearOutLine()));
+    }
+
+    public Slice<Publisher> searchPublishersByKeyword(String keyword, Pageable pageable) {
+        BooleanBuilder builder = new BooleanBuilder();
+
+        eqMajorSkillConds(keyword, builder);
+
+        List<Publisher> publishers = jpaQueryFactory.selectFrom(publisher)
+                .innerJoin(publisher.freelancerProfile, freelancerProfile).fetchJoin()
+                .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
+                .leftJoin(publisher.publishingSkills, publishingSkill)
+                .distinct()
+                .where(builder)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize() + 1)
+                .fetch();
+
+        boolean hasNext = PageUtil.isContentSizeGreaterThanPageSize(publishers, pageable);
+
+        return new SliceImpl<Publisher>(hasNext ? PageUtil.subListLastContent(publishers, pageable) : publishers, pageable, hasNext);
     }
 }

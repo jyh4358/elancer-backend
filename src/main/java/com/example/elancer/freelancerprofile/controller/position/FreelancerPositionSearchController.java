@@ -1,7 +1,9 @@
 package com.example.elancer.freelancerprofile.controller.position;
 
 import com.example.elancer.freelancer.model.HopeWorkState;
+import com.example.elancer.freelancerprofile.controller.profile.FreelancerProfileFindControllerPath;
 import com.example.elancer.freelancerprofile.dto.FreelancerSimpleResponses;
+import com.example.elancer.freelancerprofile.dto.response.FreelancerProfileSimpleResponse;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
 import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.service.position.FreelancerPositionSearchService;
@@ -93,5 +95,15 @@ public class FreelancerPositionSearchController {
     ) {
         FreelancerSimpleResponses freelancerSimpleResponses = freelancerPositionSearchService.searchPositionEtc(positionType, majorSkillKeywords, hopeWorkState, positionWorkManShip, workArea, pageable, memberDetails);
         return new ResponseEntity<FreelancerSimpleResponses>(freelancerSimpleResponses, HttpStatus.OK);
+    }
+
+    @GetMapping(FreelancerProfileFindControllerPath.FREELANCER_SEARCH_KEYWORD)
+    public ResponseEntity<FreelancerSimpleResponses> searchFreelancerByKeyword(
+            @RequestParam("keyword") String keyword,
+            @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 1) Pageable pageable,
+            @AuthenticationPrincipal MemberDetails memberDetails
+    ) {
+        FreelancerSimpleResponses simpleFreelancer = freelancerPositionSearchService.searchFreelancerByKeyword(memberDetails, keyword, pageable);
+        return new ResponseEntity<FreelancerSimpleResponses>(simpleFreelancer, HttpStatus.OK);
     }
 }

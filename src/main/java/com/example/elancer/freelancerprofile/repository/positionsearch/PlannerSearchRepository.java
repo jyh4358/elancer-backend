@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.repository.positionsearch;
 
 import com.example.elancer.common.utils.PageUtil;
+import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -25,6 +26,7 @@ import java.util.List;
 
 import static com.example.elancer.freelancer.model.QFreelancer.freelancer;
 import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.freelancerProfile;
+import static com.example.elancer.freelancerprofile.model.position.designer.QDesignRole.designRole;
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesignSkill.designSkill;
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesigner.designer;
 import static com.example.elancer.freelancerprofile.model.position.planner.QPlanner.planner;
@@ -38,7 +40,7 @@ public class PlannerSearchRepository {
 
     public Slice<Planner> searchPlanners(
             PositionType positionType,
-            List<String> majorSkillConditions,
+            String majorSkillConditions,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
@@ -75,12 +77,14 @@ public class PlannerSearchRepository {
         builder.and(freelancer.address.mainAddress.containsIgnoreCase(area.getDesc()));
     }
 
-    private void eqMajorSkillConds(List<String> majorSkillKeywords, BooleanBuilder builder) {
-        if (majorSkillKeywords == null) {
+    private void eqMajorSkillConds(String majorSkillKeywords, BooleanBuilder builder) {
+        if (majorSkillKeywords == null || majorSkillKeywords.isEmpty() || majorSkillKeywords.isBlank()) {
             return;
         }
 
-        for (String majorSkillKeyword : majorSkillKeywords) {
+        List<String> tempMajorSkillKeywords = StringEditor.editStringToStringList(majorSkillKeywords);
+
+        for (String majorSkillKeyword : tempMajorSkillKeywords) {
             builder.or(planner.etcField.containsIgnoreCase(majorSkillKeyword));
 
             if (Arrays.stream(PlannerDetailField.values()).anyMatch(plannerDetailField -> String.valueOf(plannerDetailField).equals(majorSkillKeyword.toUpperCase()))) {
@@ -114,5 +118,25 @@ public class PlannerSearchRepository {
         }
 
         builder.and(freelancer.freelancerAccountInfo.careerYear.between(positionWorkManShip.getYearInLine(), positionWorkManShip.getYearOutLine()));
+    }
+
+    public Slice<Planner> searchPlannersByKeyword(String keyword, Pageable pageable) {
+        BooleanBuilder builder = new BooleanBuilder();
+
+        eqMajorSkillConds(keyword, builder);
+
+        List<Planner> planners = jpaQueryFactory.selectFrom(planner)
+                .innerJoin(planner.freelancerProfile, freelancerProfile).fetchJoin()
+                .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
+                .leftJoin(planner.plannerFields, plannerField)
+                .distinct()
+                .where(builder)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize() + 1)
+                .fetch();
+
+        boolean hasNext = PageUtil.isContentSizeGreaterThanPageSize(planners, pageable);
+
+        return new SliceImpl<Planner>(hasNext ? PageUtil.subListLastContent(planners, pageable) : planners, pageable, hasNext);
     }
 }

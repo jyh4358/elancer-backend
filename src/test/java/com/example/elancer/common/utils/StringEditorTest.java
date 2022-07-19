@@ -41,4 +41,20 @@ class StringEditorTest {
         Assertions.assertThat(strings.get(2)).isEqualTo("문자열3");
         Assertions.assertThat(strings).isEqualTo(expectedStringList);
     }
+
+    @DisplayName("문자열이 ,가 없는 경우.")
+    @Test
+    public void 문자열이_구분자가_없는경우() {
+        //given
+        String stirng = "문자열1";
+
+        List<String> expectedStringList = Arrays.asList("문자열1");
+
+        //when
+        List<String> strings = StringEditor.editStringToStringList(stirng);
+
+        //then
+        Assertions.assertThat(strings.get(0)).isEqualTo("문자열1");
+        Assertions.assertThat(strings).isEqualTo(expectedStringList);
+    }
 }

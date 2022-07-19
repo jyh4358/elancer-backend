@@ -5,5 +5,6 @@ public class FreelancerProfileFindControllerPath {
     public static final String FREELANCER_PROFILE_FIND_SIMPLE = "/freelancer/freelancer-profile/simple";
     public static final String FREELANCER_FINDS = "/freelancers";
     public static final String FREELANCER_FIND = "/freelancers/{freelancerNum}";
+    public static final String FREELANCER_SEARCH_KEYWORD = "/freelancers/search";
 
 }

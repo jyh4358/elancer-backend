@@ -1,6 +1,7 @@
 package com.example.elancer.freelancerprofile.repository.positionsearch;
 
 import com.example.elancer.common.utils.PageUtil;
+import com.example.elancer.common.utils.StringEditor;
 import com.example.elancer.freelancer.model.HopeWorkState;
 import com.example.elancer.freelancerprofile.model.WorkArea;
 import com.example.elancer.freelancerprofile.model.position.PositionType;
@@ -8,6 +9,7 @@ import com.example.elancer.freelancerprofile.model.position.PositionWorkManShip;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailRole;
 import com.example.elancer.freelancerprofile.model.position.designer.DesignDetailSkill;
 import com.example.elancer.freelancerprofile.model.position.designer.Designer;
+import com.example.elancer.freelancerprofile.model.position.publisher.Publisher;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ import static com.example.elancer.freelancerprofile.model.QFreelancerProfile.fre
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesignRole.designRole;
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesignSkill.designSkill;
 import static com.example.elancer.freelancerprofile.model.position.designer.QDesigner.designer;
+import static com.example.elancer.freelancerprofile.model.position.publisher.QPublisher.publisher;
+import static com.example.elancer.freelancerprofile.model.position.publisher.QPublishingSkill.publishingSkill;
 
 @Repository
 @RequiredArgsConstructor
@@ -32,7 +36,7 @@ public class DesignerSearchRepository {
 
     public Slice<Designer> searchDesigners(
             PositionType positionType,
-            List<String> majorSkillConditions,
+            String majorSkillConditions,
             HopeWorkState hopeWorkState,
             PositionWorkManShip positionWorkManShip,
             WorkArea workArea,
@@ -70,12 +74,14 @@ public class DesignerSearchRepository {
         builder.and(freelancer.address.mainAddress.containsIgnoreCase(area.getDesc()));
     }
 
-    private void eqMajorSkillConds(List<String> majorSkillKeywords, BooleanBuilder builder) {
-        if (majorSkillKeywords == null) {
+    private void eqMajorSkillConds(String majorSkillKeywords, BooleanBuilder builder) {
+        if (majorSkillKeywords == null || majorSkillKeywords.isEmpty() || majorSkillKeywords.isBlank()) {
             return;
         }
 
-        for (String majorSkillKeyword : majorSkillKeywords) {
+        List<String> tempMajorSkillKeywords = StringEditor.editStringToStringList(majorSkillKeywords);
+
+        for (String majorSkillKeyword : tempMajorSkillKeywords) {
             builder.or(designer.etcSkill.containsIgnoreCase(majorSkillKeyword)).or(designer.etcRole.containsIgnoreCase(majorSkillKeyword));
 
             if (Arrays.stream(DesignDetailRole.values()).anyMatch(designDetailRole -> String.valueOf(designDetailRole).equals(majorSkillKeyword.toUpperCase()))) {
@@ -113,5 +119,26 @@ public class DesignerSearchRepository {
         }
 
         builder.and(freelancer.freelancerAccountInfo.careerYear.between(positionWorkManShip.getYearInLine(), positionWorkManShip.getYearOutLine()));
+    }
+
+    public Slice<Designer> searchDesignersByKeyword(String keyword, Pageable pageable) {
+        BooleanBuilder builder = new BooleanBuilder();
+
+        eqMajorSkillConds(keyword, builder);
+
+        List<Designer> designers = jpaQueryFactory.selectFrom(designer)
+                .innerJoin(designer.freelancerProfile, freelancerProfile).fetchJoin()
+                .innerJoin(freelancerProfile.freelancer, freelancer).fetchJoin()
+                .leftJoin(designer.designRoles, designRole)
+                .leftJoin(designer.designSkills, designSkill)
+                .distinct()
+                .where(builder)
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize() + 1)
+                .fetch();
+
+        boolean hasNext = PageUtil.isContentSizeGreaterThanPageSize(designers, pageable);
+
+        return new SliceImpl<Designer>(hasNext ? PageUtil.subListLastContent(designers, pageable) : designers, pageable, hasNext);
     }
 }
