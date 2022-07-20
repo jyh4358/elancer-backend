@@ -151,7 +151,7 @@ public class WishProjectDocumentTest extends DocumentBaseTest {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
                         requestFields(
-                                fieldWithPath("wishProjectNum").type("Long").description("프로젝트찜에 대한 식별자 정보 필드.")
+                                fieldWithPath("projectNum").type("Long").description("프로젝트찜에 대한 식별자 정보 필드.")
                         )
                 ));
     }
