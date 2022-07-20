@@ -124,9 +124,9 @@ class WishProjectServiceTest extends ServiceBaseTest {
                 ProjectStatus.PROGRESS,
                 enterprise
         ));
-        WishProject wishProject = wishProjectRepository.save(WishProject.createWishProject(freelancer, project));
+        wishProjectRepository.save(WishProject.createWishProject(freelancer, project));
 
-        WishProjectDeleteRequest wishProjectDeleteRequest = new WishProjectDeleteRequest(wishProject.getNum());
+        WishProjectDeleteRequest wishProjectDeleteRequest = new WishProjectDeleteRequest(project.getNum());
         //when
         wishProjectService.deleteWishProject(memberDetails, wishProjectDeleteRequest);
 

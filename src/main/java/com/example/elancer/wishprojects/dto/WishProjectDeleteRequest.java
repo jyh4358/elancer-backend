@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class WishProjectDeleteRequest {
     @NotNull
-    private Long wishProjectNum;
+    private Long projectNum;
 }

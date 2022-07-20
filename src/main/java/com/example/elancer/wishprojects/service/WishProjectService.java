@@ -34,8 +34,8 @@ public class WishProjectService {
 
     @Transactional
     public void deleteWishProject(MemberDetails memberDetails, WishProjectDeleteRequest wishProjectDeleteRequest) {
-        WishProject wishProject = wishProjectRepository.findById(wishProjectDeleteRequest.getWishProjectNum()).orElseThrow(NotExistWishProjectException::new);
-        RightRequestChecker.checkFreelancerAndRequester(wishProject.getFreelancer(), memberDetails);
+        RightRequestChecker.checkMemberDetail(memberDetails);
+        WishProject wishProject = wishProjectRepository.findByFreelancerNumAndProjectNum(memberDetails.getId(), wishProjectDeleteRequest.getProjectNum()).orElseThrow(NotExistWishProjectException::new);
         wishProjectRepository.deleteById(wishProject.getNum());
     }
 }
