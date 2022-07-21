@@ -80,7 +80,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -120,6 +119,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                         ),
                         responseFields(
                                 fieldWithPath("positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), ETC(\"기타\")"),
+                                fieldWithPath("enterpriseLogo").type("String").description("기업 로고 uri"),
                                 fieldWithPath("projectName").type("String").description("프로젝트명"),
                                 fieldWithPath("pay").type("String").description("프로젝트 단가"),
                                 fieldWithPath("freelancerWorkmanShip").type("FreelancerWorkmanShip").description("JUNIOR(\"초급\"), MIDDLE(\"중급\"), SENIOR(\"고급\")"),
@@ -152,7 +152,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.DEVELOP,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -177,7 +176,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.DEVELOP,
                 "쇼핑몰",
                 PositionKind.PUBLISHER,
@@ -202,7 +200,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.DEVELOP,
                 "쇼핑몰",
                 PositionKind.DESIGNER,
@@ -227,7 +224,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.DEVELOP,
                 "쇼핑몰",
                 PositionKind.PLANNER,
@@ -252,7 +248,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.DEVELOP,
                 "쇼핑몰",
                 PositionKind.ETC,
@@ -292,6 +287,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                         ),
                         responseFields(
                                 fieldWithPath("developerProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("developerProjectList.[].enterpriseLogo").type("String").description("프로젝트 로고 uri"),
                                 fieldWithPath("developerProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("developerProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
                                 fieldWithPath("developerProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
@@ -308,6 +304,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("developerProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
                                 fieldWithPath("developerProjectList.[].wishState").type("boolean").description("인재스크랩 여부"),
                                 fieldWithPath("publisherProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("publisherProjectList.[].enterpriseLogo").type("String").description("프로젝트 로고 uri"),
                                 fieldWithPath("publisherProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("publisherProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
                                 fieldWithPath("publisherProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
@@ -324,6 +321,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("publisherProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
                                 fieldWithPath("publisherProjectList.[].wishState").type("boolean").description("인재스크랩 여부"),
                                 fieldWithPath("designerProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("designerProjectList.[].enterpriseLogo").type("String").description("프로젝트 로고 uri"),
                                 fieldWithPath("designerProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("designerProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
                                 fieldWithPath("designerProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
@@ -340,6 +338,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("designerProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
                                 fieldWithPath("designerProjectList.[].wishState").type("boolean").description("인재스크랩 여부"),
                                 fieldWithPath("plannerProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("plannerProjectList.[].enterpriseLogo").type("String").description("프로젝트 로고 uri"),
                                 fieldWithPath("plannerProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("plannerProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
                                 fieldWithPath("plannerProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
@@ -356,6 +355,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                                 fieldWithPath("plannerProjectList.[].pay").type("String").description("급여 정보(비공개, 협의가능, 급여)"),
                                 fieldWithPath("plannerProjectList.[].wishState").type("boolean").description("인재스크랩 여부"),
                                 fieldWithPath("etcProjectList.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("etcProjectList.[].enterpriseLogo").type("String").description("프로젝트 로고 uri"),
                                 fieldWithPath("etcProjectList.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("etcProjectList.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
                                 fieldWithPath("etcProjectList.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
@@ -388,7 +388,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -434,6 +433,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                         ),
                         responseFields(
                                 fieldWithPath("projectBoxResponses.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("projectBoxResponses.[].enterpriseLogo").type("String").description("프로젝트 로고 uri"),
                                 fieldWithPath("projectBoxResponses.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("projectBoxResponses.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
                                 fieldWithPath("projectBoxResponses.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
@@ -468,7 +468,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -507,6 +506,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                         ),
                         responseFields(
                                 fieldWithPath("projectBoxResponses.[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("projectBoxResponses.[].enterpriseLogo").type("String").description("프로젝트 로고 uri"),
                                 fieldWithPath("projectBoxResponses.[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("projectBoxResponses.[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
                                 fieldWithPath("projectBoxResponses.[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
@@ -569,7 +569,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         ProjectSaveRequest projectSaveRequest = new ProjectSaveRequest(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
+                "www.enterpriseLogo",
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -649,7 +649,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -706,7 +705,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
             projectRepository.save(new Project(
                     ProjectType.TELEWORKING,
                     ProjectBackGround.BLACK,
-                    EnterpriseLogo.COUPANG,
                     ProjectStep.ANALYSIS,
                     "쇼핑몰",
                     PositionKind.DEVELOPER,
@@ -741,6 +739,7 @@ public class ProjectDocumentTest extends DocumentBaseTest {
                         ),
                         responseFields(
                                 fieldWithPath("[].projectNum").type("Long").description("프로젝트 식별자"),
+                                fieldWithPath("[].enterpriseLogo").type("String").description("프로젝트 로고 uri"),
                                 fieldWithPath("[].projectType").type("ProjectType").description("TELEWORKING(\"재택\"), WORKING(\"상주\")"),
                                 fieldWithPath("[].projectBackGround").type("ProjectBackGround").description("BLACK, WHITE, BLUE, INDIGO, ROSSYBROWN, BROWN, CHOCOLATE, ORANGE"),
                                 fieldWithPath("[].positionKind").type("PositionKind").description("DEVELOPER(\"개발자\"), PUBLISHER(\"퍼블리셔\"), DESIGNER(\"디자이너\"), PLANNER(\"기획자\"), CROWD_WORKER(\"크라우드워커\"), ETC(\"기타\")"),
@@ -775,7 +774,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -843,7 +841,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -941,7 +938,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
             Project project = projectRepository.save(new Project(
                     ProjectType.TELEWORKING,
                     ProjectBackGround.BLACK,
-                    EnterpriseLogo.COUPANG,
                     ProjectStep.ANALYSIS,
                     "쇼핑몰",
                     PositionKind.DEVELOPER,
@@ -1021,7 +1017,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
             Project project = projectRepository.save(new Project(
                     ProjectType.TELEWORKING,
                     ProjectBackGround.BLACK,
-                    EnterpriseLogo.COUPANG,
                     ProjectStep.ANALYSIS,
                     "쇼핑몰",
                     PositionKind.DEVELOPER,
@@ -1101,7 +1096,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
             Project project = projectRepository.save(new Project(
                     ProjectType.TELEWORKING,
                     ProjectBackGround.BLACK,
-                    EnterpriseLogo.COUPANG,
                     ProjectStep.ANALYSIS,
                     "쇼핑몰",
                     PositionKind.DEVELOPER,
@@ -1178,7 +1172,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
             Project project = projectRepository.save(new Project(
                     ProjectType.TELEWORKING,
                     ProjectBackGround.BLACK,
-                    EnterpriseLogo.COUPANG,
                     ProjectStep.ANALYSIS,
                     "쇼핑몰",
                     PositionKind.DEVELOPER,
@@ -1256,7 +1249,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
             Project project = projectRepository.save(new Project(
                     ProjectType.TELEWORKING,
                     ProjectBackGround.BLACK,
-                    EnterpriseLogo.COUPANG,
                     ProjectStep.ANALYSIS,
                     "쇼핑몰",
                     PositionKind.DEVELOPER,
@@ -1334,7 +1326,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -1393,7 +1384,6 @@ public class ProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,

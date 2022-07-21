@@ -5,6 +5,7 @@ import com.example.elancer.applyproject.repository.ApplyProjectRepository;
 import com.example.elancer.common.checker.RightRequestChecker;
 import com.example.elancer.enterprise.exception.NotExistEnterpriseException;
 import com.example.elancer.enterprise.model.enterprise.Enterprise;
+import com.example.elancer.enterprise.repository.EnterpriseLogoRepository;
 import com.example.elancer.enterprise.repository.EnterpriseRepository;
 import com.example.elancer.freelancer.model.Freelancer;
 import com.example.elancer.interviewproject.model.InterviewProject;
@@ -38,6 +39,7 @@ public class ProjectService {
     private final WaitProjectRepository waitProjectRepository;
     private final ApplyProjectRepository applyProjectRepository;
     private final InterviewProjectRepository interviewProjectRepository;
+    private final EnterpriseLogoRepository enterpriseLogoRepository;
 
     public ProjectDetailResponse findDetailProject(Long projectNum) {
         Project project = projectRepository.findById(projectNum).orElseThrow(NotExistProjectException::new);
@@ -75,6 +77,9 @@ public class ProjectService {
         List<Project> plannerProject = projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.PLANNER);
         List<Project> etcProject = projectRepository.findTop3ByPositionKindOrderByNumDesc(PositionKind.ETC);
 
+
+
+
         return IndexProjectResponse.of(
                 developProject,
                 publisherProject,
@@ -99,6 +104,7 @@ public class ProjectService {
 
         Project project = projectSaveRequest.toEntity();
         project.setEnterprise(enterprise);
+        saveEnterpriseLogo(projectSaveRequest, project);
 
         projectRepository.save(project);
     }
@@ -309,6 +315,13 @@ public class ProjectService {
         }
 
         return positionKind;
+    }
+
+    private void saveEnterpriseLogo(ProjectSaveRequest projectSaveRequest, Project project) {
+        if (projectSaveRequest.getEnterpriseLogo() == null) {
+            return;
+        }
+        enterpriseLogoRepository.save(EnterpriseLogo.createEnterpriseLogo(projectSaveRequest.getEnterpriseLogo(), project));
     }
 
 

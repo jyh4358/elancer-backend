@@ -232,7 +232,6 @@ public class FreelancerIntegrateTest extends IntegrateBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,

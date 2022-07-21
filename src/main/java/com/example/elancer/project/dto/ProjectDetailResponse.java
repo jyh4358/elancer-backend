@@ -1,10 +1,7 @@
 package com.example.elancer.project.dto;
 
 import com.example.elancer.member.domain.Address;
-import com.example.elancer.project.model.FreelancerWorkmanShip;
-import com.example.elancer.project.model.PositionKind;
-import com.example.elancer.project.model.Project;
-import com.example.elancer.project.model.ProjectStep;
+import com.example.elancer.project.model.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,11 +12,13 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProjectDetailResponse {
     private PositionKind positionKind;
+    private String enterpriseLogo;
     private String projectName;
     private String pay;
     private FreelancerWorkmanShip freelancerWorkmanShip;
@@ -36,6 +35,7 @@ public class ProjectDetailResponse {
 
     @Builder
     public ProjectDetailResponse(PositionKind positionKind,
+                                 String enterpriseLogo,
                                  String projectName,
                                  String pay,
                                  FreelancerWorkmanShip freelancerWorkmanShip,
@@ -49,6 +49,7 @@ public class ProjectDetailResponse {
                                  List<SimpleFreelancerDto> simpleFreelancerList
     ) {
         this.positionKind = positionKind;
+        this.enterpriseLogo = enterpriseLogo;
         this.projectName = projectName;
         this.pay = pay;
         this.freelancerWorkmanShip = freelancerWorkmanShip;
@@ -69,6 +70,7 @@ public class ProjectDetailResponse {
     ) {
         return ProjectDetailResponse.builder()
                 .positionKind(project.getPositionKind())
+                .enterpriseLogo(Optional.ofNullable(project.getEnterpriseLogo()).map(EnterpriseLogo::getLogoPath).orElse(null))
                 .projectName(project.getProjectName())
                 .pay(project.payConverter())
                 .freelancerWorkmanShip(project.careerToWorkmanshipConverter())

@@ -1,5 +1,6 @@
 package com.example.elancer.project.dto;
 
+import com.example.elancer.enterprise.model.enterprise.EnterpriseBizRegistration;
 import com.example.elancer.member.domain.Address;
 import com.example.elancer.project.model.*;
 import lombok.AccessLevel;
@@ -11,12 +12,15 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProjectBoxResponse {
 
     private Long projectNum;
+
+    private String enterpriseLogo;
 
     private ProjectType projectType;
 
@@ -45,6 +49,7 @@ public class ProjectBoxResponse {
     @Builder
     public ProjectBoxResponse(
             Long projectNum,
+            String enterpriseLogo,
             ProjectType projectType,
             ProjectBackGround projectBackGround,
             PositionKind positionKind,
@@ -58,6 +63,7 @@ public class ProjectBoxResponse {
             String content
     ) {
         this.projectNum = projectNum;
+        this.enterpriseLogo = enterpriseLogo;
         this.projectType = projectType;
         this.projectBackGround = projectBackGround;
         this.positionKind = positionKind;
@@ -75,6 +81,7 @@ public class ProjectBoxResponse {
     public static ProjectBoxResponse cardBoxOf(Project project) {
         return ProjectBoxResponse.builder()
                 .projectNum(project.getNum())
+                .enterpriseLogo(Optional.ofNullable(project.getEnterpriseLogo()).map(EnterpriseLogo::getLogoPath).orElse(null))
                 .projectType(project.getProjectType())
                 .projectBackGround(project.getProjectBackGround())
                 .positionKind(project.getPositionKind())
