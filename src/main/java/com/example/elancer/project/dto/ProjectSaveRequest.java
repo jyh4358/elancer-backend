@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class ProjectSaveRequest {
     private ProjectType projectType;
     private ProjectBackGround projectBackGround;
-    private EnterpriseLogo enterpriseLogo;
+    private String enterpriseLogo;
     private ProjectStep projectStep;
     private String mainBiz;
     private PositionKind positionKind;
@@ -47,7 +47,6 @@ public class ProjectSaveRequest {
         return Project.builder()
                 .projectType(projectType)
                 .projectBackGround(projectBackGround)
-                .enterpriseLogo(enterpriseLogo)
                 .projectStep(projectStep)
                 .mainBiz(mainBiz)
                 .positionKind(positionKind)

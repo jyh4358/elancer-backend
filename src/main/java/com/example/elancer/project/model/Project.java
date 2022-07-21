@@ -29,8 +29,6 @@ public class Project extends BasicEntity {
     @Enumerated(EnumType.STRING)
     private ProjectBackGround projectBackGround;
     @Enumerated(EnumType.STRING)
-    private EnterpriseLogo enterpriseLogo;
-    @Enumerated(EnumType.STRING)
     private ProjectStep projectStep;
     private String mainBiz;
     @Enumerated(EnumType.STRING)
@@ -66,10 +64,12 @@ public class Project extends BasicEntity {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private List<ApplyProject> applyProjects = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EnterpriseLogo enterpriseLogo;
+
     @Builder
     public Project(ProjectType projectType,
                    ProjectBackGround projectBackGround,
-                   EnterpriseLogo enterpriseLogo,
                    ProjectStep projectStep,
                    String mainBiz,
                    PositionKind positionKind,
@@ -93,7 +93,6 @@ public class Project extends BasicEntity {
     ) {
         this.projectType = projectType;
         this.projectBackGround = projectBackGround;
-        this.enterpriseLogo = enterpriseLogo;
         this.projectStep = projectStep;
         this.mainBiz = mainBiz;
         this.positionKind = positionKind;

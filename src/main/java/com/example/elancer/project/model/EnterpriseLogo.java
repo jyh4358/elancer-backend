@@ -1,24 +1,33 @@
 package com.example.elancer.project.model;
 
+import com.example.elancer.common.model.BasicEntity;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+@Entity
 @Getter
-@AllArgsConstructor
-public enum EnterpriseLogo {
-    SAMSUNG("삼성"),
-    LG("LG"),
-    KT("KT"),
-    SK("SK"),
-    COUPANG("쿠팡"),
-    WOOWAHAN("우아한형제들"),
-    LOTTE("롯데"),
-    NONGHYUP("농협"),
-    SHINHAN("신한"),
-    IBK("기업"),
-    KBSTAR("국민");
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class EnterpriseLogo extends BasicEntity {
 
+    @NotNull
+    private String logoPath;
 
-    private String desc;
+    @OneToOne(fetch = FetchType.LAZY)
+    private Project project;
 
+    public EnterpriseLogo(String logoPath, Project project) {
+        this.logoPath = logoPath;
+        this.project = project;
+    }
+
+    public static EnterpriseLogo createEnterpriseLogo(String logoPath, Project project) {
+        return new EnterpriseLogo(logoPath, project);
+    }
 }

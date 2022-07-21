@@ -65,7 +65,6 @@ public class InterviewProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -124,7 +123,6 @@ public class InterviewProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
@@ -181,7 +179,6 @@ public class InterviewProjectDocumentTest extends DocumentBaseTest {
         Project project = projectRepository.save(new Project(
                 ProjectType.TELEWORKING,
                 ProjectBackGround.BLACK,
-                EnterpriseLogo.COUPANG,
                 ProjectStep.ANALYSIS,
                 "쇼핑몰",
                 PositionKind.DEVELOPER,
